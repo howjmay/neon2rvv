@@ -50,6 +50,7 @@ extern "C" {
 #define NEON2RVV_ARM64
 #endif
 
+#include <riscv_vector.h>
 #include <stdint.h>
 #include <stdlib.h>
 
