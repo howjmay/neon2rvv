@@ -13,7 +13,7 @@ void *platform_aligned_alloc(size_t size) {
   // int ret = posix_memalign(&address, 16, size);
   address = malloc(size);
 #endif
-    if (!address) {
+  if (!address) {
     fprintf(stderr, "Error at File %s line number %d\n", __FILE__, __LINE__);
     exit(EXIT_FAILURE);
   }

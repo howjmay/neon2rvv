@@ -210,19 +210,25 @@ public:
           break;
         case 1: {
           uint32_t index = rand() & 3;
-          test_cases_float_pointer1[index] = float(test_cases_int_pointer1[index]);
+          test_cases_float_pointer1[index] =
+              float(test_cases_int_pointer1[index]);
           index = rand() & 3;
-          test_cases_float_pointer2[index] = float(test_cases_int_pointer2[index]);
+          test_cases_float_pointer2[index] =
+              float(test_cases_int_pointer2[index]);
         } break;
         case 2: {
           uint32_t index1 = rand() & 3;
           uint32_t index2 = rand() & 3;
-          test_cases_float_pointer1[index1] = float(test_cases_int_pointer1[index1]);
-          test_cases_float_pointer1[index2] = float(test_cases_int_pointer1[index2]);
+          test_cases_float_pointer1[index1] =
+              float(test_cases_int_pointer1[index1]);
+          test_cases_float_pointer1[index2] =
+              float(test_cases_int_pointer1[index2]);
           index1 = rand() & 3;
           index2 = rand() & 3;
-          test_cases_float_pointer1[index1] = float(test_cases_int_pointer1[index1]);
-          test_cases_float_pointer1[index2] = float(test_cases_int_pointer1[index2]);
+          test_cases_float_pointer1[index1] =
+              float(test_cases_int_pointer1[index1]);
+          test_cases_float_pointer1[index2] =
+              float(test_cases_int_pointer1[index2]);
         } break;
         case 3:
           test_cases_float_pointer1[0] = float(test_cases_int_pointer1[0]);
@@ -10173,7 +10179,7 @@ result_t test_vsudotq_laneq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 }
 
 NEON2RVV_TEST_IMPL::NEON2RVV_TEST_IMPL(void) {
-  test_cases_float_pointer1 = (float *)platform_aligned_alloc(__riscv_v_elen); 
+  test_cases_float_pointer1 = (float *)platform_aligned_alloc(__riscv_v_elen);
   test_cases_float_pointer2 = (float *)platform_aligned_alloc(__riscv_v_elen);
   test_cases_int_pointer1 = (int32_t *)platform_aligned_alloc(__riscv_v_elen);
   test_cases_int_pointer2 = (int32_t *)platform_aligned_alloc(__riscv_v_elen);
