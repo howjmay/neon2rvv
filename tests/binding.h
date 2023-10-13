@@ -13,6 +13,6 @@ namespace NEON2RVV {
 void *platform_aligned_alloc(size_t size);
 void platform_aligned_free(void *ptr);
 
-} // namespace NEON2RVV
+}  // namespace NEON2RVV
 
-#endif // NEON2RVV_BINDING_H
+#endif  // NEON2RVV_BINDING_H

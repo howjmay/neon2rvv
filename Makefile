@@ -69,7 +69,7 @@ endif
 
 format:
 	@echo "Formatting files with clang-format.."
-	@if ! hash clang-format-17; then echo "clang-format-17 is required to indent"; fi
+	@if ! hash clang-format; then echo "clang-format is required to indent"; fi
 	clang-format -i neon2rvv.h tests/*.cpp tests/*.h
 
 .PHONY: clean check format

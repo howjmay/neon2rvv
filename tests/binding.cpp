@@ -28,4 +28,4 @@ void platform_aligned_free(void *ptr) {
 #endif
 }
 
-} // namespace NEON2RVV
+}  // namespace NEON2RVV

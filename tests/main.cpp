@@ -1,6 +1,6 @@
-#include "impl.h"
 #include <stdint.h>
 #include <stdio.h>
+#include "impl.h"
 
 int main(int /*argc*/, const char ** /*argv*/) {
   NEON2RVV::NEON2RVV_TEST *test = NEON2RVV::NEON2RVV_TEST::create();
@@ -24,13 +24,13 @@ int main(int /*argc*/, const char ** /*argv*/) {
     }
   }
   test->release();
-  printf("NEON2RVV_TEST Complete!\n"
-         "Passed:  %d\n"
-         "Failed:  %d\n"
-         "Ignored: %d\n"
-         "Coverage rate: %.2f%%\n",
-         pass_count, failed_count, ignore_count,
-         (float)pass_count / (pass_count + failed_count + ignore_count) * 100);
+  printf(
+      "NEON2RVV_TEST Complete!\n"
+      "Passed:  %d\n"
+      "Failed:  %d\n"
+      "Ignored: %d\n"
+      "Coverage rate: %.2f%%\n",
+      pass_count, failed_count, ignore_count, (float)pass_count / (pass_count + failed_count + ignore_count) * 100);
 
   return failed_count ? -1 : 0;
 }

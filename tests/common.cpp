@@ -32,8 +32,7 @@ result_t validate_uint64(uint64x1_t a, uint64_t i0) {
   return TEST_SUCCESS;
 }
 
-result_t validate_int32(int32x4_t a, int32_t i0, int32_t i1, int32_t i2,
-                        int32_t i3) {
+result_t validate_int32(int32x4_t a, int32_t i0, int32_t i1, int32_t i2, int32_t i3) {
   const int32_t *t = (const int32_t *)&a;
   ASSERT_RETURN(t[0] == i0);
   ASSERT_RETURN(t[1] == i1);
@@ -42,8 +41,7 @@ result_t validate_int32(int32x4_t a, int32_t i0, int32_t i1, int32_t i2,
   return TEST_SUCCESS;
 }
 
-result_t validate_uint32(uint32x4_t a, uint32_t u0, uint32_t u1, uint32_t u2,
-                         uint32_t u3) {
+result_t validate_uint32(uint32x4_t a, uint32_t u0, uint32_t u1, uint32_t u2, uint32_t u3) {
   const uint32_t *t = (const uint32_t *)&a;
   ASSERT_RETURN(t[0] == u0);
   ASSERT_RETURN(t[1] == u1);
@@ -66,8 +64,7 @@ result_t validate_uint32(uint32x2_t a, uint32_t u0, uint32_t u1) {
   return TEST_SUCCESS;
 }
 
-result_t validate_int16(int16x8_t a, int16_t i0, int16_t i1, int16_t i2,
-                        int16_t i3, int16_t i4, int16_t i5, int16_t i6,
+result_t validate_int16(int16x8_t a, int16_t i0, int16_t i1, int16_t i2, int16_t i3, int16_t i4, int16_t i5, int16_t i6,
                         int16_t i7) {
   const int16_t *t = (const int16_t *)&a;
   ASSERT_RETURN(t[0] == i0);
@@ -81,9 +78,8 @@ result_t validate_int16(int16x8_t a, int16_t i0, int16_t i1, int16_t i2,
   return TEST_SUCCESS;
 }
 
-result_t validate_uint16(uint16x8_t a, uint16_t u0, uint16_t u1, uint16_t u2,
-                         uint16_t u3, uint16_t u4, uint16_t u5, uint16_t u6,
-                         uint16_t u7) {
+result_t validate_uint16(uint16x8_t a, uint16_t u0, uint16_t u1, uint16_t u2, uint16_t u3, uint16_t u4, uint16_t u5,
+                         uint16_t u6, uint16_t u7) {
   const uint16_t *t = (const uint16_t *)&a;
   ASSERT_RETURN(t[0] == u0);
   ASSERT_RETURN(t[1] == u1);
@@ -96,8 +92,7 @@ result_t validate_uint16(uint16x8_t a, uint16_t u0, uint16_t u1, uint16_t u2,
   return TEST_SUCCESS;
 }
 
-result_t validate_int16(int16x4_t a, int16_t i0, int16_t i1, int16_t i2,
-                        int16_t i3) {
+result_t validate_int16(int16x4_t a, int16_t i0, int16_t i1, int16_t i2, int16_t i3) {
   const int16_t *t = (const int16_t *)&a;
   ASSERT_RETURN(t[0] == i0);
   ASSERT_RETURN(t[1] == i1);
@@ -106,8 +101,7 @@ result_t validate_int16(int16x4_t a, int16_t i0, int16_t i1, int16_t i2,
   return TEST_SUCCESS;
 }
 
-result_t validate_uint16(uint16x4_t a, uint16_t u0, uint16_t u1, uint16_t u2,
-                         uint16_t u3) {
+result_t validate_uint16(uint16x4_t a, uint16_t u0, uint16_t u1, uint16_t u2, uint16_t u3) {
   const uint16_t *t = (const uint16_t *)&a;
   ASSERT_RETURN(t[0] == u0);
   ASSERT_RETURN(t[1] == u1);
@@ -116,10 +110,9 @@ result_t validate_uint16(uint16x4_t a, uint16_t u0, uint16_t u1, uint16_t u2,
   return TEST_SUCCESS;
 }
 
-result_t validate_int8(int8x16_t a, int8_t i0, int8_t i1, int8_t i2, int8_t i3,
-                       int8_t i4, int8_t i5, int8_t i6, int8_t i7, int8_t i8,
-                       int8_t i9, int8_t i10, int8_t i11, int8_t i12,
-                       int8_t i13, int8_t i14, int8_t i15) {
+result_t validate_int8(int8x16_t a, int8_t i0, int8_t i1, int8_t i2, int8_t i3, int8_t i4, int8_t i5, int8_t i6,
+                       int8_t i7, int8_t i8, int8_t i9, int8_t i10, int8_t i11, int8_t i12, int8_t i13, int8_t i14,
+                       int8_t i15) {
   const int8_t *t = (const int8_t *)&a;
   ASSERT_RETURN(t[0] == i0);
   ASSERT_RETURN(t[1] == i1);
@@ -140,11 +133,9 @@ result_t validate_int8(int8x16_t a, int8_t i0, int8_t i1, int8_t i2, int8_t i3,
   return TEST_SUCCESS;
 }
 
-result_t validate_uint8(uint8x16_t a, uint8_t u0, uint8_t u1, uint8_t u2,
-                        uint8_t u3, uint8_t u4, uint8_t u5, uint8_t u6,
-                        uint8_t u7, uint8_t u8, uint8_t u9, uint8_t u10,
-                        uint8_t u11, uint8_t u12, uint8_t u13, uint8_t u14,
-                        uint8_t u15) {
+result_t validate_uint8(uint8x16_t a, uint8_t u0, uint8_t u1, uint8_t u2, uint8_t u3, uint8_t u4, uint8_t u5,
+                        uint8_t u6, uint8_t u7, uint8_t u8, uint8_t u9, uint8_t u10, uint8_t u11, uint8_t u12,
+                        uint8_t u13, uint8_t u14, uint8_t u15) {
   const uint8_t *t = (const uint8_t *)&a;
   ASSERT_RETURN(t[0] == u0);
   ASSERT_RETURN(t[1] == u1);
@@ -165,8 +156,8 @@ result_t validate_uint8(uint8x16_t a, uint8_t u0, uint8_t u1, uint8_t u2,
   return TEST_SUCCESS;
 }
 
-result_t validate_int8(int8x8_t a, int8_t i0, int8_t i1, int8_t i2, int8_t i3,
-                       int8_t i4, int8_t i5, int8_t i6, int8_t i7) {
+result_t validate_int8(int8x8_t a, int8_t i0, int8_t i1, int8_t i2, int8_t i3, int8_t i4, int8_t i5, int8_t i6,
+                       int8_t i7) {
   const int8_t *t = (const int8_t *)&a;
   ASSERT_RETURN(t[0] == i0);
   ASSERT_RETURN(t[1] == i1);
@@ -179,8 +170,7 @@ result_t validate_int8(int8x8_t a, int8_t i0, int8_t i1, int8_t i2, int8_t i3,
   return TEST_SUCCESS;
 }
 
-result_t validate_uint8(uint8x8_t a, uint8_t u0, uint8_t u1, uint8_t u2,
-                        uint8_t u3, uint8_t u4, uint8_t u5, uint8_t u6,
+result_t validate_uint8(uint8x8_t a, uint8_t u0, uint8_t u1, uint8_t u2, uint8_t u3, uint8_t u4, uint8_t u5, uint8_t u6,
                         uint8_t u7) {
   const uint8_t *t = (const uint8_t *)&a;
   ASSERT_RETURN(t[0] == u0);
@@ -226,8 +216,7 @@ result_t validate_float(float32x4_t a, float f0, float f1, float f2, float f3) {
   return TEST_SUCCESS;
 }
 
-result_t validate_float_epsilon(float32x4_t a, float f0, float f1, float f2,
-                                float f3, float epsilon) {
+result_t validate_float_epsilon(float32x4_t a, float f0, float f1, float f2, float f3, float epsilon) {
   const float *t = (const float *)&a;
   float df0 = fabsf(t[0] - f0);
   float df1 = fabsf(t[1] - f1);
@@ -261,31 +250,26 @@ result_t validate_float_epsilon(float32x4_t a, float f0, float f1, float f2,
   return TEST_SUCCESS;
 }
 
-result_t validate_float_error(float32x4_t a, float f0, float f1, float f2,
-                              float f3, float err) {
+result_t validate_float_error(float32x4_t a, float f0, float f1, float f2, float f3, float err) {
   const float *t = (const float *)&a;
   float df0 = fabsf((t[0] - f0) / f0);
   float df1 = fabsf((t[1] - f1) / f1);
   float df2 = fabsf((t[2] - f2) / f2);
   float df3 = fabsf((t[3] - f3) / f3);
 
-  if ((std::isnan(t[0]) && std::isnan(f0)) || (t[0] == 0 && f0 == 0) ||
-      (std::isinf(t[0]) && std::isinf(f0))) {
+  if ((std::isnan(t[0]) && std::isnan(f0)) || (t[0] == 0 && f0 == 0) || (std::isinf(t[0]) && std::isinf(f0))) {
     df0 = 0;
   }
 
-  if ((std::isnan(t[1]) && std::isnan(f1)) || (t[1] == 0 && f1 == 0) ||
-      (std::isinf(t[1]) && std::isinf(f1))) {
+  if ((std::isnan(t[1]) && std::isnan(f1)) || (t[1] == 0 && f1 == 0) || (std::isinf(t[1]) && std::isinf(f1))) {
     df1 = 0;
   }
 
-  if ((std::isnan(t[2]) && std::isnan(f2)) || (t[2] == 0 && f2 == 0) ||
-      (std::isinf(t[2]) && std::isinf(f2))) {
+  if ((std::isnan(t[2]) && std::isnan(f2)) || (t[2] == 0 && f2 == 0) || (std::isinf(t[2]) && std::isinf(f2))) {
     df2 = 0;
   }
 
-  if ((std::isnan(t[3]) && std::isnan(f3)) || (t[3] == 0 && f3 == 0) ||
-      (std::isinf(t[3]) && std::isinf(f3))) {
+  if ((std::isnan(t[3]) && std::isnan(f3)) || (t[3] == 0 && f3 == 0) || (std::isinf(t[3]) && std::isinf(f3))) {
     df3 = 0;
   }
 
@@ -321,4 +305,4 @@ result_t validate_float_error(float64x2_t a, double d0, double d1, double err) {
   return TEST_SUCCESS;
 }
 
-} // namespace NEON2RVV
+}  // namespace NEON2RVV
