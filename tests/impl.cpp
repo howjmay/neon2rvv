@@ -10178,6 +10178,11 @@ result_t test_vsudotq_laneq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   return TEST_UNIMPL;
 }
 
+// Dummy function to match the case label in run_single_test.
+result_t test_last(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  return TEST_SUCCESS;
+}
+
 NEON2RVV_TEST_IMPL::NEON2RVV_TEST_IMPL(void) {
   test_cases_float_pointer1 = (float *)platform_aligned_alloc(__riscv_v_elen);
   test_cases_float_pointer2 = (float *)platform_aligned_alloc(__riscv_v_elen);
@@ -10188,11 +10193,6 @@ NEON2RVV_TEST_IMPL::NEON2RVV_TEST_IMPL(void) {
     test_cases_floats[i] = ranf(-100000, 100000);
     test_cases_ints[i] = (int32_t)ranf(-100000, 100000);
   }
-}
-
-// Dummy function to match the case label in run_single_test.
-result_t test_last(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
-  return TEST_SUCCESS;
 }
 
 result_t NEON2RVV_TEST_IMPL::load_test_float_pointers(uint32_t i) {

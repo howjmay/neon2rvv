@@ -62,6 +62,11 @@ ifeq ($(processor),$(filter $(processor),rv32 rv64))
 endif
 	$(EXEC_WRAPPER) $(EXEC_WRAPPER_FLAGS) $(PROXY_KERNEL) $^
 
+build-test: tests/main
+ifeq ($(processor),$(filter $(processor),rv32 rv64))
+	$(CC) $(ARCH_CFLAGS) -c neon2rvv.h
+endif
+
 format:
 	@echo "Formatting files with clang-format.."
 	@if ! hash clang-format-17; then echo "clang-format-17 is required to indent"; fi
