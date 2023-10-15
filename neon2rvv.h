@@ -2702,7 +2702,7 @@ FORCE_INLINE int8x8_t vadd_s8(int8x8_t __a, int8x8_t __b) { return __riscv_vadd_
 
 // // poly64x1_t vld1_p64(const poly64_t *__a);
 
-// FORCE_INLINE int8x8_t vld1_s8(const int8_t *__a);
+FORCE_INLINE int8x8_t vld1_s8(const int8_t *__a) { return __riscv_vle8_v_i8m1(__a, 8); }
 
 // FORCE_INLINE int16x4_t vld1_s16(const int16_t *__a);
 

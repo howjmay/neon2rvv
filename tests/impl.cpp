@@ -318,9 +318,8 @@ result_t test_vadd_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int8_t d6 = _a[6] + _b[6];
   int8_t d7 = _a[7] + _b[7];
 
-  // FIXME replace with NEON intrinsics
-  int8x8_t a = __riscv_vle8_v_i8m1(_a, 8);
-  int8x8_t b = __riscv_vle8_v_i8m1(_b, 8);
+  int8x8_t a = vld1_s8(_a);
+  int8x8_t b = vld1_s8(_b);
   int8x8_t c = vadd_s8(a, b);
   return validate_int8(c, d0, d1, d2, d3, d4, d5, d6, d7);
 }
@@ -2887,7 +2886,11 @@ result_t test_vuzpq_p16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return 
 
 result_t test_vld1_p64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vld1_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vld1_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int8_t *addr = (int8_t *)impl.test_cases_int_pointer1;
+  int8x8_t ret = vld1_s8(addr);
+  return validate_int8(ret, addr[0], addr[1], addr[2], addr[3], addr[4], addr[5], addr[6], addr[7]);
+}
 
 result_t test_vld1_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
@@ -5055,10 +5058,15 @@ result_t test_vsudotq_laneq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 result_t test_last(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_SUCCESS; }
 
 NEON2RVV_TEST_IMPL::NEON2RVV_TEST_IMPL(void) {
-  test_cases_float_pointer1 = (float *)platform_aligned_alloc(__riscv_v_elen);
-  test_cases_float_pointer2 = (float *)platform_aligned_alloc(__riscv_v_elen);
-  test_cases_int_pointer1 = (int32_t *)platform_aligned_alloc(__riscv_v_elen);
-  test_cases_int_pointer2 = (int32_t *)platform_aligned_alloc(__riscv_v_elen);
+#ifdef __riscv_v_elen
+  const size_t elen = __riscv_v_elen;
+#else
+  const size_t elen = 64;
+#endif
+  test_cases_float_pointer1 = (float *)platform_aligned_alloc(elen);
+  test_cases_float_pointer2 = (float *)platform_aligned_alloc(elen);
+  test_cases_int_pointer1 = (int32_t *)platform_aligned_alloc(elen);
+  test_cases_int_pointer2 = (int32_t *)platform_aligned_alloc(elen);
   srand(0);
   for (uint32_t i = 0; i < MAX_TEST_VALUE; i++) {
     test_cases_floats[i] = ranf(-100000, 100000);
