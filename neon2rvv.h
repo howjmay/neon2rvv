@@ -3527,10 +3527,6 @@ FORCE_INLINE uint64x2_t vld1q_u64(const uint64_t *__a) { return __riscv_vle64_v_
 
 // FORCE_INLINE uint32x4_t vsha256su1q_u32(uint32x4_t __tw0_3, uint32x4_t __w8_11, uint32x4_t __w12_15);
 
-// /* Intrinsics for FP16 instructions. */
-
-// /* Half-precision data processing intrinsics. */
-
 // /* AdvSIMD Dot Product intrinsics. */
 
 // FORCE_INLINE uint32x2_t vdot_u32(uint32x2_t __r, uint8x8_t __a, uint8x8_t __b);
