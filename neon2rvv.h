@@ -2492,23 +2492,23 @@ FORCE_INLINE uint32x2_t vld1_u32(const uint32_t *__a) { return __riscv_vle32_v_u
 
 FORCE_INLINE uint64x1_t vld1_u64(const uint64_t *__a) { return __riscv_vle64_v_u64m1(__a, 1); }
 
-// FORCE_INLINE int8x16_t vld1q_s8(const int8_t *__a);
+FORCE_INLINE int8x16_t vld1q_s8(const int8_t *__a) { return __riscv_vle8_v_i8m1(__a, 16); }
 
-// FORCE_INLINE int16x8_t vld1q_s16(const int16_t *__a);
+FORCE_INLINE int16x8_t vld1q_s16(const int16_t *__a) { return __riscv_vle16_v_i16m1(__a, 8); }
 
-// FORCE_INLINE int32x4_t vld1q_s32(const int32_t *__a);
+FORCE_INLINE int32x4_t vld1q_s32(const int32_t *__a) { return __riscv_vle32_v_i32m1(__a, 4); }
 
-// FORCE_INLINE int64x2_t vld1q_s64(const int64_t *__a);
+FORCE_INLINE int64x2_t vld1q_s64(const int64_t *__a) { return __riscv_vle64_v_i64m1(__a, 2); }
 
-// FORCE_INLINE float32x4_t vld1q_f32(const float32_t *__a);
+FORCE_INLINE float32x4_t vld1q_f32(const float32_t *__a) { return __riscv_vle32_v_f32m1(__a, 4); }
 
-// FORCE_INLINE uint8x16_t vld1q_u8(const uint8_t *__a);
+FORCE_INLINE uint8x16_t vld1q_u8(const uint8_t *__a) { return __riscv_vle8_v_u8m1(__a, 16); }
 
-// FORCE_INLINE uint16x8_t vld1q_u16(const uint16_t *__a);
+FORCE_INLINE uint16x8_t vld1q_u16(const uint16_t *__a) { return __riscv_vle16_v_u16m1(__a, 8); }
 
-// FORCE_INLINE uint32x4_t vld1q_u32(const uint32_t *__a);
+FORCE_INLINE uint32x4_t vld1q_u32(const uint32_t *__a) { return __riscv_vle32_v_u32m1(__a, 4); }
 
-// FORCE_INLINE uint64x2_t vld1q_u64(const uint64_t *__a);
+FORCE_INLINE uint64x2_t vld1q_u64(const uint64_t *__a) { return __riscv_vle64_v_u64m1(__a, 2); }
 
 // FORCE_INLINE int8x8_t vld1_lane_s8(const int8_t *__a, int8x8_t __b, const int __c);
 

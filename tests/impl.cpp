@@ -2708,23 +2708,61 @@ result_t test_vld1_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   return validate_uint64(ret, addr[0]);
 }
 
-result_t test_vld1q_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vld1q_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int8_t *addr = (int8_t *)impl.test_cases_int_pointer1;
+  int8x16_t ret = vld1q_s8(addr);
+  return validate_int8(ret, addr[0], addr[1], addr[2], addr[3], addr[4], addr[5], addr[6], addr[7], addr[8], addr[9],
+                       addr[10], addr[11], addr[12], addr[13], addr[14], addr[15]);
+}
 
-result_t test_vld1q_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vld1q_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int16_t *addr = (int16_t *)impl.test_cases_int_pointer1;
+  int16x8_t ret = vld1q_s16(addr);
+  return validate_int16(ret, addr[0], addr[1], addr[2], addr[3], addr[4], addr[5], addr[6], addr[7]);
+}
 
-result_t test_vld1q_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vld1q_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int32_t *addr = (int32_t *)impl.test_cases_int_pointer1;
+  int32x4_t ret = vld1q_s32(addr);
+  return validate_int32(ret, addr[0], addr[1], addr[2], addr[3]);
+}
 
-result_t test_vld1q_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vld1q_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int64_t *addr = (int64_t *)impl.test_cases_int_pointer1;
+  int64x2_t ret = vld1q_s64(addr);
+  return validate_int64(ret, addr[0], addr[1]);
+}
 
-result_t test_vld1q_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vld1q_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const float *addr = impl.test_cases_float_pointer1;
+  float32x4_t ret = vld1q_f32(addr);
+  return validate_float(ret, addr[0], addr[1], addr[2], addr[3]);
+}
 
-result_t test_vld1q_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vld1q_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint8_t *addr = (uint8_t *)impl.test_cases_int_pointer1;
+  uint8x16_t ret = vld1q_u8(addr);
+  return validate_uint8(ret, addr[0], addr[1], addr[2], addr[3], addr[4], addr[5], addr[6], addr[7], addr[8], addr[9],
+                        addr[10], addr[11], addr[12], addr[13], addr[14], addr[15]);
+}
 
-result_t test_vld1q_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vld1q_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint16_t *addr = (uint16_t *)impl.test_cases_int_pointer1;
+  uint16x8_t ret = vld1q_u16(addr);
+  return validate_uint16(ret, addr[0], addr[1], addr[2], addr[3], addr[4], addr[5], addr[6], addr[7]);
+}
 
-result_t test_vld1q_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vld1q_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint32_t *addr = (uint32_t *)impl.test_cases_int_pointer1;
+  uint32x4_t ret = vld1q_u32(addr);
+  return validate_uint32(ret, addr[0], addr[1], addr[2], addr[3]);
+}
 
-result_t test_vld1q_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vld1q_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint64_t *addr = (uint64_t *)impl.test_cases_int_pointer1;
+  uint64x2_t ret = vld1q_u64(addr);
+  return validate_uint64(ret, addr[0], addr[1]);
+}
 
 result_t test_vld1_lane_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
