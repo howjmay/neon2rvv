@@ -2678,7 +2678,11 @@ result_t test_vld1_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   return validate_int64(ret, addr[0]);
 }
 
-result_t test_vld1_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vld1_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const float *addr = impl.test_cases_float_pointer1;
+  float32x2_t ret = vld1_f32(addr);
+  return validate_float(ret, addr[0], addr[1]);
+}
 
 result_t test_vld1_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint8_t *addr = (uint8_t *)impl.test_cases_int_pointer1;

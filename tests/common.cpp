@@ -207,6 +207,13 @@ result_t validate_double_pair(double a, double b) {
   return (*ua) == (*ub) ? TEST_SUCCESS : TEST_FAIL;
 }
 
+result_t validate_float(float32x2_t a, float f0, float f1) {
+  const float *t = (const float *)&a;
+  ASSERT_RETURN(validate_float_pair(t[0], f0));
+  ASSERT_RETURN(validate_float_pair(t[1], f1));
+  return TEST_SUCCESS;
+}
+
 result_t validate_float(float32x4_t a, float f0, float f1, float f2, float f3) {
   const float *t = (const float *)&a;
   ASSERT_RETURN(validate_float_pair(t[0], f0));
