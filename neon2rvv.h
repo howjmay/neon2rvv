@@ -57,8 +57,8 @@ extern "C" {
 
 typedef float float32_t;
 
-#if __riscv_xlen == 64
-// 32bit width
+#if __riscv_v_min_vlen == 128
+// 64bit width vector register
 typedef vint8m1_t int8x8_t;
 typedef vint16m1_t int16x4_t;
 typedef vint32m1_t int32x2_t;
@@ -69,7 +69,7 @@ typedef vuint32m1_t uint32x2_t;
 typedef vuint64m1_t uint64x1_t;
 typedef vfloat32m1_t float32x2_t;
 typedef vfloat64m1_t float64x1_t;
-// 64bit width
+// 128bit width vector register
 typedef vint8m1_t int8x16_t;
 typedef vint16m1_t int16x8_t;
 typedef vint32m1_t int32x4_t;
@@ -132,23 +132,14 @@ typedef vint64m4_t int64x1x3_t;
 typedef vuint64m4_t uint64x1x3_t;
 typedef vint64m4_t int64x1x4_t;
 typedef vuint64m4_t uint64x1x4_t;
-#elif __riscv_xlen == 32
-typedef vint8m1_t int8x8_t;
-typedef vint16m1_t int16x4_t;
-typedef vint32m1_t int32x2_t;
-typedef vint64m1_t int64x1_t;
-typedef vuint8m1_t uint8x8_t;
-typedef vuint16m1_t uint16x4_t;
-typedef vuint32m1_t uint32x2_t;
-typedef vuint64m1_t uint64x1_t;
-typedef vfloat32m1_t float32x2_t;
-typedef vfloat64m1_t float64x1_t;
+#elif __riscv_v_min_vlen == 256
+#elif __riscv_v_min_vlen == 512
 #else
-// Code for other architectures
+// typedef for other VLEN
 #endif
 
 /* vadd */
-FORCE_INLINE int8x8_t vadd_s8(int8x8_t __a, int8x8_t __b);
+FORCE_INLINE int8x8_t vadd_s8(int8x8_t __a, int8x8_t __b) { return __riscv_vadd_vv_i8m1(__a, __b, 16); }
 
 // FORCE_INLINE int16x4_t vadd_s16(int16x4_t __a, int16x4_t __b);
 
@@ -4843,7 +4834,8 @@ FORCE_INLINE int8x8_t vadd_s8(int8x8_t __a, int8x8_t __b);
 
 // FORCE_INLINE float32x4_t vcmlaq_rot90_lane_f32(float32x4_t __r, float32x4_t __a, float32x2_t __b, const int __index);
 
-// FORCE_INLINE float32x4_t vcmlaq_rot90_laneq_f32(float32x4_t __r, float32x4_t __a, float32x4_t __b, const int __index);
+// FORCE_INLINE float32x4_t vcmlaq_rot90_laneq_f32(float32x4_t __r, float32x4_t __a, float32x4_t __b, const int
+// __index);
 
 // FORCE_INLINE float32x2_t vcmla_rot180_f32(float32x2_t __r, float32x2_t __a, float32x2_t __b);
 
@@ -4851,11 +4843,14 @@ FORCE_INLINE int8x8_t vadd_s8(int8x8_t __a, int8x8_t __b);
 
 // FORCE_INLINE float32x2_t vcmla_rot180_lane_f32(float32x2_t __r, float32x2_t __a, float32x2_t __b, const int __index);
 
-// FORCE_INLINE float32x2_t vcmla_rot180_laneq_f32(float32x2_t __r, float32x2_t __a, float32x4_t __b, const int __index);
+// FORCE_INLINE float32x2_t vcmla_rot180_laneq_f32(float32x2_t __r, float32x2_t __a, float32x4_t __b, const int
+// __index);
 
-// FORCE_INLINE float32x4_t vcmlaq_rot180_lane_f32(float32x4_t __r, float32x4_t __a, float32x2_t __b, const int __index);
+// FORCE_INLINE float32x4_t vcmlaq_rot180_lane_f32(float32x4_t __r, float32x4_t __a, float32x2_t __b, const int
+// __index);
 
-// FORCE_INLINE float32x4_t vcmlaq_rot180_laneq_f32(float32x4_t __r, float32x4_t __a, float32x4_t __b, const int __index);
+// FORCE_INLINE float32x4_t vcmlaq_rot180_laneq_f32(float32x4_t __r, float32x4_t __a, float32x4_t __b, const int
+// __index);
 
 // FORCE_INLINE float32x2_t vcmla_rot270_f32(float32x2_t __r, float32x2_t __a, float32x2_t __b);
 
@@ -4863,11 +4858,14 @@ FORCE_INLINE int8x8_t vadd_s8(int8x8_t __a, int8x8_t __b);
 
 // FORCE_INLINE float32x2_t vcmla_rot270_lane_f32(float32x2_t __r, float32x2_t __a, float32x2_t __b, const int __index);
 
-// FORCE_INLINE float32x2_t vcmla_rot270_laneq_f32(float32x2_t __r, float32x2_t __a, float32x4_t __b, const int __index);
+// FORCE_INLINE float32x2_t vcmla_rot270_laneq_f32(float32x2_t __r, float32x2_t __a, float32x4_t __b, const int
+// __index);
 
-// FORCE_INLINE float32x4_t vcmlaq_rot270_lane_f32(float32x4_t __r, float32x4_t __a, float32x2_t __b, const int __index);
+// FORCE_INLINE float32x4_t vcmlaq_rot270_lane_f32(float32x4_t __r, float32x4_t __a, float32x2_t __b, const int
+// __index);
 
-// FORCE_INLINE float32x4_t vcmlaq_rot270_laneq_f32(float32x4_t __r, float32x4_t __a, float32x4_t __b, const int __index);
+// FORCE_INLINE float32x4_t vcmlaq_rot270_laneq_f32(float32x4_t __r, float32x4_t __a, float32x4_t __b, const int
+// __index);
 
 // /* AdvSIMD Matrix Multiply-Accumulate and Dot Product intrinsics. */
 
