@@ -346,7 +346,17 @@ result_t test_vadd_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   return validate_int32(c, d0, d1);
 }
 
-result_t test_vadd_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vadd_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const float *_a = (float *)impl.test_cases_float_pointer1;
+  const float *_b = (float *)impl.test_cases_float_pointer2;
+  float d0 = _a[0] + _b[0];
+  float d1 = _a[1] + _b[1];
+
+  float32x2_t a = vld1_f32(_a);
+  float32x2_t b = vld1_f32(_b);
+  float32x2_t c = vadd_f32(a, b);
+  return validate_float(c, d0, d1);
+}
 
 result_t test_vadd_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint8_t *_a = (uint8_t *)impl.test_cases_int_pointer1;
@@ -484,7 +494,19 @@ result_t test_vaddq_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   return validate_int64(c, d0, d1);
 }
 
-result_t test_vaddq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vaddq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const float *_a = (float *)impl.test_cases_float_pointer1;
+  const float *_b = (float *)impl.test_cases_float_pointer2;
+  float d0 = _a[0] + _b[0];
+  float d1 = _a[1] + _b[1];
+  float d2 = _a[2] + _b[2];
+  float d3 = _a[3] + _b[3];
+
+  float32x4_t a = vld1q_f32(_a);
+  float32x4_t b = vld1q_f32(_b);
+  float32x4_t c = vaddq_f32(a, b);
+  return validate_float(c, d0, d1, d2, d3);
+}
 
 result_t test_vaddq_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint8_t *_a = (uint8_t *)impl.test_cases_int_pointer1;
