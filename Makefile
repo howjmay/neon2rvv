@@ -75,6 +75,9 @@ format:
 .PHONY: clean check format
 
 clean:
-	$(RM) $(OBJS) $(EXEC) $(deps) neon2rvv.h.gch *.log
+	$(RM) $(OBJS) $(EXEC) $(deps) neon2rvv.h.gch
+
+clean-all: clean
+	$(RM) *.log
 
 -include $(deps)
