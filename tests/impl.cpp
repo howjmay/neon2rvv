@@ -3824,7 +3824,19 @@ result_t test_vreinterpret_s8_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter)
 
 result_t test_vreinterpret_s8_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vreinterpret_s8_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vreinterpret_s8_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
+  int8_t _c[8];
+  for (int i = 0; i < 2; i++) {
+    for (int j = 0; j < 4; j++) {
+      _c[i * 4 + j] = (int8_t)((_a[i] >> (j * 8)) & 0xff);
+    }
+  }
+  int32x2_t a = vld1_s32(_a);
+  int8x8_t c = vreinterpret_s8_s32(a);
+
+  return validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]);
+}
 
 result_t test_vreinterpret_s8_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 

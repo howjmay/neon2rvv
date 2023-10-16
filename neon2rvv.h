@@ -3260,7 +3260,7 @@ FORCE_INLINE uint64x2_t vld1q_u64(const uint64_t *__a) { return __riscv_vle64_v_
 
 // FORCE_INLINE int8x8_t vreinterpret_s8_s16(int16x4_t __a);
 
-// FORCE_INLINE int8x8_t vreinterpret_s8_s32(int32x2_t __a);
+FORCE_INLINE int8x8_t vreinterpret_s8_s32(int32x2_t __a) { return __riscv_vreinterpret_v_i32m1_i8m1(__a); }
 
 // FORCE_INLINE int8x8_t vreinterpret_s8_u8(uint8x8_t __a);
 
