@@ -4187,16 +4187,17 @@ result_t test_vsudotq_laneq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 // Dummy function to match the case label in run_single_test.
 result_t test_last(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_SUCCESS; }
 
-NEON2RVV_TEST_IMPL::NEON2RVV_TEST_IMPL(void) {
-#ifdef __riscv_v_elen
-  const size_t elen = __riscv_v_elen;
-#else
-  const size_t elen = 64;
+#if defined(__riscv_v_elen)
+#define REGISTER_SIZE __riscv_v_elen
+#elif defined(__aarch64__)
+#define REGISTER_SIZE 128
 #endif
-  test_cases_float_pointer1 = (float *)platform_aligned_alloc(elen);
-  test_cases_float_pointer2 = (float *)platform_aligned_alloc(elen);
-  test_cases_int_pointer1 = (int32_t *)platform_aligned_alloc(elen);
-  test_cases_int_pointer2 = (int32_t *)platform_aligned_alloc(elen);
+
+NEON2RVV_TEST_IMPL::NEON2RVV_TEST_IMPL(void) {
+  test_cases_float_pointer1 = (float *)platform_aligned_alloc(REGISTER_SIZE);
+  test_cases_float_pointer2 = (float *)platform_aligned_alloc(REGISTER_SIZE);
+  test_cases_int_pointer1 = (int32_t *)platform_aligned_alloc(REGISTER_SIZE);
+  test_cases_int_pointer2 = (int32_t *)platform_aligned_alloc(REGISTER_SIZE);
   srand(0);
   for (uint32_t i = 0; i < MAX_TEST_VALUE; i++) {
     test_cases_floats[i] = ranf(-100000, 100000);
