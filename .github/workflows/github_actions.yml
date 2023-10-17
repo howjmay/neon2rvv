@@ -40,5 +40,5 @@ jobs:
         # clang-format version should be set
         run: |
             sudo apt-get install -q -y clang-format
-            sh .ci/check-format.sh
+            sh scripts/check-format.sh
         shell: bash
