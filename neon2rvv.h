@@ -1,5 +1,3 @@
-
-
 /*
  * This header file provides a simple API translation layer
  * between Arm/Aarch64 NEON to their corresponding RVV intrinsics versions.
