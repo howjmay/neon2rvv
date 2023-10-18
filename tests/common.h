@@ -83,9 +83,9 @@ result_t validate_int8(int8x8_t a, int8_t i0, int8_t i1, int8_t i2, int8_t i3, i
                        int8_t i7);
 result_t validate_uint8(uint8x8_t a, uint8_t u0, uint8_t u1, uint8_t u2, uint8_t u3, uint8_t u4, uint8_t u5, uint8_t u6,
                         uint8_t u7);
-result_t validate_float(float32x2_t a, float f0, float f1);
 result_t validate_float_pair(float a, float b);
 result_t validate_double_pair(double a, double b);
+result_t validate_float(float32x2_t a, float f0, float f1);
 result_t validate_float(float32x4_t a, float f0, float f1, float f2, float f3);
 result_t validate_float_epsilon(float32x4_t a, float f0, float f1, float f2, float f3, float epsilon);
 result_t validate_float_error(float32x4_t a, float f0, float f1, float f2, float f3, float err);
