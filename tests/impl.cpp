@@ -3768,7 +3768,17 @@ result_t test_vornq_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return 
 
 result_t test_vornq_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vreinterpret_f32_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vreinterpret_f32_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int64_t *_a = (int64_t *)impl.test_cases_int_pointer1;
+
+  int64_t tmp_c0 = (_a[0]) & 0xffffffff;
+  int64_t tmp_c1 = (_a[0] >> 32) & 0xffffffff;
+  float32_t _c0 = *(float32_t *)(&tmp_c0);
+  float32_t _c1 = *(float32_t *)(&tmp_c1);
+  int64x1_t a = vld1_s64(_a);
+  float32x2_t c = vreinterpret_f32_s64(a);
+  return validate_float(c, _c0, _c1);
+}
 
 result_t test_vreinterpret_f32_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
@@ -3788,7 +3798,18 @@ result_t test_vreinterpret_s64_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter
 
 result_t test_vreinterpret_s64_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vreinterpret_s64_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vreinterpret_s64_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
+
+  uint64_t _c = 0;
+  for (int i = 0; i < 8; i++) {
+    _c = (_c << 8) | (_a[7 - i] & 0xff);
+  }
+  int8x8_t a = vld1_s8(_a);
+  int64x1_t c = vreinterpret_s64_s8(a);
+
+  return validate_int64(c, *(int64_t *)&_c);
+}
 
 result_t test_vreinterpret_s64_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
