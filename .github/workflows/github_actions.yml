@@ -8,7 +8,7 @@ on:
 
 jobs:
   # run riscv tests
-  host_x86:
+  cross_compile_tests:
     runs-on: ubuntu-20.04
     steps:
       - name: checkout code
@@ -26,7 +26,7 @@ jobs:
           sh scripts/cross-test.sh qemu
 
   # for validate test cases only
-  host_arm:
+  check_test_cases:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
