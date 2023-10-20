@@ -29,13 +29,15 @@ else # CROSS_COMPILE was set
 	endif
 
 	ARCH_CFLAGS = -march=$(processor)gcv_zba
-    EXEC_WRAPPER_FLAGS = --isa=$(processor)gcv_zba
-endif
 
-EXEC_WRAPPER =
-ifdef CROSS_COMPILE
-EXEC_WRAPPER = spike
-PROXY_KERNEL = pk
+	ifeq ($(SIMULATOR_TYPE), qemu)
+		SIMULATOR += qemu-riscv64
+		SIMULATOR_FLAGS = -cpu $(processor),v=true,zba=true,vlen=128
+	else
+		SIMULATOR = spike
+		SIMULATOR_FLAGS = --isa=$(processor)gcv_zba
+		PROXY_KERNEL = pk
+	endif
 endif
 
 CXXFLAGS += -Wall -Wcast-qual -I. $(ARCH_CFLAGS)
@@ -60,7 +62,7 @@ test: tests/main
 ifeq ($(processor),$(filter $(processor),rv32 rv64))
 	$(CC) $(ARCH_CFLAGS) -c neon2rvv.h
 endif
-	$(EXEC_WRAPPER) $(EXEC_WRAPPER_FLAGS) $(PROXY_KERNEL) $^
+	$(SIMULATOR) $(SIMULATOR_FLAGS) $(PROXY_KERNEL) $^
 
 build-test: tests/main
 ifeq ($(processor),$(filter $(processor),rv32 rv64))

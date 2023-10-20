@@ -174,7 +174,7 @@ FORCE_INLINE uint32x4_t vaddq_u32(uint32x4_t __a, uint32x4_t __b) { return __ris
 FORCE_INLINE uint64x2_t vaddq_u64(uint64x2_t __a, uint64x2_t __b) { return __riscv_vadd_vv_u64m1(__a, __b, 2); }
 
 FORCE_INLINE int16x8_t vaddl_s8(int8x8_t __a, int8x8_t __b) {
-  return __riscv_vget_v_i16m2_i16m1(__riscv_vwadd_vv_i16m2(__a, __b, 8), 0);
+  return __riscv_vwadd_vv_i16m1(__a, __b, 8);
 }
 
 // FORCE_INLINE int32x4_t vaddl_s16(int16x4_t __a, int16x4_t __b);
