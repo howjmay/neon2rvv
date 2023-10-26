@@ -173,9 +173,7 @@ FORCE_INLINE uint32x4_t vaddq_u32(uint32x4_t __a, uint32x4_t __b) { return __ris
 
 FORCE_INLINE uint64x2_t vaddq_u64(uint64x2_t __a, uint64x2_t __b) { return __riscv_vadd_vv_u64m1(__a, __b, 2); }
 
-FORCE_INLINE int16x8_t vaddl_s8(int8x8_t __a, int8x8_t __b) {
-  return __riscv_vwadd_vv_i16m1(__a, __b, 8);
-}
+FORCE_INLINE int16x8_t vaddl_s8(int8x8_t __a, int8x8_t __b) { return __riscv_vwadd_vv_i16m1(__a, __b, 8); }
 
 // FORCE_INLINE int32x4_t vaddl_s16(int16x4_t __a, int16x4_t __b);
 
@@ -723,7 +721,12 @@ FORCE_INLINE uint32x2_t vmul_u32(uint32x2_t __a, uint32x2_t __b) { return __risc
 
 // FORCE_INLINE uint32x4_t vcleq_u32(uint32x4_t __a, uint32x4_t __b);
 
-// FORCE_INLINE uint8x8_t vcgt_s8(int8x8_t __a, int8x8_t __b);
+FORCE_INLINE uint8x8_t vcgt_s8(int8x8_t __a, int8x8_t __b) {
+  // vbool16 uses every bit to represent the boolean values of each elements of the comparison result
+  vbool16_t cmp_res_b16 = __riscv_vmsgt_vv_i8mf2_b16(__a, __b, 8);
+  uint8_t fs[] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
+  return __riscv_vle8_v_u8mf2_m(cmp_res_b16, fs, 8);
+}
 
 // FORCE_INLINE uint16x4_t vcgt_s16(int16x4_t __a, int16x4_t __b);
 
