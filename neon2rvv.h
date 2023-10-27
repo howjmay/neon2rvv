@@ -3675,13 +3675,6 @@ FORCE_INLINE uint32x4_t vreinterpretq_u32_u8(uint8x16_t __a) { return __riscv_vr
 
 FORCE_INLINE uint32x4_t vreinterpretq_u32_u16(uint16x8_t __a) { return __riscv_vreinterpret_v_u16m1_u32m1(__a); }
 
-// /* For vceqq_p64, we rely on vceq_p64 for each of the two elements. *
-
-// /* The vtst_p64 intrinsic does not map to a single instruction.
-//   We emulate it in way similar to vceq_p64 above but here we do
-//   a reduction with max since if any two corresponding bits
-//   // in the two poly64_t's match, then the whole result must be all ones. */
-
 // FORCE_INLINE uint8x16_t vaeseq_u8(uint8x16_t __data, uint8x16_t __key);
 
 // FORCE_INLINE uint8x16_t vaesdq_u8(uint8x16_t __data, uint8x16_t __key);
