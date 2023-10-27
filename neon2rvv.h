@@ -136,6 +136,8 @@ typedef vuint64m4_t uint64x1x4_t;
 // typedef for other VLEN
 #endif
 
+FORCE_INLINE uint8x8_t vdup_n_u8(uint8_t __a);
+
 /* vadd */
 FORCE_INLINE int8x8_t vadd_s8(int8x8_t __a, int8x8_t __b) { return __riscv_vadd_vv_i8mf2(__a, __b, 8); }
 
@@ -724,8 +726,10 @@ FORCE_INLINE uint32x2_t vmul_u32(uint32x2_t __a, uint32x2_t __b) { return __risc
 FORCE_INLINE uint8x8_t vcgt_s8(int8x8_t __a, int8x8_t __b) {
   // vbool16 uses every bit to represent the boolean values of each elements of the comparison result
   vbool16_t cmp_res_b16 = __riscv_vmsgt_vv_i8mf2_b16(__a, __b, 8);
-  uint8_t fs[] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
-  return __riscv_vle8_v_u8mf2_m(cmp_res_b16, fs, 8);
+  // FIXME __riscv_vmv_s_x_u8mf2 has a bug. When calling with other funcs, only the first element will be set.
+  uint8x8_t fs = vdup_n_u8(0xff);
+  uint8x8_t zeros = vdup_n_u8(0x0);
+  return __riscv_vmerge_vvm_u8mf2(zeros, fs, cmp_res_b16, 8);
 }
 
 // FORCE_INLINE uint16x4_t vcgt_s16(int16x4_t __a, int16x4_t __b);
