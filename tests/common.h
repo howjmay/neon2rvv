@@ -7,7 +7,6 @@
 #include "neon2rvv.h"
 #elif (defined(__aarch64__) || defined(_M_ARM64)) || defined(__arm__)
 #include <arm_neon.h>
-
 #if defined(__GNUC__) || defined(__clang__)
 #pragma push_macro("ALIGN_STRUCT")
 #define ALIGN_STRUCT(x) __attribute__((aligned(x)))
