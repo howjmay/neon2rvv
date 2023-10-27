@@ -1769,7 +1769,7 @@ FORCE_INLINE int8x8_t vdup_n_s8(int8_t __a) { return __riscv_vmv_s_x_i8mf2(__a, 
 
 // FORCE_INLINE float32x2_t vdup_n_f32(float32_t __a);
 
-// FORCE_INLINE uint8x8_t vdup_n_u8(uint8_t __a);
+FORCE_INLINE uint8x8_t vdup_n_u8(uint8_t __a) { return __riscv_vmv_s_x_u8mf2(__a, 8); }
 
 // FORCE_INLINE uint16x4_t vdup_n_u16(uint16_t __a);
 
