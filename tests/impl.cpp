@@ -2290,7 +2290,11 @@ result_t test_vdup_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return
 
 result_t test_vdup_n_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vdup_n_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vdup_n_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint8_t _a = impl.test_cases_ints[0];
+  uint8x8_t c = vdup_n_u8(_a);
+  return validate_uint8(c, _a, _a, _a, _a, _a, _a, _a, _a);
+}
 
 result_t test_vdup_n_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
