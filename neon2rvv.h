@@ -1761,9 +1761,7 @@ FORCE_INLINE uint8x8_t vcgt_s8(int8x8_t __a, int8x8_t __b) {
 
 // FORCE_INLINE uint64x1_t vcreate_u64(uint64_t __a);
 
-FORCE_INLINE int8x8_t vdup_n_s8(int8_t __a) {
-  return __riscv_vmv_s_x_i8mf2(__a, 8);
-}
+FORCE_INLINE int8x8_t vdup_n_s8(int8_t __a) { return __riscv_vmv_s_x_i8mf2(__a, 8); }
 
 // FORCE_INLINE int16x4_t vdup_n_s16(int16_t __a);
 
@@ -1799,7 +1797,7 @@ FORCE_INLINE int8x8_t vdup_n_s8(int8_t __a) {
 
 // FORCE_INLINE uint64x2_t vdupq_n_u64(uint64_t __a);
 
-// FORCE_INLINE int8x8_t vmov_n_s8(int8_t __a);
+FORCE_INLINE int8x8_t vmov_n_s8(int8_t __a) { return vdup_n_s8(__a); }
 
 // FORCE_INLINE int16x4_t vmov_n_s16(int16_t __a);
 
