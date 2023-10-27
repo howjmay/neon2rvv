@@ -2365,7 +2365,10 @@ FORCE_INLINE int8x8_t vrev64_s8(int8x8_t __a) {
 
 // FORCE_INLINE uint8x16_t vrev16q_u8(uint8x16_t __a);
 
-// FORCE_INLINE int8x8_t vbsl_s8(uint8x8_t __a, int8x8_t __b, int8x8_t __c);
+FORCE_INLINE int8x8_t vbsl_s8(uint8x8_t __a, int8x8_t __b, int8x8_t __c) {
+  return __riscv_vxor_vv_i8mf2(
+      __riscv_vand_vv_i8mf2(__riscv_vxor_vv_i8mf2(__c, __b, 8), __riscv_vreinterpret_v_u8mf2_i8mf2(__a), 8), __c, 8);
+}
 
 // FORCE_INLINE int16x4_t vbsl_s16(uint16x4_t __a, int16x4_t __b, int16x4_t __c);
 
