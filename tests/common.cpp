@@ -156,6 +156,68 @@ result_t validate_uint8(uint8x16_t a, uint8_t u0, uint8_t u1, uint8_t u2, uint8_
   return TEST_SUCCESS;
 }
 
+result_t validate_int8(int8x8x2_t a, int8_t i0, int8_t i1, int8_t i2, int8_t i3, int8_t i4, int8_t i5, int8_t i6,
+                       int8_t i7, int8_t i8, int8_t i9, int8_t i10, int8_t i11, int8_t i12, int8_t i13, int8_t i14,
+                       int8_t i15) {
+#if defined(__riscv) || defined(__riscv__)
+  vint8mf2_t a0 = __riscv_vget_v_i8mf2x2_i8mf2(a, 0);
+  vint8mf2_t a1 = __riscv_vget_v_i8mf2x2_i8mf2(a, 1);
+  const int8_t *t0 = (const int8_t *)&a0;
+  const int8_t *t1 = (const int8_t *)&a1;
+#elif defined(__aarch64__) || defined(_M_ARM64)
+  const int8_t *t0 = (const int8_t *)&a.val[0];
+  const int8_t *t1 = (const int8_t *)&a.val[1];
+#endif
+  ASSERT_RETURN(t0[0] == i0);
+  ASSERT_RETURN(t0[1] == i1);
+  ASSERT_RETURN(t0[2] == i2);
+  ASSERT_RETURN(t0[3] == i3);
+  ASSERT_RETURN(t0[4] == i4);
+  ASSERT_RETURN(t0[5] == i5);
+  ASSERT_RETURN(t0[6] == i6);
+  ASSERT_RETURN(t0[7] == i7);
+  ASSERT_RETURN(t1[0] == i8);
+  ASSERT_RETURN(t1[1] == i9);
+  ASSERT_RETURN(t1[2] == i10);
+  ASSERT_RETURN(t1[3] == i11);
+  ASSERT_RETURN(t1[4] == i12);
+  ASSERT_RETURN(t1[5] == i13);
+  ASSERT_RETURN(t1[6] == i14);
+  ASSERT_RETURN(t1[7] == i15);
+  return TEST_SUCCESS;
+}
+
+result_t validate_uint8(uint8x8x2_t a, uint8_t u0, uint8_t u1, uint8_t u2, uint8_t u3, uint8_t u4, uint8_t u5,
+                        uint8_t u6, uint8_t u7, uint8_t u8, uint8_t u9, uint8_t u10, uint8_t u11, uint8_t u12,
+                        uint8_t u13, uint8_t u14, uint8_t u15) {
+#if defined(__riscv) || defined(__riscv__)
+  vuint8mf2_t a0 = __riscv_vget_v_u8mf2x2_u8mf2(a, 0);
+  vuint8mf2_t a1 = __riscv_vget_v_u8mf2x2_u8mf2(a, 1);
+  const uint8_t *t0 = (const uint8_t *)&a0;
+  const uint8_t *t1 = (const uint8_t *)&a1;
+#elif defined(__aarch64__) || defined(_M_ARM64)
+  const uint8_t *t0 = (const uint8_t *)&a.val[0];
+  const uint8_t *t1 = (const uint8_t *)&a.val[1];
+#endif
+  ASSERT_RETURN(t0[0] == u0);
+  ASSERT_RETURN(t0[1] == u1);
+  ASSERT_RETURN(t0[2] == u2);
+  ASSERT_RETURN(t0[3] == u3);
+  ASSERT_RETURN(t0[4] == u4);
+  ASSERT_RETURN(t0[5] == u5);
+  ASSERT_RETURN(t0[6] == u6);
+  ASSERT_RETURN(t0[7] == u7);
+  ASSERT_RETURN(t1[0] == u8);
+  ASSERT_RETURN(t1[1] == u9);
+  ASSERT_RETURN(t1[2] == u10);
+  ASSERT_RETURN(t1[3] == u11);
+  ASSERT_RETURN(t1[4] == u12);
+  ASSERT_RETURN(t1[5] == u13);
+  ASSERT_RETURN(t1[6] == u14);
+  ASSERT_RETURN(t1[7] == u15);
+  return TEST_SUCCESS;
+}
+
 result_t validate_int8(int8x8_t a, int8_t i0, int8_t i1, int8_t i2, int8_t i3, int8_t i4, int8_t i5, int8_t i6,
                        int8_t i7) {
   const int8_t *t = (const int8_t *)&a;
