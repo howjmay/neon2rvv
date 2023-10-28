@@ -2378,7 +2378,13 @@ result_t test_vmovq_n_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { retur
 
 result_t test_vmovq_n_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vdup_lane_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vdup_lane_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
+  int8x8_t a = vld1_s8(_a);
+  // TODO cover more possible values
+  int8x8_t c = vdup_lane_s8(a, 3);
+  return validate_int8(c, _a[3], _a[3], _a[3], _a[3], _a[3], _a[3], _a[3], _a[3]);
+}
 
 result_t test_vdup_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
