@@ -1837,7 +1837,7 @@ FORCE_INLINE int8x8_t vmov_n_s8(int8_t __a) { return vdup_n_s8(__a); }
 
 // FORCE_INLINE uint64x2_t vmovq_n_u64(uint64_t __a);
 
-// FORCE_INLINE int8x8_t vdup_lane_s8(int8x8_t __a, const int __b);
+FORCE_INLINE int8x8_t vdup_lane_s8(int8x8_t __a, const int __b) { return __riscv_vrgather_vx_i8mf2(__a, __b, 8); }
 
 // FORCE_INLINE int16x4_t vdup_lane_s16(int16x4_t __a, const int __b);
 
