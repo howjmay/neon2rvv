@@ -33,14 +33,30 @@
 //
 // Functions with "test_" prefix will be called in run_single_test.
 namespace NEON2RVV {
-// Forward declaration
+static float ranf(float low, float high) {
+  float rand_float = (float)rand() / (float)RAND_MAX;
+  return rand_float * (high - low) + low;
+}
+
+#if defined(__riscv_v_elen)
+#define REGISTER_SIZE __riscv_v_elen
+#elif defined(__aarch64__)
+#define REGISTER_SIZE 128
+#endif
+
 class NEON2RVV_TEST_IMPL : public NEON2RVV_TEST {
  public:
-  NEON2RVV_TEST_IMPL(void);
-  result_t load_test_float_pointers(uint32_t i);
-  result_t load_test_int_pointers(uint32_t i);
-  result_t run_single_test(INSTRUCTION_TEST test, uint32_t i);
-
+  NEON2RVV_TEST_IMPL(void) {
+    test_cases_float_pointer1 = (float *)platform_aligned_alloc(REGISTER_SIZE);
+    test_cases_float_pointer2 = (float *)platform_aligned_alloc(REGISTER_SIZE);
+    test_cases_int_pointer1 = (int32_t *)platform_aligned_alloc(REGISTER_SIZE);
+    test_cases_int_pointer2 = (int32_t *)platform_aligned_alloc(REGISTER_SIZE);
+    srand(0);
+    for (uint32_t i = 0; i < MAX_TEST_VALUE; i++) {
+      test_cases_floats[i] = ranf(-100000, 100000);
+      test_cases_ints[i] = (int32_t)ranf(-100000, 100000);
+    }
+  }
   float *test_cases_float_pointer1;
   float *test_cases_float_pointer2;
   int32_t *test_cases_int_pointer1;
@@ -54,18 +70,30 @@ class NEON2RVV_TEST_IMPL : public NEON2RVV_TEST {
     platform_aligned_free(test_cases_int_pointer1);
     platform_aligned_free(test_cases_int_pointer2);
   }
+
+  void load_test_float_pointers(uint32_t iter) {
+    for (int i = 0; i < 4; i++) {
+      test_cases_float_pointer1[i] = test_cases_floats[iter + i];
+      test_cases_float_pointer2[i + 4] = test_cases_floats[iter + i + 4];
+    }
+  }
+  void load_test_int_pointers(uint32_t iter) {
+    for (int i = 0; i < 4; i++) {
+      test_cases_int_pointer1[i] = test_cases_ints[iter + i];
+      test_cases_int_pointer2[i + 4] = test_cases_ints[iter + i + 4];
+    }
+  }
+  result_t run_single_test(INSTRUCTION_TEST test, uint32_t iter);
+
   virtual void release(void) { delete this; }
   virtual result_t run_test(INSTRUCTION_TEST test) {
     result_t ret = TEST_SUCCESS;
 
     // Test a whole bunch of values
     for (uint32_t i = 0; i < (MAX_TEST_VALUE - 8); i++) {
-      ret = load_test_float_pointers(i);  // Load some random float values
-      if (ret == TEST_FAIL)
-        break;                          // load test float failed??
-      ret = load_test_int_pointers(i);  // load some random int values
-      if (ret == TEST_FAIL)
-        break;  // load test float failed??
+      load_test_float_pointers(i);  // Load some random float values
+      load_test_int_pointers(i);    // load some random int values
+
       // If we are testing the reciprocal, then invert the input data
       // (easier for debugging)
       if (test == it_vrecps_f32 || test == it_vrecpsq_f32 || test == it_vrecpe_f32 || test == it_vrecpe_u32 ||
@@ -224,6 +252,11 @@ class NEON2RVV_TEST_IMPL : public NEON2RVV_TEST {
   }
 };
 
+NEON2RVV_TEST *NEON2RVV_TEST::create(void) {
+  NEON2RVV_TEST_IMPL *st = new NEON2RVV_TEST_IMPL;
+  return static_cast<NEON2RVV_TEST *>(st);
+}
+
 const char *instruction_string[] = {
 #define _(x) #x,
     INTRIN_LIST
@@ -294,13 +327,6 @@ static inline double bankers_rounding(double val) {
   }
   return ret;
 }
-
-static float ranf(void) {
-  uint32_t ir = rand() & 0x7FFF;
-  return (float)ir * (1.0f / 32768.0f);
-}
-
-static float ranf(float low, float high) { return ranf() * (high - low) + low; }
 
 result_t test_vadd_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
@@ -4311,58 +4337,19 @@ result_t test_vsudotq_laneq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 // Dummy function to match the case label in run_single_test.
 result_t test_last(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_SUCCESS; }
 
-#if defined(__riscv_v_elen)
-#define REGISTER_SIZE __riscv_v_elen
-#elif defined(__aarch64__)
-#define REGISTER_SIZE 128
-#endif
-
-NEON2RVV_TEST_IMPL::NEON2RVV_TEST_IMPL(void) {
-  test_cases_float_pointer1 = (float *)platform_aligned_alloc(REGISTER_SIZE);
-  test_cases_float_pointer2 = (float *)platform_aligned_alloc(REGISTER_SIZE);
-  test_cases_int_pointer1 = (int32_t *)platform_aligned_alloc(REGISTER_SIZE);
-  test_cases_int_pointer2 = (int32_t *)platform_aligned_alloc(REGISTER_SIZE);
-  srand(0);
-  for (uint32_t i = 0; i < MAX_TEST_VALUE; i++) {
-    test_cases_floats[i] = ranf(-100000, 100000);
-    test_cases_ints[i] = (int32_t)ranf(-100000, 100000);
-  }
-}
-
-result_t NEON2RVV_TEST_IMPL::load_test_float_pointers(uint32_t i) {
-  for (int i = 0; i < 4; i++) {
-    test_cases_float_pointer1[i] = test_cases_floats[i];
-    test_cases_float_pointer2[i + 4] = test_cases_floats[i + 4];
-  }
-  return TEST_SUCCESS;
-}
-
-result_t NEON2RVV_TEST_IMPL::load_test_int_pointers(uint32_t i) {
-  for (int i = 0; i < 4; i++) {
-    test_cases_int_pointer1[i] = test_cases_ints[i];
-    test_cases_int_pointer2[i + 4] = test_cases_ints[i + 4];
-  }
-  return TEST_SUCCESS;
-}
-
-result_t NEON2RVV_TEST_IMPL::run_single_test(INSTRUCTION_TEST test, uint32_t i) {
+result_t NEON2RVV_TEST_IMPL::run_single_test(INSTRUCTION_TEST test, uint32_t iter) {
   result_t ret = TEST_SUCCESS;
 
   switch (test) {
-#define _(x)                  \
-  case it_##x:                \
-    ret = test_##x(*this, i); \
+#define _(x)                     \
+  case it_##x:                   \
+    ret = test_##x(*this, iter); \
     break;
     INTRIN_LIST
 #undef _
   }
 
   return ret;
-}
-
-NEON2RVV_TEST *NEON2RVV_TEST::create(void) {
-  NEON2RVV_TEST_IMPL *st = new NEON2RVV_TEST_IMPL;
-  return static_cast<NEON2RVV_TEST *>(st);
 }
 
 }  // namespace NEON2RVV
