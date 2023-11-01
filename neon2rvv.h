@@ -3158,7 +3158,9 @@ FORCE_INLINE uint64x2_t vld1q_u64(const uint64_t *__a) { return __riscv_vle64_v_
 
 // FORCE_INLINE uint64x2_t veorq_u64(uint64x2_t __a, uint64x2_t __b);
 
-// FORCE_INLINE int8x8_t vbic_s8(int8x8_t __a, int8x8_t __b);
+FORCE_INLINE int8x8_t vbic_s8(int8x8_t __a, int8x8_t __b) {
+  return __riscv_vand_vv_i8mf2(__a, __riscv_vnot_v_i8mf2(__b, 8), 8);
+}
 
 // FORCE_INLINE int16x4_t vbic_s16(int16x4_t __a, int16x4_t __b);
 
