@@ -3192,7 +3192,9 @@ FORCE_INLINE int8x8_t vbic_s8(int8x8_t __a, int8x8_t __b) {
 
 // FORCE_INLINE uint64x2_t vbicq_u64(uint64x2_t __a, uint64x2_t __b);
 
-// FORCE_INLINE int8x8_t vorn_s8(int8x8_t __a, int8x8_t __b);
+FORCE_INLINE int8x8_t vorn_s8(int8x8_t __a, int8x8_t __b) {
+  return __riscv_vor_vv_i8mf2(__a, __riscv_vnot_v_i8mf2(__b, 8), 8);
+}
 
 // FORCE_INLINE int16x4_t vorn_s16(int16x4_t __a, int16x4_t __b);
 
