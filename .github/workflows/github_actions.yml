@@ -9,7 +9,7 @@ on:
 jobs:
   # run riscv tests
   cross_compile_tests:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: checkout code
         uses: actions/checkout@v3.2.0
@@ -17,9 +17,9 @@ jobs:
         run: |
           mkdir /opt/riscv
           export PATH=$PATH:/opt/riscv/bin
-          wget https://github.com/riscv-collab/riscv-gnu-toolchain/releases/download/2023.10.18/riscv64-elf-ubuntu-20.04-gcc-nightly-2023.10.18-nightly.tar.gz
-          sudo tar -xzf riscv64-elf-ubuntu-20.04-gcc-nightly-2023.10.18-nightly.tar.gz -C /opt/
-          
+          wget https://github.com/howjmay/prebuilt-riscv-spike/releases/download/latest/riscv.tar.gz
+          sudo tar -xzf riscv.tar.gz -C /opt/
+
       - name: run tests
         run: |
           export PATH=$PATH:/opt/riscv/bin
@@ -27,7 +27,7 @@ jobs:
 
   # for validate test cases only
   check_test_cases:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         arch: [armv7, aarch64]
@@ -52,7 +52,7 @@ jobs:
             make check
 
   coding_style:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: checkout code
         uses: actions/checkout@v3.2.0
