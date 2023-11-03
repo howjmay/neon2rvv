@@ -74,13 +74,13 @@ class NEON2RVV_TEST_IMPL : public NEON2RVV_TEST {
   void load_test_float_pointers(uint32_t iter) {
     for (int i = 0; i < 4; i++) {
       test_cases_float_pointer1[i] = test_cases_floats[iter + i];
-      test_cases_float_pointer2[i + 4] = test_cases_floats[iter + i + 4];
+      test_cases_float_pointer2[i] = test_cases_floats[iter + i + 4];
     }
   }
   void load_test_int_pointers(uint32_t iter) {
     for (int i = 0; i < 4; i++) {
       test_cases_int_pointer1[i] = test_cases_ints[iter + i];
-      test_cases_int_pointer2[i + 4] = test_cases_ints[iter + i + 4];
+      test_cases_int_pointer2[i] = test_cases_ints[iter + i + 4];
     }
   }
   result_t run_single_test(INSTRUCTION_TEST test, uint32_t iter);
@@ -706,7 +706,7 @@ result_t test_vqadd_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int8_t *_a = (const int8_t *)impl.test_cases_int_pointer1;
   const int8_t *_b = (const int8_t *)impl.test_cases_int_pointer2;
 
-  int8_t _c[8];
+  int16_t _c[8];
   for (int i = 0; i < 8; i++) {
     _c[i] = (int16_t)_a[i] + (int16_t)_b[i];
     if (_c[i] > INT8_MAX) {
@@ -3092,7 +3092,36 @@ result_t test_vtrnq_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return 
 
 result_t test_vtrnq_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vzip_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vzip_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
+  const int8_t *_b = (int8_t *)impl.test_cases_int_pointer2;
+
+  int8_t _c[2][8];
+  _c[0][0] = _a[0];
+  _c[0][1] = _b[0];
+  _c[0][2] = _a[1];
+  _c[0][3] = _b[1];
+  _c[0][4] = _a[2];
+  _c[0][5] = _b[2];
+  _c[0][6] = _a[3];
+  _c[0][7] = _b[3];
+
+  _c[1][0] = _a[4];
+  _c[1][1] = _b[4];
+  _c[1][2] = _a[5];
+  _c[1][3] = _b[5];
+  _c[1][4] = _a[6];
+  _c[1][5] = _b[6];
+  _c[1][6] = _a[7];
+  _c[1][7] = _b[7];
+
+  int8x8_t a = vld1_s8(_a);
+  int8x8_t b = vld1_s8(_b);
+  int8x8x2_t c = vzip_s8(a, b);
+
+  return validate_int8(c, _c[0][0], _c[0][1], _c[0][2], _c[0][3], _c[0][4], _c[0][5], _c[0][6], _c[0][7], _c[1][0],
+                       _c[1][1], _c[1][2], _c[1][3], _c[1][4], _c[1][5], _c[1][6], _c[1][7]);
+}
 
 result_t test_vzip_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 

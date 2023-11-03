@@ -2444,7 +2444,17 @@ FORCE_INLINE int8x8x2_t vtrn_s8(int8x8_t __a, int8x8_t __b) {
 
 // FORCE_INLINE uint32x4x2_t vtrnq_u32(uint32x4_t __a, uint32x4_t __b);
 
-// FORCE_INLINE int8x8x2_t vzip_s8(int8x8_t __a, int8x8_t __b);
+FORCE_INLINE int8x8x2_t vzip_s8(int8x8_t __a, int8x8_t __b) {
+  uint16x8_t a_ext = __riscv_vzext_vf2_u16m1(__riscv_vreinterpret_v_i8mf2_u8mf2(__a), 8);
+  uint16x8_t b_ext = __riscv_vzext_vf2_u16m1(__riscv_vreinterpret_v_i8mf2_u8mf2(__b), 8);
+
+  uint16x8_t b_shifted = __riscv_vsll_vx_u16m1(b_ext, 8, 8);
+  uint8x16_t res = __riscv_vreinterpret_v_u16m1_u8m1(__riscv_vor_vv_u16m1(a_ext, b_shifted, 8));
+  uint8x8_t res_low = __riscv_vlmul_trunc_v_u8m1_u8mf2(res);
+  uint8x8_t res_high = __riscv_vlmul_trunc_v_u8m1_u8mf2(__riscv_vslidedown_vx_u8m1(res, 8, 16));
+  return __riscv_vcreate_v_i8mf2x2(__riscv_vreinterpret_v_u8mf2_i8mf2(res_low),
+                                   __riscv_vreinterpret_v_u8mf2_i8mf2(res_high));
+}
 
 // FORCE_INLINE int16x4x2_t vzip_s16(int16x4_t __a, int16x4_t __b);
 
