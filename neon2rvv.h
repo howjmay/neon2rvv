@@ -34,6 +34,16 @@
 extern "C" {
 #endif
 
+// TODO uncomment this and put all the implementation into `#elif defined(__riscv) || defined(__riscv__)`
+// In this way the developers only need to include `neon2rvv.h`
+// #if (defined(__aarch64__) || defined(_M_ARM64)) || defined(__arm__)
+// #include <arm_neon.h>
+// #elif (defined(__riscv) || defined(__riscv__))
+#include <riscv_vector.h>
+
+#include <stdint.h>
+#include <stdlib.h>
+
 #if defined(__GNUC__) || defined(__clang__)
 #pragma push_macro("FORCE_INLINE")
 #pragma push_macro("ALIGN_STRUCT")
@@ -42,10 +52,6 @@ extern "C" {
 #define _neon2rvv_likely(x) __builtin_expect(!!(x), 1)
 #define _neon2rvv_unlikely(x) __builtin_expect(!!(x), 0)
 #endif
-
-#include <riscv_vector.h>
-#include <stdint.h>
-#include <stdlib.h>
 
 typedef float float32_t;
 
@@ -3889,5 +3895,8 @@ FORCE_INLINE uint32x4_t vreinterpretq_u32_u16(uint16x8_t __a) { return __riscv_v
 #pragma pop_macro("ALIGN_STRUCT")
 #pragma pop_macro("FORCE_INLINE")
 #endif
+
+// TODO uncomment this and put all the implementation into `#elif defined(__riscv) || defined(__riscv__)`
+// #endif /* #elif (defined(__riscv) || defined(__riscv__)) */
 
 #endif /* NEON2RVV_H */
