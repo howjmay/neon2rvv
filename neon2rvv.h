@@ -47,12 +47,6 @@ extern "C" {
 #include <stdint.h>
 #include <stdlib.h>
 
-#if defined(__aarch64__) || defined(_M_ARM64)
-// ARM64 enabled system
-#define NEON2RVV_ARM64
-
-#endif
-
 typedef float float32_t;
 
 #if __riscv_v_min_vlen == 128
@@ -80,8 +74,8 @@ typedef vfloat32m1_t float32x4_t;
 typedef vfloat64m1_t float64x2_t;
 
 // FIXME wrong typedefs, just for passing compilation
-typedef vint8m2_t int8x8x2_t;
-typedef vuint8m2_t uint8x8x2_t;
+typedef vint8mf2x2_t int8x8x2_t;
+typedef vuint8mf2x2_t uint8x8x2_t;
 typedef vint8m2_t int8x16x2_t;
 typedef vuint8m2_t uint8x16x2_t;
 typedef vint8m4_t int8x16x3_t;
@@ -2408,7 +2402,21 @@ FORCE_INLINE int8x8_t vbsl_s8(uint8x8_t __a, int8x8_t __b, int8x8_t __c) {
 
 // FORCE_INLINE uint64x2_t vbslq_u64(uint64x2_t __a, uint64x2_t __b, uint64x2_t __c);
 
-// FORCE_INLINE int8x8x2_t vtrn_s8(int8x8_t __a, int8x8_t __b);
+FORCE_INLINE int8x8x2_t vtrn_s8(int8x8_t __a, int8x8_t __b) {
+  vuint16mf2_t a_u16 = __riscv_vreinterpret_v_i16mf2_u16mf2(__riscv_vreinterpret_v_i8mf2_i16mf2(__a));
+  vuint16mf2_t b_u16 = __riscv_vreinterpret_v_i16mf2_u16mf2(__riscv_vreinterpret_v_i8mf2_i16mf2(__b));
+
+  vuint8mf2_t a1 =
+      __riscv_vreinterpret_v_u16mf2_u8mf2(__riscv_vsrl_vx_u16mf2(__riscv_vsll_vx_u16mf2(a_u16, 8, 4), 8, 4));
+  vuint8mf2_t b1 = __riscv_vreinterpret_v_u16mf2_u8mf2(__riscv_vsll_vx_u16mf2(b_u16, 8, 4));
+  vint8mf2_t trn1 = __riscv_vreinterpret_v_u8mf2_i8mf2(__riscv_vor_vv_u8mf2(a1, b1, 8));
+
+  vuint8mf2_t a2 = __riscv_vreinterpret_v_u16mf2_u8mf2(__riscv_vsrl_vx_u16mf2(a_u16, 8, 4));
+  vuint8mf2_t b2 =
+      __riscv_vreinterpret_v_u16mf2_u8mf2(__riscv_vsll_vx_u16mf2(__riscv_vsrl_vx_u16mf2(b_u16, 8, 4), 8, 4));
+  vint8mf2_t trn2 = __riscv_vreinterpret_v_u8mf2_i8mf2(__riscv_vor_vv_u8mf2(a2, b2, 8));
+  return __riscv_vcreate_v_i8mf2x2(trn1, trn2);
+}
 
 // FORCE_INLINE int16x4x2_t vtrn_s16(int16x4_t __a, int16x4_t __b);
 
