@@ -2472,7 +2472,27 @@ FORCE_INLINE int8x8x2_t vtrn_s8(int8x8_t __a, int8x8_t __b) {
 
 // FORCE_INLINE uint32x4x2_t vzipq_u32(uint32x4_t __a, uint32x4_t __b);
 
-// FORCE_INLINE int8x8x2_t vuzp_s8(int8x8_t __a, int8x8_t __b);
+FORCE_INLINE int8x8x2_t vuzp_s8(int8x8_t __a, int8x8_t __b) {
+  uint8_t low_mask_arr[] = {85};
+  uint8_t merge_mask_arr[] = {15};
+  vbool16_t low_mask = __riscv_vlm_v_b16(low_mask_arr, 8);
+  vbool16_t merge_mask = __riscv_vlm_v_b16(merge_mask_arr, 8);
+  vint8mf2_t zeros = vdup_n_s8(0);
+
+  vint8mf2_t res_low_low = __riscv_vcompress_vm_i8mf2(__a, low_mask, 8);
+  vint8mf2_t res_low_high = __riscv_vcompress_vm_i8mf2(__b, low_mask, 8);
+  vint8mf2_t res_low_high_slideup = __riscv_vslideup_vx_i8mf2(zeros, res_low_high, 4, 8);
+  vint8mf2_t res_low = __riscv_vmerge_vvm_i8mf2(res_low_high_slideup, res_low_low, merge_mask, 8);
+
+  vint8mf2_t a_slide1down = __riscv_vslide1down_vx_i8mf2(__a, 0, 8);
+  vint8mf2_t b_slide1down = __riscv_vslide1down_vx_i8mf2(__b, 0, 8);
+  vint8mf2_t res_high_low = __riscv_vcompress_vm_i8mf2(a_slide1down, low_mask, 8);
+  vint8mf2_t res_high_high = __riscv_vcompress_vm_i8mf2(b_slide1down, low_mask, 8);
+  vint8mf2_t res_high_high_slideup = __riscv_vslideup_vx_i8mf2(zeros, res_high_high, 4, 8);
+  vint8mf2_t res_high = __riscv_vmerge_vvm_i8mf2(res_high_high_slideup, res_high_low, merge_mask, 8);
+
+  return __riscv_vcreate_v_i8mf2x2(res_low, res_high);
+}
 
 // FORCE_INLINE int16x4x2_t vuzp_s16(int16x4_t __a, int16x4_t __b);
 
