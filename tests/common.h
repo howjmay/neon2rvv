@@ -8,12 +8,13 @@
 #include "neon2rvv.h"
 #elif (defined(__aarch64__) || defined(_M_ARM64)) || defined(__arm__)
 #include <arm_neon.h>
+
 #if defined(__GNUC__) || defined(__clang__)
 #pragma push_macro("ALIGN_STRUCT")
 #define ALIGN_STRUCT(x) __attribute__((aligned(x)))
 #else
 #define ALIGN_STRUCT(x) __declspec(align(x))
-#endif
+#endif  // defined(__GNUC__) || defined(__clang__)
 
 typedef union ALIGN_STRUCT(16) SIMDVec {
   float m128_f32[4];     // as floats - DON'T USE. Added for convenience.
@@ -29,9 +30,8 @@ typedef union ALIGN_STRUCT(16) SIMDVec {
 
 #if defined(__GNUC__) || defined(__clang__)
 #pragma pop_macro("ALIGN_STRUCT")
-#endif
-
-#endif
+#endif  // defined(__GNUC__) || defined(__clang__)
+#endif  // defined(__riscv) || defined(__riscv__)
 
 #define ASSERT_RETURN(x) \
   if (!(x))              \
