@@ -2355,7 +2355,7 @@ result_t test_vcreate_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { retur
 result_t test_vcreate_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
 result_t test_vdup_n_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
-  const int8_t _a = impl.test_cases_ints[0];
+  const int8_t _a = (const int8_t)impl.test_cases_ints[0];
   int8x8_t c = vdup_n_s8(_a);
   return validate_int8(c, _a, _a, _a, _a, _a, _a, _a, _a);
 }
@@ -2367,7 +2367,7 @@ result_t test_vdup_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return
 result_t test_vdup_n_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
 result_t test_vdup_n_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
-  const uint8_t _a = impl.test_cases_ints[0];
+  const uint8_t _a = (const uint8_t)impl.test_cases_ints[0];
   uint8x8_t c = vdup_n_u8(_a);
   return validate_uint8(c, _a, _a, _a, _a, _a, _a, _a, _a);
 }
@@ -2399,7 +2399,7 @@ result_t test_vdupq_n_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { retur
 result_t test_vdupq_n_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
 result_t test_vmov_n_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
-  const int8_t _a = impl.test_cases_ints[0];
+  const int8_t _a = (const int8_t)impl.test_cases_ints[0];
   int8x8_t c = vmov_n_s8(_a);
   return validate_int8(c, _a, _a, _a, _a, _a, _a, _a, _a);
 }
@@ -3403,7 +3403,11 @@ result_t test_vld1q_lane_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { re
 
 result_t test_vld1q_lane_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vld1_dup_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vld1_dup_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int8_t *_a = (const int8_t *)impl.test_cases_int_pointer1;
+  int8x8_t c = vld1_dup_s8(_a);
+  return validate_int8(c, _a[0], _a[0], _a[0], _a[0], _a[0], _a[0], _a[0], _a[0]);
+}
 
 result_t test_vld1_dup_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
