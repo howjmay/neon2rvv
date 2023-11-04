@@ -29,7 +29,7 @@ We are using [RISC-V GNU Compiler Toolchain](https://github.com/riscv-collab/ris
 
 ## Development
 
-## Run Tests
+### Run Tests
 
 `neon2rvv` provides a unified interface for developing test cases. These test cases are located in `tests` directory, and the input data is specified at runtime. Use the following commands to perform test cases:
 
@@ -64,7 +64,7 @@ $ make CROSS_COMPILE=riscv64-unknown-elf- SIMULATOR_TYPE=qemu test
   * [Part 4: Shifting Left and Right](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/coding-for-neon---part-4-shifting-left-and-right)
   * [Part 5: Rearranging Vectors](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/coding-for-neon---part-5-rearranging-vectors)
 
-## Reference
+## References
 
 * [sse2neon](https://github.com/DLTcollab/sse2neon)
 * [rvv_example](https://github.com/brucehoult/rvv_example)
