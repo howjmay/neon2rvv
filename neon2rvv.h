@@ -2614,7 +2614,7 @@ FORCE_INLINE int8x8_t vld1_lane_s8(const int8_t *__a, int8x8_t __b, const int __
 
 // FORCE_INLINE uint64x2_t vld1q_lane_u64(const uint64_t *__a, uint64x2_t __b, const int __c);
 
-// FORCE_INLINE int8x8_t vld1_dup_s8(const int8_t *__a);
+FORCE_INLINE int8x8_t vld1_dup_s8(const int8_t *__a) { return vdup_n_s8(__a[0]); }
 
 // FORCE_INLINE int16x4_t vld1_dup_s16(const int16_t *__a);
 
