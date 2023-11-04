@@ -382,7 +382,9 @@ FORCE_INLINE uint32x2_t vmul_u32(uint32x2_t __a, uint32x2_t __b) { return __risc
 
 // FORCE_INLINE int64x2_t vqdmull_s32(int32x2_t __a, int32x2_t __b);
 
-// FORCE_INLINE int8x8_t vmla_s8(int8x8_t __a, int8x8_t __b, int8x8_t __c);
+FORCE_INLINE int8x8_t vmla_s8(int8x8_t __a, int8x8_t __b, int8x8_t __c) {
+  return __riscv_vmacc_vv_i8mf2(__a, __b, __c, 8);
+}
 
 // FORCE_INLINE int16x4_t vmla_s16(int16x4_t __a, int16x4_t __b, int16x4_t __c);
 
