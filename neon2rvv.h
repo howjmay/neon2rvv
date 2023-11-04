@@ -2572,7 +2572,13 @@ FORCE_INLINE uint32x4_t vld1q_u32(const uint32_t *__a) { return __riscv_vle32_v_
 
 FORCE_INLINE uint64x2_t vld1q_u64(const uint64_t *__a) { return __riscv_vle64_v_u64m1(__a, 2); }
 
-// FORCE_INLINE int8x8_t vld1_lane_s8(const int8_t *__a, int8x8_t __b, const int __c);
+FORCE_INLINE int8x8_t vld1_lane_s8(const int8_t *__a, int8x8_t __b, const int __c) {
+  const uint8_t mask_arr[] = {1 << __c};
+  vbool16_t mask = __riscv_vlm_v_b16(mask_arr, 1);
+  vint8mf2_t a = vld1_s8(__a);
+  vint8mf2_t a_slideup = __riscv_vslideup_vx_i8mf2(a, a, __c, 8);
+  return __riscv_vmerge_vvm_i8mf2(__b, a_slideup, mask, 8);
+}
 
 // FORCE_INLINE int16x4_t vld1_lane_s16(const int16_t *__a, int16x4_t __b, const int __c);
 
