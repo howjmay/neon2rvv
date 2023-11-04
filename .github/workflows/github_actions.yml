@@ -49,7 +49,7 @@ jobs:
             apt-get install -q -y "${{ matrix.cxx_compiler }}" make
             apt-get install -q -y gcc
           run: |
-            make check
+            make test
 
   coding_style:
     runs-on: ubuntu-22.04
