@@ -23,7 +23,7 @@ neon2rvv is a translator of Arm/Aarch64 NEON intrinsics to RISC-V Vector (RVV) E
 
 ### Targets and Limitations
 
-The preliminary stage development goal of neon2rvv is targeting RV64 architecture with 128 bits vector register size, which means the implementation is compiled with `-march=rv64gcv_zba` flag.
+The preliminary stage development goal of neon2rvv is targeting RV64 architecture with `128 bits vector register size (vlen == 128)`, which means the implementation is compiled with `-march=rv64gcv_zba` flag.
 
 We are using [RISC-V GNU Compiler Toolchain](https://github.com/riscv-collab/riscv-gnu-toolchain) for development.
 
