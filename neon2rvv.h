@@ -428,7 +428,9 @@ FORCE_INLINE int8x8_t vmla_s8(int8x8_t __a, int8x8_t __b, int8x8_t __c) {
 
 // FORCE_INLINE int64x2_t vqdmlal_s32(int64x2_t __a, int32x2_t __b, int32x2_t __c);
 
-// FORCE_INLINE int8x8_t vmls_s8(int8x8_t __a, int8x8_t __b, int8x8_t __c);
+FORCE_INLINE int8x8_t vmls_s8(int8x8_t __a, int8x8_t __b, int8x8_t __c) {
+  return __riscv_vnmsac_vv_i8mf2(__a, __b, __c, 8);
+}
 
 // FORCE_INLINE int16x4_t vmls_s16(int16x4_t __a, int16x4_t __b, int16x4_t __c);
 
