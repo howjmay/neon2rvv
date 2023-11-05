@@ -1631,7 +1631,18 @@ result_t test_vpadd_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return 
 
 result_t test_vpadd_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vpaddl_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vpaddl_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
+  int16_t _c[4];
+  _c[0] = (int16_t)_a[0] + (int16_t)_a[1];
+  _c[1] = (int16_t)_a[2] + (int16_t)_a[3];
+  _c[2] = (int16_t)_a[4] + (int16_t)_a[5];
+  _c[3] = (int16_t)_a[6] + (int16_t)_a[7];
+
+  int8x8_t a = vld1_s8(_a);
+  int16x4_t c = vpaddl_s8(a);
+  return validate_int16(c, _c[0], _c[1], _c[2], _c[3]);
+}
 
 result_t test_vpaddl_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
@@ -3050,7 +3061,7 @@ result_t test_vbsl_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int8_t d6 = _c[6] ^ ((_c[6] ^ _b[6]) & _a[6]);
   int8_t d7 = _c[7] ^ ((_c[7] ^ _b[7]) & _a[7]);
 
-  uint8x8_t a = vld1_u8((uint8_t *)_a);
+  uint8x8_t a = vld1_u8((const uint8_t *)_a);
   int8x8_t b = vld1_s8(_b);
   int8x8_t c = vld1_s8(_c);
   int8x8_t d = vbsl_s8(a, b, c);
