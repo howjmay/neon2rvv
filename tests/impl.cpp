@@ -2903,12 +2903,14 @@ result_t test_vext_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int8_t *_b = (int8_t *)impl.test_cases_int_pointer2;
   const int imm = 3;
   int8_t _c[8];
+
+  int8_t temp_arr[16];
   for (int i = 0; i < 8; i++) {
-    if (i < imm) {
-      _c[i] = _a[i];
-    } else {
-      _c[i] = _b[i];
-    }
+    temp_arr[i] = _a[i];
+    temp_arr[i + 8] = _b[i];
+  }
+  for (int i = 0; i < 8; i++) {
+    _c[i] = temp_arr[i + imm];
   }
 
   int8x8_t a = vld1_s8(_a);
