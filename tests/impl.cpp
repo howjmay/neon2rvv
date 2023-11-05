@@ -987,7 +987,25 @@ result_t test_vmlaq_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return 
 
 result_t test_vmlaq_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vmlal_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vmlal_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
+  const int8_t *_b = (int8_t *)impl.test_cases_int_pointer1 + 8;
+  const int8_t *_c = (int8_t *)impl.test_cases_int_pointer2;
+  int16_t d0 = _a[0] + (int16_t)_b[0] * (int16_t)_c[0];
+  int16_t d1 = _a[1] + (int16_t)_b[1] * (int16_t)_c[1];
+  int16_t d2 = _a[2] + (int16_t)_b[2] * (int16_t)_c[2];
+  int16_t d3 = _a[3] + (int16_t)_b[3] * (int16_t)_c[3];
+  int16_t d4 = _a[4] + (int16_t)_b[4] * (int16_t)_c[4];
+  int16_t d5 = _a[5] + (int16_t)_b[5] * (int16_t)_c[5];
+  int16_t d6 = _a[6] + (int16_t)_b[6] * (int16_t)_c[6];
+  int16_t d7 = _a[7] + (int16_t)_b[7] * (int16_t)_c[7];
+
+  int16x8_t a = vld1q_s16(_a);
+  int8x8_t b = vld1_s8(_b);
+  int8x8_t c = vld1_s8(_c);
+  int16x8_t d = vmlal_s8(a, b, c);
+  return validate_int16(d, d0, d1, d2, d3, d4, d5, d6, d7);
+}
 
 result_t test_vmlal_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
