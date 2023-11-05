@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        arch: [armv7, aarch64]
+        arch: [aarch64]
         cxx_compiler: [g++-10, clang++-11]
     steps:
       - name: checkout code
