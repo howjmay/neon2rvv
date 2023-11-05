@@ -999,7 +999,17 @@ FORCE_INLINE int8x8_t vmax_s8(int8x8_t __a, int8x8_t __b) { return __riscv_vmax_
 
 // FORCE_INLINE uint32x4_t vminq_u32(uint32x4_t __a, uint32x4_t __b);
 
-// FORCE_INLINE int8x8_t vpadd_s8(int8x8_t __a, int8x8_t __b);
+FORCE_INLINE int8x8_t vpadd_s8(int8x8_t __a, int8x8_t __b) {
+  uint8_t mask_arr[] = {85};
+  vbool16_t mask = __riscv_vlm_v_b16(mask_arr, 8);
+  vint8mf2_t a_slidedown = __riscv_vslidedown_vx_i8mf2(__a, 1, 8);
+  vint8mf2_t b_slidedown = __riscv_vslidedown_vx_i8mf2(__b, 1, 8);
+  vint8mf2_t a_add = __riscv_vadd_vv_i8mf2(__a, a_slidedown, 8);
+  vint8mf2_t b_add = __riscv_vadd_vv_i8mf2(__b, b_slidedown, 8);
+  vint8mf2_t a_compress = __riscv_vcompress_vm_i8mf2(a_add, mask, 8);
+  vint8mf2_t b_compress = __riscv_vcompress_vm_i8mf2(b_add, mask, 8);
+  return __riscv_vslideup_vx_i8mf2(a_compress, b_compress, 4, 8);
+}
 
 // FORCE_INLINE int16x4_t vpadd_s16(int16x4_t __a, int16x4_t __b);
 
