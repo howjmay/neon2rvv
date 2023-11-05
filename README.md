@@ -33,7 +33,7 @@ We are using [RISC-V GNU Compiler Toolchain](https://github.com/riscv-collab/ris
 
 `neon2rvv` provides a unified interface for developing test cases. These test cases are located in `tests` directory, and the input data is specified at runtime. Use the following commands to perform test cases:
 
-You can run the tests under the architecture of your current machine. This can help you verify the implementation of tests case if you run the tests on ARM machines.
+You can run the tests under the architecture of your current machine. This can help you verify the implementation of tests case if you run the tests on ARM machines. Now the tests support Aarch64 only.
 
 ```shell
 $ make test
