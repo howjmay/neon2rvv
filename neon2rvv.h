@@ -2281,8 +2281,7 @@ FORCE_INLINE int8x8_t vdup_lane_s8(int8x8_t __a, const int __b) { return __riscv
 
 FORCE_INLINE int8x8_t vext_s8(int8x8_t __a, int8x8_t __b, const int __c) {
   vint8mf2_t a_slidedown = __riscv_vslidedown_vx_i8mf2(__a, __c, 8);
-  vint8mf2_t b_slideup = __riscv_vslideup_vx_i8mf2(vdup_n_s8(0), __b, 8 - __c, 8);
-  return __riscv_vor_vv_i8mf2(a_slidedown, b_slideup, 8);
+  return __riscv_vslideup_vx_i8mf2(a_slidedown, __b, 8 - __c, 8);
 }
 
 // FORCE_INLINE int16x4_t vext_s16(int16x4_t __a, int16x4_t __b, const int __c);
