@@ -2822,7 +2822,7 @@ FORCE_INLINE int8x8x2_t vld2_s8(const int8_t *__a) { return __riscv_vlseg2e8_v_i
 
 // FORCE_INLINE uint64x1x2_t vld2_dup_u64(const uint64_t *__a);
 
-// FORCE_INLINE void vst2_s8(int8_t *__a, int8x8x2_t __b);
+FORCE_INLINE void vst2_s8(int8_t *__a, int8x8x2_t __b) { return __riscv_vsseg2e8_v_i8mf2x2(__a, __b, 8); }
 
 // FORCE_INLINE void vst2_s16(int16_t *__a, int16x4x2_t __b);
 
