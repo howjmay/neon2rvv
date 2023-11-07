@@ -2676,7 +2676,7 @@ FORCE_INLINE int8x8_t vld1_dup_s8(const int8_t *__a) { return vdup_n_s8(__a[0]);
 
 // FORCE_INLINE uint64x2_t vld1q_dup_u64(const uint64_t *__a);
 
-// void vst1_s8(int8_t *__a, int8x8_t __b);
+FORCE_INLINE void vst1_s8(int8_t *__a, int8x8_t __b) { return __riscv_vse8_v_i8mf2(__a, __b, 8); }
 
 // void vst1_s16(int16_t *__a, int16x4_t __b);
 
