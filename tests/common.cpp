@@ -160,8 +160,8 @@ result_t validate_int8(int8x8x2_t a, int8_t i0, int8_t i1, int8_t i2, int8_t i3,
                        int8_t i7, int8_t i8, int8_t i9, int8_t i10, int8_t i11, int8_t i12, int8_t i13, int8_t i14,
                        int8_t i15) {
 #if defined(__riscv) || defined(__riscv__)
-  vint8mf2_t a0 = __riscv_vget_v_i8mf2x2_i8mf2(a, 0);
-  vint8mf2_t a1 = __riscv_vget_v_i8mf2x2_i8mf2(a, 1);
+  vint8m1_t a0 = __riscv_vget_v_i8m1x2_i8m1(a, 0);
+  vint8m1_t a1 = __riscv_vget_v_i8m1x2_i8m1(a, 1);
   const int8_t *t0 = (const int8_t *)&a0;
   const int8_t *t1 = (const int8_t *)&a1;
 #elif defined(__aarch64__) || defined(_M_ARM64)
@@ -191,8 +191,8 @@ result_t validate_uint8(uint8x8x2_t a, uint8_t u0, uint8_t u1, uint8_t u2, uint8
                         uint8_t u6, uint8_t u7, uint8_t u8, uint8_t u9, uint8_t u10, uint8_t u11, uint8_t u12,
                         uint8_t u13, uint8_t u14, uint8_t u15) {
 #if defined(__riscv) || defined(__riscv__)
-  vuint8mf2_t a0 = __riscv_vget_v_u8mf2x2_u8mf2(a, 0);
-  vuint8mf2_t a1 = __riscv_vget_v_u8mf2x2_u8mf2(a, 1);
+  vuint8m1_t a0 = __riscv_vget_v_u8m1x2_u8m1(a, 0);
+  vuint8m1_t a1 = __riscv_vget_v_u8m1x2_u8m1(a, 1);
   const uint8_t *t0 = (const uint8_t *)&a0;
   const uint8_t *t1 = (const uint8_t *)&a1;
 #elif defined(__aarch64__) || defined(_M_ARM64)

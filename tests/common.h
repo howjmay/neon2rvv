@@ -42,15 +42,15 @@ namespace NEON2RVV {
 // A replica of typedefs in neon2rvv.h. This is only to make implementing tests easier.
 #if __riscv_v_min_vlen == 128
 // 64bit width vector register
-typedef vint8mf2_t int8x8_t;
-typedef vint16mf2_t int16x4_t;
-typedef vint32mf2_t int32x2_t;
+typedef vint8m1_t int8x8_t;
+typedef vint16m1_t int16x4_t;
+typedef vint32m1_t int32x2_t;
 typedef vint64m1_t int64x1_t;
-typedef vuint8mf2_t uint8x8_t;
-typedef vuint16mf2_t uint16x4_t;
-typedef vuint32mf2_t uint32x2_t;
+typedef vuint8m1_t uint8x8_t;
+typedef vuint16m1_t uint16x4_t;
+typedef vuint32m1_t uint32x2_t;
 typedef vuint64m1_t uint64x1_t;
-typedef vfloat32mf2_t float32x2_t;
+typedef vfloat32m1_t float32x2_t;
 typedef vfloat64m1_t float64x1_t;
 // 128bit width vector register
 typedef vint8m1_t int8x16_t;
@@ -65,8 +65,8 @@ typedef vfloat32m1_t float32x4_t;
 typedef vfloat64m1_t float64x2_t;
 
 // FIXME wrong typedefs, just for passing compilation
-typedef vint8mf2x2_t int8x8x2_t;
-typedef vuint8mf2x2_t uint8x8x2_t;
+typedef vint8m1x2_t int8x8x2_t;
+typedef vuint8m1x2_t uint8x8x2_t;
 typedef vint8m2_t int8x16x2_t;
 typedef vuint8m2_t uint8x16x2_t;
 typedef vint8m4_t int8x16x3_t;
