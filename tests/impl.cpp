@@ -3666,7 +3666,54 @@ result_t test_vld2q_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return 
 
 result_t test_vld2q_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vld2_lane_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vld2_lane_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
+  const int8_t *_b = (int8_t *)impl.test_cases_int_pointer2;
+  int8x8x2_t c;
+  int8x8x2_t b = vld2_s8(_b);
+  c = vld2_lane_s8(_a, b, 0);
+  if (TEST_FAIL == validate_int8(c, _a[0], _b[2], _b[4], _b[6], _b[8], _b[10], _b[12], _b[14], _a[1], _b[3], _b[5],
+                                 _b[7], _b[9], _b[11], _b[13], _b[15])) {
+    return TEST_FAIL;
+  }
+  c = vld2_lane_s8(_a, b, 1);
+  if (TEST_FAIL == validate_int8(c, _b[0], _a[0], _b[4], _b[6], _b[8], _b[10], _b[12], _b[14], _b[1], _a[1], _b[5],
+                                 _b[7], _b[9], _b[11], _b[13], _b[15])) {
+    return TEST_FAIL;
+  }
+  c = vld2_lane_s8(_a, b, 2);
+  if (TEST_FAIL == validate_int8(c, _b[0], _b[2], _a[0], _b[6], _b[8], _b[10], _b[12], _b[14], _b[1], _b[3], _a[1],
+                                 _b[7], _b[9], _b[11], _b[13], _b[15])) {
+    return TEST_FAIL;
+  }
+  c = vld2_lane_s8(_a, b, 3);
+  if (TEST_FAIL == validate_int8(c, _b[0], _b[2], _b[4], _a[0], _b[8], _b[10], _b[12], _b[14], _b[1], _b[3], _b[5],
+                                 _a[1], _b[9], _b[11], _b[13], _b[15])) {
+    return TEST_FAIL;
+  }
+  c = vld2_lane_s8(_a, b, 4);
+  if (TEST_FAIL == validate_int8(c, _b[0], _b[2], _b[4], _b[6], _a[0], _b[10], _b[12], _b[14], _b[1], _b[3], _b[5],
+                                 _b[7], _a[1], _b[11], _b[13], _b[15])) {
+    return TEST_FAIL;
+  }
+  c = vld2_lane_s8(_a, b, 5);
+  if (TEST_FAIL == validate_int8(c, _b[0], _b[2], _b[4], _b[6], _b[8], _a[0], _b[12], _b[14], _b[1], _b[3], _b[5],
+                                 _b[7], _b[9], _a[1], _b[13], _b[15])) {
+    return TEST_FAIL;
+  }
+  c = vld2_lane_s8(_a, b, 6);
+  if (TEST_FAIL == validate_int8(c, _b[0], _b[2], _b[4], _b[6], _b[8], _b[10], _a[0], _b[14], _b[1], _b[3], _b[5],
+                                 _b[7], _b[9], _b[11], _a[1], _b[15])) {
+    return TEST_FAIL;
+  }
+  c = vld2_lane_s8(_a, b, 7);
+  if (TEST_FAIL == validate_int8(c, _b[0], _b[2], _b[4], _b[6], _b[8], _b[10], _b[12], _a[0], _b[1], _b[3], _b[5],
+                                 _b[7], _b[9], _b[11], _b[13], _a[1])) {
+    return TEST_FAIL;
+  }
+
+  return TEST_SUCCESS;
+}
 
 result_t test_vld2_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
