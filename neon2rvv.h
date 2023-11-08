@@ -2598,7 +2598,7 @@ FORCE_INLINE uint32x4_t vld1q_u32(const uint32_t *__a) { return __riscv_vle32_v_
 FORCE_INLINE uint64x2_t vld1q_u64(const uint64_t *__a) { return __riscv_vle64_v_u64m1(__a, 2); }
 
 FORCE_INLINE int8x8_t vld1_lane_s8(const int8_t *__a, int8x8_t __b, const int __c) {
-  const uint8_t mask_arr[] = {1 << (uint8_t)__c};
+  const uint8_t mask_arr[] = {(uint8_t)(1 << __c)};
   vbool8_t mask = __riscv_vlm_v_b8(mask_arr, 1);
   vint8m1_t a_dup = vdup_n_s8(__a[0]);
   return __riscv_vmerge_vvm_i8m1(__b, a_dup, mask, 8);
