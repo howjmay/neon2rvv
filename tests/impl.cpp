@@ -3586,7 +3586,14 @@ result_t test_vst1q_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return 
 
 result_t test_vst1q_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vst1_lane_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vst1_lane_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int8_t *_a = (const int8_t *)impl.test_cases_int_pointer1;
+  int8_t _b[8];
+  int8x8_t a = vld1_s8(_a);
+  vst1_lane_s8(_b, a, 2);
+  int8x8_t b = vld1_s8(_b);
+  return validate_int8(b, _a[2], _b[1], _b[2], _b[3], _b[4], _b[5], _b[6], _b[7]);
+}
 
 result_t test_vst1_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 

@@ -2712,7 +2712,12 @@ FORCE_INLINE void vst1_s8(int8_t *__a, int8x8_t __b) { return __riscv_vse8_v_i8m
 
 // FORCE_INLINE void vst1q_u64(uint64_t *__a, uint64x2_t __b);
 
-// FORCE_INLINE void vst1_lane_s8(int8_t *__a, int8x8_t __b, const int __c);
+FORCE_INLINE void vst1_lane_s8(int8_t *__a, int8x8_t __b, const int __c) {
+  const uint8_t mask_arr[] = {1};
+  vbool8_t mask = __riscv_vlm_v_b8(mask_arr, 2);
+  int8x8_t b_s = __riscv_vslidedown_vx_i8m1(__b, __c, 8);
+  __riscv_vse8_v_i8m1_m(mask, __a, b_s, 8);
+}
 
 // FORCE_INLINE void vst1_lane_s16(int16_t *__a, int16x4_t __b, const int __c);
 
