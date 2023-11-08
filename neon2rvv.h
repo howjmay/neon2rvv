@@ -284,7 +284,12 @@ FORCE_INLINE int8x8_t vqadd_s8(int8x8_t __a, int8x8_t __b) { return __riscv_vsad
 
 // FORCE_INLINE uint64x2_t vqaddq_u64(uint64x2_t __a, uint64x2_t __b);
 
-// FORCE_INLINE int8x8_t vaddhn_s16(int16x8_t __a, int16x8_t __b);
+FORCE_INLINE int8x8_t vaddhn_s16(int16x8_t __a, int16x8_t __b) {
+  // 0xaa is 10101010 in binary
+  vbool8_t mask = __riscv_vreinterpret_v_u8m1_b8(vdup_n_u8(0xaa));
+  int8x16_t add_res = __riscv_vreinterpret_v_i16m1_i8m1(__riscv_vadd_vv_i16m1(__a, __b, 8));
+  return __riscv_vcompress_vm_i8m1(add_res, mask, 16);
+}
 
 // FORCE_INLINE int16x4_t vaddhn_s32(int32x4_t __a, int32x4_t __b);
 
