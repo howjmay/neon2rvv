@@ -380,7 +380,9 @@ FORCE_INLINE int16x4_t vqdmulh_s16(int16x4_t __a, int16x4_t __b) {
 
 // FORCE_INLINE int32x4_t vqrdmlshq_s32(int32x4_t __a, int32x4_t __b, int32x4_t __c);
 
-// FORCE_INLINE int16x8_t vmull_s8(int8x8_t __a, int8x8_t __b);
+FORCE_INLINE int16x8_t vmull_s8(int8x8_t __a, int8x8_t __b) {
+  return __riscv_vlmul_trunc_v_i16m2_i16m1(__riscv_vwmul_vv_i16m2(__a, __b, 8));
+}
 
 // FORCE_INLINE int32x4_t vmull_s16(int16x4_t __a, int16x4_t __b);
 
