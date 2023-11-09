@@ -1791,7 +1791,9 @@ FORCE_INLINE int16x4_t vpaddl_s8(int8x8_t __a) {
 
 // FORCE_INLINE uint64x2_t vsetq_lane_u64(uint64_t __a, uint64x2_t __b, const int __c);
 
-// FORCE_INLINE int8x8_t vcreate_s8(uint64_t __a);
+FORCE_INLINE int8x8_t vcreate_s8(uint64_t __a) {
+  return __riscv_vreinterpret_v_i64m1_i8m1(__riscv_vreinterpret_v_u64m1_i64m1(__riscv_vmv_v_x_u64m1(__a, 8)));
+}
 
 // FORCE_INLINE int16x4_t vcreate_s16(uint64_t __a);
 
