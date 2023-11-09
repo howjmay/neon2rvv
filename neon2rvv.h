@@ -1719,7 +1719,9 @@ FORCE_INLINE int16x4_t vpaddl_s8(int8x8_t __a) {
 
 // FORCE_INLINE uint32x4_t vrsqrteq_u32(uint32x4_t __a);
 
-// FORCE_INLINE int8_t vget_lane_s8(int8x8_t __a, const int __b);
+FORCE_INLINE int8_t vget_lane_s8(int8x8_t __a, const int __b) {
+  return __riscv_vmv_x_s_i8m1_i8(__riscv_vslidedown_vx_i8m1(__a, __b, 8));
+}
 
 // FORCE_INLINE int16_t vget_lane_s16(int16x4_t __a, const int __b);
 

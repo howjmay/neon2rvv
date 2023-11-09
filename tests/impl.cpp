@@ -2403,7 +2403,47 @@ result_t test_vrsqrteq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { retu
 
 result_t test_vrsqrteq_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vget_lane_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vget_lane_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
+  int8x8_t a = vld1_s8(_a);
+  if (vget_lane_s8(a, 0) != _a[0]) {
+    return TEST_FAIL;
+  }
+
+  if (vget_lane_s8(a, 1) != _a[1]) {
+    return TEST_FAIL;
+  }
+
+  if (vget_lane_s8(a, 2) != _a[2]) {
+    return TEST_FAIL;
+  }
+
+  if (vget_lane_s8(a, 3) != _a[3]) {
+    return TEST_FAIL;
+  }
+
+  if (vget_lane_s8(a, 3) != _a[3]) {
+    return TEST_FAIL;
+  }
+
+  if (vget_lane_s8(a, 4) != _a[4]) {
+    return TEST_FAIL;
+  }
+
+  if (vget_lane_s8(a, 5) != _a[5]) {
+    return TEST_FAIL;
+  }
+
+  if (vget_lane_s8(a, 6) != _a[6]) {
+    return TEST_FAIL;
+  }
+
+  if (vget_lane_s8(a, 7) != _a[7]) {
+    return TEST_FAIL;
+  }
+
+  return TEST_SUCCESS;
+}
 
 result_t test_vget_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
