@@ -136,6 +136,11 @@ typedef vuint64m4_t uint64x1x4_t;
 // typedef for other VLEN
 #endif
 
+#define NEON2RVV_ROUND_TYPE_RNU 0  // round-to-nearest-up (add +0.5 LSB)
+#define NEON2RVV_ROUND_TYPE_RNE 1  // round-to-nearest-even
+#define NEON2RVV_ROUND_TYPE_RDN 2  // round-down (truncate)
+#define NEON2RVV_ROUND_TYPE_ROD 3  // round-to-odd (OR bits into LSB, aka "jam")
+
 FORCE_INLINE uint8x8_t vdup_n_u8(uint8_t __a);
 
 /* vadd */
@@ -204,17 +209,29 @@ FORCE_INLINE int16x8_t vaddw_s8(int16x8_t __a, int8x8_t __b) {
 
 // FORCE_INLINE uint64x2_t vaddw_u32(uint64x2_t __a, uint32x2_t __b);
 
-// FORCE_INLINE int8x8_t vhadd_s8(int8x8_t __a, int8x8_t __b);
+FORCE_INLINE int8x8_t vhadd_s8(int8x8_t __a, int8x8_t __b) {
+  return __riscv_vaadd_vv_i8m1(__a, __b, NEON2RVV_ROUND_TYPE_RDN, 8);
+}
 
-// FORCE_INLINE int16x4_t vhadd_s16(int16x4_t __a, int16x4_t __b);
+FORCE_INLINE int16x4_t vhadd_s16(int16x4_t __a, int16x4_t __b) {
+  return __riscv_vaadd_vv_i16m1(__a, __b, NEON2RVV_ROUND_TYPE_RDN, 4);
+}
 
-// FORCE_INLINE int32x2_t vhadd_s32(int32x2_t __a, int32x2_t __b);
+FORCE_INLINE int32x2_t vhadd_s32(int32x2_t __a, int32x2_t __b) {
+  return __riscv_vaadd_vv_i32m1(__a, __b, NEON2RVV_ROUND_TYPE_RDN, 2);
+}
 
-// FORCE_INLINE uint8x8_t vhadd_u8(uint8x8_t __a, uint8x8_t __b);
+FORCE_INLINE uint8x8_t vhadd_u8(uint8x8_t __a, uint8x8_t __b) {
+  return __riscv_vaaddu_vv_u8m1(__a, __b, NEON2RVV_ROUND_TYPE_RDN, 8);
+}
 
-// FORCE_INLINE uint16x4_t vhadd_u16(uint16x4_t __a, uint16x4_t __b);
+FORCE_INLINE uint16x4_t vhadd_u16(uint16x4_t __a, uint16x4_t __b) {
+  return __riscv_vaaddu_vv_u16m1(__a, __b, NEON2RVV_ROUND_TYPE_RDN, 4);
+}
 
-// FORCE_INLINE uint32x2_t vhadd_u32(uint32x2_t __a, uint32x2_t __b);
+FORCE_INLINE uint32x2_t vhadd_u32(uint32x2_t __a, uint32x2_t __b) {
+  return __riscv_vaaddu_vv_u32m1(__a, __b, NEON2RVV_ROUND_TYPE_RDN, 2);
+}
 
 // FORCE_INLINE int8x16_t vhaddq_s8(int8x16_t __a, int8x16_t __b);
 
