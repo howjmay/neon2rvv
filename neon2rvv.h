@@ -141,7 +141,16 @@ typedef vuint64m4_t uint64x1x4_t;
 #define NEON2RVV_ROUND_TYPE_RDN 2  // round-down (truncate)
 #define NEON2RVV_ROUND_TYPE_ROD 3  // round-to-odd (OR bits into LSB, aka "jam")
 
+// forward declaration
+FORCE_INLINE int8x8_t vdup_n_s8(int8_t __a);
+FORCE_INLINE int16x4_t vdup_n_s16(int16_t __a);
+FORCE_INLINE int32x2_t vdup_n_s32(int32_t __a);
+FORCE_INLINE float32x2_t vdup_n_f32(float32_t __a);
 FORCE_INLINE uint8x8_t vdup_n_u8(uint8_t __a);
+FORCE_INLINE uint16x4_t vdup_n_u16(uint16_t __a);
+FORCE_INLINE uint32x2_t vdup_n_u32(uint32_t __a);
+FORCE_INLINE int64x1_t vdup_n_s64(int64_t __a);
+FORCE_INLINE uint64x1_t vdup_n_u64(uint64_t __a);
 
 /* vadd */
 FORCE_INLINE int8x8_t vadd_s8(int8x8_t __a, int8x8_t __b) { return __riscv_vadd_vv_i8m1(__a, __b, 8); }
@@ -798,25 +807,41 @@ FORCE_INLINE int16x8_t vmlsl_s8(int16x8_t __a, int8x8_t __b, int8x8_t __c) {
 // FORCE_INLINE uint32x4_t vcleq_u32(uint32x4_t __a, uint32x4_t __b);
 
 FORCE_INLINE uint8x8_t vcgt_s8(int8x8_t __a, int8x8_t __b) {
-  // vbool8 uses every bit to represent the boolean values of each elements of the comparison result
-  vbool8_t cmp_res_b8 = __riscv_vmsgt_vv_i8m1_b8(__a, __b, 8);
-  // FIXME __riscv_vmv_s_x_u8mf2 has a bug. When calling with other funcs, only the first element will be set.
-  uint8x8_t fs = vdup_n_u8(0xff);
-  uint8x8_t zeros = vdup_n_u8(0x0);
-  return __riscv_vmerge_vvm_u8m1(zeros, fs, cmp_res_b8, 8);
+  // vbool8_t uses every bit to represent the boolean values of each elements of the comparison result
+  vbool8_t cmp_res = __riscv_vmsgt_vv_i8m1_b8(__a, __b, 8);
+  // FIXME __riscv_vmv_s_x_* has a bug. When calling with other funcs, only the first element will be set.
+  return __riscv_vmerge_vvm_u8m1(vdup_n_u8(0x0), vdup_n_u8(0xff), cmp_res, 8);
 }
 
-// FORCE_INLINE uint16x4_t vcgt_s16(int16x4_t __a, int16x4_t __b);
+FORCE_INLINE uint16x4_t vcgt_s16(int16x4_t __a, int16x4_t __b) {
+  vbool16_t cmp_res = __riscv_vmsgt_vv_i16m1_b16(__a, __b, 4);
+  return __riscv_vmerge_vvm_u16m1(vdup_n_u16(0x0), vdup_n_u16(0xffff), cmp_res, 4);
+}
 
-// FORCE_INLINE uint32x2_t vcgt_s32(int32x2_t __a, int32x2_t __b);
+FORCE_INLINE uint32x2_t vcgt_s32(int32x2_t __a, int32x2_t __b) {
+  vbool32_t cmp_res = __riscv_vmsgt_vv_i32m1_b32(__a, __b, 2);
+  return __riscv_vmerge_vvm_u32m1(vdup_n_u32(0x0), vdup_n_u32(0xffffffff), cmp_res, 2);
+}
 
-// FORCE_INLINE uint32x2_t vcgt_f32(float32x2_t __a, float32x2_t __b);
+FORCE_INLINE uint32x2_t vcgt_f32(float32x2_t __a, float32x2_t __b) {
+  vbool32_t cmp_res = __riscv_vmfgt_vv_f32m1_b32(__a, __b, 2);
+  return __riscv_vmerge_vvm_u32m1(vdup_n_u32(0x0), vdup_n_u32(0xffffffff), cmp_res, 2);
+}
 
-// FORCE_INLINE uint8x8_t vcgt_u8(uint8x8_t __a, uint8x8_t __b);
+FORCE_INLINE uint8x8_t vcgt_u8(uint8x8_t __a, uint8x8_t __b) {
+  vbool8_t cmp_res = __riscv_vmsgtu_vv_u8m1_b8(__a, __b, 8);
+  return __riscv_vmerge_vvm_u8m1(vdup_n_u8(0x0), vdup_n_u8(0xff), cmp_res, 8);
+}
 
-// FORCE_INLINE uint16x4_t vcgt_u16(uint16x4_t __a, uint16x4_t __b);
+FORCE_INLINE uint16x4_t vcgt_u16(uint16x4_t __a, uint16x4_t __b) {
+  vbool16_t cmp_res = __riscv_vmsgtu_vv_u16m1_b16(__a, __b, 4);
+  return __riscv_vmerge_vvm_u16m1(vdup_n_u16(0x0), vdup_n_u16(0xffff), cmp_res, 4);
+}
 
-// FORCE_INLINE uint32x2_t vcgt_u32(uint32x2_t __a, uint32x2_t __b);
+FORCE_INLINE uint32x2_t vcgt_u32(uint32x2_t __a, uint32x2_t __b) {
+  vbool32_t cmp_res = __riscv_vmsgtu_vv_u32m1_b32(__a, __b, 2);
+  return __riscv_vmerge_vvm_u32m1(vdup_n_u32(0x0), vdup_n_u32(0xffffffff), cmp_res, 2);
+}
 
 // FORCE_INLINE uint8x16_t vcgtq_s8(int8x16_t __a, int8x16_t __b);
 
