@@ -2608,9 +2608,7 @@ FORCE_INLINE int8x8x2_t vzip_s8(int8x8_t __a, int8x8_t __b) {
 FORCE_INLINE int8x8x2_t vuzp_s8(int8x8_t __a, int8x8_t __b) {
   uint8_t mask_arr[] = {85, 85};
   vbool8_t mask = __riscv_vlm_v_b8(mask_arr, 16);
-  vint8m1_t a_s_up_down = __riscv_vslidedown_vx_i8m1(__riscv_vslideup_vx_i8m1(vdup_n_s8(0), __a, 8, 16), 8, 16);
-  vint8m1_t b_s_up = __riscv_vslideup_vx_i8m1(vdup_n_s8(0), __b, 8, 16);
-  vint8m1_t ab = __riscv_vor_vv_i8m1(a_s_up_down, b_s_up, 16);
+  vint8m1_t ab = __riscv_vslideup_vx_i8m1(__a, __b, 8, 16);
   vint8m1_t ab_s_down = __riscv_vslide1down_vx_i8m1(ab, 0, 16);
   vint8m1_t res_low = __riscv_vcompress_vm_i8m1(ab, mask, 16);
   vint8m1_t res_high = __riscv_vcompress_vm_i8m1(ab_s_down, mask, 16);
