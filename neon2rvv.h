@@ -1993,7 +1993,7 @@ FORCE_INLINE int8x8_t vdup_lane_s8(int8x8_t __a, const int __b) { return __riscv
 
 // FORCE_INLINE uint64x2_t vdupq_lane_u64(uint64x1_t __a, const int __b);
 
-// FORCE_INLINE int8x16_t vcombine_s8(int8x8_t __a, int8x8_t __b);
+FORCE_INLINE int8x16_t vcombine_s8(int8x8_t __a, int8x8_t __b) { return __riscv_vslideup_vx_i8m1(__a, __b, 8, 16); }
 
 // FORCE_INLINE int16x8_t vcombine_s16(int16x4_t __a, int16x4_t __b);
 
