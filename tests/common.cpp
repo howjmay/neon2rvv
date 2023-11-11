@@ -374,6 +374,22 @@ result_t validate_float_error(float64x2_t a, double d0, double d1, double err) {
   return TEST_SUCCESS;
 }
 
+int16_t saturate_int16(int32_t a) {
+  if (a > INT32_MAX)
+    return INT32_MAX;
+  if (a < INT32_MIN)
+    return INT32_MIN;
+  return a;
+}
+
+int32_t saturate_int32(int64_t a) {
+  if (a > INT64_MAX)
+    return INT64_MAX;
+  if (a < INT64_MIN)
+    return INT64_MIN;
+  return a;
+}
+
 void print_64_bits_u8_arr(char *var_name, const uint8_t *u) {
   printf("%s0: %3u, %s1: %3u, %s2: %3u, %s3: %3u, %s4: %3u, %s5: %3u, %s6: %3u, %s7: %3u\n", var_name, u[0], var_name,
          u[1], var_name, u[2], var_name, u[3], var_name, u[4], var_name, u[5], var_name, u[6], var_name, u[7]);
