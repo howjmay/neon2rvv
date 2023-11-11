@@ -1053,10 +1053,10 @@ result_t test_vqdmulh_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
   const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
   int16_t _c[4];
-  _c[0] = (2 * (int32_t)_a[0] * (int32_t)_b[0]) >> 16;
-  _c[1] = (2 * (int32_t)_a[1] * (int32_t)_b[1]) >> 16;
-  _c[2] = (2 * (int32_t)_a[2] * (int32_t)_b[2]) >> 16;
-  _c[3] = (2 * (int32_t)_a[3] * (int32_t)_b[3]) >> 16;
+  _c[0] = saturate_int16(2 * (int32_t)_a[0] * (int32_t)_b[0] >> 16);
+  _c[1] = saturate_int16(2 * (int32_t)_a[1] * (int32_t)_b[1] >> 16);
+  _c[2] = saturate_int16(2 * (int32_t)_a[2] * (int32_t)_b[2] >> 16);
+  _c[3] = saturate_int16(2 * (int32_t)_a[3] * (int32_t)_b[3] >> 16);
 
   int16x4_t a = vld1_s16(_a);
   int16x4_t b = vld1_s16(_b);
