@@ -2085,7 +2085,11 @@ FORCE_INLINE int8x16_t vcombine_s8(int8x8_t __a, int8x8_t __b) { return __riscv_
 
 // FORCE_INLINE uint32x4_t vcvtq_n_u32_f32(float32x4_t __a, const int __b);
 
-// FORCE_INLINE int8x8_t vmovn_s16(int16x8_t __a);
+FORCE_INLINE int8x8_t vmovn_s16(int16x8_t __a) {
+  uint8_t mask_arr[] = {85, 85};
+  vbool8_t mask = __riscv_vlm_v_b8(mask_arr, 16);
+  return __riscv_vcompress_vm_i8m1(__riscv_vreinterpret_v_i16m1_i8m1(__a), mask, 16);
+}
 
 // FORCE_INLINE int16x4_t vmovn_s32(int32x4_t __a);
 
