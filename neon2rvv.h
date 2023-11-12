@@ -2035,7 +2035,9 @@ FORCE_INLINE int8x16_t vcombine_s8(int8x8_t __a, int8x8_t __b) { return __riscv_
 
 // FORCE_INLINE uint64x1_t vget_high_u64(uint64x2_t __a);
 
-// FORCE_INLINE int8x8_t vget_low_s8(int8x16_t __a);
+FORCE_INLINE int8x8_t vget_low_s8(int8x16_t __a) {
+  return __a;
+}
 
 // FORCE_INLINE int16x4_t vget_low_s16(int16x8_t __a);
 
