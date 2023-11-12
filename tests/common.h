@@ -131,8 +131,17 @@ extern int64_t NaN64;
 #define ALL_BIT_1_32 (*(float *)&NaN)
 #define ALL_BIT_1_64 (*(double *)&NaN64)
 
-template <typename T>
-result_t validate_128bits(T a, T b) {
+template <typename T, typename U>
+result_t validate_64_bits(T a, U b) {
+  const int32_t *t1 = (const int32_t *)&a;
+  const int32_t *t2 = (const int32_t *)&b;
+
+  ASSERT_RETURN(t1[0] == t2[0]);
+  ASSERT_RETURN(t1[1] == t2[1]);
+  return TEST_SUCCESS;
+}
+template <typename T, typename U>
+result_t validate_128_bits(T a, U b) {
   const int32_t *t1 = (const int32_t *)&a;
   const int32_t *t2 = (const int32_t *)&b;
 
