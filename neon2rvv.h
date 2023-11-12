@@ -337,7 +337,13 @@ FORCE_INLINE int8x8_t vaddhn_s16(int16x8_t __a, int16x8_t __b) {
 
 // FORCE_INLINE uint32x2_t vaddhn_u64(uint64x2_t __a, uint64x2_t __b);
 
-// FORCE_INLINE int8x8_t vraddhn_s16(int16x8_t __a, int16x8_t __b);
+FORCE_INLINE int8x8_t vraddhn_s16(int16x8_t __a, int16x8_t __b) {
+  uint8_t mask_arr[] = {0xaa, 0xaa};
+  vbool8_t mask = __riscv_vlm_v_b8(mask_arr, 16);
+  int16x8_t add_ab = (__riscv_vadd_vv_i16m1(__a, __b, 8));
+  int16x8_t add_round = __riscv_vadd_vx_i16m1(add_ab, 1 << 7, 8);
+  return __riscv_vcompress_vm_i8m1(__riscv_vreinterpret_v_i16m1_i8m1(add_round), mask, 16);
+}
 
 // FORCE_INLINE int16x4_t vraddhn_s32(int32x4_t __a, int32x4_t __b);
 

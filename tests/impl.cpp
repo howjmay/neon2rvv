@@ -923,7 +923,22 @@ result_t test_vaddhn_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return
 
 result_t test_vaddhn_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vraddhn_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vraddhn_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
+  const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
+  int8_t _c[8];
+
+  const int16_t round = 1 << 7;
+  for (int i = 0; i < 8; i++) {
+    _c[i] = ((_a[i] + _b[i] + round) >> 8) & 0xff;
+  }
+
+  int16x8_t a = vld1q_s16(_a);
+  int16x8_t b = vld1q_s16(_b);
+  int8x8_t c = vraddhn_s16(a, b);
+
+  return validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]);
+}
 
 result_t test_vraddhn_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
