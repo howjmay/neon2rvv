@@ -1835,7 +1835,12 @@ FORCE_INLINE int8_t vget_lane_s8(int8x8_t __a, const int __b) {
 
 // FORCE_INLINE uint64_t vgetq_lane_u64(uint64x2_t __a, const int __b);
 
-// FORCE_INLINE int8x8_t vset_lane_s8(int8_t __a, int8x8_t __b, const int __c);
+FORCE_INLINE int8x8_t vset_lane_s8(int8_t __a, int8x8_t __b, const int __c) {
+  const uint8_t mask_arr[] = {(uint8_t)(1 << __c)};
+  vbool8_t mask = __riscv_vlm_v_b8(mask_arr, 8);
+  int8x8_t a_dup = vdup_n_s8(__a);
+  return __riscv_vmerge_vvm_i8m1(__b, a_dup, mask, 8);
+}
 
 // FORCE_INLINE int16x4_t vset_lane_s16(int16_t __a, int16x4_t __b, const int __c);
 
