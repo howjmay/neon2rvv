@@ -2017,7 +2017,7 @@ FORCE_INLINE int8x16_t vcombine_s8(int8x8_t __a, int8x8_t __b) { return __riscv_
 
 // FORCE_INLINE uint64x2_t vcombine_u64(uint64x1_t __a, uint64x1_t __b);
 
-// FORCE_INLINE int8x8_t vget_high_s8(int8x16_t __a);
+FORCE_INLINE int8x8_t vget_high_s8(int8x16_t __a) { return __riscv_vslidedown_vx_i8m1(__a, 8, 16); }
 
 // FORCE_INLINE int16x4_t vget_high_s16(int16x8_t __a);
 
