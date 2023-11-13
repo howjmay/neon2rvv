@@ -1025,7 +1025,18 @@ FORCE_INLINE int8x8_t vabd_s8(int8x8_t __a, int8x8_t __b) {
 
 // FORCE_INLINE uint64x2_t vabdl_u32(uint32x2_t __a, uint32x2_t __b);
 
-// FORCE_INLINE int8x8_t vaba_s8(int8x8_t __a, int8x8_t __b, int8x8_t __c);
+FORCE_INLINE int8x8_t vaba_s8(int8x8_t __a, int8x8_t __b, int8x8_t __c) {
+  // extend to 16 bits then do abs()
+  vint16m1_t bc_sub = __riscv_vlmul_trunc_v_i16m2_i16m1(__riscv_vwsub_vv_i16m2(__b, __c, 8));
+  vint16m1_t sign_bit_mask = __riscv_vsra_vx_i16m1(bc_sub, 15, 8);
+  vint16m1_t bc_xor = __riscv_vxor_vv_i16m1(bc_sub, sign_bit_mask, 8);
+  vint16m1_t bc_sub_16 = __riscv_vsub_vv_i16m1(bc_xor, sign_bit_mask, 8);
+  // select the lower 8 bits
+  vbool8_t compress_mask = __riscv_vreinterpret_v_i8m1_b8(vdup_n_s8(85));
+  vint8m1_t abs_diff = __riscv_vcompress_vm_i8m1(__riscv_vreinterpret_v_i16m1_i8m1(bc_sub_16), compress_mask, 16);
+  // accumulate
+  return __riscv_vadd_vv_i8m1(__a, abs_diff, 8);
+}
 
 // FORCE_INLINE int16x4_t vaba_s16(int16x4_t __a, int16x4_t __b, int16x4_t __c);
 
