@@ -1169,7 +1169,14 @@ FORCE_INLINE int16x4_t vpaddl_s8(int8x8_t __a) {
 
 // FORCE_INLINE uint64x2_t vpaddlq_u32(uint32x4_t __a);
 
-// FORCE_INLINE int16x4_t vpadal_s8(int16x4_t __a, int8x8_t __b);
+FORCE_INLINE int16x4_t vpadal_s8(int16x4_t __a, int8x8_t __b) {
+  uint8_t mask_arr[] = {85};
+  vbool16_t mask = __riscv_vlm_v_b16(mask_arr, 1);
+  vint8m1_t b_s = __riscv_vslidedown_vx_i8m1(__b, 1, 8);
+  vint16m1_t b_add = __riscv_vlmul_trunc_v_i16m2_i16m1(__riscv_vwadd_vv_i16m2(__b, b_s, 8));
+  vint16m1_t padd = __riscv_vcompress_vm_i16m1(b_add, mask, 8);
+  return __riscv_vadd_vv_i16m1(padd, __a, 8);
+}
 
 // FORCE_INLINE int32x2_t vpadal_s16(int32x2_t __a, int16x4_t __b);
 
