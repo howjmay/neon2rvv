@@ -3337,7 +3337,32 @@ result_t test_vget_low_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { retu
 
 result_t test_vget_low_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vcvt_s32_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vcvt_s32_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const float *_a = (const float *)impl.test_cases_float_pointer1;
+  int32_t _c[2];
+  for (int i = 0; i < 2; i++) {
+    _c[i] = _a[i];
+  }
+
+  float32x2_t a = vld1_f32(_a);
+  int32x2_t c = vcvt_s32_f32(a);
+  
+  for (int i = 0; i < 2; i++) {
+    printf(", _a[%d]: %f", i, _a[i]);
+  }
+  printf("\n");
+  for (int i = 0; i < 2; i++) {
+    printf(", _c[%d]: %d", i, _c[i]);
+  }
+  printf("\n");
+  const int32_t *_u = (const int32_t *)&c;
+  for (int i = 0; i < 2; i++) {
+    printf(", c_[%d]: %d", i, _u[i]);
+  }
+  printf("\n");
+
+  return validate_int32(c, _c[0], _c[1]);
+}
 
 result_t test_vcvt_f32_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
