@@ -1903,7 +1903,21 @@ result_t test_vabaq_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return 
 
 result_t test_vabaq_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vabal_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vabal_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int16_t *_a = (const int16_t *)impl.test_cases_int_pointer1;
+  const int8_t *_b = (const int8_t *)impl.test_cases_int_pointer2;
+  const int8_t *_c = (const int8_t *)impl.test_cases_int_pointer2 + 8;
+  int16_t _d[8];
+  for (int i = 0; i < 8; i++) {
+    _d[i] = _a[i] + abs(_b[i] - _c[i]);
+  }
+  int16x8_t a = vld1q_s16(_a);
+  int8x8_t b = vld1_s8(_b);
+  int8x8_t c = vld1_s8(_c);
+  int16x8_t d = vabal_s8(a, b, c);
+
+  return validate_int16(d, _d[0], _d[1], _d[2], _d[3], _d[4], _d[5], _d[6], _d[7]);
+}
 
 result_t test_vabal_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
