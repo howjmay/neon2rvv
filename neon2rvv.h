@@ -1013,7 +1013,12 @@ FORCE_INLINE int8x8_t vabd_s8(int8x8_t __a, int8x8_t __b) {
 
 // FORCE_INLINE uint32x4_t vabdq_u32(uint32x4_t __a, uint32x4_t __b);
 
-// FORCE_INLINE int16x8_t vabdl_s8(int8x8_t __a, int8x8_t __b);
+FORCE_INLINE int16x8_t vabdl_s8(int8x8_t __a, int8x8_t __b) {
+  vint16m1_t ab_sub = __riscv_vlmul_trunc_v_i16m2_i16m1(__riscv_vwsub_vv_i16m2(__a, __b, 8));
+  vint16m1_t sign_bit_mask = __riscv_vsra_vx_i16m1(ab_sub, 15, 8);
+  vint16m1_t ab_xor = __riscv_vxor_vv_i16m1(ab_sub, sign_bit_mask, 8);
+  return __riscv_vsub_vv_i16m1(ab_xor, sign_bit_mask, 8);
+}
 
 // FORCE_INLINE int32x4_t vabdl_s16(int16x4_t __a, int16x4_t __b);
 
