@@ -3108,7 +3108,16 @@ result_t test_vqmovun_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { retur
 
 result_t test_vqmovun_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vmovl_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vmovl_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
+  int16_t _c[8];
+  for (int i = 0; i < 8; i++) {
+    _c[i] = _a[i];
+  }
+  int8x8_t a = vld1_s8(_a);
+  int16x8_t c = vmovl_s8(a);
+  return validate_int16(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]);
+}
 
 result_t test_vmovl_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
