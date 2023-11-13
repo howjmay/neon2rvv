@@ -263,71 +263,6 @@ const char *instruction_string[] = {
 #undef _
 };
 
-// FIXME may not need in this project
-// Produce rounding which is the same as SSE instructions with _MM_ROUND_NEAREST
-// rounding mode
-static inline float bankers_rounding(float val) {
-  if (val < 0)
-    return -bankers_rounding(-val);
-
-  float ret;
-  float round_down = floorf(val);  // Round down value
-  float round_up = ceilf(val);     // Round up value
-  float diff_down = val - round_down;
-  float diff_up = round_up - val;
-
-  if (diff_down < diff_up) {
-    /* If it's closer to the round down value, then use it */
-    ret = round_down;
-  } else if (diff_down > diff_up) {
-    /* If it's closer to the round up value, then use it */
-    ret = round_up;
-  } else {
-    /* If it's equidistant between round up and round down value, pick the
-     * one which is an even number */
-    float half = round_down / 2;
-    if (half != floorf(half)) {
-      /* If the round down value is odd, return the round up value */
-      ret = round_up;
-    } else {
-      /* If the round up value is odd, return the round down value */
-      ret = round_down;
-    }
-  }
-  return ret;
-}
-
-static inline double bankers_rounding(double val) {
-  if (val < 0)
-    return -bankers_rounding(-val);
-
-  double ret;
-  double round_down = floor(val);  // Round down value
-  double round_up = ceil(val);     // Round up value
-  double diff_down = val - round_down;
-  double diff_up = round_up - val;
-
-  if (diff_down < diff_up) {
-    /* If it's closer to the round down value, then use it */
-    ret = round_down;
-  } else if (diff_down > diff_up) {
-    /* If it's closer to the round up value, then use it */
-    ret = round_up;
-  } else {
-    /* If it's equidistant between round up and round down value, pick the
-     * one which is an even number */
-    double half = round_down / 2;
-    if (half != floor(half)) {
-      /* If the round down value is odd, return the round up value */
-      ret = round_up;
-    } else {
-      /* If the round up value is odd, return the round down value */
-      ret = round_down;
-    }
-  }
-  return ret;
-}
-
 result_t test_vadd_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
   const int8_t *_b = (int8_t *)impl.test_cases_int_pointer2;
@@ -776,7 +711,20 @@ result_t test_vhaddq_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return
 
 result_t test_vhaddq_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vrhadd_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vrhadd_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int8_t *_a = (const int8_t *)impl.test_cases_int_pointer1;
+  const int8_t *_b = (const int8_t *)impl.test_cases_int_pointer2;
+  int8_t _c[8];
+  for (int i = 0; i < 8; i++) {
+    _c[i] = (_a[i] + _b[i] + 1) >> 1;  // equals to add 0.5 which is NEON2RVV_ROUND_TYPE_RNU
+  }
+
+  int8x8_t a = vld1_s8(_a);
+  int8x8_t b = vld1_s8(_b);
+  int8x8_t c = vrhadd_s8(a, b);
+
+  return validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]);
+}
 
 result_t test_vrhadd_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
