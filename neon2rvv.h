@@ -975,7 +975,17 @@ FORCE_INLINE int8x8_t vabs_s8(int8x8_t __a) {
 
 // FORCE_INLINE uint32x4_t vtstq_u32(uint32x4_t __a, uint32x4_t __b);
 
-// FORCE_INLINE int8x8_t vabd_s8(int8x8_t __a, int8x8_t __b);
+FORCE_INLINE int8x8_t vabd_s8(int8x8_t __a, int8x8_t __b) {
+  // extend to 16 bits then do abs()
+  vint16m1_t ab_sub = __riscv_vlmul_trunc_v_i16m2_i16m1(__riscv_vwsub_vv_i16m2(__a, __b, 8));
+  vint16m1_t sign_bit_mask = __riscv_vsra_vx_i16m1(ab_sub, 15, 8);
+  vint16m1_t ab_xor = __riscv_vxor_vv_i16m1(ab_sub, sign_bit_mask, 8);
+  vint16m1_t ab_sub_16 = __riscv_vsub_vv_i16m1(ab_xor, sign_bit_mask, 8);
+
+  // select the lower 8 bits
+  vbool8_t compress_mask = __riscv_vreinterpret_v_i8m1_b8(vdup_n_s8(85));
+  return __riscv_vcompress_vm_i8m1(__riscv_vreinterpret_v_i16m1_i8m1(ab_sub_16), compress_mask, 16);
+}
 
 // FORCE_INLINE int16x4_t vabd_s16(int16x4_t __a, int16x4_t __b);
 
@@ -1117,7 +1127,7 @@ FORCE_INLINE int8x8_t vmax_s8(int8x8_t __a, int8x8_t __b) { return __riscv_vmax_
 
 FORCE_INLINE int8x8_t vpadd_s8(int8x8_t __a, int8x8_t __b) {
   uint8_t mask_arr[] = {85};
-  vbool8_t mask = __riscv_vlm_v_b8(mask_arr, 1);
+  vbool8_t mask = __riscv_vlm_v_b8(mask_arr, 8);
   vint8m1_t a_slidedown = __riscv_vslidedown_vx_i8m1(__a, 1, 8);
   vint8m1_t b_slidedown = __riscv_vslidedown_vx_i8m1(__b, 1, 8);
   vint8m1_t a_add = __riscv_vadd_vv_i8m1(__a, a_slidedown, 8);
