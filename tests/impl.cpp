@@ -1626,8 +1626,8 @@ result_t test_vcgt_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 }
 
 result_t test_vcgt_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
-  const float *_a = (const float *)impl.test_cases_int_pointer1;
-  const float *_b = (const float *)impl.test_cases_int_pointer2;
+  const float *_a = (const float *)impl.test_cases_float_pointer1;
+  const float *_b = (const float *)impl.test_cases_float_pointer2;
   uint32_t _c[2];
   for (int i = 0; i < 2; i++) {
     _c[i] = (_a[i] > _b[i]) ? ~UINT32_C(0) : 0x00;
