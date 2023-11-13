@@ -901,7 +901,13 @@ FORCE_INLINE uint32x2_t vcgt_u32(uint32x2_t __a, uint32x2_t __b) {
 
 // FORCE_INLINE uint32x4_t vcltq_u32(uint32x4_t __a, uint32x4_t __b);
 
-// FORCE_INLINE int8x8_t vabs_s8(int8x8_t __a);
+// TODO RVV doesn't have abs?
+FORCE_INLINE int8x8_t vabs_s8(int8x8_t __a) {
+  // refer https://stackoverflow.com/questions/12041632/how-to-compute-the-integer-absolute-value
+  vint8m1_t mask = __riscv_vsra_vx_i8m1(__a, 7, 8);
+  vint8m1_t a_xor = __riscv_vxor_vv_i8m1(__a, mask, 8);
+  return __riscv_vsub_vv_i8m1(a_xor, mask, 8);
+}
 
 // FORCE_INLINE int16x4_t vabs_s16(int16x4_t __a);
 
