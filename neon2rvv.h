@@ -2134,7 +2134,9 @@ FORCE_INLINE int8x8_t vmovn_s16(int16x8_t __a) {
 
 // FORCE_INLINE uint32x2_t vqmovun_s64(int64x2_t __a);
 
-// FORCE_INLINE int16x8_t vmovl_s8(int8x8_t __a);
+FORCE_INLINE int16x8_t vmovl_s8(int8x8_t __a) {
+  return __riscv_vlmul_trunc_v_i16m2_i16m1(__riscv_vsext_vf2_i16m2(__a, 8));
+}
 
 // FORCE_INLINE int32x4_t vmovl_s16(int16x4_t __a);
 
