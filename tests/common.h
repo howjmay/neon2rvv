@@ -190,8 +190,8 @@ result_t validate_float_error(float32x4_t a, float f0, float f1, float f2, float
 result_t validate_double(float64x2_t a, double d0, double d1);
 result_t validate_float_error(float64x2_t a, double d0, double d1, double err);
 
-int16_t saturate_int16(int32_t a);
-int32_t saturate_int32(int64_t a);
+int saturate_int16(int a);
+long int saturate_int32(int a);
 
 void print_64_bits_u8_arr(char *var_name, const uint8_t *u);
 void print_128_bits_u8_arr(char *var_name, const uint8_t *u);
