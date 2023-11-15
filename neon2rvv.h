@@ -2250,7 +2250,15 @@ FORCE_INLINE int8x8_t vtbl1_s8(int8x8_t __a, int8x8_t __b) {
 
 // FORCE_INLINE uint8x8_t vtbl4_u8(uint8x8x4_t __a, uint8x8_t __b);
 
-// FORCE_INLINE int8x8_t vtbx1_s8(int8x8_t __a, int8x8_t __b, int8x8_t __c);
+FORCE_INLINE int8x8_t vtbx1_s8(int8x8_t __a, int8x8_t __b, int8x8_t __c) {
+  // TODO a better way to set the high half into zeros
+  vint8m1_t b_s = __riscv_vslidedown_vx_i8m1(__riscv_vslideup_vx_i8m1(__b, __b, 8, 16), 8, 16);
+  vint8m1_t b_unbound = __riscv_vrgather_vv_i8m1(b_s, __riscv_vreinterpret_v_i8m1_u8m1(__c), 8);
+  vbool8_t gt_mask = __riscv_vmsgt_vx_i8m1_b8(__c, 7, 8);
+  vbool8_t lt_mask = __riscv_vmslt_vx_i8m1_b8(__c, 0, 8);
+  vbool8_t out_range_mask = __riscv_vmor_mm_b8(gt_mask, lt_mask, 8);
+  return __riscv_vmerge_vvm_i8m1(b_unbound, __a, out_range_mask, 8);
+}
 
 // FORCE_INLINE uint8x8_t vtbx1_u8(uint8x8_t __a, uint8x8_t __b, uint8x8_t __c);
 
