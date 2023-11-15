@@ -3375,7 +3375,43 @@ result_t test_vtbx4_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return T
 
 result_t test_vtbx4_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vmul_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vmul_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
+  const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
+  int16_t _c[4];
+  int16x4_t a = vld1_s16(_a);
+  int16x4_t b = vld1_s16(_b);
+  int16x4_t c;
+  for (int i = 0; i < 4; i++) {
+    _c[i] = _a[i] * _b[0];
+  }
+  c = vmul_lane_s16(a, b, 0);
+  if (validate_int16(c, _c[0], _c[1], _c[2], _c[3]) == TEST_FAIL) {
+    return TEST_FAIL;
+  }
+  for (int i = 0; i < 4; i++) {
+    _c[i] = _a[i] * _b[1];
+  }
+  c = vmul_lane_s16(a, b, 1);
+  if (validate_int16(c, _c[0], _c[1], _c[2], _c[3]) == TEST_FAIL) {
+    return TEST_FAIL;
+  }
+  for (int i = 0; i < 4; i++) {
+    _c[i] = _a[i] * _b[2];
+  }
+  c = vmul_lane_s16(a, b, 2);
+  if (validate_int16(c, _c[0], _c[1], _c[2], _c[3]) == TEST_FAIL) {
+    return TEST_FAIL;
+  }
+  for (int i = 0; i < 4; i++) {
+    _c[i] = _a[i] * _b[3];
+  }
+  c = vmul_lane_s16(a, b, 3);
+  if (validate_int16(c, _c[0], _c[1], _c[2], _c[3]) == TEST_FAIL) {
+    return TEST_FAIL;
+  }
+  return TEST_SUCCESS;
+}
 
 result_t test_vmul_lane_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
