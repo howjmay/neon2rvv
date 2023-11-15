@@ -239,13 +239,8 @@ class NEON2RVV_TEST_IMPL : public NEON2RVV_TEST {
         }
       }
 
-      ret = run_single_test(test, i);
-      if (ret == TEST_FAIL)  // the test failed...
-      {
-        // Set a breakpoint here if you want to step through the failure
-        // case in the debugger
-        ret = run_single_test(test, i);
-        break;
+      if (run_single_test(test, i) == TEST_FAIL) {
+        return TEST_FAIL;
       }
     }
     return ret;
@@ -2144,7 +2139,26 @@ result_t test_vrsqrts_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { retur
 
 result_t test_vrsqrtsq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vshl_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vshl_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
+  int8_t *_b = (int8_t *)impl.test_cases_int_pointer2;
+  // force _b[] in a more reasonable shift range
+  for (int i = 0; i < 8; i++) {
+    _b[i] = _b[i] % 16;
+  }
+  int8_t _c[8];
+  for (int i = 0; i < 8; i++) {
+    if (_b[i] < 0) {
+      _c[i] = _a[i] >> -_b[i];
+    } else {
+      _c[i] = _a[i] << _b[i];
+    }
+  }
+  int8x8_t a = vld1_s8(_a);
+  int8x8_t b = vld1_s8(_b);
+  int8x8_t c = vshl_s8(a, b);
+  return validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]);
+}
 
 result_t test_vshl_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 

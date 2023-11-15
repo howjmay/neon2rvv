@@ -1268,7 +1268,31 @@ FORCE_INLINE int16x4_t vpadal_s8(int16x4_t __a, int8x8_t __b) {
 
 // FORCE_INLINE float32x4_t vrsqrtsq_f32(float32x4_t __a, float32x4_t __b);
 
-// FORCE_INLINE int8x8_t vshl_s8(int8x8_t __a, int8x8_t __b);
+FORCE_INLINE int8x8_t vshl_s8(int8x8_t __a, int8x8_t __b) {
+  int8_t *_a = (int8_t *)&__a;
+  int8_t *_b = (int8_t *)&__b;
+  int8_t _c[8];
+  for (int i = 0; i < 8; i++) {
+    if (_b[i] < 0) {
+      _c[i] = _a[i] >> -_b[i];
+    } else {
+      _c[i] = _a[i] << _b[i];
+    }
+  }
+  return __riscv_vle8_v_i8m1(_c, 8);
+  // FIXME the following is a working RVV impl, but I doubt its speed
+  // vint8m1_t neg_mask = __riscv_vsra_vx_i8m1(__b, 7, 8);
+  // vint8m1_t b_neg_mask = __riscv_vand_vv_i8m1(__b, neg_mask, 8);
+  // vint8m1_t a_sll_mess = __riscv_vsll_vv_i8m1(__a, __riscv_vreinterpret_v_i8m1_u8m1(__b), 8);
+  // vint8m1_t a_sll = __riscv_vand_vv_i8m1(a_sll_mess, __riscv_vnot_v_i8m1(neg_mask, 8), 8);
+  // vint8m1_t b_neg = __riscv_vneg_v_i8m1(b_neg_mask, 8);
+  // vbool8_t lt_mask = __riscv_vmsgt_vx_i8m1_b8(b_neg, 7, 8);
+  // vuint8m1_t b_sra_bound = __riscv_vreinterpret_v_i8m1_u8m1(__riscv_vmerge_vxm_i8m1(b_neg, 7, lt_mask, 8));
+  // vint8m1_t a_sra = __riscv_vsra_vv_i8m1(__riscv_vand_vv_i8m1(__a, neg_mask, 8), b_sra_bound, 8);
+  // vbool8_t gt_mask = __riscv_vmsgt_vx_i8m1_b8(__b, 7, 8);
+  // vint8m1_t a_sll_sra = __riscv_vor_vv_i8m1(a_sll, a_sra, 8);
+  // return __riscv_vmerge_vvm_i8m1(a_sll_sra, vdup_n_s8(0), gt_mask, 8);
+}
 
 // FORCE_INLINE int16x4_t vshl_s16(int16x4_t __a, int16x4_t __b);
 
