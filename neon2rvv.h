@@ -2230,7 +2230,11 @@ FORCE_INLINE int16x8_t vmovl_s8(int8x8_t __a) {
 
 // FORCE_INLINE uint64x2_t vmovl_u32(uint32x2_t __a);
 
-// FORCE_INLINE int8x8_t vtbl1_s8(int8x8_t __a, int8x8_t __b);
+FORCE_INLINE int8x8_t vtbl1_s8(int8x8_t __a, int8x8_t __b) {
+  // TODO a better way to set the high half into zeros
+  vint8m1_t a_s = __riscv_vslidedown_vx_i8m1(__riscv_vslideup_vx_i8m1(__a, __a, 8, 16), 8, 16);
+  return __riscv_vrgather_vv_i8m1(a_s, __riscv_vreinterpret_v_i8m1_u8m1(__b), 8);
+}
 
 // FORCE_INLINE uint8x8_t vtbl1_u8(uint8x8_t __a, uint8x8_t __b);
 
