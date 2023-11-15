@@ -1324,7 +1324,20 @@ FORCE_INLINE int8x8_t vshl_s8(int8x8_t __a, int8x8_t __b) {
 
 // FORCE_INLINE uint64x2_t vshlq_u64(uint64x2_t __a, int64x2_t __b);
 
-// FORCE_INLINE int8x8_t vrshl_s8(int8x8_t __a, int8x8_t __b);
+FORCE_INLINE int8x8_t vrshl_s8(int8x8_t __a, int8x8_t __b) {
+  int8_t *_a = (int8_t *)&__a;
+  int8_t *_b = (int8_t *)&__b;
+  int8_t _c[8];
+  for (int i = 0; i < 8; i++) {
+    if (_b[i] < 0) {
+      int8_t b_neg = -_b[i];
+      _c[i] = (_a[i] + (1 << (b_neg - 1))) >> b_neg;
+    } else {
+      _c[i] = (_a[i]) << _b[i];
+    }
+  }
+  return __riscv_vle8_v_i8m1(_c, 8);
+}
 
 // FORCE_INLINE int16x4_t vrshl_s16(int16x4_t __a, int16x4_t __b);
 
