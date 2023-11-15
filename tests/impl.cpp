@@ -2431,7 +2431,77 @@ result_t test_vqrshrun_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { re
 
 result_t test_vqrshrun_n_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vshl_n_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vshl_n_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int8_t *_a = (const int8_t *)impl.test_cases_int_pointer1;
+  int8_t _c[8];
+  int8x8_t a = vld1_s8(_a);
+  int8x8_t c;
+  for (int i = 0; i < 8; i++) {
+    _c[i] = _a[i];
+  }
+  c = vshl_n_s8(a, 0);
+  if (TEST_FAIL == validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7])) {
+    return TEST_FAIL;
+  }
+  for (int i = 0; i < 8; i++) {
+    _c[i] = _a[i] << 1;
+  }
+  a = vld1_s8(_a);
+  c = vshl_n_s8(a, 1);
+  if (TEST_FAIL == validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7])) {
+    return TEST_FAIL;
+  }
+  for (int i = 0; i < 8; i++) {
+    _c[i] = _a[i] << 2;
+  }
+  a = vld1_s8(_a);
+  c = vshl_n_s8(a, 2);
+  if (TEST_FAIL == validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7])) {
+    return TEST_FAIL;
+  }
+  for (int i = 0; i < 8; i++) {
+    _c[i] = _a[i] << 3;
+  }
+  a = vld1_s8(_a);
+  c = vshl_n_s8(a, 3);
+  if (TEST_FAIL == validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7])) {
+    return TEST_FAIL;
+  }
+  for (int i = 0; i < 8; i++) {
+    _c[i] = _a[i] << 4;
+  }
+  a = vld1_s8(_a);
+  c = vshl_n_s8(a, 4);
+  if (TEST_FAIL == validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7])) {
+    return TEST_FAIL;
+  }
+  for (int i = 0; i < 8; i++) {
+    _c[i] = _a[i] << 5;
+  }
+  a = vld1_s8(_a);
+  c = vshl_n_s8(a, 5);
+  if (TEST_FAIL == validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7])) {
+    return TEST_FAIL;
+  }
+  for (int i = 0; i < 8; i++) {
+    _c[i] = _a[i] << 6;
+  }
+  a = vld1_s8(_a);
+  c = vshl_n_s8(a, 6);
+  if (TEST_FAIL == validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7])) {
+    return TEST_FAIL;
+  }
+  for (int i = 0; i < 8; i++) {
+    _c[i] = _a[i] << 7;
+  }
+  a = vld1_s8(_a);
+  c = vshl_n_s8(a, 7);
+  if (TEST_FAIL == validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7])) {
+    return TEST_FAIL;
+  }
+
+  return TEST_SUCCESS;
+}
 
 result_t test_vshl_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
