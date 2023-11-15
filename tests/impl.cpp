@@ -239,8 +239,9 @@ class NEON2RVV_TEST_IMPL : public NEON2RVV_TEST {
         }
       }
 
-      if (run_single_test(test, i) == TEST_FAIL) {
-        return TEST_FAIL;
+      ret = run_single_test(test, i);
+      if (ret != TEST_SUCCESS) {
+        break;
       }
     }
     return ret;
@@ -2194,28 +2195,21 @@ result_t test_vrshl_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
   int8_t *_b = (int8_t *)impl.test_cases_int_pointer2;
   // force _b[] in a more reasonable shift range
-  int8_t _b_filter[8];
   for (int i = 0; i < 8; i++) {
     _b[i] = _b[i] % 16;
   }
   int8_t _c[8];
   for (int i = 0; i < 8; i++) {
-    int8_t tmp = 0;
     if (_b[i] < 0) {
-      tmp = 1<<(-_b[i]-1);
-      _c[i] = (_a[i]+tmp) >> -_b[i];
-      printf("tmp: %d\n", tmp);
+      int8_t b_neg = -_b[i];
+      _c[i] = (_a[i] + (1 << (b_neg - 1))) >> b_neg;
     } else {
-      _c[i] = (_a[i]+tmp) << _b[i];
+      _c[i] = (_a[i]) << _b[i];
     }
   }
   int8x8_t a = vld1_s8(_a);
   int8x8_t b = vld1_s8(_b);
   int8x8_t c = vrshl_s8(a, b);
-  print_64_bits_in_u8("_a", _a);
-  print_64_bits_in_u8("_b", _b);
-  print_64_bits_in_u8("_c", _c);
-  print_64_bits_in_u8("c-", c);
   return validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]);
 }
 

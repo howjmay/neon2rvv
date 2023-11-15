@@ -1325,11 +1325,18 @@ FORCE_INLINE int8x8_t vshl_s8(int8x8_t __a, int8x8_t __b) {
 // FORCE_INLINE uint64x2_t vshlq_u64(uint64x2_t __a, int64x2_t __b);
 
 FORCE_INLINE int8x8_t vrshl_s8(int8x8_t __a, int8x8_t __b) {
-  vint8m1_t zeros = vdup_n_s8(0);
-  vuint8m1_t abs_b = __riscv_vreinterpret_v_i8m1_u8m1(vabs_s8(__b));
-  vbool8_t b_mask = __riscv_vmsgtu_vx_u8m1_b8(abs_b, 7, 8);
-  vint8m1_t a_filtered = __riscv_vmerge_vvm_i8m1(__a, zeros, b_mask, 8);
-  return __riscv_vsll_vv_i8m1(a_filtered, abs_b, 8);
+  int8_t *_a = (int8_t *)&__a;
+  int8_t *_b = (int8_t *)&__b;
+  int8_t _c[8];
+  for (int i = 0; i < 8; i++) {
+    if (_b[i] < 0) {
+      int8_t b_neg = -_b[i];
+      _c[i] = (_a[i] + (1 << (b_neg - 1))) >> b_neg;
+    } else {
+      _c[i] = (_a[i]) << _b[i];
+    }
+  }
+  return __riscv_vle8_v_i8m1(_c, 8);
 }
 
 // FORCE_INLINE int16x4_t vrshl_s16(int16x4_t __a, int16x4_t __b);
