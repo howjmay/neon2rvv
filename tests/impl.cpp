@@ -852,57 +852,57 @@ result_t test_vraddhn_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { retur
 result_t test_vmul_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
   const int8_t *_b = (int8_t *)impl.test_cases_int_pointer2;
-  int8_t d0 = _a[0] * _b[0];
-  int8_t d1 = _a[1] * _b[1];
-  int8_t d2 = _a[2] * _b[2];
-  int8_t d3 = _a[3] * _b[3];
-  int8_t d4 = _a[4] * _b[4];
-  int8_t d5 = _a[5] * _b[5];
-  int8_t d6 = _a[6] * _b[6];
-  int8_t d7 = _a[7] * _b[7];
+  int8_t _c[8];
+  for (int i = 0; i < 8; i++) {
+    _c[i] = _a[i] * _b[i];
+  }
 
   int8x8_t a = vld1_s8(_a);
   int8x8_t b = vld1_s8(_b);
   int8x8_t c = vmul_s8(a, b);
-  return validate_int8(c, d0, d1, d2, d3, d4, d5, d6, d7);
+  return validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]);
 }
 
 result_t test_vmul_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
   const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
-  int16_t d0 = _a[0] * _b[0];
-  int16_t d1 = _a[1] * _b[1];
-  int16_t d2 = _a[2] * _b[2];
-  int16_t d3 = _a[3] * _b[3];
+  int16_t _c[4];
+  for (int i = 0; i < 4; i++) {
+    _c[i] = _a[i] * _b[i];
+  }
 
   int16x4_t a = vld1_s16(_a);
   int16x4_t b = vld1_s16(_b);
   int16x4_t c = vmul_s16(a, b);
-  return validate_int16(c, d0, d1, d2, d3);
+  return validate_int16(c, _c[0], _c[1], _c[2], _c[3]);
 }
 
 result_t test_vmul_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
   const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
-  int32_t d0 = _a[0] * _b[0];
-  int32_t d1 = _a[1] * _b[1];
+  int32_t _c[2];
+  for (int i = 0; i < 2; i++) {
+    _c[i] = _a[i] * _b[i];
+  }
 
   int32x2_t a = vld1_s32(_a);
   int32x2_t b = vld1_s32(_b);
   int32x2_t c = vmul_s32(a, b);
-  return validate_int32(c, d0, d1);
+  return validate_int32(c, _c[0], _c[1]);
 }
 
 result_t test_vmul_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const float *_a = (float *)impl.test_cases_float_pointer1;
   const float *_b = (float *)impl.test_cases_float_pointer2;
-  float d0 = _a[0] * _b[0];
-  float d1 = _a[1] * _b[1];
+  float _c[2];
+  for (int i = 0; i < 2; i++) {
+    _c[i] = _a[i] * _b[i];
+  }
 
   float32x2_t a = vld1_f32(_a);
   float32x2_t b = vld1_f32(_b);
   float32x2_t c = vmul_f32(a, b);
-  return validate_float(c, d0, d1);
+  return validate_float(c, _c[0], _c[1]);
 }
 
 result_t test_vmul_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
