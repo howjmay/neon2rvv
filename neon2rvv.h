@@ -2457,7 +2457,9 @@ FORCE_INLINE int16x4_t vmul_lane_s16(int16x4_t __a, int16x4_t __b, const int __c
 
 // FORCE_INLINE int32x2_t vqrdmulh_n_s32(int32x2_t __a, int32_t __b);
 
-// FORCE_INLINE int16x4_t vmla_n_s16(int16x4_t __a, int16x4_t __b, int16_t __c);
+FORCE_INLINE int16x4_t vmla_n_s16(int16x4_t __a, int16x4_t __b, int16_t __c) {
+  return __riscv_vmacc_vx_i16m1(__a, __c, __b, 4);
+}
 
 // FORCE_INLINE int32x2_t vmla_n_s32(int32x2_t __a, int32x2_t __b, int32_t __c);
 
