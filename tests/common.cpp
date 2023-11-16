@@ -374,6 +374,14 @@ result_t validate_float_error(float64x2_t a, double d0, double d1, double err) {
   return TEST_SUCCESS;
 }
 
+int saturate_int8(int a) {
+  if (a > INT8_MAX)
+    return INT8_MAX;
+  if (a < INT8_MIN)
+    return INT8_MIN;
+  return a;
+}
+
 int saturate_int16(int a) {
   if (a > INT32_MAX)
     return INT32_MAX;
