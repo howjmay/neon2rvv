@@ -386,8 +386,7 @@ FORCE_INLINE uint32x2_t vmul_u32(uint32x2_t __a, uint32x2_t __b) { return __risc
 // FORCE_INLINE uint32x4_t vmulq_u32(uint32x4_t __a, uint32x4_t __b);
 
 FORCE_INLINE int16x4_t vqdmulh_s16(int16x4_t __a, int16x4_t __b) {
-  uint8_t mask_arr[] = {0xaa};
-  vbool8_t mask = __riscv_vlm_v_b8(mask_arr, 1);
+  vbool8_t mask = __riscv_vreinterpret_v_u8m1_b8(vdup_n_u8(0xaa));
   vint32m2_t ab_mul = __riscv_vwmul_vv_i32m2(__a, __b, 4);
   vint32m2_t ab_mulx2 = __riscv_vmul_vx_i32m2(ab_mul, 2, 4);
   return __riscv_vlmul_trunc_v_i16m2_i16m1(
@@ -456,7 +455,10 @@ FORCE_INLINE uint64x2_t vmull_u32(uint32x2_t __a, uint32x2_t __b) {
   return __riscv_vlmul_trunc_v_u64m2_u64m1(__riscv_vwmulu_vv_u64m2(__a, __b, 8));
 }
 
-// FORCE_INLINE int32x4_t vqdmull_s16(int16x4_t __a, int16x4_t __b);
+FORCE_INLINE int32x4_t vqdmull_s16(int16x4_t __a, int16x4_t __b) {
+  vint32m2_t ab_mul = __riscv_vwmul_vv_i32m2(__a, __b, 4);
+  return __riscv_vlmul_trunc_v_i32m2_i32m1(__riscv_vmul_vx_i32m2(ab_mul, 2, 4));
+}
 
 // FORCE_INLINE int64x2_t vqdmull_s32(int32x2_t __a, int32x2_t __b);
 
