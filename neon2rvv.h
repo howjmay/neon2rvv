@@ -2276,7 +2276,10 @@ FORCE_INLINE int8x8_t vtbx1_s8(int8x8_t __a, int8x8_t __b, int8x8_t __c) {
 
 // FORCE_INLINE uint8x8_t vtbx4_u8(uint8x8_t __a, uint8x8x4_t __b, uint8x8_t __c);
 
-// FORCE_INLINE int16x4_t vmul_lane_s16(int16x4_t __a, int16x4_t __b, const int __c);
+FORCE_INLINE int16x4_t vmul_lane_s16(int16x4_t __a, int16x4_t __b, const int __c) {
+  vint16m1_t b_shuffile = __riscv_vrgather_vx_i16m1(__b, __c, 4);
+  return __riscv_vmul_vv_i16m1(__a, b_shuffile, 4);
+}
 
 // FORCE_INLINE int32x2_t vmul_lane_s32(int32x2_t __a, int32x2_t __b, const int __c);
 
