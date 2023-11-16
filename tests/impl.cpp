@@ -49,8 +49,10 @@ class NEON2RVV_TEST_IMPL : public NEON2RVV_TEST {
   NEON2RVV_TEST_IMPL(void) {
     test_cases_float_pointer1 = (float *)platform_aligned_alloc(REGISTER_SIZE);
     test_cases_float_pointer2 = (float *)platform_aligned_alloc(REGISTER_SIZE);
+    test_cases_float_pointer3 = (float *)platform_aligned_alloc(REGISTER_SIZE);
     test_cases_int_pointer1 = (int32_t *)platform_aligned_alloc(REGISTER_SIZE);
     test_cases_int_pointer2 = (int32_t *)platform_aligned_alloc(REGISTER_SIZE);
+    test_cases_int_pointer3 = (int32_t *)platform_aligned_alloc(REGISTER_SIZE);
     srand(0);
     for (uint32_t i = 0; i < MAX_TEST_VALUE; i++) {
       test_cases_floats[i] = ranf(-100000, 100000);
@@ -59,28 +61,34 @@ class NEON2RVV_TEST_IMPL : public NEON2RVV_TEST {
   }
   float *test_cases_float_pointer1;
   float *test_cases_float_pointer2;
+  float *test_cases_float_pointer3;
   int32_t *test_cases_int_pointer1;
   int32_t *test_cases_int_pointer2;
+  int32_t *test_cases_int_pointer3;
   float test_cases_floats[MAX_TEST_VALUE];
   int32_t test_cases_ints[MAX_TEST_VALUE];
 
   virtual ~NEON2RVV_TEST_IMPL(void) {
     platform_aligned_free(test_cases_float_pointer1);
     platform_aligned_free(test_cases_float_pointer2);
+    platform_aligned_free(test_cases_float_pointer3);
     platform_aligned_free(test_cases_int_pointer1);
     platform_aligned_free(test_cases_int_pointer2);
+    platform_aligned_free(test_cases_int_pointer3);
   }
 
   void load_test_float_pointers(uint32_t iter) {
     for (int i = 0; i < 4; i++) {
       test_cases_float_pointer1[i] = test_cases_floats[iter + i];
       test_cases_float_pointer2[i] = test_cases_floats[iter + i + 4];
+      test_cases_float_pointer2[i] = test_cases_floats[iter + i + 8];
     }
   }
   void load_test_int_pointers(uint32_t iter) {
     for (int i = 0; i < 4; i++) {
       test_cases_int_pointer1[i] = test_cases_ints[iter + i];
       test_cases_int_pointer2[i] = test_cases_ints[iter + i + 4];
+      test_cases_int_pointer2[i] = test_cases_ints[iter + i + 8];
     }
   }
   result_t run_single_test(INSTRUCTION_TEST test, uint32_t iter);
@@ -90,7 +98,7 @@ class NEON2RVV_TEST_IMPL : public NEON2RVV_TEST {
     result_t ret = TEST_SUCCESS;
 
     // Test a whole bunch of values
-    for (uint32_t i = 0; i < (MAX_TEST_VALUE - 8); i++) {
+    for (uint32_t i = 0; i < (MAX_TEST_VALUE - 12); i++) {
       load_test_float_pointers(i);  // Load some random float values
       load_test_int_pointers(i);    // load some random int values
 
@@ -138,6 +146,7 @@ class NEON2RVV_TEST_IMPL : public NEON2RVV_TEST {
           test == it_vcleq_u16 || test == it_vcleq_u32) {
         // Make sure at least one value is the same.
         test_cases_float_pointer1[3] = test_cases_float_pointer2[3];
+        test_cases_float_pointer1[3] = test_cases_float_pointer3[3];
       }
 
       if (test == it_vceq_s8 || test == it_vceq_s16 || test == it_vceq_s32 || test == it_vceq_f32 ||
@@ -163,8 +172,10 @@ class NEON2RVV_TEST_IMPL : public NEON2RVV_TEST {
         if ((rand() & 3) == 0) {
           uint32_t r1 = rand() & 3;
           uint32_t r2 = rand() & 3;
+          uint32_t r3 = rand() & 3;
           test_cases_float_pointer1[r1] = nanf("");
           test_cases_float_pointer2[r2] = nanf("");
+          test_cases_float_pointer3[r3] = nanf("");
         }
       }
 
@@ -183,10 +194,14 @@ class NEON2RVV_TEST_IMPL : public NEON2RVV_TEST {
           uint32_t r2 = ((rand() & 1) << 1) + 1;
           uint32_t r3 = ((rand() & 1) << 1) + 1;
           uint32_t r4 = ((rand() & 1) << 1) + 1;
+          uint32_t r5 = ((rand() & 1) << 1) + 1;
+          uint32_t r6 = ((rand() & 1) << 1) + 1;
           test_cases_float_pointer1[r1] = INFINITY;
           test_cases_float_pointer2[r2] = INFINITY;
-          test_cases_float_pointer1[r3] = -INFINITY;
+          test_cases_float_pointer3[r3] = INFINITY;
           test_cases_float_pointer1[r4] = -INFINITY;
+          test_cases_float_pointer2[r5] = -INFINITY;
+          test_cases_float_pointer3[r6] = -INFINITY;
         }
       }
 
@@ -207,12 +222,19 @@ class NEON2RVV_TEST_IMPL : public NEON2RVV_TEST {
             test_cases_float_pointer2[2] = float(test_cases_int_pointer2[2]);
             test_cases_float_pointer2[3] = float(test_cases_int_pointer2[3]);
 
+            test_cases_float_pointer3[0] = float(test_cases_int_pointer3[0]);
+            test_cases_float_pointer3[1] = float(test_cases_int_pointer3[1]);
+            test_cases_float_pointer3[2] = float(test_cases_int_pointer3[2]);
+            test_cases_float_pointer3[3] = float(test_cases_int_pointer3[3]);
+
             break;
           case 1: {
             uint32_t index = rand() & 3;
             test_cases_float_pointer1[index] = float(test_cases_int_pointer1[index]);
             index = rand() & 3;
             test_cases_float_pointer2[index] = float(test_cases_int_pointer2[index]);
+            index = rand() & 3;
+            test_cases_float_pointer3[index] = float(test_cases_int_pointer3[index]);
           } break;
           case 2: {
             uint32_t index1 = rand() & 3;
@@ -221,8 +243,12 @@ class NEON2RVV_TEST_IMPL : public NEON2RVV_TEST {
             test_cases_float_pointer1[index2] = float(test_cases_int_pointer1[index2]);
             index1 = rand() & 3;
             index2 = rand() & 3;
-            test_cases_float_pointer1[index1] = float(test_cases_int_pointer1[index1]);
-            test_cases_float_pointer1[index2] = float(test_cases_int_pointer1[index2]);
+            test_cases_float_pointer2[index1] = float(test_cases_int_pointer2[index1]);
+            test_cases_float_pointer2[index2] = float(test_cases_int_pointer2[index2]);
+            index1 = rand() & 3;
+            index2 = rand() & 3;
+            test_cases_float_pointer3[index1] = float(test_cases_int_pointer3[index1]);
+            test_cases_float_pointer3[index2] = float(test_cases_int_pointer3[index2]);
           } break;
           case 3:
             test_cases_float_pointer1[0] = float(test_cases_int_pointer1[0]);
@@ -1119,8 +1145,8 @@ result_t test_vqdmull_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { retur
 
 result_t test_vmla_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
-  const int8_t *_b = (int8_t *)impl.test_cases_int_pointer1 + 8;
-  const int8_t *_c = (int8_t *)impl.test_cases_int_pointer2;
+  const int8_t *_b = (int8_t *)impl.test_cases_int_pointer2;
+  const int8_t *_c = (int8_t *)impl.test_cases_int_pointer3;
   int8_t _d[8];
   for (int i = 0; i < 8; i++) {
     _d[i] = _a[i] + _b[i] * _c[i];
@@ -1161,8 +1187,8 @@ result_t test_vmlaq_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return 
 
 result_t test_vmlal_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
-  const int8_t *_b = (int8_t *)impl.test_cases_int_pointer1 + 8;
-  const int8_t *_c = (int8_t *)impl.test_cases_int_pointer2;
+  const int8_t *_b = (int8_t *)impl.test_cases_int_pointer2;
+  const int8_t *_c = (int8_t *)impl.test_cases_int_pointer3;
   int16_t _d[8];
   for (int i = 0; i < 8; i++) {
     _d[i] = _a[i] + (int16_t)_b[i] * (int16_t)_c[i];
@@ -1177,8 +1203,8 @@ result_t test_vmlal_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 
 result_t test_vmlal_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
-  const int16_t *_b = (int16_t *)impl.test_cases_int_pointer1 + 8;
-  const int16_t *_c = (int16_t *)impl.test_cases_int_pointer2;
+  const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
+  const int16_t *_c = (int16_t *)impl.test_cases_int_pointer3;
   int32_t _d[4];
   for (int i = 0; i < 4; i++) {
     _d[i] = _a[i] + (int32_t)_b[i] * (int32_t)_c[i];
@@ -1193,8 +1219,8 @@ result_t test_vmlal_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 
 result_t test_vmlal_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int64_t *_a = (int64_t *)impl.test_cases_int_pointer1;
-  const int32_t *_b = (int32_t *)impl.test_cases_int_pointer1 + 8;
-  const int32_t *_c = (int32_t *)impl.test_cases_int_pointer2;
+  const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
+  const int32_t *_c = (int32_t *)impl.test_cases_int_pointer3;
   int64_t _d[2];
   for (int i = 0; i < 2; i++) {
     _d[i] = _a[i] + (int64_t)_b[i] * (int64_t)_c[i];
@@ -1209,8 +1235,8 @@ result_t test_vmlal_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 
 result_t test_vmlal_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint16_t *_a = (uint16_t *)impl.test_cases_int_pointer1;
-  const uint8_t *_b = (uint8_t *)impl.test_cases_int_pointer1 + 8;
-  const uint8_t *_c = (uint8_t *)impl.test_cases_int_pointer2;
+  const uint8_t *_b = (uint8_t *)impl.test_cases_int_pointer2;
+  const uint8_t *_c = (uint8_t *)impl.test_cases_int_pointer3;
   uint16_t _d[8];
   for (int i = 0; i < 8; i++) {
     _d[i] = _a[i] + (uint16_t)_b[i] * (uint16_t)_c[i];
@@ -1225,8 +1251,8 @@ result_t test_vmlal_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 
 result_t test_vmlal_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint32_t *_a = (uint32_t *)impl.test_cases_int_pointer1;
-  const uint16_t *_b = (uint16_t *)impl.test_cases_int_pointer1 + 8;
-  const uint16_t *_c = (uint16_t *)impl.test_cases_int_pointer2;
+  const uint16_t *_b = (uint16_t *)impl.test_cases_int_pointer2;
+  const uint16_t *_c = (uint16_t *)impl.test_cases_int_pointer3;
   uint32_t _d[4];
   for (int i = 0; i < 4; i++) {
     _d[i] = _a[i] + (uint32_t)_b[i] * (uint32_t)_c[i];
@@ -1241,8 +1267,8 @@ result_t test_vmlal_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 
 result_t test_vmlal_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint64_t *_a = (uint64_t *)impl.test_cases_int_pointer1;
-  const uint32_t *_b = (uint32_t *)impl.test_cases_int_pointer1 + 8;
-  const uint32_t *_c = (uint32_t *)impl.test_cases_int_pointer2;
+  const uint32_t *_b = (uint32_t *)impl.test_cases_int_pointer2;
+  const uint32_t *_c = (uint32_t *)impl.test_cases_int_pointer3;
   uint64_t _d[2];
   for (int i = 0; i < 2; i++) {
     _d[i] = _a[i] + (uint64_t)_b[i] * (uint64_t)_c[i];
@@ -1261,8 +1287,8 @@ result_t test_vqdmlal_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { retur
 
 result_t test_vmls_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
-  const int8_t *_b = (int8_t *)impl.test_cases_int_pointer1 + 8;
-  const int8_t *_c = (int8_t *)impl.test_cases_int_pointer2;
+  const int8_t *_b = (int8_t *)impl.test_cases_int_pointer2;
+  const int8_t *_c = (int8_t *)impl.test_cases_int_pointer3;
   int8_t _d[8];
   for (int i = 0; i < 8; i++) {
     _d[i] = _a[i] - _b[i] * _c[i];
@@ -1303,8 +1329,8 @@ result_t test_vmlsq_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return 
 
 result_t test_vmlsl_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
-  const int8_t *_b = (int8_t *)impl.test_cases_int_pointer1 + 8;
-  const int8_t *_c = (int8_t *)impl.test_cases_int_pointer2;
+  const int8_t *_b = (int8_t *)impl.test_cases_int_pointer2;
+  const int8_t *_c = (int8_t *)impl.test_cases_int_pointer3;
   int16_t d0 = _a[0] - (int16_t)_b[0] * (int16_t)_c[0];
   int16_t d1 = _a[1] - (int16_t)_b[1] * (int16_t)_c[1];
   int16_t d2 = _a[2] - (int16_t)_b[2] * (int16_t)_c[2];
@@ -1875,8 +1901,8 @@ result_t test_vabdl_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return 
 
 result_t test_vaba_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int8_t *_a = (const int8_t *)impl.test_cases_int_pointer1;
-  const int8_t *_b = (const int8_t *)impl.test_cases_int_pointer1 + 8;
-  const int8_t *_c = (const int8_t *)impl.test_cases_int_pointer2;
+  const int8_t *_b = (const int8_t *)impl.test_cases_int_pointer2;
+  const int8_t *_c = (const int8_t *)impl.test_cases_int_pointer3;
   int8_t _d[8];
   for (int i = 0; i < 8; i++) {
     _d[i] = _a[i] + abs(_b[i] - _c[i]);
@@ -1914,7 +1940,7 @@ result_t test_vabaq_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return 
 result_t test_vabal_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_a = (const int16_t *)impl.test_cases_int_pointer1;
   const int8_t *_b = (const int8_t *)impl.test_cases_int_pointer2;
-  const int8_t *_c = (const int8_t *)impl.test_cases_int_pointer2 + 8;
+  const int8_t *_c = (const int8_t *)impl.test_cases_int_pointer3;
   int16_t _d[8];
   for (int i = 0; i < 8; i++) {
     _d[i] = _a[i] + abs(_b[i] - _c[i]);
@@ -3364,8 +3390,8 @@ result_t test_vtbl4_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return T
 
 result_t test_vtbx1_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
-  const int8_t *_b = (int8_t *)impl.test_cases_int_pointer1 + 8;
-  const int8_t *_c = (int8_t *)impl.test_cases_int_pointer2;
+  const int8_t *_b = (int8_t *)impl.test_cases_int_pointer2;
+  const int8_t *_c = (int8_t *)impl.test_cases_int_pointer3;
   int8_t _d[8];
   for (int i = 0; i < 8; i++) {
     if (_c[i] > 7 || _c[i] < 0) {
@@ -3791,8 +3817,8 @@ result_t test_vrev16q_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return
 
 result_t test_vbsl_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
-  const int8_t *_b = (int8_t *)impl.test_cases_int_pointer1 + 8;
-  const int8_t *_c = (int8_t *)impl.test_cases_int_pointer2;
+  const int8_t *_b = (int8_t *)impl.test_cases_int_pointer2;
+  const int8_t *_c = (int8_t *)impl.test_cases_int_pointer3;
   int8_t _d[8];
   for (int i = 0; i < 8; i++) {
     _d[i] = _c[i] ^ ((_c[i] ^ _b[i]) & _a[i]);
