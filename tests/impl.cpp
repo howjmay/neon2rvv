@@ -81,14 +81,14 @@ class NEON2RVV_TEST_IMPL : public NEON2RVV_TEST {
     for (int i = 0; i < 4; i++) {
       test_cases_float_pointer1[i] = test_cases_floats[iter + i];
       test_cases_float_pointer2[i] = test_cases_floats[iter + i + 4];
-      test_cases_float_pointer2[i] = test_cases_floats[iter + i + 8];
+      test_cases_float_pointer3[i] = test_cases_floats[iter + i + 8];
     }
   }
   void load_test_int_pointers(uint32_t iter) {
     for (int i = 0; i < 4; i++) {
       test_cases_int_pointer1[i] = test_cases_ints[iter + i];
       test_cases_int_pointer2[i] = test_cases_ints[iter + i + 4];
-      test_cases_int_pointer2[i] = test_cases_ints[iter + i + 8];
+      test_cases_int_pointer3[i] = test_cases_ints[iter + i + 8];
     }
   }
   result_t run_single_test(INSTRUCTION_TEST test, uint32_t iter);
