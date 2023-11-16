@@ -190,6 +190,7 @@ result_t validate_float_error(float32x4_t a, float f0, float f1, float f2, float
 result_t validate_double(float64x2_t a, double d0, double d1);
 result_t validate_float_error(float64x2_t a, double d0, double d1, double err);
 
+int saturate_int8(int a);
 int saturate_int16(int a);
 long int saturate_int32(int a);
 
