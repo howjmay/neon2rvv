@@ -689,7 +689,7 @@ FORCE_INLINE int8x8_t vhsub_s8(int8x8_t __a, int8x8_t __b) {
 
 // FORCE_INLINE uint32x4_t vhsubq_u32(uint32x4_t __a, uint32x4_t __b);
 
-// FORCE_INLINE int8x8_t vqsub_s8(int8x8_t __a, int8x8_t __b);
+FORCE_INLINE int8x8_t vqsub_s8(int8x8_t __a, int8x8_t __b) { return __riscv_vssub_vv_i8m1(__a, __b, 8); }
 
 // FORCE_INLINE int16x4_t vqsub_s16(int16x4_t __a, int16x4_t __b);
 
