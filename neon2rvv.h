@@ -648,7 +648,10 @@ FORCE_INLINE int16x8_t vmlsl_s8(int16x8_t __a, int8x8_t __b, int8x8_t __c) {
 
 // FORCE_INLINE uint64x2_t vsubl_u32(uint32x2_t __a, uint32x2_t __b);
 
-// FORCE_INLINE int16x8_t vsubw_s8(int16x8_t __a, int8x8_t __b);
+FORCE_INLINE int16x8_t vsubw_s8(int16x8_t __a, int8x8_t __b) {
+  vint16m1_t b_ext = __riscv_vlmul_trunc_v_i16m2_i16m1(__riscv_vsext_vf2_i16m2(__b, 8));
+  return (__riscv_vsub_vv_i16m1(__a, b_ext, 8));
+}
 
 // FORCE_INLINE int32x4_t vsubw_s16(int32x4_t __a, int16x4_t __b);
 
