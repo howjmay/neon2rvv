@@ -215,7 +215,7 @@ FORCE_INLINE uint64x2_t vaddl_u32(uint32x2_t __a, uint32x2_t __b) {
 
 FORCE_INLINE int16x8_t vaddw_s8(int16x8_t __a, int8x8_t __b) {
   vint16m1_t b_ext = __riscv_vlmul_trunc_v_i16m2_i16m1(__riscv_vsext_vf2_i16m2(__b, 8));
-  return (__riscv_vadd_vv_i16m1(__a, b_ext, 8));
+  return __riscv_vadd_vv_i16m1(__a, b_ext, 8);
 }
 
 // FORCE_INLINE int32x4_t vaddw_s16(int32x4_t __a, int16x4_t __b);
@@ -650,7 +650,7 @@ FORCE_INLINE int16x8_t vmlsl_s8(int16x8_t __a, int8x8_t __b, int8x8_t __c) {
 
 FORCE_INLINE int16x8_t vsubw_s8(int16x8_t __a, int8x8_t __b) {
   vint16m1_t b_ext = __riscv_vlmul_trunc_v_i16m2_i16m1(__riscv_vsext_vf2_i16m2(__b, 8));
-  return (__riscv_vsub_vv_i16m1(__a, b_ext, 8));
+  return __riscv_vsub_vv_i16m1(__a, b_ext, 8);
 }
 
 // FORCE_INLINE int32x4_t vsubw_s16(int32x4_t __a, int16x4_t __b);
@@ -721,7 +721,12 @@ FORCE_INLINE int8x8_t vqsub_s8(int8x8_t __a, int8x8_t __b) { return __riscv_vssu
 
 // FORCE_INLINE uint64x2_t vqsubq_u64(uint64x2_t __a, uint64x2_t __b);
 
-// FORCE_INLINE int8x8_t vsubhn_s16(int16x8_t __a, int16x8_t __b);
+FORCE_INLINE int8x8_t vsubhn_s16(int16x8_t __a, int16x8_t __b) {
+  // 0xaa is 10101010 in binary
+  vbool8_t mask = __riscv_vreinterpret_v_u8m1_b8(vdup_n_u8(0xaa));
+  int8x16_t ab_sub = __riscv_vreinterpret_v_i16m1_i8m1(__riscv_vsub_vv_i16m1(__a, __b, 8));
+  return __riscv_vcompress_vm_i8m1(ab_sub, mask, 16);
+}
 
 // FORCE_INLINE int16x4_t vsubhn_s32(int32x4_t __a, int32x4_t __b);
 
