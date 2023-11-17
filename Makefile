@@ -43,10 +43,11 @@ endif
 CXXFLAGS += -Wall -Wcast-qual -I. $(ARCH_CFLAGS)
 LDFLAGS	+= -lm
 OBJS = \
-    tests/binding.o \
-    tests/common.o \
-    tests/impl.o \
-    tests/main.o
+	tests/binding.o \
+	tests/common.o \
+	tests/debug_tools.o \
+	tests/impl.o \
+	tests/main.o
 deps := $(OBJS:%.o=%.o.d)
 
 .SUFFIXES: .o .cpp
