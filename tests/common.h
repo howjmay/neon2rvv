@@ -39,88 +39,6 @@ typedef union ALIGN_STRUCT(16) SIMDVec {
 
 namespace NEON2RVV {
 
-// A replica of typedefs in neon2rvv.h. This is only to make implementing tests easier.
-#if __riscv_v_min_vlen == 128
-// 64bit width vector register
-typedef vint8m1_t int8x8_t;
-typedef vint16m1_t int16x4_t;
-typedef vint32m1_t int32x2_t;
-typedef vint64m1_t int64x1_t;
-typedef vuint8m1_t uint8x8_t;
-typedef vuint16m1_t uint16x4_t;
-typedef vuint32m1_t uint32x2_t;
-typedef vuint64m1_t uint64x1_t;
-typedef vfloat32m1_t float32x2_t;
-typedef vfloat64m1_t float64x1_t;
-// 128bit width vector register
-typedef vint8m1_t int8x16_t;
-typedef vint16m1_t int16x8_t;
-typedef vint32m1_t int32x4_t;
-typedef vint64m1_t int64x2_t;
-typedef vuint8m1_t uint8x16_t;
-typedef vuint16m1_t uint16x8_t;
-typedef vuint32m1_t uint32x4_t;
-typedef vuint64m1_t uint64x2_t;
-typedef vfloat32m1_t float32x4_t;
-typedef vfloat64m1_t float64x2_t;
-
-// FIXME wrong typedefs, just for passing compilation
-typedef vint8m1x2_t int8x8x2_t;
-typedef vuint8m1x2_t uint8x8x2_t;
-typedef vint8m2_t int8x16x2_t;
-typedef vuint8m2_t uint8x16x2_t;
-typedef vint8m4_t int8x16x3_t;
-typedef vuint8m4_t uint8x16x3_t;
-typedef vint8m4_t int8x16x4_t;
-typedef vuint8m4_t uint8x16x4_t;
-typedef vint8m4_t int8x8x3_t;
-typedef vuint8m4_t uint8x8x3_t;
-typedef vint8m4_t int8x8x4_t;
-typedef vuint8m4_t uint8x8x4_t;
-typedef vint16m2_t int16x4x2_t;
-typedef vuint16m2_t uint16x4x2_t;
-typedef vint16m4_t int16x4x3_t;
-typedef vuint16m4_t uint16x4x3_t;
-typedef vint16m4_t int16x4x4_t;
-typedef vuint16m4_t uint16x4x4_t;
-typedef vint16m2_t int16x8x2_t;
-typedef vuint16m2_t uint16x8x2_t;
-typedef vint16m4_t int16x8x3_t;
-typedef vuint16m4_t uint16x8x3_t;
-typedef vint16m4_t int16x8x4_t;
-typedef vuint16m4_t uint16x8x4_t;
-typedef vint32m2_t int32x2x2_t;
-typedef vuint32m2_t uint32x2x2_t;
-typedef vint32m4_t int32x2x3_t;
-typedef vuint32m4_t uint32x2x3_t;
-typedef vint32m4_t int32x2x4_t;
-typedef vuint32m4_t uint32x2x4_t;
-typedef vint32m4_t int32x2x4_t;
-typedef vuint32m4_t uint32x2x4_t;
-typedef vint32m2_t int32x4x2_t;
-typedef vuint32m2_t uint32x4x2_t;
-typedef vint32m4_t int32x4x3_t;
-typedef vuint32m4_t uint32x4x3_t;
-typedef vint32m4_t int32x4x4_t;
-typedef vuint32m4_t uint32x4x4_t;
-typedef vfloat32m2_t float32x2x2_t;
-typedef vfloat32m4_t float32x2x3_t;
-typedef vfloat32m4_t float32x2x4_t;
-typedef vfloat32m2_t float32x4x2_t;
-typedef vfloat32m4_t float32x4x3_t;
-typedef vfloat32m4_t float32x4x4_t;
-typedef vint64m2_t int64x1x2_t;
-typedef vuint64m2_t uint64x1x2_t;
-typedef vint64m4_t int64x1x3_t;
-typedef vuint64m4_t uint64x1x3_t;
-typedef vint64m4_t int64x1x4_t;
-typedef vuint64m4_t uint64x1x4_t;
-#elif __riscv_v_min_vlen == 256
-#elif __riscv_v_min_vlen == 512
-#else
-// typedef for other VLEN
-#endif
-
 enum result_t {
   TEST_SUCCESS = 1,
   TEST_FAIL = 0,
@@ -181,67 +99,20 @@ result_t validate_int8(int8x8_t a, int8_t i0, int8_t i1, int8_t i2, int8_t i3, i
                        int8_t i7);
 result_t validate_uint8(uint8x8_t a, uint8_t u0, uint8_t u1, uint8_t u2, uint8_t u3, uint8_t u4, uint8_t u5, uint8_t u6,
                         uint8_t u7);
-result_t validate_float_pair(float a, float b);
-result_t validate_double_pair(double a, double b);
-result_t validate_float(float32x2_t a, float f0, float f1);
 result_t validate_float(float32x4_t a, float f0, float f1, float f2, float f3);
-result_t validate_float_epsilon(float32x4_t a, float f0, float f1, float f2, float f3, float epsilon);
+result_t validate_float(float32x2_t a, float f0, float f1);
 result_t validate_float_error(float32x4_t a, float f0, float f1, float f2, float f3, float err);
+result_t validate_float_error(float32x2_t a, float f0, float f1, float err);
 result_t validate_double(float64x2_t a, double d0, double d1);
-result_t validate_float_error(float64x2_t a, double d0, double d1, double err);
+result_t validate_double(float64x1_t a, double d0);
+result_t validate_double_error(float64x2_t a, double d0, double d1, double err);
+result_t validate_double_error(float64x2_t a, double d0, double err);
 
-int saturate_int8(int a);
-int saturate_int16(int a);
-long int saturate_int32(int a);
+int8_t saturate_int8(int a);
+int16_t saturate_int16(int a);
+int32_t saturate_int32(int a);
 
-void print_64_bits_u8_arr(char *var_name, const uint8_t *u);
-void print_128_bits_u8_arr(char *var_name, const uint8_t *u);
-
-void print_64_bits_in_u8(char *var_name, uint8_t u0, uint8_t u1, uint8_t u2, uint8_t u3, uint8_t u4, uint8_t u5,
-                         uint8_t u6, uint8_t u7);
-void print_64_bits_in_u8(char *var_name, int8_t i0, int8_t i1, int8_t i2, int8_t i3, int8_t i4, int8_t i5, int8_t i6,
-                         int8_t i7);
-void print_64_bits_in_u8(char *var_name, uint16_t u0, uint16_t u1, uint16_t u2, uint16_t u3);
-void print_64_bits_in_u8(char *var_name, int16_t i0, int16_t i1, int16_t i2, int16_t i3);
-void print_64_bits_in_u8(char *var_name, uint32_t u0, uint32_t u1);
-void print_64_bits_in_u8(char *var_name, int32_t i0, int32_t i1);
-void print_64_bits_in_u8(char *var_name, uint64_t u0);
-void print_64_bits_in_u8(char *var_name, int64_t i0);
-template <typename T>
-void print_64_bits_in_u8(char *var_name, T a) {
-  const uint8_t *u = (const uint8_t *)&a;
-  print_64_bits_u8_arr(var_name, u);
-}
-template <typename T>
-void print_64_bits_in_u8(char *var_name, T *a) {
-  const uint8_t *u = (const uint8_t *)a;
-  print_64_bits_u8_arr(var_name, u);
-}
-
-void print_128_bits_in_u8(char *var_name, uint8_t u0, uint8_t u1, uint8_t u2, uint8_t u3, uint8_t u4, uint8_t u5,
-                          uint8_t u6, uint8_t u7, uint8_t u8, uint8_t u9, uint8_t u10, uint8_t u11, uint8_t u12,
-                          uint8_t u13, uint8_t u14, uint8_t u15);
-void print_128_bits_in_u8(char *var_name, int8_t i0, int8_t i1, int8_t i2, int8_t i3, int8_t i4, int8_t i5, int8_t i6,
-                          int8_t i7, int8_t i8, int8_t i9, int8_t i10, int8_t i11, int8_t i12, int8_t i13, int8_t i14,
-                          int8_t i15);
-void print_128_bits_in_u8(char *var_name, uint16_t u0, uint16_t u1, uint16_t u2, uint16_t u3, uint16_t u4, uint16_t u5,
-                          uint16_t u6, uint16_t u7);
-void print_128_bits_in_u8(char *var_name, int16_t i0, int16_t i1, int16_t i2, int16_t i3, int16_t i4, int16_t i5,
-                          int16_t i6, int16_t i7);
-void print_128_bits_in_u8(char *var_name, uint32_t u0, uint32_t u1, uint32_t u2, uint32_t u3);
-void print_128_bits_in_u8(char *var_name, int32_t i0, int32_t i1, int32_t i2, int32_t i3);
-void print_128_bits_in_u8(char *var_name, uint64_t u0, uint64_t u1);
-void print_128_bits_in_u8(char *var_name, int64_t i0, int64_t i1);
-template <typename T>
-void print_128_bits_in_u8(char *var_name, T a) {
-  const uint8_t *u = (const uint8_t *)&a;
-  print_128_bits_u8_arr(var_name, u);
-}
-template <typename T>
-void print_128_bits_in_u8(char *var_name, T *a) {
-  const uint8_t *u = (const uint8_t *)a;
-  print_128_bits_u8_arr(var_name, u);
-}
+float ranf(float low, float high);
 
 }  // namespace NEON2RVV
 

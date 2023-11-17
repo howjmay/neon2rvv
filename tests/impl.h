@@ -2,6 +2,7 @@
 #define NEON2RVV_TEST_H
 
 #include "common.h"
+#include "debug_tools.h"
 
 #define INTRIN_LIST                                                         \
   /* vadd */                                                                \
@@ -2384,7 +2385,12 @@ namespace NEON2RVV {
 // the actual expected results from the corresponding NEON intrinsic against all
 // of the 10,000 randomized input vectors. When running on ARM, then the results
 // are compared to the NEON approximate version.
-extern const char *instruction_string[];
+static const char *instruction_string[] = {
+#define _(x) #x,
+    INTRIN_LIST
+#undef _
+};
+
 enum INSTRUCTION_TEST {
 #define _(x) it_##x,
   INTRIN_LIST

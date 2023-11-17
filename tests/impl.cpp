@@ -15,28 +15,11 @@
 // Try 10,000 random floating point values for each test we run
 #define MAX_TEST_VALUE 10000
 
-/* Pattern Matching for C macros.
- * https://github.com/pfultz2/Cloak/wiki/C-Preprocessor-tricks,-tips,-and-idioms
- */
-
-/* catenate */
-#define PRIMITIVE_CAT(a, ...) a##__VA_ARGS__
-
-#define IIF(c) PRIMITIVE_CAT(IIF_, c)
-/* run the 2nd parameter */
-#define IIF_0(t, ...) __VA_ARGS__
-/* run the 1st parameter */
-#define IIF_1(t, ...) t
-
 // This program a set of unit tests to ensure that each NEON call provide the
 // output we expect.  If this fires an assert, then something didn't match up.
 //
 // Functions with "test_" prefix will be called in run_single_test.
 namespace NEON2RVV {
-static float ranf(float low, float high) {
-  float rand_float = (float)rand() / (float)RAND_MAX;
-  return rand_float * (high - low) + low;
-}
 
 #if defined(__riscv_v_elen)
 #define REGISTER_SIZE __riscv_v_elen
@@ -278,12 +261,6 @@ NEON2RVV_TEST *NEON2RVV_TEST::create(void) {
   NEON2RVV_TEST_IMPL *st = new NEON2RVV_TEST_IMPL;
   return static_cast<NEON2RVV_TEST *>(st);
 }
-
-const char *instruction_string[] = {
-#define _(x) #x,
-    INTRIN_LIST
-#undef _
-};
 
 result_t test_vadd_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
