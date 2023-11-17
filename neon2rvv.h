@@ -1867,7 +1867,16 @@ FORCE_INLINE int8x8_t vshl_n_s8(int8x8_t __a, const int __b) { return __riscv_vs
 
 // FORCE_INLINE uint32x4_t vclzq_u32(uint32x4_t __a);
 
-// FORCE_INLINE int8x8_t vcnt_s8(int8x8_t __a);
+FORCE_INLINE int8x8_t vcnt_s8(int8x8_t __a) {
+  const int8_t bit_population_lookup_arr[16] = {0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4};
+  vint8m1_t lookup = __riscv_vle8_v_i8m1(bit_population_lookup_arr, 16);
+  vint8m1_t cnt_low =
+      __riscv_vrgather_vv_i8m1(lookup, __riscv_vreinterpret_v_i8m1_u8m1(__riscv_vand_vx_i8m1(__a, 0xf, 8)), 8);
+  vint8m1_t a_high =
+      __riscv_vreinterpret_v_u8m1_i8m1(__riscv_vsrl_vx_u8m1(__riscv_vreinterpret_v_i8m1_u8m1(__a), 4, 8));
+  vint8m1_t cnt_high = __riscv_vrgather_vv_i8m1(lookup, __riscv_vreinterpret_v_i8m1_u8m1(a_high), 8);
+  return __riscv_vadd_vv_i8m1(cnt_low, cnt_high, 8);
+}
 
 // FORCE_INLINE uint8x8_t vcnt_u8(uint8x8_t __a);
 
