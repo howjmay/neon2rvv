@@ -1828,7 +1828,23 @@ result_t test_vabsq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return 
 
 result_t test_vabsq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vqabs_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vqabs_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
+  int8_t _c[8];
+  // insert edge case _a[i] = -128
+  _a[0] = -128;
+  for (int i = 0; i < 8; i++) {
+    if (abs(_a[i]) > INT8_MAX) {
+      _c[i] = INT8_MAX;
+    } else {
+      _c[i] = abs(_a[i]);
+    }
+  }
+
+  int8x8_t a = vld1_s8(_a);
+  int8x8_t c = vqabs_s8(a);
+  return validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]);
+}
 
 result_t test_vqabs_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 

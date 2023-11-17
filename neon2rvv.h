@@ -935,7 +935,12 @@ FORCE_INLINE int8x8_t vabs_s8(int8x8_t __a) {
 
 // FORCE_INLINE float32x4_t vabsq_f32(float32x4_t __a);
 
-// FORCE_INLINE int8x8_t vqabs_s8(int8x8_t __a);
+FORCE_INLINE int8x8_t vqabs_s8(int8x8_t __a) {
+  // refer https://stackoverflow.com/questions/12041632/how-to-compute-the-integer-absolute-value
+  vint8m1_t mask = __riscv_vsra_vx_i8m1(__a, 7, 8);
+  vint8m1_t a_xor = __riscv_vxor_vv_i8m1(__a, mask, 8);
+  return __riscv_vssub_vv_i8m1(a_xor, mask, 8);
+}
 
 // FORCE_INLINE int16x4_t vqabs_s16(int16x4_t __a);
 
