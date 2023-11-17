@@ -152,6 +152,9 @@ FORCE_INLINE uint32x2_t vdup_n_u32(uint32_t __a);
 FORCE_INLINE int64x1_t vdup_n_s64(int64_t __a);
 FORCE_INLINE uint64x1_t vdup_n_u64(uint64_t __a);
 
+FORCE_INLINE int8x8_t vcnt_s8(int8x8_t __a);
+FORCE_INLINE uint8x8_t vcnt_u8(uint8x8_t __a);
+
 /* vadd */
 FORCE_INLINE int8x8_t vadd_s8(int8x8_t __a, int8x8_t __b) { return __riscv_vadd_vv_i8m1(__a, __b, 8); }
 
@@ -1866,7 +1869,16 @@ FORCE_INLINE int8x8_t vmvn_s8(int8x8_t __a) { return __riscv_vnot_v_i8m1(__a, 8)
 
 // FORCE_INLINE int32x4_t vclsq_s32(int32x4_t __a);
 
-// FORCE_INLINE int8x8_t vclz_s8(int8x8_t __a);
+FORCE_INLINE int8x8_t vclz_s8(int8x8_t __a) {
+  // refer
+  // https://stackoverflow.com/questions/23856596/how-to-count-leading-zeros-in-a-32-bit-unsigned-integer
+  vuint8m1_t a_u = __riscv_vreinterpret_v_i8m1_u8m1(__a);
+  a_u = __riscv_vor_vv_u8m1(__riscv_vsrl_vx_u8m1(a_u, 1, 8), a_u, 8);
+  a_u = __riscv_vor_vv_u8m1(__riscv_vsrl_vx_u8m1(a_u, 2, 8), a_u, 8);
+  a_u = __riscv_vor_vv_u8m1(__riscv_vsrl_vx_u8m1(a_u, 4, 8), a_u, 8);
+  vuint8m1_t a_not = __riscv_vnot_v_u8m1(a_u, 8);
+  return vcnt_s8(__riscv_vreinterpret_v_u8m1_i8m1(a_not));
+}
 
 // FORCE_INLINE int16x4_t vclz_s16(int16x4_t __a);
 
