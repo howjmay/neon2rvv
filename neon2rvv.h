@@ -1807,7 +1807,7 @@ FORCE_INLINE int8x8_t vshl_n_s8(int8x8_t __a, const int __b) { return __riscv_vs
 
 // FORCE_INLINE int32x4_t vqnegq_s32(int32x4_t __a);
 
-// FORCE_INLINE int8x8_t vmvn_s8(int8x8_t __a);
+FORCE_INLINE int8x8_t vmvn_s8(int8x8_t __a) { return __riscv_vnot_v_i8m1(__a, 8); }
 
 // FORCE_INLINE int16x4_t vmvn_s16(int16x4_t __a);
 
