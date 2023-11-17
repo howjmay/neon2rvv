@@ -972,7 +972,11 @@ FORCE_INLINE int8x8_t vqabs_s8(int8x8_t __a) {
 
 // FORCE_INLINE uint32x4_t vcaltq_f32(float32x4_t __a, float32x4_t __b);
 
-// FORCE_INLINE uint8x8_t vtst_s8(int8x8_t __a, int8x8_t __b);
+FORCE_INLINE uint8x8_t vtst_s8(int8x8_t __a, int8x8_t __b) {
+  vint8m1_t ab_and = __riscv_vand_vv_i8m1(__a, __b, 8);
+  vbool8_t nonzero_mask = __riscv_vmsgtu_vx_u8m1_b8(__riscv_vreinterpret_v_i8m1_u8m1(ab_and), 0, 8);
+  return __riscv_vreinterpret_v_i8m1_u8m1(__riscv_vmerge_vxm_i8m1(vdup_n_s8(0), 0xff, nonzero_mask, 8));
+}
 
 // FORCE_INLINE uint16x4_t vtst_s16(int16x4_t __a, int16x4_t __b);
 
