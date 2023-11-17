@@ -663,7 +663,9 @@ FORCE_INLINE int16x8_t vsubw_s8(int16x8_t __a, int8x8_t __b) {
 
 // FORCE_INLINE uint64x2_t vsubw_u32(uint64x2_t __a, uint32x2_t __b);
 
-// FORCE_INLINE int8x8_t vhsub_s8(int8x8_t __a, int8x8_t __b);
+FORCE_INLINE int8x8_t vhsub_s8(int8x8_t __a, int8x8_t __b) {
+  return __riscv_vasub_vv_i8m1(__a, __b, NEON2RVV_ROUND_TYPE_RDN, 8);
+}
 
 // FORCE_INLINE int16x4_t vhsub_s16(int16x4_t __a, int16x4_t __b);
 
