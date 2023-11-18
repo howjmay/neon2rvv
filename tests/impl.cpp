@@ -1342,7 +1342,21 @@ result_t test_vqdmlsl_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { retur
 
 result_t test_vqdmlsl_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vfma_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vfma_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const float *_a = (float *)impl.test_cases_float_pointer1;
+  const float *_b = (float *)impl.test_cases_float_pointer2;
+  const float *_c = (float *)impl.test_cases_float_pointer3;
+  float _d[2];
+  for (int i = 0; i < 2; i++) {
+    _d[i] = _a[i] + _b[i] * _c[i];
+  }
+
+  float32x2_t a = vld1_f32(_a);
+  float32x2_t b = vld1_f32(_b);
+  float32x2_t c = vld1_f32(_c);
+  float32x2_t d = vfma_f32(a, b, c);
+  return validate_float_error(d, _d[0], _d[1], 0.001f);
+}
 
 result_t test_vfmaq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
