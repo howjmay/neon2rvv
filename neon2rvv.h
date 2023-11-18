@@ -1933,7 +1933,7 @@ FORCE_INLINE int8x8_t vcnt_s8(int8x8_t __a) {
 
 // FORCE_INLINE uint32x4_t vrecpeq_u32(uint32x4_t __a);
 
-// FORCE_INLINE float32x2_t vrsqrte_f32(float32x2_t __a);
+FORCE_INLINE float32x2_t vrsqrte_f32(float32x2_t __a) { return __riscv_vfrsqrt7_v_f32m1(__a, 2); }
 
 // FORCE_INLINE uint32x2_t vrsqrte_u32(uint32x2_t __a);
 
