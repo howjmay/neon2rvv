@@ -3471,7 +3471,21 @@ result_t test_vcvtq_f32_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { ret
 
 result_t test_vcvtq_u32_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vcvt_n_s32_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vcvt_n_s32_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const float *_a = (const float *)impl.test_cases_float_pointer1;
+  int32_t _c[2];
+  float32x2_t a = vld1_f32(_a);
+  int32x2_t c;
+  // TODO test all the values with macro
+  for (int i = 0; i < 2; i++) {
+    _c[i] = _a[i] * (1 << 3);
+  }
+  c = vcvt_n_s32_f32(a, 3);
+  if (validate_int32(c, _c[0], _c[1]) == TEST_FAIL) {
+    return TEST_FAIL;
+  }
+  return TEST_SUCCESS;
+}
 
 result_t test_vcvt_n_f32_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 

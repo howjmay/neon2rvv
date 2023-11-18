@@ -2220,7 +2220,10 @@ FORCE_INLINE uint32x2_t vcvt_u32_f32(float32x2_t __a) { return __riscv_vfcvt_rtz
 
 // FORCE_INLINE uint32x4_t vcvtq_u32_f32(float32x4_t __a);
 
-// FORCE_INLINE int32x2_t vcvt_n_s32_f32(float32x2_t __a, const int __b);
+FORCE_INLINE int32x2_t vcvt_n_s32_f32(float32x2_t __a, const int __b) {
+  vfloat32m1_t fx2pow_b = __riscv_vfmul_vf_f32m1(__a, 1 << __b, 2);
+  return __riscv_vfcvt_rtz_x_f_v_i32m1(fx2pow_b, 2);
+}
 
 // FORCE_INLINE float32x2_t vcvt_n_f32_s32(int32x2_t __a, const int __b);
 
