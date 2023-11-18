@@ -574,7 +574,9 @@ FORCE_INLINE int16x8_t vmlsl_s8(int16x8_t __a, int8x8_t __b, int8x8_t __c) {
 
 // FORCE_INLINE int64x2_t vqdmlsl_s32(int64x2_t __a, int32x2_t __b, int32x2_t __c);
 
-// FORCE_INLINE float32x2_t vfma_f32(float32x2_t __a, float32x2_t __b, float32x2_t __c);
+FORCE_INLINE float32x2_t vfma_f32(float32x2_t __a, float32x2_t __b, float32x2_t __c) {
+  return __riscv_vfmacc_vv_f32m1(__a, __b, __c, 2);
+}
 
 // FORCE_INLINE float32x4_t vfmaq_f32(float32x4_t __a, float32x4_t __b, float32x4_t __c);
 
