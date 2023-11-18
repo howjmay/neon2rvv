@@ -1925,7 +1925,7 @@ FORCE_INLINE int8x8_t vcnt_s8(int8x8_t __a) {
 
 // FORCE_INLINE uint8x16_t vcntq_u8(uint8x16_t __a);
 
-// FORCE_INLINE float32x2_t vrecpe_f32(float32x2_t __a);
+FORCE_INLINE float32x2_t vrecpe_f32(float32x2_t __a) { return __riscv_vfrec7_v_f32m1(__a, 2); }
 
 // FORCE_INLINE uint32x2_t vrecpe_u32(uint32x2_t __a);
 
