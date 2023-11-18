@@ -53,6 +53,16 @@ void print_u8_64(const char *var_name, T a) {
   print_64_bits_u8_arr(var_name, u);
 }
 template <typename T>
+void print_u8_64(const char *var_name, T *a) {
+  const uint8_t *u = (const uint8_t *)a;
+  print_64_bits_u8_arr(var_name, u);
+}
+template <typename T>
+void print_u16_64(const char *var_name, T a) {
+  const uint16_t *u = (const uint16_t *)&a;
+  print_64_bits_u16_arr(var_name, u);
+}
+template <typename T>
 void print_u16_64(const char *var_name, T *a) {
   const uint16_t *u = (const uint16_t *)a;
   print_64_bits_u16_arr(var_name, u);
@@ -63,14 +73,34 @@ void print_u32_64(const char *var_name, T a) {
   print_64_bits_u32_arr(var_name, u);
 }
 template <typename T>
+void print_u32_64(const char *var_name, T *a) {
+  const uint32_t *u = (const uint32_t *)a;
+  print_64_bits_u32_arr(var_name, u);
+}
+template <typename T>
 void print_f32_64(const char *var_name, T a) {
   const float *f = (const float *)&a;
+  print_64_bits_f32_arr(var_name, f);
+}
+template <typename T>
+void print_f32_64(const char *var_name, T *a) {
+  const float *f = (const float *)a;
   print_64_bits_f32_arr(var_name, f);
 }
 template <typename T>
 void print_u8_128(const char *var_name, T a) {
   const uint8_t *u = (const uint8_t *)&a;
   print_128_bits_u8_arr(var_name, u);
+}
+template <typename T>
+void print_u8_128(const char *var_name, T *a) {
+  const uint8_t *u = (const uint8_t *)a;
+  print_128_bits_u8_arr(var_name, u);
+}
+template <typename T>
+void print_u16_128(const char *var_name, T a) {
+  const uint16_t *u = (const uint16_t *)&a;
+  print_128_bits_u16_arr(var_name, u);
 }
 template <typename T>
 void print_u16_128(const char *var_name, T *a) {
@@ -83,8 +113,18 @@ void print_u32_128(const char *var_name, T a) {
   print_128_bits_u32_arr(var_name, u);
 }
 template <typename T>
+void print_u32_128(const char *var_name, T *a) {
+  const uint32_t *u = (const uint32_t *)a;
+  print_128_bits_u32_arr(var_name, u);
+}
+template <typename T>
 void print_f32_128(const char *var_name, T a) {
   const float *f = (const float *)&a;
+  print_128_bits_f32_arr(var_name, f);
+}
+template <typename T>
+void print_f32_128(const char *var_name, T *a) {
+  const float *f = (const float *)a;
   print_128_bits_f32_arr(var_name, f);
 }
 
