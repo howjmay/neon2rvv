@@ -3014,7 +3014,16 @@ result_t test_vrecpeq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { retur
 
 result_t test_vrecpeq_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vrsqrte_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vrsqrte_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const float *_a = impl.test_cases_float_pointer1;
+  float _c[2];
+  _c[0] = 1 / sqrtf(_a[0]);
+  _c[1] = 1 / sqrtf(_a[1]);
+
+  float32x2_t a = vld1_f32(_a);
+  float32x2_t c = vrsqrte_f32(a);
+  return validate_float_error(c, _c[0], _c[1], 0.01f);
+}
 
 result_t test_vrsqrte_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
