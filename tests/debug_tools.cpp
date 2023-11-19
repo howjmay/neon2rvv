@@ -8,11 +8,21 @@ void print_64_bits_u8_arr(const char *var_name, const uint8_t *u) {
   printf("%s0: %3u, %s1: %3u, %s2: %3u, %s3: %3u, %s4: %3u, %s5: %3u, %s6: %3u, %s7: %3u\n", var_name, u[0], var_name,
          u[1], var_name, u[2], var_name, u[3], var_name, u[4], var_name, u[5], var_name, u[6], var_name, u[7]);
 }
+void print_64_bits_s8_arr(const char *var_name, const int8_t *u) {
+  printf("%s0: %3d, %s1: %3d, %s2: %3d, %s3: %3d, %s4: %3d, %s5: %3d, %s6: %3d, %s7: %3d\n", var_name, u[0], var_name,
+         u[1], var_name, u[2], var_name, u[3], var_name, u[4], var_name, u[5], var_name, u[6], var_name, u[7]);
+}
 void print_64_bits_u16_arr(const char *var_name, const uint16_t *u) {
   printf("%s0: %5u, %s1: %5u, %s2: %5u, %s3: %5u\n", var_name, u[0], var_name, u[1], var_name, u[2], var_name, u[3]);
 }
+void print_64_bits_s16_arr(const char *var_name, const int16_t *u) {
+  printf("%s0: %5d, %s1: %5d, %s2: %5d, %s3: %5d\n", var_name, u[0], var_name, u[1], var_name, u[2], var_name, u[3]);
+}
 void print_64_bits_u32_arr(const char *var_name, const uint32_t *u) {
   printf("%s0: %10u, %s1: %10u\n", var_name, u[0], var_name, u[1]);
+}
+void print_64_bits_s32_arr(const char *var_name, const int32_t *u) {
+  printf("%s0: %10d, %s1: %10d\n", var_name, u[0], var_name, u[1]);
 }
 void print_64_bits_f32_arr(const char *var_name, const float *f) {
   printf("%s0: %.3f, %s1: %.3f\n", var_name, f[0], var_name, f[1]);
@@ -26,12 +36,29 @@ void print_128_bits_u8_arr(const char *var_name, const uint8_t *u) {
       var_name, u[7], var_name, u[8], var_name, u[9], var_name, u[10], var_name, u[11], var_name, u[12], var_name,
       u[13], var_name, u[14], var_name, u[15]);
 }
+void print_128_bits_s8_arr(const char *var_name, const int8_t *u) {
+  printf(
+      "%s0: %3d, %s1: %3d, %s2: %3d, %s3: %3d, %s4: %3d, %s5: %3d, "
+      "%s6: %3d, %s7: %3d, %s8: %3d, %s9: %3d, %s10: %3d, %s11: %3d, "
+      "%s12: %3d, %s13: %3d, %s14: %3d, %s15: %3d\n",
+      var_name, u[0], var_name, u[1], var_name, u[2], var_name, u[3], var_name, u[4], var_name, u[5], var_name, u[6],
+      var_name, u[7], var_name, u[8], var_name, u[9], var_name, u[10], var_name, u[11], var_name, u[12], var_name,
+      u[13], var_name, u[14], var_name, u[15]);
+}
 void print_128_bits_u16_arr(const char *var_name, const uint16_t *u) {
   printf("%s0: %5u, %s1: %5u, %s2: %5u, %s3: %5u, %s4: %5u, %s5: %5u, %s6: %5u, %s7: %5u\n", var_name, u[0], var_name,
          u[1], var_name, u[2], var_name, u[3], var_name, u[4], var_name, u[5], var_name, u[6], var_name, u[7]);
 }
+void print_128_bits_s16_arr(const char *var_name, const int16_t *u) {
+  printf("%s0: %5d, %s1: %5d, %s2: %5d, %s3: %5d, %s4: %5d, %s5: %5d, %s6: %5d, %s7: %5d\n", var_name, u[0], var_name,
+         u[1], var_name, u[2], var_name, u[3], var_name, u[4], var_name, u[5], var_name, u[6], var_name, u[7]);
+}
 void print_128_bits_u32_arr(const char *var_name, const uint32_t *u) {
   printf("%s0: %10u, %s1: %10u, %s2: %10u, %s3: %10u\n", var_name, u[0], var_name, u[1], var_name, u[2], var_name,
+         u[3]);
+}
+void print_128_bits_s32_arr(const char *var_name, const int32_t *u) {
+  printf("%s0: %10d, %s1: %10d, %s2: %10d, %s3: %10d\n", var_name, u[0], var_name, u[1], var_name, u[2], var_name,
          u[3]);
 }
 void print_128_bits_f32_arr(const char *var_name, const float *f) {
