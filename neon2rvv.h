@@ -570,7 +570,11 @@ FORCE_INLINE int16x8_t vmlsl_s8(int16x8_t __a, int8x8_t __b, int8x8_t __c) {
 
 // FORCE_INLINE uint64x2_t vmlsl_u32(uint64x2_t __a, uint32x2_t __b, uint32x2_t __c);
 
-// FORCE_INLINE int32x4_t vqdmlsl_s16(int32x4_t __a, int16x4_t __b, int16x4_t __c);
+FORCE_INLINE int32x4_t vqdmlsl_s16(int32x4_t __a, int16x4_t __b, int16x4_t __c) {
+  vint32m1_t bc_mul = __riscv_vlmul_trunc_v_i32m2_i32m1(__riscv_vwmul_vv_i32m2(__b, __c, 4));
+  vint32m1_t bc_mulx2 = __riscv_vmul_vx_i32m1(bc_mul, 2, 4);
+  return __riscv_vsub_vv_i32m1(__a, bc_mulx2, 4);
+}
 
 // FORCE_INLINE int64x2_t vqdmlsl_s32(int64x2_t __a, int32x2_t __b, int32x2_t __c);
 
