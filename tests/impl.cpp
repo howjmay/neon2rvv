@@ -3476,14 +3476,17 @@ result_t test_vcvt_n_s32_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int32_t _c[2];
   float32x2_t a = vld1_f32(_a);
   int32x2_t c;
-  // TODO test all the values with macro
-  for (int i = 0; i < 2; i++) {
-    _c[i] = _a[i] * (1 << 3);
-  }
-  c = vcvt_n_s32_f32(a, 3);
-  if (validate_int32(c, _c[0], _c[1]) == TEST_FAIL) {
-    return TEST_FAIL;
-  }
+
+#define TEST_IMPL(IDX)                  \
+  for (int i = 0; i < 2; i++) {         \
+    _c[i] = _a[i] * powf(2, (IDX + 1)); \
+  }                                     \
+  c = vcvt_n_s32_f32(a, (IDX + 1));     \
+  CHECK_RESULT(validate_int32(c, _c[0], _c[1]))
+
+  IMM_32_ITER
+#undef TEST_IMPL
+
   return TEST_SUCCESS;
 }
 
