@@ -13,12 +13,18 @@
 namespace NEON2RVV {
 
 void print_64_bits_u8_arr(const char *var_name, const uint8_t *u);
+void print_64_bits_s8_arr(const char *var_name, const int8_t *u);
 void print_64_bits_u16_arr(const char *var_name, const uint16_t *u);
+void print_64_bits_s16_arr(const char *var_name, const int16_t *u);
 void print_64_bits_u32_arr(const char *var_name, const uint32_t *u);
+void print_64_bits_s32_arr(const char *var_name, const int32_t *u);
 void print_64_bits_f32_arr(const char *var_name, const float *f);
 void print_128_bits_u8_arr(const char *var_name, const uint8_t *u);
+void print_128_bits_s8_arr(const char *var_name, const int8_t *u);
 void print_128_bits_u16_arr(const char *var_name, const uint16_t *u);
+void print_128_bits_s16_arr(const char *var_name, const int16_t *u);
 void print_128_bits_u32_arr(const char *var_name, const uint32_t *u);
+void print_128_bits_s32_arr(const char *var_name, const int32_t *u);
 void print_128_bits_f32_arr(const char *var_name, const float *f);
 
 void print_u8_64(const char *var_name, uint8_t u0, uint8_t u1, uint8_t u2, uint8_t u3, uint8_t u4, uint8_t u5,
@@ -58,6 +64,16 @@ void print_u8_64(const char *var_name, T *a) {
   print_64_bits_u8_arr(var_name, u);
 }
 template <typename T>
+void print_s8_64(const char *var_name, T a) {
+  const int8_t *s = (const int8_t *)&a;
+  print_64_bits_s8_arr(var_name, s);
+}
+template <typename T>
+void print_s8_64(const char *var_name, T *a) {
+  const int8_t *s = (const int8_t *)a;
+  print_64_bits_s8_arr(var_name, s);
+}
+template <typename T>
 void print_u16_64(const char *var_name, T a) {
   const uint16_t *u = (const uint16_t *)&a;
   print_64_bits_u16_arr(var_name, u);
@@ -68,6 +84,16 @@ void print_u16_64(const char *var_name, T *a) {
   print_64_bits_u16_arr(var_name, u);
 }
 template <typename T>
+void print_s16_64(const char *var_name, T a) {
+  const int16_t *s = (const int16_t *)&a;
+  print_64_bits_s16_arr(var_name, s);
+}
+template <typename T>
+void print_s16_64(const char *var_name, T *a) {
+  const int16_t *s = (const int16_t *)a;
+  print_64_bits_s16_arr(var_name, s);
+}
+template <typename T>
 void print_u32_64(const char *var_name, T a) {
   const uint32_t *u = (const uint32_t *)&a;
   print_64_bits_u32_arr(var_name, u);
@@ -76,6 +102,16 @@ template <typename T>
 void print_u32_64(const char *var_name, T *a) {
   const uint32_t *u = (const uint32_t *)a;
   print_64_bits_u32_arr(var_name, u);
+}
+template <typename T>
+void print_s32_64(const char *var_name, T a) {
+  const int32_t *s = (const int32_t *)&a;
+  print_64_bits_s32_arr(var_name, s);
+}
+template <typename T>
+void print_s32_64(const char *var_name, T *a) {
+  const int32_t *s = (const int32_t *)a;
+  print_64_bits_s32_arr(var_name, s);
 }
 template <typename T>
 void print_f32_64(const char *var_name, T a) {
