@@ -2379,7 +2379,11 @@ FORCE_INLINE int16x4_t vmla_lane_s16(int16x4_t __a, int16x4_t __b, int16x4_t __c
 
 // FORCE_INLINE uint32x4_t vmlaq_lane_u32(uint32x4_t __a, uint32x4_t __b, uint32x2_t __c, const int __d);
 
-// FORCE_INLINE int32x4_t vmlal_lane_s16(int32x4_t __a, int16x4_t __b, int16x4_t __c, const int __d);
+FORCE_INLINE int32x4_t vmlal_lane_s16(int32x4_t __a, int16x4_t __b, int16x4_t __c, const int __d) {
+  vint16m1_t c_dup = __riscv_vrgather_vx_i16m1(__c, __d, 4);
+  return __riscv_vlmul_trunc_v_i32m2_i32m1(
+      __riscv_vwmacc_vv_i32m2(__riscv_vlmul_ext_v_i32m1_i32m2(__a), __b, c_dup, 4));
+}
 
 // FORCE_INLINE int64x2_t vmlal_lane_s32(int64x2_t __a, int32x2_t __b, int32x2_t __c, const int __d);
 
