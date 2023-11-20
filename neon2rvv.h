@@ -1704,7 +1704,10 @@ FORCE_INLINE int8x8_t vshl_n_s8(int8x8_t __a, const int __b) { return __riscv_vs
 
 // FORCE_INLINE uint64x2_t vshll_n_u32(uint32x2_t __a, const int __b);
 
-// FORCE_INLINE int8x8_t vsra_n_s8(int8x8_t __a, int8x8_t __b, const int __c);
+FORCE_INLINE int8x8_t vsra_n_s8(int8x8_t __a, int8x8_t __b, const int __c) {
+  const int imm = ((-(__c & 8)) >> 3) + __c;
+  return __riscv_vadd_vv_i8m1(__a, __riscv_vsra_vx_i8m1(__b, imm, 8), 8);
+}
 
 // FORCE_INLINE int16x4_t vsra_n_s16(int16x4_t __a, int16x4_t __b, const int __c);
 
