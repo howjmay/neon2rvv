@@ -1586,7 +1586,9 @@ FORCE_INLINE int8x8_t vqshrn_n_s16(int16x8_t __a, const int __b) {
 
 // FORCE_INLINE uint32x2_t vqshrn_n_u64(uint64x2_t __a, const int __b);
 
-// FORCE_INLINE int8x8_t vqrshrn_n_s16(int16x8_t __a, const int __b);
+FORCE_INLINE int8x8_t vqrshrn_n_s16(int16x8_t __a, const int __b) {
+  return __riscv_vnclip_wx_i8m1(__riscv_vlmul_ext_v_i16m1_i16m2(__a), __b, NEON2RVV_ROUND_TYPE_RNU, 8);
+}
 
 // FORCE_INLINE int16x4_t vqrshrn_n_s32(int32x4_t __a, const int __b);
 
