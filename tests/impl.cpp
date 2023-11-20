@@ -2878,69 +2878,16 @@ result_t test_vshl_n_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int8_t _c[8];
   int8x8_t a = vld1_s8(_a);
   int8x8_t c;
-  for (int i = 0; i < 8; i++) {
-    _c[i] = _a[i];
-  }
-  c = vshl_n_s8(a, 0);
-  if (TEST_FAIL == validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7])) {
-    return TEST_FAIL;
-  }
-  for (int i = 0; i < 8; i++) {
-    _c[i] = _a[i] << 1;
-  }
-  a = vld1_s8(_a);
-  c = vshl_n_s8(a, 1);
-  if (TEST_FAIL == validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7])) {
-    return TEST_FAIL;
-  }
-  for (int i = 0; i < 8; i++) {
-    _c[i] = _a[i] << 2;
-  }
-  a = vld1_s8(_a);
-  c = vshl_n_s8(a, 2);
-  if (TEST_FAIL == validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7])) {
-    return TEST_FAIL;
-  }
-  for (int i = 0; i < 8; i++) {
-    _c[i] = _a[i] << 3;
-  }
-  a = vld1_s8(_a);
-  c = vshl_n_s8(a, 3);
-  if (TEST_FAIL == validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7])) {
-    return TEST_FAIL;
-  }
-  for (int i = 0; i < 8; i++) {
-    _c[i] = _a[i] << 4;
-  }
-  a = vld1_s8(_a);
-  c = vshl_n_s8(a, 4);
-  if (TEST_FAIL == validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7])) {
-    return TEST_FAIL;
-  }
-  for (int i = 0; i < 8; i++) {
-    _c[i] = _a[i] << 5;
-  }
-  a = vld1_s8(_a);
-  c = vshl_n_s8(a, 5);
-  if (TEST_FAIL == validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7])) {
-    return TEST_FAIL;
-  }
-  for (int i = 0; i < 8; i++) {
-    _c[i] = _a[i] << 6;
-  }
-  a = vld1_s8(_a);
-  c = vshl_n_s8(a, 6);
-  if (TEST_FAIL == validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7])) {
-    return TEST_FAIL;
-  }
-  for (int i = 0; i < 8; i++) {
-    _c[i] = _a[i] << 7;
-  }
-  a = vld1_s8(_a);
-  c = vshl_n_s8(a, 7);
-  if (TEST_FAIL == validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7])) {
-    return TEST_FAIL;
-  }
+
+#define TEST_IMPL(IDX)          \
+  for (int i = 0; i < 8; i++) { \
+    _c[i] = _a[i] << IDX;       \
+  }                             \
+  c = vshl_n_s8(a, IDX);        \
+  CHECK_RESULT(validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]))
+
+  IMM_8_ITER
+#undef TEST_IMPL
 
   return TEST_SUCCESS;
 }
@@ -4754,40 +4701,23 @@ result_t test_vld1q_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 result_t test_vld1_lane_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
   const int8_t *_b = (int8_t *)impl.test_cases_int_pointer2;
+  int8_t _c[8];
   int8x8_t c;
   int8x8_t b = vld1_s8(_b);
-  c = vld1_lane_s8(_a, b, 0);
-  if (TEST_FAIL == validate_int8(c, _a[0], _b[1], _b[2], _b[3], _b[4], _b[5], _b[6], _b[7])) {
-    return TEST_FAIL;
-  }
-  c = vld1_lane_s8(_a, b, 1);
-  if (TEST_FAIL == validate_int8(c, _b[0], _a[0], _b[2], _b[3], _b[4], _b[5], _b[6], _b[7])) {
-    return TEST_FAIL;
-  }
-  c = vld1_lane_s8(_a, b, 2);
-  if (TEST_FAIL == validate_int8(c, _b[0], _b[1], _a[0], _b[3], _b[4], _b[5], _b[6], _b[7])) {
-    return TEST_FAIL;
-  }
-  c = vld1_lane_s8(_a, b, 3);
-  if (TEST_FAIL == validate_int8(c, _b[0], _b[1], _b[2], _a[0], _b[4], _b[5], _b[6], _b[7])) {
-    return TEST_FAIL;
-  }
-  c = vld1_lane_s8(_a, b, 4);
-  if (TEST_FAIL == validate_int8(c, _b[0], _b[1], _b[2], _b[3], _a[0], _b[5], _b[6], _b[7])) {
-    return TEST_FAIL;
-  }
-  c = vld1_lane_s8(_a, b, 5);
-  if (TEST_FAIL == validate_int8(c, _b[0], _b[1], _b[2], _b[3], _b[4], _a[0], _b[6], _b[7])) {
-    return TEST_FAIL;
-  }
-  c = vld1_lane_s8(_a, b, 6);
-  if (TEST_FAIL == validate_int8(c, _b[0], _b[1], _b[2], _b[3], _b[4], _b[5], _a[0], _b[7])) {
-    return TEST_FAIL;
-  }
-  c = vld1_lane_s8(_a, b, 7);
-  if (TEST_FAIL == validate_int8(c, _b[0], _b[1], _b[2], _b[3], _b[4], _b[5], _b[6], _a[0])) {
-    return TEST_FAIL;
-  }
+
+#define TEST_IMPL(IDX)          \
+  for (int i = 0; i < 8; i++) { \
+    if (i != IDX) {             \
+      _c[i] = _b[i];            \
+    } else {                    \
+      _c[i] = _a[0];            \
+    }                           \
+  }                             \
+  c = vld1_lane_s8(_a, b, IDX); \
+  CHECK_RESULT(validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]))
+
+  IMM_8_ITER
+#undef TEST_IMPL
 
   return TEST_SUCCESS;
 }
@@ -4795,24 +4725,22 @@ result_t test_vld1_lane_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 result_t test_vld1_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
   const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
+  int16_t _c[4];
   int16x4_t c;
   int16x4_t b = vld1_s16(_b);
-  c = vld1_lane_s16(_a, b, 0);
-  if (TEST_FAIL == validate_int16(c, _a[0], _b[1], _b[2], _b[3])) {
-    return TEST_FAIL;
-  }
-  c = vld1_lane_s16(_a, b, 1);
-  if (TEST_FAIL == validate_int16(c, _b[0], _a[0], _b[2], _b[3])) {
-    return TEST_FAIL;
-  }
-  c = vld1_lane_s16(_a, b, 2);
-  if (TEST_FAIL == validate_int16(c, _b[0], _b[1], _a[0], _b[3])) {
-    return TEST_FAIL;
-  }
-  c = vld1_lane_s16(_a, b, 3);
-  if (TEST_FAIL == validate_int16(c, _b[0], _b[1], _b[2], _a[0])) {
-    return TEST_FAIL;
-  }
+#define TEST_IMPL(IDX)           \
+  for (int i = 0; i < 4; i++) {  \
+    if (i != IDX) {              \
+      _c[i] = _b[i];             \
+    } else {                     \
+      _c[i] = _a[0];             \
+    }                            \
+  }                              \
+  c = vld1_lane_s16(_a, b, IDX); \
+  CHECK_RESULT(validate_int16(c, _c[0], _c[1], _c[2], _c[3]))
+
+  IMM_4_ITER
+#undef TEST_IMPL
 
   return TEST_SUCCESS;
 }
@@ -4854,40 +4782,23 @@ result_t test_vld1_lane_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 result_t test_vld1_lane_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint8_t *_a = (uint8_t *)impl.test_cases_int_pointer1;
   const uint8_t *_b = (uint8_t *)impl.test_cases_int_pointer2;
+  uint8_t _c[8];
   uint8x8_t c;
   uint8x8_t b = vld1_u8(_b);
-  c = vld1_lane_u8(_a, b, 0);
-  if (TEST_FAIL == validate_uint8(c, _a[0], _b[1], _b[2], _b[3], _b[4], _b[5], _b[6], _b[7])) {
-    return TEST_FAIL;
-  }
-  c = vld1_lane_u8(_a, b, 1);
-  if (TEST_FAIL == validate_uint8(c, _b[0], _a[0], _b[2], _b[3], _b[4], _b[5], _b[6], _b[7])) {
-    return TEST_FAIL;
-  }
-  c = vld1_lane_u8(_a, b, 2);
-  if (TEST_FAIL == validate_uint8(c, _b[0], _b[1], _a[0], _b[3], _b[4], _b[5], _b[6], _b[7])) {
-    return TEST_FAIL;
-  }
-  c = vld1_lane_u8(_a, b, 3);
-  if (TEST_FAIL == validate_uint8(c, _b[0], _b[1], _b[2], _a[0], _b[4], _b[5], _b[6], _b[7])) {
-    return TEST_FAIL;
-  }
-  c = vld1_lane_u8(_a, b, 4);
-  if (TEST_FAIL == validate_uint8(c, _b[0], _b[1], _b[2], _b[3], _a[0], _b[5], _b[6], _b[7])) {
-    return TEST_FAIL;
-  }
-  c = vld1_lane_u8(_a, b, 5);
-  if (TEST_FAIL == validate_uint8(c, _b[0], _b[1], _b[2], _b[3], _b[4], _a[0], _b[6], _b[7])) {
-    return TEST_FAIL;
-  }
-  c = vld1_lane_u8(_a, b, 6);
-  if (TEST_FAIL == validate_uint8(c, _b[0], _b[1], _b[2], _b[3], _b[4], _b[5], _a[0], _b[7])) {
-    return TEST_FAIL;
-  }
-  c = vld1_lane_u8(_a, b, 7);
-  if (TEST_FAIL == validate_uint8(c, _b[0], _b[1], _b[2], _b[3], _b[4], _b[5], _b[6], _a[0])) {
-    return TEST_FAIL;
-  }
+
+#define TEST_IMPL(IDX)          \
+  for (int i = 0; i < 8; i++) { \
+    if (i != IDX) {             \
+      _c[i] = _b[i];            \
+    } else {                    \
+      _c[i] = _a[0];            \
+    }                           \
+  }                             \
+  c = vld1_lane_u8(_a, b, IDX); \
+  CHECK_RESULT(validate_uint8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]))
+
+  IMM_8_ITER
+#undef TEST_IMPL
 
   return TEST_SUCCESS;
 }
@@ -4895,24 +4806,22 @@ result_t test_vld1_lane_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 result_t test_vld1_lane_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint16_t *_a = (uint16_t *)impl.test_cases_int_pointer1;
   const uint16_t *_b = (uint16_t *)impl.test_cases_int_pointer2;
+  uint16_t _c[4];
   uint16x4_t c;
   uint16x4_t b = vld1_u16(_b);
-  c = vld1_lane_u16(_a, b, 0);
-  if (TEST_FAIL == validate_uint16(c, _a[0], _b[1], _b[2], _b[3])) {
-    return TEST_FAIL;
-  }
-  c = vld1_lane_u16(_a, b, 1);
-  if (TEST_FAIL == validate_uint16(c, _b[0], _a[0], _b[2], _b[3])) {
-    return TEST_FAIL;
-  }
-  c = vld1_lane_u16(_a, b, 2);
-  if (TEST_FAIL == validate_uint16(c, _b[0], _b[1], _a[0], _b[3])) {
-    return TEST_FAIL;
-  }
-  c = vld1_lane_u16(_a, b, 3);
-  if (TEST_FAIL == validate_uint16(c, _b[0], _b[1], _b[2], _a[0])) {
-    return TEST_FAIL;
-  }
+#define TEST_IMPL(IDX)           \
+  for (int i = 0; i < 4; i++) {  \
+    if (i != IDX) {              \
+      _c[i] = _b[i];             \
+    } else {                     \
+      _c[i] = _a[0];             \
+    }                            \
+  }                              \
+  c = vld1_lane_u16(_a, b, IDX); \
+  CHECK_RESULT(validate_uint16(c, _c[0], _c[1], _c[2], _c[3]))
+
+  IMM_4_ITER
+#undef TEST_IMPL
 
   return TEST_SUCCESS;
 }
@@ -5137,48 +5046,26 @@ result_t test_vld2q_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return 
 result_t test_vld2_lane_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
   const int8_t *_b = (int8_t *)impl.test_cases_int_pointer2;
+  int8_t _c[16];
   int8x8x2_t c;
   int8x8x2_t b = vld2_s8(_b);
-  c = vld2_lane_s8(_a, b, 0);
-  if (TEST_FAIL == validate_int8(c, _a[0], _b[2], _b[4], _b[6], _b[8], _b[10], _b[12], _b[14], _a[1], _b[3], _b[5],
-                                 _b[7], _b[9], _b[11], _b[13], _b[15])) {
-    return TEST_FAIL;
-  }
-  c = vld2_lane_s8(_a, b, 1);
-  if (TEST_FAIL == validate_int8(c, _b[0], _a[0], _b[4], _b[6], _b[8], _b[10], _b[12], _b[14], _b[1], _a[1], _b[5],
-                                 _b[7], _b[9], _b[11], _b[13], _b[15])) {
-    return TEST_FAIL;
-  }
-  c = vld2_lane_s8(_a, b, 2);
-  if (TEST_FAIL == validate_int8(c, _b[0], _b[2], _a[0], _b[6], _b[8], _b[10], _b[12], _b[14], _b[1], _b[3], _a[1],
-                                 _b[7], _b[9], _b[11], _b[13], _b[15])) {
-    return TEST_FAIL;
-  }
-  c = vld2_lane_s8(_a, b, 3);
-  if (TEST_FAIL == validate_int8(c, _b[0], _b[2], _b[4], _a[0], _b[8], _b[10], _b[12], _b[14], _b[1], _b[3], _b[5],
-                                 _a[1], _b[9], _b[11], _b[13], _b[15])) {
-    return TEST_FAIL;
-  }
-  c = vld2_lane_s8(_a, b, 4);
-  if (TEST_FAIL == validate_int8(c, _b[0], _b[2], _b[4], _b[6], _a[0], _b[10], _b[12], _b[14], _b[1], _b[3], _b[5],
-                                 _b[7], _a[1], _b[11], _b[13], _b[15])) {
-    return TEST_FAIL;
-  }
-  c = vld2_lane_s8(_a, b, 5);
-  if (TEST_FAIL == validate_int8(c, _b[0], _b[2], _b[4], _b[6], _b[8], _a[0], _b[12], _b[14], _b[1], _b[3], _b[5],
-                                 _b[7], _b[9], _a[1], _b[13], _b[15])) {
-    return TEST_FAIL;
-  }
-  c = vld2_lane_s8(_a, b, 6);
-  if (TEST_FAIL == validate_int8(c, _b[0], _b[2], _b[4], _b[6], _b[8], _b[10], _a[0], _b[14], _b[1], _b[3], _b[5],
-                                 _b[7], _b[9], _b[11], _a[1], _b[15])) {
-    return TEST_FAIL;
-  }
-  c = vld2_lane_s8(_a, b, 7);
-  if (TEST_FAIL == validate_int8(c, _b[0], _b[2], _b[4], _b[6], _b[8], _b[10], _b[12], _a[0], _b[1], _b[3], _b[5],
-                                 _b[7], _b[9], _b[11], _b[13], _a[1])) {
-    return TEST_FAIL;
-  }
+
+#define TEST_IMPL(IDX)                                                                                                \
+  for (int i = 0; i < 8; i++) {                                                                                       \
+    if ((i != IDX)) {                                                                                                 \
+      _c[i] = _b[2 * i];                                                                                              \
+      _c[i + 8] = _b[2 * i + 1];                                                                                      \
+    } else {                                                                                                          \
+      _c[i] = _a[0];                                                                                                  \
+      _c[i + 8] = _a[1];                                                                                              \
+    }                                                                                                                 \
+  }                                                                                                                   \
+  c = vld2_lane_s8(_a, b, IDX);                                                                                       \
+  CHECK_RESULT(validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7], _c[8], _c[9], _c[10], _c[11], \
+                             _c[12], _c[13], _c[14], _c[15]))
+
+  IMM_8_ITER
+#undef TEST_IMPL
 
   return TEST_SUCCESS;
 }
