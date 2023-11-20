@@ -1168,11 +1168,11 @@ FORCE_INLINE int8x8_t vmax_s8(int8x8_t __a, int8x8_t __b) { return __riscv_vmax_
 
 // FORCE_INLINE float32x4_t vmaxq_f32(float32x4_t __a, float32x4_t __b);
 
-// FORCE_INLINE float32x2_t vmaxnm_f32(float32x2_t a, float32x2_t b);
+FORCE_INLINE float32x2_t vmaxnm_f32(float32x2_t a, float32x2_t b) { return __riscv_vfmax_vv_f32m1(a, b, 2); }
 
 // FORCE_INLINE float32x4_t vmaxnmq_f32(float32x4_t a, float32x4_t b);
 
-// FORCE_INLINE float32x2_t vminnm_f32(float32x2_t a, float32x2_t b);
+FORCE_INLINE float32x2_t vminnm_f32(float32x2_t a, float32x2_t b) { return __riscv_vfmin_vv_f32m1(a, b, 2); }
 
 // FORCE_INLINE float32x4_t vminnmq_f32(float32x4_t a, float32x4_t b);
 
