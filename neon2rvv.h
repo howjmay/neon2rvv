@@ -1567,7 +1567,14 @@ FORCE_INLINE int8x8_t vrshrn_n_s16(int16x8_t __a, const int __b) {
 
 // FORCE_INLINE uint32x2_t vrshrn_n_u64(uint64x2_t __a, const int __b);
 
-// FORCE_INLINE int8x8_t vqshrn_n_s16(int16x8_t __a, const int __b);
+FORCE_INLINE int8x8_t vqshrn_n_s16(int16x8_t __a, const int __b) {
+  vint16m1_t sra = __riscv_vsra_vx_i16m1(__a, __b, 8);
+  vbool16_t positive_mask = __riscv_vmsgt_vx_i16m1_b16(sra, 0, 8);
+  vbool16_t negative_mask = __riscv_vmnot_m_b16(positive_mask, 8);
+  vint16m1_t sra_positive = __riscv_vmin_vx_i16m1_m(positive_mask, sra, INT8_MAX, 8);
+  vint16m1_t sra_saturated = __riscv_vmax_vx_i16m1_m(negative_mask, sra_positive, INT8_MIN, 8);
+  return __riscv_vlmul_ext_v_i8mf2_i8m1(__riscv_vncvt_x_x_w_i8mf2(sra_saturated, 8));
+}
 
 // FORCE_INLINE int16x4_t vqshrn_n_s32(int32x4_t __a, const int __b);
 
