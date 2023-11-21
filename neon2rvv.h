@@ -1838,7 +1838,13 @@ FORCE_INLINE int8x8_t vsri_n_s8(int8x8_t __a, int8x8_t __b, const int __c) {
 
 // FORCE_INLINE uint64x2_t vsriq_n_u64(uint64x2_t __a, uint64x2_t __b, const int __c);
 
-// FORCE_INLINE int8x8_t vsli_n_s8(int8x8_t __a, int8x8_t __b, const int __c);
+FORCE_INLINE int8x8_t vsli_n_s8(int8x8_t __a, int8x8_t __b, const int __c) {
+  uint8_t mask = UINT8_MAX << __c;
+  vint8m1_t high = __riscv_vand_vx_i8m1(__a, ~mask, 8);
+  vint8m1_t low_unmasked = __riscv_vsll_vx_i8m1(__b, __c, 8);
+  vint8m1_t low = __riscv_vand_vx_i8m1(low_unmasked, mask, 8);
+  return __riscv_vor_vv_i8m1(high, low, 8);
+}
 
 // FORCE_INLINE int16x4_t vsli_n_s16(int16x4_t __a, int16x4_t __b, const int __c);
 
