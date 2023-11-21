@@ -1527,7 +1527,10 @@ FORCE_INLINE int8x8_t vshr_n_s8(int8x8_t __a, const int __b) {
 
 // FORCE_INLINE uint64x2_t vshrq_n_u64(uint64x2_t __a, const int __b);
 
-// FORCE_INLINE int8x8_t vrshr_n_s8(int8x8_t __a, const int __b);
+FORCE_INLINE int8x8_t vrshr_n_s8(int8x8_t __a, const int __b) {
+  vint16m2_t a_w = __riscv_vsext_vf2_i16m2(__a, 8);
+  return __riscv_vnclip_wx_i8m1(a_w, __b, NEON2RVV_ROUND_TYPE_RNU, 8);
+}
 
 // FORCE_INLINE int16x4_t vrshr_n_s16(int16x4_t __a, const int __b);
 
