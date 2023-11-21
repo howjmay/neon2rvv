@@ -3154,7 +3154,28 @@ result_t test_vsriq_n_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { retur
 
 result_t test_vsriq_n_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vsli_n_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vsli_n_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int8_t *_a = (const int8_t *)impl.test_cases_int_pointer1;
+  const int8_t *_b = (const int8_t *)impl.test_cases_int_pointer2;
+  int8_t _c[8];
+  int8x8_t a = vld1_s8(_a);
+  int8x8_t b = vld1_s8(_b);
+  int8x8_t c;
+
+#define TEST_IMPL(IDX)                                 \
+  for (int i = 0; i < 8; i++) {                        \
+    uint8_t mask = (uint8_t)(UINT8_MAX << IDX);        \
+    _c[i] = (_a[i] & ~mask) | ((_b[i] << IDX) & mask); \
+  }                                                    \
+  c = vsli_n_s8(a, b, IDX);                            \
+  CHECK_RESULT(validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]))
+
+  IMM_8_ITER
+
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
 
 result_t test_vsli_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
