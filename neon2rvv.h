@@ -1334,11 +1334,15 @@ FORCE_INLINE int16x4_t vpadal_s8(int16x4_t __a, int8x8_t __b) {
 
 // FORCE_INLINE uint32x2_t vpmin_u32(uint32x2_t __a, uint32x2_t __b);
 
-// FORCE_INLINE float32x2_t vrecps_f32(float32x2_t __a, float32x2_t __b);
+FORCE_INLINE float32x2_t vrecps_f32(float32x2_t __a, float32x2_t __b) {
+  return __riscv_vfnmsac_vv_f32m1(vdup_n_f32(2.0), __a, __b, 2);
+}
 
 // FORCE_INLINE float32x4_t vrecpsq_f32(float32x4_t __a, float32x4_t __b);
 
-// FORCE_INLINE float32x2_t vrsqrts_f32(float32x2_t __a, float32x2_t __b);
+FORCE_INLINE float32x2_t vrsqrts_f32(float32x2_t __a, float32x2_t __b) {
+  return __riscv_vfdiv_vf_f32m1(__riscv_vfnmsac_vv_f32m1(vdup_n_f32(3.0), __a, __b, 2), 2.0, 2);
+}
 
 // FORCE_INLINE float32x4_t vrsqrtsq_f32(float32x4_t __a, float32x4_t __b);
 

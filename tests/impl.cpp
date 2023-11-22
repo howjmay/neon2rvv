@@ -2529,11 +2529,35 @@ result_t test_vpmin_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return 
 
 result_t test_vpmin_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vrecps_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vrecps_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const float *_a = impl.test_cases_float_pointer1;
+  const float *_b = impl.test_cases_float_pointer2;
+  float _c[2];
+  _c[0] = 2.0 - _a[0] * _b[0];
+  _c[1] = 2.0 - _a[1] * _b[1];
+
+  float32x2_t a = vld1_f32(_a);
+  float32x2_t b = vld1_f32(_b);
+  float32x2_t c = vrecps_f32(a, b);
+
+  return validate_float_error(c, _c[0], _c[1], 0.0001f);
+}
 
 result_t test_vrecpsq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vrsqrts_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vrsqrts_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const float *_a = impl.test_cases_float_pointer1;
+  const float *_b = impl.test_cases_float_pointer2;
+  float _c[2];
+  _c[0] = (3.0 - _a[0] * _b[0]) / 2.0;
+  _c[1] = (3.0 - _a[1] * _b[1]) / 2.0;
+
+  float32x2_t a = vld1_f32(_a);
+  float32x2_t b = vld1_f32(_b);
+  float32x2_t c = vrsqrts_f32(a, b);
+
+  return validate_float_error(c, _c[0], _c[1], 0.0001f);
+}
 
 result_t test_vrsqrtsq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
