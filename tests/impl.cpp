@@ -4264,7 +4264,26 @@ result_t test_vmull_lane_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { re
 
 result_t test_vmull_lane_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vqdmull_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vqdmull_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
+  const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
+  int32_t _c[4];
+  int16x4_t a = vld1_s16(_a);
+  int16x4_t b = vld1_s16(_b);
+  int32x4_t c;
+
+#define TEST_IMPL(IDX)                           \
+  for (int i = 0; i < 4; i++) {                  \
+    _c[i] = saturate_int32(2 * _a[i] * _b[IDX]); \
+  }                                              \
+  c = vqdmull_lane_s16(a, b, IDX);               \
+  CHECK_RESULT(validate_int32(c, _c[0], _c[1], _c[2], _c[3]))
+
+  IMM_4_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
 
 result_t test_vqdmull_lane_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
