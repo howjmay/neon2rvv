@@ -1181,27 +1181,46 @@ FORCE_INLINE uint64x2_t vabdl_u32(uint32x2_t __a, uint32x2_t __b) {
 }
 
 FORCE_INLINE int8x8_t vaba_s8(int8x8_t __a, int8x8_t __b, int8x8_t __c) {
-  // extend to 16 bits then do abs()
-  vint16m1_t bc_sub = __riscv_vlmul_trunc_v_i16m2_i16m1(__riscv_vwsub_vv_i16m2(__b, __c, 8));
-  vint16m1_t sign_bit_mask = __riscv_vsra_vx_i16m1(bc_sub, 15, 8);
-  vint16m1_t bc_xor = __riscv_vxor_vv_i16m1(bc_sub, sign_bit_mask, 8);
-  vint16m1_t bc_sub_16 = __riscv_vsub_vv_i16m1(bc_xor, sign_bit_mask, 8);
-  // select the lower 8 bits
-  vbool8_t compress_mask = __riscv_vreinterpret_v_i8m1_b8(vdup_n_s8(85));
-  vint8m1_t abs_diff = __riscv_vcompress_vm_i8m1(__riscv_vreinterpret_v_i16m1_i8m1(bc_sub_16), compress_mask, 16);
-  // accumulate
-  return __riscv_vadd_vv_i8m1(__a, abs_diff, 8);
+  vint8m1_t bc_max = __riscv_vmax_vv_i8m1(__b, __c, 8);
+  vint8m1_t bc_min = __riscv_vmin_vv_i8m1(__b, __c, 8);
+  vint8m1_t max_min_sub = __riscv_vsub_vv_i8m1(bc_max, bc_min, 8);
+  return __riscv_vadd_vv_i8m1(__a, max_min_sub, 8);
 }
 
-// FORCE_INLINE int16x4_t vaba_s16(int16x4_t __a, int16x4_t __b, int16x4_t __c);
+FORCE_INLINE int16x4_t vaba_s16(int16x4_t __a, int16x4_t __b, int16x4_t __c) {
+  vint16m1_t bc_max = __riscv_vmax_vv_i16m1(__b, __c, 4);
+  vint16m1_t bc_min = __riscv_vmin_vv_i16m1(__b, __c, 4);
+  vint16m1_t max_min_sub = __riscv_vsub_vv_i16m1(bc_max, bc_min, 4);
+  return __riscv_vadd_vv_i16m1(__a, max_min_sub, 4);
+}
 
-// FORCE_INLINE int32x2_t vaba_s32(int32x2_t __a, int32x2_t __b, int32x2_t __c);
+FORCE_INLINE int32x2_t vaba_s32(int32x2_t __a, int32x2_t __b, int32x2_t __c) {
+  vint32m1_t bc_max = __riscv_vmax_vv_i32m1(__b, __c, 2);
+  vint32m1_t bc_min = __riscv_vmin_vv_i32m1(__b, __c, 2);
+  vint32m1_t max_min_sub = __riscv_vsub_vv_i32m1(bc_max, bc_min, 2);
+  return __riscv_vadd_vv_i32m1(__a, max_min_sub, 2);
+}
 
-// FORCE_INLINE uint8x8_t vaba_u8(uint8x8_t __a, uint8x8_t __b, uint8x8_t __c);
+FORCE_INLINE uint8x8_t vaba_u8(uint8x8_t __a, uint8x8_t __b, uint8x8_t __c) {
+  vuint8m1_t bc_max = __riscv_vmaxu_vv_u8m1(__b, __c, 8);
+  vuint8m1_t bc_min = __riscv_vminu_vv_u8m1(__b, __c, 8);
+  vuint8m1_t max_min_sub = __riscv_vsub_vv_u8m1(bc_max, bc_min, 8);
+  return __riscv_vadd_vv_u8m1(__a, max_min_sub, 8);
+}
 
-// FORCE_INLINE uint16x4_t vaba_u16(uint16x4_t __a, uint16x4_t __b, uint16x4_t __c);
+FORCE_INLINE uint16x4_t vaba_u16(uint16x4_t __a, uint16x4_t __b, uint16x4_t __c) {
+  vuint16m1_t bc_max = __riscv_vmaxu_vv_u16m1(__b, __c, 4);
+  vuint16m1_t bc_min = __riscv_vminu_vv_u16m1(__b, __c, 4);
+  vuint16m1_t max_min_sub = __riscv_vsub_vv_u16m1(bc_max, bc_min, 4);
+  return __riscv_vadd_vv_u16m1(__a, max_min_sub, 4);
+}
 
-// FORCE_INLINE uint32x2_t vaba_u32(uint32x2_t __a, uint32x2_t __b, uint32x2_t __c);
+FORCE_INLINE uint32x2_t vaba_u32(uint32x2_t __a, uint32x2_t __b, uint32x2_t __c) {
+  vuint32m1_t bc_max = __riscv_vmaxu_vv_u32m1(__b, __c, 2);
+  vuint32m1_t bc_min = __riscv_vminu_vv_u32m1(__b, __c, 2);
+  vuint32m1_t max_min_sub = __riscv_vsub_vv_u32m1(bc_max, bc_min, 2);
+  return __riscv_vadd_vv_u32m1(__a, max_min_sub, 2);
+}
 
 // FORCE_INLINE int8x16_t vabaq_s8(int8x16_t __a, int8x16_t __b, int8x16_t __c);
 
