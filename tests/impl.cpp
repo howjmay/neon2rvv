@@ -5046,17 +5046,127 @@ result_t test_vtrn_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   return validate_int8(c, c10, c11, c12, c13, c14, c15, c16, c17, c20, c21, c22, c23, c24, c25, c26, c27);
 }
 
-result_t test_vtrn_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vtrn_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
+  const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
 
-result_t test_vtrn_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  int16_t c10 = _a[0];
+  int16_t c11 = _b[0];
+  int16_t c12 = _a[2];
+  int16_t c13 = _b[2];
 
-result_t test_vtrn_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  int16_t c20 = _a[1];
+  int16_t c21 = _b[1];
+  int16_t c22 = _a[3];
+  int16_t c23 = _b[3];
 
-result_t test_vtrn_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  int16x4_t a = vld1_s16(_a);
+  int16x4_t b = vld1_s16(_b);
+  int16x4x2_t c = vtrn_s16(a, b);
 
-result_t test_vtrn_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  return validate_int16(c, c10, c11, c12, c13, c20, c21, c22, c23);
+}
 
-result_t test_vtrn_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vtrn_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint8_t *_a = (uint8_t *)impl.test_cases_int_pointer1;
+  const uint8_t *_b = (uint8_t *)impl.test_cases_int_pointer2;
+
+  uint8_t c10 = _a[0];
+  uint8_t c11 = _b[0];
+  uint8_t c12 = _a[2];
+  uint8_t c13 = _b[2];
+  uint8_t c14 = _a[4];
+  uint8_t c15 = _b[4];
+  uint8_t c16 = _a[6];
+  uint8_t c17 = _b[6];
+
+  uint8_t c20 = _a[1];
+  uint8_t c21 = _b[1];
+  uint8_t c22 = _a[3];
+  uint8_t c23 = _b[3];
+  uint8_t c24 = _a[5];
+  uint8_t c25 = _b[5];
+  uint8_t c26 = _a[7];
+  uint8_t c27 = _b[7];
+
+  uint8x8_t a = vld1_u8(_a);
+  uint8x8_t b = vld1_u8(_b);
+  uint8x8x2_t c = vtrn_u8(a, b);
+
+  return validate_uint8(c, c10, c11, c12, c13, c14, c15, c16, c17, c20, c21, c22, c23, c24, c25, c26, c27);
+}
+
+result_t test_vtrn_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint16_t *_a = (uint16_t *)impl.test_cases_int_pointer1;
+  const uint16_t *_b = (uint16_t *)impl.test_cases_int_pointer2;
+
+  uint16_t c10 = _a[0];
+  uint16_t c11 = _b[0];
+  uint16_t c12 = _a[2];
+  uint16_t c13 = _b[2];
+
+  uint16_t c20 = _a[1];
+  uint16_t c21 = _b[1];
+  uint16_t c22 = _a[3];
+  uint16_t c23 = _b[3];
+
+  uint16x4_t a = vld1_u16(_a);
+  uint16x4_t b = vld1_u16(_b);
+  uint16x4x2_t c = vtrn_u16(a, b);
+
+  return validate_uint16(c, c10, c11, c12, c13, c20, c21, c22, c23);
+}
+
+result_t test_vtrn_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
+  const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
+
+  int32_t c10 = _a[0];
+  int32_t c11 = _b[0];
+
+  int32_t c20 = _a[1];
+  int32_t c21 = _b[1];
+
+  int32x2_t a = vld1_s32(_a);
+  int32x2_t b = vld1_s32(_b);
+  int32x2x2_t c = vtrn_s32(a, b);
+
+  return validate_int32(c, c10, c11, c20, c21);
+}
+
+result_t test_vtrn_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const float *_a = (float *)impl.test_cases_float_pointer1;
+  const float *_b = (float *)impl.test_cases_float_pointer2;
+
+  float c10 = _a[0];
+  float c11 = _b[0];
+
+  float c20 = _a[1];
+  float c21 = _b[1];
+
+  float32x2_t a = vld1_f32(_a);
+  float32x2_t b = vld1_f32(_b);
+  float32x2x2_t c = vtrn_f32(a, b);
+
+  return validate_float(c, c10, c11, c20, c21);
+}
+
+result_t test_vtrn_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint32_t *_a = (uint32_t *)impl.test_cases_int_pointer1;
+  const uint32_t *_b = (uint32_t *)impl.test_cases_int_pointer2;
+
+  uint32_t c10 = _a[0];
+  uint32_t c11 = _b[0];
+
+  uint32_t c20 = _a[1];
+  uint32_t c21 = _b[1];
+
+  uint32x2_t a = vld1_u32(_a);
+  uint32x2_t b = vld1_u32(_b);
+  uint32x2x2_t c = vtrn_u32(a, b);
+
+  return validate_uint32(c, c10, c11, c20, c21);
+}
 
 result_t test_vtrnq_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
