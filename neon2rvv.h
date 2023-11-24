@@ -1104,9 +1104,15 @@ FORCE_INLINE uint32x2_t vtst_u32(uint32x2_t __a, uint32x2_t __b) {
 // FORCE_INLINE uint32x4_t vtstq_u32(uint32x4_t __a, uint32x4_t __b);
 
 FORCE_INLINE int8x8_t vabd_s8(int8x8_t __a, int8x8_t __b) {
-  vint8m1_t ab_max = __riscv_vmax_vv_i8m1(__a, __b, 8);
-  vint8m1_t ab_min = __riscv_vmin_vv_i8m1(__a, __b, 8);
-  return __riscv_vsub_vv_i8m1(ab_max, ab_min, 8);
+  // TODO need to benchmark the two implementation
+  // extend to 16 bits then do abs()
+  vint16m1_t ab_sub = __riscv_vlmul_trunc_v_i16m2_i16m1(__riscv_vwsub_vv_i16m2(__a, __b, 8));
+  vint16m1_t sign_bit_mask = __riscv_vsra_vx_i16m1(ab_sub, 15, 8);
+  vint16m1_t ab_xor = __riscv_vxor_vv_i16m1(ab_sub, sign_bit_mask, 8);
+  vint16m1_t ab_sub_16 = __riscv_vsub_vv_i16m1(ab_xor, sign_bit_mask, 8);
+
+  // select the lower 8 bits
+  return __riscv_vnsra_wx_i8m1(__riscv_vlmul_ext_v_i16m1_i16m2(ab_sub_16), 0, 8);
 }
 
 FORCE_INLINE int16x4_t vabd_s16(int16x4_t __a, int16x4_t __b) {
