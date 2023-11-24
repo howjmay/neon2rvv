@@ -1252,15 +1252,42 @@ FORCE_INLINE int16x8_t vabal_s8(int16x8_t __a, int8x8_t __b, int8x8_t __c) {
   return __riscv_vadd_vv_i16m1(__a, abs_diff, 8);
 }
 
-// FORCE_INLINE int32x4_t vabal_s16(int32x4_t __a, int16x4_t __b, int16x4_t __c);
+FORCE_INLINE int32x4_t vabal_s16(int32x4_t __a, int16x4_t __b, int16x4_t __c) {
+  vint32m1_t bc_sub = __riscv_vlmul_trunc_v_i32m2_i32m1(__riscv_vwsub_vv_i32m2(__b, __c, 4));
+  vint32m1_t sign_bit_mask = __riscv_vsra_vx_i32m1(bc_sub, 31, 4);
+  vint32m1_t bc_xor = __riscv_vxor_vv_i32m1(bc_sub, sign_bit_mask, 4);
+  vint32m1_t abs_diff = __riscv_vsub_vv_i32m1(bc_xor, sign_bit_mask, 4);
+  return __riscv_vadd_vv_i32m1(__a, abs_diff, 4);
+}
 
-// FORCE_INLINE int64x2_t vabal_s32(int64x2_t __a, int32x2_t __b, int32x2_t __c);
+FORCE_INLINE int64x2_t vabal_s32(int64x2_t __a, int32x2_t __b, int32x2_t __c) {
+  vint64m1_t bc_sub = __riscv_vlmul_trunc_v_i64m2_i64m1(__riscv_vwsub_vv_i64m2(__b, __c, 2));
+  vint64m1_t sign_bit_mask = __riscv_vsra_vx_i64m1(bc_sub, 63, 2);
+  vint64m1_t bc_xor = __riscv_vxor_vv_i64m1(bc_sub, sign_bit_mask, 2);
+  vint64m1_t abs_diff = __riscv_vsub_vv_i64m1(bc_xor, sign_bit_mask, 2);
+  return __riscv_vadd_vv_i64m1(__a, abs_diff, 2);
+}
 
-// FORCE_INLINE uint16x8_t vabal_u8(uint16x8_t __a, uint8x8_t __b, uint8x8_t __c);
+FORCE_INLINE uint16x8_t vabal_u8(uint16x8_t __a, uint8x8_t __b, uint8x8_t __c) {
+  vuint8m1_t bc_max = __riscv_vmaxu_vv_u8m1(__b, __c, 8);
+  vuint8m1_t bc_min = __riscv_vminu_vv_u8m1(__b, __c, 8);
+  vuint16m1_t bc_sub = __riscv_vlmul_trunc_v_u16m2_u16m1(__riscv_vwsubu_vv_u16m2(bc_max, bc_min, 8));
+  return __riscv_vadd_vv_u16m1(__a, bc_sub, 8);
+}
 
-// FORCE_INLINE uint32x4_t vabal_u16(uint32x4_t __a, uint16x4_t __b, uint16x4_t __c);
+FORCE_INLINE uint32x4_t vabal_u16(uint32x4_t __a, uint16x4_t __b, uint16x4_t __c) {
+  vuint16m1_t bc_max = __riscv_vmaxu_vv_u16m1(__b, __c, 4);
+  vuint16m1_t bc_min = __riscv_vminu_vv_u16m1(__b, __c, 4);
+  vuint32m1_t bc_sub = __riscv_vlmul_trunc_v_u32m2_u32m1(__riscv_vwsubu_vv_u32m2(bc_max, bc_min, 4));
+  return __riscv_vadd_vv_u32m1(__a, bc_sub, 4);
+}
 
-// FORCE_INLINE uint64x2_t vabal_u32(uint64x2_t __a, uint32x2_t __b, uint32x2_t __c);
+FORCE_INLINE uint64x2_t vabal_u32(uint64x2_t __a, uint32x2_t __b, uint32x2_t __c) {
+  vuint32m1_t bc_max = __riscv_vmaxu_vv_u32m1(__b, __c, 2);
+  vuint32m1_t bc_min = __riscv_vminu_vv_u32m1(__b, __c, 2);
+  vuint64m1_t bc_sub = __riscv_vlmul_trunc_v_u64m2_u64m1(__riscv_vwsubu_vv_u64m2(bc_max, bc_min, 2));
+  return __riscv_vadd_vv_u64m1(__a, bc_sub, 2);
+}
 
 FORCE_INLINE int8x8_t vmax_s8(int8x8_t __a, int8x8_t __b) { return __riscv_vmax_vv_i8m1(__a, __b, 8); }
 
