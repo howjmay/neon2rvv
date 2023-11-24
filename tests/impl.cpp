@@ -2166,13 +2166,54 @@ result_t test_vabs_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   return validate_float(c, _c[0], _c[1]);
 }
 
-result_t test_vabsq_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vabsq_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int8_t *_a = (const int8_t *)impl.test_cases_int_pointer1;
+  int8_t _c[16];
+  for (int i = 0; i < 16; i++) {
+    _c[i] = abs(_a[i]);
+  }
 
-result_t test_vabsq_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  int8x16_t a = vld1q_s8(_a);
+  int8x16_t c = vabsq_s8(a);
+  return validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7], _c[8], _c[9], _c[10], _c[11], _c[12],
+                       _c[13], _c[14], _c[15]);
+}
 
-result_t test_vabsq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vabsq_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int16_t *_a = (const int16_t *)impl.test_cases_int_pointer1;
+  int16_t _c[8];
+  for (int i = 0; i < 8; i++) {
+    _c[i] = abs(_a[i]);
+  }
 
-result_t test_vabsq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  int16x8_t a = vld1q_s16(_a);
+  int16x8_t c = vabsq_s16(a);
+  return validate_int16(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]);
+}
+
+result_t test_vabsq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int32_t *_a = (const int32_t *)impl.test_cases_int_pointer1;
+  int32_t _c[4];
+  for (int i = 0; i < 4; i++) {
+    _c[i] = abs(_a[i]);
+  }
+
+  int32x4_t a = vld1q_s32(_a);
+  int32x4_t c = vabsq_s32(a);
+  return validate_int32(c, _c[0], _c[1], _c[2], _c[3]);
+}
+
+result_t test_vabsq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const float *_a = (const float *)impl.test_cases_float_pointer1;
+  float _c[4];
+  for (int i = 0; i < 4; i++) {
+    _c[i] = fabs(_a[i]);
+  }
+
+  float32x4_t a = vld1q_f32(_a);
+  float32x4_t c = vabsq_f32(a);
+  return validate_float(c, _c[0], _c[1], _c[2], _c[3]);
+}
 
 result_t test_vqabs_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
