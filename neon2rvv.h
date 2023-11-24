@@ -1024,7 +1024,6 @@ FORCE_INLINE float32x2_t vabs_f32(float32x2_t __a) { return __riscv_vfabs_v_f32m
 // FORCE_INLINE float32x4_t vabsq_f32(float32x4_t __a);
 
 FORCE_INLINE int8x8_t vqabs_s8(int8x8_t __a) {
-  // refer https://stackoverflow.com/questions/12041632/how-to-compute-the-integer-absolute-value
   vint8m1_t mask = __riscv_vsra_vx_i8m1(__a, 7, 8);
   vint8m1_t a_xor = __riscv_vxor_vv_i8m1(__a, mask, 8);
   return __riscv_vssub_vv_i8m1(a_xor, mask, 8);
@@ -1116,17 +1115,50 @@ FORCE_INLINE int8x8_t vabd_s8(int8x8_t __a, int8x8_t __b) {
   return __riscv_vcompress_vm_i8m1(__riscv_vreinterpret_v_i16m1_i8m1(ab_sub_16), compress_mask, 16);
 }
 
-// FORCE_INLINE int16x4_t vabd_s16(int16x4_t __a, int16x4_t __b);
+FORCE_INLINE int16x4_t vabd_s16(int16x4_t __a, int16x4_t __b) {
+  vint32m1_t ab_sub = __riscv_vlmul_trunc_v_i32m2_i32m1(__riscv_vwsub_vv_i32m2(__a, __b, 4));
+  vint32m1_t sign_bit_mask = __riscv_vsra_vx_i32m1(ab_sub, 31, 4);
+  vint32m1_t ab_xor = __riscv_vxor_vv_i32m1(ab_sub, sign_bit_mask, 4);
+  vint32m1_t ab_sub_32 = __riscv_vsub_vv_i32m1(ab_xor, sign_bit_mask, 4);
 
-// FORCE_INLINE int32x2_t vabd_s32(int32x2_t __a, int32x2_t __b);
+  vbool16_t compress_mask = __riscv_vreinterpret_v_i8m1_b16(vdup_n_s8(85));
+  return __riscv_vcompress_vm_i16m1(__riscv_vreinterpret_v_i32m1_i16m1(ab_sub_32), compress_mask, 8);
+}
 
-// FORCE_INLINE float32x2_t vabd_f32(float32x2_t __a, float32x2_t __b);
+FORCE_INLINE int32x2_t vabd_s32(int32x2_t __a, int32x2_t __b) {
+  vint64m1_t ab_sub = __riscv_vlmul_trunc_v_i64m2_i64m1(__riscv_vwsub_vv_i64m2(__a, __b, 2));
+  vint64m1_t sign_bit_mask = __riscv_vsra_vx_i64m1(ab_sub, 63, 2);
+  vint64m1_t ab_xor = __riscv_vxor_vv_i64m1(ab_sub, sign_bit_mask, 2);
+  vint64m1_t ab_sub_64 = __riscv_vsub_vv_i64m1(ab_xor, sign_bit_mask, 2);
 
-// FORCE_INLINE uint8x8_t vabd_u8(uint8x8_t __a, uint8x8_t __b);
+  vbool32_t compress_mask = __riscv_vreinterpret_v_i8m1_b32(vdup_n_s8(85));
+  return __riscv_vcompress_vm_i32m1(__riscv_vreinterpret_v_i64m1_i32m1(ab_sub_64), compress_mask, 4);
+}
 
-// FORCE_INLINE uint16x4_t vabd_u16(uint16x4_t __a, uint16x4_t __b);
+FORCE_INLINE float32x2_t vabd_f32(float32x2_t __a, float32x2_t __b) {
+  return __riscv_vfabs_v_f32m1(__riscv_vfsub_vv_f32m1(__a, __b, 2), 2);
+}
 
-// FORCE_INLINE uint32x2_t vabd_u32(uint32x2_t __a, uint32x2_t __b);
+FORCE_INLINE uint8x8_t vabd_u8(uint8x8_t __a, uint8x8_t __b) {
+  vuint8m1_t ab_sub = __riscv_vsub_vv_u8m1(__a, __b, 8);
+  vuint8m1_t ba_sub = __riscv_vsub_vv_u8m1(__b, __a, 8);
+  vbool8_t gt_mask = __riscv_vmsgtu_vv_u8m1_b8(__a, __b, 8);
+  return __riscv_vmerge_vvm_u8m1(ba_sub, ab_sub, gt_mask, 8);
+}
+
+FORCE_INLINE uint16x4_t vabd_u16(uint16x4_t __a, uint16x4_t __b) {
+  vuint16m1_t ab_sub = __riscv_vsub_vv_u16m1(__a, __b, 4);
+  vuint16m1_t ba_sub = __riscv_vsub_vv_u16m1(__b, __a, 4);
+  vbool16_t gt_mask = __riscv_vmsgtu_vv_u16m1_b16(__a, __b, 4);
+  return __riscv_vmerge_vvm_u16m1(ba_sub, ab_sub, gt_mask, 4);
+}
+
+FORCE_INLINE uint32x2_t vabd_u32(uint32x2_t __a, uint32x2_t __b) {
+  vuint32m1_t ab_sub = __riscv_vsub_vv_u32m1(__a, __b, 2);
+  vuint32m1_t ba_sub = __riscv_vsub_vv_u32m1(__b, __a, 2);
+  vbool32_t gt_mask = __riscv_vmsgtu_vv_u32m1_b32(__a, __b, 2);
+  return __riscv_vmerge_vvm_u32m1(ba_sub, ab_sub, gt_mask, 2);
+}
 
 // FORCE_INLINE int8x16_t vabdq_s8(int8x16_t __a, int8x16_t __b);
 
