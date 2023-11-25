@@ -1024,7 +1024,6 @@ FORCE_INLINE float32x2_t vabs_f32(float32x2_t __a) { return __riscv_vfabs_v_f32m
 // FORCE_INLINE float32x4_t vabsq_f32(float32x4_t __a);
 
 FORCE_INLINE int8x8_t vqabs_s8(int8x8_t __a) {
-  // refer https://stackoverflow.com/questions/12041632/how-to-compute-the-integer-absolute-value
   vint8m1_t mask = __riscv_vsra_vx_i8m1(__a, 7, 8);
   vint8m1_t a_xor = __riscv_vxor_vv_i8m1(__a, mask, 8);
   return __riscv_vssub_vv_i8m1(a_xor, mask, 8);
@@ -1105,6 +1104,7 @@ FORCE_INLINE uint32x2_t vtst_u32(uint32x2_t __a, uint32x2_t __b) {
 // FORCE_INLINE uint32x4_t vtstq_u32(uint32x4_t __a, uint32x4_t __b);
 
 FORCE_INLINE int8x8_t vabd_s8(int8x8_t __a, int8x8_t __b) {
+  // TODO need to benchmark the two implementation
   // extend to 16 bits then do abs()
   vint16m1_t ab_sub = __riscv_vlmul_trunc_v_i16m2_i16m1(__riscv_vwsub_vv_i16m2(__a, __b, 8));
   vint16m1_t sign_bit_mask = __riscv_vsra_vx_i16m1(ab_sub, 15, 8);
@@ -1112,35 +1112,82 @@ FORCE_INLINE int8x8_t vabd_s8(int8x8_t __a, int8x8_t __b) {
   vint16m1_t ab_sub_16 = __riscv_vsub_vv_i16m1(ab_xor, sign_bit_mask, 8);
 
   // select the lower 8 bits
-  vbool8_t compress_mask = __riscv_vreinterpret_v_i8m1_b8(vdup_n_s8(85));
-  return __riscv_vcompress_vm_i8m1(__riscv_vreinterpret_v_i16m1_i8m1(ab_sub_16), compress_mask, 16);
+  return __riscv_vnsra_wx_i8m1(__riscv_vlmul_ext_v_i16m1_i16m2(ab_sub_16), 0, 8);
 }
 
-// FORCE_INLINE int16x4_t vabd_s16(int16x4_t __a, int16x4_t __b);
+FORCE_INLINE int16x4_t vabd_s16(int16x4_t __a, int16x4_t __b) {
+  vint16m1_t ab_max = __riscv_vmax_vv_i16m1(__a, __b, 4);
+  vint16m1_t ab_min = __riscv_vmin_vv_i16m1(__a, __b, 4);
+  return __riscv_vsub_vv_i16m1(ab_max, ab_min, 4);
+}
 
-// FORCE_INLINE int32x2_t vabd_s32(int32x2_t __a, int32x2_t __b);
+FORCE_INLINE int32x2_t vabd_s32(int32x2_t __a, int32x2_t __b) {
+  vint32m1_t ab_max = __riscv_vmax_vv_i32m1(__a, __b, 2);
+  vint32m1_t ab_min = __riscv_vmin_vv_i32m1(__a, __b, 2);
+  return __riscv_vsub_vv_i32m1(ab_max, ab_min, 2);
+}
 
-// FORCE_INLINE float32x2_t vabd_f32(float32x2_t __a, float32x2_t __b);
+FORCE_INLINE float32x2_t vabd_f32(float32x2_t __a, float32x2_t __b) {
+  return __riscv_vfabs_v_f32m1(__riscv_vfsub_vv_f32m1(__a, __b, 2), 2);
+}
 
-// FORCE_INLINE uint8x8_t vabd_u8(uint8x8_t __a, uint8x8_t __b);
+FORCE_INLINE uint8x8_t vabd_u8(uint8x8_t __a, uint8x8_t __b) {
+  vuint8m1_t ab_max = __riscv_vmaxu_vv_u8m1(__a, __b, 8);
+  vuint8m1_t ab_min = __riscv_vminu_vv_u8m1(__a, __b, 8);
+  return __riscv_vsub_vv_u8m1(ab_max, ab_min, 8);
+}
 
-// FORCE_INLINE uint16x4_t vabd_u16(uint16x4_t __a, uint16x4_t __b);
+FORCE_INLINE uint16x4_t vabd_u16(uint16x4_t __a, uint16x4_t __b) {
+  vuint16m1_t ab_max = __riscv_vmaxu_vv_u16m1(__a, __b, 4);
+  vuint16m1_t ab_min = __riscv_vminu_vv_u16m1(__a, __b, 4);
+  return __riscv_vsub_vv_u16m1(ab_max, ab_min, 4);
+}
 
-// FORCE_INLINE uint32x2_t vabd_u32(uint32x2_t __a, uint32x2_t __b);
+FORCE_INLINE uint32x2_t vabd_u32(uint32x2_t __a, uint32x2_t __b) {
+  vuint32m1_t ab_max = __riscv_vmaxu_vv_u32m1(__a, __b, 2);
+  vuint32m1_t ab_min = __riscv_vminu_vv_u32m1(__a, __b, 2);
+  return __riscv_vsub_vv_u32m1(ab_max, ab_min, 2);
+}
 
-// FORCE_INLINE int8x16_t vabdq_s8(int8x16_t __a, int8x16_t __b);
+FORCE_INLINE int8x16_t vabdq_s8(int8x16_t __a, int8x16_t __b) {
+  vint8m1_t ab_max = __riscv_vmax_vv_i8m1(__a, __b, 16);
+  vint8m1_t ab_min = __riscv_vmin_vv_i8m1(__a, __b, 16);
+  return __riscv_vsub_vv_i8m1(ab_max, ab_min, 16);
+}
 
-// FORCE_INLINE int16x8_t vabdq_s16(int16x8_t __a, int16x8_t __b);
+FORCE_INLINE int16x8_t vabdq_s16(int16x8_t __a, int16x8_t __b) {
+  vint16m1_t ab_max = __riscv_vmax_vv_i16m1(__a, __b, 8);
+  vint16m1_t ab_min = __riscv_vmin_vv_i16m1(__a, __b, 8);
+  return __riscv_vsub_vv_i16m1(ab_max, ab_min, 8);
+}
 
-// FORCE_INLINE int32x4_t vabdq_s32(int32x4_t __a, int32x4_t __b);
+FORCE_INLINE int32x4_t vabdq_s32(int32x4_t __a, int32x4_t __b) {
+  vint32m1_t ab_max = __riscv_vmax_vv_i32m1(__a, __b, 4);
+  vint32m1_t ab_min = __riscv_vmin_vv_i32m1(__a, __b, 4);
+  return __riscv_vsub_vv_i32m1(ab_max, ab_min, 4);
+}
 
-// FORCE_INLINE float32x4_t vabdq_f32(float32x4_t __a, float32x4_t __b);
+FORCE_INLINE float32x4_t vabdq_f32(float32x4_t __a, float32x4_t __b) {
+  return __riscv_vfabs_v_f32m1(__riscv_vfsub_vv_f32m1(__a, __b, 4), 4);
+}
 
-// FORCE_INLINE uint8x16_t vabdq_u8(uint8x16_t __a, uint8x16_t __b);
+FORCE_INLINE uint8x16_t vabdq_u8(uint8x16_t __a, uint8x16_t __b) {
+  vuint8m1_t ab_max = __riscv_vmaxu_vv_u8m1(__a, __b, 16);
+  vuint8m1_t ab_min = __riscv_vminu_vv_u8m1(__a, __b, 16);
+  return __riscv_vsub_vv_u8m1(ab_max, ab_min, 16);
+}
 
-// FORCE_INLINE uint16x8_t vabdq_u16(uint16x8_t __a, uint16x8_t __b);
+FORCE_INLINE uint16x8_t vabdq_u16(uint16x8_t __a, uint16x8_t __b) {
+  vuint16m1_t ab_max = __riscv_vmaxu_vv_u16m1(__a, __b, 8);
+  vuint16m1_t ab_min = __riscv_vminu_vv_u16m1(__a, __b, 8);
+  return __riscv_vsub_vv_u16m1(ab_max, ab_min, 8);
+}
 
-// FORCE_INLINE uint32x4_t vabdq_u32(uint32x4_t __a, uint32x4_t __b);
+FORCE_INLINE uint32x4_t vabdq_u32(uint32x4_t __a, uint32x4_t __b) {
+  vuint32m1_t ab_max = __riscv_vmaxu_vv_u32m1(__a, __b, 4);
+  vuint32m1_t ab_min = __riscv_vminu_vv_u32m1(__a, __b, 4);
+  return __riscv_vsub_vv_u32m1(ab_max, ab_min, 4);
+}
 
 FORCE_INLINE int16x8_t vabdl_s8(int8x8_t __a, int8x8_t __b) {
   vint16m1_t ab_sub = __riscv_vlmul_trunc_v_i16m2_i16m1(__riscv_vwsub_vv_i16m2(__a, __b, 8));
