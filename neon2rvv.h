@@ -1015,13 +1015,25 @@ FORCE_INLINE int32x2_t vabs_s32(int32x2_t __a) {
 
 FORCE_INLINE float32x2_t vabs_f32(float32x2_t __a) { return __riscv_vfabs_v_f32m1(__a, 2); }
 
-// FORCE_INLINE int8x16_t vabsq_s8(int8x16_t __a);
+FORCE_INLINE int8x16_t vabsq_s8(int8x16_t __a) {
+  vint8m1_t mask = __riscv_vsra_vx_i8m1(__a, 7, 16);
+  vint8m1_t a_xor = __riscv_vxor_vv_i8m1(__a, mask, 16);
+  return __riscv_vsub_vv_i8m1(a_xor, mask, 16);
+}
 
-// FORCE_INLINE int16x8_t vabsq_s16(int16x8_t __a);
+FORCE_INLINE int16x8_t vabsq_s16(int16x8_t __a) {
+  vint16m1_t mask = __riscv_vsra_vx_i16m1(__a, 15, 8);
+  vint16m1_t a_xor = __riscv_vxor_vv_i16m1(__a, mask, 8);
+  return __riscv_vsub_vv_i16m1(a_xor, mask, 8);
+}
 
-// FORCE_INLINE int32x4_t vabsq_s32(int32x4_t __a);
+FORCE_INLINE int32x4_t vabsq_s32(int32x4_t __a) {
+  vint32m1_t mask = __riscv_vsra_vx_i32m1(__a, 31, 4);
+  vint32m1_t a_xor = __riscv_vxor_vv_i32m1(__a, mask, 4);
+  return __riscv_vsub_vv_i32m1(a_xor, mask, 4);
+}
 
-// FORCE_INLINE float32x4_t vabsq_f32(float32x4_t __a);
+FORCE_INLINE float32x4_t vabsq_f32(float32x4_t __a) { return __riscv_vfabs_v_f32m1(__a, 4); }
 
 FORCE_INLINE int8x8_t vqabs_s8(int8x8_t __a) {
   vint8m1_t mask = __riscv_vsra_vx_i8m1(__a, 7, 8);
