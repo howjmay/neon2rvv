@@ -2542,17 +2542,104 @@ result_t test_vaba_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   return validate_uint32(d, _d[0], _d[1]);
 }
 
-result_t test_vabaq_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vabaq_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int8_t *_a = (const int8_t *)impl.test_cases_int_pointer1;
+  const int8_t *_b = (const int8_t *)impl.test_cases_int_pointer2;
+  const int8_t *_c = (const int8_t *)impl.test_cases_int_pointer3;
+  int8_t _d[16];
+  for (int i = 0; i < 16; i++) {
+    _d[i] = _a[i] + abs(_b[i] - _c[i]);
+  }
+  int8x16_t a = vld1q_s8(_a);
+  int8x16_t b = vld1q_s8(_b);
+  int8x16_t c = vld1q_s8(_c);
+  int8x16_t d = vabaq_s8(a, b, c);
 
-result_t test_vabaq_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  return validate_int8(d, _d[0], _d[1], _d[2], _d[3], _d[4], _d[5], _d[6], _d[7], _d[8], _d[9], _d[10], _d[11], _d[12],
+                       _d[13], _d[14], _d[15]);
+}
 
-result_t test_vabaq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vabaq_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int16_t *_a = (const int16_t *)impl.test_cases_int_pointer1;
+  const int16_t *_b = (const int16_t *)impl.test_cases_int_pointer2;
+  const int16_t *_c = (const int16_t *)impl.test_cases_int_pointer3;
+  int16_t _d[8];
+  for (int i = 0; i < 8; i++) {
+    _d[i] = _a[i] + abs(_b[i] - _c[i]);
+  }
+  int16x8_t a = vld1q_s16(_a);
+  int16x8_t b = vld1q_s16(_b);
+  int16x8_t c = vld1q_s16(_c);
+  int16x8_t d = vabaq_s16(a, b, c);
 
-result_t test_vabaq_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  return validate_int16(d, _d[0], _d[1], _d[2], _d[3], _d[4], _d[5], _d[6], _d[7]);
+}
 
-result_t test_vabaq_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vabaq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int32_t *_a = (const int32_t *)impl.test_cases_int_pointer1;
+  const int32_t *_b = (const int32_t *)impl.test_cases_int_pointer2;
+  const int32_t *_c = (const int32_t *)impl.test_cases_int_pointer3;
+  int32_t _d[4];
+  for (int i = 0; i < 4; i++) {
+    _d[i] = _a[i] + abs(_b[i] - _c[i]);
+  }
+  int32x4_t a = vld1q_s32(_a);
+  int32x4_t b = vld1q_s32(_b);
+  int32x4_t c = vld1q_s32(_c);
+  int32x4_t d = vabaq_s32(a, b, c);
 
-result_t test_vabaq_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  return validate_int32(d, _d[0], _d[1], _d[2], _d[3]);
+}
+
+result_t test_vabaq_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint8_t *_a = (const uint8_t *)impl.test_cases_int_pointer1;
+  const uint8_t *_b = (const uint8_t *)impl.test_cases_int_pointer2;
+  const uint8_t *_c = (const uint8_t *)impl.test_cases_int_pointer3;
+  uint8_t _d[16];
+  for (int i = 0; i < 16; i++) {
+    _d[i] = _a[i] + abs(_b[i] - _c[i]);
+  }
+  uint8x16_t a = vld1q_u8(_a);
+  uint8x16_t b = vld1q_u8(_b);
+  uint8x16_t c = vld1q_u8(_c);
+  uint8x16_t d = vabaq_u8(a, b, c);
+
+  return validate_uint8(d, _d[0], _d[1], _d[2], _d[3], _d[4], _d[5], _d[6], _d[7], _d[8], _d[9], _d[10], _d[11], _d[12],
+                        _d[13], _d[14], _d[15]);
+}
+
+result_t test_vabaq_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint16_t *_a = (const uint16_t *)impl.test_cases_int_pointer1;
+  const uint16_t *_b = (const uint16_t *)impl.test_cases_int_pointer2;
+  const uint16_t *_c = (const uint16_t *)impl.test_cases_int_pointer3;
+  uint16_t _d[8];
+  for (int i = 0; i < 8; i++) {
+    _d[i] = _a[i] + abs(_b[i] - _c[i]);
+  }
+  uint16x8_t a = vld1q_u16(_a);
+  uint16x8_t b = vld1q_u16(_b);
+  uint16x8_t c = vld1q_u16(_c);
+  uint16x8_t d = vabaq_u16(a, b, c);
+
+  return validate_uint16(d, _d[0], _d[1], _d[2], _d[3], _d[4], _d[5], _d[6], _d[7]);
+}
+
+result_t test_vabaq_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint32_t *_a = (const uint32_t *)impl.test_cases_int_pointer1;
+  const uint32_t *_b = (const uint32_t *)impl.test_cases_int_pointer2;
+  const uint32_t *_c = (const uint32_t *)impl.test_cases_int_pointer3;
+  uint32_t _d[4];
+  for (int i = 0; i < 4; i++) {
+    uint32_t tmp = _b[i] > _c[i] ? (_b[i] - _c[i]) : (_c[i] - _b[i]);
+    _d[i] = _a[i] + tmp;
+  }
+  uint32x4_t a = vld1q_u32(_a);
+  uint32x4_t b = vld1q_u32(_b);
+  uint32x4_t c = vld1q_u32(_c);
+  uint32x4_t d = vabaq_u32(a, b, c);
+
+  return validate_uint32(d, _d[0], _d[1], _d[2], _d[3]);
+}
 
 result_t test_vabal_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_a = (const int16_t *)impl.test_cases_int_pointer1;
