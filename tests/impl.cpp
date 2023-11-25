@@ -4431,14 +4431,15 @@ result_t test_vsraq_n_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { retur
 result_t test_vrsra_n_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int8_t *_a = (const int8_t *)impl.test_cases_int_pointer1;
   const int8_t *_b = (const int8_t *)impl.test_cases_int_pointer2;
-  int8_t _c[8];
+  const int element_num = 8;
+  int8_t _c[element_num];
   int8x8_t a = vld1_s8(_a);
   int8x8_t b = vld1_s8(_b);
   int8x8_t c;
   uint8_t round_const;
 
 #define TEST_IMPL(IDX)                                    \
-  for (int i = 0; i < 8; i++) {                           \
+  for (int i = 0; i < element_num; i++) {                 \
     round_const = 1 << ((IDX + 1) - 1);                   \
     _c[i] = _a[i] + ((_b[i] + round_const) >> (IDX + 1)); \
   }                                                       \
@@ -4451,33 +4452,277 @@ result_t test_vrsra_n_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   return TEST_SUCCESS;
 }
 
-result_t test_vrsra_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vrsra_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int16_t *_a = (const int16_t *)impl.test_cases_int_pointer1;
+  const int16_t *_b = (const int16_t *)impl.test_cases_int_pointer2;
+  const int element_num = 4;
+  int16_t _c[element_num];
+  int16x4_t a = vld1_s16(_a);
+  int16x4_t b = vld1_s16(_b);
+  int16x4_t c;
+  uint16_t round_const;
 
-result_t test_vrsra_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+#define TEST_IMPL(IDX)                                    \
+  for (int i = 0; i < element_num; i++) {                 \
+    round_const = 1 << ((IDX + 1) - 1);                   \
+    _c[i] = _a[i] + ((_b[i] + round_const) >> (IDX + 1)); \
+  }                                                       \
+  c = vrsra_n_s16(a, b, (IDX + 1));                       \
+  CHECK_RESULT(validate_int16(c, _c[0], _c[1], _c[2], _c[3]))
+
+  IMM_16_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
+
+result_t test_vrsra_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int32_t *_a = (const int32_t *)impl.test_cases_int_pointer1;
+  const int32_t *_b = (const int32_t *)impl.test_cases_int_pointer2;
+  const int element_num = 2;
+  int32_t _c[element_num];
+  int32x2_t a = vld1_s32(_a);
+  int32x2_t b = vld1_s32(_b);
+  int32x2_t c;
+  uint32_t round_const;
+
+#define TEST_IMPL(IDX)                                              \
+  for (int i = 0; i < element_num; i++) {                           \
+    round_const = 1 << ((IDX + 1) - 1);                             \
+    _c[i] = _a[i] + (((uint64_t)_b[i] + round_const) >> (IDX + 1)); \
+  }                                                                 \
+  c = vrsra_n_s32(a, b, (IDX + 1));                                 \
+  CHECK_RESULT(validate_int32(c, _c[0], _c[1]))
+
+  IMM_32_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
 
 result_t test_vrsra_n_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vrsra_n_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vrsra_n_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint8_t *_a = (const uint8_t *)impl.test_cases_int_pointer1;
+  const uint8_t *_b = (const uint8_t *)impl.test_cases_int_pointer2;
+  const int element_num = 8;
+  uint8_t _c[element_num];
+  uint8x8_t a = vld1_u8(_a);
+  uint8x8_t b = vld1_u8(_b);
+  uint8x8_t c;
+  uint8_t round_const;
 
-result_t test_vrsra_n_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+#define TEST_IMPL(IDX)                                    \
+  for (int i = 0; i < element_num; i++) {                 \
+    round_const = 1 << ((IDX + 1) - 1);                   \
+    _c[i] = _a[i] + ((_b[i] + round_const) >> (IDX + 1)); \
+  }                                                       \
+  c = vrsra_n_u8(a, b, (IDX + 1));                        \
+  CHECK_RESULT(validate_uint8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]))
 
-result_t test_vrsra_n_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  IMM_8_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
+
+result_t test_vrsra_n_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint16_t *_a = (const uint16_t *)impl.test_cases_int_pointer1;
+  const uint16_t *_b = (const uint16_t *)impl.test_cases_int_pointer2;
+  const int element_num = 4;
+  uint16_t _c[element_num];
+  uint16x4_t a = vld1_u16(_a);
+  uint16x4_t b = vld1_u16(_b);
+  uint16x4_t c;
+  uint16_t round_const;
+
+#define TEST_IMPL(IDX)                                    \
+  for (int i = 0; i < element_num; i++) {                 \
+    round_const = 1 << ((IDX + 1) - 1);                   \
+    _c[i] = _a[i] + ((_b[i] + round_const) >> (IDX + 1)); \
+  }                                                       \
+  c = vrsra_n_u16(a, b, (IDX + 1));                       \
+  CHECK_RESULT(validate_uint16(c, _c[0], _c[1], _c[2], _c[3]))
+
+  IMM_16_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
+
+result_t test_vrsra_n_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint32_t *_a = (const uint32_t *)impl.test_cases_int_pointer1;
+  const uint32_t *_b = (const uint32_t *)impl.test_cases_int_pointer2;
+  const int element_num = 2;
+  uint32_t _c[element_num];
+  uint32x2_t a = vld1_u32(_a);
+  uint32x2_t b = vld1_u32(_b);
+  uint32x2_t c;
+  uint32_t round_const;
+
+#define TEST_IMPL(IDX)                                              \
+  for (int i = 0; i < element_num; i++) {                           \
+    round_const = 1 << ((IDX + 1) - 1);                             \
+    _c[i] = _a[i] + (((uint64_t)_b[i] + round_const) >> (IDX + 1)); \
+  }                                                                 \
+  c = vrsra_n_u32(a, b, (IDX + 1));                                 \
+  CHECK_RESULT(validate_uint32(c, _c[0], _c[1]))
+
+  IMM_32_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
 
 result_t test_vrsra_n_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vrsraq_n_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vrsraq_n_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int8_t *_a = (const int8_t *)impl.test_cases_int_pointer1;
+  const int8_t *_b = (const int8_t *)impl.test_cases_int_pointer2;
+  const int element_num = 16;
+  int8_t _c[element_num];
+  int8x16_t a = vld1q_s8(_a);
+  int8x16_t b = vld1q_s8(_b);
+  int8x16_t c;
+  uint8_t round_const;
 
-result_t test_vrsraq_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+#define TEST_IMPL(IDX)                                                                                                \
+  for (int i = 0; i < element_num; i++) {                                                                             \
+    round_const = 1 << ((IDX + 1) - 1);                                                                               \
+    _c[i] = _a[i] + ((_b[i] + round_const) >> (IDX + 1));                                                             \
+  }                                                                                                                   \
+  c = vrsraq_n_s8(a, b, (IDX + 1));                                                                                   \
+  CHECK_RESULT(validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7], _c[8], _c[9], _c[10], _c[11], \
+                             _c[12], _c[13], _c[14], _c[15]))
 
-result_t test_vrsraq_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  IMM_8_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
+
+result_t test_vrsraq_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int16_t *_a = (const int16_t *)impl.test_cases_int_pointer1;
+  const int16_t *_b = (const int16_t *)impl.test_cases_int_pointer2;
+  const int element_num = 8;
+  int16_t _c[element_num];
+  int16x8_t a = vld1q_s16(_a);
+  int16x8_t b = vld1q_s16(_b);
+  int16x8_t c;
+  uint16_t round_const;
+
+#define TEST_IMPL(IDX)                                    \
+  for (int i = 0; i < element_num; i++) {                 \
+    round_const = 1 << ((IDX + 1) - 1);                   \
+    _c[i] = _a[i] + ((_b[i] + round_const) >> (IDX + 1)); \
+  }                                                       \
+  c = vrsraq_n_s16(a, b, (IDX + 1));                      \
+  CHECK_RESULT(validate_int16(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]))
+
+  IMM_16_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
+
+result_t test_vrsraq_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int32_t *_a = (const int32_t *)impl.test_cases_int_pointer1;
+  const int32_t *_b = (const int32_t *)impl.test_cases_int_pointer2;
+  const int element_num = 4;
+  int32_t _c[element_num];
+  int32x4_t a = vld1q_s32(_a);
+  int32x4_t b = vld1q_s32(_b);
+  int32x4_t c;
+  uint32_t round_const;
+
+#define TEST_IMPL(IDX)                                              \
+  for (int i = 0; i < element_num; i++) {                           \
+    round_const = 1 << ((IDX + 1) - 1);                             \
+    _c[i] = _a[i] + (((uint64_t)_b[i] + round_const) >> (IDX + 1)); \
+  }                                                                 \
+  c = vrsraq_n_s32(a, b, (IDX + 1));                                \
+  CHECK_RESULT(validate_int32(c, _c[0], _c[1], _c[2], _c[3]))
+
+  IMM_32_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
 
 result_t test_vrsraq_n_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vrsraq_n_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vrsraq_n_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint8_t *_a = (const uint8_t *)impl.test_cases_int_pointer1;
+  const uint8_t *_b = (const uint8_t *)impl.test_cases_int_pointer2;
+  const int element_num = 16;
+  uint8_t _c[element_num];
+  uint8x16_t a = vld1q_u8(_a);
+  uint8x16_t b = vld1q_u8(_b);
+  uint8x16_t c;
+  uint8_t round_const;
 
-result_t test_vrsraq_n_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+#define TEST_IMPL(IDX)                                                                                                 \
+  for (int i = 0; i < element_num; i++) {                                                                              \
+    round_const = 1 << ((IDX + 1) - 1);                                                                                \
+    _c[i] = _a[i] + ((_b[i] + round_const) >> (IDX + 1));                                                              \
+  }                                                                                                                    \
+  c = vrsraq_n_u8(a, b, (IDX + 1));                                                                                    \
+  CHECK_RESULT(validate_uint8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7], _c[8], _c[9], _c[10], _c[11], \
+                              _c[12], _c[13], _c[14], _c[15]))
 
-result_t test_vrsraq_n_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  IMM_8_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
+
+result_t test_vrsraq_n_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint16_t *_a = (const uint16_t *)impl.test_cases_int_pointer1;
+  const uint16_t *_b = (const uint16_t *)impl.test_cases_int_pointer2;
+  const int element_num = 8;
+  uint16_t _c[element_num];
+  uint16x8_t a = vld1q_u16(_a);
+  uint16x8_t b = vld1q_u16(_b);
+  uint16x8_t c;
+  uint16_t round_const;
+
+#define TEST_IMPL(IDX)                                    \
+  for (int i = 0; i < element_num; i++) {                 \
+    round_const = 1 << ((IDX + 1) - 1);                   \
+    _c[i] = _a[i] + ((_b[i] + round_const) >> (IDX + 1)); \
+  }                                                       \
+  c = vrsraq_n_u16(a, b, (IDX + 1));                      \
+  CHECK_RESULT(validate_uint16(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]))
+
+  IMM_16_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
+
+result_t test_vrsraq_n_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint32_t *_a = (const uint32_t *)impl.test_cases_int_pointer1;
+  const uint32_t *_b = (const uint32_t *)impl.test_cases_int_pointer2;
+  const int element_num = 4;
+  uint32_t _c[element_num];
+  uint32x4_t a = vld1q_u32(_a);
+  uint32x4_t b = vld1q_u32(_b);
+  uint32x4_t c;
+  uint32_t round_const;
+
+#define TEST_IMPL(IDX)                                              \
+  for (int i = 0; i < element_num; i++) {                           \
+    round_const = 1 << ((IDX + 1) - 1);                             \
+    _c[i] = _a[i] + (((uint64_t)_b[i] + round_const) >> (IDX + 1)); \
+  }                                                                 \
+  c = vrsraq_n_u32(a, b, (IDX + 1));                                \
+  CHECK_RESULT(validate_uint32(c, _c[0], _c[1], _c[2], _c[3]))
+
+  IMM_32_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
 
 result_t test_vrsraq_n_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
