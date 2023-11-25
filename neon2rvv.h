@@ -2123,33 +2123,77 @@ FORCE_INLINE int8x8_t vrsra_n_s8(int8x8_t __a, int8x8_t __b, const int __c) {
   return __riscv_vadd_vv_i8m1(__a, b_rshr, 8);
 }
 
-// FORCE_INLINE int16x4_t vrsra_n_s16(int16x4_t __a, int16x4_t __b, const int __c);
+FORCE_INLINE int16x4_t vrsra_n_s16(int16x4_t __a, int16x4_t __b, const int __c) {
+  vint32m2_t b_w = __riscv_vsext_vf2_i32m2(__b, 4);
+  vint16m1_t b_rshr = __riscv_vnclip_wx_i16m1(b_w, __c, NEON2RVV_ROUND_TYPE_RNU, 4);
+  return __riscv_vadd_vv_i16m1(__a, b_rshr, 4);
+}
 
-// FORCE_INLINE int32x2_t vrsra_n_s32(int32x2_t __a, int32x2_t __b, const int __c);
+FORCE_INLINE int32x2_t vrsra_n_s32(int32x2_t __a, int32x2_t __b, const int __c) {
+  vint64m2_t b_w = __riscv_vsext_vf2_i64m2(__b, 2);
+  vint32m1_t b_rshr = __riscv_vnclip_wx_i32m1(b_w, __c, NEON2RVV_ROUND_TYPE_RNU, 2);
+  return __riscv_vadd_vv_i32m1(__a, b_rshr, 2);
+}
 
 // FORCE_INLINE int64x1_t vrsra_n_s64(int64x1_t __a, int64x1_t __b, const int __c);
 
-// FORCE_INLINE uint8x8_t vrsra_n_u8(uint8x8_t __a, uint8x8_t __b, const int __c);
+FORCE_INLINE uint8x8_t vrsra_n_u8(uint8x8_t __a, uint8x8_t __b, const int __c) {
+  vuint16m2_t b_w = __riscv_vzext_vf2_u16m2(__b, 8);
+  vuint8m1_t b_rshr = __riscv_vnclipu_wx_u8m1(b_w, __c, NEON2RVV_ROUND_TYPE_RNU, 8);
+  return __riscv_vadd_vv_u8m1(__a, b_rshr, 8);
+}
 
-// FORCE_INLINE uint16x4_t vrsra_n_u16(uint16x4_t __a, uint16x4_t __b, const int __c);
+FORCE_INLINE uint16x4_t vrsra_n_u16(uint16x4_t __a, uint16x4_t __b, const int __c) {
+  vuint32m2_t b_w = __riscv_vzext_vf2_u32m2(__b, 4);
+  vuint16m1_t b_rshr = __riscv_vnclipu_wx_u16m1(b_w, __c, NEON2RVV_ROUND_TYPE_RNU, 4);
+  return __riscv_vadd_vv_u16m1(__a, b_rshr, 4);
+}
 
-// FORCE_INLINE uint32x2_t vrsra_n_u32(uint32x2_t __a, uint32x2_t __b, const int __c);
+FORCE_INLINE uint32x2_t vrsra_n_u32(uint32x2_t __a, uint32x2_t __b, const int __c) {
+  vuint64m2_t b_w = __riscv_vzext_vf2_u64m2(__b, 2);
+  vuint32m1_t b_rshr = __riscv_vnclipu_wx_u32m1(b_w, __c, NEON2RVV_ROUND_TYPE_RNU, 2);
+  return __riscv_vadd_vv_u32m1(__a, b_rshr, 2);
+}
 
 // FORCE_INLINE uint64x1_t vrsra_n_u64(uint64x1_t __a, uint64x1_t __b, const int __c);
 
-// FORCE_INLINE int8x16_t vrsraq_n_s8(int8x16_t __a, int8x16_t __b, const int __c);
+FORCE_INLINE int8x16_t vrsraq_n_s8(int8x16_t __a, int8x16_t __b, const int __c) {
+  vint16m2_t b_w = __riscv_vsext_vf2_i16m2(__b, 16);
+  vint8m1_t b_rshr = __riscv_vnclip_wx_i8m1(b_w, __c, NEON2RVV_ROUND_TYPE_RNU, 16);
+  return __riscv_vadd_vv_i8m1(__a, b_rshr, 16);
+}
 
-// FORCE_INLINE int16x8_t vrsraq_n_s16(int16x8_t __a, int16x8_t __b, const int __c);
+FORCE_INLINE int16x8_t vrsraq_n_s16(int16x8_t __a, int16x8_t __b, const int __c) {
+  vint32m2_t b_w = __riscv_vsext_vf2_i32m2(__b, 8);
+  vint16m1_t b_rshr = __riscv_vnclip_wx_i16m1(b_w, __c, NEON2RVV_ROUND_TYPE_RNU, 8);
+  return __riscv_vadd_vv_i16m1(__a, b_rshr, 8);
+}
 
-// FORCE_INLINE int32x4_t vrsraq_n_s32(int32x4_t __a, int32x4_t __b, const int __c);
+FORCE_INLINE int32x4_t vrsraq_n_s32(int32x4_t __a, int32x4_t __b, const int __c) {
+  vint64m2_t b_w = __riscv_vsext_vf2_i64m2(__b, 4);
+  vint32m1_t b_rshr = __riscv_vnclip_wx_i32m1(b_w, __c, NEON2RVV_ROUND_TYPE_RNU, 4);
+  return __riscv_vadd_vv_i32m1(__a, b_rshr, 4);
+}
 
 // FORCE_INLINE int64x2_t vrsraq_n_s64(int64x2_t __a, int64x2_t __b, const int __c);
 
-// FORCE_INLINE uint8x16_t vrsraq_n_u8(uint8x16_t __a, uint8x16_t __b, const int __c);
+FORCE_INLINE uint8x16_t vrsraq_n_u8(uint8x16_t __a, uint8x16_t __b, const int __c) {
+  vuint16m2_t b_w = __riscv_vzext_vf2_u16m2(__b, 16);
+  vuint8m1_t b_rshr = __riscv_vnclipu_wx_u8m1(b_w, __c, NEON2RVV_ROUND_TYPE_RNU, 16);
+  return __riscv_vadd_vv_u8m1(__a, b_rshr, 16);
+}
 
-// FORCE_INLINE uint16x8_t vrsraq_n_u16(uint16x8_t __a, uint16x8_t __b, const int __c);
+FORCE_INLINE uint16x8_t vrsraq_n_u16(uint16x8_t __a, uint16x8_t __b, const int __c) {
+  vuint32m2_t b_w = __riscv_vzext_vf2_u32m2(__b, 8);
+  vuint16m1_t b_rshr = __riscv_vnclipu_wx_u16m1(b_w, __c, NEON2RVV_ROUND_TYPE_RNU, 8);
+  return __riscv_vadd_vv_u16m1(__a, b_rshr, 8);
+}
 
-// FORCE_INLINE uint32x4_t vrsraq_n_u32(uint32x4_t __a, uint32x4_t __b, const int __c);
+FORCE_INLINE uint32x4_t vrsraq_n_u32(uint32x4_t __a, uint32x4_t __b, const int __c) {
+  vuint64m2_t b_w = __riscv_vzext_vf2_u64m2(__b, 4);
+  vuint32m1_t b_rshr = __riscv_vnclipu_wx_u32m1(b_w, __c, NEON2RVV_ROUND_TYPE_RNU, 4);
+  return __riscv_vadd_vv_u32m1(__a, b_rshr, 4);
+}
 
 // FORCE_INLINE uint64x2_t vrsraq_n_u64(uint64x2_t __a, uint64x2_t __b, const int __c);
 
