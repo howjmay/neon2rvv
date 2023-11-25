@@ -5604,17 +5604,134 @@ result_t test_vzip_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
                        _c[1][1], _c[1][2], _c[1][3], _c[1][4], _c[1][5], _c[1][6], _c[1][7]);
 }
 
-result_t test_vzip_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vzip_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
+  const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
 
-result_t test_vzip_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  int16_t _c[2][4];
+  _c[0][0] = _a[0];
+  _c[0][1] = _b[0];
+  _c[0][2] = _a[1];
+  _c[0][3] = _b[1];
 
-result_t test_vzip_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  _c[1][0] = _a[2];
+  _c[1][1] = _b[2];
+  _c[1][2] = _a[3];
+  _c[1][3] = _b[3];
 
-result_t test_vzip_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  int16x4_t a = vld1_s16(_a);
+  int16x4_t b = vld1_s16(_b);
+  int16x4x2_t c = vzip_s16(a, b);
 
-result_t test_vzip_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  return validate_int16(c, _c[0][0], _c[0][1], _c[0][2], _c[0][3], _c[1][0], _c[1][1], _c[1][2], _c[1][3]);
+}
 
-result_t test_vzip_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vzip_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint8_t *_a = (uint8_t *)impl.test_cases_int_pointer1;
+  const uint8_t *_b = (uint8_t *)impl.test_cases_int_pointer2;
+
+  uint8_t _c[2][8];
+  _c[0][0] = _a[0];
+  _c[0][1] = _b[0];
+  _c[0][2] = _a[1];
+  _c[0][3] = _b[1];
+  _c[0][4] = _a[2];
+  _c[0][5] = _b[2];
+  _c[0][6] = _a[3];
+  _c[0][7] = _b[3];
+
+  _c[1][0] = _a[4];
+  _c[1][1] = _b[4];
+  _c[1][2] = _a[5];
+  _c[1][3] = _b[5];
+  _c[1][4] = _a[6];
+  _c[1][5] = _b[6];
+  _c[1][6] = _a[7];
+  _c[1][7] = _b[7];
+
+  uint8x8_t a = vld1_u8(_a);
+  uint8x8_t b = vld1_u8(_b);
+  uint8x8x2_t c = vzip_u8(a, b);
+
+  return validate_uint8(c, _c[0][0], _c[0][1], _c[0][2], _c[0][3], _c[0][4], _c[0][5], _c[0][6], _c[0][7], _c[1][0],
+                        _c[1][1], _c[1][2], _c[1][3], _c[1][4], _c[1][5], _c[1][6], _c[1][7]);
+}
+
+result_t test_vzip_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint16_t *_a = (uint16_t *)impl.test_cases_int_pointer1;
+  const uint16_t *_b = (uint16_t *)impl.test_cases_int_pointer2;
+
+  uint16_t _c[2][4];
+  _c[0][0] = _a[0];
+  _c[0][1] = _b[0];
+  _c[0][2] = _a[1];
+  _c[0][3] = _b[1];
+
+  _c[1][0] = _a[2];
+  _c[1][1] = _b[2];
+  _c[1][2] = _a[3];
+  _c[1][3] = _b[3];
+
+  uint16x4_t a = vld1_u16(_a);
+  uint16x4_t b = vld1_u16(_b);
+  uint16x4x2_t c = vzip_u16(a, b);
+
+  return validate_uint16(c, _c[0][0], _c[0][1], _c[0][2], _c[0][3], _c[1][0], _c[1][1], _c[1][2], _c[1][3]);
+}
+
+result_t test_vzip_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
+  const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
+
+  int32_t _c[2][2];
+  _c[0][0] = _a[0];
+  _c[0][1] = _b[0];
+
+  _c[1][0] = _a[1];
+  _c[1][1] = _b[1];
+
+  int32x2_t a = vld1_s32(_a);
+  int32x2_t b = vld1_s32(_b);
+  int32x2x2_t c = vzip_s32(a, b);
+
+  return validate_int32(c, _c[0][0], _c[0][1], _c[1][0], _c[1][1]);
+}
+
+result_t test_vzip_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const float *_a = (float *)impl.test_cases_float_pointer1;
+  const float *_b = (float *)impl.test_cases_float_pointer2;
+
+  float _c[2][2];
+  _c[0][0] = _a[0];
+  _c[0][1] = _b[0];
+
+  _c[1][0] = _a[1];
+  _c[1][1] = _b[1];
+
+  float32x2_t a = vld1_f32(_a);
+  float32x2_t b = vld1_f32(_b);
+  float32x2x2_t c = vzip_f32(a, b);
+
+  return validate_float(c, _c[0][0], _c[0][1], _c[1][0], _c[1][1]);
+}
+
+result_t test_vzip_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint32_t *_a = (uint32_t *)impl.test_cases_int_pointer1;
+  const uint32_t *_b = (uint32_t *)impl.test_cases_int_pointer2;
+
+  uint32_t _c[2][2];
+  _c[0][0] = _a[0];
+  _c[0][1] = _b[0];
+
+  _c[1][0] = _a[1];
+  _c[1][1] = _b[1];
+
+  uint32x2_t a = vld1_u32(_a);
+  uint32x2_t b = vld1_u32(_b);
+  uint32x2x2_t c = vzip_u32(a, b);
+
+  return validate_uint32(c, _c[0][0], _c[0][1], _c[1][0], _c[1][1]);
+}
 
 result_t test_vzipq_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
