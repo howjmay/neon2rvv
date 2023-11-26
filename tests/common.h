@@ -137,20 +137,25 @@ float ranf(float low, float high);
   if (EXP != TEST_SUCCESS) { \
     return TEST_FAIL;        \
   }
+#define IMM_1_ITER TEST_IMPL(0)
 #define IMM_2_ITER \
-  TEST_IMPL(0)     \
+  IMM_1_ITER       \
   TEST_IMPL(1)
-#define IMM_4_ITER \
+#define IMM_3_ITER \
   IMM_2_ITER       \
-  TEST_IMPL(2)     \
+  TEST_IMPL(2)
+#define IMM_4_ITER \
+  IMM_3_ITER       \
   TEST_IMPL(3)
-#define IMM_8_ITER \
+#define IMM_7_ITER \
   IMM_4_ITER       \
   TEST_IMPL(4)     \
   TEST_IMPL(5)     \
-  TEST_IMPL(6)     \
+  TEST_IMPL(6)
+#define IMM_8_ITER \
+  IMM_7_ITER       \
   TEST_IMPL(7)
-#define IMM_16_ITER \
+#define IMM_15_ITER \
   IMM_8_ITER        \
   TEST_IMPL(8)      \
   TEST_IMPL(9)      \
@@ -158,9 +163,11 @@ float ranf(float low, float high);
   TEST_IMPL(11)     \
   TEST_IMPL(12)     \
   TEST_IMPL(13)     \
-  TEST_IMPL(14)     \
+  TEST_IMPL(14)
+#define IMM_16_ITER \
+  IMM_15_ITER       \
   TEST_IMPL(15)
-#define IMM_32_ITER \
+#define IMM_31_ITER \
   IMM_16_ITER       \
   TEST_IMPL(16)     \
   TEST_IMPL(17)     \
@@ -176,9 +183,11 @@ float ranf(float low, float high);
   TEST_IMPL(27)     \
   TEST_IMPL(28)     \
   TEST_IMPL(29)     \
-  TEST_IMPL(30)     \
+  TEST_IMPL(30)
+#define IMM_32_ITER \
+  IMM_31_ITER       \
   TEST_IMPL(31)
-#define IMM_64_ITER \
+#define IMM_63_ITER \
   IMM_32_ITER       \
   TEST_IMPL(32)     \
   TEST_IMPL(33)     \
@@ -210,9 +219,11 @@ float ranf(float low, float high);
   TEST_IMPL(59)     \
   TEST_IMPL(60)     \
   TEST_IMPL(61)     \
-  TEST_IMPL(62)     \
+  TEST_IMPL(62)
+#define IMM_64_ITER \
+  IMM_63_ITER       \
   TEST_IMPL(63)
-#define IMM_128_ITER \
+#define IMM_127_ITER \
   IMM_64_ITER        \
   TEST_IMPL(64)      \
   TEST_IMPL(65)      \
@@ -276,9 +287,11 @@ float ranf(float low, float high);
   TEST_IMPL(123)     \
   TEST_IMPL(124)     \
   TEST_IMPL(125)     \
-  TEST_IMPL(126)     \
+  TEST_IMPL(126)
+#define IMM_128_ITER \
+  IMM_127_ITER       \
   TEST_IMPL(127)
-#define IMM_256_ITER \
+#define IMM_255_ITER \
   IMM_128_ITER       \
   TEST_IMPL(128)     \
   TEST_IMPL(129)     \
@@ -406,7 +419,9 @@ float ranf(float low, float high);
   TEST_IMPL(251)     \
   TEST_IMPL(252)     \
   TEST_IMPL(253)     \
-  TEST_IMPL(254)     \
+  TEST_IMPL(254)
+#define IMM_256_ITER \
+  IMM_255_ITER       \
   TEST_IMPL(255)
 
 }  // namespace NEON2RVV
