@@ -18,6 +18,8 @@ void print_64_bits_u16_arr(const char *var_name, const uint16_t *u);
 void print_64_bits_s16_arr(const char *var_name, const int16_t *u);
 void print_64_bits_u32_arr(const char *var_name, const uint32_t *u);
 void print_64_bits_s32_arr(const char *var_name, const int32_t *u);
+void print_64_bits_u64_arr(const char *var_name, const uint64_t *u);
+void print_64_bits_s64_arr(const char *var_name, const int64_t *u);
 void print_64_bits_f32_arr(const char *var_name, const float *f);
 void print_128_bits_u8_arr(const char *var_name, const uint8_t *u);
 void print_128_bits_s8_arr(const char *var_name, const int8_t *u);
@@ -25,6 +27,8 @@ void print_128_bits_u16_arr(const char *var_name, const uint16_t *u);
 void print_128_bits_s16_arr(const char *var_name, const int16_t *u);
 void print_128_bits_u32_arr(const char *var_name, const uint32_t *u);
 void print_128_bits_s32_arr(const char *var_name, const int32_t *u);
+void print_128_bits_u64_arr(const char *var_name, const uint64_t *u);
+void print_128_bits_s64_arr(const char *var_name, const int64_t *u);
 void print_128_bits_f32_arr(const char *var_name, const float *f);
 
 void print_u8_64(const char *var_name, uint8_t u0, uint8_t u1, uint8_t u2, uint8_t u3, uint8_t u4, uint8_t u5,
@@ -114,6 +118,26 @@ void print_s32_64(const char *var_name, T *a) {
   print_64_bits_s32_arr(var_name, s);
 }
 template <typename T>
+void print_u64_64(const char *var_name, T a) {
+  const uint64_t *u = (const uint64_t *)&a;
+  print_64_bits_u64_arr(var_name, u);
+}
+template <typename T>
+void print_u64_64(const char *var_name, T *a) {
+  const uint64_t *u = (const uint64_t *)a;
+  print_64_bits_u64_arr(var_name, u);
+}
+template <typename T>
+void print_s64_64(const char *var_name, T a) {
+  const int64_t *s = (const int64_t *)&a;
+  print_64_bits_s64_arr(var_name, s);
+}
+template <typename T>
+void print_s64_64(const char *var_name, T *a) {
+  const int64_t *s = (const int64_t *)a;
+  print_64_bits_s64_arr(var_name, s);
+}
+template <typename T>
 void print_f32_64(const char *var_name, T a) {
   const float *f = (const float *)&a;
   print_64_bits_f32_arr(var_name, f);
@@ -182,6 +206,26 @@ template <typename T>
 void print_s32_128(const char *var_name, T *a) {
   const int32_t *u = (const int32_t *)a;
   print_128_bits_s32_arr(var_name, u);
+}
+template <typename T>
+void print_u64_128(const char *var_name, T a) {
+  const uint64_t *u = (const uint64_t *)&a;
+  print_128_bits_u64_arr(var_name, u);
+}
+template <typename T>
+void print_u64_128(const char *var_name, T *a) {
+  const uint64_t *u = (const uint64_t *)a;
+  print_128_bits_u64_arr(var_name, u);
+}
+template <typename T>
+void print_s64_128(const char *var_name, T a) {
+  const int64_t *u = (const int64_t *)&a;
+  print_128_bits_s64_arr(var_name, u);
+}
+template <typename T>
+void print_s64_128(const char *var_name, T *a) {
+  const int64_t *u = (const int64_t *)a;
+  print_128_bits_s64_arr(var_name, u);
 }
 template <typename T>
 void print_f32_128(const char *var_name, T a) {

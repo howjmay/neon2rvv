@@ -24,6 +24,8 @@ void print_64_bits_u32_arr(const char *var_name, const uint32_t *u) {
 void print_64_bits_s32_arr(const char *var_name, const int32_t *u) {
   printf("%s0: %10d, %s1: %10d\n", var_name, u[0], var_name, u[1]);
 }
+void print_64_bits_u64_arr(const char *var_name, const uint64_t *u) { printf("%s0: %20llu\n", var_name, u[0]); }
+void print_64_bits_s64_arr(const char *var_name, const int64_t *u) { printf("%s0: %20lld\n", var_name, u[0]); }
 void print_64_bits_f32_arr(const char *var_name, const float *f) {
   printf("%s0: %.3f, %s1: %.3f\n", var_name, f[0], var_name, f[1]);
 }
@@ -60,6 +62,12 @@ void print_128_bits_u32_arr(const char *var_name, const uint32_t *u) {
 void print_128_bits_s32_arr(const char *var_name, const int32_t *u) {
   printf("%s0: %10d, %s1: %10d, %s2: %10d, %s3: %10d\n", var_name, u[0], var_name, u[1], var_name, u[2], var_name,
          u[3]);
+}
+void print_128_bits_u64_arr(const char *var_name, const uint64_t *u) {
+  printf("%s0: %20llu, %s1: %20llu\n", var_name, u[0], var_name, u[1]);
+}
+void print_128_bits_s64_arr(const char *var_name, const int64_t *u) {
+  printf("%s0: %20lld, %s1: %20lld\n", var_name, u[0], var_name, u[1]);
 }
 void print_128_bits_f32_arr(const char *var_name, const float *f) {
   printf("%s0: %.3f, %s1: %.3f, %s2: %.3f, %s3: %.3f\n", var_name, f[0], var_name, f[1], var_name, f[2], var_name,
