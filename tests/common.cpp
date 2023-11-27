@@ -607,7 +607,7 @@ uint16_t saturate_uint16(unsigned int a) {
     return (uint16_t)UINT16_MAX;
   return (uint16_t)a;
 }
-int32_t saturate_int32(int a) {
+int32_t saturate_int32(int64_t a) {
   if (a > INT32_MAX)
     return (int32_t)INT32_MAX;
   if (a < INT32_MIN)
