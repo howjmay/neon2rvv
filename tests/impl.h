@@ -2385,7 +2385,7 @@ namespace NEON2RVV {
 // the actual expected results from the corresponding NEON intrinsic against all
 // of the 10,000 randomized input vectors. When running on ARM, then the results
 // are compared to the NEON approximate version.
-static const char *instruction_string[] = {
+static const char* instruction_string[] __attribute__((unused)) = {
 #define _(x) #x,
     INTRIN_LIST
 #undef _
@@ -2399,7 +2399,7 @@ enum INSTRUCTION_TEST {
 
 class NEON2RVV_TEST {
  public:
-  static NEON2RVV_TEST *create(void);  // create the test.
+  static NEON2RVV_TEST* create(void);  // create the test.
 
   // Run test of this instruction;
   // Passed: TEST_SUCCESS (1)
