@@ -502,31 +502,57 @@ FORCE_INLINE int8x8_t vmla_s8(int8x8_t __a, int8x8_t __b, int8x8_t __c) {
   return __riscv_vmacc_vv_i8m1(__a, __b, __c, 8);
 }
 
-// FORCE_INLINE int16x4_t vmla_s16(int16x4_t __a, int16x4_t __b, int16x4_t __c);
+FORCE_INLINE int16x4_t vmla_s16(int16x4_t __a, int16x4_t __b, int16x4_t __c) {
+  return __riscv_vmacc_vv_i16m1(__a, __b, __c, 4);
+}
 
-// FORCE_INLINE int32x2_t vmla_s32(int32x2_t __a, int32x2_t __b, int32x2_t __c);
+FORCE_INLINE int32x2_t vmla_s32(int32x2_t __a, int32x2_t __b, int32x2_t __c) {
+  return __riscv_vmacc_vv_i32m1(__a, __b, __c, 2);
+}
 
-// FORCE_INLINE float32x2_t vmla_f32(float32x2_t __a, float32x2_t __b, float32x2_t __c);
+FORCE_INLINE float32x2_t vmla_f32(float32x2_t __a, float32x2_t __b, float32x2_t __c) {
+  return __riscv_vfmacc_vv_f32m1(__a, __b, __c, 2);
+}
 
-// FORCE_INLINE uint8x8_t vmla_u8(uint8x8_t __a, uint8x8_t __b, uint8x8_t __c);
+FORCE_INLINE uint8x8_t vmla_u8(uint8x8_t __a, uint8x8_t __b, uint8x8_t __c) {
+  return __riscv_vmacc_vv_u8m1(__a, __b, __c, 8);
+}
 
-// FORCE_INLINE uint16x4_t vmla_u16(uint16x4_t __a, uint16x4_t __b, uint16x4_t __c);
+FORCE_INLINE uint16x4_t vmla_u16(uint16x4_t __a, uint16x4_t __b, uint16x4_t __c) {
+  return __riscv_vmacc_vv_u16m1(__a, __b, __c, 4);
+}
 
-// FORCE_INLINE uint32x2_t vmla_u32(uint32x2_t __a, uint32x2_t __b, uint32x2_t __c);
+FORCE_INLINE uint32x2_t vmla_u32(uint32x2_t __a, uint32x2_t __b, uint32x2_t __c) {
+  return __riscv_vmacc_vv_u32m1(__a, __b, __c, 2);
+}
 
-// FORCE_INLINE int8x16_t vmlaq_s8(int8x16_t __a, int8x16_t __b, int8x16_t __c);
+FORCE_INLINE int8x16_t vmlaq_s8(int8x16_t __a, int8x16_t __b, int8x16_t __c) {
+  return __riscv_vmacc_vv_i8m1(__a, __b, __c, 16);
+}
 
-// FORCE_INLINE int16x8_t vmlaq_s16(int16x8_t __a, int16x8_t __b, int16x8_t __c);
+FORCE_INLINE int16x8_t vmlaq_s16(int16x8_t __a, int16x8_t __b, int16x8_t __c) {
+  return __riscv_vmacc_vv_i16m1(__a, __b, __c, 8);
+}
 
-// FORCE_INLINE int32x4_t vmlaq_s32(int32x4_t __a, int32x4_t __b, int32x4_t __c);
+FORCE_INLINE int32x4_t vmlaq_s32(int32x4_t __a, int32x4_t __b, int32x4_t __c) {
+  return __riscv_vmacc_vv_i32m1(__a, __b, __c, 4);
+}
 
-// FORCE_INLINE float32x4_t vmlaq_f32(float32x4_t __a, float32x4_t __b, float32x4_t __c);
+FORCE_INLINE float32x4_t vmlaq_f32(float32x4_t __a, float32x4_t __b, float32x4_t __c) {
+  return __riscv_vfmacc_vv_f32m1(__a, __b, __c, 4);
+}
 
-// FORCE_INLINE uint8x16_t vmlaq_u8(uint8x16_t __a, uint8x16_t __b, uint8x16_t __c);
+FORCE_INLINE uint8x16_t vmlaq_u8(uint8x16_t __a, uint8x16_t __b, uint8x16_t __c) {
+  return __riscv_vmacc_vv_u8m1(__a, __b, __c, 16);
+}
 
-// FORCE_INLINE uint16x8_t vmlaq_u16(uint16x8_t __a, uint16x8_t __b, uint16x8_t __c);
+FORCE_INLINE uint16x8_t vmlaq_u16(uint16x8_t __a, uint16x8_t __b, uint16x8_t __c) {
+  return __riscv_vmacc_vv_u16m1(__a, __b, __c, 8);
+}
 
-// FORCE_INLINE uint32x4_t vmlaq_u32(uint32x4_t __a, uint32x4_t __b, uint32x4_t __c);
+FORCE_INLINE uint32x4_t vmlaq_u32(uint32x4_t __a, uint32x4_t __b, uint32x4_t __c) {
+  return __riscv_vmacc_vv_u32m1(__a, __b, __c, 4);
+}
 
 FORCE_INLINE int16x8_t vmlal_s8(int16x8_t __a, int8x8_t __b, int8x8_t __c) {
   return __riscv_vlmul_trunc_v_i16m2_i16m1(__riscv_vwmacc_vv_i16m2(__riscv_vlmul_ext_v_i16m1_i16m2(__a), __b, __c, 8));
