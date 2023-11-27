@@ -6268,22 +6268,67 @@ result_t test_vmovn_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
   int8_t _c[8];
   for (int i = 0; i < 8; i++) {
-    _c[i] = _a[i] & 0xff;
+    _c[i] = _a[i] & UINT8_MAX;
   }
   int16x8_t a = vld1q_s16(_a);
   int8x8_t c = vmovn_s16(a);
   return validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]);
 }
 
-result_t test_vmovn_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vmovn_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
+  int16_t _c[4];
+  for (int i = 0; i < 4; i++) {
+    _c[i] = _a[i] & UINT16_MAX;
+  }
+  int32x4_t a = vld1q_s32(_a);
+  int16x4_t c = vmovn_s32(a);
+  return validate_int16(c, _c[0], _c[1], _c[2], _c[3]);
+}
 
-result_t test_vmovn_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vmovn_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int64_t *_a = (int64_t *)impl.test_cases_int_pointer1;
+  int32_t _c[2];
+  for (int i = 0; i < 2; i++) {
+    _c[i] = _a[i] & UINT32_MAX;
+  }
+  int64x2_t a = vld1q_s64(_a);
+  int32x2_t c = vmovn_s64(a);
+  return validate_int32(c, _c[0], _c[1]);
+}
 
-result_t test_vmovn_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vmovn_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint16_t *_a = (uint16_t *)impl.test_cases_int_pointer1;
+  uint8_t _c[8];
+  for (int i = 0; i < 8; i++) {
+    _c[i] = _a[i] & UINT8_MAX;
+  }
+  uint16x8_t a = vld1q_u16(_a);
+  uint8x8_t c = vmovn_u16(a);
+  return validate_uint8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]);
+}
 
-result_t test_vmovn_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vmovn_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint32_t *_a = (uint32_t *)impl.test_cases_int_pointer1;
+  uint16_t _c[4];
+  for (int i = 0; i < 4; i++) {
+    _c[i] = _a[i] & UINT16_MAX;
+  }
+  uint32x4_t a = vld1q_u32(_a);
+  uint16x4_t c = vmovn_u32(a);
+  return validate_uint16(c, _c[0], _c[1], _c[2], _c[3]);
+}
 
-result_t test_vmovn_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vmovn_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint64_t *_a = (uint64_t *)impl.test_cases_int_pointer1;
+  uint32_t _c[2];
+  for (int i = 0; i < 2; i++) {
+    _c[i] = _a[i] & UINT32_MAX;
+  }
+  uint64x2_t a = vld1q_u64(_a);
+  uint32x2_t c = vmovn_u64(a);
+  return validate_uint32(c, _c[0], _c[1]);
+}
 
 result_t test_vqmovn_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
