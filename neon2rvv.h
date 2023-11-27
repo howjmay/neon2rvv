@@ -161,6 +161,15 @@ FORCE_INLINE uint16x4_t vdup_n_u16(uint16_t __a);
 FORCE_INLINE uint32x2_t vdup_n_u32(uint32_t __a);
 FORCE_INLINE int64x1_t vdup_n_s64(int64_t __a);
 FORCE_INLINE uint64x1_t vdup_n_u64(uint64_t __a);
+FORCE_INLINE int8x8_t vdupq_n_s8(int8_t __a);
+FORCE_INLINE int16x4_t vdupq_n_s16(int16_t __a);
+FORCE_INLINE int32x2_t vdupq_n_s32(int32_t __a);
+FORCE_INLINE float32x2_t vdupq_n_f32(float32_t __a);
+FORCE_INLINE uint8x8_t vdupq_n_u8(uint8_t __a);
+FORCE_INLINE uint16x4_t vdupq_n_u16(uint16_t __a);
+FORCE_INLINE uint32x2_t vdupq_n_u32(uint32_t __a);
+FORCE_INLINE int64x1_t vdupq_n_s64(int64_t __a);
+FORCE_INLINE uint64x1_t vdupq_n_u64(uint64_t __a);
 
 FORCE_INLINE int8x8_t vcnt_s8(int8x8_t __a);
 FORCE_INLINE uint8x8_t vcnt_u8(uint8x8_t __a);
@@ -1866,44 +1875,176 @@ FORCE_INLINE uint64x2_t vshlq_u64(uint64x2_t __a, int64x2_t __b) {
 
 FORCE_INLINE int8x8_t vrshl_s8(int8x8_t __a, int8x8_t __b) {
   vbool8_t positive_mask = __riscv_vmsgt_vx_i8m1_b8(__b, 0, 8);
-  vbool8_t gt_mask = __riscv_vmsgt_vx_i8m1_b8(__b, 7, 8);
   vint8m1_t shl = __riscv_vsll_vv_i8m1(__a, __riscv_vreinterpret_v_i8m1_u8m1(__b), 8);
   vint16m2_t a_ext = __riscv_vsext_vf2_i16m2(__a, 8);
   vint8m1_t b_neg = __riscv_vneg_v_i8m1(__b, 8);
   vint8m1_t shr = __riscv_vnclip_wv_i8m1(a_ext, __riscv_vreinterpret_v_i8m1_u8m1(b_neg), NEON2RVV_ROUND_TYPE_RNU, 8);
-  vint8m1_t ab_within_range = __riscv_vmerge_vvm_i8m1(shr, shl, positive_mask, 8);
-  return __riscv_vmerge_vxm_i8m1(ab_within_range, 0x0, gt_mask, 8);
+  return __riscv_vmerge_vvm_i8m1(shr, shl, positive_mask, 8);
 }
 
-// FORCE_INLINE int16x4_t vrshl_s16(int16x4_t __a, int16x4_t __b);
+FORCE_INLINE int16x4_t vrshl_s16(int16x4_t __a, int16x4_t __b) {
+  vbool16_t positive_mask = __riscv_vmsgt_vx_i16m1_b16(__b, 0, 4);
+  vint16m1_t shl = __riscv_vsll_vv_i16m1(__a, __riscv_vreinterpret_v_i16m1_u16m1(__b), 4);
+  vint32m2_t a_ext = __riscv_vsext_vf2_i32m2(__a, 4);
+  vint16m1_t b_neg = __riscv_vneg_v_i16m1(__b, 4);
+  vint16m1_t shr =
+      __riscv_vnclip_wv_i16m1(a_ext, __riscv_vreinterpret_v_i16m1_u16m1(b_neg), NEON2RVV_ROUND_TYPE_RNU, 4);
+  return __riscv_vmerge_vvm_i16m1(shr, shl, positive_mask, 4);
+}
 
-// FORCE_INLINE int32x2_t vrshl_s32(int32x2_t __a, int32x2_t __b);
+FORCE_INLINE int32x2_t vrshl_s32(int32x2_t __a, int32x2_t __b) {
+  vbool32_t positive_mask = __riscv_vmsgt_vx_i32m1_b32(__b, 0, 2);
+  vint32m1_t shl = __riscv_vsll_vv_i32m1(__a, __riscv_vreinterpret_v_i32m1_u32m1(__b), 2);
+  vint64m2_t a_ext = __riscv_vsext_vf2_i64m2(__a, 2);
+  vint32m1_t b_neg = __riscv_vneg_v_i32m1(__b, 2);
+  vint32m1_t shr =
+      __riscv_vnclip_wv_i32m1(a_ext, __riscv_vreinterpret_v_i32m1_u32m1(b_neg), NEON2RVV_ROUND_TYPE_RNU, 2);
+  return __riscv_vmerge_vvm_i32m1(shr, shl, positive_mask, 2);
+}
 
-// FORCE_INLINE int64x1_t vrshl_s64(int64x1_t __a, int64x1_t __b);
+FORCE_INLINE int64x1_t vrshl_s64(int64x1_t __a, int64x1_t __b) {
+  // implementation only works within defined range 'b' in [0, 63]
+  vbool64_t non_neg_mask = __riscv_vmsge_vx_i64m1_b64(__b, 0, 1);
+  vint64m1_t shl = __riscv_vsll_vv_i64m1(__a, __riscv_vreinterpret_v_i64m1_u64m1(__b), 1);
+  vint64m1_t b_neg = __riscv_vneg_v_i64m1(__b, 1);
+  vint64m1_t round_const = __riscv_vsll_vv_i64m1(
+      vdup_n_s64(1), __riscv_vreinterpret_v_i64m1_u64m1(__riscv_vsub_vx_i64m1(__riscv_vneg_v_i64m1(__b, 1), 1, 1)), 1);
+  vint64m1_t a_round = __riscv_vadd_vv_i64m1((__a), (round_const), 1);
+  vint64m1_t shr = __riscv_vsra_vv_i64m1((a_round), __riscv_vreinterpret_v_i64m1_u64m1(b_neg), 1);
+  return __riscv_vmerge_vvm_i64m1(shr, shl, non_neg_mask, 1);
+}
 
-// FORCE_INLINE uint8x8_t vrshl_u8(uint8x8_t __a, int8x8_t __b);
+FORCE_INLINE uint8x8_t vrshl_u8(uint8x8_t __a, int8x8_t __b) {
+  // implementation only works within defined range 'b' in [0, 7]
+  vbool8_t positive_mask = __riscv_vmsgt_vx_i8m1_b8(__b, 0, 8);
+  vuint8m1_t shl = __riscv_vsll_vv_u8m1(__a, __riscv_vreinterpret_v_i8m1_u8m1(__b), 8);
+  vuint16m2_t a_ext = __riscv_vzext_vf2_u16m2(__a, 8);
+  vint8m1_t b_neg = __riscv_vneg_v_i8m1(__b, 8);
+  vuint8m1_t shr = __riscv_vnclipu_wv_u8m1(a_ext, __riscv_vreinterpret_v_i8m1_u8m1(b_neg), NEON2RVV_ROUND_TYPE_RNU, 8);
+  return __riscv_vmerge_vvm_u8m1(shr, shl, positive_mask, 8);
+}
 
-// FORCE_INLINE uint16x4_t vrshl_u16(uint16x4_t __a, int16x4_t __b);
+FORCE_INLINE uint16x4_t vrshl_u16(uint16x4_t __a, int16x4_t __b) {
+  // implementation only works within defined range 'b' in [0, 15]
+  vbool16_t positive_mask = __riscv_vmsgt_vx_i16m1_b16(__b, 0, 4);
+  vuint16m1_t shl = __riscv_vsll_vv_u16m1(__a, __riscv_vreinterpret_v_i16m1_u16m1(__b), 4);
+  vuint32m2_t a_ext = __riscv_vzext_vf2_u32m2(__a, 4);
+  vint16m1_t b_neg = __riscv_vneg_v_i16m1(__b, 4);
+  vuint16m1_t shr =
+      __riscv_vnclipu_wv_u16m1(a_ext, __riscv_vreinterpret_v_i16m1_u16m1(b_neg), NEON2RVV_ROUND_TYPE_RNU, 4);
+  return __riscv_vmerge_vvm_u16m1(shr, shl, positive_mask, 4);
+}
 
-// FORCE_INLINE uint32x2_t vrshl_u32(uint32x2_t __a, int32x2_t __b);
+FORCE_INLINE uint32x2_t vrshl_u32(uint32x2_t __a, int32x2_t __b) {
+  // implementation only works within defined range 'b' in [0, 31]
+  vbool32_t positive_mask = __riscv_vmsgt_vx_i32m1_b32(__b, 0, 2);
+  vuint32m1_t shl = __riscv_vsll_vv_u32m1(__a, __riscv_vreinterpret_v_i32m1_u32m1(__b), 2);
+  vuint64m2_t a_ext = __riscv_vzext_vf2_u64m2(__a, 2);
+  vint32m1_t b_neg = __riscv_vneg_v_i32m1(__b, 2);
+  vuint32m1_t shr =
+      __riscv_vnclipu_wv_u32m1(a_ext, __riscv_vreinterpret_v_i32m1_u32m1(b_neg), NEON2RVV_ROUND_TYPE_RNU, 2);
+  return __riscv_vmerge_vvm_u32m1(shr, shl, positive_mask, 2);
+}
 
-// FORCE_INLINE uint64x1_t vrshl_u64(uint64x1_t __a, int64x1_t __b);
+FORCE_INLINE uint64x1_t vrshl_u64(uint64x1_t __a, int64x1_t __b) {
+  // implementation only works within defined range 'b' in [0, 63]
+  vbool64_t non_neg_mask = __riscv_vmsge_vx_i64m1_b64(__b, 0, 1);
+  vuint64m1_t shl = __riscv_vsll_vv_u64m1(__a, __riscv_vreinterpret_v_i64m1_u64m1(__b), 1);
+  vint64m1_t b_neg = __riscv_vneg_v_i64m1(__b, 1);
+  vuint64m1_t round_const = __riscv_vsll_vv_u64m1(
+      vdup_n_u64(1), __riscv_vreinterpret_v_i64m1_u64m1(__riscv_vsub_vx_i64m1(__riscv_vneg_v_i64m1(__b, 1), 1, 1)), 1);
+  vuint64m1_t a_round = __riscv_vadd_vv_u64m1((__a), (round_const), 1);
+  vuint64m1_t shr = __riscv_vsrl_vv_u64m1((a_round), __riscv_vreinterpret_v_i64m1_u64m1(b_neg), 1);
+  return __riscv_vmerge_vvm_u64m1(shr, shl, non_neg_mask, 1);
+}
 
-// FORCE_INLINE int8x16_t vrshlq_s8(int8x16_t __a, int8x16_t __b);
+FORCE_INLINE int8x16_t vrshlq_s8(int8x16_t __a, int8x16_t __b) {
+  // implementation only works within defined range 'b' in [0, 7]
+  vbool8_t positive_mask = __riscv_vmsgt_vx_i8m1_b8(__b, 0, 16);
+  vint8m1_t shl = __riscv_vsll_vv_i8m1(__a, __riscv_vreinterpret_v_i8m1_u8m1(__b), 16);
+  vint16m2_t a_ext = __riscv_vsext_vf2_i16m2(__a, 16);
+  vint8m1_t b_neg = __riscv_vneg_v_i8m1(__b, 16);
+  vint8m1_t shr = __riscv_vnclip_wv_i8m1(a_ext, __riscv_vreinterpret_v_i8m1_u8m1(b_neg), NEON2RVV_ROUND_TYPE_RNU, 16);
+  return __riscv_vmerge_vvm_i8m1(shr, shl, positive_mask, 16);
+}
 
-// FORCE_INLINE int16x8_t vrshlq_s16(int16x8_t __a, int16x8_t __b);
+FORCE_INLINE int16x8_t vrshlq_s16(int16x8_t __a, int16x8_t __b) {
+  // implementation only works within defined range 'b' in [0, 15]
+  vbool16_t positive_mask = __riscv_vmsgt_vx_i16m1_b16(__b, 0, 8);
+  vint16m1_t shl = __riscv_vsll_vv_i16m1(__a, __riscv_vreinterpret_v_i16m1_u16m1(__b), 8);
+  vint32m2_t a_ext = __riscv_vsext_vf2_i32m2(__a, 8);
+  vint16m1_t b_neg = __riscv_vneg_v_i16m1(__b, 8);
+  vint16m1_t shr =
+      __riscv_vnclip_wv_i16m1(a_ext, __riscv_vreinterpret_v_i16m1_u16m1(b_neg), NEON2RVV_ROUND_TYPE_RNU, 8);
+  return __riscv_vmerge_vvm_i16m1(shr, shl, positive_mask, 8);
+}
 
-// FORCE_INLINE int32x4_t vrshlq_s32(int32x4_t __a, int32x4_t __b);
+FORCE_INLINE int32x4_t vrshlq_s32(int32x4_t __a, int32x4_t __b) {
+  // implementation only works within defined range 'b' in [0, 31]
+  vbool32_t positive_mask = __riscv_vmsgt_vx_i32m1_b32(__b, 0, 4);
+  vint32m1_t shl = __riscv_vsll_vv_i32m1(__a, __riscv_vreinterpret_v_i32m1_u32m1(__b), 4);
+  vint64m2_t a_ext = __riscv_vsext_vf2_i64m2(__a, 4);
+  vint32m1_t b_neg = __riscv_vneg_v_i32m1(__b, 4);
+  vint32m1_t shr =
+      __riscv_vnclip_wv_i32m1(a_ext, __riscv_vreinterpret_v_i32m1_u32m1(b_neg), NEON2RVV_ROUND_TYPE_RNU, 4);
+  return __riscv_vmerge_vvm_i32m1(shr, shl, positive_mask, 4);
+}
 
-// FORCE_INLINE int64x2_t vrshlq_s64(int64x2_t __a, int64x2_t __b);
+FORCE_INLINE int64x2_t vrshlq_s64(int64x2_t __a, int64x2_t __b) {
+  // implementation only works within defined range 'b' in [0, 63]
+  vbool64_t non_neg_mask = __riscv_vmsge_vx_i64m1_b64(__b, 0, 2);
+  vint64m1_t shl = __riscv_vsll_vv_i64m1(__a, __riscv_vreinterpret_v_i64m1_u64m1(__b), 2);
+  vint64m1_t b_neg = __riscv_vneg_v_i64m1(__b, 2);
+  vint64m1_t round_const = __riscv_vsll_vv_i64m1(
+      vdupq_n_s64(1), __riscv_vreinterpret_v_i64m1_u64m1(__riscv_vsub_vx_i64m1(__riscv_vneg_v_i64m1(__b, 2), 1, 2)), 2);
+  vint64m1_t a_round = __riscv_vadd_vv_i64m1((__a), (round_const), 2);
+  vint64m1_t shr = __riscv_vsra_vv_i64m1((a_round), __riscv_vreinterpret_v_i64m1_u64m1(b_neg), 2);
+  return __riscv_vmerge_vvm_i64m1(shr, shl, non_neg_mask, 2);
+}
 
-// FORCE_INLINE uint8x16_t vrshlq_u8(uint8x16_t __a, int8x16_t __b);
+FORCE_INLINE uint8x16_t vrshlq_u8(uint8x16_t __a, int8x16_t __b) {
+  // implementation only works within defined range 'b' in [0, 7]
+  vbool8_t positive_mask = __riscv_vmsgt_vx_i8m1_b8(__b, 0, 16);
+  vuint8m1_t shl = __riscv_vsll_vv_u8m1(__a, __riscv_vreinterpret_v_i8m1_u8m1(__b), 16);
+  vuint16m2_t a_ext = __riscv_vzext_vf2_u16m2(__a, 16);
+  vint8m1_t b_neg = __riscv_vneg_v_i8m1(__b, 16);
+  vuint8m1_t shr = __riscv_vnclipu_wv_u8m1(a_ext, __riscv_vreinterpret_v_i8m1_u8m1(b_neg), NEON2RVV_ROUND_TYPE_RNU, 16);
+  return __riscv_vmerge_vvm_u8m1(shr, shl, positive_mask, 16);
+}
 
-// FORCE_INLINE uint16x8_t vrshlq_u16(uint16x8_t __a, int16x8_t __b);
+FORCE_INLINE uint16x8_t vrshlq_u16(uint16x8_t __a, int16x8_t __b) {
+  // implementation only works within defined range 'b' in [0, 15]
+  vbool16_t positive_mask = __riscv_vmsgt_vx_i16m1_b16(__b, 0, 8);
+  vuint16m1_t shl = __riscv_vsll_vv_u16m1(__a, __riscv_vreinterpret_v_i16m1_u16m1(__b), 8);
+  vuint32m2_t a_ext = __riscv_vzext_vf2_u32m2(__a, 8);
+  vint16m1_t b_neg = __riscv_vneg_v_i16m1(__b, 8);
+  vuint16m1_t shr =
+      __riscv_vnclipu_wv_u16m1(a_ext, __riscv_vreinterpret_v_i16m1_u16m1(b_neg), NEON2RVV_ROUND_TYPE_RNU, 8);
+  return __riscv_vmerge_vvm_u16m1(shr, shl, positive_mask, 8);
+}
 
-// FORCE_INLINE uint32x4_t vrshlq_u32(uint32x4_t __a, int32x4_t __b);
+FORCE_INLINE uint32x4_t vrshlq_u32(uint32x4_t __a, int32x4_t __b) {
+  // implementation only works within defined range 'b' in [0, 31]
+  vbool32_t positive_mask = __riscv_vmsgt_vx_i32m1_b32(__b, 0, 4);
+  vuint32m1_t shl = __riscv_vsll_vv_u32m1(__a, __riscv_vreinterpret_v_i32m1_u32m1(__b), 4);
+  vuint64m2_t a_ext = __riscv_vzext_vf2_u64m2(__a, 4);
+  vint32m1_t b_neg = __riscv_vneg_v_i32m1(__b, 4);
+  vuint32m1_t shr =
+      __riscv_vnclipu_wv_u32m1(a_ext, __riscv_vreinterpret_v_i32m1_u32m1(b_neg), NEON2RVV_ROUND_TYPE_RNU, 4);
+  return __riscv_vmerge_vvm_u32m1(shr, shl, positive_mask, 4);
+}
 
-// FORCE_INLINE uint64x2_t vrshlq_u64(uint64x2_t __a, int64x2_t __b);
+FORCE_INLINE uint64x2_t vrshlq_u64(uint64x2_t __a, int64x2_t __b) {
+  // implementation only works within defined range 'b' in [0, 63]
+  vbool64_t non_neg_mask = __riscv_vmsge_vx_i64m1_b64(__b, 0, 2);
+  vuint64m1_t shl = __riscv_vsll_vv_u64m1(__a, __riscv_vreinterpret_v_i64m1_u64m1(__b), 2);
+  vint64m1_t b_neg = __riscv_vneg_v_i64m1(__b, 2);
+  vuint64m1_t round_const = __riscv_vsll_vv_u64m1(
+      vdupq_n_u64(1), __riscv_vreinterpret_v_i64m1_u64m1(__riscv_vsub_vx_i64m1(__riscv_vneg_v_i64m1(__b, 2), 1, 2)), 2);
+  vuint64m1_t a_round = __riscv_vadd_vv_u64m1((__a), (round_const), 2);
+  vuint64m1_t shr = __riscv_vsrl_vv_u64m1((a_round), __riscv_vreinterpret_v_i64m1_u64m1(b_neg), 2);
+  return __riscv_vmerge_vvm_u64m1(shr, shl, non_neg_mask, 2);
+}
 
 // FORCE_INLINE int8x8_t vqshl_s8(int8x8_t __a, int8x8_t __b);
 
