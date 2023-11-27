@@ -4,6 +4,14 @@
 
 namespace NEON2RVV {
 
+#if defined(__clang__)
+#define INT64_ESCAPE "%20lld"
+#define UINT64_ESCAPE "%20llu"
+#else
+#define INT64_ESCAPE "%20ld"
+#define UINT64_ESCAPE "%20lu"
+#endif
+
 void print_64_bits_u8_arr(const char *var_name, const uint8_t *u) {
   printf("%s0: %3u, %s1: %3u, %s2: %3u, %s3: %3u, %s4: %3u, %s5: %3u, %s6: %3u, %s7: %3u\n", var_name, u[0], var_name,
          u[1], var_name, u[2], var_name, u[3], var_name, u[4], var_name, u[5], var_name, u[6], var_name, u[7]);
@@ -24,8 +32,12 @@ void print_64_bits_u32_arr(const char *var_name, const uint32_t *u) {
 void print_64_bits_s32_arr(const char *var_name, const int32_t *u) {
   printf("%s0: %10d, %s1: %10d\n", var_name, u[0], var_name, u[1]);
 }
-void print_64_bits_u64_arr(const char *var_name, const uint64_t *u) { printf("%s0: %20lu\n", var_name, u[0]); }
-void print_64_bits_s64_arr(const char *var_name, const int64_t *u) { printf("%s0: %20ld\n", var_name, u[0]); }
+void print_64_bits_u64_arr(const char *var_name, const uint64_t *u) {
+  printf("%s0: " UINT64_ESCAPE "\n", var_name, u[0]);
+}
+void print_64_bits_s64_arr(const char *var_name, const int64_t *u) {
+  printf("%s0: " INT64_ESCAPE "\n", var_name, u[0]);
+}
 void print_64_bits_f32_arr(const char *var_name, const float *f) {
   printf("%s0: %.3f, %s1: %.3f\n", var_name, f[0], var_name, f[1]);
 }
@@ -64,10 +76,10 @@ void print_128_bits_s32_arr(const char *var_name, const int32_t *u) {
          u[3]);
 }
 void print_128_bits_u64_arr(const char *var_name, const uint64_t *u) {
-  printf("%s0: %20lu, %s1: %20lu\n", var_name, u[0], var_name, u[1]);
+  printf("%s0: " UINT64_ESCAPE ", %s1: " UINT64_ESCAPE "\n", var_name, u[0], var_name, u[1]);
 }
 void print_128_bits_s64_arr(const char *var_name, const int64_t *u) {
-  printf("%s0: %20ld, %s1: %20ld\n", var_name, u[0], var_name, u[1]);
+  printf("%s0: " INT64_ESCAPE ", %s1: " INT64_ESCAPE "\n", var_name, u[0], var_name, u[1]);
 }
 void print_128_bits_f32_arr(const char *var_name, const float *f) {
   printf("%s0: %.3f, %s1: %.3f, %s2: %.3f, %s3: %.3f\n", var_name, f[0], var_name, f[1], var_name, f[2], var_name,
