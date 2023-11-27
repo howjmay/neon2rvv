@@ -590,21 +590,34 @@ int8_t saturate_int8(int a) {
     return (int8_t)INT8_MIN;
   return (int8_t)a;
 }
-
+uint8_t saturate_uint8(unsigned int a) {
+  if (a > UINT8_MAX)
+    return (uint8_t)UINT8_MAX;
+  return (uint8_t)a;
+}
 int16_t saturate_int16(int a) {
-  if (a > INT32_MAX)
-    return (int16_t)INT32_MAX;
-  if (a < INT32_MIN)
-    return (int16_t)INT32_MIN;
+  if (a > INT16_MAX)
+    return (int16_t)INT16_MAX;
+  if (a < INT16_MIN)
+    return (int16_t)INT16_MIN;
   return (int16_t)a;
 }
-
+uint16_t saturate_uint16(unsigned int a) {
+  if (a > UINT16_MAX)
+    return (uint16_t)UINT16_MAX;
+  return (uint16_t)a;
+}
 int32_t saturate_int32(int a) {
   if (a > INT32_MAX)
     return (int32_t)INT32_MAX;
   if (a < INT32_MIN)
     return (int32_t)INT32_MIN;
   return (int32_t)a;
+}
+uint32_t saturate_uint32(uint64_t a) {
+  if (a > UINT32_MAX)
+    return (uint32_t)UINT32_MAX;
+  return (uint32_t)a;
 }
 
 float ranf(float low, float high) {
