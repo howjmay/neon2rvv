@@ -9180,21 +9180,101 @@ result_t test_vget_high_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   return validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]);
 }
 
-result_t test_vget_high_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vget_high_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
+  int16_t _c[4];
+  for (int i = 0; i < 4; i++) {
+    _c[i] = _a[i + 4];
+  }
+  int16x8_t a = vld1q_s16(_a);
+  int16x4_t c = vget_high_s16(a);
 
-result_t test_vget_high_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  return validate_int16(c, _c[0], _c[1], _c[2], _c[3]);
+}
 
-result_t test_vget_high_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vget_high_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
+  int32_t _c[2];
+  for (int i = 0; i < 2; i++) {
+    _c[i] = _a[i + 2];
+  }
+  int32x4_t a = vld1q_s32(_a);
+  int32x2_t c = vget_high_s32(a);
 
-result_t test_vget_high_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  return validate_int32(c, _c[0], _c[1]);
+}
 
-result_t test_vget_high_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vget_high_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int64_t *_a = (int64_t *)impl.test_cases_int_pointer1;
+  int64_t _c[1];
+  for (int i = 0; i < 1; i++) {
+    _c[i] = _a[i + 1];
+  }
+  int64x2_t a = vld1q_s64(_a);
+  int64x1_t c = vget_high_s64(a);
 
-result_t test_vget_high_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  return validate_int64(c, _c[0]);
+}
 
-result_t test_vget_high_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vget_high_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const float *_a = (float *)impl.test_cases_float_pointer1;
+  float _c[2];
+  for (int i = 0; i < 2; i++) {
+    _c[i] = _a[i + 2];
+  }
+  float32x4_t a = vld1q_f32(_a);
+  float32x2_t c = vget_high_f32(a);
 
-result_t test_vget_high_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  return validate_float(c, _c[0], _c[1]);
+}
+
+result_t test_vget_high_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint8_t *_a = (uint8_t *)impl.test_cases_int_pointer1;
+  uint8_t _c[8];
+  for (int i = 0; i < 8; i++) {
+    _c[i] = _a[i + 8];
+  }
+  uint8x16_t a = vld1q_u8(_a);
+  uint8x8_t c = vget_high_u8(a);
+
+  return validate_uint8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]);
+}
+
+result_t test_vget_high_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint16_t *_a = (uint16_t *)impl.test_cases_int_pointer1;
+  uint16_t _c[4];
+  for (int i = 0; i < 4; i++) {
+    _c[i] = _a[i + 4];
+  }
+  uint16x8_t a = vld1q_u16(_a);
+  uint16x4_t c = vget_high_u16(a);
+
+  return validate_uint16(c, _c[0], _c[1], _c[2], _c[3]);
+}
+
+result_t test_vget_high_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint32_t *_a = (uint32_t *)impl.test_cases_int_pointer1;
+  uint32_t _c[2];
+  for (int i = 0; i < 2; i++) {
+    _c[i] = _a[i + 2];
+  }
+  uint32x4_t a = vld1q_u32(_a);
+  uint32x2_t c = vget_high_u32(a);
+
+  return validate_uint32(c, _c[0], _c[1]);
+}
+
+result_t test_vget_high_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint64_t *_a = (uint64_t *)impl.test_cases_int_pointer1;
+  uint64_t _c[1];
+  for (int i = 0; i < 1; i++) {
+    _c[i] = _a[i + 1];
+  }
+  uint64x2_t a = vld1q_u64(_a);
+  uint64x1_t c = vget_high_u64(a);
+
+  return validate_uint64(c, _c[0]);
+}
 
 result_t test_vget_low_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
@@ -9208,21 +9288,101 @@ result_t test_vget_low_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   return validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]);
 }
 
-result_t test_vget_low_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vget_low_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
+  int16_t _c[4];
+  for (int i = 0; i < 4; i++) {
+    _c[i] = _a[i];
+  }
+  int16x8_t a = vld1q_s16(_a);
+  int16x4_t c = vget_low_s16(a);
 
-result_t test_vget_low_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  return validate_int16(c, _c[0], _c[1], _c[2], _c[3]);
+}
 
-result_t test_vget_low_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vget_low_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
+  int32_t _c[2];
+  for (int i = 0; i < 2; i++) {
+    _c[i] = _a[i];
+  }
+  int32x4_t a = vld1q_s32(_a);
+  int32x2_t c = vget_low_s32(a);
 
-result_t test_vget_low_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  return validate_int32(c, _c[0], _c[1]);
+}
 
-result_t test_vget_low_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vget_low_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const float *_a = (float *)impl.test_cases_float_pointer1;
+  float _c[2];
+  for (int i = 0; i < 2; i++) {
+    _c[i] = _a[i];
+  }
+  float32x4_t a = vld1q_f32(_a);
+  float32x2_t c = vget_low_f32(a);
 
-result_t test_vget_low_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  return validate_float(c, _c[0], _c[1]);
+}
 
-result_t test_vget_low_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vget_low_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint8_t *_a = (uint8_t *)impl.test_cases_int_pointer1;
+  uint8_t _c[8];
+  for (int i = 0; i < 8; i++) {
+    _c[i] = _a[i];
+  }
+  uint8x16_t a = vld1q_u8(_a);
+  uint8x8_t c = vget_low_u8(a);
 
-result_t test_vget_low_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  return validate_uint8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]);
+}
+
+result_t test_vget_low_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint16_t *_a = (uint16_t *)impl.test_cases_int_pointer1;
+  uint16_t _c[4];
+  for (int i = 0; i < 4; i++) {
+    _c[i] = _a[i];
+  }
+  uint16x8_t a = vld1q_u16(_a);
+  uint16x4_t c = vget_low_u16(a);
+
+  return validate_uint16(c, _c[0], _c[1], _c[2], _c[3]);
+}
+
+result_t test_vget_low_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint32_t *_a = (uint32_t *)impl.test_cases_int_pointer1;
+  uint32_t _c[2];
+  for (int i = 0; i < 2; i++) {
+    _c[i] = _a[i];
+  }
+  uint32x4_t a = vld1q_u32(_a);
+  uint32x2_t c = vget_low_u32(a);
+
+  return validate_uint32(c, _c[0], _c[1]);
+}
+
+result_t test_vget_low_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int64_t *_a = (int64_t *)impl.test_cases_int_pointer1;
+  int64_t _c[1];
+  for (int i = 0; i < 1; i++) {
+    _c[i] = _a[i];
+  }
+  int64x2_t a = vld1q_s64(_a);
+  int64x1_t c = vget_low_s64(a);
+
+  return validate_int64(c, _c[0]);
+}
+
+result_t test_vget_low_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint64_t *_a = (uint64_t *)impl.test_cases_int_pointer1;
+  uint64_t _c[1];
+  for (int i = 0; i < 1; i++) {
+    _c[i] = _a[i];
+  }
+  uint64x2_t a = vld1q_u64(_a);
+  uint64x1_t c = vget_low_u64(a);
+
+  return validate_uint64(c, _c[0]);
+}
 
 result_t test_vcvt_s32_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const float *_a = (const float *)impl.test_cases_float_pointer1;
