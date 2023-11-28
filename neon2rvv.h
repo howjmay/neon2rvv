@@ -2683,35 +2683,96 @@ FORCE_INLINE int8x8_t vsra_n_s8(int8x8_t __a, int8x8_t __b, const int __c) {
   return __riscv_vadd_vv_i8m1(__a, __riscv_vsra_vx_i8m1(__b, imm, 8), 8);
 }
 
-// FORCE_INLINE int16x4_t vsra_n_s16(int16x4_t __a, int16x4_t __b, const int __c);
+FORCE_INLINE int16x4_t vsra_n_s16(int16x4_t __a, int16x4_t __b, const int __c) {
+  const int imm = __c - (__c >> 4);
+  return __riscv_vadd_vv_i16m1(__a, __riscv_vsra_vx_i16m1(__b, imm, 4), 4);
+}
 
-// FORCE_INLINE int32x2_t vsra_n_s32(int32x2_t __a, int32x2_t __b, const int __c);
+FORCE_INLINE int32x2_t vsra_n_s32(int32x2_t __a, int32x2_t __b, const int __c) {
+  const int imm = __c - (__c >> 5);
+  return __riscv_vadd_vv_i32m1(__a, __riscv_vsra_vx_i32m1(__b, imm, 2), 2);
+}
 
-// FORCE_INLINE int64x1_t vsra_n_s64(int64x1_t __a, int64x1_t __b, const int __c);
+FORCE_INLINE int64x1_t vsra_n_s64(int64x1_t __a, int64x1_t __b, const int __c) {
+  const int imm = __c - (__c >> 6);
+  return __riscv_vadd_vv_i64m1(__a, __riscv_vsra_vx_i64m1(__b, imm, 1), 1);
+}
 
-// FORCE_INLINE uint8x8_t vsra_n_u8(uint8x8_t __a, uint8x8_t __b, const int __c);
+FORCE_INLINE uint8x8_t vsra_n_u8(uint8x8_t __a, uint8x8_t __b, const int __c) {
+  const int c_half = __c >> 1;
+  vuint8m1_t srl1 = __riscv_vsrl_vx_u8m1(__b, c_half, 8);
+  vuint8m1_t srl = __riscv_vsrl_vx_u8m1(srl1, c_half + (__c & 0x1), 8);
+  return __riscv_vadd_vv_u8m1(__a, srl, 8);
+}
 
-// FORCE_INLINE uint16x4_t vsra_n_u16(uint16x4_t __a, uint16x4_t __b, const int __c);
+FORCE_INLINE uint16x4_t vsra_n_u16(uint16x4_t __a, uint16x4_t __b, const int __c) {
+  const int c_half = __c >> 1;
+  vuint16m1_t srl1 = __riscv_vsrl_vx_u16m1(__b, c_half, 4);
+  vuint16m1_t srl = __riscv_vsrl_vx_u16m1(srl1, c_half + (__c & 0x1), 4);
+  return __riscv_vadd_vv_u16m1(__a, srl, 4);
+}
 
-// FORCE_INLINE uint32x2_t vsra_n_u32(uint32x2_t __a, uint32x2_t __b, const int __c);
+FORCE_INLINE uint32x2_t vsra_n_u32(uint32x2_t __a, uint32x2_t __b, const int __c) {
+  const int c_half = __c >> 1;
+  vuint32m1_t srl1 = __riscv_vsrl_vx_u32m1(__b, c_half, 2);
+  vuint32m1_t srl = __riscv_vsrl_vx_u32m1(srl1, c_half + (__c & 0x1), 2);
+  return __riscv_vadd_vv_u32m1(__a, srl, 2);
+}
 
-// FORCE_INLINE uint64x1_t vsra_n_u64(uint64x1_t __a, uint64x1_t __b, const int __c);
+FORCE_INLINE uint64x1_t vsra_n_u64(uint64x1_t __a, uint64x1_t __b, const int __c) {
+  const int c_half = __c >> 1;
+  vuint64m1_t srl1 = __riscv_vsrl_vx_u64m1(__b, c_half, 1);
+  vuint64m1_t srl = __riscv_vsrl_vx_u64m1(srl1, c_half + (__c & 0x1), 1);
+  return __riscv_vadd_vv_u64m1(__a, srl, 1);
+}
 
-// FORCE_INLINE int8x16_t vsraq_n_s8(int8x16_t __a, int8x16_t __b, const int __c);
+FORCE_INLINE int8x16_t vsraq_n_s8(int8x16_t __a, int8x16_t __b, const int __c) {
+  const int imm = __c - (__c >> 3);
+  return __riscv_vadd_vv_i8m1(__a, __riscv_vsra_vx_i8m1(__b, imm, 16), 16);
+}
 
-// FORCE_INLINE int16x8_t vsraq_n_s16(int16x8_t __a, int16x8_t __b, const int __c);
+FORCE_INLINE int16x8_t vsraq_n_s16(int16x8_t __a, int16x8_t __b, const int __c) {
+  const int imm = __c - (__c >> 4);
+  return __riscv_vadd_vv_i16m1(__a, __riscv_vsra_vx_i16m1(__b, imm, 8), 8);
+}
 
-// FORCE_INLINE int32x4_t vsraq_n_s32(int32x4_t __a, int32x4_t __b, const int __c);
+FORCE_INLINE int32x4_t vsraq_n_s32(int32x4_t __a, int32x4_t __b, const int __c) {
+  const int imm = __c - (__c >> 5);
+  return __riscv_vadd_vv_i32m1(__a, __riscv_vsra_vx_i32m1(__b, imm, 4), 4);
+}
 
-// FORCE_INLINE int64x2_t vsraq_n_s64(int64x2_t __a, int64x2_t __b, const int __c);
+FORCE_INLINE int64x2_t vsraq_n_s64(int64x2_t __a, int64x2_t __b, const int __c) {
+  const int imm = __c - (__c >> 6);
+  return __riscv_vadd_vv_i64m1(__a, __riscv_vsra_vx_i64m1(__b, imm, 2), 2);
+}
 
-// FORCE_INLINE uint8x16_t vsraq_n_u8(uint8x16_t __a, uint8x16_t __b, const int __c);
+FORCE_INLINE uint8x16_t vsraq_n_u8(uint8x16_t __a, uint8x16_t __b, const int __c) {
+  const int c_half = __c >> 1;
+  vuint8m1_t srl1 = __riscv_vsrl_vx_u8m1(__b, c_half, 16);
+  vuint8m1_t srl = __riscv_vsrl_vx_u8m1(srl1, c_half + (__c & 0x1), 16);
+  return __riscv_vadd_vv_u8m1(__a, srl, 16);
+}
 
-// FORCE_INLINE uint16x8_t vsraq_n_u16(uint16x8_t __a, uint16x8_t __b, const int __c);
+FORCE_INLINE uint16x8_t vsraq_n_u16(uint16x8_t __a, uint16x8_t __b, const int __c) {
+  const int c_half = __c >> 1;
+  vuint16m1_t srl1 = __riscv_vsrl_vx_u16m1(__b, c_half, 8);
+  vuint16m1_t srl = __riscv_vsrl_vx_u16m1(srl1, c_half + (__c & 0x1), 8);
+  return __riscv_vadd_vv_u16m1(__a, srl, 8);
+}
 
-// FORCE_INLINE uint32x4_t vsraq_n_u32(uint32x4_t __a, uint32x4_t __b, const int __c);
+FORCE_INLINE uint32x4_t vsraq_n_u32(uint32x4_t __a, uint32x4_t __b, const int __c) {
+  const int c_half = __c >> 1;
+  vuint32m1_t srl1 = __riscv_vsrl_vx_u32m1(__b, c_half, 4);
+  vuint32m1_t srl = __riscv_vsrl_vx_u32m1(srl1, c_half + (__c & 0x1), 4);
+  return __riscv_vadd_vv_u32m1(__a, srl, 4);
+}
 
-// FORCE_INLINE uint64x2_t vsraq_n_u64(uint64x2_t __a, uint64x2_t __b, const int __c);
+FORCE_INLINE uint64x2_t vsraq_n_u64(uint64x2_t __a, uint64x2_t __b, const int __c) {
+  const int c_half = __c >> 1;
+  vuint64m1_t srl1 = __riscv_vsrl_vx_u64m1(__b, c_half, 2);
+  vuint64m1_t srl = __riscv_vsrl_vx_u64m1(srl1, c_half + (__c & 0x1), 2);
+  return __riscv_vadd_vv_u64m1(__a, srl, 2);
+}
 
 FORCE_INLINE int8x8_t vrsra_n_s8(int8x8_t __a, int8x8_t __b, const int __c) {
   vint16m2_t b_w = __riscv_vsext_vf2_i16m2(__b, 8);
