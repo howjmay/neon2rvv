@@ -590,9 +590,12 @@ int8_t saturate_int8(int a) {
     return (int8_t)INT8_MIN;
   return (int8_t)a;
 }
-uint8_t saturate_uint8(unsigned int a) {
-  if (a > UINT8_MAX)
+uint8_t saturate_uint8(int a) {
+  if (a > UINT8_MAX) {
     return (uint8_t)UINT8_MAX;
+  } else if (a < 0) {
+    return 0;
+  }
   return (uint8_t)a;
 }
 int16_t saturate_int16(int a) {
@@ -602,10 +605,13 @@ int16_t saturate_int16(int a) {
     return (int16_t)INT16_MIN;
   return (int16_t)a;
 }
-uint16_t saturate_uint16(unsigned int a) {
-  if (a > UINT16_MAX)
+uint16_t saturate_uint16(int a) {
+  if (a > UINT16_MAX) {
     return (uint16_t)UINT16_MAX;
-  return (uint16_t)a;
+  } else if (a < 0) {
+    return 0;
+  }
+  return a;
 }
 int32_t saturate_int32(int64_t a) {
   if (a > INT32_MAX)
@@ -614,10 +620,13 @@ int32_t saturate_int32(int64_t a) {
     return (int32_t)INT32_MIN;
   return (int32_t)a;
 }
-uint32_t saturate_uint32(uint64_t a) {
-  if (a > UINT32_MAX)
+uint32_t saturate_uint32(int64_t a) {
+  if (a > UINT32_MAX) {
     return (uint32_t)UINT32_MAX;
-  return (uint32_t)a;
+  } else if (a < 0) {
+    return 0;
+  }
+  return a;
 }
 
 float ranf(float low, float high) {
