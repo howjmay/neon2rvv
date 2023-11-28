@@ -2544,19 +2544,42 @@ FORCE_INLINE int8x8_t vrshr_n_s8(int8x8_t __a, const int __b) {
   return __riscv_vnclip_wx_i8m1(a_ext, __b, NEON2RVV_ROUND_TYPE_RNU, 8);
 }
 
-// FORCE_INLINE int16x4_t vrshr_n_s16(int16x4_t __a, const int __b);
+FORCE_INLINE int16x4_t vrshr_n_s16(int16x4_t __a, const int __b) {
+  vint32m2_t a_ext = __riscv_vsext_vf2_i32m2(__a, 4);
+  return __riscv_vnclip_wx_i16m1(a_ext, __b, NEON2RVV_ROUND_TYPE_RNU, 4);
+}
 
-// FORCE_INLINE int32x2_t vrshr_n_s32(int32x2_t __a, const int __b);
+FORCE_INLINE int32x2_t vrshr_n_s32(int32x2_t __a, const int __b) {
+  vint64m2_t a_ext = __riscv_vsext_vf2_i64m2(__a, 2);
+  return __riscv_vnclip_wx_i32m1(a_ext, __b, NEON2RVV_ROUND_TYPE_RNU, 2);
+}
 
-// FORCE_INLINE int64x1_t vrshr_n_s64(int64x1_t __a, const int __b);
+FORCE_INLINE int64x1_t vrshr_n_s64(int64x1_t __a, const int __b) {
+  vint64m1_t sra = __riscv_vsra_vx_i64m1(__a, __b - 1, 2);
+  vint64m1_t sra_round = __riscv_vadd_vv_i64m1(sra, __riscv_vand_vx_i64m1(sra, 1, 2), 2);
+  return __riscv_vsra_vx_i64m1(sra_round, 1, 2);
+}
 
-// FORCE_INLINE uint8x8_t vrshr_n_u8(uint8x8_t __a, const int __b);
+FORCE_INLINE uint8x8_t vrshr_n_u8(uint8x8_t __a, const int __b) {
+  vuint16m2_t a_ext = __riscv_vzext_vf2_u16m2(__a, 8);
+  return __riscv_vnclipu_wx_u8m1(a_ext, __b, NEON2RVV_ROUND_TYPE_RNU, 8);
+}
 
-// FORCE_INLINE uint16x4_t vrshr_n_u16(uint16x4_t __a, const int __b);
+FORCE_INLINE uint16x4_t vrshr_n_u16(uint16x4_t __a, const int __b) {
+  vuint32m2_t a_ext = __riscv_vzext_vf2_u32m2(__a, 4);
+  return __riscv_vnclipu_wx_u16m1(a_ext, __b, NEON2RVV_ROUND_TYPE_RNU, 4);
+}
 
-// FORCE_INLINE uint32x2_t vrshr_n_u32(uint32x2_t __a, const int __b);
+FORCE_INLINE uint32x2_t vrshr_n_u32(uint32x2_t __a, const int __b) {
+  vuint64m2_t a_ext = __riscv_vzext_vf2_u64m2(__a, 2);
+  return __riscv_vnclipu_wx_u32m1(a_ext, __b, NEON2RVV_ROUND_TYPE_RNU, 2);
+}
 
-// FORCE_INLINE uint64x1_t vrshr_n_u64(uint64x1_t __a, const int __b);
+FORCE_INLINE uint64x1_t vrshr_n_u64(uint64x1_t __a, const int __b) {
+  vuint64m1_t srl = __riscv_vsrl_vx_u64m1(__a, __b - 1, 2);
+  vuint64m1_t srl_round = __riscv_vadd_vv_u64m1(srl, __riscv_vand_vx_u64m1(srl, 1, 2), 2);
+  return __riscv_vsrl_vx_u64m1(srl_round, 1, 2);
+}
 
 // FORCE_INLINE int8x16_t vrshrq_n_s8(int8x16_t __a, const int __b);
 
