@@ -8251,48 +8251,272 @@ result_t test_vrsqrteq_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { retu
 result_t test_vget_lane_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
   int8x8_t a = vld1_s8(_a);
-  if ((vget_lane_s8(a, 0) != _a[0]) || (vget_lane_s8(a, 1) != _a[1]) || (vget_lane_s8(a, 2) != _a[2]) ||
-      (vget_lane_s8(a, 3) != _a[3]) || (vget_lane_s8(a, 3) != _a[3]) || (vget_lane_s8(a, 4) != _a[4]) ||
-      (vget_lane_s8(a, 5) != _a[5]) || (vget_lane_s8(a, 6) != _a[6]) || (vget_lane_s8(a, 7) != _a[7])) {
-    return TEST_FAIL;
+
+#define TEST_IMPL(IDX)                   \
+  if (vget_lane_s8(a, IDX) != _a[IDX]) { \
+    return TEST_FAIL;                    \
   }
+
+  IMM_8_ITER
+#undef TEST_IMPL
 
   return TEST_SUCCESS;
 }
 
-result_t test_vget_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vget_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
+  int16x4_t a = vld1_s16(_a);
 
-result_t test_vget_lane_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+#define TEST_IMPL(IDX)                    \
+  if (vget_lane_s16(a, IDX) != _a[IDX]) { \
+    return TEST_FAIL;                     \
+  }
 
-result_t test_vget_lane_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  IMM_4_ITER
+#undef TEST_IMPL
 
-result_t test_vget_lane_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  return TEST_SUCCESS;
+}
 
-result_t test_vget_lane_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vget_lane_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
+  int32x2_t a = vld1_s32(_a);
 
-result_t test_vget_lane_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+#define TEST_IMPL(IDX)                    \
+  if (vget_lane_s32(a, IDX) != _a[IDX]) { \
+    return TEST_FAIL;                     \
+  }
 
-result_t test_vget_lane_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  IMM_2_ITER
+#undef TEST_IMPL
 
-result_t test_vget_lane_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  return TEST_SUCCESS;
+}
 
-result_t test_vgetq_lane_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vget_lane_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const float *_a = (float *)impl.test_cases_float_pointer1;
+  float32x2_t a = vld1_f32(_a);
 
-result_t test_vgetq_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+#define TEST_IMPL(IDX)                    \
+  if (vget_lane_f32(a, IDX) != _a[IDX]) { \
+    return TEST_FAIL;                     \
+  }
 
-result_t test_vgetq_lane_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  IMM_2_ITER
+#undef TEST_IMPL
 
-result_t test_vgetq_lane_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  return TEST_SUCCESS;
+}
 
-result_t test_vgetq_lane_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vget_lane_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint8_t *_a = (uint8_t *)impl.test_cases_int_pointer1;
+  uint8x8_t a = vld1_u8(_a);
 
-result_t test_vgetq_lane_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+#define TEST_IMPL(IDX)                   \
+  if (vget_lane_u8(a, IDX) != _a[IDX]) { \
+    return TEST_FAIL;                    \
+  }
 
-result_t test_vgetq_lane_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  IMM_8_ITER
+#undef TEST_IMPL
 
-result_t test_vgetq_lane_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  return TEST_SUCCESS;
+}
 
-result_t test_vgetq_lane_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vget_lane_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint16_t *_a = (uint16_t *)impl.test_cases_int_pointer1;
+  uint16x4_t a = vld1_u16(_a);
+
+#define TEST_IMPL(IDX)                    \
+  if (vget_lane_u16(a, IDX) != _a[IDX]) { \
+    return TEST_FAIL;                     \
+  }
+
+  IMM_4_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
+
+result_t test_vget_lane_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint32_t *_a = (uint32_t *)impl.test_cases_int_pointer1;
+  uint32x2_t a = vld1_u32(_a);
+
+#define TEST_IMPL(IDX)                    \
+  if (vget_lane_u32(a, IDX) != _a[IDX]) { \
+    return TEST_FAIL;                     \
+  }
+
+  IMM_2_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
+
+result_t test_vget_lane_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int64_t *_a = (int64_t *)impl.test_cases_int_pointer1;
+  int64x1_t a = vld1_s64(_a);
+
+#define TEST_IMPL(IDX)                    \
+  if (vget_lane_s64(a, IDX) != _a[IDX]) { \
+    return TEST_FAIL;                     \
+  }
+
+  IMM_1_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
+
+result_t test_vget_lane_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint64_t *_a = (uint64_t *)impl.test_cases_int_pointer1;
+  uint64x1_t a = vld1_u64(_a);
+
+#define TEST_IMPL(IDX)                    \
+  if (vget_lane_u64(a, IDX) != _a[IDX]) { \
+    return TEST_FAIL;                     \
+  }
+
+  IMM_1_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
+
+result_t test_vgetq_lane_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
+  int8x16_t a = vld1q_s8(_a);
+
+#define TEST_IMPL(IDX)                    \
+  if (vgetq_lane_s8(a, IDX) != _a[IDX]) { \
+    return TEST_FAIL;                     \
+  }
+
+  IMM_16_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
+
+result_t test_vgetq_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
+  int16x8_t a = vld1q_s16(_a);
+
+#define TEST_IMPL(IDX)                     \
+  if (vgetq_lane_s16(a, IDX) != _a[IDX]) { \
+    return TEST_FAIL;                      \
+  }
+
+  IMM_8_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
+
+result_t test_vgetq_lane_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
+  int32x4_t a = vld1q_s32(_a);
+
+#define TEST_IMPL(IDX)                     \
+  if (vgetq_lane_s32(a, IDX) != _a[IDX]) { \
+    return TEST_FAIL;                      \
+  }
+
+  IMM_4_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
+
+result_t test_vgetq_lane_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const float *_a = (float *)impl.test_cases_float_pointer1;
+  float32x4_t a = vld1q_f32(_a);
+
+#define TEST_IMPL(IDX)                     \
+  if (vgetq_lane_f32(a, IDX) != _a[IDX]) { \
+    return TEST_FAIL;                      \
+  }
+
+  IMM_4_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
+
+result_t test_vgetq_lane_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint8_t *_a = (uint8_t *)impl.test_cases_int_pointer1;
+  uint8x16_t a = vld1q_u8(_a);
+
+#define TEST_IMPL(IDX)                    \
+  if (vgetq_lane_u8(a, IDX) != _a[IDX]) { \
+    return TEST_FAIL;                     \
+  }
+
+  IMM_16_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
+
+result_t test_vgetq_lane_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint16_t *_a = (uint16_t *)impl.test_cases_int_pointer1;
+  uint16x8_t a = vld1q_u16(_a);
+
+#define TEST_IMPL(IDX)                     \
+  if (vgetq_lane_u16(a, IDX) != _a[IDX]) { \
+    return TEST_FAIL;                      \
+  }
+
+  IMM_8_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
+
+result_t test_vgetq_lane_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint32_t *_a = (uint32_t *)impl.test_cases_int_pointer1;
+  uint32x4_t a = vld1q_u32(_a);
+
+#define TEST_IMPL(IDX)                     \
+  if (vgetq_lane_u32(a, IDX) != _a[IDX]) { \
+    return TEST_FAIL;                      \
+  }
+
+  IMM_4_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
+
+result_t test_vgetq_lane_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int64_t *_a = (int64_t *)impl.test_cases_int_pointer1;
+  int64x2_t a = vld1q_s64(_a);
+
+#define TEST_IMPL(IDX)                     \
+  if (vgetq_lane_s64(a, IDX) != _a[IDX]) { \
+    return TEST_FAIL;                      \
+  }
+
+  IMM_2_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
+
+result_t test_vgetq_lane_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint64_t *_a = (uint64_t *)impl.test_cases_int_pointer1;
+  uint64x2_t a = vld1q_u64(_a);
+
+#define TEST_IMPL(IDX)                     \
+  if (vgetq_lane_u64(a, IDX) != _a[IDX]) { \
+    return TEST_FAIL;                      \
+  }
+
+  IMM_2_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
 
 result_t test_vset_lane_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;

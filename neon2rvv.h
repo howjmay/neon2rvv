@@ -3108,39 +3108,73 @@ FORCE_INLINE int8_t vget_lane_s8(int8x8_t __a, const int __b) {
   return __riscv_vmv_x_s_i8m1_i8(__riscv_vslidedown_vx_i8m1(__a, __b, 8));
 }
 
-// FORCE_INLINE int16_t vget_lane_s16(int16x4_t __a, const int __b);
+FORCE_INLINE int16_t vget_lane_s16(int16x4_t __a, const int __b) {
+  return __riscv_vmv_x_s_i16m1_i16(__riscv_vslidedown_vx_i16m1(__a, __b, 4));
+}
 
-// FORCE_INLINE int32_t vget_lane_s32(int32x2_t __a, const int __b);
+FORCE_INLINE int32_t vget_lane_s32(int32x2_t __a, const int __b) {
+  return __riscv_vmv_x_s_i32m1_i32(__riscv_vslidedown_vx_i32m1(__a, __b, 2));
+}
 
-// FORCE_INLINE float32_t vget_lane_f32(float32x2_t __a, const int __b);
+FORCE_INLINE float32_t vget_lane_f32(float32x2_t __a, const int __b) {
+  return __riscv_vfmv_f_s_f32m1_f32(__riscv_vslidedown_vx_f32m1(__a, __b, 2));
+}
 
-// FORCE_INLINE uint8_t vget_lane_u8(uint8x8_t __a, const int __b);
+FORCE_INLINE uint8_t vget_lane_u8(uint8x8_t __a, const int __b) {
+  return __riscv_vmv_x_s_u8m1_u8(__riscv_vslidedown_vx_u8m1(__a, __b, 8));
+}
 
-// FORCE_INLINE uint16_t vget_lane_u16(uint16x4_t __a, const int __b);
+FORCE_INLINE uint16_t vget_lane_u16(uint16x4_t __a, const int __b) {
+  return __riscv_vmv_x_s_u16m1_u16(__riscv_vslidedown_vx_u16m1(__a, __b, 4));
+}
 
-// FORCE_INLINE uint32_t vget_lane_u32(uint32x2_t __a, const int __b);
+FORCE_INLINE uint32_t vget_lane_u32(uint32x2_t __a, const int __b) {
+  return __riscv_vmv_x_s_u32m1_u32(__riscv_vslidedown_vx_u32m1(__a, __b, 2));
+}
 
-// FORCE_INLINE int64_t vget_lane_s64(int64x1_t __a, const int __b);
+FORCE_INLINE int64_t vget_lane_s64(int64x1_t __a, const int __b) {
+  return __riscv_vmv_x_s_i64m1_i64(__riscv_vslidedown_vx_i64m1(__a, __b, 1));
+}
 
-// FORCE_INLINE uint64_t vget_lane_u64(uint64x1_t __a, const int __b);
+FORCE_INLINE uint64_t vget_lane_u64(uint64x1_t __a, const int __b) {
+  return __riscv_vmv_x_s_u64m1_u64(__riscv_vslidedown_vx_u64m1(__a, __b, 1));
+}
 
-// FORCE_INLINE int8_t vgetq_lane_s8(int8x16_t __a, const int __b);
+FORCE_INLINE int8_t vgetq_lane_s8(int8x16_t __a, const int __b) {
+  return __riscv_vmv_x_s_i8m1_i8(__riscv_vslidedown_vx_i8m1(__a, __b, 16));
+}
 
-// FORCE_INLINE int16_t vgetq_lane_s16(int16x8_t __a, const int __b);
+FORCE_INLINE int16_t vgetq_lane_s16(int16x8_t __a, const int __b) {
+  return __riscv_vmv_x_s_i16m1_i16(__riscv_vslidedown_vx_i16m1(__a, __b, 8));
+}
 
-// FORCE_INLINE int32_t vgetq_lane_s32(int32x4_t __a, const int __b);
+FORCE_INLINE int32_t vgetq_lane_s32(int32x4_t __a, const int __b) {
+  return __riscv_vmv_x_s_i32m1_i32(__riscv_vslidedown_vx_i32m1(__a, __b, 4));
+}
 
-// FORCE_INLINE float32_t vgetq_lane_f32(float32x4_t __a, const int __b);
+FORCE_INLINE float32_t vgetq_lane_f32(float32x4_t __a, const int __b) {
+  return __riscv_vfmv_f_s_f32m1_f32(__riscv_vslidedown_vx_f32m1(__a, __b, 4));
+}
 
-// FORCE_INLINE uint8_t vgetq_lane_u8(uint8x16_t __a, const int __b);
+FORCE_INLINE uint8_t vgetq_lane_u8(uint8x16_t __a, const int __b) {
+  return __riscv_vmv_x_s_u8m1_u8(__riscv_vslidedown_vx_u8m1(__a, __b, 16));
+}
 
-// FORCE_INLINE uint16_t vgetq_lane_u16(uint16x8_t __a, const int __b);
+FORCE_INLINE uint16_t vgetq_lane_u16(uint16x8_t __a, const int __b) {
+  return __riscv_vmv_x_s_u16m1_u16(__riscv_vslidedown_vx_u16m1(__a, __b, 8));
+}
 
-// FORCE_INLINE uint32_t vgetq_lane_u32(uint32x4_t __a, const int __b);
+FORCE_INLINE uint32_t vgetq_lane_u32(uint32x4_t __a, const int __b) {
+  return __riscv_vmv_x_s_u32m1_u32(__riscv_vslidedown_vx_u32m1(__a, __b, 4));
+}
 
-// FORCE_INLINE int64_t vgetq_lane_s64(int64x2_t __a, const int __b);
+FORCE_INLINE int64_t vgetq_lane_s64(int64x2_t __a, const int __b) {
+  return __riscv_vmv_x_s_i64m1_i64(__riscv_vslidedown_vx_i64m1(__a, __b, 2));
+}
 
-// FORCE_INLINE uint64_t vgetq_lane_u64(uint64x2_t __a, const int __b);
+FORCE_INLINE uint64_t vgetq_lane_u64(uint64x2_t __a, const int __b) {
+  return __riscv_vmv_x_s_u64m1_u64(__riscv_vslidedown_vx_u64m1(__a, __b, 2));
+}
 
 FORCE_INLINE int8x8_t vset_lane_s8(int8_t __a, int8x8_t __b, const int __c) {
   const uint8_t mask_arr[] = {(uint8_t)(1 << __c)};
