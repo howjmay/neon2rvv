@@ -10291,13 +10291,57 @@ result_t test_vmulq_n_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   return validate_uint32(c, _c[0], _c[1], _c[2], _c[3]);
 }
 
-result_t test_vmull_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vmull_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
+  const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
+  int32_t _c[4];
+  for (int i = 0; i < 4; i++) {
+    _c[i] = (int32_t)_a[i] * (int32_t)_b[0];
+  }
 
-result_t test_vmull_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  int16x4_t a = vld1_s16(_a);
+  int32x4_t c = vmull_n_s16(a, _b[0]);
+  return validate_int32(c, _c[0], _c[1], _c[2], _c[3]);
+}
 
-result_t test_vmull_n_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vmull_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
+  const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
+  int64_t _c[2];
+  for (int i = 0; i < 2; i++) {
+    _c[i] = (int64_t)_a[i] * (int64_t)_b[0];
+  }
 
-result_t test_vmull_n_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  int32x2_t a = vld1_s32(_a);
+  int64x2_t c = vmull_n_s32(a, _b[0]);
+  return validate_int64(c, _c[0], _c[1]);
+}
+
+result_t test_vmull_n_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint16_t *_a = (uint16_t *)impl.test_cases_int_pointer1;
+  const uint16_t *_b = (uint16_t *)impl.test_cases_int_pointer2;
+  uint32_t _c[4];
+  for (int i = 0; i < 4; i++) {
+    _c[i] = (uint32_t)_a[i] * (uint32_t)_b[0];
+  }
+
+  uint16x4_t a = vld1_u16(_a);
+  uint32x4_t c = vmull_n_u16(a, _b[0]);
+  return validate_uint32(c, _c[0], _c[1], _c[2], _c[3]);
+}
+
+result_t test_vmull_n_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint32_t *_a = (uint32_t *)impl.test_cases_int_pointer1;
+  const uint32_t *_b = (uint32_t *)impl.test_cases_int_pointer2;
+  uint64_t _c[2];
+  for (int i = 0; i < 2; i++) {
+    _c[i] = (uint64_t)_a[i] * (uint64_t)_b[0];
+  }
+
+  uint32x2_t a = vld1_u32(_a);
+  uint64x2_t c = vmull_n_u32(a, _b[0]);
+  return validate_uint64(c, _c[0], _c[1]);
+}
 
 result_t test_vqdmull_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
