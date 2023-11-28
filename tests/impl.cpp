@@ -8111,17 +8111,119 @@ result_t test_vqshluq_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { ret
 
 result_t test_vqshluq_n_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vshll_n_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vshll_n_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int8_t *_a = (const int8_t *)impl.test_cases_int_pointer1;
+  int16_t _c[8];
+  int8x8_t a = vld1_s8(_a);
+  int16x8_t c;
 
-result_t test_vshll_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+#define TEST_IMPL(IDX)             \
+  for (int i = 0; i < 8; i++) {    \
+    _c[i] = (int16_t)_a[i] << IDX; \
+  }                                \
+  c = vshll_n_s8(a, IDX);          \
+  CHECK_RESULT(validate_int16(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]))
 
-result_t test_vshll_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  IMM_8_ITER
+#undef TEST_IMPL
 
-result_t test_vshll_n_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  return TEST_SUCCESS;
+}
 
-result_t test_vshll_n_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vshll_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int16_t *_a = (const int16_t *)impl.test_cases_int_pointer1;
+  int32_t _c[4];
+  int16x4_t a = vld1_s16(_a);
+  int32x4_t c;
 
-result_t test_vshll_n_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+#define TEST_IMPL(IDX)             \
+  for (int i = 0; i < 4; i++) {    \
+    _c[i] = (int32_t)_a[i] << IDX; \
+  }                                \
+  c = vshll_n_s16(a, IDX);         \
+  CHECK_RESULT(validate_int32(c, _c[0], _c[1], _c[2], _c[3]))
+
+  IMM_16_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
+
+result_t test_vshll_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const int32_t *_a = (const int32_t *)impl.test_cases_int_pointer1;
+  int64_t _c[2];
+  int32x2_t a = vld1_s32(_a);
+  int64x2_t c;
+
+#define TEST_IMPL(IDX)             \
+  for (int i = 0; i < 2; i++) {    \
+    _c[i] = (int64_t)_a[i] << IDX; \
+  }                                \
+  c = vshll_n_s32(a, IDX);         \
+  CHECK_RESULT(validate_int64(c, _c[0], _c[1]))
+
+  IMM_32_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
+
+result_t test_vshll_n_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint8_t *_a = (const uint8_t *)impl.test_cases_int_pointer1;
+  uint16_t _c[8];
+  uint8x8_t a = vld1_u8(_a);
+  uint16x8_t c;
+
+#define TEST_IMPL(IDX)              \
+  for (int i = 0; i < 8; i++) {     \
+    _c[i] = (uint16_t)_a[i] << IDX; \
+  }                                 \
+  c = vshll_n_u8(a, IDX);           \
+  CHECK_RESULT(validate_uint16(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]))
+
+  IMM_8_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
+
+result_t test_vshll_n_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint16_t *_a = (const uint16_t *)impl.test_cases_int_pointer1;
+  uint32_t _c[4];
+  uint16x4_t a = vld1_u16(_a);
+  uint32x4_t c;
+
+#define TEST_IMPL(IDX)              \
+  for (int i = 0; i < 4; i++) {     \
+    _c[i] = (uint32_t)_a[i] << IDX; \
+  }                                 \
+  c = vshll_n_u16(a, IDX);          \
+  CHECK_RESULT(validate_uint32(c, _c[0], _c[1], _c[2], _c[3]))
+
+  IMM_16_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
+
+result_t test_vshll_n_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  const uint32_t *_a = (const uint32_t *)impl.test_cases_int_pointer1;
+  uint64_t _c[2];
+  uint32x2_t a = vld1_u32(_a);
+  uint64x2_t c;
+
+#define TEST_IMPL(IDX)              \
+  for (int i = 0; i < 2; i++) {     \
+    _c[i] = (uint64_t)_a[i] << IDX; \
+  }                                 \
+  c = vshll_n_u32(a, IDX);          \
+  CHECK_RESULT(validate_uint64(c, _c[0], _c[1]))
+
+  IMM_32_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+}
 
 result_t test_vsra_n_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int8_t *_a = (const int8_t *)impl.test_cases_int_pointer1;
