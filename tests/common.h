@@ -128,11 +128,11 @@ result_t validate_double_error(float64x2_t a, double d0, double d1, double err);
 result_t validate_double_error(float64x2_t a, double d0, double err);
 
 int8_t saturate_int8(int a);
-uint8_t saturate_uint8(unsigned int a);
+uint8_t saturate_uint8(int a);
 int16_t saturate_int16(int a);
-uint16_t saturate_uint16(unsigned int a);
+uint16_t saturate_uint16(int a);
 int32_t saturate_int32(int64_t a);
-uint32_t saturate_uint32(uint64_t a);
+uint32_t saturate_uint32(int64_t a);
 
 float ranf(float low, float high);
 
