@@ -930,21 +930,34 @@ FORCE_INLINE uint32x4_t vqsubq_u32(uint32x4_t __a, uint32x4_t __b) { return __ri
 FORCE_INLINE uint64x2_t vqsubq_u64(uint64x2_t __a, uint64x2_t __b) { return __riscv_vssubu_vv_u64m1(__a, __b, 2); }
 
 FORCE_INLINE int8x8_t vsubhn_s16(int16x8_t __a, int16x8_t __b) {
-  // 0xaa is 10101010 in binary
-  vbool8_t mask = __riscv_vreinterpret_v_u8m1_b8(vdup_n_u8(0xaa));
-  int8x16_t ab_sub = __riscv_vreinterpret_v_i16m1_i8m1(__riscv_vsub_vv_i16m1(__a, __b, 8));
-  return __riscv_vcompress_vm_i8m1(ab_sub, mask, 16);
+  vint16m2_t ab_sub = __riscv_vlmul_ext_v_i16m1_i16m2(__riscv_vsub_vv_i16m1(__a, __b, 8));
+  return __riscv_vnsra_wx_i8m1(ab_sub, 8, 8);
 }
 
-// FORCE_INLINE int16x4_t vsubhn_s32(int32x4_t __a, int32x4_t __b);
+FORCE_INLINE int16x4_t vsubhn_s32(int32x4_t __a, int32x4_t __b) {
+  vint32m2_t ab_sub = __riscv_vlmul_ext_v_i32m1_i32m2(__riscv_vsub_vv_i32m1(__a, __b, 4));
+  return __riscv_vnsra_wx_i16m1(ab_sub, 16, 4);
+}
 
-// FORCE_INLINE int32x2_t vsubhn_s64(int64x2_t __a, int64x2_t __b);
+FORCE_INLINE int32x2_t vsubhn_s64(int64x2_t __a, int64x2_t __b) {
+  vint64m2_t ab_sub = __riscv_vlmul_ext_v_i64m1_i64m2(__riscv_vsub_vv_i64m1(__a, __b, 2));
+  return __riscv_vnsra_wx_i32m1(ab_sub, 32, 2);
+}
 
-// FORCE_INLINE uint8x8_t vsubhn_u16(uint16x8_t __a, uint16x8_t __b);
+FORCE_INLINE uint8x8_t vsubhn_u16(uint16x8_t __a, uint16x8_t __b) {
+  vuint16m2_t ab_sub = __riscv_vlmul_ext_v_u16m1_u16m2(__riscv_vsub_vv_u16m1(__a, __b, 8));
+  return __riscv_vnsrl_wx_u8m1(ab_sub, 8, 8);
+}
 
-// FORCE_INLINE uint16x4_t vsubhn_u32(uint32x4_t __a, uint32x4_t __b);
+FORCE_INLINE uint16x4_t vsubhn_u32(uint32x4_t __a, uint32x4_t __b) {
+  vuint32m2_t ab_sub = __riscv_vlmul_ext_v_u32m1_u32m2(__riscv_vsub_vv_u32m1(__a, __b, 4));
+  return __riscv_vnsrl_wx_u16m1(ab_sub, 16, 4);
+}
 
-// FORCE_INLINE uint32x2_t vsubhn_u64(uint64x2_t __a, uint64x2_t __b);
+FORCE_INLINE uint32x2_t vsubhn_u64(uint64x2_t __a, uint64x2_t __b) {
+  vuint64m2_t ab_sub = __riscv_vlmul_ext_v_u64m1_u64m2(__riscv_vsub_vv_u64m1(__a, __b, 2));
+  return __riscv_vnsrl_wx_u32m1(ab_sub, 32, 2);
+}
 
 FORCE_INLINE int8x8_t vrsubhn_s16(int16x8_t __a, int16x8_t __b) {
   vbool8_t mask = __riscv_vreinterpret_v_u8m1_b8(vdup_n_u8(0xaa));
