@@ -3748,25 +3748,25 @@ FORCE_INLINE int32x4_t vqdmull_lane_s16(int16x4_t __a, int16x4_t __b, const int 
 
 // FORCE_INLINE int32x2_t vqrdmlsh_lane_s32(int32x2_t __a, int32x2_t __b, int32x2_t __c, const int __d);
 
-// FORCE_INLINE int16x4_t vmul_n_s16(int16x4_t __a, int16_t __b);
+FORCE_INLINE int16x4_t vmul_n_s16(int16x4_t __a, int16_t __b) { return __riscv_vmul_vx_i16m1(__a, __b, 4); }
 
-// FORCE_INLINE int32x2_t vmul_n_s32(int32x2_t __a, int32_t __b);
+FORCE_INLINE int32x2_t vmul_n_s32(int32x2_t __a, int32_t __b) { return __riscv_vmul_vx_i32m1(__a, __b, 2); }
 
-// FORCE_INLINE float32x2_t vmul_n_f32(float32x2_t __a, float32_t __b);
+FORCE_INLINE float32x2_t vmul_n_f32(float32x2_t __a, float32_t __b) { return __riscv_vfmul_vf_f32m1(__a, __b, 2); }
 
-// FORCE_INLINE uint16x4_t vmul_n_u16(uint16x4_t __a, uint16_t __b);
+FORCE_INLINE uint16x4_t vmul_n_u16(uint16x4_t __a, uint16_t __b) { return __riscv_vmul_vx_u16m1(__a, __b, 4); }
 
-// FORCE_INLINE uint32x2_t vmul_n_u32(uint32x2_t __a, uint32_t __b);
+FORCE_INLINE uint32x2_t vmul_n_u32(uint32x2_t __a, uint32_t __b) { return __riscv_vmul_vx_u32m1(__a, __b, 2); }
 
-// FORCE_INLINE int16x8_t vmulq_n_s16(int16x8_t __a, int16_t __b);
+FORCE_INLINE int16x8_t vmulq_n_s16(int16x8_t __a, int16_t __b) { return __riscv_vmul_vx_i16m1(__a, __b, 8); }
 
-// FORCE_INLINE int32x4_t vmulq_n_s32(int32x4_t __a, int32_t __b);
+FORCE_INLINE int32x4_t vmulq_n_s32(int32x4_t __a, int32_t __b) { return __riscv_vmul_vx_i32m1(__a, __b, 4); }
 
-// FORCE_INLINE float32x4_t vmulq_n_f32(float32x4_t __a, float32_t __b);
+FORCE_INLINE float32x4_t vmulq_n_f32(float32x4_t __a, float32_t __b) { return __riscv_vfmul_vf_f32m1(__a, __b, 4); }
 
-// FORCE_INLINE uint16x8_t vmulq_n_u16(uint16x8_t __a, uint16_t __b);
+FORCE_INLINE uint16x8_t vmulq_n_u16(uint16x8_t __a, uint16_t __b) { return __riscv_vmul_vx_u16m1(__a, __b, 8); }
 
-// FORCE_INLINE uint32x4_t vmulq_n_u32(uint32x4_t __a, uint32_t __b);
+FORCE_INLINE uint32x4_t vmulq_n_u32(uint32x4_t __a, uint32_t __b) { return __riscv_vmul_vx_u32m1(__a, __b, 4); }
 
 // FORCE_INLINE int32x4_t vmull_n_s16(int16x4_t __a, int16_t __b);
 
