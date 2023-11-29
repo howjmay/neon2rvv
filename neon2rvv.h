@@ -720,11 +720,15 @@ FORCE_INLINE uint64x2_t vmlsl_u32(uint64x2_t __a, uint32x2_t __b, uint32x2_t __c
 
 FORCE_INLINE int32x4_t vqdmlsl_s16(int32x4_t __a, int16x4_t __b, int16x4_t __c) {
   vint32m1_t bc_mul = __riscv_vlmul_trunc_v_i32m2_i32m1(__riscv_vwmul_vv_i32m2(__b, __c, 4));
-  vint32m1_t bc_mulx2 = __riscv_vmul_vx_i32m1(bc_mul, 2, 4);
+  vint32m1_t bc_mulx2 = __riscv_vsll_vx_i32m1(bc_mul, 1, 4);
   return __riscv_vsub_vv_i32m1(__a, bc_mulx2, 4);
 }
 
-// FORCE_INLINE int64x2_t vqdmlsl_s32(int64x2_t __a, int32x2_t __b, int32x2_t __c);
+FORCE_INLINE int64x2_t vqdmlsl_s32(int64x2_t __a, int32x2_t __b, int32x2_t __c) {
+  vint64m1_t bc_mul = __riscv_vlmul_trunc_v_i64m2_i64m1(__riscv_vwmul_vv_i64m2(__b, __c, 2));
+  vint64m1_t bc_mulx2 = __riscv_vsll_vx_i64m1(bc_mul, 1, 2);
+  return __riscv_vsub_vv_i64m1(__a, bc_mulx2, 2);
+}
 
 FORCE_INLINE float32x2_t vfma_f32(float32x2_t __a, float32x2_t __b, float32x2_t __c) {
   return __riscv_vfmacc_vv_f32m1(__a, __b, __c, 2);
@@ -3849,9 +3853,19 @@ FORCE_INLINE uint64x2_t vmlsl_lane_u32(uint64x2_t __a, uint32x2_t __b, uint32x2_
   return __riscv_vsub_vv_u64m1(__a, __riscv_vlmul_trunc_v_u64m2_u64m1(__riscv_vwmulu_vv_u64m2(__b, c_dup, 2)), 2);
 }
 
-// FORCE_INLINE int32x4_t vqdmlsl_lane_s16(int32x4_t __a, int16x4_t __b, int16x4_t __c, const int __d);
+FORCE_INLINE int32x4_t vqdmlsl_lane_s16(int32x4_t __a, int16x4_t __b, int16x4_t __c, const int __d) {
+  vint16m1_t c_dup = __riscv_vrgather_vx_i16m1(__c, __d, 4);
+  vint32m1_t bc_mul = __riscv_vlmul_trunc_v_i32m2_i32m1(__riscv_vwmul_vv_i32m2(__b, c_dup, 4));
+  vint32m1_t bc_mulx2 = __riscv_vsll_vx_i32m1(bc_mul, 1, 4);
+  return __riscv_vsub_vv_i32m1(__a, bc_mulx2, 4);
+}
 
-// FORCE_INLINE int64x2_t vqdmlsl_lane_s32(int64x2_t __a, int32x2_t __b, int32x2_t __c, const int __d);
+FORCE_INLINE int64x2_t vqdmlsl_lane_s32(int64x2_t __a, int32x2_t __b, int32x2_t __c, const int __d) {
+  vint32m1_t c_dup = __riscv_vrgather_vx_i32m1(__c, __d, 2);
+  vint64m1_t bc_mul = __riscv_vlmul_trunc_v_i64m2_i64m1(__riscv_vwmul_vv_i64m2(__b, c_dup, 2));
+  vint64m1_t bc_mulx2 = __riscv_vsll_vx_i64m1(bc_mul, 1, 2);
+  return __riscv_vsub_vv_i64m1(__a, bc_mulx2, 2);
+}
 
 // FORCE_INLINE int32x4_t vmull_lane_s16(int16x4_t __a, int16x4_t __b, const int __c);
 
