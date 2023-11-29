@@ -23,7 +23,9 @@ jobs:
       - name: run tests
         run: |
           export PATH=$PATH:/opt/riscv/bin
-          sh scripts/cross-test.sh qemu
+          export SIMULATOR_TYPE=qemu
+          export ENABLE_TEST_ALL=true
+          sh scripts/cross-test.sh
 
   # for validate test cases only
   check_test_cases:
@@ -49,6 +51,7 @@ jobs:
             apt-get install -q -y "${{ matrix.cxx_compiler }}" make
             apt-get install -q -y gcc
           run: |
+            export ENABLE_TEST_ALL=true
             make test
 
   coding_style:
