@@ -1989,7 +1989,32 @@ result_t test_vqdmull_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #endif  // ENABLE_TEST_ALL
 }
 
-result_t test_vqdmull_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vqdmull_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
+  const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
+  int64_t _c[4];
+  float max_f = (float)INT64_MAX, min_f = (float)INT64_MIN;
+  for (int i = 0; i < 4; i++) {
+    float a_f = _a[i];
+    float b_f = _b[i];
+    if ((a_f * b_f > 0) && (2 * a_f * b_f > max_f)) {
+      _c[i] = INT64_MAX;
+    } else if (2 * a_f * b_f < min_f) {
+      _c[i] = INT64_MIN;
+    } else {
+      _c[i] = 2 * (int64_t)_a[i] * (int64_t)_b[i];
+    }
+  }
+
+  int32x2_t a = vld1_s32(_a);
+  int32x2_t b = vld1_s32(_b);
+  int64x2_t c = vqdmull_s32(a, b);
+  return validate_int64(c, _c[0], _c[1]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vmla_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
