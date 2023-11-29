@@ -10,7 +10,7 @@ fi
 set -x
 
 make clean
-make CROSS_COMPILE=riscv64-unknown-elf- SIMULATOR_TYPE=$1 test || exit 1 # riscv64
+make CROSS_COMPILE=riscv64-unknown-elf- SIMULATOR_TYPE=${SIMULATOR_TYPE} ENABLE_TEST_ALL=${ENABLE_TEST_ALL} test || exit 1 # riscv64
 
 # make clean
 # make CROSS_COMPILE=riscv32-unknown-elf- test || exit 1 # riscv32
