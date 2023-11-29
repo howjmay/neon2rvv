@@ -13852,7 +13852,39 @@ result_t test_vqdmull_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #endif  // ENABLE_TEST_ALL
 }
 
-result_t test_vqdmull_lane_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vqdmull_lane_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
+  const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
+  int64_t _c[2];
+  int32x2_t a = vld1_s32(_a);
+  int32x2_t b = vld1_s32(_b);
+  int64x2_t c;
+  float a_f, b_f, max_f = (float)INT64_MAX, min_f = (float)INT64_MIN;
+
+#define TEST_IMPL(IDX)                                \
+  for (int i = 0; i < 2; i++) {                       \
+    a_f = _a[i];                                      \
+    b_f = _b[IDX];                                    \
+    if ((a_f * b_f > 0) && (2 * a_f * b_f > max_f)) { \
+      _c[i] = INT64_MAX;                              \
+    } else if (2 * a_f * b_f < min_f) {               \
+      _c[i] = INT64_MIN;                              \
+    } else {                                          \
+      _c[i] = 2 * (int64_t)_a[i] * (int64_t)_b[IDX];  \
+    }                                                 \
+  }                                                   \
+  c = vqdmull_lane_s32(a, b, IDX);                    \
+  CHECK_RESULT(validate_int64(c, _c[0], _c[1]))
+
+  IMM_2_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vqdmulhq_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
@@ -14130,19 +14162,12 @@ result_t test_vqdmull_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
   int32_t _c[4];
   int16x4_t a = vld1_s16(_a);
-  int32x4_t c;
 
-#define TEST_IMPL(IDX)                           \
-  for (int i = 0; i < 4; i++) {                  \
-    _c[i] = saturate_int32(2 * _a[i] * _b[IDX]); \
-  }                                              \
-  c = vqdmull_n_s16(a, _b[IDX]);                 \
-  CHECK_RESULT(validate_int32(c, _c[0], _c[1], _c[2], _c[3]))
-
-  IMM_4_ITER
-#undef TEST_IMPL
-
-  return TEST_SUCCESS;
+  for (int i = 0; i < 4; i++) {
+    _c[i] = saturate_int32(2 * _a[i] * _b[0]);
+  }
+  int32x4_t c = vqdmull_n_s16(a, _b[0]);
+  return validate_int32(c, _c[0], _c[1], _c[2], _c[3]);
 #else
   return TEST_UNIMPL;
 #endif  // ENABLE_TEST_ALL
@@ -14154,28 +14179,21 @@ result_t test_vqdmull_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
   int64_t _c[2];
   int32x2_t a = vld1_s32(_a);
-  int64x2_t c;
-  float a_f, b_f, max_f = (float)INT64_MAX, min_f = (float)INT64_MIN;
 
-#define TEST_IMPL(IDX)                                \
-  for (int i = 0; i < 2; i++) {                       \
-    a_f = _a[i];                                      \
-    b_f = _b[IDX];                                    \
-    if ((a_f * b_f > 0) && (2 * a_f * b_f > max_f)) { \
-      _c[i] = INT64_MAX;                              \
-    } else if (2 * a_f * b_f < min_f) {               \
-      _c[i] = INT64_MIN;                              \
-    } else {                                          \
-      _c[i] = 2 * (int64_t)_a[i] * (int64_t)_b[IDX];  \
-    }                                                 \
-  }                                                   \
-  c = vqdmull_n_s32(a, _b[IDX]);                      \
-  CHECK_RESULT(validate_int64(c, _c[0], _c[1]))
-
-  IMM_2_ITER
-#undef TEST_IMPL
-
-  return TEST_SUCCESS;
+  float max_f = (float)INT64_MAX, min_f = (float)INT64_MIN;
+  for (int i = 0; i < 2; i++) {
+    float a_f = _a[i];
+    float b_f = _b[0];
+    if ((a_f * b_f > 0) && (2 * a_f * b_f > max_f)) {
+      _c[i] = INT64_MAX;
+    } else if (2 * a_f * b_f < min_f) {
+      _c[i] = INT64_MIN;
+    } else {
+      _c[i] = 2 * (int64_t)_a[i] * (int64_t)_b[0];
+    }
+  }
+  int64x2_t c = vqdmull_n_s32(a, _b[0]);
+  return validate_int64(c, _c[0], _c[1]);
 #else
   return TEST_UNIMPL;
 #endif  // ENABLE_TEST_ALL
