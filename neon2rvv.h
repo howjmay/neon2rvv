@@ -4103,9 +4103,11 @@ FORCE_INLINE int8x8_t vext_s8(int8x8_t __a, int8x8_t __b, const int __c) {
 // FORCE_INLINE uint64x2_t vextq_u64(uint64x2_t __a, uint64x2_t __b, const int __c);
 
 FORCE_INLINE int8x8_t vrev64_s8(int8x8_t __a) {
-  uint8_t shuffle_indices_arr[] = {7, 6, 5, 4, 3, 2, 1, 0};
-  vuint8m1_t shuffle_indices = __riscv_vle8_v_u8m1(shuffle_indices_arr, 8);
-  return __riscv_vrgather_vv_i8m1(__a, shuffle_indices, 8);
+  // generate element index
+  vuint8m1_t vid = __riscv_vid_v_u8m1(8);
+  // make the indexes reversed
+  vuint8m1_t idxs = __riscv_vsub_vv_u8m1(vdup_n_u8(7), vid, 8);
+  return __riscv_vrgather_vv_i8m1(__a, idxs, 8);
 }
 
 // FORCE_INLINE int16x4_t vrev64_s16(int16x4_t __a);
