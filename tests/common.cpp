@@ -11,11 +11,42 @@ result_t validate_int64(int64x2_t a, int64_t i0, int64_t i1) {
   ASSERT_RETURN(t[1] == i1);
   return TEST_SUCCESS;
 }
-
 result_t validate_uint64(uint64x2_t a, uint64_t i0, uint64_t i1) {
   const uint64_t *t = (const uint64_t *)&a;
   ASSERT_RETURN(t[0] == i0);
   ASSERT_RETURN(t[1] == i1);
+  return TEST_SUCCESS;
+}
+result_t validate_int64(int64x2x2_t a, int64_t i0, int64_t i1, int64_t i2, int64_t i3) {
+#if defined(__riscv) || defined(__riscv__)
+  vint64m1_t a0 = __riscv_vget_v_i64m1x2_i64m1(a, 0);
+  vint64m1_t a1 = __riscv_vget_v_i64m1x2_i64m1(a, 1);
+  const int64_t *t0 = (const int64_t *)&a0;
+  const int64_t *t1 = (const int64_t *)&a1;
+#elif defined(__aarch64__) || defined(_M_ARM64)
+  const int64_t *t0 = (const int64_t *)&a.val[0];
+  const int64_t *t1 = (const int64_t *)&a.val[1];
+#endif
+  ASSERT_RETURN(t0[0] == i0);
+  ASSERT_RETURN(t0[1] == i1);
+  ASSERT_RETURN(t1[0] == i2);
+  ASSERT_RETURN(t1[1] == i3);
+  return TEST_SUCCESS;
+}
+result_t validate_uint64(uint64x2x2_t a, uint64_t u0, uint64_t u1, uint64_t u2, uint64_t u3) {
+#if defined(__riscv) || defined(__riscv__)
+  vuint64m1_t a0 = __riscv_vget_v_u64m1x2_u64m1(a, 0);
+  vuint64m1_t a1 = __riscv_vget_v_u64m1x2_u64m1(a, 1);
+  const uint64_t *t0 = (const uint64_t *)&a0;
+  const uint64_t *t1 = (const uint64_t *)&a1;
+#elif defined(__aarch64__) || defined(_M_ARM64)
+  const uint64_t *t0 = (const uint64_t *)&a.val[0];
+  const uint64_t *t1 = (const uint64_t *)&a.val[1];
+#endif
+  ASSERT_RETURN(t0[0] == u0);
+  ASSERT_RETURN(t0[1] == u1);
+  ASSERT_RETURN(t1[0] == u2);
+  ASSERT_RETURN(t1[1] == u3);
   return TEST_SUCCESS;
 }
 
@@ -24,10 +55,37 @@ result_t validate_int64(int64x1_t a, int64_t i0) {
   ASSERT_RETURN(t[0] == i0);
   return TEST_SUCCESS;
 }
-
-result_t validate_uint64(uint64x1_t a, uint64_t i0) {
+result_t validate_uint64(uint64x1_t a, uint64_t u0) {
   const uint64_t *t = (const uint64_t *)&a;
-  ASSERT_RETURN(t[0] == i0);
+  ASSERT_RETURN(t[0] == u0);
+  return TEST_SUCCESS;
+}
+result_t validate_int64(int64x1x2_t a, int64_t i0, int64_t i1) {
+#if defined(__riscv) || defined(__riscv__)
+  vint64m1_t a0 = __riscv_vget_v_i64m1x2_i64m1(a, 0);
+  vint64m1_t a1 = __riscv_vget_v_i64m1x2_i64m1(a, 1);
+  const int64_t *t0 = (const int64_t *)&a0;
+  const int64_t *t1 = (const int64_t *)&a1;
+#elif defined(__aarch64__) || defined(_M_ARM64)
+  const int64_t *t0 = (const int64_t *)&a.val[0];
+  const int64_t *t1 = (const int64_t *)&a.val[1];
+#endif
+  ASSERT_RETURN(t0[0] == i0);
+  ASSERT_RETURN(t1[0] == i1);
+  return TEST_SUCCESS;
+}
+result_t validate_uint64(uint64x1x2_t a, uint64_t u0, uint64_t u1) {
+#if defined(__riscv) || defined(__riscv__)
+  vuint64m1_t a0 = __riscv_vget_v_u64m1x2_u64m1(a, 0);
+  vuint64m1_t a1 = __riscv_vget_v_u64m1x2_u64m1(a, 1);
+  const uint64_t *t0 = (const uint64_t *)&a0;
+  const uint64_t *t1 = (const uint64_t *)&a1;
+#elif defined(__aarch64__) || defined(_M_ARM64)
+  const uint64_t *t0 = (const uint64_t *)&a.val[0];
+  const uint64_t *t1 = (const uint64_t *)&a.val[1];
+#endif
+  ASSERT_RETURN(t0[0] == u0);
+  ASSERT_RETURN(t1[0] == u1);
   return TEST_SUCCESS;
 }
 
@@ -189,14 +247,14 @@ result_t validate_int16(int16x8x2_t a, int16_t i0, int16_t i1, int16_t i2, int16
   ASSERT_RETURN(t0[5] == i5);
   ASSERT_RETURN(t0[6] == i6);
   ASSERT_RETURN(t0[7] == i7);
-  ASSERT_RETURN(t1[8] == i8);
-  ASSERT_RETURN(t1[9] == i9);
-  ASSERT_RETURN(t1[10] == i10);
-  ASSERT_RETURN(t1[11] == i11);
-  ASSERT_RETURN(t1[12] == i12);
-  ASSERT_RETURN(t1[13] == i13);
-  ASSERT_RETURN(t1[14] == i14);
-  ASSERT_RETURN(t1[15] == i15);
+  ASSERT_RETURN(t1[0] == i8);
+  ASSERT_RETURN(t1[1] == i9);
+  ASSERT_RETURN(t1[2] == i10);
+  ASSERT_RETURN(t1[3] == i11);
+  ASSERT_RETURN(t1[4] == i12);
+  ASSERT_RETURN(t1[5] == i13);
+  ASSERT_RETURN(t1[6] == i14);
+  ASSERT_RETURN(t1[7] == i15);
   return TEST_SUCCESS;
 }
 
@@ -220,14 +278,14 @@ result_t validate_uint16(uint16x8x2_t a, uint16_t u0, uint16_t u1, uint16_t u2, 
   ASSERT_RETURN(t0[5] == u5);
   ASSERT_RETURN(t0[6] == u6);
   ASSERT_RETURN(t0[7] == u7);
-  ASSERT_RETURN(t1[8] == u8);
-  ASSERT_RETURN(t1[9] == u9);
-  ASSERT_RETURN(t1[10] == u10);
-  ASSERT_RETURN(t1[11] == u11);
-  ASSERT_RETURN(t1[12] == u12);
-  ASSERT_RETURN(t1[13] == u13);
-  ASSERT_RETURN(t1[14] == u14);
-  ASSERT_RETURN(t1[15] == u15);
+  ASSERT_RETURN(t1[0] == u8);
+  ASSERT_RETURN(t1[1] == u9);
+  ASSERT_RETURN(t1[2] == u10);
+  ASSERT_RETURN(t1[3] == u11);
+  ASSERT_RETURN(t1[4] == u12);
+  ASSERT_RETURN(t1[5] == u13);
+  ASSERT_RETURN(t1[6] == u14);
+  ASSERT_RETURN(t1[7] == u15);
   return TEST_SUCCESS;
 }
 
@@ -366,7 +424,6 @@ result_t validate_uint8(uint8x8_t a, uint8_t u0, uint8_t u1, uint8_t u2, uint8_t
   ASSERT_RETURN(t[7] == u7);
   return TEST_SUCCESS;
 }
-
 result_t validate_int8(int8x8x2_t a, int8_t i0, int8_t i1, int8_t i2, int8_t i3, int8_t i4, int8_t i5, int8_t i6,
                        int8_t i7, int8_t i8, int8_t i9, int8_t i10, int8_t i11, int8_t i12, int8_t i13, int8_t i14,
                        int8_t i15) {
@@ -397,7 +454,6 @@ result_t validate_int8(int8x8x2_t a, int8_t i0, int8_t i1, int8_t i2, int8_t i3,
   ASSERT_RETURN(t1[7] == i15);
   return TEST_SUCCESS;
 }
-
 result_t validate_uint8(uint8x8x2_t a, uint8_t u0, uint8_t u1, uint8_t u2, uint8_t u3, uint8_t u4, uint8_t u5,
                         uint8_t u6, uint8_t u7, uint8_t u8, uint8_t u9, uint8_t u10, uint8_t u11, uint8_t u12,
                         uint8_t u13, uint8_t u14, uint8_t u15) {
@@ -426,6 +482,102 @@ result_t validate_uint8(uint8x8x2_t a, uint8_t u0, uint8_t u1, uint8_t u2, uint8
   ASSERT_RETURN(t1[5] == u13);
   ASSERT_RETURN(t1[6] == u14);
   ASSERT_RETURN(t1[7] == u15);
+  return TEST_SUCCESS;
+}
+result_t validate_int8(int8x16x2_t a, int8_t i0, int8_t i1, int8_t i2, int8_t i3, int8_t i4, int8_t i5, int8_t i6,
+                       int8_t i7, int8_t i8, int8_t i9, int8_t i10, int8_t i11, int8_t i12, int8_t i13, int8_t i14,
+                       int8_t i15, int8_t i16, int8_t i17, int8_t i18, int8_t i19, int8_t i20, int8_t i21, int8_t i22,
+                       int8_t i23, int8_t i24, int8_t i25, int8_t i26, int8_t i27, int8_t i28, int8_t i29, int8_t i30,
+                       int8_t i31) {
+#if defined(__riscv) || defined(__riscv__)
+  vint8m1_t a0 = __riscv_vget_v_i8m1x2_i8m1(a, 0);
+  vint8m1_t a1 = __riscv_vget_v_i8m1x2_i8m1(a, 1);
+  const int8_t *t0 = (const int8_t *)&a0;
+  const int8_t *t1 = (const int8_t *)&a1;
+#elif defined(__aarch64__) || defined(_M_ARM64)
+  const int8_t *t0 = (const int8_t *)&a.val[0];
+  const int8_t *t1 = (const int8_t *)&a.val[1];
+#endif
+  ASSERT_RETURN(t0[0] == i0);
+  ASSERT_RETURN(t0[1] == i1);
+  ASSERT_RETURN(t0[2] == i2);
+  ASSERT_RETURN(t0[3] == i3);
+  ASSERT_RETURN(t0[4] == i4);
+  ASSERT_RETURN(t0[5] == i5);
+  ASSERT_RETURN(t0[6] == i6);
+  ASSERT_RETURN(t0[7] == i7);
+  ASSERT_RETURN(t0[8] == i8);
+  ASSERT_RETURN(t0[9] == i9);
+  ASSERT_RETURN(t0[10] == i10);
+  ASSERT_RETURN(t0[11] == i11);
+  ASSERT_RETURN(t0[12] == i12);
+  ASSERT_RETURN(t0[13] == i13);
+  ASSERT_RETURN(t0[14] == i14);
+  ASSERT_RETURN(t0[15] == i15);
+  ASSERT_RETURN(t1[0] == i16);
+  ASSERT_RETURN(t1[1] == i17);
+  ASSERT_RETURN(t1[2] == i18);
+  ASSERT_RETURN(t1[3] == i19);
+  ASSERT_RETURN(t1[4] == i20);
+  ASSERT_RETURN(t1[5] == i21);
+  ASSERT_RETURN(t1[6] == i22);
+  ASSERT_RETURN(t1[7] == i23);
+  ASSERT_RETURN(t1[8] == i24);
+  ASSERT_RETURN(t1[9] == i25);
+  ASSERT_RETURN(t1[10] == i26);
+  ASSERT_RETURN(t1[11] == i27);
+  ASSERT_RETURN(t1[12] == i28);
+  ASSERT_RETURN(t1[13] == i29);
+  ASSERT_RETURN(t1[14] == i30);
+  ASSERT_RETURN(t1[15] == i31);
+  return TEST_SUCCESS;
+}
+result_t validate_uint8(uint8x16x2_t a, uint8_t u0, uint8_t u1, uint8_t u2, uint8_t u3, uint8_t u4, uint8_t u5,
+                        uint8_t u6, uint8_t u7, uint8_t u8, uint8_t u9, uint8_t u10, uint8_t u11, uint8_t u12,
+                        uint8_t u13, uint8_t u14, uint8_t u15, uint8_t u16, uint8_t u17, uint8_t u18, uint8_t u19,
+                        uint8_t u20, uint8_t u21, uint8_t u22, uint8_t u23, uint8_t u24, uint8_t u25, uint8_t u26,
+                        uint8_t u27, uint8_t u28, uint8_t u29, uint8_t u30, uint8_t u31) {
+#if defined(__riscv) || defined(__riscv__)
+  vuint8m1_t a0 = __riscv_vget_v_u8m1x2_u8m1(a, 0);
+  vuint8m1_t a1 = __riscv_vget_v_u8m1x2_u8m1(a, 1);
+  const uint8_t *t0 = (const uint8_t *)&a0;
+  const uint8_t *t1 = (const uint8_t *)&a1;
+#elif defined(__aarch64__) || defined(_M_ARM64)
+  const uint8_t *t0 = (const uint8_t *)&a.val[0];
+  const uint8_t *t1 = (const uint8_t *)&a.val[1];
+#endif
+  ASSERT_RETURN(t0[0] == u0);
+  ASSERT_RETURN(t0[1] == u1);
+  ASSERT_RETURN(t0[2] == u2);
+  ASSERT_RETURN(t0[3] == u3);
+  ASSERT_RETURN(t0[4] == u4);
+  ASSERT_RETURN(t0[5] == u5);
+  ASSERT_RETURN(t0[6] == u6);
+  ASSERT_RETURN(t0[7] == u7);
+  ASSERT_RETURN(t0[8] == u8);
+  ASSERT_RETURN(t0[9] == u9);
+  ASSERT_RETURN(t0[10] == u10);
+  ASSERT_RETURN(t0[11] == u11);
+  ASSERT_RETURN(t0[12] == u12);
+  ASSERT_RETURN(t0[13] == u13);
+  ASSERT_RETURN(t0[14] == u14);
+  ASSERT_RETURN(t0[15] == u15);
+  ASSERT_RETURN(t1[0] == u16);
+  ASSERT_RETURN(t1[1] == u17);
+  ASSERT_RETURN(t1[2] == u18);
+  ASSERT_RETURN(t1[3] == u19);
+  ASSERT_RETURN(t1[4] == u20);
+  ASSERT_RETURN(t1[5] == u21);
+  ASSERT_RETURN(t1[6] == u22);
+  ASSERT_RETURN(t1[7] == u23);
+  ASSERT_RETURN(t1[8] == u24);
+  ASSERT_RETURN(t1[9] == u25);
+  ASSERT_RETURN(t1[10] == u26);
+  ASSERT_RETURN(t1[11] == u27);
+  ASSERT_RETURN(t1[12] == u28);
+  ASSERT_RETURN(t1[13] == u29);
+  ASSERT_RETURN(t1[14] == u30);
+  ASSERT_RETURN(t1[15] == u31);
   return TEST_SUCCESS;
 }
 
