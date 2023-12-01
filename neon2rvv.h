@@ -4936,39 +4936,39 @@ FORCE_INLINE int8x8_t vld1_dup_s8(const int8_t *__a) { return vdup_n_s8(__a[0]);
 
 FORCE_INLINE void vst1_s8(int8_t *__a, int8x8_t __b) { return __riscv_vse8_v_i8m1(__a, __b, 8); }
 
-// FORCE_INLINE void vst1_s16(int16_t *__a, int16x4_t __b);
+FORCE_INLINE void vst1_s16(int16_t *__a, int16x4_t __b) { return __riscv_vse16_v_i16m1(__a, __b, 4); }
 
-// FORCE_INLINE void vst1_s32(int32_t *__a, int32x2_t __b);
+FORCE_INLINE void vst1_s32(int32_t *__a, int32x2_t __b) { return __riscv_vse32_v_i32m1(__a, __b, 2); }
 
-// FORCE_INLINE void vst1_s64(int64_t *__a, int64x1_t __b);
+FORCE_INLINE void vst1_s64(int64_t *__a, int64x1_t __b) { return __riscv_vse64_v_i64m1(__a, __b, 1); }
 
-// FORCE_INLINE void vst1_f32(float32_t *__a, float32x2_t __b);
+FORCE_INLINE void vst1_f32(float32_t *__a, float32x2_t __b) { return __riscv_vse32_v_f32m1(__a, __b, 2); }
 
-// FORCE_INLINE void vst1_u8(uint8_t *__a, uint8x8_t __b);
+FORCE_INLINE void vst1_u8(uint8_t *__a, uint8x8_t __b) { return __riscv_vse8_v_u8m1(__a, __b, 16); }
 
-// FORCE_INLINE void vst1_u16(uint16_t *__a, uint16x4_t __b);
+FORCE_INLINE void vst1_u16(uint16_t *__a, uint16x4_t __b) { return __riscv_vse16_v_u16m1(__a, __b, 4); }
 
-// FORCE_INLINE void vst1_u32(uint32_t *__a, uint32x2_t __b);
+FORCE_INLINE void vst1_u32(uint32_t *__a, uint32x2_t __b) { return __riscv_vse32_v_u32m1(__a, __b, 2); }
 
-// FORCE_INLINE void vst1_u64(uint64_t *__a, uint64x1_t __b);
+FORCE_INLINE void vst1_u64(uint64_t *__a, uint64x1_t __b) { return __riscv_vse64_v_u64m1(__a, __b, 1); }
 
-// FORCE_INLINE void vst1q_s8(int8_t *__a, int8x16_t __b);
+FORCE_INLINE void vst1q_s8(int8_t *__a, int8x16_t __b) { return __riscv_vse8_v_i8m1(__a, __b, 16); }
 
-// FORCE_INLINE void vst1q_s16(int16_t *__a, int16x8_t __b);
+FORCE_INLINE void vst1q_s16(int16_t *__a, int16x8_t __b) { return __riscv_vse16_v_i16m1(__a, __b, 8); }
 
-// FORCE_INLINE void vst1q_s32(int32_t *__a, int32x4_t __b);
+FORCE_INLINE void vst1q_s32(int32_t *__a, int32x4_t __b) { return __riscv_vse32_v_i32m1(__a, __b, 4); }
 
-// FORCE_INLINE void vst1q_s64(int64_t *__a, int64x2_t __b);
+FORCE_INLINE void vst1q_s64(int64_t *__a, int64x2_t __b) { return __riscv_vse64_v_i64m1(__a, __b, 2); }
 
-// FORCE_INLINE void vst1q_f32(float32_t *__a, float32x4_t __b);
+FORCE_INLINE void vst1q_f32(float32_t *__a, float32x4_t __b) { return __riscv_vse32_v_f32m1(__a, __b, 4); }
 
-// FORCE_INLINE void vst1q_u8(uint8_t *__a, uint8x16_t __b);
+FORCE_INLINE void vst1q_u8(uint8_t *__a, uint8x16_t __b) { return __riscv_vse8_v_u8m1(__a, __b, 16); }
 
-// FORCE_INLINE void vst1q_u16(uint16_t *__a, uint16x8_t __b);
+FORCE_INLINE void vst1q_u16(uint16_t *__a, uint16x8_t __b) { return __riscv_vse16_v_u16m1(__a, __b, 8); }
 
-// FORCE_INLINE void vst1q_u32(uint32_t *__a, uint32x4_t __b);
+FORCE_INLINE void vst1q_u32(uint32_t *__a, uint32x4_t __b) { return __riscv_vse32_v_u32m1(__a, __b, 4); }
 
-// FORCE_INLINE void vst1q_u64(uint64_t *__a, uint64x2_t __b);
+FORCE_INLINE void vst1q_u64(uint64_t *__a, uint64x2_t __b) { return __riscv_vse64_v_u64m1(__a, __b, 2); }
 
 FORCE_INLINE void vst1_lane_s8(int8_t *__a, int8x8_t __b, const int __c) {
   // FIXME use index store
