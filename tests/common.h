@@ -70,16 +70,20 @@ result_t validate_128_bits(T a, U b) {
   return TEST_SUCCESS;
 }
 result_t validate_int64(int64x2_t a, int64_t i0, int64_t i1);
-result_t validate_uint64(uint64x2_t a, uint64_t i0, uint64_t i1);
+result_t validate_uint64(uint64x2_t a, uint64_t u0, uint64_t u1);
+result_t validate_int64(int64x2x2_t a, int64_t i0, int64_t i1, int64_t i2, int64_t i3);
+result_t validate_uint64(uint64x2x2_t a, uint64_t u0, uint64_t u1, uint64_t u2, uint64_t u3);
 result_t validate_int64(int64x1_t a, int64_t i0);
-result_t validate_uint64(uint64x1_t a, uint64_t i0);
+result_t validate_uint64(uint64x1_t a, uint64_t u0);
+result_t validate_int64(int64x1x2_t a, int64_t i0, int64_t i1);
+result_t validate_uint64(uint64x1x2_t a, uint64_t u0, uint64_t u1);
 result_t validate_int32(int32x4_t a, int32_t i0, int32_t i1, int32_t i2, int32_t i3);
 result_t validate_uint32(uint32x4_t a, uint32_t u0, uint32_t u1, uint32_t u2, uint32_t u3);
 result_t validate_int32(int32x4x2_t a, int32_t i0, int32_t i1, int32_t i2, int32_t i3, int32_t i4, int32_t i5,
                         int32_t i6, int32_t i7);
 result_t validate_uint32(uint32x4x2_t a, uint32_t u0, uint32_t u1, uint32_t u2, uint32_t u3, uint32_t u4, uint32_t u5,
                          uint32_t u6, uint32_t u7);
-result_t validate_int32(int32x2_t a, int32_t u0, int32_t u1);
+result_t validate_int32(int32x2_t a, int32_t i0, int32_t i1);
 result_t validate_uint32(uint32x2_t a, uint32_t u0, uint32_t u1);
 result_t validate_int32(int32x2x2_t a, int32_t i0, int32_t i1, int32_t i2, int32_t i3);
 result_t validate_uint32(uint32x2x2_t a, uint32_t u0, uint32_t u1, uint32_t u2, uint32_t u3);
@@ -105,6 +109,16 @@ result_t validate_int8(int8x16_t a, int8_t i0, int8_t i1, int8_t i2, int8_t i3, 
 result_t validate_uint8(uint8x16_t a, uint8_t u0, uint8_t u1, uint8_t u2, uint8_t u3, uint8_t u4, uint8_t u5,
                         uint8_t u6, uint8_t u7, uint8_t u8, uint8_t u9, uint8_t u10, uint8_t u11, uint8_t u12,
                         uint8_t u13, uint8_t u14, uint8_t u15);
+result_t validate_int8(int8x16x2_t a, int8_t i0, int8_t i1, int8_t i2, int8_t i3, int8_t i4, int8_t i5, int8_t i6,
+                       int8_t i7, int8_t i8, int8_t i9, int8_t i10, int8_t i11, int8_t i12, int8_t i13, int8_t i14,
+                       int8_t i15, int8_t i16, int8_t i17, int8_t i18, int8_t i19, int8_t i20, int8_t i21, int8_t i22,
+                       int8_t i23, int8_t i24, int8_t i25, int8_t i26, int8_t i27, int8_t i28, int8_t i29, int8_t i30,
+                       int8_t i31);
+result_t validate_uint8(uint8x16x2_t u, uint8_t u0, uint8_t u1, uint8_t u2, uint8_t u3, uint8_t u4, uint8_t u5,
+                        uint8_t u6, uint8_t u7, uint8_t u8, uint8_t u9, uint8_t u10, uint8_t u11, uint8_t u12,
+                        uint8_t u13, uint8_t u14, uint8_t u15, uint8_t u16, uint8_t u17, uint8_t u18, uint8_t u19,
+                        uint8_t u20, uint8_t u21, uint8_t u22, uint8_t u23, uint8_t u24, uint8_t u25, uint8_t u26,
+                        uint8_t u27, uint8_t u28, uint8_t u29, uint8_t u30, uint8_t u31);
 result_t validate_int8(int8x8_t a, int8_t i0, int8_t i1, int8_t i2, int8_t i3, int8_t i4, int8_t i5, int8_t i6,
                        int8_t i7);
 result_t validate_uint8(uint8x8_t a, uint8_t u0, uint8_t u1, uint8_t u2, uint8_t u3, uint8_t u4, uint8_t u5, uint8_t u6,
