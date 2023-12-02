@@ -140,6 +140,7 @@ result_t validate_double(float64x2_t a, double d0, double d1);
 result_t validate_double(float64x1_t a, double d0);
 result_t validate_double_error(float64x2_t a, double d0, double d1, double err);
 result_t validate_double_error(float64x2_t a, double d0, double err);
+result_t validate_float_pair(float a, float b);
 
 int8_t saturate_int8(int a);
 uint8_t saturate_uint8(int a);
@@ -149,6 +150,17 @@ int32_t saturate_int32(int64_t a);
 uint32_t saturate_uint32(int64_t a);
 
 float ranf(float low, float high);
+
+template <typename T, typename U>
+static void merge_arrays(const T *arr1, const T *arr2, U *out) {
+  size_t len = 128 / (sizeof(U) * 8);
+  const U *_arr1 = (const U *)arr1;
+  const U *_arr2 = (const U *)arr2;
+  for (int i = 0; i < len; i++) {
+    out[i] = _arr1[i];
+    out[i + len] = _arr2[i];
+  }
+}
 
 #define CHECK_RESULT(EXP)    \
   if (EXP != TEST_SUCCESS) { \
