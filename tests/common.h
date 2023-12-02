@@ -156,7 +156,7 @@ static void merge_arrays(const T *arr1, const T *arr2, U *out) {
   size_t len = 128 / (sizeof(U) * 8);
   const U *_arr1 = (const U *)arr1;
   const U *_arr2 = (const U *)arr2;
-  for (int i = 0; i < len; i++) {
+  for (size_t i = 0; i < len; i++) {
     out[i] = _arr1[i];
     out[i + len] = _arr2[i];
   }
