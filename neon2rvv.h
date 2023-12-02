@@ -4060,24 +4060,72 @@ FORCE_INLINE int16x8_t vmovl_s8(int8x8_t __a) {
 // FORCE_INLINE uint64x2_t vmovl_u32(uint32x2_t __a);
 
 FORCE_INLINE int8x8_t vtbl1_s8(int8x8_t __a, int8x8_t __b) {
-  // TODO a better way to set the high half into zeros
-  vint8m1_t a_s = __riscv_vslidedown_vx_i8m1(__riscv_vslideup_vx_i8m1(__a, __a, 8, 16), 8, 16);
+  vint8m1_t a_s = __riscv_vslideup_vx_i8m1(__a, vdup_n_s8(0), 8, 16);
   return __riscv_vrgather_vv_i8m1(a_s, __riscv_vreinterpret_v_i8m1_u8m1(__b), 8);
 }
 
-// FORCE_INLINE uint8x8_t vtbl1_u8(uint8x8_t __a, uint8x8_t __b);
+FORCE_INLINE uint8x8_t vtbl1_u8(uint8x8_t __a, uint8x8_t __b) {
+  vuint8m1_t a_s = __riscv_vslideup_vx_u8m1(__a, vdup_n_u8(0), 8, 16);
+  return __riscv_vrgather_vv_u8m1(a_s, __b, 8);
+}
 
-// FORCE_INLINE int8x8_t vtbl2_s8(int8x8x2_t __a, int8x8_t __b);
+FORCE_INLINE int8x8_t vtbl2_s8(int8x8x2_t __a, int8x8_t __b) {
+  vint8m1_t table1 = __riscv_vget_v_i8m1x2_i8m1(__a, 0);
+  vint8m1_t table2 = __riscv_vget_v_i8m1x2_i8m1(__a, 1);
+  vint8m1_t table = __riscv_vslideup_vx_i8m1(table1, table2, 8, 16);
+  return __riscv_vrgather_vv_i8m1(table, __riscv_vreinterpret_v_i8m1_u8m1(__b), 8);
+}
 
-// FORCE_INLINE uint8x8_t vtbl2_u8(uint8x8x2_t __a, uint8x8_t __b);
+FORCE_INLINE uint8x8_t vtbl2_u8(uint8x8x2_t __a, uint8x8_t __b) {
+  vuint8m1_t table1 = __riscv_vget_v_u8m1x2_u8m1(__a, 0);
+  vuint8m1_t table2 = __riscv_vget_v_u8m1x2_u8m1(__a, 1);
+  vuint8m1_t table = __riscv_vslideup_vx_u8m1(table1, table2, 8, 16);
+  return __riscv_vrgather_vv_u8m1(table, __b, 8);
+}
 
-// FORCE_INLINE int8x8_t vtbl3_s8(int8x8x3_t __a, int8x8_t __b);
+FORCE_INLINE int8x8_t vtbl3_s8(int8x8x3_t __a, int8x8_t __b) {
+  vint8m1_t table1 = __riscv_vget_v_i8m1x3_i8m1(__a, 0);
+  vint8m1_t table2 = __riscv_vget_v_i8m1x3_i8m1(__a, 1);
+  vint8m1_t table3 = __riscv_vget_v_i8m1x3_i8m1(__a, 2);
+  vint8m2_t table12 = __riscv_vlmul_ext_v_i8m1_i8m2(__riscv_vslideup_vx_i8m1(table1, table2, 8, 16));
+  vint8m2_t table34 = __riscv_vlmul_ext_v_i8m1_i8m2(__riscv_vslideup_vx_i8m1(table3, vdup_n_s8(0), 8, 16));
+  vint8m2_t table = __riscv_vslideup_vx_i8m2(table12, table34, 16, 32);
+  return __riscv_vlmul_trunc_v_i8m2_i8m1(
+      __riscv_vrgather_vv_i8m2(table, __riscv_vlmul_ext_v_u8m1_u8m2(__riscv_vreinterpret_v_i8m1_u8m1(__b)), 8));
+}
 
-// FORCE_INLINE uint8x8_t vtbl3_u8(uint8x8x3_t __a, uint8x8_t __b);
+FORCE_INLINE uint8x8_t vtbl3_u8(uint8x8x3_t __a, uint8x8_t __b) {
+  vuint8m1_t table1 = __riscv_vget_v_u8m1x3_u8m1(__a, 0);
+  vuint8m1_t table2 = __riscv_vget_v_u8m1x3_u8m1(__a, 1);
+  vuint8m1_t table3 = __riscv_vget_v_u8m1x3_u8m1(__a, 2);
+  vuint8m2_t table12 = __riscv_vlmul_ext_v_u8m1_u8m2(__riscv_vslideup_vx_u8m1(table1, table2, 8, 16));
+  vuint8m2_t table34 = __riscv_vlmul_ext_v_u8m1_u8m2(__riscv_vslideup_vx_u8m1(table3, vdup_n_u8(0), 8, 16));
+  vuint8m2_t table = __riscv_vslideup_vx_u8m2(table12, table34, 16, 32);
+  return __riscv_vlmul_trunc_v_u8m2_u8m1(__riscv_vrgather_vv_u8m2(table, __riscv_vlmul_ext_v_u8m1_u8m2(__b), 8));
+}
 
-// FORCE_INLINE int8x8_t vtbl4_s8(int8x8x4_t __a, int8x8_t __b);
+FORCE_INLINE int8x8_t vtbl4_s8(int8x8x4_t __a, int8x8_t __b) {
+  vint8m1_t table1 = __riscv_vget_v_i8m1x4_i8m1(__a, 0);
+  vint8m1_t table2 = __riscv_vget_v_i8m1x4_i8m1(__a, 1);
+  vint8m1_t table3 = __riscv_vget_v_i8m1x4_i8m1(__a, 2);
+  vint8m1_t table4 = __riscv_vget_v_i8m1x4_i8m1(__a, 3);
+  vint8m2_t table12 = __riscv_vlmul_ext_v_i8m1_i8m2(__riscv_vslideup_vx_i8m1(table1, table2, 8, 16));
+  vint8m2_t table34 = __riscv_vlmul_ext_v_i8m1_i8m2(__riscv_vslideup_vx_i8m1(table3, table4, 8, 16));
+  vint8m2_t table = __riscv_vslideup_vx_i8m2(table12, table34, 16, 32);
+  return __riscv_vlmul_trunc_v_i8m2_i8m1(
+      __riscv_vrgather_vv_i8m2(table, __riscv_vlmul_ext_v_u8m1_u8m2(__riscv_vreinterpret_v_i8m1_u8m1(__b)), 8));
+}
 
-// FORCE_INLINE uint8x8_t vtbl4_u8(uint8x8x4_t __a, uint8x8_t __b);
+FORCE_INLINE uint8x8_t vtbl4_u8(uint8x8x4_t __a, uint8x8_t __b) {
+  vuint8m1_t table1 = __riscv_vget_v_u8m1x4_u8m1(__a, 0);
+  vuint8m1_t table2 = __riscv_vget_v_u8m1x4_u8m1(__a, 1);
+  vuint8m1_t table3 = __riscv_vget_v_u8m1x4_u8m1(__a, 2);
+  vuint8m1_t table4 = __riscv_vget_v_u8m1x4_u8m1(__a, 3);
+  vuint8m2_t table12 = __riscv_vlmul_ext_v_u8m1_u8m2(__riscv_vslideup_vx_u8m1(table1, table2, 8, 16));
+  vuint8m2_t table34 = __riscv_vlmul_ext_v_u8m1_u8m2(__riscv_vslideup_vx_u8m1(table3, table4, 8, 16));
+  vuint8m2_t table = __riscv_vslideup_vx_u8m2(table12, table34, 16, 32);
+  return __riscv_vlmul_trunc_v_u8m2_u8m1(__riscv_vrgather_vv_u8m2(table, __riscv_vlmul_ext_v_u8m1_u8m2(__b), 8));
+}
 
 FORCE_INLINE int8x8_t vtbx1_s8(int8x8_t __a, int8x8_t __b, int8x8_t __c) {
   // TODO a better way to set the high half into zeros
