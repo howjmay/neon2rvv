@@ -3914,21 +3914,29 @@ FORCE_INLINE uint64x2_t vdupq_lane_u64(uint64x1_t __a, const int __b) { return _
 
 FORCE_INLINE int8x16_t vcombine_s8(int8x8_t __a, int8x8_t __b) { return __riscv_vslideup_vx_i8m1(__a, __b, 8, 16); }
 
-// FORCE_INLINE int16x8_t vcombine_s16(int16x4_t __a, int16x4_t __b);
+FORCE_INLINE int16x8_t vcombine_s16(int16x4_t __a, int16x4_t __b) { return __riscv_vslideup_vx_i16m1(__a, __b, 4, 8); }
 
-// FORCE_INLINE int32x4_t vcombine_s32(int32x2_t __a, int32x2_t __b);
+FORCE_INLINE int32x4_t vcombine_s32(int32x2_t __a, int32x2_t __b) { return __riscv_vslideup_vx_i32m1(__a, __b, 2, 4); }
 
-// FORCE_INLINE int64x2_t vcombine_s64(int64x1_t __a, int64x1_t __b);
+FORCE_INLINE int64x2_t vcombine_s64(int64x1_t __a, int64x1_t __b) { return __riscv_vslideup_vx_i64m1(__a, __b, 1, 2); }
 
-// FORCE_INLINE float32x4_t vcombine_f32(float32x2_t __a, float32x2_t __b);
+FORCE_INLINE float32x4_t vcombine_f32(float32x2_t __a, float32x2_t __b) {
+  return __riscv_vslideup_vx_f32m1(__a, __b, 2, 4);
+}
 
-// FORCE_INLINE uint8x16_t vcombine_u8(uint8x8_t __a, uint8x8_t __b);
+FORCE_INLINE uint8x16_t vcombine_u8(uint8x8_t __a, uint8x8_t __b) { return __riscv_vslideup_vx_u8m1(__a, __b, 8, 16); }
 
-// FORCE_INLINE uint16x8_t vcombine_u16(uint16x4_t __a, uint16x4_t __b);
+FORCE_INLINE uint16x8_t vcombine_u16(uint16x4_t __a, uint16x4_t __b) {
+  return __riscv_vslideup_vx_u16m1(__a, __b, 4, 8);
+}
 
-// FORCE_INLINE uint32x4_t vcombine_u32(uint32x2_t __a, uint32x2_t __b);
+FORCE_INLINE uint32x4_t vcombine_u32(uint32x2_t __a, uint32x2_t __b) {
+  return __riscv_vslideup_vx_u32m1(__a, __b, 2, 4);
+}
 
-// FORCE_INLINE uint64x2_t vcombine_u64(uint64x1_t __a, uint64x1_t __b);
+FORCE_INLINE uint64x2_t vcombine_u64(uint64x1_t __a, uint64x1_t __b) {
+  return __riscv_vslideup_vx_u64m1(__a, __b, 1, 2);
+}
 
 FORCE_INLINE int8x8_t vget_high_s8(int8x16_t __a) { return __riscv_vslidedown_vx_i8m1(__a, 8, 16); }
 
