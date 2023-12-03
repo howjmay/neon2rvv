@@ -4057,15 +4057,25 @@ FORCE_INLINE int16x8_t vmovl_s8(int8x8_t __a) {
   return __riscv_vlmul_trunc_v_i16m2_i16m1(__riscv_vsext_vf2_i16m2(__a, 8));
 }
 
-// FORCE_INLINE int32x4_t vmovl_s16(int16x4_t __a);
+FORCE_INLINE int32x4_t vmovl_s16(int16x4_t __a) {
+  return __riscv_vlmul_trunc_v_i32m2_i32m1(__riscv_vsext_vf2_i32m2(__a, 4));
+}
 
-// FORCE_INLINE int64x2_t vmovl_s32(int32x2_t __a);
+FORCE_INLINE int64x2_t vmovl_s32(int32x2_t __a) {
+  return __riscv_vlmul_trunc_v_i64m2_i64m1(__riscv_vsext_vf2_i64m2(__a, 2));
+}
 
-// FORCE_INLINE uint16x8_t vmovl_u8(uint8x8_t __a);
+FORCE_INLINE uint16x8_t vmovl_u8(uint8x8_t __a) {
+  return __riscv_vlmul_trunc_v_u16m2_u16m1(__riscv_vzext_vf2_u16m2(__a, 8));
+}
 
-// FORCE_INLINE uint32x4_t vmovl_u16(uint16x4_t __a);
+FORCE_INLINE uint32x4_t vmovl_u16(uint16x4_t __a) {
+  return __riscv_vlmul_trunc_v_u32m2_u32m1(__riscv_vzext_vf2_u32m2(__a, 4));
+}
 
-// FORCE_INLINE uint64x2_t vmovl_u32(uint32x2_t __a);
+FORCE_INLINE uint64x2_t vmovl_u32(uint32x2_t __a) {
+  return __riscv_vlmul_trunc_v_u64m2_u64m1(__riscv_vzext_vf2_u64m2(__a, 2));
+}
 
 FORCE_INLINE int8x8_t vtbl1_s8(int8x8_t __a, int8x8_t __b) {
   vint8m1_t a_s = __riscv_vslideup_vx_i8m1(__a, vdup_n_s8(0), 8, 16);
