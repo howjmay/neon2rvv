@@ -14454,13 +14454,69 @@ result_t test_vcvt_u32_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #endif  // ENABLE_TEST_ALL
 }
 
-result_t test_vcvtq_s32_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vcvtq_s32_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const float *_a = (const float *)impl.test_cases_float_pointer1;
+  int32_t _c[4];
+  for (int i = 0; i < 4; i++) {
+    _c[i] = _a[i];
+  }
 
-result_t test_vcvtq_f32_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  float32x4_t a = vld1q_f32(_a);
+  int32x4_t c = vcvtq_s32_f32(a);
+  return validate_int32(c, _c[0], _c[1], _c[2], _c[3]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
-result_t test_vcvtq_f32_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vcvtq_f32_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int32_t *_a = (const int32_t *)impl.test_cases_int_pointer1;
+  float _c[4];
+  for (int i = 0; i < 4; i++) {
+    _c[i] = _a[i];
+  }
 
-result_t test_vcvtq_u32_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  int32x4_t a = vld1q_s32(_a);
+  float32x4_t c = vcvtq_f32_s32(a);
+  return validate_float(c, _c[0], _c[1], _c[2], _c[3]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vcvtq_f32_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint32_t *_a = (const uint32_t *)impl.test_cases_int_pointer1;
+  float _c[4];
+  for (int i = 0; i < 4; i++) {
+    _c[i] = _a[i];
+  }
+
+  uint32x4_t a = vld1q_u32(_a);
+  float32x4_t c = vcvtq_f32_u32(a);
+  return validate_float(c, _c[0], _c[1], _c[2], _c[3]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vcvtq_u32_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const float *_a = (const float *)impl.test_cases_float_pointer1;
+  uint32_t _c[4];
+  for (int i = 0; i < 4; i++) {
+    _c[i] = _a[i];
+  }
+
+  float32x4_t a = vld1q_f32(_a);
+  uint32x4_t c = vcvtq_u32_f32(a);
+  return validate_uint32(c, _c[0], _c[1], _c[2], _c[3]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vcvt_n_s32_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
