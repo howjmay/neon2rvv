@@ -4146,28 +4146,104 @@ FORCE_INLINE uint8x8_t vtbl4_u8(uint8x8x4_t __a, uint8x8_t __b) {
 }
 
 FORCE_INLINE int8x8_t vtbx1_s8(int8x8_t __a, int8x8_t __b, int8x8_t __c) {
-  // TODO a better way to set the high half into zeros
-  vint8m1_t b_s = __riscv_vslidedown_vx_i8m1(__riscv_vslideup_vx_i8m1(__b, __b, 8, 16), 8, 16);
-  vint8m1_t b_unbound = __riscv_vrgather_vv_i8m1(b_s, __riscv_vreinterpret_v_i8m1_u8m1(__c), 8);
-  vbool8_t gt_mask = __riscv_vmsgt_vx_i8m1_b8(__c, 7, 8);
-  vbool8_t lt_mask = __riscv_vmslt_vx_i8m1_b8(__c, 0, 8);
-  vbool8_t out_range_mask = __riscv_vmor_mm_b8(gt_mask, lt_mask, 8);
-  return __riscv_vmerge_vvm_i8m1(b_unbound, __a, out_range_mask, 8);
+  vint8m1_t b_s = __riscv_vslideup_vx_i8m1(__b, vdup_n_s8(0), 8, 16);
+  vint8m1_t b_scatter = __riscv_vrgather_vv_i8m1(b_s, __riscv_vreinterpret_v_i8m1_u8m1(__c), 8);
+  // 0xf8 = 11111000, so any number out of the range [7:0] will return non-zero
+  vint8m1_t out_range = __riscv_vand_vx_i8m1(__c, 0xf8, 8);
+  vbool8_t out_range_mask = __riscv_vmsne_vx_i8m1_b8(out_range, 0, 8);
+  return __riscv_vmerge_vvm_i8m1(b_scatter, __a, out_range_mask, 8);
 }
 
-// FORCE_INLINE uint8x8_t vtbx1_u8(uint8x8_t __a, uint8x8_t __b, uint8x8_t __c);
+FORCE_INLINE uint8x8_t vtbx1_u8(uint8x8_t __a, uint8x8_t __b, uint8x8_t __c) {
+  vuint8m1_t b_s = __riscv_vslideup_vx_u8m1(__b, vdup_n_u8(0), 8, 16);
+  vuint8m1_t b_scatter = __riscv_vrgather_vv_u8m1(b_s, __c, 8);
+  // 0xf8 = 11111000, so any number out of the range [7:0] will return non-zero
+  vuint8m1_t out_range = __riscv_vand_vx_u8m1(__c, 0xf8, 8);
+  vbool8_t out_range_mask = __riscv_vmsne_vx_u8m1_b8(out_range, 0, 8);
+  return __riscv_vmerge_vvm_u8m1(b_scatter, __a, out_range_mask, 8);
+}
 
-// FORCE_INLINE int8x8_t vtbx2_s8(int8x8_t __a, int8x8x2_t __b, int8x8_t __c);
+FORCE_INLINE int8x8_t vtbx2_s8(int8x8_t __a, int8x8x2_t __b, int8x8_t __c) {
+  vint8m1_t table1 = __riscv_vget_v_i8m1x2_i8m1(__b, 0);
+  vint8m1_t table2 = __riscv_vget_v_i8m1x2_i8m1(__b, 1);
+  vint8m1_t table = __riscv_vslideup_vx_i8m1(table1, table2, 8, 16);
+  vint8m1_t b_scatter = __riscv_vrgather_vv_i8m1(table, __riscv_vreinterpret_v_i8m1_u8m1(__c), 16);
+  // 0xf0 = 11110000, so any number out of the range [15:0] will return non-zero
+  vint8m1_t out_range = __riscv_vand_vx_i8m1(__c, 0xf0, 16);
+  vbool8_t out_range_mask = __riscv_vmsne_vx_i8m1_b8(out_range, 0, 16);
+  return __riscv_vmerge_vvm_i8m1(b_scatter, __a, out_range_mask, 16);
+}
 
-// FORCE_INLINE uint8x8_t vtbx2_u8(uint8x8_t __a, uint8x8x2_t __b, uint8x8_t __c);
+FORCE_INLINE uint8x8_t vtbx2_u8(uint8x8_t __a, uint8x8x2_t __b, uint8x8_t __c) {
+  vuint8m1_t table1 = __riscv_vget_v_u8m1x2_u8m1(__b, 0);
+  vuint8m1_t table2 = __riscv_vget_v_u8m1x2_u8m1(__b, 1);
+  vuint8m1_t table = __riscv_vslideup_vx_u8m1(table1, table2, 8, 16);
+  vuint8m1_t b_scatter = __riscv_vrgather_vv_u8m1(table, __c, 16);
+  // 0xf0 = 11110000, so any number out of the range [15:0] will return non-zero
+  vuint8m1_t out_range = __riscv_vand_vx_u8m1(__c, 0xf0, 16);
+  vbool8_t out_range_mask = __riscv_vmsne_vx_u8m1_b8(out_range, 0, 16);
+  return __riscv_vmerge_vvm_u8m1(b_scatter, __a, out_range_mask, 16);
+}
 
-// FORCE_INLINE int8x8_t vtbx3_s8(int8x8_t __a, int8x8x3_t __b, int8x8_t __c);
+FORCE_INLINE int8x8_t vtbx3_s8(int8x8_t __a, int8x8x3_t __b, int8x8_t __c) {
+  vint8m1_t table1 = __riscv_vget_v_i8m1x3_i8m1(__b, 0);
+  vint8m1_t table2 = __riscv_vget_v_i8m1x3_i8m1(__b, 1);
+  vint8m1_t table3 = __riscv_vget_v_i8m1x3_i8m1(__b, 2);
+  vint8m2_t table12 = __riscv_vlmul_ext_v_i8m1_i8m2(__riscv_vslideup_vx_i8m1(table1, table2, 8, 16));
+  vint8m2_t table34 = __riscv_vlmul_ext_v_i8m1_i8m2(__riscv_vslideup_vx_i8m1(table3, vdup_n_s8(0), 8, 16));
+  vint8m2_t table = __riscv_vslideup_vx_i8m2(table12, table34, 16, 32);
+  vint8m1_t b_scatter = __riscv_vlmul_trunc_v_i8m2_i8m1(
+      __riscv_vrgather_vv_i8m2(table, __riscv_vlmul_ext_v_u8m1_u8m2(__riscv_vreinterpret_v_i8m1_u8m1(__c)), 8));
+  vbool8_t gt_mask = __riscv_vmsgt_vx_i8m1_b8(__c, 23, 8);
+  vbool8_t lt_mask = __riscv_vmslt_vx_i8m1_b8(__c, 0, 8);
+  vbool8_t out_range_mask = __riscv_vmor_mm_b8(gt_mask, lt_mask, 8);
+  return __riscv_vmerge_vvm_i8m1(b_scatter, __a, out_range_mask, 8);
+}
 
-// FORCE_INLINE uint8x8_t vtbx3_u8(uint8x8_t __a, uint8x8x3_t __b, uint8x8_t __c);
+FORCE_INLINE uint8x8_t vtbx3_u8(uint8x8_t __a, uint8x8x3_t __b, uint8x8_t __c) {
+  vuint8m1_t table1 = __riscv_vget_v_u8m1x3_u8m1(__b, 0);
+  vuint8m1_t table2 = __riscv_vget_v_u8m1x3_u8m1(__b, 1);
+  vuint8m1_t table3 = __riscv_vget_v_u8m1x3_u8m1(__b, 2);
+  vuint8m2_t table12 = __riscv_vlmul_ext_v_u8m1_u8m2(__riscv_vslideup_vx_u8m1(table1, table2, 8, 16));
+  vuint8m2_t table34 = __riscv_vlmul_ext_v_u8m1_u8m2(__riscv_vslideup_vx_u8m1(table3, vdup_n_u8(0), 8, 16));
+  vuint8m2_t table = __riscv_vslideup_vx_u8m2(table12, table34, 16, 32);
+  vuint8m1_t b_scatter =
+      __riscv_vlmul_trunc_v_u8m2_u8m1(__riscv_vrgather_vv_u8m2(table, __riscv_vlmul_ext_v_u8m1_u8m2(__c), 8));
+  vbool8_t out_range_mask = __riscv_vmsgtu_vx_u8m1_b8(__c, 23, 8);
+  return __riscv_vmerge_vvm_u8m1(b_scatter, __a, out_range_mask, 8);
+}
 
-// FORCE_INLINE int8x8_t vtbx4_s8(int8x8_t __a, int8x8x4_t __b, int8x8_t __c);
+FORCE_INLINE int8x8_t vtbx4_s8(int8x8_t __a, int8x8x4_t __b, int8x8_t __c) {
+  vint8m1_t table1 = __riscv_vget_v_i8m1x4_i8m1(__b, 0);
+  vint8m1_t table2 = __riscv_vget_v_i8m1x4_i8m1(__b, 1);
+  vint8m1_t table3 = __riscv_vget_v_i8m1x4_i8m1(__b, 2);
+  vint8m1_t table4 = __riscv_vget_v_i8m1x4_i8m1(__b, 3);
+  vint8m2_t table12 = __riscv_vlmul_ext_v_i8m1_i8m2(__riscv_vslideup_vx_i8m1(table1, table2, 8, 16));
+  vint8m2_t table34 = __riscv_vlmul_ext_v_i8m1_i8m2(__riscv_vslideup_vx_i8m1(table3, table4, 8, 16));
+  vint8m2_t table = __riscv_vslideup_vx_i8m2(table12, table34, 16, 32);
+  vint8m1_t b_scatter = __riscv_vlmul_trunc_v_i8m2_i8m1(
+      __riscv_vrgather_vv_i8m2(table, __riscv_vlmul_ext_v_u8m1_u8m2(__riscv_vreinterpret_v_i8m1_u8m1(__c)), 8));
+  // 0xe0 = 11100000, so any number out of the range [31:0] will return non-zero
+  vint8m1_t out_range = __riscv_vand_vx_i8m1(__c, 0xe0, 8);
+  vbool8_t out_range_mask = __riscv_vmsne_vx_i8m1_b8(out_range, 0, 8);
+  return __riscv_vmerge_vvm_i8m1(b_scatter, __a, out_range_mask, 8);
+}
 
-// FORCE_INLINE uint8x8_t vtbx4_u8(uint8x8_t __a, uint8x8x4_t __b, uint8x8_t __c);
+FORCE_INLINE uint8x8_t vtbx4_u8(uint8x8_t __a, uint8x8x4_t __b, uint8x8_t __c) {
+  vuint8m1_t table1 = __riscv_vget_v_u8m1x4_u8m1(__b, 0);
+  vuint8m1_t table2 = __riscv_vget_v_u8m1x4_u8m1(__b, 1);
+  vuint8m1_t table3 = __riscv_vget_v_u8m1x4_u8m1(__b, 2);
+  vuint8m1_t table4 = __riscv_vget_v_u8m1x4_u8m1(__b, 3);
+  vuint8m2_t table12 = __riscv_vlmul_ext_v_u8m1_u8m2(__riscv_vslideup_vx_u8m1(table1, table2, 8, 16));
+  vuint8m2_t table34 = __riscv_vlmul_ext_v_u8m1_u8m2(__riscv_vslideup_vx_u8m1(table3, table4, 8, 16));
+  vuint8m2_t table = __riscv_vslideup_vx_u8m2(table12, table34, 16, 32);
+  vuint8m1_t b_scatter =
+      __riscv_vlmul_trunc_v_u8m2_u8m1(__riscv_vrgather_vv_u8m2(table, __riscv_vlmul_ext_v_u8m1_u8m2(__c), 8));
+  // 0xe0 = 11100000, so any number out of the range [31:0] will return non-zero
+  vuint8m1_t out_range = __riscv_vand_vx_u8m1(__c, 0xe0, 8);
+  vbool8_t out_range_mask = __riscv_vmsne_vx_u8m1_b8(out_range, 0, 8);
+  return __riscv_vmerge_vvm_u8m1(b_scatter, __a, out_range_mask, 8);
+}
 
 FORCE_INLINE int16x4_t vmul_lane_s16(int16x4_t __a, int16x4_t __b, const int __c) {
   vint16m1_t b_dup_lane = __riscv_vrgather_vx_i16m1(__b, __c, 4);
