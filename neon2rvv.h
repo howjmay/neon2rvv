@@ -3838,39 +3838,39 @@ FORCE_INLINE uint64x2_t vdupq_n_u64(uint64_t __a) { return __riscv_vmv_s_x_u64m1
 
 FORCE_INLINE int8x8_t vmov_n_s8(int8_t __a) { return vdup_n_s8(__a); }
 
-// FORCE_INLINE int16x4_t vmov_n_s16(int16_t __a);
+FORCE_INLINE int16x4_t vmov_n_s16(int16_t __a) { return vdup_n_s16(__a); }
 
-// FORCE_INLINE int32x2_t vmov_n_s32(int32_t __a);
+FORCE_INLINE int32x2_t vmov_n_s32(int32_t __a) { return vdup_n_s32(__a); }
 
-// FORCE_INLINE float32x2_t vmov_n_f32(float32_t __a);
+FORCE_INLINE float32x2_t vmov_n_f32(float32_t __a) { return vdup_n_f32(__a); }
 
-// FORCE_INLINE uint8x8_t vmov_n_u8(uint8_t __a);
+FORCE_INLINE uint8x8_t vmov_n_u8(uint8_t __a) { return vdup_n_u8(__a); }
 
-// FORCE_INLINE uint16x4_t vmov_n_u16(uint16_t __a);
+FORCE_INLINE uint16x4_t vmov_n_u16(uint16_t __a) { return vdup_n_u16(__a); }
 
-// FORCE_INLINE uint32x2_t vmov_n_u32(uint32_t __a);
+FORCE_INLINE uint32x2_t vmov_n_u32(uint32_t __a) { return vdup_n_u32(__a); }
 
-// FORCE_INLINE int64x1_t vmov_n_s64(int64_t __a);
+FORCE_INLINE int64x1_t vmov_n_s64(int64_t __a) { return vdup_n_s64(__a); }
 
-// FORCE_INLINE uint64x1_t vmov_n_u64(uint64_t __a);
+FORCE_INLINE uint64x1_t vmov_n_u64(uint64_t __a) { return vdup_n_u64(__a); }
 
-// FORCE_INLINE int8x16_t vmovq_n_s8(int8_t __a);
+FORCE_INLINE int8x16_t vmovq_n_s8(int8_t __a) { return vdupq_n_s8(__a); }
 
-// FORCE_INLINE int16x8_t vmovq_n_s16(int16_t __a);
+FORCE_INLINE int16x8_t vmovq_n_s16(int16_t __a) { return vdupq_n_s16(__a); }
 
-// FORCE_INLINE int32x4_t vmovq_n_s32(int32_t __a);
+FORCE_INLINE int32x4_t vmovq_n_s32(int32_t __a) { return vdupq_n_s32(__a); }
 
-// FORCE_INLINE float32x4_t vmovq_n_f32(float32_t __a);
+FORCE_INLINE float32x4_t vmovq_n_f32(float32_t __a) { return vdupq_n_f32(__a); }
 
-// FORCE_INLINE uint8x16_t vmovq_n_u8(uint8_t __a);
+FORCE_INLINE uint8x16_t vmovq_n_u8(uint8_t __a) { return vdupq_n_u8(__a); }
 
-// FORCE_INLINE uint16x8_t vmovq_n_u16(uint16_t __a);
+FORCE_INLINE uint16x8_t vmovq_n_u16(uint16_t __a) { return vdupq_n_u16(__a); }
 
-// FORCE_INLINE uint32x4_t vmovq_n_u32(uint32_t __a);
+FORCE_INLINE uint32x4_t vmovq_n_u32(uint32_t __a) { return vdupq_n_u32(__a); }
 
-// FORCE_INLINE int64x2_t vmovq_n_s64(int64_t __a);
+FORCE_INLINE int64x2_t vmovq_n_s64(int64_t __a) { return vdupq_n_s64(__a); }
 
-// FORCE_INLINE uint64x2_t vmovq_n_u64(uint64_t __a);
+FORCE_INLINE uint64x2_t vmovq_n_u64(uint64_t __a) { return vdupq_n_u64(__a); }
 
 FORCE_INLINE int8x8_t vdup_lane_s8(int8x8_t __a, const int __b) { return __riscv_vrgather_vx_i8m1(__a, __b, 8); }
 
