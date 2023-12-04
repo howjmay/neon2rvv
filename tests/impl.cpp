@@ -14880,15 +14880,15 @@ result_t test_vtbl3_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int8_t *in1 = (int8_t *)impl.test_cases_int_pointer1;
   const int8_t *in2 = (int8_t *)impl.test_cases_int_pointer2;
   const int8_t *_b = (int8_t *)impl.test_cases_int_pointer3;
-  int8_t _in_unordered[32];
+  int8_t _in_interleave[32];
   int8_t _a[24];
   int8_t _c[8];
-  merge_arrays(in1, in2, _in_unordered);
+  merge_arrays(in1, in2, _in_interleave);
   // organize input array
   for (int i = 0; i < 8; i++) {
-    _a[i] = _in_unordered[3 * i];
-    _a[i + 8] = _in_unordered[3 * i + 1];
-    _a[i + 16] = _in_unordered[3 * i + 2];
+    _a[i] = _in_interleave[3 * i];
+    _a[i + 8] = _in_interleave[3 * i + 1];
+    _a[i + 16] = _in_interleave[3 * i + 2];
   }
   for (int i = 0; i < 8; i++) {
     if (_b[i] > 23 || _b[i] < 0) {
@@ -14898,7 +14898,7 @@ result_t test_vtbl3_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
     }
   }
 
-  int8x8x3_t a = vld3_s8(_in_unordered);
+  int8x8x3_t a = vld3_s8(_in_interleave);
   int8x8_t b = vld1_s8(_b);
   int8x8_t c = vtbl3_s8(a, b);
   return validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]);
@@ -14912,15 +14912,15 @@ result_t test_vtbl3_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint8_t *in1 = (uint8_t *)impl.test_cases_int_pointer1;
   const uint8_t *in2 = (uint8_t *)impl.test_cases_int_pointer2;
   const uint8_t *_b = (uint8_t *)impl.test_cases_int_pointer3;
-  uint8_t _in_unordered[32];
+  uint8_t _in_interleave[32];
   uint8_t _a[24];
   uint8_t _c[8];
-  merge_arrays(in1, in2, _in_unordered);
+  merge_arrays(in1, in2, _in_interleave);
   // organize input array
   for (int i = 0; i < 8; i++) {
-    _a[i] = _in_unordered[3 * i];
-    _a[i + 8] = _in_unordered[3 * i + 1];
-    _a[i + 16] = _in_unordered[3 * i + 2];
+    _a[i] = _in_interleave[3 * i];
+    _a[i + 8] = _in_interleave[3 * i + 1];
+    _a[i + 16] = _in_interleave[3 * i + 2];
   }
   for (int i = 0; i < 8; i++) {
     if (_b[i] > 23 || _b[i] < 0) {
@@ -14930,7 +14930,7 @@ result_t test_vtbl3_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
     }
   }
 
-  uint8x8x3_t a = vld3_u8(_in_unordered);
+  uint8x8x3_t a = vld3_u8(_in_interleave);
   uint8x8_t b = vld1_u8(_b);
   uint8x8_t c = vtbl3_u8(a, b);
   return validate_uint8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]);
@@ -14944,16 +14944,16 @@ result_t test_vtbl4_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int8_t *in1 = (int8_t *)impl.test_cases_int_pointer1;
   const int8_t *in2 = (int8_t *)impl.test_cases_int_pointer2;
   const int8_t *_b = (int8_t *)impl.test_cases_int_pointer3;
-  int8_t _in_unordered[32];
+  int8_t _in_interleave[32];
   int8_t _a[32];
   int8_t _c[8];
-  merge_arrays(in1, in2, _in_unordered);
+  merge_arrays(in1, in2, _in_interleave);
   // organize input array
   for (int i = 0; i < 8; i++) {
-    _a[i] = _in_unordered[4 * i];
-    _a[i + 8] = _in_unordered[4 * i + 1];
-    _a[i + 16] = _in_unordered[4 * i + 2];
-    _a[i + 24] = _in_unordered[4 * i + 3];
+    _a[i] = _in_interleave[4 * i];
+    _a[i + 8] = _in_interleave[4 * i + 1];
+    _a[i + 16] = _in_interleave[4 * i + 2];
+    _a[i + 24] = _in_interleave[4 * i + 3];
   }
   for (int i = 0; i < 8; i++) {
     if (_b[i] > 31 || _b[i] < 0) {
@@ -14963,7 +14963,7 @@ result_t test_vtbl4_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
     }
   }
 
-  int8x8x4_t a = vld4_s8(_in_unordered);
+  int8x8x4_t a = vld4_s8(_in_interleave);
   int8x8_t b = vld1_s8(_b);
   int8x8_t c = vtbl4_s8(a, b);
   return validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]);
@@ -14977,16 +14977,16 @@ result_t test_vtbl4_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint8_t *in1 = (uint8_t *)impl.test_cases_int_pointer1;
   const uint8_t *in2 = (uint8_t *)impl.test_cases_int_pointer2;
   const uint8_t *_b = (uint8_t *)impl.test_cases_int_pointer3;
-  uint8_t _in_unordered[32];
+  uint8_t _in_interleave[32];
   uint8_t _a[32];
   uint8_t _c[8];
-  merge_arrays(in1, in2, _in_unordered);
+  merge_arrays(in1, in2, _in_interleave);
   // organize input array
   for (int i = 0; i < 8; i++) {
-    _a[i] = _in_unordered[4 * i];
-    _a[i + 8] = _in_unordered[4 * i + 1];
-    _a[i + 16] = _in_unordered[4 * i + 2];
-    _a[i + 24] = _in_unordered[4 * i + 3];
+    _a[i] = _in_interleave[4 * i];
+    _a[i + 8] = _in_interleave[4 * i + 1];
+    _a[i + 16] = _in_interleave[4 * i + 2];
+    _a[i + 24] = _in_interleave[4 * i + 3];
   }
   for (int i = 0; i < 8; i++) {
     if (_b[i] > 31 || _b[i] < 0) {
@@ -14996,7 +14996,7 @@ result_t test_vtbl4_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
     }
   }
 
-  uint8x8x4_t a = vld4_u8(_in_unordered);
+  uint8x8x4_t a = vld4_u8(_in_interleave);
   uint8x8_t b = vld1_u8(_b);
   uint8x8_t c = vtbl4_u8(a, b);
   return validate_uint8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]);
@@ -15029,19 +15029,233 @@ result_t test_vtbx1_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #endif  // ENABLE_TEST_ALL
 }
 
-result_t test_vtbx1_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vtbx1_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint8_t *_a = (uint8_t *)impl.test_cases_int_pointer1;
+  const uint8_t *_b = (uint8_t *)impl.test_cases_int_pointer2;
+  const uint8_t *_c = (uint8_t *)impl.test_cases_int_pointer3;
+  uint8_t _d[8];
+  for (int i = 0; i < 8; i++) {
+    if (_c[i] > 7 || _c[i] < 0) {
+      _d[i] = _a[i];
+    } else {
+      _d[i] = _b[_c[i]];
+    }
+  }
 
-result_t test_vtbx2_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  uint8x8_t a = vld1_u8(_a);
+  uint8x8_t b = vld1_u8(_b);
+  uint8x8_t c = vld1_u8(_c);
+  uint8x8_t d = vtbx1_u8(a, b, c);
+  return validate_uint8(d, _d[0], _d[1], _d[2], _d[3], _d[4], _d[5], _d[6], _d[7]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
-result_t test_vtbx2_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vtbx2_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
+  const int8_t *in1 = (int8_t *)impl.test_cases_int_pointer2;
+  const int8_t *in2 = (int8_t *)impl.test_cases_int_pointer3;
+  const int8_t *_c = (int8_t *)impl.test_cases_int_pointer4;
+  int8_t _in_interleave[32];
+  int8_t _b[16];
+  int8_t _d[8];
+  merge_arrays(in1, in2, _in_interleave);
+  // organize input array
+  for (int i = 0; i < 8; i++) {
+    _b[i] = _in_interleave[2 * i];
+    _b[i + 8] = _in_interleave[2 * i + 1];
+  }
+  for (int i = 0; i < 8; i++) {
+    if (_c[i] > 15 || _c[i] < 0) {
+      _d[i] = _a[i];
+    } else {
+      _d[i] = _b[_c[i]];
+    }
+  }
 
-result_t test_vtbx3_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  int8x8_t a = vld1_s8(_a);
+  int8x8x2_t b = vld2_s8(_in_interleave);
+  int8x8_t c = vld1_s8(_c);
+  int8x8_t d = vtbx2_s8(a, b, c);
+  return validate_int8(d, _d[0], _d[1], _d[2], _d[3], _d[4], _d[5], _d[6], _d[7]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
-result_t test_vtbx3_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vtbx2_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint8_t *_a = (uint8_t *)impl.test_cases_int_pointer1;
+  const uint8_t *in1 = (uint8_t *)impl.test_cases_int_pointer2;
+  const uint8_t *in2 = (uint8_t *)impl.test_cases_int_pointer3;
+  const uint8_t *_c = (uint8_t *)impl.test_cases_int_pointer4;
+  uint8_t _in_interleave[32];
+  uint8_t _b[16];
+  uint8_t _d[8];
+  merge_arrays(in1, in2, _in_interleave);
+  // organize input array
+  for (int i = 0; i < 8; i++) {
+    _b[i] = _in_interleave[2 * i];
+    _b[i + 8] = _in_interleave[2 * i + 1];
+  }
+  for (int i = 0; i < 8; i++) {
+    if (_c[i] > 15 || _c[i] < 0) {
+      _d[i] = _a[i];
+    } else {
+      _d[i] = _b[_c[i]];
+    }
+  }
 
-result_t test_vtbx4_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  uint8x8_t a = vld1_u8(_a);
+  uint8x8x2_t b = vld2_u8(_in_interleave);
+  uint8x8_t c = vld1_u8(_c);
+  uint8x8_t d = vtbx2_u8(a, b, c);
+  return validate_uint8(d, _d[0], _d[1], _d[2], _d[3], _d[4], _d[5], _d[6], _d[7]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
-result_t test_vtbx4_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vtbx3_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
+  const int8_t *in1 = (int8_t *)impl.test_cases_int_pointer2;
+  const int8_t *in2 = (int8_t *)impl.test_cases_int_pointer3;
+  const int8_t *_c = (int8_t *)impl.test_cases_int_pointer4;
+  int8_t _in_interleave[32];
+  int8_t _b[24];
+  int8_t _d[8];
+  merge_arrays(in1, in2, _in_interleave);
+  // organize input array
+  for (int i = 0; i < 8; i++) {
+    _b[i] = _in_interleave[3 * i];
+    _b[i + 8] = _in_interleave[3 * i + 1];
+    _b[i + 16] = _in_interleave[3 * i + 2];
+  }
+  for (int i = 0; i < 8; i++) {
+    if (_c[i] > 23 || _c[i] < 0) {
+      _d[i] = _a[i];
+    } else {
+      _d[i] = _b[_c[i]];
+    }
+  }
+
+  int8x8_t a = vld1_s8(_a);
+  int8x8x3_t b = vld3_s8(_in_interleave);
+  int8x8_t c = vld1_s8(_c);
+  int8x8_t d = vtbx3_s8(a, b, c);
+  return validate_int8(d, _d[0], _d[1], _d[2], _d[3], _d[4], _d[5], _d[6], _d[7]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vtbx3_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint8_t *_a = (uint8_t *)impl.test_cases_int_pointer1;
+  const uint8_t *in1 = (uint8_t *)impl.test_cases_int_pointer2;
+  const uint8_t *in2 = (uint8_t *)impl.test_cases_int_pointer3;
+  const uint8_t *_c = (uint8_t *)impl.test_cases_int_pointer4;
+  uint8_t _in_interleave[32];
+  uint8_t _b[24];
+  uint8_t _d[8];
+  merge_arrays(in1, in2, _in_interleave);
+  // organize input array
+  for (int i = 0; i < 8; i++) {
+    _b[i] = _in_interleave[3 * i];
+    _b[i + 8] = _in_interleave[3 * i + 1];
+    _b[i + 16] = _in_interleave[3 * i + 2];
+  }
+  for (int i = 0; i < 8; i++) {
+    if (_c[i] > 23 || _c[i] < 0) {
+      _d[i] = _a[i];
+    } else {
+      _d[i] = _b[_c[i]];
+    }
+  }
+
+  uint8x8_t a = vld1_u8(_a);
+  uint8x8x3_t b = vld3_u8(_in_interleave);
+  uint8x8_t c = vld1_u8(_c);
+  uint8x8_t d = vtbx3_u8(a, b, c);
+  return validate_uint8(d, _d[0], _d[1], _d[2], _d[3], _d[4], _d[5], _d[6], _d[7]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vtbx4_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
+  const int8_t *in1 = (int8_t *)impl.test_cases_int_pointer2;
+  const int8_t *in2 = (int8_t *)impl.test_cases_int_pointer3;
+  const int8_t *_c = (int8_t *)impl.test_cases_int_pointer4;
+  int8_t _in_interleave[32];
+  int8_t _b[32];
+  int8_t _d[8];
+  merge_arrays(in1, in2, _in_interleave);
+  // organize input array
+  for (int i = 0; i < 8; i++) {
+    _b[i] = _in_interleave[4 * i];
+    _b[i + 8] = _in_interleave[4 * i + 1];
+    _b[i + 16] = _in_interleave[4 * i + 2];
+    _b[i + 24] = _in_interleave[4 * i + 3];
+  }
+  for (int i = 0; i < 8; i++) {
+    if (_c[i] > 31 || _c[i] < 0) {
+      _d[i] = _a[i];
+    } else {
+      _d[i] = _b[_c[i]];
+    }
+  }
+
+  int8x8_t a = vld1_s8(_a);
+  int8x8x4_t b = vld4_s8(_in_interleave);
+  int8x8_t c = vld1_s8(_c);
+  int8x8_t d = vtbx4_s8(a, b, c);
+  return validate_int8(d, _d[0], _d[1], _d[2], _d[3], _d[4], _d[5], _d[6], _d[7]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vtbx4_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint8_t *_a = (uint8_t *)impl.test_cases_int_pointer1;
+  const uint8_t *in1 = (uint8_t *)impl.test_cases_int_pointer2;
+  const uint8_t *in2 = (uint8_t *)impl.test_cases_int_pointer3;
+  const uint8_t *_c = (uint8_t *)impl.test_cases_int_pointer4;
+  uint8_t _in_interleave[32];
+  uint8_t _b[32];
+  uint8_t _d[8];
+  merge_arrays(in1, in2, _in_interleave);
+  // organize input array
+  for (int i = 0; i < 8; i++) {
+    _b[i] = _in_interleave[4 * i];
+    _b[i + 8] = _in_interleave[4 * i + 1];
+    _b[i + 16] = _in_interleave[4 * i + 2];
+    _b[i + 24] = _in_interleave[4 * i + 3];
+  }
+  for (int i = 0; i < 8; i++) {
+    if (_c[i] > 31 || _c[i] < 0) {
+      _d[i] = _a[i];
+    } else {
+      _d[i] = _b[_c[i]];
+    }
+  }
+
+  uint8x8_t a = vld1_u8(_a);
+  uint8x8x4_t b = vld4_u8(_in_interleave);
+  uint8x8_t c = vld1_u8(_c);
+  uint8x8_t d = vtbx4_u8(a, b, c);
+  return validate_uint8(d, _d[0], _d[1], _d[2], _d[3], _d[4], _d[5], _d[6], _d[7]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vmul_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
