@@ -469,19 +469,19 @@ FORCE_INLINE uint16x4_t vmul_u16(uint16x4_t __a, uint16x4_t __b) { return __risc
 
 FORCE_INLINE uint32x2_t vmul_u32(uint32x2_t __a, uint32x2_t __b) { return __riscv_vmul_vv_u32m1(__a, __b, 2); }
 
-// FORCE_INLINE int8x16_t vmulq_s8(int8x16_t __a, int8x16_t __b);
+FORCE_INLINE int8x16_t vmulq_s8(int8x16_t __a, int8x16_t __b) { return __riscv_vmul_vv_i8m1(__a, __b, 16); }
 
-// FORCE_INLINE int16x8_t vmulq_s16(int16x8_t __a, int16x8_t __b);
+FORCE_INLINE int16x8_t vmulq_s16(int16x8_t __a, int16x8_t __b) { return __riscv_vmul_vv_i16m1(__a, __b, 8); }
 
-// FORCE_INLINE int32x4_t vmulq_s32(int32x4_t __a, int32x4_t __b);
+FORCE_INLINE int32x4_t vmulq_s32(int32x4_t __a, int32x4_t __b) { return __riscv_vmul_vv_i32m1(__a, __b, 4); }
 
-// FORCE_INLINE float32x4_t vmulq_f32(float32x4_t __a, float32x4_t __b);
+FORCE_INLINE float32x4_t vmulq_f32(float32x4_t __a, float32x4_t __b) { return __riscv_vfmul_vv_f32m1(__a, __b, 4); }
 
-// FORCE_INLINE uint8x16_t vmulq_u8(uint8x16_t __a, uint8x16_t __b);
+FORCE_INLINE uint8x16_t vmulq_u8(uint8x16_t __a, uint8x16_t __b) { return __riscv_vmul_vv_u8m1(__a, __b, 16); }
 
-// FORCE_INLINE uint16x8_t vmulq_u16(uint16x8_t __a, uint16x8_t __b);
+FORCE_INLINE uint16x8_t vmulq_u16(uint16x8_t __a, uint16x8_t __b) { return __riscv_vmul_vv_u16m1(__a, __b, 8); }
 
-// FORCE_INLINE uint32x4_t vmulq_u32(uint32x4_t __a, uint32x4_t __b);
+FORCE_INLINE uint32x4_t vmulq_u32(uint32x4_t __a, uint32x4_t __b) { return __riscv_vmul_vv_u32m1(__a, __b, 4); }
 
 FORCE_INLINE int16x4_t vqdmulh_s16(int16x4_t __a, int16x4_t __b) {
   vbool8_t mask = __riscv_vreinterpret_v_u8m1_b8(vdup_n_u8(0xaa));
