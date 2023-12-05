@@ -5178,39 +5178,86 @@ FORCE_INLINE int8x8_t vbsl_s8(uint8x8_t __a, int8x8_t __b, int8x8_t __c) {
       __riscv_vand_vv_i8m1(__riscv_vxor_vv_i8m1(__c, __b, 8), __riscv_vreinterpret_v_u8m1_i8m1(__a), 8), __c, 8);
 }
 
-// FORCE_INLINE int16x4_t vbsl_s16(uint16x4_t __a, int16x4_t __b, int16x4_t __c);
+FORCE_INLINE int16x4_t vbsl_s16(uint16x4_t __a, int16x4_t __b, int16x4_t __c) {
+  return __riscv_vxor_vv_i16m1(
+      __riscv_vand_vv_i16m1(__riscv_vxor_vv_i16m1(__c, __b, 4), __riscv_vreinterpret_v_u16m1_i16m1(__a), 4), __c, 4);
+}
 
-// FORCE_INLINE int32x2_t vbsl_s32(uint32x2_t __a, int32x2_t __b, int32x2_t __c);
+FORCE_INLINE int32x2_t vbsl_s32(uint32x2_t __a, int32x2_t __b, int32x2_t __c) {
+  return __riscv_vxor_vv_i32m1(
+      __riscv_vand_vv_i32m1(__riscv_vxor_vv_i32m1(__c, __b, 2), __riscv_vreinterpret_v_u32m1_i32m1(__a), 2), __c, 2);
+}
 
-// FORCE_INLINE int64x1_t vbsl_s64(uint64x1_t __a, int64x1_t __b, int64x1_t __c);
+FORCE_INLINE int64x1_t vbsl_s64(uint64x1_t __a, int64x1_t __b, int64x1_t __c) {
+  return __riscv_vxor_vv_i64m1(
+      __riscv_vand_vv_i64m1(__riscv_vxor_vv_i64m1(__c, __b, 1), __riscv_vreinterpret_v_u64m1_i64m1(__a), 1), __c, 1);
+}
 
-// FORCE_INLINE float32x2_t vbsl_f32(uint32x2_t __a, float32x2_t __b, float32x2_t __c);
+FORCE_INLINE float32x2_t vbsl_f32(uint32x2_t __a, float32x2_t __b, float32x2_t __c) {
+  vuint32m1_t b_u32 = __riscv_vreinterpret_v_f32m1_u32m1(__b);
+  vuint32m1_t c_u32 = __riscv_vreinterpret_v_f32m1_u32m1(__c);
+  return __riscv_vreinterpret_v_u32m1_f32m1(
+      __riscv_vxor_vv_u32m1(__riscv_vand_vv_u32m1(__riscv_vxor_vv_u32m1(c_u32, b_u32, 2), __a, 2), c_u32, 2));
+}
 
-// FORCE_INLINE uint8x8_t vbsl_u8(uint8x8_t __a, uint8x8_t __b, uint8x8_t __c);
+FORCE_INLINE uint8x8_t vbsl_u8(uint8x8_t __a, uint8x8_t __b, uint8x8_t __c) {
+  return __riscv_vxor_vv_u8m1(__riscv_vand_vv_u8m1(__riscv_vxor_vv_u8m1(__c, __b, 8), __a, 8), __c, 8);
+}
 
-// FORCE_INLINE uint16x4_t vbsl_u16(uint16x4_t __a, uint16x4_t __b, uint16x4_t __c);
+FORCE_INLINE uint16x4_t vbsl_u16(uint16x4_t __a, uint16x4_t __b, uint16x4_t __c) {
+  return __riscv_vxor_vv_u16m1(__riscv_vand_vv_u16m1(__riscv_vxor_vv_u16m1(__c, __b, 4), __a, 4), __c, 4);
+}
 
-// FORCE_INLINE uint32x2_t vbsl_u32(uint32x2_t __a, uint32x2_t __b, uint32x2_t __c);
+FORCE_INLINE uint32x2_t vbsl_u32(uint32x2_t __a, uint32x2_t __b, uint32x2_t __c) {
+  return __riscv_vxor_vv_u32m1(__riscv_vand_vv_u32m1(__riscv_vxor_vv_u32m1(__c, __b, 2), __a, 2), __c, 2);
+}
 
-// FORCE_INLINE uint64x1_t vbsl_u64(uint64x1_t __a, uint64x1_t __b, uint64x1_t __c);
+FORCE_INLINE uint64x1_t vbsl_u64(uint64x1_t __a, uint64x1_t __b, uint64x1_t __c) {
+  return __riscv_vxor_vv_u64m1(__riscv_vand_vv_u64m1(__riscv_vxor_vv_u64m1(__c, __b, 1), __a, 1), __c, 1);
+}
 
-// FORCE_INLINE int8x16_t vbslq_s8(uint8x16_t __a, int8x16_t __b, int8x16_t __c);
+FORCE_INLINE int8x16_t vbslq_s8(uint8x16_t __a, int8x16_t __b, int8x16_t __c) {
+  return __riscv_vxor_vv_i8m1(
+      __riscv_vand_vv_i8m1(__riscv_vxor_vv_i8m1(__c, __b, 16), __riscv_vreinterpret_v_u8m1_i8m1(__a), 16), __c, 16);
+}
 
-// FORCE_INLINE int16x8_t vbslq_s16(uint16x8_t __a, int16x8_t __b, int16x8_t __c);
+FORCE_INLINE int16x8_t vbslq_s16(uint16x8_t __a, int16x8_t __b, int16x8_t __c) {
+  return __riscv_vxor_vv_i16m1(
+      __riscv_vand_vv_i16m1(__riscv_vxor_vv_i16m1(__c, __b, 8), __riscv_vreinterpret_v_u16m1_i16m1(__a), 8), __c, 8);
+}
 
-// FORCE_INLINE int32x4_t vbslq_s32(uint32x4_t __a, int32x4_t __b, int32x4_t __c);
+FORCE_INLINE int32x4_t vbslq_s32(uint32x4_t __a, int32x4_t __b, int32x4_t __c) {
+  return __riscv_vxor_vv_i32m1(
+      __riscv_vand_vv_i32m1(__riscv_vxor_vv_i32m1(__c, __b, 4), __riscv_vreinterpret_v_u32m1_i32m1(__a), 4), __c, 4);
+}
 
-// FORCE_INLINE int64x2_t vbslq_s64(uint64x2_t __a, int64x2_t __b, int64x2_t __c);
+FORCE_INLINE int64x2_t vbslq_s64(uint64x2_t __a, int64x2_t __b, int64x2_t __c) {
+  return __riscv_vxor_vv_i64m1(
+      __riscv_vand_vv_i64m1(__riscv_vxor_vv_i64m1(__c, __b, 2), __riscv_vreinterpret_v_u64m1_i64m1(__a), 2), __c, 2);
+}
 
-// FORCE_INLINE float32x4_t vbslq_f32(uint32x4_t __a, float32x4_t __b, float32x4_t __c);
+FORCE_INLINE float32x4_t vbslq_f32(uint32x4_t __a, float32x4_t __b, float32x4_t __c) {
+  vuint32m1_t b_u32 = __riscv_vreinterpret_v_f32m1_u32m1(__b);
+  vuint32m1_t c_u32 = __riscv_vreinterpret_v_f32m1_u32m1(__c);
+  return __riscv_vreinterpret_v_u32m1_f32m1(
+      __riscv_vxor_vv_u32m1(__riscv_vand_vv_u32m1(__riscv_vxor_vv_u32m1(c_u32, b_u32, 4), __a, 4), c_u32, 4));
+}
 
-// FORCE_INLINE uint8x16_t vbslq_u8(uint8x16_t __a, uint8x16_t __b, uint8x16_t __c);
+FORCE_INLINE uint8x16_t vbslq_u8(uint8x16_t __a, uint8x16_t __b, uint8x16_t __c) {
+  return __riscv_vxor_vv_u8m1(__riscv_vand_vv_u8m1(__riscv_vxor_vv_u8m1(__c, __b, 16), __a, 16), __c, 16);
+}
 
-// FORCE_INLINE uint16x8_t vbslq_u16(uint16x8_t __a, uint16x8_t __b, uint16x8_t __c);
+FORCE_INLINE uint16x8_t vbslq_u16(uint16x8_t __a, uint16x8_t __b, uint16x8_t __c) {
+  return __riscv_vxor_vv_u16m1(__riscv_vand_vv_u16m1(__riscv_vxor_vv_u16m1(__c, __b, 8), __a, 8), __c, 8);
+}
 
-// FORCE_INLINE uint32x4_t vbslq_u32(uint32x4_t __a, uint32x4_t __b, uint32x4_t __c);
+FORCE_INLINE uint32x4_t vbslq_u32(uint32x4_t __a, uint32x4_t __b, uint32x4_t __c) {
+  return __riscv_vxor_vv_u32m1(__riscv_vand_vv_u32m1(__riscv_vxor_vv_u32m1(__c, __b, 4), __a, 4), __c, 4);
+}
 
-// FORCE_INLINE uint64x2_t vbslq_u64(uint64x2_t __a, uint64x2_t __b, uint64x2_t __c);
+FORCE_INLINE uint64x2_t vbslq_u64(uint64x2_t __a, uint64x2_t __b, uint64x2_t __c) {
+  return __riscv_vxor_vv_u64m1(__riscv_vand_vv_u64m1(__riscv_vxor_vv_u64m1(__c, __b, 2), __a, 2), __c, 2);
+}
 
 FORCE_INLINE int8x8x2_t vtrn_s8(int8x8_t __a, int8x8_t __b) {
   vuint16m1_t a_u16 = __riscv_vreinterpret_v_i16m1_u16m1(__riscv_vreinterpret_v_i8m1_i16m1(__a));
