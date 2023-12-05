@@ -4439,11 +4439,20 @@ FORCE_INLINE uint32x2_t vqmovn_u64(uint64x2_t __a) {
   return __riscv_vlmul_ext_v_u32mf2_u32m1(__riscv_vnclipu_wx_u32mf2(__a, 0, NEON2RVV_ROUND_TYPE_RDN, 2));
 }
 
-// FORCE_INLINE uint8x8_t vqmovun_s16(int16x8_t __a);
+FORCE_INLINE uint8x8_t vqmovun_s16(int16x8_t __a) {
+  vuint16m1_t a_non_neg = __riscv_vreinterpret_v_i16m1_u16m1(__riscv_vmax_vx_i16m1(__a, 0, 8));
+  return __riscv_vlmul_ext_v_u8mf2_u8m1(__riscv_vnclipu_wx_u8mf2(a_non_neg, 0, NEON2RVV_ROUND_TYPE_RDN, 8));
+}
 
-// FORCE_INLINE uint16x4_t vqmovun_s32(int32x4_t __a);
+FORCE_INLINE uint16x4_t vqmovun_s32(int32x4_t __a) {
+  vuint32m1_t a_non_neg = __riscv_vreinterpret_v_i32m1_u32m1(__riscv_vmax_vx_i32m1(__a, 0, 4));
+  return __riscv_vlmul_ext_v_u16mf2_u16m1(__riscv_vnclipu_wx_u16mf2(a_non_neg, 0, NEON2RVV_ROUND_TYPE_RDN, 4));
+}
 
-// FORCE_INLINE uint32x2_t vqmovun_s64(int64x2_t __a);
+FORCE_INLINE uint32x2_t vqmovun_s64(int64x2_t __a) {
+  vuint64m1_t a_non_neg = __riscv_vreinterpret_v_i64m1_u64m1(__riscv_vmax_vx_i64m1(__a, 0, 2));
+  return __riscv_vlmul_ext_v_u32mf2_u32m1(__riscv_vnclipu_wx_u32mf2(a_non_neg, 0, NEON2RVV_ROUND_TYPE_RDN, 2));
+}
 
 FORCE_INLINE int16x8_t vmovl_s8(int8x8_t __a) {
   return __riscv_vlmul_trunc_v_i16m2_i16m1(__riscv_vsext_vf2_i16m2(__a, 8));
