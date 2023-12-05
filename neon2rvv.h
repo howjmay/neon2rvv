@@ -3216,7 +3216,17 @@ FORCE_INLINE int32x2_t vqshl_n_s32(int32x2_t __a, const int __b) {
   return __riscv_vnclip_wx_i32m1(a_s, 0, NEON2RVV_ROUND_TYPE_RDN, 2);
 }
 
-// FORCE_INLINE int64x1_t vqshl_n_s64(int64x1_t __a, const int __b);
+FORCE_INLINE int64x1_t vqshl_n_s64(int64x1_t __a, const int __b) {
+  vbool64_t mask_positive = __riscv_vmsgt_vx_i64m1_b64(__a, 0, 1);
+  vbool64_t mask_non_positive = __riscv_vmnot_m_b64(mask_positive, 1);
+  vbool64_t gt_max = __riscv_vmsgt_vx_i64m1_b64(__a, INT64_MAX >> __b, 1);
+  vbool64_t lt_min = __riscv_vmslt_vx_i64m1_b64(__a, INT64_MIN >> __b, 1);
+  vbool64_t mask_sat_positive = __riscv_vmand_mm_b64(gt_max, mask_positive, 1);
+  vbool64_t mask_sat_non_positive = __riscv_vmand_mm_b64(lt_min, mask_non_positive, 1);
+  vint64m1_t shl = __riscv_vsll_vx_i64m1(__a, __b, 1);
+  vint64m1_t shl_max = __riscv_vmerge_vxm_i64m1(shl, INT64_MAX, mask_sat_positive, 1);
+  return __riscv_vmerge_vxm_i64m1(shl_max, INT64_MIN, mask_sat_non_positive, 1);
+}
 
 FORCE_INLINE uint8x8_t vqshl_n_u8(uint8x8_t __a, const int __b) {
   vuint16m2_t a_ext = __riscv_vzext_vf2_u16m2(__a, 8);
@@ -3236,7 +3246,13 @@ FORCE_INLINE uint32x2_t vqshl_n_u32(uint32x2_t __a, const int __b) {
   return __riscv_vnclipu_wx_u32m1(a_s, 0, NEON2RVV_ROUND_TYPE_RDN, 2);
 }
 
-// FORCE_INLINE uint64x1_t vqshl_n_u64(uint64x1_t __a, const int __b);
+FORCE_INLINE uint64x1_t vqshl_n_u64(uint64x1_t __a, const int __b) {
+  vbool64_t mask_positive = __riscv_vmsgtu_vx_u64m1_b64(__a, 0, 1);
+  vbool64_t gt_max = __riscv_vmsgtu_vx_u64m1_b64(__a, UINT64_MAX >> __b, 1);
+  vbool64_t mask_sat_positive = __riscv_vmand_mm_b64(gt_max, mask_positive, 1);
+  vuint64m1_t shl = __riscv_vsll_vx_u64m1(__a, __b, 1);
+  return __riscv_vmerge_vxm_u64m1(shl, UINT64_MAX, mask_sat_positive, 1);
+}
 
 FORCE_INLINE int8x16_t vqshlq_n_s8(int8x16_t __a, const int __b) {
   vint16m2_t a_ext = __riscv_vsext_vf2_i16m2(__a, 16);
@@ -3256,7 +3272,17 @@ FORCE_INLINE int32x4_t vqshlq_n_s32(int32x4_t __a, const int __b) {
   return __riscv_vnclip_wx_i32m1(a_s, 0, NEON2RVV_ROUND_TYPE_RDN, 4);
 }
 
-// FORCE_INLINE int64x2_t vqshlq_n_s64(int64x2_t __a, const int __b);
+FORCE_INLINE int64x2_t vqshlq_n_s64(int64x2_t __a, const int __b) {
+  vbool64_t mask_positive = __riscv_vmsgt_vx_i64m1_b64(__a, 0, 2);
+  vbool64_t mask_non_positive = __riscv_vmnot_m_b64(mask_positive, 2);
+  vbool64_t gt_max = __riscv_vmsgt_vx_i64m1_b64(__a, INT64_MAX >> __b, 2);
+  vbool64_t lt_min = __riscv_vmslt_vx_i64m1_b64(__a, INT64_MIN >> __b, 2);
+  vbool64_t mask_sat_positive = __riscv_vmand_mm_b64(gt_max, mask_positive, 2);
+  vbool64_t mask_sat_non_positive = __riscv_vmand_mm_b64(lt_min, mask_non_positive, 2);
+  vint64m1_t shl = __riscv_vsll_vx_i64m1(__a, __b, 2);
+  vint64m1_t shl_max = __riscv_vmerge_vxm_i64m1(shl, INT64_MAX, mask_sat_positive, 2);
+  return __riscv_vmerge_vxm_i64m1(shl_max, INT64_MIN, mask_sat_non_positive, 2);
+}
 
 FORCE_INLINE uint8x16_t vqshlq_n_u8(uint8x16_t __a, const int __b) {
   vuint16m2_t a_ext = __riscv_vzext_vf2_u16m2(__a, 16);
@@ -3276,7 +3302,13 @@ FORCE_INLINE uint32x4_t vqshlq_n_u32(uint32x4_t __a, const int __b) {
   return __riscv_vnclipu_wx_u32m1(a_s, 0, NEON2RVV_ROUND_TYPE_RDN, 4);
 }
 
-// FORCE_INLINE uint64x2_t vqshlq_n_u64(uint64x2_t __a, const int __b);
+FORCE_INLINE uint64x2_t vqshlq_n_u64(uint64x2_t __a, const int __b) {
+  vbool64_t mask_positive = __riscv_vmsgtu_vx_u64m1_b64(__a, 0, 2);
+  vbool64_t gt_max = __riscv_vmsgtu_vx_u64m1_b64(__a, UINT64_MAX >> __b, 2);
+  vbool64_t mask_sat_positive = __riscv_vmand_mm_b64(gt_max, mask_positive, 2);
+  vuint64m1_t shl = __riscv_vsll_vx_u64m1(__a, __b, 2);
+  return __riscv_vmerge_vxm_u64m1(shl, UINT64_MAX, mask_sat_positive, 2);
+}
 
 // FORCE_INLINE uint8x8_t vqshlu_n_s8(int8x8_t __a, const int __b);
 
