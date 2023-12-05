@@ -1841,24 +1841,60 @@ FORCE_INLINE uint16x8_t vminq_u16(uint16x8_t __a, uint16x8_t __b) { return __ris
 FORCE_INLINE uint32x4_t vminq_u32(uint32x4_t __a, uint32x4_t __b) { return __riscv_vminu_vv_u32m1(__a, __b, 4); }
 
 FORCE_INLINE int8x8_t vpadd_s8(int8x8_t __a, int8x8_t __b) {
-  vbool8_t mask = __riscv_vreinterpret_v_u8m1_b8(vdup_n_u8(85));
+  vbool8_t mask = __riscv_vreinterpret_v_u8m1_b8(vdupq_n_u8(85));
   vint8m1_t ab = __riscv_vslideup_vx_i8m1(__a, __b, 8, 16);
   vint8m1_t ab_s = __riscv_vslidedown_vx_i8m1(ab, 1, 16);
   vint8m1_t ab_add = __riscv_vadd_vv_i8m1(ab, ab_s, 16);
   return __riscv_vcompress_vm_i8m1(ab_add, mask, 16);
 }
 
-// FORCE_INLINE int16x4_t vpadd_s16(int16x4_t __a, int16x4_t __b);
+FORCE_INLINE int16x4_t vpadd_s16(int16x4_t __a, int16x4_t __b) {
+  vbool16_t mask = __riscv_vreinterpret_v_u8m1_b16(vdupq_n_u8(85));
+  vint16m1_t ab = __riscv_vslideup_vx_i16m1(__a, __b, 4, 8);
+  vint16m1_t ab_s = __riscv_vslidedown_vx_i16m1(ab, 1, 8);
+  vint16m1_t ab_add = __riscv_vadd_vv_i16m1(ab, ab_s, 8);
+  return __riscv_vcompress_vm_i16m1(ab_add, mask, 8);
+}
 
-// FORCE_INLINE int32x2_t vpadd_s32(int32x2_t __a, int32x2_t __b);
+FORCE_INLINE int32x2_t vpadd_s32(int32x2_t __a, int32x2_t __b) {
+  vbool32_t mask = __riscv_vreinterpret_v_u8m1_b32(vdupq_n_u8(85));
+  vint32m1_t ab = __riscv_vslideup_vx_i32m1(__a, __b, 2, 4);
+  vint32m1_t ab_s = __riscv_vslidedown_vx_i32m1(ab, 1, 4);
+  vint32m1_t ab_add = __riscv_vadd_vv_i32m1(ab, ab_s, 4);
+  return __riscv_vcompress_vm_i32m1(ab_add, mask, 4);
+}
 
-// FORCE_INLINE float32x2_t vpadd_f32(float32x2_t __a, float32x2_t __b);
+FORCE_INLINE float32x2_t vpadd_f32(float32x2_t __a, float32x2_t __b) {
+  vbool32_t mask = __riscv_vreinterpret_v_u8m1_b32(vdupq_n_u8(85));
+  vfloat32m1_t ab = __riscv_vslideup_vx_f32m1(__a, __b, 2, 4);
+  vfloat32m1_t ab_s = __riscv_vslidedown_vx_f32m1(ab, 1, 4);
+  vfloat32m1_t ab_add = __riscv_vfadd_vv_f32m1(ab, ab_s, 4);
+  return __riscv_vcompress_vm_f32m1(ab_add, mask, 4);
+}
 
-// FORCE_INLINE uint8x8_t vpadd_u8(uint8x8_t __a, uint8x8_t __b);
+FORCE_INLINE uint8x8_t vpadd_u8(uint8x8_t __a, uint8x8_t __b) {
+  vbool8_t mask = __riscv_vreinterpret_v_u8m1_b8(vdupq_n_u8(85));
+  vuint8m1_t ab = __riscv_vslideup_vx_u8m1(__a, __b, 8, 16);
+  vuint8m1_t ab_s = __riscv_vslidedown_vx_u8m1(ab, 1, 16);
+  vuint8m1_t ab_add = __riscv_vadd_vv_u8m1(ab, ab_s, 16);
+  return __riscv_vcompress_vm_u8m1(ab_add, mask, 16);
+}
 
-// FORCE_INLINE uint16x4_t vpadd_u16(uint16x4_t __a, uint16x4_t __b);
+FORCE_INLINE uint16x4_t vpadd_u16(uint16x4_t __a, uint16x4_t __b) {
+  vbool16_t mask = __riscv_vreinterpret_v_u8m1_b16(vdupq_n_u8(85));
+  vuint16m1_t ab = __riscv_vslideup_vx_u16m1(__a, __b, 4, 8);
+  vuint16m1_t ab_s = __riscv_vslidedown_vx_u16m1(ab, 1, 8);
+  vuint16m1_t ab_add = __riscv_vadd_vv_u16m1(ab, ab_s, 8);
+  return __riscv_vcompress_vm_u16m1(ab_add, mask, 8);
+}
 
-// FORCE_INLINE uint32x2_t vpadd_u32(uint32x2_t __a, uint32x2_t __b);
+FORCE_INLINE uint32x2_t vpadd_u32(uint32x2_t __a, uint32x2_t __b) {
+  vbool32_t mask = __riscv_vreinterpret_v_u8m1_b32(vdupq_n_u8(85));
+  vuint32m1_t ab = __riscv_vslideup_vx_u32m1(__a, __b, 2, 4);
+  vuint32m1_t ab_s = __riscv_vslidedown_vx_u32m1(ab, 1, 4);
+  vuint32m1_t ab_add = __riscv_vadd_vv_u32m1(ab, ab_s, 4);
+  return __riscv_vcompress_vm_u32m1(ab_add, mask, 4);
+}
 
 FORCE_INLINE int16x4_t vpaddl_s8(int8x8_t __a) {
   vint8m1_t a_s = __riscv_vslidedown_vx_i8m1(__a, 1, 8);
