@@ -5707,48 +5707,100 @@ FORCE_INLINE void vst1q_u32(uint32_t *__a, uint32x4_t __b) { return __riscv_vse3
 FORCE_INLINE void vst1q_u64(uint64_t *__a, uint64x2_t __b) { return __riscv_vse64_v_u64m1(__a, __b, 2); }
 
 FORCE_INLINE void vst1_lane_s8(int8_t *__a, int8x8_t __b, const int __c) {
-  // FIXME use index store
-  int8x8_t b_s = __riscv_vslidedown_vx_i8m1(__b, __c, 8);
+  vint8m1_t b_s = __riscv_vslidedown_vx_i8m1(__b, __c, 8);
   __riscv_vsse8_v_i8m1(__a, 8, b_s, 8);
 }
 
-// FORCE_INLINE void vst1_lane_s16(int16_t *__a, int16x4_t __b, const int __c);
+FORCE_INLINE void vst1_lane_s16(int16_t *__a, int16x4_t __b, const int __c) {
+  vint16m1_t b_s = __riscv_vslidedown_vx_i16m1(__b, __c, 4);
+  __riscv_vsse16_v_i16m1(__a, 4, b_s, 4);
+}
 
-// FORCE_INLINE void vst1_lane_s32(int32_t *__a, int32x2_t __b, const int __c);
+FORCE_INLINE void vst1_lane_s32(int32_t *__a, int32x2_t __b, const int __c) {
+  // FIXME error when calling __riscv_vsse32_v_i32m1()
+  const int32_t *b = (const int32_t *)&__b;
+  __a[0] = b[__c];
+}
 
-// FORCE_INLINE void vst1_lane_f32(float32_t *__a, float32x2_t __b, const int __c);
+FORCE_INLINE void vst1_lane_f32(float32_t *__a, float32x2_t __b, const int __c) {
+  // FIXME error when calling __riscv_vsse32_v_f32m1()
+  const float *b = (const float *)&__b;
+  __a[0] = b[__c];
+}
 
-// FORCE_INLINE void vst1_lane_u8(uint8_t *__a, uint8x8_t __b, const int __c);
+FORCE_INLINE void vst1_lane_u8(uint8_t *__a, uint8x8_t __b, const int __c) {
+  vuint8m1_t b_s = __riscv_vslidedown_vx_u8m1(__b, __c, 8);
+  __riscv_vsse8_v_u8m1(__a, 8, b_s, 8);
+}
 
-// FORCE_INLINE void vst1_lane_u16(uint16_t *__a, uint16x4_t __b, const int __c);
+FORCE_INLINE void vst1_lane_u16(uint16_t *__a, uint16x4_t __b, const int __c) {
+  vuint16m1_t b_s = __riscv_vslidedown_vx_u16m1(__b, __c, 4);
+  __riscv_vsse16_v_u16m1(__a, 4, b_s, 4);
+}
 
-// FORCE_INLINE void vst1_lane_u32(uint32_t *__a, uint32x2_t __b, const int __c);
+FORCE_INLINE void vst1_lane_u32(uint32_t *__a, uint32x2_t __b, const int __c) {
+  // FIXME error when calling __riscv_vsse32_v_u32m1()
+  const uint32_t *b = (const uint32_t *)&__b;
+  __a[0] = b[__c];
+}
 
-// FORCE_INLINE void vst1_lane_s64(int64_t *__a, int64x1_t __b, const int __c);
+FORCE_INLINE void vst1_lane_s64(int64_t *__a, int64x1_t __b, const int __c) {
+  vint64m1_t b_s = __riscv_vslidedown_vx_i64m1(__b, __c, 1);
+  __riscv_vsse64_v_i64m1(__a, 1, b_s, 1);
+}
 
-// FORCE_INLINE void vst1_lane_u64(uint64_t *__a, uint64x1_t __b, const int __c);
+FORCE_INLINE void vst1_lane_u64(uint64_t *__a, uint64x1_t __b, const int __c) {
+  vuint64m1_t b_s = __riscv_vslidedown_vx_u64m1(__b, __c, 1);
+  __riscv_vsse64_v_u64m1(__a, 1, b_s, 1);
+}
 
 FORCE_INLINE void vst1q_lane_s8(int8_t *__a, int8x16_t __b, const int __c) {
-  // FIXME use index store
   int8x8_t b_s = __riscv_vslidedown_vx_i8m1(__b, __c, 8);
   __riscv_vsse8_v_i8m1(__a, 16, b_s, 8);
 }
 
-// FORCE_INLINE void vst1q_lane_s16(int16_t *__a, int16x8_t __b, const int __c);
+FORCE_INLINE void vst1q_lane_s16(int16_t *__a, int16x8_t __b, const int __c) {
+  vint16m1_t b_s = __riscv_vslidedown_vx_i16m1(__b, __c, 4);
+  __riscv_vsse16_v_i16m1(__a, 4, b_s, 4);
+}
 
-// FORCE_INLINE void vst1q_lane_s32(int32_t *__a, int32x4_t __b, const int __c);
+FORCE_INLINE void vst1q_lane_s32(int32_t *__a, int32x4_t __b, const int __c) {
+  // FIXME error when calling __riscv_vsse32_v_i32m1()
+  const int32_t *b = (const int32_t *)&__b;
+  __a[0] = b[__c];
+}
 
-// FORCE_INLINE void vst1q_lane_f32(float32_t *__a, float32x4_t __b, const int __c);
+FORCE_INLINE void vst1q_lane_f32(float32_t *__a, float32x4_t __b, const int __c) {
+  // FIXME error when calling __riscv_vsse32_v_f32m1()
+  const int32_t *b = (const int32_t *)&__b;
+  __a[0] = b[__c];
+}
 
-// FORCE_INLINE void vst1q_lane_u8(uint8_t *__a, uint8x16_t __b, const int __c);
+FORCE_INLINE void vst1q_lane_u8(uint8_t *__a, uint8x16_t __b, const int __c) {
+  vuint8m1_t b_s = __riscv_vslidedown_vx_u8m1(__b, __c, 8);
+  __riscv_vsse8_v_u8m1(__a, 8, b_s, 8);
+}
 
-// FORCE_INLINE void vst1q_lane_u16(uint16_t *__a, uint16x8_t __b, const int __c);
+FORCE_INLINE void vst1q_lane_u16(uint16_t *__a, uint16x8_t __b, const int __c) {
+  vuint16m1_t b_s = __riscv_vslidedown_vx_u16m1(__b, __c, 4);
+  __riscv_vsse16_v_u16m1(__a, 4, b_s, 4);
+}
 
-// FORCE_INLINE void vst1q_lane_u32(uint32_t *__a, uint32x4_t __b, const int __c);
+FORCE_INLINE void vst1q_lane_u32(uint32_t *__a, uint32x4_t __b, const int __c) {
+  // FIXME error when calling __riscv_vsse32_v_u32m1()
+  const int32_t *b = (const int32_t *)&__b;
+  __a[0] = b[__c];
+}
 
-// FORCE_INLINE void vst1q_lane_s64(int64_t *__a, int64x2_t __b, const int __c);
+FORCE_INLINE void vst1q_lane_s64(int64_t *__a, int64x2_t __b, const int __c) {
+  vint64m1_t b_s = __riscv_vslidedown_vx_i64m1(__b, __c, 1);
+  __riscv_vsse64_v_i64m1(__a, 1, b_s, 1);
+}
 
-// FORCE_INLINE void vst1q_lane_u64(uint64_t *__a, uint64x2_t __b, const int __c);
+FORCE_INLINE void vst1q_lane_u64(uint64_t *__a, uint64x2_t __b, const int __c) {
+  vuint64m1_t b_s = __riscv_vslidedown_vx_u64m1(__b, __c, 1);
+  __riscv_vsse64_v_u64m1(__a, 1, b_s, 1);
+}
 
 FORCE_INLINE int8x8x2_t vld2_s8(const int8_t *__a) { return __riscv_vlseg2e8_v_i8m1x2(__a, 8); }
 
