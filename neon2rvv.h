@@ -5772,7 +5772,7 @@ FORCE_INLINE void vst1q_lane_s32(int32_t *__a, int32x4_t __b, const int __c) {
 
 FORCE_INLINE void vst1q_lane_f32(float32_t *__a, float32x4_t __b, const int __c) {
   // FIXME error when calling __riscv_vsse32_v_f32m1()
-  const int32_t *b = (const int32_t *)&__b;
+  const float *b = (const float *)&__b;
   __a[0] = b[__c];
 }
 
