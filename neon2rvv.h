@@ -6108,29 +6108,101 @@ FORCE_INLINE uint16x8x3_t vld3q_u16(const uint16_t *__a) { return __riscv_vlseg3
 
 FORCE_INLINE uint32x4x3_t vld3q_u32(const uint32_t *__a) { return __riscv_vlseg3e32_v_u32m1x3(__a, 4); }
 
-// FORCE_INLINE int8x8x3_t vld3_lane_s8(const int8_t *__a, int8x8x3_t __b, const int __c);
+FORCE_INLINE int8x8x3_t vld3_lane_s8(const int8_t *__a, int8x8x3_t __b, const int __c) {
+  vbool8_t mask = __riscv_vreinterpret_v_u8m1_b8(vdup_n_u8((uint8_t)(1 << __c)));
+  vint8m1_t c0 = __riscv_vmerge_vxm_i8m1(__riscv_vget_v_i8m1x3_i8m1(__b, 0), __a[0], mask, 8);
+  vint8m1_t c1 = __riscv_vmerge_vxm_i8m1(__riscv_vget_v_i8m1x3_i8m1(__b, 1), __a[1], mask, 8);
+  vint8m1_t c2 = __riscv_vmerge_vxm_i8m1(__riscv_vget_v_i8m1x3_i8m1(__b, 2), __a[2], mask, 8);
+  return __riscv_vcreate_v_i8m1x3(c0, c1, c2);
+}
 
-// FORCE_INLINE int16x4x3_t vld3_lane_s16(const int16_t *__a, int16x4x3_t __b, const int __c);
+FORCE_INLINE int16x4x3_t vld3_lane_s16(const int16_t *__a, int16x4x3_t __b, const int __c) {
+  vbool16_t mask = __riscv_vreinterpret_v_u8m1_b16(vdup_n_u8((uint8_t)(1 << __c)));
+  vint16m1_t c0 = __riscv_vmerge_vxm_i16m1(__riscv_vget_v_i16m1x3_i16m1(__b, 0), __a[0], mask, 4);
+  vint16m1_t c1 = __riscv_vmerge_vxm_i16m1(__riscv_vget_v_i16m1x3_i16m1(__b, 1), __a[1], mask, 4);
+  vint16m1_t c2 = __riscv_vmerge_vxm_i16m1(__riscv_vget_v_i16m1x3_i16m1(__b, 2), __a[2], mask, 4);
+  return __riscv_vcreate_v_i16m1x3(c0, c1, c2);
+}
 
-// FORCE_INLINE int32x2x3_t vld3_lane_s32(const int32_t *__a, int32x2x3_t __b, const int __c);
+FORCE_INLINE int32x2x3_t vld3_lane_s32(const int32_t *__a, int32x2x3_t __b, const int __c) {
+  vbool32_t mask = __riscv_vreinterpret_v_u8m1_b32(vdup_n_u8((uint8_t)(1 << __c)));
+  vint32m1_t c0 = __riscv_vmerge_vxm_i32m1(__riscv_vget_v_i32m1x3_i32m1(__b, 0), __a[0], mask, 2);
+  vint32m1_t c1 = __riscv_vmerge_vxm_i32m1(__riscv_vget_v_i32m1x3_i32m1(__b, 1), __a[1], mask, 2);
+  vint32m1_t c2 = __riscv_vmerge_vxm_i32m1(__riscv_vget_v_i32m1x3_i32m1(__b, 2), __a[2], mask, 2);
+  return __riscv_vcreate_v_i32m1x3(c0, c1, c2);
+}
 
-// FORCE_INLINE float32x2x3_t vld3_lane_f32(const float32_t *__a, float32x2x3_t __b, const int __c);
+FORCE_INLINE float32x2x3_t vld3_lane_f32(const float32_t *__a, float32x2x3_t __b, const int __c) {
+  vbool32_t mask = __riscv_vreinterpret_v_u8m1_b32(vdup_n_u8((uint8_t)(1 << __c)));
+  vfloat32m1_t c0 = __riscv_vfmerge_vfm_f32m1(__riscv_vget_v_f32m1x3_f32m1(__b, 0), __a[0], mask, 2);
+  vfloat32m1_t c1 = __riscv_vfmerge_vfm_f32m1(__riscv_vget_v_f32m1x3_f32m1(__b, 1), __a[1], mask, 2);
+  vfloat32m1_t c2 = __riscv_vfmerge_vfm_f32m1(__riscv_vget_v_f32m1x3_f32m1(__b, 2), __a[2], mask, 2);
+  return __riscv_vcreate_v_f32m1x3(c0, c1, c2);
+}
 
-// FORCE_INLINE uint8x8x3_t vld3_lane_u8(const uint8_t *__a, uint8x8x3_t __b, const int __c);
+FORCE_INLINE uint8x8x3_t vld3_lane_u8(const uint8_t *__a, uint8x8x3_t __b, const int __c) {
+  vbool8_t mask = __riscv_vreinterpret_v_u8m1_b8(vdup_n_u8((uint8_t)(1 << __c)));
+  vuint8m1_t c0 = __riscv_vmerge_vxm_u8m1(__riscv_vget_v_u8m1x3_u8m1(__b, 0), __a[0], mask, 8);
+  vuint8m1_t c1 = __riscv_vmerge_vxm_u8m1(__riscv_vget_v_u8m1x3_u8m1(__b, 1), __a[1], mask, 8);
+  vuint8m1_t c2 = __riscv_vmerge_vxm_u8m1(__riscv_vget_v_u8m1x3_u8m1(__b, 2), __a[2], mask, 8);
+  return __riscv_vcreate_v_u8m1x3(c0, c1, c2);
+}
 
-// FORCE_INLINE uint16x4x3_t vld3_lane_u16(const uint16_t *__a, uint16x4x3_t __b, const int __c);
+FORCE_INLINE uint16x4x3_t vld3_lane_u16(const uint16_t *__a, uint16x4x3_t __b, const int __c) {
+  vbool16_t mask = __riscv_vreinterpret_v_u8m1_b16(vdup_n_u8((uint8_t)(1 << __c)));
+  vuint16m1_t c0 = __riscv_vmerge_vxm_u16m1(__riscv_vget_v_u16m1x3_u16m1(__b, 0), __a[0], mask, 4);
+  vuint16m1_t c1 = __riscv_vmerge_vxm_u16m1(__riscv_vget_v_u16m1x3_u16m1(__b, 1), __a[1], mask, 4);
+  vuint16m1_t c2 = __riscv_vmerge_vxm_u16m1(__riscv_vget_v_u16m1x3_u16m1(__b, 2), __a[2], mask, 4);
+  return __riscv_vcreate_v_u16m1x3(c0, c1, c2);
+}
 
-// FORCE_INLINE uint32x2x3_t vld3_lane_u32(const uint32_t *__a, uint32x2x3_t __b, const int __c);
+FORCE_INLINE uint32x2x3_t vld3_lane_u32(const uint32_t *__a, uint32x2x3_t __b, const int __c) {
+  vbool32_t mask = __riscv_vreinterpret_v_u8m1_b32(vdup_n_u8((uint8_t)(1 << __c)));
+  vuint32m1_t c0 = __riscv_vmerge_vxm_u32m1(__riscv_vget_v_u32m1x3_u32m1(__b, 0), __a[0], mask, 2);
+  vuint32m1_t c1 = __riscv_vmerge_vxm_u32m1(__riscv_vget_v_u32m1x3_u32m1(__b, 1), __a[1], mask, 2);
+  vuint32m1_t c2 = __riscv_vmerge_vxm_u32m1(__riscv_vget_v_u32m1x3_u32m1(__b, 2), __a[2], mask, 2);
+  return __riscv_vcreate_v_u32m1x3(c0, c1, c2);
+}
 
-// FORCE_INLINE int16x8x3_t vld3q_lane_s16(const int16_t *__a, int16x8x3_t __b, const int __c);
+FORCE_INLINE int16x8x3_t vld3q_lane_s16(const int16_t *__a, int16x8x3_t __b, const int __c) {
+  vbool16_t mask = __riscv_vreinterpret_v_u8m1_b16(vdup_n_u8((uint8_t)(1 << __c)));
+  vint16m1_t c0 = __riscv_vmerge_vxm_i16m1(__riscv_vget_v_i16m1x3_i16m1(__b, 0), __a[0], mask, 8);
+  vint16m1_t c1 = __riscv_vmerge_vxm_i16m1(__riscv_vget_v_i16m1x3_i16m1(__b, 1), __a[1], mask, 8);
+  vint16m1_t c2 = __riscv_vmerge_vxm_i16m1(__riscv_vget_v_i16m1x3_i16m1(__b, 2), __a[2], mask, 8);
+  return __riscv_vcreate_v_i16m1x3(c0, c1, c2);
+}
 
-// FORCE_INLINE int32x4x3_t vld3q_lane_s32(const int32_t *__a, int32x4x3_t __b, const int __c);
+FORCE_INLINE int32x4x3_t vld3q_lane_s32(const int32_t *__a, int32x4x3_t __b, const int __c) {
+  vbool32_t mask = __riscv_vreinterpret_v_u8m1_b32(vdup_n_u8((uint8_t)(1 << __c)));
+  vint32m1_t c0 = __riscv_vmerge_vxm_i32m1(__riscv_vget_v_i32m1x3_i32m1(__b, 0), __a[0], mask, 4);
+  vint32m1_t c1 = __riscv_vmerge_vxm_i32m1(__riscv_vget_v_i32m1x3_i32m1(__b, 1), __a[1], mask, 4);
+  vint32m1_t c2 = __riscv_vmerge_vxm_i32m1(__riscv_vget_v_i32m1x3_i32m1(__b, 2), __a[2], mask, 4);
+  return __riscv_vcreate_v_i32m1x3(c0, c1, c2);
+}
 
-// FORCE_INLINE float32x4x3_t vld3q_lane_f32(const float32_t *__a, float32x4x3_t __b, const int __c);
+FORCE_INLINE float32x4x3_t vld3q_lane_f32(const float32_t *__a, float32x4x3_t __b, const int __c) {
+  vbool32_t mask = __riscv_vreinterpret_v_u8m1_b32(vdup_n_u8((uint8_t)(1 << __c)));
+  vfloat32m1_t c0 = __riscv_vfmerge_vfm_f32m1(__riscv_vget_v_f32m1x3_f32m1(__b, 0), __a[0], mask, 4);
+  vfloat32m1_t c1 = __riscv_vfmerge_vfm_f32m1(__riscv_vget_v_f32m1x3_f32m1(__b, 1), __a[1], mask, 4);
+  vfloat32m1_t c2 = __riscv_vfmerge_vfm_f32m1(__riscv_vget_v_f32m1x3_f32m1(__b, 2), __a[2], mask, 4);
+  return __riscv_vcreate_v_f32m1x3(c0, c1, c2);
+}
 
-// FORCE_INLINE uint16x8x3_t vld3q_lane_u16(const uint16_t *__a, uint16x8x3_t __b, const int __c);
+FORCE_INLINE uint16x8x3_t vld3q_lane_u16(const uint16_t *__a, uint16x8x3_t __b, const int __c) {
+  vbool16_t mask = __riscv_vreinterpret_v_u8m1_b16(vdup_n_u8((uint8_t)(1 << __c)));
+  vuint16m1_t c0 = __riscv_vmerge_vxm_u16m1(__riscv_vget_v_u16m1x3_u16m1(__b, 0), __a[0], mask, 8);
+  vuint16m1_t c1 = __riscv_vmerge_vxm_u16m1(__riscv_vget_v_u16m1x3_u16m1(__b, 1), __a[1], mask, 8);
+  vuint16m1_t c2 = __riscv_vmerge_vxm_u16m1(__riscv_vget_v_u16m1x3_u16m1(__b, 2), __a[2], mask, 8);
+  return __riscv_vcreate_v_u16m1x3(c0, c1, c2);
+}
 
-// FORCE_INLINE uint32x4x3_t vld3q_lane_u32(const uint32_t *__a, uint32x4x3_t __b, const int __c);
+FORCE_INLINE uint32x4x3_t vld3q_lane_u32(const uint32_t *__a, uint32x4x3_t __b, const int __c) {
+  vbool32_t mask = __riscv_vreinterpret_v_u8m1_b32(vdup_n_u8((uint8_t)(1 << __c)));
+  vuint32m1_t c0 = __riscv_vmerge_vxm_u32m1(__riscv_vget_v_u32m1x3_u32m1(__b, 0), __a[0], mask, 4);
+  vuint32m1_t c1 = __riscv_vmerge_vxm_u32m1(__riscv_vget_v_u32m1x3_u32m1(__b, 1), __a[1], mask, 4);
+  vuint32m1_t c2 = __riscv_vmerge_vxm_u32m1(__riscv_vget_v_u32m1x3_u32m1(__b, 2), __a[2], mask, 4);
+  return __riscv_vcreate_v_u32m1x3(c0, c1, c2);
+}
 
 // FORCE_INLINE int8x8x3_t vld3_dup_s8(const int8_t *__a);
 
