@@ -254,6 +254,20 @@ static void merge_arrays(const T *arr1, const T *arr2, const T *arr3, const T *a
     out[i + single_arr_size * 3] = _arr4[i];
   }
 }
+template <typename T, typename U>
+static void merge_arrays(const T *arr1, const T *arr2, const T *arr3, const T *arr4, U *out) {
+  size_t len = 128 / (sizeof(U) * 8);
+  const U *_arr1 = (const U *)arr1;
+  const U *_arr2 = (const U *)arr2;
+  const U *_arr3 = (const U *)arr3;
+  const U *_arr4 = (const U *)arr4;
+  for (size_t i = 0; i < len; i++) {
+    out[i] = _arr1[i];
+    out[i + len] = _arr2[i];
+    out[i + len * 2] = _arr3[i];
+    out[i + len * 3] = _arr4[i];
+  }
+}
 
 #define CHECK_RESULT(EXP)    \
   if (EXP != TEST_SUCCESS) { \

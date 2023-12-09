@@ -6588,29 +6588,185 @@ FORCE_INLINE void vst4q_u16(uint16_t *__a, uint16x8x4_t __b) { return __riscv_vs
 
 FORCE_INLINE void vst4q_u32(uint32_t *__a, uint32x4x4_t __b) { return __riscv_vsseg4e32_v_u32m1x4(__a, __b, 4); }
 
-// FORCE_INLINE void vst4_lane_s8(int8_t *__a, int8x8x4_t __b, const int __c);
+FORCE_INLINE void vst4_lane_s8(int8_t *__a, int8x8x4_t __b, const int __c) {
+  vint8m1_t b0 = __riscv_vget_v_i8m1x4_i8m1(__b, 0);
+  vint8m1_t b1 = __riscv_vget_v_i8m1x4_i8m1(__b, 1);
+  vint8m1_t b2 = __riscv_vget_v_i8m1x4_i8m1(__b, 2);
+  vint8m1_t b3 = __riscv_vget_v_i8m1x4_i8m1(__b, 3);
+  int8_t *_b0 = (int8_t *)&b0;
+  int8_t *_b1 = (int8_t *)&b1;
+  int8_t *_b2 = (int8_t *)&b2;
+  int8_t *_b3 = (int8_t *)&b3;
+  __a[0] = _b0[__c];
+  __a[1] = _b1[__c];
+  __a[2] = _b2[__c];
+  __a[3] = _b3[__c];
+}
 
-// FORCE_INLINE void vst4_lane_s16(int16_t *__a, int16x4x4_t __b, const int __c);
+FORCE_INLINE void vst4_lane_s16(int16_t *__a, int16x4x4_t __b, const int __c) {
+  vint16m1_t b0 = __riscv_vget_v_i16m1x4_i16m1(__b, 0);
+  vint16m1_t b1 = __riscv_vget_v_i16m1x4_i16m1(__b, 1);
+  vint16m1_t b2 = __riscv_vget_v_i16m1x4_i16m1(__b, 2);
+  vint16m1_t b3 = __riscv_vget_v_i16m1x4_i16m1(__b, 3);
+  int16_t *_b0 = (int16_t *)&b0;
+  int16_t *_b1 = (int16_t *)&b1;
+  int16_t *_b2 = (int16_t *)&b2;
+  int16_t *_b3 = (int16_t *)&b3;
+  __a[0] = _b0[__c];
+  __a[1] = _b1[__c];
+  __a[2] = _b2[__c];
+  __a[3] = _b3[__c];
+}
 
-// FORCE_INLINE void vst4_lane_s32(int32_t *__a, int32x2x4_t __b, const int __c);
+FORCE_INLINE void vst4_lane_s32(int32_t *__a, int32x2x4_t __b, const int __c) {
+  vint32m1_t b0 = __riscv_vget_v_i32m1x4_i32m1(__b, 0);
+  vint32m1_t b1 = __riscv_vget_v_i32m1x4_i32m1(__b, 1);
+  vint32m1_t b2 = __riscv_vget_v_i32m1x4_i32m1(__b, 2);
+  vint32m1_t b3 = __riscv_vget_v_i32m1x4_i32m1(__b, 3);
+  int32_t *_b0 = (int32_t *)&b0;
+  int32_t *_b1 = (int32_t *)&b1;
+  int32_t *_b2 = (int32_t *)&b2;
+  int32_t *_b3 = (int32_t *)&b3;
+  __a[0] = _b0[__c];
+  __a[1] = _b1[__c];
+  __a[2] = _b2[__c];
+  __a[3] = _b3[__c];
+}
 
-// FORCE_INLINE void vst4_lane_f32(float32_t *__a, float32x2x4_t __b, const int __c);
+FORCE_INLINE void vst4_lane_f32(float32_t *__a, float32x2x4_t __b, const int __c) {
+  vfloat32m1_t b0 = __riscv_vget_v_f32m1x4_f32m1(__b, 0);
+  vfloat32m1_t b1 = __riscv_vget_v_f32m1x4_f32m1(__b, 1);
+  vfloat32m1_t b2 = __riscv_vget_v_f32m1x4_f32m1(__b, 2);
+  vfloat32m1_t b3 = __riscv_vget_v_f32m1x4_f32m1(__b, 3);
+  float *_b0 = (float *)&b0;
+  float *_b1 = (float *)&b1;
+  float *_b2 = (float *)&b2;
+  float *_b3 = (float *)&b3;
+  __a[0] = _b0[__c];
+  __a[1] = _b1[__c];
+  __a[2] = _b2[__c];
+  __a[3] = _b3[__c];
+}
 
-// FORCE_INLINE void vst4_lane_u8(uint8_t *__a, uint8x8x4_t __b, const int __c);
+FORCE_INLINE void vst4_lane_u8(uint8_t *__a, uint8x8x4_t __b, const int __c) {
+  vuint8m1_t b0 = __riscv_vget_v_u8m1x4_u8m1(__b, 0);
+  vuint8m1_t b1 = __riscv_vget_v_u8m1x4_u8m1(__b, 1);
+  vuint8m1_t b2 = __riscv_vget_v_u8m1x4_u8m1(__b, 2);
+  vuint8m1_t b3 = __riscv_vget_v_u8m1x4_u8m1(__b, 3);
+  uint8_t *_b0 = (uint8_t *)&b0;
+  uint8_t *_b1 = (uint8_t *)&b1;
+  uint8_t *_b2 = (uint8_t *)&b2;
+  uint8_t *_b3 = (uint8_t *)&b3;
+  __a[0] = _b0[__c];
+  __a[1] = _b1[__c];
+  __a[2] = _b2[__c];
+  __a[3] = _b3[__c];
+}
 
-// FORCE_INLINE void vst4_lane_u16(uint16_t *__a, uint16x4x4_t __b, const int __c);
+FORCE_INLINE void vst4_lane_u16(uint16_t *__a, uint16x4x4_t __b, const int __c) {
+  vuint16m1_t b0 = __riscv_vget_v_u16m1x4_u16m1(__b, 0);
+  vuint16m1_t b1 = __riscv_vget_v_u16m1x4_u16m1(__b, 1);
+  vuint16m1_t b2 = __riscv_vget_v_u16m1x4_u16m1(__b, 2);
+  vuint16m1_t b3 = __riscv_vget_v_u16m1x4_u16m1(__b, 3);
+  uint16_t *_b0 = (uint16_t *)&b0;
+  uint16_t *_b1 = (uint16_t *)&b1;
+  uint16_t *_b2 = (uint16_t *)&b2;
+  uint16_t *_b3 = (uint16_t *)&b3;
+  __a[0] = _b0[__c];
+  __a[1] = _b1[__c];
+  __a[2] = _b2[__c];
+  __a[3] = _b3[__c];
+}
 
-// FORCE_INLINE void vst4_lane_u32(uint32_t *__a, uint32x2x4_t __b, const int __c);
+FORCE_INLINE void vst4_lane_u32(uint32_t *__a, uint32x2x4_t __b, const int __c) {
+  vuint32m1_t b0 = __riscv_vget_v_u32m1x4_u32m1(__b, 0);
+  vuint32m1_t b1 = __riscv_vget_v_u32m1x4_u32m1(__b, 1);
+  vuint32m1_t b2 = __riscv_vget_v_u32m1x4_u32m1(__b, 2);
+  vuint32m1_t b3 = __riscv_vget_v_u32m1x4_u32m1(__b, 3);
+  uint32_t *_b0 = (uint32_t *)&b0;
+  uint32_t *_b1 = (uint32_t *)&b1;
+  uint32_t *_b2 = (uint32_t *)&b2;
+  uint32_t *_b3 = (uint32_t *)&b3;
+  __a[0] = _b0[__c];
+  __a[1] = _b1[__c];
+  __a[2] = _b2[__c];
+  __a[3] = _b3[__c];
+}
 
-// FORCE_INLINE void vst4q_lane_s16(int16_t *__a, int16x8x4_t __b, const int __c);
+FORCE_INLINE void vst4q_lane_s16(int16_t *__a, int16x8x4_t __b, const int __c) {
+  vint16m1_t b0 = __riscv_vget_v_i16m1x4_i16m1(__b, 0);
+  vint16m1_t b1 = __riscv_vget_v_i16m1x4_i16m1(__b, 1);
+  vint16m1_t b2 = __riscv_vget_v_i16m1x4_i16m1(__b, 2);
+  vint16m1_t b3 = __riscv_vget_v_i16m1x4_i16m1(__b, 3);
+  int16_t *_b0 = (int16_t *)&b0;
+  int16_t *_b1 = (int16_t *)&b1;
+  int16_t *_b2 = (int16_t *)&b2;
+  int16_t *_b3 = (int16_t *)&b3;
+  __a[0] = _b0[__c];
+  __a[1] = _b1[__c];
+  __a[2] = _b2[__c];
+  __a[3] = _b3[__c];
+}
 
-// FORCE_INLINE void vst4q_lane_s32(int32_t *__a, int32x4x4_t __b, const int __c);
+FORCE_INLINE void vst4q_lane_s32(int32_t *__a, int32x4x4_t __b, const int __c) {
+  vint32m1_t b0 = __riscv_vget_v_i32m1x4_i32m1(__b, 0);
+  vint32m1_t b1 = __riscv_vget_v_i32m1x4_i32m1(__b, 1);
+  vint32m1_t b2 = __riscv_vget_v_i32m1x4_i32m1(__b, 2);
+  vint32m1_t b3 = __riscv_vget_v_i32m1x4_i32m1(__b, 3);
+  int32_t *_b0 = (int32_t *)&b0;
+  int32_t *_b1 = (int32_t *)&b1;
+  int32_t *_b2 = (int32_t *)&b2;
+  int32_t *_b3 = (int32_t *)&b3;
+  __a[0] = _b0[__c];
+  __a[1] = _b1[__c];
+  __a[2] = _b2[__c];
+  __a[3] = _b3[__c];
+}
 
-// FORCE_INLINE void vst4q_lane_f32(float32_t *__a, float32x4x4_t __b, const int __c);
+FORCE_INLINE void vst4q_lane_f32(float32_t *__a, float32x4x4_t __b, const int __c) {
+  vfloat32m1_t b0 = __riscv_vget_v_f32m1x4_f32m1(__b, 0);
+  vfloat32m1_t b1 = __riscv_vget_v_f32m1x4_f32m1(__b, 1);
+  vfloat32m1_t b2 = __riscv_vget_v_f32m1x4_f32m1(__b, 2);
+  vfloat32m1_t b3 = __riscv_vget_v_f32m1x4_f32m1(__b, 3);
+  float *_b0 = (float *)&b0;
+  float *_b1 = (float *)&b1;
+  float *_b2 = (float *)&b2;
+  float *_b3 = (float *)&b3;
+  __a[0] = _b0[__c];
+  __a[1] = _b1[__c];
+  __a[2] = _b2[__c];
+  __a[3] = _b3[__c];
+}
 
-// FORCE_INLINE void vst4q_lane_u16(uint16_t *__a, uint16x8x4_t __b, const int __c);
+FORCE_INLINE void vst4q_lane_u16(uint16_t *__a, uint16x8x4_t __b, const int __c) {
+  vuint16m1_t b0 = __riscv_vget_v_u16m1x4_u16m1(__b, 0);
+  vuint16m1_t b1 = __riscv_vget_v_u16m1x4_u16m1(__b, 1);
+  vuint16m1_t b2 = __riscv_vget_v_u16m1x4_u16m1(__b, 2);
+  vuint16m1_t b3 = __riscv_vget_v_u16m1x4_u16m1(__b, 3);
+  uint16_t *_b0 = (uint16_t *)&b0;
+  uint16_t *_b1 = (uint16_t *)&b1;
+  uint16_t *_b2 = (uint16_t *)&b2;
+  uint16_t *_b3 = (uint16_t *)&b3;
+  __a[0] = _b0[__c];
+  __a[1] = _b1[__c];
+  __a[2] = _b2[__c];
+  __a[3] = _b3[__c];
+}
 
-// FORCE_INLINE void vst4q_lane_u32(uint32_t *__a, uint32x4x4_t __b, const int __c);
+FORCE_INLINE void vst4q_lane_u32(uint32_t *__a, uint32x4x4_t __b, const int __c) {
+  vuint32m1_t b0 = __riscv_vget_v_u32m1x4_u32m1(__b, 0);
+  vuint32m1_t b1 = __riscv_vget_v_u32m1x4_u32m1(__b, 1);
+  vuint32m1_t b2 = __riscv_vget_v_u32m1x4_u32m1(__b, 2);
+  vuint32m1_t b3 = __riscv_vget_v_u32m1x4_u32m1(__b, 3);
+  uint32_t *_b0 = (uint32_t *)&b0;
+  uint32_t *_b1 = (uint32_t *)&b1;
+  uint32_t *_b2 = (uint32_t *)&b2;
+  uint32_t *_b3 = (uint32_t *)&b3;
+  __a[0] = _b0[__c];
+  __a[1] = _b1[__c];
+  __a[2] = _b2[__c];
+  __a[3] = _b3[__c];
+}
 
 // FORCE_INLINE int8x8_t vand_s8(int8x8_t __a, int8x8_t __b);
 
