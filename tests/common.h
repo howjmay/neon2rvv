@@ -222,25 +222,36 @@ DEFINE_TUPLEx4_GET(uint64, u, 64, 2);
 float ranf(float low, float high);
 
 template <typename T, typename U>
-static void merge_arrays(const T *arr1, const T *arr2, U *out) {
-  size_t len = sizeof(out)/sizeof(U);
+static void merge_arrays(const T *arr1, const T *arr2, U *out, size_t single_arr_size) {
   const U *_arr1 = (const U *)arr1;
   const U *_arr2 = (const U *)arr2;
-  for (size_t i = 0; i < len; i++) {
+  for (size_t i = 0; i < single_arr_size; i++) {
     out[i] = _arr1[i];
-    out[i + len] = _arr2[i];
+    out[i + single_arr_size] = _arr2[i];
   }
 }
 template <typename T, typename U>
-static void merge_arrays(const T *arr1, const T *arr2, const T *arr3, U *out) {
-  size_t len = sizeof(out)/sizeof(U);
+static void merge_arrays(const T *arr1, const T *arr2, const T *arr3, U *out, size_t single_arr_size) {
   const U *_arr1 = (const U *)arr1;
   const U *_arr2 = (const U *)arr2;
   const U *_arr3 = (const U *)arr3;
-  for (size_t i = 0; i < len; i++) {
+  for (size_t i = 0; i < single_arr_size; i++) {
     out[i] = _arr1[i];
-    out[i + len] = _arr2[i];
-    out[i + len * 2] = _arr3[i];
+    out[i + single_arr_size] = _arr2[i];
+    out[i + single_arr_size * 2] = _arr3[i];
+  }
+}
+template <typename T, typename U>
+static void merge_arrays(const T *arr1, const T *arr2, const T *arr3, const T *arr4, U *out, size_t single_arr_size) {
+  const U *_arr1 = (const U *)arr1;
+  const U *_arr2 = (const U *)arr2;
+  const U *_arr3 = (const U *)arr3;
+  const U *_arr4 = (const U *)arr4;
+  for (size_t i = 0; i < single_arr_size; i++) {
+    out[i] = _arr1[i];
+    out[i + single_arr_size] = _arr2[i];
+    out[i + single_arr_size * 2] = _arr3[i];
+    out[i + single_arr_size * 3] = _arr4[i];
   }
 }
 
