@@ -150,6 +150,11 @@ int32_t saturate_int32(int64_t a);
 uint32_t saturate_uint32(int64_t a);
 
 #if defined(__riscv) || defined(__riscv__)
+#define DEFINE_TUPLEx2_GET(TYPE, SIGN, BIT, ELT_NUM)                                                              \
+  static void TYPE##x2_get_##TYPE(TYPE##x##ELT_NUM##x2_t a, TYPE##x##ELT_NUM##_t *a0, TYPE##x##ELT_NUM##_t *a1) { \
+    *a0 = __riscv_vget_v_##SIGN##BIT##m1x2_##SIGN##BIT##m1(a, 0);                                                 \
+    *a1 = __riscv_vget_v_##SIGN##BIT##m1x2_##SIGN##BIT##m1(a, 1);                                                 \
+  }
 #define DEFINE_TUPLEx3_GET(TYPE, SIGN, BIT, ELT_NUM)                                                            \
   static void TYPE##x3_get_##TYPE(TYPE##x##ELT_NUM##x3_t a, TYPE##x##ELT_NUM##_t *a0, TYPE##x##ELT_NUM##_t *a1, \
                                   TYPE##x##ELT_NUM##_t *a2) {                                                   \
@@ -157,7 +162,6 @@ uint32_t saturate_uint32(int64_t a);
     *a1 = __riscv_vget_v_##SIGN##BIT##m1x3_##SIGN##BIT##m1(a, 1);                                               \
     *a2 = __riscv_vget_v_##SIGN##BIT##m1x3_##SIGN##BIT##m1(a, 2);                                               \
   }
-
 #define DEFINE_TUPLEx4_GET(TYPE, SIGN, BIT, ELT_NUM)                                                            \
   static void TYPE##x4_get_##TYPE(TYPE##x##ELT_NUM##x4_t a, TYPE##x##ELT_NUM##_t *a0, TYPE##x##ELT_NUM##_t *a1, \
                                   TYPE##x##ELT_NUM##_t *a2, TYPE##x##ELT_NUM##_t *a3) {                         \
@@ -167,6 +171,11 @@ uint32_t saturate_uint32(int64_t a);
     *a3 = __riscv_vget_v_##SIGN##BIT##m1x4_##SIGN##BIT##m1(a, 3);                                               \
   }
 #elif defined(__aarch64__) || defined(_M_ARM64)
+#define DEFINE_TUPLEx2_GET(TYPE, SIGN, BIT, ELT_NUM)                                                              \
+  static void TYPE##x2_get_##TYPE(TYPE##x##ELT_NUM##x2_t a, TYPE##x##ELT_NUM##_t *a0, TYPE##x##ELT_NUM##_t *a1) { \
+    *a0 = a.val[0];                                                                                               \
+    *a1 = a.val[1];                                                                                               \
+  }
 #define DEFINE_TUPLEx3_GET(TYPE, SIGN, BIT, ELT_NUM)                                                            \
   static void TYPE##x3_get_##TYPE(TYPE##x##ELT_NUM##x3_t a, TYPE##x##ELT_NUM##_t *a0, TYPE##x##ELT_NUM##_t *a1, \
                                   TYPE##x##ELT_NUM##_t *a2) {                                                   \
@@ -184,6 +193,15 @@ uint32_t saturate_uint32(int64_t a);
   }
 #endif
 
+DEFINE_TUPLEx2_GET(int8, i, 8, 8);
+DEFINE_TUPLEx2_GET(uint8, u, 8, 8);
+DEFINE_TUPLEx2_GET(int16, i, 16, 4);
+DEFINE_TUPLEx2_GET(uint16, u, 16, 4);
+DEFINE_TUPLEx2_GET(int32, i, 32, 2);
+DEFINE_TUPLEx2_GET(uint32, u, 32, 2);
+DEFINE_TUPLEx2_GET(float32, f, 32, 2);
+DEFINE_TUPLEx2_GET(int64, i, 64, 1);
+DEFINE_TUPLEx2_GET(uint64, u, 64, 1);
 DEFINE_TUPLEx3_GET(int8, i, 8, 8);
 DEFINE_TUPLEx3_GET(uint8, u, 8, 8);
 DEFINE_TUPLEx3_GET(int16, i, 16, 4);
@@ -203,6 +221,13 @@ DEFINE_TUPLEx4_GET(float32, f, 32, 2);
 DEFINE_TUPLEx4_GET(int64, i, 64, 1);
 DEFINE_TUPLEx4_GET(uint64, u, 64, 1);
 #if defined(__aarch64__) || defined(_M_ARM64)
+DEFINE_TUPLEx2_GET(int16, i, 16, 8);
+DEFINE_TUPLEx2_GET(uint16, u, 16, 8);
+DEFINE_TUPLEx2_GET(int32, i, 32, 4);
+DEFINE_TUPLEx2_GET(uint32, u, 32, 4);
+DEFINE_TUPLEx2_GET(float32, f, 32, 4);
+DEFINE_TUPLEx2_GET(int64, i, 64, 2);
+DEFINE_TUPLEx2_GET(uint64, u, 64, 2);
 DEFINE_TUPLEx3_GET(int16, i, 16, 8);
 DEFINE_TUPLEx3_GET(uint16, u, 16, 8);
 DEFINE_TUPLEx3_GET(int32, i, 32, 4);
