@@ -6574,23 +6574,41 @@ FORCE_INLINE uint32x4x4_t vld4q_lane_u32(const uint32_t *__a, uint32x4x4_t __b, 
   return __riscv_vcreate_v_u32m1x4(c0, c1, c2, c3);
 }
 
-// FORCE_INLINE int8x8x4_t vld4_dup_s8(const int8_t *__a);
+FORCE_INLINE int8x8x4_t vld4_dup_s8(const int8_t *__a) {
+  return __riscv_vcreate_v_i8m1x4(vdup_n_s8(__a[0]), vdup_n_s8(__a[1]), vdup_n_s8(__a[2]), vdup_n_s8(__a[3]));
+}
 
-// FORCE_INLINE int16x4x4_t vld4_dup_s16(const int16_t *__a);
+FORCE_INLINE int16x4x4_t vld4_dup_s16(const int16_t *__a) {
+  return __riscv_vcreate_v_i16m1x4(vdup_n_s16(__a[0]), vdup_n_s16(__a[1]), vdup_n_s16(__a[2]), vdup_n_s16(__a[3]));
+}
 
-// FORCE_INLINE int32x2x4_t vld4_dup_s32(const int32_t *__a);
+FORCE_INLINE int32x2x4_t vld4_dup_s32(const int32_t *__a) {
+  return __riscv_vcreate_v_i32m1x4(vdup_n_s32(__a[0]), vdup_n_s32(__a[1]), vdup_n_s32(__a[2]), vdup_n_s32(__a[3]));
+}
 
-// FORCE_INLINE float32x2x4_t vld4_dup_f32(const float32_t *__a);
+FORCE_INLINE float32x2x4_t vld4_dup_f32(const float32_t *__a) {
+  return __riscv_vcreate_v_f32m1x4(vdup_n_f32(__a[0]), vdup_n_f32(__a[1]), vdup_n_f32(__a[2]), vdup_n_f32(__a[3]));
+}
 
-// FORCE_INLINE uint8x8x4_t vld4_dup_u8(const uint8_t *__a);
+FORCE_INLINE uint8x8x4_t vld4_dup_u8(const uint8_t *__a) {
+  return __riscv_vcreate_v_u8m1x4(vdup_n_u8(__a[0]), vdup_n_u8(__a[1]), vdup_n_u8(__a[2]), vdup_n_u8(__a[3]));
+}
 
-// FORCE_INLINE uint16x4x4_t vld4_dup_u16(const uint16_t *__a);
+FORCE_INLINE uint16x4x4_t vld4_dup_u16(const uint16_t *__a) {
+  return __riscv_vcreate_v_u16m1x4(vdup_n_u16(__a[0]), vdup_n_u16(__a[1]), vdup_n_u16(__a[2]), vdup_n_u16(__a[3]));
+}
 
-// FORCE_INLINE uint32x2x4_t vld4_dup_u32(const uint32_t *__a);
+FORCE_INLINE uint32x2x4_t vld4_dup_u32(const uint32_t *__a) {
+  return __riscv_vcreate_v_u32m1x4(vdup_n_u32(__a[0]), vdup_n_u32(__a[1]), vdup_n_u32(__a[2]), vdup_n_u32(__a[3]));
+}
 
-// FORCE_INLINE int64x1x4_t vld4_dup_s64(const int64_t *__a);
+FORCE_INLINE int64x1x4_t vld4_dup_s64(const int64_t *__a) {
+  return __riscv_vcreate_v_i64m1x4(vdup_n_s64(__a[0]), vdup_n_s64(__a[1]), vdup_n_s64(__a[2]), vdup_n_s64(__a[3]));
+}
 
-// FORCE_INLINE uint64x1x4_t vld4_dup_u64(const uint64_t *__a);
+FORCE_INLINE uint64x1x4_t vld4_dup_u64(const uint64_t *__a) {
+  return __riscv_vcreate_v_u64m1x4(vdup_n_u64(__a[0]), vdup_n_u64(__a[1]), vdup_n_u64(__a[2]), vdup_n_u64(__a[3]));
+}
 
 FORCE_INLINE void vst4_s8(int8_t *__a, int8x8x4_t __b) { return __riscv_vsseg4e8_v_i8m1x4(__a, __b, 8); }
 
