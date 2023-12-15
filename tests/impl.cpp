@@ -12143,7 +12143,7 @@ result_t test_vqshlu_n_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
     if (_a[i] < 0) {                               \
       _c[i] = 0;                                   \
     } else {                                       \
-      if (_a[i] > ((uint64_t)UINT64_MAX >> IDX)) { \
+      if ((uint64_t)_a[i] > (UINT64_MAX >> IDX)) { \
         _c[i] = UINT64_MAX;                        \
       } else {                                     \
         _c[i] = _a[i] << IDX;                      \
@@ -12244,7 +12244,7 @@ result_t test_vqshluq_n_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
     if (_a[i] < 0) {                               \
       _c[i] = 0;                                   \
     } else {                                       \
-      if (_a[i] > ((uint64_t)UINT64_MAX >> IDX)) { \
+      if ((uint64_t)_a[i] > (UINT64_MAX >> IDX)) { \
         _c[i] = UINT64_MAX;                        \
       } else {                                     \
         _c[i] = _a[i] << IDX;                      \
@@ -12485,19 +12485,20 @@ result_t test_vsra_n_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int64x1_t b = vld1_s64(_b);
   int64x1_t c;
 
-#define TEST_IMPL(IDX)                      \
-  for (int i = 0; i < 1; i++) {             \
-    if ((IDX + 1) == 64) {                  \
-      if (_b[i] > 0) {                      \
-        _c[i] = _a[i];                      \
-      } else {                              \
-        _c[i] = _a[i] - 1;                  \
-      }                                     \
-    } else {                                \
-      _c[i] = _a[i] + (_b[i] >> (IDX + 1)); \
-    }                                       \
-  }                                         \
-  c = vsra_n_s64(a, b, (IDX + 1));          \
+#define TEST_IMPL(IDX)                \
+  for (int i = 0; i < 1; i++) {       \
+    int idx = (IDX + 1);              \
+    if (idx == 64) {                  \
+      if (_b[i] > 0) {                \
+        _c[i] = _a[i];                \
+      } else {                        \
+        _c[i] = _a[i] - 1;            \
+      }                               \
+    } else {                          \
+      _c[i] = _a[i] + (_b[i] >> idx); \
+    }                                 \
+  }                                   \
+  c = vsra_n_s64(a, b, (IDX + 1));    \
   CHECK_RESULT(validate_int64(c, _c[0]))
 
   IMM_64_ITER
@@ -12593,15 +12594,16 @@ result_t test_vsra_n_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   uint64x1_t b = vld1_u64(_b);
   uint64x1_t c;
 
-#define TEST_IMPL(IDX)                      \
-  for (int i = 0; i < 1; i++) {             \
-    if ((IDX + 1) == 64) {                  \
-      _c[i] = _a[i];                        \
-    } else {                                \
-      _c[i] = _a[i] + (_b[i] >> (IDX + 1)); \
-    }                                       \
-  }                                         \
-  c = vsra_n_u64(a, b, (IDX + 1));          \
+#define TEST_IMPL(IDX)                \
+  for (int i = 0; i < 1; i++) {       \
+    int idx = (IDX + 1);              \
+    if (idx == 64) {                  \
+      _c[i] = _a[i];                  \
+    } else {                          \
+      _c[i] = _a[i] + (_b[i] >> idx); \
+    }                                 \
+  }                                   \
+  c = vsra_n_u64(a, b, (IDX + 1));    \
   CHECK_RESULT(validate_uint64(c, _c[0]))
 
   IMM_64_ITER
@@ -12698,19 +12700,20 @@ result_t test_vsraq_n_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int64x2_t b = vld1q_s64(_b);
   int64x2_t c;
 
-#define TEST_IMPL(IDX)                      \
-  for (int i = 0; i < 2; i++) {             \
-    if ((IDX + 1) == 64) {                  \
-      if (_b[i] > 0) {                      \
-        _c[i] = _a[i];                      \
-      } else {                              \
-        _c[i] = _a[i] - 1;                  \
-      }                                     \
-    } else {                                \
-      _c[i] = _a[i] + (_b[i] >> (IDX + 1)); \
-    }                                       \
-  }                                         \
-  c = vsraq_n_s64(a, b, (IDX + 1));         \
+#define TEST_IMPL(IDX)                \
+  for (int i = 0; i < 2; i++) {       \
+    int idx = (IDX + 1);              \
+    if (idx == 64) {                  \
+      if (_b[i] > 0) {                \
+        _c[i] = _a[i];                \
+      } else {                        \
+        _c[i] = _a[i] - 1;            \
+      }                               \
+    } else {                          \
+      _c[i] = _a[i] + (_b[i] >> idx); \
+    }                                 \
+  }                                   \
+  c = vsraq_n_s64(a, b, (IDX + 1));   \
   CHECK_RESULT(validate_int64(c, _c[0], _c[1]))
 
   IMM_64_ITER
@@ -12807,15 +12810,16 @@ result_t test_vsraq_n_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   uint64x2_t b = vld1q_u64(_b);
   uint64x2_t c;
 
-#define TEST_IMPL(IDX)                      \
-  for (int i = 0; i < 2; i++) {             \
-    if ((IDX + 1) == 64) {                  \
-      _c[i] = _a[i];                        \
-    } else {                                \
-      _c[i] = _a[i] + (_b[i] >> (IDX + 1)); \
-    }                                       \
-  }                                         \
-  c = vsraq_n_u64(a, b, (IDX + 1));         \
+#define TEST_IMPL(IDX)                \
+  for (int i = 0; i < 2; i++) {       \
+    int idx = (IDX + 1);              \
+    if (idx == 64) {                  \
+      _c[i] = _a[i];                  \
+    } else {                          \
+      _c[i] = _a[i] + (_b[i] >> idx); \
+    }                                 \
+  }                                   \
+  c = vsraq_n_u64(a, b, (IDX + 1));   \
   CHECK_RESULT(validate_uint64(c, _c[0], _c[1]))
 
   IMM_64_ITER
@@ -13182,12 +13186,18 @@ result_t test_vsri_n_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int8x8_t b = vld1_s8(_b);
   int8x8_t c;
 
-#define TEST_IMPL(IDX)                                       \
-  for (int i = 0; i < 8; i++) {                              \
-    uint8_t mask = UINT8_MAX >> (IDX + 1);                   \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] >> (IDX + 1)) & mask); \
-  }                                                          \
-  c = vsri_n_s8(a, b, (IDX + 1));                            \
+#define TEST_IMPL(IDX)                                   \
+  for (int i = 0; i < 8; i++) {                          \
+    int idx = (IDX + 1);                                 \
+    if (idx == 8) {                                      \
+      uint8_t mask = 0;                                  \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);              \
+    } else {                                             \
+      uint8_t mask = UINT8_MAX >> idx;                   \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] >> idx) & mask); \
+    }                                                    \
+  }                                                      \
+  c = vsri_n_s8(a, b, (IDX + 1));                        \
   CHECK_RESULT(validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]))
 
   IMM_8_ITER
@@ -13209,12 +13219,18 @@ result_t test_vsri_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int16x4_t b = vld1_s16(_b);
   int16x4_t c;
 
-#define TEST_IMPL(IDX)                                       \
-  for (int i = 0; i < 4; i++) {                              \
-    uint16_t mask = UINT16_MAX >> (IDX + 1);                 \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] >> (IDX + 1)) & mask); \
-  }                                                          \
-  c = vsri_n_s16(a, b, (IDX + 1));                           \
+#define TEST_IMPL(IDX)                                   \
+  for (int i = 0; i < 4; i++) {                          \
+    int idx = (IDX + 1);                                 \
+    if (idx == 16) {                                     \
+      uint16_t mask = 0;                                 \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);              \
+    } else {                                             \
+      uint16_t mask = UINT16_MAX >> idx;                 \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] >> idx) & mask); \
+    }                                                    \
+  }                                                      \
+  c = vsri_n_s16(a, b, (IDX + 1));                       \
   CHECK_RESULT(validate_int16(c, _c[0], _c[1], _c[2], _c[3]))
 
   IMM_16_ITER
@@ -13236,12 +13252,18 @@ result_t test_vsri_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int32x2_t b = vld1_s32(_b);
   int32x2_t c;
 
-#define TEST_IMPL(IDX)                                       \
-  for (int i = 0; i < 2; i++) {                              \
-    uint32_t mask = (uint64_t)UINT32_MAX >> (IDX + 1);       \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] >> (IDX + 1)) & mask); \
-  }                                                          \
-  c = vsri_n_s32(a, b, (IDX + 1));                           \
+#define TEST_IMPL(IDX)                                   \
+  for (int i = 0; i < 2; i++) {                          \
+    int idx = (IDX + 1);                                 \
+    if (idx == 32) {                                     \
+      uint32_t mask = 0;                                 \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);              \
+    } else {                                             \
+      uint32_t mask = UINT32_MAX >> idx;                 \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] >> idx) & mask); \
+    }                                                    \
+  }                                                      \
+  c = vsri_n_s32(a, b, (IDX + 1));                       \
   CHECK_RESULT(validate_int32(c, _c[0], _c[1]))
 
   IMM_32_ITER
@@ -13263,15 +13285,18 @@ result_t test_vsri_n_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int64x1_t b = vld1_s64(_b);
   int64x1_t c;
 
-#define TEST_IMPL(IDX)                                       \
-  for (int i = 0; i < 1; i++) {                              \
-    uint64_t mask = (uint64_t)UINT64_MAX >> (IDX + 1);       \
-    if ((IDX + 1) == 64) {                                   \
-      mask = 0;                                              \
-    }                                                        \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] >> (IDX + 1)) & mask); \
-  }                                                          \
-  c = vsri_n_s64(a, b, (IDX + 1));                           \
+#define TEST_IMPL(IDX)                                   \
+  for (int i = 0; i < 1; i++) {                          \
+    int idx = (IDX + 1);                                 \
+    if (idx == 64) {                                     \
+      uint64_t mask = 0;                                 \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);              \
+    } else {                                             \
+      uint64_t mask = UINT64_MAX >> idx;                 \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] >> idx) & mask); \
+    }                                                    \
+  }                                                      \
+  c = vsri_n_s64(a, b, (IDX + 1));                       \
   CHECK_RESULT(validate_int64(c, _c[0]))
 
   IMM_64_ITER
@@ -13293,12 +13318,18 @@ result_t test_vsri_n_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   uint8x8_t b = vld1_u8(_b);
   uint8x8_t c;
 
-#define TEST_IMPL(IDX)                                       \
-  for (int i = 0; i < 8; i++) {                              \
-    uint8_t mask = UINT8_MAX >> (IDX + 1);                   \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] >> (IDX + 1)) & mask); \
-  }                                                          \
-  c = vsri_n_u8(a, b, (IDX + 1));                            \
+#define TEST_IMPL(IDX)                                   \
+  for (int i = 0; i < 8; i++) {                          \
+    int idx = (IDX + 1);                                 \
+    if (idx == 8) {                                      \
+      uint8_t mask = 0;                                  \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);              \
+    } else {                                             \
+      uint8_t mask = UINT8_MAX >> idx;                   \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] >> idx) & mask); \
+    }                                                    \
+  }                                                      \
+  c = vsri_n_u8(a, b, (IDX + 1));                        \
   CHECK_RESULT(validate_uint8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]))
 
   IMM_8_ITER
@@ -13320,12 +13351,18 @@ result_t test_vsri_n_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   uint16x4_t b = vld1_u16(_b);
   uint16x4_t c;
 
-#define TEST_IMPL(IDX)                                       \
-  for (int i = 0; i < 4; i++) {                              \
-    uint16_t mask = UINT16_MAX >> (IDX + 1);                 \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] >> (IDX + 1)) & mask); \
-  }                                                          \
-  c = vsri_n_u16(a, b, (IDX + 1));                           \
+#define TEST_IMPL(IDX)                                   \
+  for (int i = 0; i < 4; i++) {                          \
+    int idx = (IDX + 1);                                 \
+    if (idx == 16) {                                     \
+      uint16_t mask = 0;                                 \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);              \
+    } else {                                             \
+      uint16_t mask = UINT16_MAX >> idx;                 \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] >> idx) & mask); \
+    }                                                    \
+  }                                                      \
+  c = vsri_n_u16(a, b, (IDX + 1));                       \
   CHECK_RESULT(validate_uint16(c, _c[0], _c[1], _c[2], _c[3]))
 
   IMM_16_ITER
@@ -13347,12 +13384,18 @@ result_t test_vsri_n_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   uint32x2_t b = vld1_u32(_b);
   uint32x2_t c;
 
-#define TEST_IMPL(IDX)                                       \
-  for (int i = 0; i < 2; i++) {                              \
-    uint32_t mask = (uint64_t)UINT32_MAX >> (IDX + 1);       \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] >> (IDX + 1)) & mask); \
-  }                                                          \
-  c = vsri_n_u32(a, b, (IDX + 1));                           \
+#define TEST_IMPL(IDX)                                   \
+  for (int i = 0; i < 2; i++) {                          \
+    int idx = (IDX + 1);                                 \
+    if (idx == 32) {                                     \
+      uint32_t mask = 0;                                 \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);              \
+    } else {                                             \
+      uint32_t mask = (uint64_t)UINT32_MAX >> idx;       \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] >> idx) & mask); \
+    }                                                    \
+  }                                                      \
+  c = vsri_n_u32(a, b, (IDX + 1));                       \
   CHECK_RESULT(validate_uint32(c, _c[0], _c[1]))
 
   IMM_32_ITER
@@ -13374,15 +13417,18 @@ result_t test_vsri_n_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   uint64x1_t b = vld1_u64(_b);
   uint64x1_t c;
 
-#define TEST_IMPL(IDX)                                       \
-  for (int i = 0; i < 1; i++) {                              \
-    uint64_t mask = (uint64_t)UINT64_MAX >> (IDX + 1);       \
-    if ((IDX + 1) == 64) {                                   \
-      mask = 0;                                              \
-    }                                                        \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] >> (IDX + 1)) & mask); \
-  }                                                          \
-  c = vsri_n_u64(a, b, (IDX + 1));                           \
+#define TEST_IMPL(IDX)                                   \
+  for (int i = 0; i < 1; i++) {                          \
+    int idx = (IDX + 1);                                 \
+    if (idx == 64) {                                     \
+      uint64_t mask = 0;                                 \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);              \
+    } else {                                             \
+      uint64_t mask = UINT64_MAX >> idx;                 \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] >> idx) & mask); \
+    }                                                    \
+  }                                                      \
+  c = vsri_n_u64(a, b, (IDX + 1));                       \
   CHECK_RESULT(validate_uint64(c, _c[0]))
 
   IMM_64_ITER
@@ -13406,8 +13452,14 @@ result_t test_vsriq_n_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 
 #define TEST_IMPL(IDX)                                                                                                \
   for (int i = 0; i < 16; i++) {                                                                                      \
-    uint8_t mask = UINT8_MAX >> (IDX + 1);                                                                            \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] >> (IDX + 1)) & mask);                                                          \
+    int idx = (IDX + 1);                                                                                              \
+    if (idx == 8) {                                                                                                   \
+      uint8_t mask = 0;                                                                                               \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);                                                                           \
+    } else {                                                                                                          \
+      uint8_t mask = UINT8_MAX >> idx;                                                                                \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] >> idx) & mask);                                                              \
+    }                                                                                                                 \
   }                                                                                                                   \
   c = vsriq_n_s8(a, b, (IDX + 1));                                                                                    \
   CHECK_RESULT(validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7], _c[8], _c[9], _c[10], _c[11], \
@@ -13432,12 +13484,18 @@ result_t test_vsriq_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int16x8_t b = vld1q_s16(_b);
   int16x8_t c;
 
-#define TEST_IMPL(IDX)                                       \
-  for (int i = 0; i < 8; i++) {                              \
-    uint16_t mask = UINT16_MAX >> (IDX + 1);                 \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] >> (IDX + 1)) & mask); \
-  }                                                          \
-  c = vsriq_n_s16(a, b, (IDX + 1));                          \
+#define TEST_IMPL(IDX)                                   \
+  for (int i = 0; i < 8; i++) {                          \
+    int idx = (IDX + 1);                                 \
+    if (idx == 16) {                                     \
+      uint16_t mask = 0;                                 \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);              \
+    } else {                                             \
+      uint16_t mask = UINT16_MAX >> idx;                 \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] >> idx) & mask); \
+    }                                                    \
+  }                                                      \
+  c = vsriq_n_s16(a, b, (IDX + 1));                      \
   CHECK_RESULT(validate_int16(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]))
 
   IMM_16_ITER
@@ -13459,12 +13517,18 @@ result_t test_vsriq_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int32x4_t b = vld1q_s32(_b);
   int32x4_t c;
 
-#define TEST_IMPL(IDX)                                       \
-  for (int i = 0; i < 4; i++) {                              \
-    uint32_t mask = (uint64_t)UINT32_MAX >> (IDX + 1);       \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] >> (IDX + 1)) & mask); \
-  }                                                          \
-  c = vsriq_n_s32(a, b, (IDX + 1));                          \
+#define TEST_IMPL(IDX)                                   \
+  for (int i = 0; i < 4; i++) {                          \
+    int idx = (IDX + 1);                                 \
+    if (idx == 32) {                                     \
+      uint32_t mask = 0;                                 \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);              \
+    } else {                                             \
+      uint32_t mask = UINT32_MAX >> idx;                 \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] >> idx) & mask); \
+    }                                                    \
+  }                                                      \
+  c = vsriq_n_s32(a, b, (IDX + 1));                      \
   CHECK_RESULT(validate_int32(c, _c[0], _c[1], _c[2], _c[3]))
 
   IMM_32_ITER
@@ -13486,15 +13550,18 @@ result_t test_vsriq_n_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int64x2_t b = vld1q_s64(_b);
   int64x2_t c;
 
-#define TEST_IMPL(IDX)                                       \
-  for (int i = 0; i < 2; i++) {                              \
-    uint64_t mask = (uint64_t)UINT64_MAX >> (IDX + 1);       \
-    if ((IDX + 1) == 64) {                                   \
-      mask = 0;                                              \
-    }                                                        \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] >> (IDX + 1)) & mask); \
-  }                                                          \
-  c = vsriq_n_s64(a, b, (IDX + 1));                          \
+#define TEST_IMPL(IDX)                                   \
+  for (int i = 0; i < 2; i++) {                          \
+    int idx = (IDX + 1);                                 \
+    if (idx == 64) {                                     \
+      uint64_t mask = 0;                                 \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);              \
+    } else {                                             \
+      uint64_t mask = UINT64_MAX >> idx;                 \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] >> idx) & mask); \
+    }                                                    \
+  }                                                      \
+  c = vsriq_n_s64(a, b, (IDX + 1));                      \
   CHECK_RESULT(validate_int64(c, _c[0], _c[1]))
 
   IMM_64_ITER
@@ -13518,8 +13585,14 @@ result_t test_vsriq_n_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 
 #define TEST_IMPL(IDX)                                                                                                 \
   for (int i = 0; i < 16; i++) {                                                                                       \
-    uint8_t mask = UINT8_MAX >> (IDX + 1);                                                                             \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] >> (IDX + 1)) & mask);                                                           \
+    int idx = (IDX + 1);                                                                                               \
+    if (idx == 8) {                                                                                                    \
+      uint8_t mask = 0;                                                                                                \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);                                                                            \
+    } else {                                                                                                           \
+      uint8_t mask = UINT8_MAX >> idx;                                                                                 \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] >> idx) & mask);                                                               \
+    }                                                                                                                  \
   }                                                                                                                    \
   c = vsriq_n_u8(a, b, (IDX + 1));                                                                                     \
   CHECK_RESULT(validate_uint8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7], _c[8], _c[9], _c[10], _c[11], \
@@ -13544,12 +13617,18 @@ result_t test_vsriq_n_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   uint16x8_t b = vld1q_u16(_b);
   uint16x8_t c;
 
-#define TEST_IMPL(IDX)                                       \
-  for (int i = 0; i < 8; i++) {                              \
-    uint16_t mask = UINT16_MAX >> (IDX + 1);                 \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] >> (IDX + 1)) & mask); \
-  }                                                          \
-  c = vsriq_n_u16(a, b, (IDX + 1));                          \
+#define TEST_IMPL(IDX)                                   \
+  for (int i = 0; i < 8; i++) {                          \
+    int idx = (IDX + 1);                                 \
+    if (idx == 16) {                                     \
+      uint16_t mask = 0;                                 \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);              \
+    } else {                                             \
+      uint16_t mask = UINT16_MAX >> idx;                 \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] >> idx) & mask); \
+    }                                                    \
+  }                                                      \
+  c = vsriq_n_u16(a, b, (IDX + 1));                      \
   CHECK_RESULT(validate_uint16(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]))
 
   IMM_16_ITER
@@ -13571,12 +13650,18 @@ result_t test_vsriq_n_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   uint32x4_t b = vld1q_u32(_b);
   uint32x4_t c;
 
-#define TEST_IMPL(IDX)                                       \
-  for (int i = 0; i < 4; i++) {                              \
-    uint32_t mask = (uint64_t)UINT32_MAX >> (IDX + 1);       \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] >> (IDX + 1)) & mask); \
-  }                                                          \
-  c = vsriq_n_u32(a, b, (IDX + 1));                          \
+#define TEST_IMPL(IDX)                                   \
+  for (int i = 0; i < 4; i++) {                          \
+    int idx = (IDX + 1);                                 \
+    if (idx == 32) {                                     \
+      uint32_t mask = 0;                                 \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);              \
+    } else {                                             \
+      uint32_t mask = UINT32_MAX >> idx;                 \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] >> idx) & mask); \
+    }                                                    \
+  }                                                      \
+  c = vsriq_n_u32(a, b, (IDX + 1));                      \
   CHECK_RESULT(validate_uint32(c, _c[0], _c[1], _c[2], _c[3]))
 
   IMM_32_ITER
@@ -13598,15 +13683,18 @@ result_t test_vsriq_n_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   uint64x2_t b = vld1q_u64(_b);
   uint64x2_t c;
 
-#define TEST_IMPL(IDX)                                       \
-  for (int i = 0; i < 2; i++) {                              \
-    uint64_t mask = (uint64_t)UINT64_MAX >> (IDX + 1);       \
-    if ((IDX + 1) == 64) {                                   \
-      mask = 0;                                              \
-    }                                                        \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] >> (IDX + 1)) & mask); \
-  }                                                          \
-  c = vsriq_n_u64(a, b, (IDX + 1));                          \
+#define TEST_IMPL(IDX)                                   \
+  for (int i = 0; i < 2; i++) {                          \
+    int idx = (IDX + 1);                                 \
+    if (idx == 64) {                                     \
+      uint64_t mask = 0;                                 \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);              \
+    } else {                                             \
+      uint64_t mask = UINT64_MAX >> idx;                 \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] >> idx) & mask); \
+    }                                                    \
+  }                                                      \
+  c = vsriq_n_u64(a, b, (IDX + 1));                      \
   CHECK_RESULT(validate_uint64(c, _c[0], _c[1]))
 
   IMM_64_ITER
@@ -13628,12 +13716,18 @@ result_t test_vsli_n_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int8x8_t b = vld1_s8(_b);
   int8x8_t c;
 
-#define TEST_IMPL(IDX)                                 \
-  for (int i = 0; i < 8; i++) {                        \
-    uint8_t mask = (uint8_t)(UINT8_MAX << IDX);        \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] << IDX) & mask); \
-  }                                                    \
-  c = vsli_n_s8(a, b, IDX);                            \
+#define TEST_IMPL(IDX)                                   \
+  for (int i = 0; i < 8; i++) {                          \
+    int idx = IDX;                                       \
+    if (idx == 8) {                                      \
+      uint8_t mask = 0;                                  \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);              \
+    } else {                                             \
+      uint8_t mask = (uint8_t)(UINT8_MAX << idx);        \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] << idx) & mask); \
+    }                                                    \
+  }                                                      \
+  c = vsli_n_s8(a, b, IDX);                              \
   CHECK_RESULT(validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]))
 
   IMM_8_ITER
@@ -13655,12 +13749,18 @@ result_t test_vsli_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int16x4_t b = vld1_s16(_b);
   int16x4_t c;
 
-#define TEST_IMPL(IDX)                                 \
-  for (int i = 0; i < 4; i++) {                        \
-    uint16_t mask = UINT16_MAX << IDX;                 \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] << IDX) & mask); \
-  }                                                    \
-  c = vsli_n_s16(a, b, IDX);                           \
+#define TEST_IMPL(IDX)                                   \
+  for (int i = 0; i < 4; i++) {                          \
+    int idx = IDX;                                       \
+    if (idx == 16) {                                     \
+      uint16_t mask = 0;                                 \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);              \
+    } else {                                             \
+      uint16_t mask = (uint16_t)(UINT16_MAX << idx);     \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] << idx) & mask); \
+    }                                                    \
+  }                                                      \
+  c = vsli_n_s16(a, b, IDX);                             \
   CHECK_RESULT(validate_int16(c, _c[0], _c[1], _c[2], _c[3]))
 
   IMM_16_ITER
@@ -13682,12 +13782,18 @@ result_t test_vsli_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int32x2_t b = vld1_s32(_b);
   int32x2_t c;
 
-#define TEST_IMPL(IDX)                                 \
-  for (int i = 0; i < 2; i++) {                        \
-    uint32_t mask = (uint64_t)UINT32_MAX << IDX;       \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] << IDX) & mask); \
-  }                                                    \
-  c = vsli_n_s32(a, b, IDX);                           \
+#define TEST_IMPL(IDX)                                   \
+  for (int i = 0; i < 2; i++) {                          \
+    int idx = IDX;                                       \
+    if (idx == 32) {                                     \
+      uint32_t mask = 0;                                 \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);              \
+    } else {                                             \
+      uint32_t mask = (uint32_t)(UINT32_MAX << idx);     \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] << idx) & mask); \
+    }                                                    \
+  }                                                      \
+  c = vsli_n_s32(a, b, IDX);                             \
   CHECK_RESULT(validate_int32(c, _c[0], _c[1]))
 
   IMM_32_ITER
@@ -13709,15 +13815,18 @@ result_t test_vsli_n_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int64x1_t b = vld1_s64(_b);
   int64x1_t c;
 
-#define TEST_IMPL(IDX)                                 \
-  for (int i = 0; i < 1; i++) {                        \
-    uint64_t mask = (uint64_t)UINT64_MAX << IDX;       \
-    if (IDX == 64) {                                   \
-      mask = 0;                                        \
-    }                                                  \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] << IDX) & mask); \
-  }                                                    \
-  c = vsli_n_s64(a, b, IDX);                           \
+#define TEST_IMPL(IDX)                                   \
+  for (int i = 0; i < 1; i++) {                          \
+    int idx = IDX;                                       \
+    if (idx == 64) {                                     \
+      uint64_t mask = 0;                                 \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);              \
+    } else {                                             \
+      uint64_t mask = (uint64_t)(UINT64_MAX << idx);     \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] << idx) & mask); \
+    }                                                    \
+  }                                                      \
+  c = vsli_n_s64(a, b, IDX);                             \
   CHECK_RESULT(validate_int64(c, _c[0]))
 
   IMM_64_ITER
@@ -13739,12 +13848,18 @@ result_t test_vsli_n_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   uint8x8_t b = vld1_u8(_b);
   uint8x8_t c;
 
-#define TEST_IMPL(IDX)                                 \
-  for (int i = 0; i < 8; i++) {                        \
-    uint8_t mask = UINT8_MAX << IDX;                   \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] << IDX) & mask); \
-  }                                                    \
-  c = vsli_n_u8(a, b, IDX);                            \
+#define TEST_IMPL(IDX)                                   \
+  for (int i = 0; i < 8; i++) {                          \
+    int idx = IDX;                                       \
+    if (idx == 8) {                                      \
+      uint8_t mask = 0;                                  \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);              \
+    } else {                                             \
+      uint8_t mask = (uint8_t)(UINT8_MAX << idx);        \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] << idx) & mask); \
+    }                                                    \
+  }                                                      \
+  c = vsli_n_u8(a, b, IDX);                              \
   CHECK_RESULT(validate_uint8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]))
 
   IMM_8_ITER
@@ -13766,12 +13881,18 @@ result_t test_vsli_n_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   uint16x4_t b = vld1_u16(_b);
   uint16x4_t c;
 
-#define TEST_IMPL(IDX)                                 \
-  for (int i = 0; i < 4; i++) {                        \
-    uint16_t mask = UINT16_MAX << IDX;                 \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] << IDX) & mask); \
-  }                                                    \
-  c = vsli_n_u16(a, b, IDX);                           \
+#define TEST_IMPL(IDX)                                   \
+  for (int i = 0; i < 4; i++) {                          \
+    int idx = IDX;                                       \
+    if (idx == 16) {                                     \
+      uint16_t mask = 0;                                 \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);              \
+    } else {                                             \
+      uint16_t mask = (uint16_t)(UINT16_MAX << idx);     \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] << idx) & mask); \
+    }                                                    \
+  }                                                      \
+  c = vsli_n_u16(a, b, IDX);                             \
   CHECK_RESULT(validate_uint16(c, _c[0], _c[1], _c[2], _c[3]))
 
   IMM_16_ITER
@@ -13793,12 +13914,18 @@ result_t test_vsli_n_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   uint32x2_t b = vld1_u32(_b);
   uint32x2_t c;
 
-#define TEST_IMPL(IDX)                                 \
-  for (int i = 0; i < 2; i++) {                        \
-    uint32_t mask = (uint64_t)UINT32_MAX << IDX;       \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] << IDX) & mask); \
-  }                                                    \
-  c = vsli_n_u32(a, b, IDX);                           \
+#define TEST_IMPL(IDX)                                   \
+  for (int i = 0; i < 2; i++) {                          \
+    int idx = IDX;                                       \
+    if (idx == 32) {                                     \
+      uint32_t mask = 0;                                 \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);              \
+    } else {                                             \
+      uint32_t mask = (uint32_t)(UINT32_MAX << idx);     \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] << idx) & mask); \
+    }                                                    \
+  }                                                      \
+  c = vsli_n_u32(a, b, IDX);                             \
   CHECK_RESULT(validate_uint32(c, _c[0], _c[1]))
 
   IMM_32_ITER
@@ -13820,15 +13947,18 @@ result_t test_vsli_n_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   uint64x1_t b = vld1_u64(_b);
   uint64x1_t c;
 
-#define TEST_IMPL(IDX)                                 \
-  for (int i = 0; i < 1; i++) {                        \
-    uint64_t mask = (uint64_t)UINT64_MAX << IDX;       \
-    if (IDX == 64) {                                   \
-      mask = 0;                                        \
-    }                                                  \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] << IDX) & mask); \
-  }                                                    \
-  c = vsli_n_u64(a, b, IDX);                           \
+#define TEST_IMPL(IDX)                                   \
+  for (int i = 0; i < 1; i++) {                          \
+    int idx = IDX;                                       \
+    if (idx == 64) {                                     \
+      uint64_t mask = 0;                                 \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);              \
+    } else {                                             \
+      uint64_t mask = (uint64_t)(UINT64_MAX << idx);     \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] << idx) & mask); \
+    }                                                    \
+  }                                                      \
+  c = vsli_n_u64(a, b, IDX);                             \
   CHECK_RESULT(validate_uint64(c, _c[0]))
 
   IMM_64_ITER
@@ -13852,8 +13982,14 @@ result_t test_vsliq_n_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 
 #define TEST_IMPL(IDX)                                                                                                \
   for (int i = 0; i < 16; i++) {                                                                                      \
-    uint8_t mask = UINT8_MAX << IDX;                                                                                  \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] << IDX) & mask);                                                                \
+    int idx = IDX;                                                                                                    \
+    if (idx == 8) {                                                                                                   \
+      uint8_t mask = 0;                                                                                               \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);                                                                           \
+    } else {                                                                                                          \
+      uint8_t mask = (uint8_t)(UINT8_MAX << idx);                                                                     \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] << idx) & mask);                                                              \
+    }                                                                                                                 \
   }                                                                                                                   \
   c = vsliq_n_s8(a, b, IDX);                                                                                          \
   CHECK_RESULT(validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7], _c[8], _c[9], _c[10], _c[11], \
@@ -13878,12 +14014,18 @@ result_t test_vsliq_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int16x8_t b = vld1q_s16(_b);
   int16x8_t c;
 
-#define TEST_IMPL(IDX)                                 \
-  for (int i = 0; i < 8; i++) {                        \
-    uint16_t mask = UINT16_MAX << IDX;                 \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] << IDX) & mask); \
-  }                                                    \
-  c = vsliq_n_s16(a, b, IDX);                          \
+#define TEST_IMPL(IDX)                                   \
+  for (int i = 0; i < 8; i++) {                          \
+    int idx = IDX;                                       \
+    if (idx == 16) {                                     \
+      uint16_t mask = 0;                                 \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);              \
+    } else {                                             \
+      uint16_t mask = (uint16_t)(UINT16_MAX << idx);     \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] << idx) & mask); \
+    }                                                    \
+  }                                                      \
+  c = vsliq_n_s16(a, b, IDX);                            \
   CHECK_RESULT(validate_int16(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]))
 
   IMM_16_ITER
@@ -13905,12 +14047,18 @@ result_t test_vsliq_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int32x4_t b = vld1q_s32(_b);
   int32x4_t c;
 
-#define TEST_IMPL(IDX)                                 \
-  for (int i = 0; i < 4; i++) {                        \
-    uint32_t mask = (uint64_t)UINT32_MAX << IDX;       \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] << IDX) & mask); \
-  }                                                    \
-  c = vsliq_n_s32(a, b, IDX);                          \
+#define TEST_IMPL(IDX)                                   \
+  for (int i = 0; i < 4; i++) {                          \
+    int idx = IDX;                                       \
+    if (idx == 32) {                                     \
+      uint32_t mask = 0;                                 \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);              \
+    } else {                                             \
+      uint32_t mask = (uint32_t)(UINT32_MAX << idx);     \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] << idx) & mask); \
+    }                                                    \
+  }                                                      \
+  c = vsliq_n_s32(a, b, IDX);                            \
   CHECK_RESULT(validate_int32(c, _c[0], _c[1], _c[2], _c[3]))
 
   IMM_32_ITER
@@ -13932,15 +14080,18 @@ result_t test_vsliq_n_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int64x2_t b = vld1q_s64(_b);
   int64x2_t c;
 
-#define TEST_IMPL(IDX)                                 \
-  for (int i = 0; i < 2; i++) {                        \
-    uint64_t mask = (uint64_t)UINT64_MAX << IDX;       \
-    if (IDX == 64) {                                   \
-      mask = 0;                                        \
-    }                                                  \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] << IDX) & mask); \
-  }                                                    \
-  c = vsliq_n_s64(a, b, IDX);                          \
+#define TEST_IMPL(IDX)                                   \
+  for (int i = 0; i < 2; i++) {                          \
+    int idx = IDX;                                       \
+    if (idx == 64) {                                     \
+      uint64_t mask = 0;                                 \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);              \
+    } else {                                             \
+      uint64_t mask = (uint64_t)(UINT64_MAX << idx);     \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] << idx) & mask); \
+    }                                                    \
+  }                                                      \
+  c = vsliq_n_s64(a, b, IDX);                            \
   CHECK_RESULT(validate_int64(c, _c[0], _c[1]))
 
   IMM_64_ITER
@@ -13964,8 +14115,14 @@ result_t test_vsliq_n_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 
 #define TEST_IMPL(IDX)                                                                                                 \
   for (int i = 0; i < 16; i++) {                                                                                       \
-    uint8_t mask = UINT8_MAX << IDX;                                                                                   \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] << IDX) & mask);                                                                 \
+    int idx = IDX;                                                                                                     \
+    if (idx == 8) {                                                                                                    \
+      uint8_t mask = 0;                                                                                                \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);                                                                            \
+    } else {                                                                                                           \
+      uint8_t mask = (uint8_t)(UINT8_MAX << idx);                                                                      \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] << idx) & mask);                                                               \
+    }                                                                                                                  \
   }                                                                                                                    \
   c = vsliq_n_u8(a, b, IDX);                                                                                           \
   CHECK_RESULT(validate_uint8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7], _c[8], _c[9], _c[10], _c[11], \
@@ -13990,12 +14147,18 @@ result_t test_vsliq_n_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   uint16x8_t b = vld1q_u16(_b);
   uint16x8_t c;
 
-#define TEST_IMPL(IDX)                                 \
-  for (int i = 0; i < 8; i++) {                        \
-    uint16_t mask = UINT16_MAX << IDX;                 \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] << IDX) & mask); \
-  }                                                    \
-  c = vsliq_n_u16(a, b, IDX);                          \
+#define TEST_IMPL(IDX)                                   \
+  for (int i = 0; i < 8; i++) {                          \
+    int idx = IDX;                                       \
+    if (idx == 16) {                                     \
+      uint16_t mask = 0;                                 \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);              \
+    } else {                                             \
+      uint16_t mask = (uint16_t)(UINT16_MAX << idx);     \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] << idx) & mask); \
+    }                                                    \
+  }                                                      \
+  c = vsliq_n_u16(a, b, IDX);                            \
   CHECK_RESULT(validate_uint16(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]))
 
   IMM_16_ITER
@@ -14017,12 +14180,18 @@ result_t test_vsliq_n_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   uint32x4_t b = vld1q_u32(_b);
   uint32x4_t c;
 
-#define TEST_IMPL(IDX)                                 \
-  for (int i = 0; i < 4; i++) {                        \
-    uint32_t mask = (uint64_t)UINT32_MAX << IDX;       \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] << IDX) & mask); \
-  }                                                    \
-  c = vsliq_n_u32(a, b, IDX);                          \
+#define TEST_IMPL(IDX)                                   \
+  for (int i = 0; i < 4; i++) {                          \
+    int idx = IDX;                                       \
+    if (idx == 32) {                                     \
+      uint32_t mask = 0;                                 \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);              \
+    } else {                                             \
+      uint32_t mask = (uint32_t)(UINT32_MAX << idx);     \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] << idx) & mask); \
+    }                                                    \
+  }                                                      \
+  c = vsliq_n_u32(a, b, IDX);                            \
   CHECK_RESULT(validate_uint32(c, _c[0], _c[1], _c[2], _c[3]))
 
   IMM_32_ITER
@@ -14044,15 +14213,18 @@ result_t test_vsliq_n_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   uint64x2_t b = vld1q_u64(_b);
   uint64x2_t c;
 
-#define TEST_IMPL(IDX)                                 \
-  for (int i = 0; i < 2; i++) {                        \
-    uint64_t mask = (uint64_t)UINT64_MAX << IDX;       \
-    if (IDX == 64) {                                   \
-      mask = 0;                                        \
-    }                                                  \
-    _c[i] = (_a[i] & ~mask) | ((_b[i] << IDX) & mask); \
-  }                                                    \
-  c = vsliq_n_u64(a, b, IDX);                          \
+#define TEST_IMPL(IDX)                                   \
+  for (int i = 0; i < 2; i++) {                          \
+    int idx = IDX;                                       \
+    if (idx == 64) {                                     \
+      uint64_t mask = 0;                                 \
+      _c[i] = (_a[i] & ~mask) | (0 & mask);              \
+    } else {                                             \
+      uint64_t mask = (uint64_t)(UINT64_MAX << idx);     \
+      _c[i] = (_a[i] & ~mask) | ((_b[i] << idx) & mask); \
+    }                                                    \
+  }                                                      \
+  c = vsliq_n_u64(a, b, IDX);                            \
   CHECK_RESULT(validate_uint64(c, _c[0], _c[1]))
 
   IMM_64_ITER
@@ -19779,7 +19951,7 @@ result_t test_vext_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
   const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
   const int8_t *_b = (int8_t *)impl.test_cases_int_pointer2;
-  const size_t elt_num = 8;
+  const int elt_num = 8;
   int8_t _c[elt_num];
   int8x8_t a, b, c;
 
@@ -19811,7 +19983,7 @@ result_t test_vext_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
   const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
   const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
-  const size_t elt_num = 4;
+  const int elt_num = 4;
   int16_t _c[elt_num];
   int16x4_t a, b, c;
 
@@ -19843,7 +20015,7 @@ result_t test_vext_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
   const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
   const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
-  const size_t elt_num = 2;
+  const int elt_num = 2;
   int32_t _c[elt_num];
   int32x2_t a, b, c;
 
@@ -19875,7 +20047,7 @@ result_t test_vext_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
   const int64_t *_a = (int64_t *)impl.test_cases_int_pointer1;
   const int64_t *_b = (int64_t *)impl.test_cases_int_pointer2;
-  const size_t elt_num = 1;
+  const int elt_num = 1;
   int64_t _c[elt_num];
   int64x1_t a, b, c;
 
@@ -19907,7 +20079,7 @@ result_t test_vext_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
   const float *_a = (float *)impl.test_cases_float_pointer1;
   const float *_b = (float *)impl.test_cases_float_pointer2;
-  const size_t elt_num = 2;
+  const int elt_num = 2;
   float _c[elt_num];
   float32x2_t a, b, c;
 
@@ -19939,7 +20111,7 @@ result_t test_vext_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
   const uint8_t *_a = (uint8_t *)impl.test_cases_int_pointer1;
   const uint8_t *_b = (uint8_t *)impl.test_cases_int_pointer2;
-  const size_t elt_num = 8;
+  const int elt_num = 8;
   uint8_t _c[elt_num];
   uint8x8_t a, b, c;
 
@@ -19971,7 +20143,7 @@ result_t test_vext_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
   const uint16_t *_a = (uint16_t *)impl.test_cases_int_pointer1;
   const uint16_t *_b = (uint16_t *)impl.test_cases_int_pointer2;
-  const size_t elt_num = 4;
+  const int elt_num = 4;
   uint16_t _c[elt_num];
   uint16x4_t a, b, c;
 
@@ -20003,7 +20175,7 @@ result_t test_vext_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
   const uint32_t *_a = (uint32_t *)impl.test_cases_int_pointer1;
   const uint32_t *_b = (uint32_t *)impl.test_cases_int_pointer2;
-  const size_t elt_num = 2;
+  const int elt_num = 2;
   uint32_t _c[elt_num];
   uint32x2_t a, b, c;
 
@@ -20035,7 +20207,7 @@ result_t test_vext_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
   const uint64_t *_a = (uint64_t *)impl.test_cases_int_pointer1;
   const uint64_t *_b = (uint64_t *)impl.test_cases_int_pointer2;
-  const size_t elt_num = 1;
+  const int elt_num = 1;
   uint64_t _c[elt_num];
   uint64x1_t a, b, c;
 
@@ -20067,7 +20239,7 @@ result_t test_vextq_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
   const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
   const int8_t *_b = (int8_t *)impl.test_cases_int_pointer2;
-  const size_t elt_num = 16;
+  const int elt_num = 16;
   int8_t _c[elt_num];
   int8x16_t a, b, c;
 
@@ -20100,7 +20272,7 @@ result_t test_vextq_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
   const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
   const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
-  const size_t elt_num = 8;
+  const int elt_num = 8;
   int16_t _c[elt_num];
   int16x8_t a, b, c;
 
@@ -20132,7 +20304,7 @@ result_t test_vextq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
   const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
   const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
-  const size_t elt_num = 4;
+  const int elt_num = 4;
   int32_t _c[elt_num];
   int32x4_t a, b, c;
 
@@ -20164,7 +20336,7 @@ result_t test_vextq_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
   const int64_t *_a = (int64_t *)impl.test_cases_int_pointer1;
   const int64_t *_b = (int64_t *)impl.test_cases_int_pointer2;
-  const size_t elt_num = 2;
+  const int elt_num = 2;
   int64_t _c[elt_num];
   int64x2_t a, b, c;
 
@@ -20196,7 +20368,7 @@ result_t test_vextq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
   const float *_a = (float *)impl.test_cases_float_pointer1;
   const float *_b = (float *)impl.test_cases_float_pointer2;
-  const size_t elt_num = 4;
+  const int elt_num = 4;
   float _c[elt_num];
   float32x4_t a, b, c;
 
@@ -20228,7 +20400,7 @@ result_t test_vextq_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
   const uint8_t *_a = (uint8_t *)impl.test_cases_int_pointer1;
   const uint8_t *_b = (uint8_t *)impl.test_cases_int_pointer2;
-  const size_t elt_num = 16;
+  const int elt_num = 16;
   uint8_t _c[elt_num];
   uint8x16_t a, b, c;
 
@@ -20261,7 +20433,7 @@ result_t test_vextq_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
   const uint16_t *_a = (uint16_t *)impl.test_cases_int_pointer1;
   const uint16_t *_b = (uint16_t *)impl.test_cases_int_pointer2;
-  const size_t elt_num = 8;
+  const int elt_num = 8;
   uint16_t _c[elt_num];
   uint16x8_t a, b, c;
 
@@ -20293,7 +20465,7 @@ result_t test_vextq_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
   const uint32_t *_a = (uint32_t *)impl.test_cases_int_pointer1;
   const uint32_t *_b = (uint32_t *)impl.test_cases_int_pointer2;
-  const size_t elt_num = 4;
+  const int elt_num = 4;
   uint32_t _c[elt_num];
   uint32x4_t a, b, c;
 
@@ -20325,7 +20497,7 @@ result_t test_vextq_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
   const uint64_t *_a = (uint64_t *)impl.test_cases_int_pointer1;
   const uint64_t *_b = (uint64_t *)impl.test_cases_int_pointer2;
-  const size_t elt_num = 2;
+  const int elt_num = 2;
   uint64_t _c[elt_num];
   uint64x2_t a, b, c;
 
