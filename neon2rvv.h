@@ -5087,25 +5087,45 @@ FORCE_INLINE uint64x2_t vmlal_n_u32(uint64x2_t __a, uint32x2_t __b, uint32_t __c
 
 // FORCE_INLINE int64x2_t vqdmlal_n_s32(int64x2_t __a, int32x2_t __b, int32_t __c);
 
-// FORCE_INLINE int16x4_t vmls_n_s16(int16x4_t __a, int16x4_t __b, int16_t __c);
+FORCE_INLINE int16x4_t vmls_n_s16(int16x4_t __a, int16x4_t __b, int16_t __c) {
+  return __riscv_vnmsac_vx_i16m1(__a, __c, __b, 4);
+}
 
-// FORCE_INLINE int32x2_t vmls_n_s32(int32x2_t __a, int32x2_t __b, int32_t __c);
+FORCE_INLINE int32x2_t vmls_n_s32(int32x2_t __a, int32x2_t __b, int32_t __c) {
+  return __riscv_vnmsac_vx_i32m1(__a, __c, __b, 2);
+}
 
-// FORCE_INLINE float32x2_t vmls_n_f32(float32x2_t __a, float32x2_t __b, float32_t __c);
+FORCE_INLINE float32x2_t vmls_n_f32(float32x2_t __a, float32x2_t __b, float32_t __c) {
+  return __riscv_vfnmsac_vf_f32m1(__a, __c, __b, 2);
+}
 
-// FORCE_INLINE uint16x4_t vmls_n_u16(uint16x4_t __a, uint16x4_t __b, uint16_t __c);
+FORCE_INLINE uint16x4_t vmls_n_u16(uint16x4_t __a, uint16x4_t __b, uint16_t __c) {
+  return __riscv_vnmsac_vx_u16m1(__a, __c, __b, 4);
+}
 
-// FORCE_INLINE uint32x2_t vmls_n_u32(uint32x2_t __a, uint32x2_t __b, uint32_t __c);
+FORCE_INLINE uint32x2_t vmls_n_u32(uint32x2_t __a, uint32x2_t __b, uint32_t __c) {
+  return __riscv_vnmsac_vx_u32m1(__a, __c, __b, 2);
+}
 
-// FORCE_INLINE int16x8_t vmlsq_n_s16(int16x8_t __a, int16x8_t __b, int16_t __c);
+FORCE_INLINE int16x8_t vmlsq_n_s16(int16x8_t __a, int16x8_t __b, int16_t __c) {
+  return __riscv_vnmsac_vx_i16m1(__a, __c, __b, 8);
+}
 
-// FORCE_INLINE int32x4_t vmlsq_n_s32(int32x4_t __a, int32x4_t __b, int32_t __c);
+FORCE_INLINE int32x4_t vmlsq_n_s32(int32x4_t __a, int32x4_t __b, int32_t __c) {
+  return __riscv_vnmsac_vx_i32m1(__a, __c, __b, 4);
+}
 
-// FORCE_INLINE float32x4_t vmlsq_n_f32(float32x4_t __a, float32x4_t __b, float32_t __c);
+FORCE_INLINE float32x4_t vmlsq_n_f32(float32x4_t __a, float32x4_t __b, float32_t __c) {
+  return __riscv_vfnmsac_vf_f32m1(__a, __c, __b, 4);
+}
 
-// FORCE_INLINE uint16x8_t vmlsq_n_u16(uint16x8_t __a, uint16x8_t __b, uint16_t __c);
+FORCE_INLINE uint16x8_t vmlsq_n_u16(uint16x8_t __a, uint16x8_t __b, uint16_t __c) {
+  return __riscv_vnmsac_vx_u16m1(__a, __c, __b, 8);
+}
 
-// FORCE_INLINE uint32x4_t vmlsq_n_u32(uint32x4_t __a, uint32x4_t __b, uint32_t __c);
+FORCE_INLINE uint32x4_t vmlsq_n_u32(uint32x4_t __a, uint32x4_t __b, uint32_t __c) {
+  return __riscv_vnmsac_vx_u32m1(__a, __c, __b, 4);
+}
 
 // FORCE_INLINE int32x4_t vmlsl_n_s16(int32x4_t __a, int16x4_t __b, int16_t __c);
 
