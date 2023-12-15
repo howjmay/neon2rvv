@@ -14559,11 +14559,58 @@ result_t test_vcnt_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #endif  // ENABLE_TEST_ALL
 }
 
-result_t test_vcnt_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vcnt_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint8_t *_a = (const uint8_t *)impl.test_cases_int_pointer1;
+  uint8_t _c[8];
+  const uint8_t bit_population_lookup[16] = {0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4};
+  for (int i = 0; i < 8; i++) {
+    uint8_t byte = _a[i];
+    _c[i] = bit_population_lookup[byte & 0x0F] + bit_population_lookup[byte >> 4];
+  }
+  uint8x8_t a = vld1_u8(_a);
+  uint8x8_t c = vcnt_u8(a);
+  return validate_uint8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
-result_t test_vcntq_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vcntq_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int8_t *_a = (const int8_t *)impl.test_cases_int_pointer1;
+  int8_t _c[16];
+  const int8_t bit_population_lookup[16] = {0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4};
+  for (int i = 0; i < 16; i++) {
+    uint8_t byte = _a[i];
+    _c[i] = bit_population_lookup[byte & 0x0F] + bit_population_lookup[byte >> 4];
+  }
+  int8x16_t a = vld1q_s8(_a);
+  int8x16_t c = vcntq_s8(a);
+  return validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7], _c[8], _c[9], _c[10], _c[11], _c[12],
+                       _c[13], _c[14], _c[15]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
-result_t test_vcntq_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vcntq_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint8_t *_a = (const uint8_t *)impl.test_cases_int_pointer1;
+  uint8_t _c[16];
+  const uint8_t bit_population_lookup[16] = {0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4};
+  for (int i = 0; i < 16; i++) {
+    uint8_t byte = _a[i];
+    _c[i] = bit_population_lookup[byte & 0x0F] + bit_population_lookup[byte >> 4];
+  }
+  uint8x16_t a = vld1q_u8(_a);
+  uint8x16_t c = vcntq_u8(a);
+  return validate_uint8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7], _c[8], _c[9], _c[10], _c[11], _c[12],
+                        _c[13], _c[14], _c[15]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vrecpe_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
