@@ -150,46 +150,50 @@ int32_t saturate_int32(int64_t a);
 uint32_t saturate_uint32(int64_t a);
 
 #if defined(__riscv) || defined(__riscv__)
-#define DEFINE_TUPLEx2_GET(TYPE, SIGN, BIT, ELT_NUM)                                                              \
-  static void TYPE##x2_get_##TYPE(TYPE##x##ELT_NUM##x2_t a, TYPE##x##ELT_NUM##_t *a0, TYPE##x##ELT_NUM##_t *a1) { \
-    *a0 = __riscv_vget_v_##SIGN##BIT##m1x2_##SIGN##BIT##m1(a, 0);                                                 \
-    *a1 = __riscv_vget_v_##SIGN##BIT##m1x2_##SIGN##BIT##m1(a, 1);                                                 \
+#define DEFINE_TUPLEx2_GET(TYPE, SIGN, BIT, ELT_NUM)                                                          \
+  __attribute__((unused)) static void TYPE##x2_get_##TYPE(TYPE##x##ELT_NUM##x2_t a, TYPE##x##ELT_NUM##_t *a0, \
+                                                          TYPE##x##ELT_NUM##_t *a1) {                         \
+    *a0 = __riscv_vget_v_##SIGN##BIT##m1x2_##SIGN##BIT##m1(a, 0);                                             \
+    *a1 = __riscv_vget_v_##SIGN##BIT##m1x2_##SIGN##BIT##m1(a, 1);                                             \
   }
 #define DEFINE_TUPLEx3_GET(TYPE, SIGN, BIT, ELT_NUM)                                                            \
-  static void TYPE##x3_get_##TYPE(TYPE##x##ELT_NUM##x3_t a, TYPE##x##ELT_NUM##_t *a0, TYPE##x##ELT_NUM##_t *a1, \
-                                  TYPE##x##ELT_NUM##_t *a2) {                                                   \
+  __attribute__((unused)) static void TYPE##x3_get_##TYPE(TYPE##x##ELT_NUM##x3_t a, TYPE##x##ELT_NUM##_t *a0,   \
+                                                          TYPE##x##ELT_NUM##_t *a1, TYPE##x##ELT_NUM##_t *a2) { \
     *a0 = __riscv_vget_v_##SIGN##BIT##m1x3_##SIGN##BIT##m1(a, 0);                                               \
     *a1 = __riscv_vget_v_##SIGN##BIT##m1x3_##SIGN##BIT##m1(a, 1);                                               \
     *a2 = __riscv_vget_v_##SIGN##BIT##m1x3_##SIGN##BIT##m1(a, 2);                                               \
   }
-#define DEFINE_TUPLEx4_GET(TYPE, SIGN, BIT, ELT_NUM)                                                            \
-  static void TYPE##x4_get_##TYPE(TYPE##x##ELT_NUM##x4_t a, TYPE##x##ELT_NUM##_t *a0, TYPE##x##ELT_NUM##_t *a1, \
-                                  TYPE##x##ELT_NUM##_t *a2, TYPE##x##ELT_NUM##_t *a3) {                         \
-    *a0 = __riscv_vget_v_##SIGN##BIT##m1x4_##SIGN##BIT##m1(a, 0);                                               \
-    *a1 = __riscv_vget_v_##SIGN##BIT##m1x4_##SIGN##BIT##m1(a, 1);                                               \
-    *a2 = __riscv_vget_v_##SIGN##BIT##m1x4_##SIGN##BIT##m1(a, 2);                                               \
-    *a3 = __riscv_vget_v_##SIGN##BIT##m1x4_##SIGN##BIT##m1(a, 3);                                               \
+#define DEFINE_TUPLEx4_GET(TYPE, SIGN, BIT, ELT_NUM)                                                          \
+  __attribute__((unused)) static void TYPE##x4_get_##TYPE(TYPE##x##ELT_NUM##x4_t a, TYPE##x##ELT_NUM##_t *a0, \
+                                                          TYPE##x##ELT_NUM##_t *a1, TYPE##x##ELT_NUM##_t *a2, \
+                                                          TYPE##x##ELT_NUM##_t *a3) {                         \
+    *a0 = __riscv_vget_v_##SIGN##BIT##m1x4_##SIGN##BIT##m1(a, 0);                                             \
+    *a1 = __riscv_vget_v_##SIGN##BIT##m1x4_##SIGN##BIT##m1(a, 1);                                             \
+    *a2 = __riscv_vget_v_##SIGN##BIT##m1x4_##SIGN##BIT##m1(a, 2);                                             \
+    *a3 = __riscv_vget_v_##SIGN##BIT##m1x4_##SIGN##BIT##m1(a, 3);                                             \
   }
 #elif defined(__aarch64__) || defined(_M_ARM64)
-#define DEFINE_TUPLEx2_GET(TYPE, SIGN, BIT, ELT_NUM)                                                              \
-  static void TYPE##x2_get_##TYPE(TYPE##x##ELT_NUM##x2_t a, TYPE##x##ELT_NUM##_t *a0, TYPE##x##ELT_NUM##_t *a1) { \
-    *a0 = a.val[0];                                                                                               \
-    *a1 = a.val[1];                                                                                               \
+#define DEFINE_TUPLEx2_GET(TYPE, SIGN, BIT, ELT_NUM)                                                          \
+  __attribute__((unused)) static void TYPE##x2_get_##TYPE(TYPE##x##ELT_NUM##x2_t a, TYPE##x##ELT_NUM##_t *a0, \
+                                                          TYPE##x##ELT_NUM##_t *a1) {                         \
+    *a0 = a.val[0];                                                                                           \
+    *a1 = a.val[1];                                                                                           \
   }
 #define DEFINE_TUPLEx3_GET(TYPE, SIGN, BIT, ELT_NUM)                                                            \
-  static void TYPE##x3_get_##TYPE(TYPE##x##ELT_NUM##x3_t a, TYPE##x##ELT_NUM##_t *a0, TYPE##x##ELT_NUM##_t *a1, \
-                                  TYPE##x##ELT_NUM##_t *a2) {                                                   \
+  __attribute__((unused)) static void TYPE##x3_get_##TYPE(TYPE##x##ELT_NUM##x3_t a, TYPE##x##ELT_NUM##_t *a0,   \
+                                                          TYPE##x##ELT_NUM##_t *a1, TYPE##x##ELT_NUM##_t *a2) { \
     *a0 = a.val[0];                                                                                             \
     *a1 = a.val[1];                                                                                             \
     *a2 = a.val[2];                                                                                             \
   }
-#define DEFINE_TUPLEx4_GET(TYPE, SIGN, BIT, ELT_NUM)                                                            \
-  static void TYPE##x4_get_##TYPE(TYPE##x##ELT_NUM##x4_t a, TYPE##x##ELT_NUM##_t *a0, TYPE##x##ELT_NUM##_t *a1, \
-                                  TYPE##x##ELT_NUM##_t *a2, TYPE##x##ELT_NUM##_t *a3) {                         \
-    *a0 = a.val[0];                                                                                             \
-    *a1 = a.val[1];                                                                                             \
-    *a2 = a.val[2];                                                                                             \
-    *a3 = a.val[3];                                                                                             \
+#define DEFINE_TUPLEx4_GET(TYPE, SIGN, BIT, ELT_NUM)                                                          \
+  __attribute__((unused)) static void TYPE##x4_get_##TYPE(TYPE##x##ELT_NUM##x4_t a, TYPE##x##ELT_NUM##_t *a0, \
+                                                          TYPE##x##ELT_NUM##_t *a1, TYPE##x##ELT_NUM##_t *a2, \
+                                                          TYPE##x##ELT_NUM##_t *a3) {                         \
+    *a0 = a.val[0];                                                                                           \
+    *a1 = a.val[1];                                                                                           \
+    *a2 = a.val[2];                                                                                           \
+    *a3 = a.val[3];                                                                                           \
   }
 #endif
 
