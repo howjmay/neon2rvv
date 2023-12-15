@@ -1415,15 +1415,35 @@ FORCE_INLINE int8x8_t vqabs_s8(int8x8_t __a) {
   return __riscv_vssub_vv_i8m1(a_xor, mask, 8);
 }
 
-// FORCE_INLINE int16x4_t vqabs_s16(int16x4_t __a);
+FORCE_INLINE int16x4_t vqabs_s16(int16x4_t __a) {
+  vint16m1_t mask = __riscv_vsra_vx_i16m1(__a, 15, 4);
+  vint16m1_t a_xor = __riscv_vxor_vv_i16m1(__a, mask, 4);
+  return __riscv_vssub_vv_i16m1(a_xor, mask, 4);
+}
 
-// FORCE_INLINE int32x2_t vqabs_s32(int32x2_t __a);
+FORCE_INLINE int32x2_t vqabs_s32(int32x2_t __a) {
+  vint32m1_t mask = __riscv_vsra_vx_i32m1(__a, 31, 2);
+  vint32m1_t a_xor = __riscv_vxor_vv_i32m1(__a, mask, 2);
+  return __riscv_vssub_vv_i32m1(a_xor, mask, 2);
+}
 
-// FORCE_INLINE int8x16_t vqabsq_s8(int8x16_t __a);
+FORCE_INLINE int8x16_t vqabsq_s8(int8x16_t __a) {
+  vint8m1_t mask = __riscv_vsra_vx_i8m1(__a, 7, 16);
+  vint8m1_t a_xor = __riscv_vxor_vv_i8m1(__a, mask, 16);
+  return __riscv_vssub_vv_i8m1(a_xor, mask, 16);
+}
 
-// FORCE_INLINE int16x8_t vqabsq_s16(int16x8_t __a);
+FORCE_INLINE int16x8_t vqabsq_s16(int16x8_t __a) {
+  vint16m1_t mask = __riscv_vsra_vx_i16m1(__a, 15, 8);
+  vint16m1_t a_xor = __riscv_vxor_vv_i16m1(__a, mask, 8);
+  return __riscv_vssub_vv_i16m1(a_xor, mask, 8);
+}
 
-// FORCE_INLINE int32x4_t vqabsq_s32(int32x4_t __a);
+FORCE_INLINE int32x4_t vqabsq_s32(int32x4_t __a) {
+  vint32m1_t mask = __riscv_vsra_vx_i32m1(__a, 31, 4);
+  vint32m1_t a_xor = __riscv_vxor_vv_i32m1(__a, mask, 4);
+  return __riscv_vssub_vv_i32m1(a_xor, mask, 4);
+}
 
 // FORCE_INLINE uint32x2_t vcage_f32(float32x2_t __a, float32x2_t __b);
 
