@@ -19779,60 +19779,579 @@ result_t test_vext_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
   const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
   const int8_t *_b = (int8_t *)impl.test_cases_int_pointer2;
-  const int imm = 3;
-  int8_t _c[8];
+  const size_t elt_num = 8;
+  int8_t _c[elt_num];
+  int8x8_t a, b, c;
 
-  int8_t temp_arr[16];
-  for (int i = 0; i < 8; i++) {
+  int8_t temp_arr[elt_num * 2];
+  for (int i = 0; i < elt_num; i++) {
     temp_arr[i] = _a[i];
-    temp_arr[i + 8] = _b[i];
-  }
-  for (int i = 0; i < 8; i++) {
-    _c[i] = temp_arr[i + imm];
+    temp_arr[i + elt_num] = _b[i];
   }
 
-  int8x8_t a = vld1_s8(_a);
-  int8x8_t b = vld1_s8(_b);
-  int8x8_t c = vext_s8(a, b, imm);
-  return validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]);
+#define TEST_IMPL(IDX)                \
+  for (int i = 0; i < elt_num; i++) { \
+    _c[i] = temp_arr[i + IDX];        \
+  }                                   \
+  a = vld1_s8(_a);                    \
+  b = vld1_s8(_b);                    \
+  c = vext_s8(a, b, IDX);             \
+  CHECK_RESULT(validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]))
+
+  IMM_8_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
 #else
   return TEST_UNIMPL;
 #endif  // ENABLE_TEST_ALL
 }
 
-result_t test_vext_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vext_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
+  const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
+  const size_t elt_num = 4;
+  int16_t _c[elt_num];
+  int16x4_t a, b, c;
 
-result_t test_vext_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  int16_t temp_arr[elt_num * 2];
+  for (int i = 0; i < elt_num; i++) {
+    temp_arr[i] = _a[i];
+    temp_arr[i + elt_num] = _b[i];
+  }
 
-result_t test_vext_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+#define TEST_IMPL(IDX)                \
+  for (int i = 0; i < elt_num; i++) { \
+    _c[i] = temp_arr[i + IDX];        \
+  }                                   \
+  a = vld1_s16(_a);                   \
+  b = vld1_s16(_b);                   \
+  c = vext_s16(a, b, IDX);            \
+  CHECK_RESULT(validate_int16(c, _c[0], _c[1], _c[2], _c[3]))
 
-result_t test_vext_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  IMM_4_ITER
+#undef TEST_IMPL
 
-result_t test_vext_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
-result_t test_vext_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vext_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
+  const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
+  const size_t elt_num = 2;
+  int32_t _c[elt_num];
+  int32x2_t a, b, c;
 
-result_t test_vext_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  int32_t temp_arr[elt_num * 2];
+  for (int i = 0; i < elt_num; i++) {
+    temp_arr[i] = _a[i];
+    temp_arr[i + elt_num] = _b[i];
+  }
 
-result_t test_vext_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+#define TEST_IMPL(IDX)                \
+  for (int i = 0; i < elt_num; i++) { \
+    _c[i] = temp_arr[i + IDX];        \
+  }                                   \
+  a = vld1_s32(_a);                   \
+  b = vld1_s32(_b);                   \
+  c = vext_s32(a, b, IDX);            \
+  CHECK_RESULT(validate_int32(c, _c[0], _c[1]))
 
-result_t test_vextq_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  IMM_2_ITER
+#undef TEST_IMPL
 
-result_t test_vextq_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
-result_t test_vextq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vext_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int64_t *_a = (int64_t *)impl.test_cases_int_pointer1;
+  const int64_t *_b = (int64_t *)impl.test_cases_int_pointer2;
+  const size_t elt_num = 1;
+  int64_t _c[elt_num];
+  int64x1_t a, b, c;
 
-result_t test_vextq_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  int64_t temp_arr[elt_num * 2];
+  for (int i = 0; i < elt_num; i++) {
+    temp_arr[i] = _a[i];
+    temp_arr[i + elt_num] = _b[i];
+  }
 
-result_t test_vextq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+#define TEST_IMPL(IDX)                \
+  for (int i = 0; i < elt_num; i++) { \
+    _c[i] = temp_arr[i + IDX];        \
+  }                                   \
+  a = vld1_s64(_a);                   \
+  b = vld1_s64(_b);                   \
+  c = vext_s64(a, b, IDX);            \
+  CHECK_RESULT(validate_int64(c, _c[0]))
 
-result_t test_vextq_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  IMM_1_ITER
+#undef TEST_IMPL
 
-result_t test_vextq_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
-result_t test_vextq_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vext_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const float *_a = (float *)impl.test_cases_float_pointer1;
+  const float *_b = (float *)impl.test_cases_float_pointer2;
+  const size_t elt_num = 2;
+  float _c[elt_num];
+  float32x2_t a, b, c;
 
-result_t test_vextq_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  float temp_arr[elt_num * 2];
+  for (int i = 0; i < elt_num; i++) {
+    temp_arr[i] = _a[i];
+    temp_arr[i + elt_num] = _b[i];
+  }
+
+#define TEST_IMPL(IDX)                \
+  for (int i = 0; i < elt_num; i++) { \
+    _c[i] = temp_arr[i + IDX];        \
+  }                                   \
+  a = vld1_f32(_a);                   \
+  b = vld1_f32(_b);                   \
+  c = vext_f32(a, b, IDX);            \
+  CHECK_RESULT(validate_float(c, _c[0], _c[1]))
+
+  IMM_2_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vext_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint8_t *_a = (uint8_t *)impl.test_cases_int_pointer1;
+  const uint8_t *_b = (uint8_t *)impl.test_cases_int_pointer2;
+  const size_t elt_num = 8;
+  uint8_t _c[elt_num];
+  uint8x8_t a, b, c;
+
+  uint8_t temp_arr[elt_num * 2];
+  for (int i = 0; i < elt_num; i++) {
+    temp_arr[i] = _a[i];
+    temp_arr[i + elt_num] = _b[i];
+  }
+
+#define TEST_IMPL(IDX)                \
+  for (int i = 0; i < elt_num; i++) { \
+    _c[i] = temp_arr[i + IDX];        \
+  }                                   \
+  a = vld1_u8(_a);                    \
+  b = vld1_u8(_b);                    \
+  c = vext_u8(a, b, IDX);             \
+  CHECK_RESULT(validate_uint8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]))
+
+  IMM_8_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vext_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint16_t *_a = (uint16_t *)impl.test_cases_int_pointer1;
+  const uint16_t *_b = (uint16_t *)impl.test_cases_int_pointer2;
+  const size_t elt_num = 4;
+  uint16_t _c[elt_num];
+  uint16x4_t a, b, c;
+
+  uint16_t temp_arr[elt_num * 2];
+  for (int i = 0; i < elt_num; i++) {
+    temp_arr[i] = _a[i];
+    temp_arr[i + elt_num] = _b[i];
+  }
+
+#define TEST_IMPL(IDX)                \
+  for (int i = 0; i < elt_num; i++) { \
+    _c[i] = temp_arr[i + IDX];        \
+  }                                   \
+  a = vld1_u16(_a);                   \
+  b = vld1_u16(_b);                   \
+  c = vext_u16(a, b, IDX);            \
+  CHECK_RESULT(validate_uint16(c, _c[0], _c[1], _c[2], _c[3]))
+
+  IMM_4_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vext_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint32_t *_a = (uint32_t *)impl.test_cases_int_pointer1;
+  const uint32_t *_b = (uint32_t *)impl.test_cases_int_pointer2;
+  const size_t elt_num = 2;
+  uint32_t _c[elt_num];
+  uint32x2_t a, b, c;
+
+  uint32_t temp_arr[elt_num * 2];
+  for (int i = 0; i < elt_num; i++) {
+    temp_arr[i] = _a[i];
+    temp_arr[i + elt_num] = _b[i];
+  }
+
+#define TEST_IMPL(IDX)                \
+  for (int i = 0; i < elt_num; i++) { \
+    _c[i] = temp_arr[i + IDX];        \
+  }                                   \
+  a = vld1_u32(_a);                   \
+  b = vld1_u32(_b);                   \
+  c = vext_u32(a, b, IDX);            \
+  CHECK_RESULT(validate_uint32(c, _c[0], _c[1]))
+
+  IMM_2_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vext_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint64_t *_a = (uint64_t *)impl.test_cases_int_pointer1;
+  const uint64_t *_b = (uint64_t *)impl.test_cases_int_pointer2;
+  const size_t elt_num = 1;
+  uint64_t _c[elt_num];
+  uint64x1_t a, b, c;
+
+  uint64_t temp_arr[elt_num * 2];
+  for (int i = 0; i < elt_num; i++) {
+    temp_arr[i] = _a[i];
+    temp_arr[i + elt_num] = _b[i];
+  }
+
+#define TEST_IMPL(IDX)                \
+  for (int i = 0; i < elt_num; i++) { \
+    _c[i] = temp_arr[i + IDX];        \
+  }                                   \
+  a = vld1_u64(_a);                   \
+  b = vld1_u64(_b);                   \
+  c = vext_u64(a, b, IDX);            \
+  CHECK_RESULT(validate_uint64(c, _c[0]))
+
+  IMM_1_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vextq_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
+  const int8_t *_b = (int8_t *)impl.test_cases_int_pointer2;
+  const size_t elt_num = 16;
+  int8_t _c[elt_num];
+  int8x16_t a, b, c;
+
+  int8_t temp_arr[elt_num * 2];
+  for (int i = 0; i < elt_num; i++) {
+    temp_arr[i] = _a[i];
+    temp_arr[i + elt_num] = _b[i];
+  }
+
+#define TEST_IMPL(IDX)                                                                                                \
+  for (int i = 0; i < elt_num; i++) {                                                                                 \
+    _c[i] = temp_arr[i + IDX];                                                                                        \
+  }                                                                                                                   \
+  a = vld1q_s8(_a);                                                                                                   \
+  b = vld1q_s8(_b);                                                                                                   \
+  c = vextq_s8(a, b, IDX);                                                                                            \
+  CHECK_RESULT(validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7], _c[8], _c[9], _c[10], _c[11], \
+                             _c[12], _c[13], _c[14], _c[15]))
+
+  IMM_8_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vextq_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
+  const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
+  const size_t elt_num = 8;
+  int16_t _c[elt_num];
+  int16x8_t a, b, c;
+
+  int16_t temp_arr[elt_num * 2];
+  for (int i = 0; i < elt_num; i++) {
+    temp_arr[i] = _a[i];
+    temp_arr[i + elt_num] = _b[i];
+  }
+
+#define TEST_IMPL(IDX)                \
+  for (int i = 0; i < elt_num; i++) { \
+    _c[i] = temp_arr[i + IDX];        \
+  }                                   \
+  a = vld1q_s16(_a);                  \
+  b = vld1q_s16(_b);                  \
+  c = vextq_s16(a, b, IDX);           \
+  CHECK_RESULT(validate_int16(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]))
+
+  IMM_4_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vextq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
+  const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
+  const size_t elt_num = 4;
+  int32_t _c[elt_num];
+  int32x4_t a, b, c;
+
+  int32_t temp_arr[elt_num * 2];
+  for (int i = 0; i < elt_num; i++) {
+    temp_arr[i] = _a[i];
+    temp_arr[i + elt_num] = _b[i];
+  }
+
+#define TEST_IMPL(IDX)                \
+  for (int i = 0; i < elt_num; i++) { \
+    _c[i] = temp_arr[i + IDX];        \
+  }                                   \
+  a = vld1q_s32(_a);                  \
+  b = vld1q_s32(_b);                  \
+  c = vextq_s32(a, b, IDX);           \
+  CHECK_RESULT(validate_int32(c, _c[0], _c[1], _c[2], _c[3]))
+
+  IMM_2_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vextq_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int64_t *_a = (int64_t *)impl.test_cases_int_pointer1;
+  const int64_t *_b = (int64_t *)impl.test_cases_int_pointer2;
+  const size_t elt_num = 2;
+  int64_t _c[elt_num];
+  int64x2_t a, b, c;
+
+  int64_t temp_arr[elt_num * 2];
+  for (int i = 0; i < elt_num; i++) {
+    temp_arr[i] = _a[i];
+    temp_arr[i + elt_num] = _b[i];
+  }
+
+#define TEST_IMPL(IDX)                \
+  for (int i = 0; i < elt_num; i++) { \
+    _c[i] = temp_arr[i + IDX];        \
+  }                                   \
+  a = vld1q_s64(_a);                  \
+  b = vld1q_s64(_b);                  \
+  c = vextq_s64(a, b, IDX);           \
+  CHECK_RESULT(validate_int64(c, _c[0], _c[1]))
+
+  IMM_1_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vextq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const float *_a = (float *)impl.test_cases_float_pointer1;
+  const float *_b = (float *)impl.test_cases_float_pointer2;
+  const size_t elt_num = 4;
+  float _c[elt_num];
+  float32x4_t a, b, c;
+
+  float temp_arr[elt_num * 2];
+  for (int i = 0; i < elt_num; i++) {
+    temp_arr[i] = _a[i];
+    temp_arr[i + elt_num] = _b[i];
+  }
+
+#define TEST_IMPL(IDX)                \
+  for (int i = 0; i < elt_num; i++) { \
+    _c[i] = temp_arr[i + IDX];        \
+  }                                   \
+  a = vld1q_f32(_a);                  \
+  b = vld1q_f32(_b);                  \
+  c = vextq_f32(a, b, IDX);           \
+  CHECK_RESULT(validate_float(c, _c[0], _c[1], _c[2], _c[3]))
+
+  IMM_2_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vextq_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint8_t *_a = (uint8_t *)impl.test_cases_int_pointer1;
+  const uint8_t *_b = (uint8_t *)impl.test_cases_int_pointer2;
+  const size_t elt_num = 16;
+  uint8_t _c[elt_num];
+  uint8x16_t a, b, c;
+
+  uint8_t temp_arr[elt_num * 2];
+  for (int i = 0; i < elt_num; i++) {
+    temp_arr[i] = _a[i];
+    temp_arr[i + elt_num] = _b[i];
+  }
+
+#define TEST_IMPL(IDX)                                                                                                 \
+  for (int i = 0; i < elt_num; i++) {                                                                                  \
+    _c[i] = temp_arr[i + IDX];                                                                                         \
+  }                                                                                                                    \
+  a = vld1q_u8(_a);                                                                                                    \
+  b = vld1q_u8(_b);                                                                                                    \
+  c = vextq_u8(a, b, IDX);                                                                                             \
+  CHECK_RESULT(validate_uint8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7], _c[8], _c[9], _c[10], _c[11], \
+                              _c[12], _c[13], _c[14], _c[15]))
+
+  IMM_8_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vextq_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint16_t *_a = (uint16_t *)impl.test_cases_int_pointer1;
+  const uint16_t *_b = (uint16_t *)impl.test_cases_int_pointer2;
+  const size_t elt_num = 8;
+  uint16_t _c[elt_num];
+  uint16x8_t a, b, c;
+
+  uint16_t temp_arr[elt_num * 2];
+  for (int i = 0; i < elt_num; i++) {
+    temp_arr[i] = _a[i];
+    temp_arr[i + elt_num] = _b[i];
+  }
+
+#define TEST_IMPL(IDX)                \
+  for (int i = 0; i < elt_num; i++) { \
+    _c[i] = temp_arr[i + IDX];        \
+  }                                   \
+  a = vld1q_u16(_a);                  \
+  b = vld1q_u16(_b);                  \
+  c = vextq_u16(a, b, IDX);           \
+  CHECK_RESULT(validate_uint16(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]))
+
+  IMM_4_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vextq_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint32_t *_a = (uint32_t *)impl.test_cases_int_pointer1;
+  const uint32_t *_b = (uint32_t *)impl.test_cases_int_pointer2;
+  const size_t elt_num = 4;
+  uint32_t _c[elt_num];
+  uint32x4_t a, b, c;
+
+  uint32_t temp_arr[elt_num * 2];
+  for (int i = 0; i < elt_num; i++) {
+    temp_arr[i] = _a[i];
+    temp_arr[i + elt_num] = _b[i];
+  }
+
+#define TEST_IMPL(IDX)                \
+  for (int i = 0; i < elt_num; i++) { \
+    _c[i] = temp_arr[i + IDX];        \
+  }                                   \
+  a = vld1q_u32(_a);                  \
+  b = vld1q_u32(_b);                  \
+  c = vextq_u32(a, b, IDX);           \
+  CHECK_RESULT(validate_uint32(c, _c[0], _c[1], _c[2], _c[3]))
+
+  IMM_2_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vextq_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint64_t *_a = (uint64_t *)impl.test_cases_int_pointer1;
+  const uint64_t *_b = (uint64_t *)impl.test_cases_int_pointer2;
+  const size_t elt_num = 2;
+  uint64_t _c[elt_num];
+  uint64x2_t a, b, c;
+
+  uint64_t temp_arr[elt_num * 2];
+  for (int i = 0; i < elt_num; i++) {
+    temp_arr[i] = _a[i];
+    temp_arr[i + elt_num] = _b[i];
+  }
+
+#define TEST_IMPL(IDX)                \
+  for (int i = 0; i < elt_num; i++) { \
+    _c[i] = temp_arr[i + IDX];        \
+  }                                   \
+  a = vld1q_u64(_a);                  \
+  b = vld1q_u64(_b);                  \
+  c = vextq_u64(a, b, IDX);           \
+  CHECK_RESULT(validate_uint64(c, _c[0], _c[1]))
+
+  IMM_1_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vrev64_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
