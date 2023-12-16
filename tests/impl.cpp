@@ -20912,13 +20912,71 @@ result_t test_vrev32q_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #endif  // ENABLE_TEST_ALL
 }
 
-result_t test_vrev16_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vrev16_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
+  int8_t _c[8];
+  for (int i = 0; i < 4; i++) {
+    _c[2 * i] = _a[2 * i + 1];
+    _c[2 * i + 1] = _a[2 * i];
+  }
+  int8x8_t a = vld1_s8(_a);
+  int8x8_t c = vrev16_s8(a);
+  return validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
-result_t test_vrev16_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vrev16_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint8_t *_a = (uint8_t *)impl.test_cases_int_pointer1;
+  uint8_t _c[8];
+  for (int i = 0; i < 4; i++) {
+    _c[2 * i] = _a[2 * i + 1];
+    _c[2 * i + 1] = _a[2 * i];
+  }
+  uint8x8_t a = vld1_u8(_a);
+  uint8x8_t c = vrev16_u8(a);
+  return validate_uint8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
-result_t test_vrev16q_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vrev16q_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
+  int8_t _c[16];
+  for (int i = 0; i < 8; i++) {
+    _c[2 * i] = _a[2 * i + 1];
+    _c[2 * i + 1] = _a[2 * i];
+  }
+  int8x16_t a = vld1q_s8(_a);
+  int8x16_t c = vrev16q_s8(a);
+  return validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7], _c[8], _c[9], _c[10], _c[11], _c[12],
+                       _c[13], _c[14], _c[15]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
-result_t test_vrev16q_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vrev16q_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint8_t *_a = (uint8_t *)impl.test_cases_int_pointer1;
+  uint8_t _c[16];
+  for (int i = 0; i < 8; i++) {
+    _c[2 * i] = _a[2 * i + 1];
+    _c[2 * i + 1] = _a[2 * i];
+  }
+  uint8x16_t a = vld1q_u8(_a);
+  uint8x16_t c = vrev16q_u8(a);
+  return validate_uint8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7], _c[8], _c[9], _c[10], _c[11], _c[12],
+                        _c[13], _c[14], _c[15]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vbsl_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
