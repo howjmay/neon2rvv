@@ -5983,21 +5983,149 @@ result_t test_vqabsq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #endif  // ENABLE_TEST_ALL
 }
 
-result_t test_vcage_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vcage_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const float *_a = (const float *)impl.test_cases_float_pointer1;
+  const float *_b = (const float *)impl.test_cases_float_pointer2;
+  float _c[2];
+  for (int i = 0; i < 2; i++) {
+    _c[i] = fabs(_a[i]) >= fabs(_b[i]) ? UINT32_MAX : 0x0;
+  }
 
-result_t test_vcageq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  float32x2_t a = vld1_f32(_a);
+  float32x2_t b = vld1_f32(_b);
+  uint32x2_t c = vcage_f32(a, b);
+  return validate_uint32(c, _c[0], _c[1]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
-result_t test_vcale_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vcageq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const float *_a = (const float *)impl.test_cases_float_pointer1;
+  const float *_b = (const float *)impl.test_cases_float_pointer2;
+  float _c[4];
+  for (int i = 0; i < 4; i++) {
+    _c[i] = fabs(_a[i]) >= fabs(_b[i]) ? UINT32_MAX : 0x0;
+  }
 
-result_t test_vcaleq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  float32x4_t a = vld1q_f32(_a);
+  float32x4_t b = vld1q_f32(_b);
+  uint32x4_t c = vcageq_f32(a, b);
+  return validate_uint32(c, _c[0], _c[1], _c[2], _c[3]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
-result_t test_vcagt_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vcale_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const float *_a = (const float *)impl.test_cases_float_pointer1;
+  const float *_b = (const float *)impl.test_cases_float_pointer2;
+  float _c[2];
+  for (int i = 0; i < 2; i++) {
+    _c[i] = fabs(_a[i]) <= fabs(_b[i]) ? UINT32_MAX : 0x0;
+  }
 
-result_t test_vcagtq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  float32x2_t a = vld1_f32(_a);
+  float32x2_t b = vld1_f32(_b);
+  uint32x2_t c = vcale_f32(a, b);
+  return validate_uint32(c, _c[0], _c[1]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
-result_t test_vcalt_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vcaleq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const float *_a = (const float *)impl.test_cases_float_pointer1;
+  const float *_b = (const float *)impl.test_cases_float_pointer2;
+  float _c[4];
+  for (int i = 0; i < 4; i++) {
+    _c[i] = fabs(_a[i]) <= fabs(_b[i]) ? UINT32_MAX : 0x0;
+  }
 
-result_t test_vcaltq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  float32x4_t a = vld1q_f32(_a);
+  float32x4_t b = vld1q_f32(_b);
+  uint32x4_t c = vcaleq_f32(a, b);
+  return validate_uint32(c, _c[0], _c[1], _c[2], _c[3]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vcagt_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const float *_a = (const float *)impl.test_cases_float_pointer1;
+  const float *_b = (const float *)impl.test_cases_float_pointer2;
+  float _c[2];
+  for (int i = 0; i < 2; i++) {
+    _c[i] = fabs(_a[i]) > fabs(_b[i]) ? UINT32_MAX : 0x0;
+  }
+
+  float32x2_t a = vld1_f32(_a);
+  float32x2_t b = vld1_f32(_b);
+  uint32x2_t c = vcagt_f32(a, b);
+  return validate_uint32(c, _c[0], _c[1]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vcagtq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const float *_a = (const float *)impl.test_cases_float_pointer1;
+  const float *_b = (const float *)impl.test_cases_float_pointer2;
+  float _c[4];
+  for (int i = 0; i < 4; i++) {
+    _c[i] = fabs(_a[i]) > fabs(_b[i]) ? UINT32_MAX : 0x0;
+  }
+
+  float32x4_t a = vld1q_f32(_a);
+  float32x4_t b = vld1q_f32(_b);
+  uint32x4_t c = vcagtq_f32(a, b);
+  return validate_uint32(c, _c[0], _c[1], _c[2], _c[3]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vcalt_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const float *_a = (const float *)impl.test_cases_float_pointer1;
+  const float *_b = (const float *)impl.test_cases_float_pointer2;
+  float _c[2];
+  for (int i = 0; i < 2; i++) {
+    _c[i] = fabs(_a[i]) < fabs(_b[i]) ? UINT32_MAX : 0x0;
+  }
+
+  float32x2_t a = vld1_f32(_a);
+  float32x2_t b = vld1_f32(_b);
+  uint32x2_t c = vcalt_f32(a, b);
+  return validate_uint32(c, _c[0], _c[1]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vcaltq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const float *_a = (const float *)impl.test_cases_float_pointer1;
+  const float *_b = (const float *)impl.test_cases_float_pointer2;
+  float _c[4];
+  for (int i = 0; i < 4; i++) {
+    _c[i] = fabs(_a[i]) < fabs(_b[i]) ? UINT32_MAX : 0x0;
+  }
+
+  float32x4_t a = vld1q_f32(_a);
+  float32x4_t b = vld1q_f32(_b);
+  uint32x4_t c = vcaltq_f32(a, b);
+  return validate_uint32(c, _c[0], _c[1], _c[2], _c[3]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vtst_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
