@@ -7399,37 +7399,37 @@ FORCE_INLINE uint32x4_t vandq_u32(uint32x4_t __a, uint32x4_t __b) { return __ris
 
 FORCE_INLINE uint64x2_t vandq_u64(uint64x2_t __a, uint64x2_t __b) { return __riscv_vand_vv_u64m1(__a, __b, 2); }
 
-// FORCE_INLINE int8x8_t vorr_s8(int8x8_t __a, int8x8_t __b);
+FORCE_INLINE int8x8_t vorr_s8(int8x8_t __a, int8x8_t __b) { return __riscv_vor_vv_i8m1(__a, __b, 8); }
 
-// FORCE_INLINE int16x4_t vorr_s16(int16x4_t __a, int16x4_t __b);
+FORCE_INLINE int16x4_t vorr_s16(int16x4_t __a, int16x4_t __b) { return __riscv_vor_vv_i16m1(__a, __b, 4); }
 
-// FORCE_INLINE int32x2_t vorr_s32(int32x2_t __a, int32x2_t __b);
+FORCE_INLINE int32x2_t vorr_s32(int32x2_t __a, int32x2_t __b) { return __riscv_vor_vv_i32m1(__a, __b, 2); }
 
-// FORCE_INLINE uint8x8_t vorr_u8(uint8x8_t __a, uint8x8_t __b);
+FORCE_INLINE uint8x8_t vorr_u8(uint8x8_t __a, uint8x8_t __b) { return __riscv_vor_vv_u8m1(__a, __b, 8); }
 
-// FORCE_INLINE uint16x4_t vorr_u16(uint16x4_t __a, uint16x4_t __b);
+FORCE_INLINE uint16x4_t vorr_u16(uint16x4_t __a, uint16x4_t __b) { return __riscv_vor_vv_u16m1(__a, __b, 4); }
 
-// FORCE_INLINE uint32x2_t vorr_u32(uint32x2_t __a, uint32x2_t __b);
+FORCE_INLINE uint32x2_t vorr_u32(uint32x2_t __a, uint32x2_t __b) { return __riscv_vor_vv_u32m1(__a, __b, 2); }
 
-// FORCE_INLINE int64x1_t vorr_s64(int64x1_t __a, int64x1_t __b);
+FORCE_INLINE int64x1_t vorr_s64(int64x1_t __a, int64x1_t __b) { return __riscv_vor_vv_i64m1(__a, __b, 1); }
 
-// FORCE_INLINE uint64x1_t vorr_u64(uint64x1_t __a, uint64x1_t __b);
+FORCE_INLINE uint64x1_t vorr_u64(uint64x1_t __a, uint64x1_t __b) { return __riscv_vor_vv_u64m1(__a, __b, 1); }
 
-// FORCE_INLINE int8x16_t vorrq_s8(int8x16_t __a, int8x16_t __b);
+FORCE_INLINE int8x16_t vorrq_s8(int8x16_t __a, int8x16_t __b) { return __riscv_vor_vv_i8m1(__a, __b, 16); }
 
-// FORCE_INLINE int16x8_t vorrq_s16(int16x8_t __a, int16x8_t __b);
+FORCE_INLINE int16x8_t vorrq_s16(int16x8_t __a, int16x8_t __b) { return __riscv_vor_vv_i16m1(__a, __b, 8); }
 
-// FORCE_INLINE int32x4_t vorrq_s32(int32x4_t __a, int32x4_t __b);
+FORCE_INLINE int32x4_t vorrq_s32(int32x4_t __a, int32x4_t __b) { return __riscv_vor_vv_i32m1(__a, __b, 4); }
 
-// FORCE_INLINE int64x2_t vorrq_s64(int64x2_t __a, int64x2_t __b);
+FORCE_INLINE int64x2_t vorrq_s64(int64x2_t __a, int64x2_t __b) { return __riscv_vor_vv_i64m1(__a, __b, 2); }
 
-// FORCE_INLINE uint8x16_t vorrq_u8(uint8x16_t __a, uint8x16_t __b);
+FORCE_INLINE uint8x16_t vorrq_u8(uint8x16_t __a, uint8x16_t __b) { return __riscv_vor_vv_u8m1(__a, __b, 16); }
 
-// FORCE_INLINE uint16x8_t vorrq_u16(uint16x8_t __a, uint16x8_t __b);
+FORCE_INLINE uint16x8_t vorrq_u16(uint16x8_t __a, uint16x8_t __b) { return __riscv_vor_vv_u16m1(__a, __b, 8); }
 
-// FORCE_INLINE uint32x4_t vorrq_u32(uint32x4_t __a, uint32x4_t __b);
+FORCE_INLINE uint32x4_t vorrq_u32(uint32x4_t __a, uint32x4_t __b) { return __riscv_vor_vv_u32m1(__a, __b, 4); }
 
-// FORCE_INLINE uint64x2_t vorrq_u64(uint64x2_t __a, uint64x2_t __b);
+FORCE_INLINE uint64x2_t vorrq_u64(uint64x2_t __a, uint64x2_t __b) { return __riscv_vor_vv_u64m1(__a, __b, 2); }
 
 // FORCE_INLINE int8x8_t veor_s8(int8x8_t __a, int8x8_t __b);
 
