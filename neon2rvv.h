@@ -55,7 +55,7 @@ extern "C" {
 
 typedef float float32_t;
 
-#if __riscv_v_min_vlen == 128
+#if __riscv_v_min_vlen == 128 || __riscv_v_min_vlen == 256 || __riscv_v_min_vlen == 512
 // 64bit width vector register
 typedef vint8m1_t int8x8_t;
 typedef vint16m1_t int16x4_t;
@@ -140,10 +140,8 @@ typedef vfloat64m1x4_t float64x1x4_t;
 typedef vfloat64m1x2_t float64x2x2_t;
 typedef vfloat64m1x3_t float64x2x3_t;
 typedef vfloat64m1x4_t float64x2x4_t;
-#elif __riscv_v_min_vlen == 256
-#elif __riscv_v_min_vlen == 512
 #else
-// typedef for other VLEN
+#error unsupported vlen
 #endif
 
 #define NEON2RVV_ROUND_TYPE_RNU 0  // round-to-nearest-up (add +0.5 LSB)
