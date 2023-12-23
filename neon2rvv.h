@@ -767,13 +767,17 @@ FORCE_INLINE float32x2_t vfma_f32(float32x2_t __a, float32x2_t __b, float32x2_t 
   return __riscv_vfmacc_vv_f32m1(__a, __b, __c, 2);
 }
 
-// FORCE_INLINE float32x4_t vfmaq_f32(float32x4_t __a, float32x4_t __b, float32x4_t __c);
+FORCE_INLINE float32x4_t vfmaq_f32(float32x4_t __a, float32x4_t __b, float32x4_t __c) {
+  return __riscv_vfmacc_vv_f32m1(__a, __b, __c, 4);
+}
 
 FORCE_INLINE float32x2_t vfms_f32(float32x2_t __a, float32x2_t __b, float32x2_t __c) {
   return __riscv_vfnmsac_vv_f32m1(__a, __b, __c, 2);
 }
 
-// FORCE_INLINE float32x4_t vfmsq_f32(float32x4_t __a, float32x4_t __b, float32x4_t __c);
+FORCE_INLINE float32x4_t vfmsq_f32(float32x4_t __a, float32x4_t __b, float32x4_t __c) {
+  return __riscv_vfnmsac_vv_f32m1(__a, __b, __c, 4);
+}
 
 // FORCE_INLINE float32x2_t vrndn_f32(float32x2_t __a);
 
