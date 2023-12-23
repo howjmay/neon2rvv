@@ -2248,13 +2248,17 @@ FORCE_INLINE float32x2_t vrecps_f32(float32x2_t __a, float32x2_t __b) {
   return __riscv_vfnmsac_vv_f32m1(vdup_n_f32(2.0), __a, __b, 2);
 }
 
-// FORCE_INLINE float32x4_t vrecpsq_f32(float32x4_t __a, float32x4_t __b);
+FORCE_INLINE float32x4_t vrecpsq_f32(float32x4_t __a, float32x4_t __b) {
+  return __riscv_vfnmsac_vv_f32m1(vdupq_n_f32(2.0), __a, __b, 4);
+}
 
 FORCE_INLINE float32x2_t vrsqrts_f32(float32x2_t __a, float32x2_t __b) {
   return __riscv_vfdiv_vf_f32m1(__riscv_vfnmsac_vv_f32m1(vdup_n_f32(3.0), __a, __b, 2), 2.0, 2);
 }
 
-// FORCE_INLINE float32x4_t vrsqrtsq_f32(float32x4_t __a, float32x4_t __b);
+FORCE_INLINE float32x4_t vrsqrtsq_f32(float32x4_t __a, float32x4_t __b) {
+  return __riscv_vfdiv_vf_f32m1(__riscv_vfnmsac_vv_f32m1(vdupq_n_f32(3.0), __a, __b, 4), 2.0, 4);
+}
 
 FORCE_INLINE int8x8_t vshl_s8(int8x8_t __a, int8x8_t __b) {
   // implementation only works within defined range 'b' in [0, 7]
