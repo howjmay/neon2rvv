@@ -41,6 +41,7 @@ extern "C" {
 // #elif (defined(__riscv) || defined(__riscv__))
 #include <riscv_vector.h>
 
+#include <math.h>
 #include <stdint.h>
 #include <stdlib.h>
 
@@ -143,10 +144,17 @@ typedef vfloat64m1x4_t float64x2x4_t;
 #error unsupported vlen
 #endif
 
+// XRM
 // #define __RISCV_VXRM_RNU 0  // round-to-nearest-up (add +0.5 LSB)
 // #define __RISCV_VXRM_RNE 1  // round-to-nearest-even
 // #define __RISCV_VXRM_RDN 2  // round-down (truncate)
 // #define __RISCV_VXRM_ROD 3  // round-to-odd (OR bits into LSB, aka "jam")
+// FRM
+// #define __RISCV_FRM_RNE 0  // round to nearest, ties to even
+// #define __RISCV_FRM_RTZ 1  // round towards zero
+// #define __RISCV_FRM_RDN 2  // round down (towards -infinity)
+// #define __RISCV_FRM_RUP 3  // round up (towards +infinity)
+// #define __RISCV_FRM_RMM 4  // round to nearest, ties to max magnitude
 
 // forward declaration
 // FIXME vdup_n_* will be removed if the __riscv_vmv_* errors are fixed
@@ -779,29 +787,129 @@ FORCE_INLINE float32x4_t vfmsq_f32(float32x4_t __a, float32x4_t __b, float32x4_t
   return __riscv_vfnmsac_vv_f32m1(__a, __b, __c, 4);
 }
 
-// FORCE_INLINE float32x2_t vrndn_f32(float32x2_t __a);
+FORCE_INLINE float32x2_t vrndn_f32(float32x2_t __a) {
+  // FIXME riscv round doesn't work
+  float arr[2];
+  const int len = 2;
+  __riscv_vse32_v_f32m1(arr, __a, len);
+  for (int i = 0; i < len; i++) {
+    const float trunc_diff = fabs(arr[i] - trunc(arr[i]));
+    if (trunc_diff == 0.5) {
+      arr[i] = round(arr[i] / 2) * 2;
+    } else {
+      arr[i] = round(arr[i]);
+    }
+  }
+  return __riscv_vle32_v_f32m1(arr, len);
+}
 
-// FORCE_INLINE float32x4_t vrndnq_f32(float32x4_t __a);
+FORCE_INLINE float32x4_t vrndnq_f32(float32x4_t __a) {
+  // FIXME riscv round doesn't work
+  float arr[4];
+  const int len = 4;
+  __riscv_vse32_v_f32m1(arr, __a, len);
+  for (int i = 0; i < len; i++) {
+    const float trunc_diff = fabs(arr[i] - trunc(arr[i]));
+    if (trunc_diff == 0.5) {
+      arr[i] = round(arr[i] / 2) * 2;
+    } else {
+      arr[i] = round(arr[i]);
+    }
+  }
+  return __riscv_vle32_v_f32m1(arr, len);
+}
 
-// FORCE_INLINE float32x2_t vrnda_f32(float32x2_t __a);
+FORCE_INLINE float32x2_t vrnda_f32(float32x2_t __a) {
+  // FIXME riscv round doesn't work
+  float arr[2];
+  const int len = 2;
+  __riscv_vse32_v_f32m1(arr, __a, len);
+  for (int i = 0; i < len; i++) {
+    arr[i] = round(arr[i]);
+  }
+  return __riscv_vle32_v_f32m1(arr, len);
+}
 
-// FORCE_INLINE float32x4_t vrndaq_f32(float32x4_t __a);
+FORCE_INLINE float32x4_t vrndaq_f32(float32x4_t __a) {
+  // FIXME riscv round doesn't work
+  float arr[4];
+  const int len = 4;
+  __riscv_vse32_v_f32m1(arr, __a, len);
+  for (int i = 0; i < len; i++) {
+    arr[i] = round(arr[i]);
+  }
+  return __riscv_vle32_v_f32m1(arr, len);
+}
 
-// FORCE_INLINE float32x2_t vrndp_f32(float32x2_t __a);
+FORCE_INLINE float32x2_t vrndp_f32(float32x2_t __a) {
+  // FIXME riscv round doesn't work
+  float arr[2];
+  const int len = 2;
+  __riscv_vse32_v_f32m1(arr, __a, len);
+  for (int i = 0; i < len; i++) {
+    arr[i] = ceil(arr[i]);
+  }
+  return __riscv_vle32_v_f32m1(arr, len);
+}
 
-// FORCE_INLINE float32x4_t vrndpq_f32(float32x4_t __a);
+FORCE_INLINE float32x4_t vrndpq_f32(float32x4_t __a) {
+  // FIXME riscv round doesn't work
+  float arr[4];
+  const int len = 4;
+  __riscv_vse32_v_f32m1(arr, __a, len);
+  for (int i = 0; i < len; i++) {
+    arr[i] = ceil(arr[i]);
+  }
+  return __riscv_vle32_v_f32m1(arr, len);
+}
 
-// FORCE_INLINE float32x2_t vrndm_f32(float32x2_t __a);
+FORCE_INLINE float32x2_t vrndm_f32(float32x2_t __a) {
+  // FIXME riscv round doesn't work
+  float arr[2];
+  const int len = 2;
+  __riscv_vse32_v_f32m1(arr, __a, len);
+  for (int i = 0; i < len; i++) {
+    arr[i] = floor(arr[i]);
+  }
+  return __riscv_vle32_v_f32m1(arr, len);
+}
 
-// FORCE_INLINE float32x4_t vrndmq_f32(float32x4_t __a);
+FORCE_INLINE float32x4_t vrndmq_f32(float32x4_t __a) {
+  // FIXME riscv round doesn't work
+  float arr[4];
+  const int len = 4;
+  __riscv_vse32_v_f32m1(arr, __a, len);
+  for (int i = 0; i < len; i++) {
+    arr[i] = floor(arr[i]);
+  }
+  return __riscv_vle32_v_f32m1(arr, len);
+}
 
 // FORCE_INLINE float32x2_t vrndx_f32(float32x2_t __a);
 
 // FORCE_INLINE float32x4_t vrndxq_f32(float32x4_t __a);
 
-// FORCE_INLINE float32x2_t vrnd_f32(float32x2_t __a);
+FORCE_INLINE float32x2_t vrnd_f32(float32x2_t __a) {
+  // FIXME riscv round doesn't work
+  float arr[2];
+  const int len = 2;
+  __riscv_vse32_v_f32m1(arr, __a, len);
+  for (int i = 0; i < len; i++) {
+    arr[i] = trunc(arr[i]);
+  }
+  return __riscv_vle32_v_f32m1(arr, len);
+}
 
-// FORCE_INLINE float32x4_t vrndq_f32(float32x4_t __a);
+FORCE_INLINE float32x4_t vrndq_f32(float32x4_t __a) {
+  // FIXME riscv round doesn't work
+  float arr[4];
+  const int len = 4;
+  __riscv_vse32_v_f32m1(arr, __a, len);
+  for (int i = 0; i < len; i++) {
+    arr[i] = trunc(arr[i]);
+  }
+  return __riscv_vle32_v_f32m1(arr, len);
+}
 
 FORCE_INLINE int8x8_t vsub_s8(int8x8_t __a, int8x8_t __b) { return __riscv_vsub_vv_i8m1(__a, __b, 8); }
 

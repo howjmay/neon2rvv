@@ -786,4 +786,63 @@ float ranf(float low, float high) {
   return rand_float * (high - low) + low;
 }
 
+// rounding mode
+float bankers_rounding(float val) {
+  if (val < 0)
+    return -bankers_rounding(-val);
+  float ret;
+  float round_down = floorf(val);  // Round down value
+  float round_up = ceilf(val);     // Round up value
+  float diff_down = val - round_down;
+  float diff_up = round_up - val;
+  if (diff_down < diff_up) {
+    /* If it's closer to the round down value, then use it */
+    ret = round_down;
+  } else if (diff_down > diff_up) {
+    /* If it's closer to the round up value, then use it */
+    ret = round_up;
+  } else {
+    /* If it's equidistant between round up and round down value, pick the
+     * one which is an even number */
+    float half = round_down / 2;
+    if (half != floorf(half)) {
+      /* If the round down value is odd, return the round up value */
+      ret = round_up;
+    } else {
+      /* If the round up value is odd, return the round down value */
+      ret = round_down;
+    }
+  }
+  return ret;
+}
+
+double bankers_rounding(double val) {
+  if (val < 0)
+    return -bankers_rounding(-val);
+  double ret;
+  double round_down = floor(val);  // Round down value
+  double round_up = ceil(val);     // Round up value
+  double diff_down = val - round_down;
+  double diff_up = round_up - val;
+  if (diff_down < diff_up) {
+    /* If it's closer to the round down value, then use it */
+    ret = round_down;
+  } else if (diff_down > diff_up) {
+    /* If it's closer to the round up value, then use it */
+    ret = round_up;
+  } else {
+    /* If it's equidistant between round up and round down value, pick the
+     * one which is an even number */
+    double half = round_down / 2;
+    if (half != floor(half)) {
+      /* If the round down value is odd, return the round up value */
+      ret = round_up;
+    } else {
+      /* If the round up value is odd, return the round down value */
+      ret = round_down;
+    }
+  }
+  return ret;
+}
+
 }  // namespace NEON2RVV
