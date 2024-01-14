@@ -1156,10 +1156,9 @@ FORCE_INLINE uint32x2_t vsubhn_u64(uint64x2_t __a, uint64x2_t __b) {
 }
 
 FORCE_INLINE int8x8_t vrsubhn_s16(int16x8_t __a, int16x8_t __b) {
-  // FIXME use vnclip
-  vint16m1_t ab_sub = __riscv_vsub_vv_i16m1(__a, __b, 8);
-  vint16m1_t sub_round = __riscv_vadd_vx_i16m1(ab_sub, 1 << 7, 8);
-  return __riscv_vnsra_wx_i8m1(__riscv_vlmul_ext_v_i16m1_i16m2(sub_round), 8, 16);
+  vint16m1_t add_ab = __riscv_vsub_vv_i16m1(__a, __b, 8);
+  vint16m1_t add_round = __riscv_vadd_vx_i16m1(add_ab, 1 << 7, 8);
+  return __riscv_vnsra_wx_i8m1(__riscv_vlmul_ext_v_i16m1_i16m2(add_round), 8, 8);
 }
 
 FORCE_INLINE int16x4_t vrsubhn_s32(int32x4_t __a, int32x4_t __b) {
@@ -1170,26 +1169,28 @@ FORCE_INLINE int16x4_t vrsubhn_s32(int32x4_t __a, int32x4_t __b) {
 
 FORCE_INLINE int32x2_t vrsubhn_s64(int64x2_t __a, int64x2_t __b) {
   vint64m1_t ab_sub = __riscv_vsub_vv_i64m1(__a, __b, 2);
-  vint64m1_t ab_sra1 = __riscv_vsra_vx_i64m1(ab_sub, 31, 2);
-  vint64m1_t ab_sra_round = __riscv_vadd_vx_i64m1(ab_sra1, 1, 2);
-  return __riscv_vnsra_wx_i32m1(__riscv_vlmul_ext_v_i64m1_i64m2(ab_sra_round), 1, 2);
+  vint64m1_t sub_round = __riscv_vadd_vx_i64m1(ab_sub, (int64_t)1 << 31, 2);
+  return __riscv_vnsra_wx_i32m1(__riscv_vlmul_ext_v_i64m1_i64m2(sub_round), 32, 2);
 }
 
 FORCE_INLINE uint8x8_t vrsubhn_u16(uint16x8_t __a, uint16x8_t __b) {
-  vbool8_t mask = __riscv_vreinterpret_v_u8m1_b8(vdup_n_u8(0xaa));
-  uint16x8_t ab_sub = __riscv_vsub_vv_u16m1(__a, __b, 8);
-  uint16x8_t sub_round = __riscv_vadd_vx_u16m1(ab_sub, 1 << 7, 8);
-  return __riscv_vcompress_vm_u8m1(__riscv_vreinterpret_v_u16m1_u8m1(sub_round), mask, 16);
+  // FIXME use vnclipu
+  vuint16m1_t add_ab = __riscv_vsub_vv_u16m1(__a, __b, 8);
+  vuint16m1_t add_round = __riscv_vadd_vx_u16m1(add_ab, 1 << 7, 8);
+  return __riscv_vnsrl_wx_u8m1(__riscv_vlmul_ext_v_u16m1_u16m2(add_round), 8, 8);
 }
 
 FORCE_INLINE uint16x4_t vrsubhn_u32(uint32x4_t __a, uint32x4_t __b) {
-  vbool16_t mask = __riscv_vreinterpret_v_u16m1_b16(vdup_n_u16(0xaa));
-  uint32x4_t ab_sub = __riscv_vsub_vv_u32m1(__a, __b, 8);
-  uint32x4_t sub_round = __riscv_vadd_vx_u32m1(ab_sub, 1 << 15, 8);
-  return __riscv_vcompress_vm_u16m1(__riscv_vreinterpret_v_u32m1_u16m1(sub_round), mask, 8);
+  vuint32m1_t add_ab = __riscv_vsub_vv_u32m1(__a, __b, 4);
+  vuint32m1_t add_round = __riscv_vadd_vx_u32m1(add_ab, 1 << 15, 4);
+  return __riscv_vnsrl_wx_u16m1(__riscv_vlmul_ext_v_u32m1_u32m2(add_round), 16, 4);
 }
 
-// FORCE_INLINE uint32x2_t vrsubhn_u64(uint64x2_t __a, uint64x2_t __b);
+FORCE_INLINE uint32x2_t vrsubhn_u64(uint64x2_t __a, uint64x2_t __b) {
+  vuint64m1_t add_ab = __riscv_vsub_vv_u64m1(__a, __b, 2);
+  vuint64m1_t add_round = __riscv_vadd_vx_u64m1(add_ab, (int64_t)1 << 31, 2);
+  return __riscv_vnsrl_wx_u32m1(__riscv_vlmul_ext_v_u64m1_u64m2(add_round), 32, 2);
+}
 
 FORCE_INLINE uint8x8_t vceq_s8(int8x8_t __a, int8x8_t __b) {
   vbool8_t cmp_res = __riscv_vmseq_vv_i8m1_b8(__a, __b, 8);
