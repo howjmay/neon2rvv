@@ -15755,7 +15755,21 @@ result_t test_vrecpe_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 
 result_t test_vrecpe_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vrecpeq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vrecpeq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const float *_a = impl.test_cases_float_pointer1;
+  float _c[4];
+  for (int i = 0; i < 4; i++) {
+    _c[i] = 1.0f / _a[i];
+  }
+
+  float32x4_t a = vld1q_f32(_a);
+  float32x4_t c = vrecpeq_f32(a);
+  return validate_float_error(c, _c[0], _c[1], _c[2], _c[3], 0.01f);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vrecpeq_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
@@ -15776,7 +15790,21 @@ result_t test_vrsqrte_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 
 result_t test_vrsqrte_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vrsqrteq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vrsqrteq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const float *_a = impl.test_cases_float_pointer1;
+  float _c[4];
+  for (int i = 0; i < 4; i++) {
+    _c[i] = 1 / sqrtf(_a[i]);
+  }
+
+  float32x4_t a = vld1q_f32(_a);
+  float32x4_t c = vrsqrteq_f32(a);
+  return validate_float_error(c, _c[0], _c[1], _c[2], _c[3], 0.01f);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vrsqrteq_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
