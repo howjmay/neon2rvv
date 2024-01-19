@@ -4266,7 +4266,7 @@ FORCE_INLINE float32x2_t vrecpe_f32(float32x2_t __a) { return __riscv_vfrec7_v_f
 
 // FORCE_INLINE uint32x2_t vrecpe_u32(uint32x2_t __a);
 
-// FORCE_INLINE float32x4_t vrecpeq_f32(float32x4_t __a);
+FORCE_INLINE float32x4_t vrecpeq_f32(float32x4_t __a) { return __riscv_vfrec7_v_f32m1(__a, 4); }
 
 // FORCE_INLINE uint32x4_t vrecpeq_u32(uint32x4_t __a);
 
@@ -4274,7 +4274,7 @@ FORCE_INLINE float32x2_t vrsqrte_f32(float32x2_t __a) { return __riscv_vfrsqrt7_
 
 // FORCE_INLINE uint32x2_t vrsqrte_u32(uint32x2_t __a);
 
-// FORCE_INLINE float32x4_t vrsqrteq_f32(float32x4_t __a);
+FORCE_INLINE float32x4_t vrsqrteq_f32(float32x4_t __a) { return __riscv_vfrsqrt7_v_f32m1(__a, 4); }
 
 // FORCE_INLINE uint32x4_t vrsqrteq_u32(uint32x4_t __a);
 
