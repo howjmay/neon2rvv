@@ -3846,7 +3846,7 @@ FORCE_INLINE uint64x2_t vrsraq_n_u64(uint64x2_t __a, uint64x2_t __b, const int _
 }
 
 FORCE_INLINE int8x8_t vsri_n_s8(int8x8_t __a, int8x8_t __b, const int __c) {
-  uint8_t mask = UINT8_MAX >> __c;
+  uint8_t mask = (__c == 8) ? 0 : UINT8_MAX >> __c;
   vint8m1_t high = __riscv_vand_vx_i8m1(__a, ~mask, 8);
   vint8m1_t low_unmasked = __riscv_vsra_vx_i8m1(__b, __c, 8);
   vint8m1_t low = __riscv_vand_vx_i8m1(low_unmasked, mask, 8);
@@ -3854,7 +3854,7 @@ FORCE_INLINE int8x8_t vsri_n_s8(int8x8_t __a, int8x8_t __b, const int __c) {
 }
 
 FORCE_INLINE int16x4_t vsri_n_s16(int16x4_t __a, int16x4_t __b, const int __c) {
-  uint16_t mask = UINT16_MAX >> __c;
+  uint16_t mask = (__c == 16) ? 0 : UINT16_MAX >> __c;
   vint16m1_t high = __riscv_vand_vx_i16m1(__a, ~mask, 4);
   vint16m1_t low_unmasked = __riscv_vsra_vx_i16m1(__b, __c, 4);
   vint16m1_t low = __riscv_vand_vx_i16m1(low_unmasked, mask, 4);
@@ -3862,7 +3862,7 @@ FORCE_INLINE int16x4_t vsri_n_s16(int16x4_t __a, int16x4_t __b, const int __c) {
 }
 
 FORCE_INLINE int32x2_t vsri_n_s32(int32x2_t __a, int32x2_t __b, const int __c) {
-  uint32_t mask = UINT32_MAX >> __c;
+  uint32_t mask = (__c == 32) ? 0 : UINT32_MAX >> __c;
   vint32m1_t high = __riscv_vand_vx_i32m1(__a, ~mask, 2);
   vint32m1_t low_unmasked = __riscv_vsra_vx_i32m1(__b, __c, 2);
   vint32m1_t low = __riscv_vand_vx_i32m1(low_unmasked, mask, 2);
@@ -3870,7 +3870,7 @@ FORCE_INLINE int32x2_t vsri_n_s32(int32x2_t __a, int32x2_t __b, const int __c) {
 }
 
 FORCE_INLINE int64x1_t vsri_n_s64(int64x1_t __a, int64x1_t __b, const int __c) {
-  uint64_t mask = UINT64_MAX >> __c;
+  uint64_t mask = (__c == 64) ? 0 : UINT64_MAX >> __c;
   vint64m1_t high = __riscv_vand_vx_i64m1(__a, ~mask, 1);
   vint64m1_t low_unmasked = __riscv_vsra_vx_i64m1(__b, __c, 1);
   vint64m1_t low = __riscv_vand_vx_i64m1(low_unmasked, mask, 1);
@@ -3878,7 +3878,7 @@ FORCE_INLINE int64x1_t vsri_n_s64(int64x1_t __a, int64x1_t __b, const int __c) {
 }
 
 FORCE_INLINE uint8x8_t vsri_n_u8(uint8x8_t __a, uint8x8_t __b, const int __c) {
-  uint8_t mask = UINT8_MAX >> __c;
+  uint8_t mask = (__c == 8) ? 0 : UINT8_MAX >> __c;
   vuint8m1_t high = __riscv_vand_vx_u8m1(__a, ~mask, 8);
   vuint8m1_t low_unmasked = __riscv_vsrl_vx_u8m1(__b, __c, 8);
   vuint8m1_t low = __riscv_vand_vx_u8m1(low_unmasked, mask, 8);
@@ -3886,7 +3886,7 @@ FORCE_INLINE uint8x8_t vsri_n_u8(uint8x8_t __a, uint8x8_t __b, const int __c) {
 }
 
 FORCE_INLINE uint16x4_t vsri_n_u16(uint16x4_t __a, uint16x4_t __b, const int __c) {
-  uint16_t mask = UINT16_MAX >> __c;
+  uint16_t mask = (__c == 16) ? 0 : UINT16_MAX >> __c;
   vuint16m1_t high = __riscv_vand_vx_u16m1(__a, ~mask, 4);
   vuint16m1_t low_unmasked = __riscv_vsrl_vx_u16m1(__b, __c, 4);
   vuint16m1_t low = __riscv_vand_vx_u16m1(low_unmasked, mask, 4);
@@ -3894,7 +3894,7 @@ FORCE_INLINE uint16x4_t vsri_n_u16(uint16x4_t __a, uint16x4_t __b, const int __c
 }
 
 FORCE_INLINE uint32x2_t vsri_n_u32(uint32x2_t __a, uint32x2_t __b, const int __c) {
-  uint32_t mask = UINT32_MAX >> __c;
+  uint32_t mask = (__c == 32) ? 0 : UINT32_MAX >> __c;
   vuint32m1_t high = __riscv_vand_vx_u32m1(__a, ~mask, 2);
   vuint32m1_t low_unmasked = __riscv_vsrl_vx_u32m1(__b, __c, 2);
   vuint32m1_t low = __riscv_vand_vx_u32m1(low_unmasked, mask, 2);
@@ -3902,7 +3902,7 @@ FORCE_INLINE uint32x2_t vsri_n_u32(uint32x2_t __a, uint32x2_t __b, const int __c
 }
 
 FORCE_INLINE uint64x1_t vsri_n_u64(uint64x1_t __a, uint64x1_t __b, const int __c) {
-  uint64_t mask = UINT64_MAX >> __c;
+  uint64_t mask = (__c == 64) ? 0 : UINT64_MAX >> __c;
   vuint64m1_t high = __riscv_vand_vx_u64m1(__a, ~mask, 1);
   vuint64m1_t low_unmasked = __riscv_vsrl_vx_u64m1(__b, __c, 1);
   vuint64m1_t low = __riscv_vand_vx_u64m1(low_unmasked, mask, 1);
@@ -3910,7 +3910,7 @@ FORCE_INLINE uint64x1_t vsri_n_u64(uint64x1_t __a, uint64x1_t __b, const int __c
 }
 
 FORCE_INLINE int8x16_t vsriq_n_s8(int8x16_t __a, int8x16_t __b, const int __c) {
-  uint8_t mask = UINT8_MAX >> __c;
+  uint8_t mask = (__c == 8) ? 0 : UINT8_MAX >> __c;
   vint8m1_t high = __riscv_vand_vx_i8m1(__a, ~mask, 16);
   vint8m1_t low_unmasked = __riscv_vsra_vx_i8m1(__b, __c, 16);
   vint8m1_t low = __riscv_vand_vx_i8m1(low_unmasked, mask, 16);
@@ -3918,7 +3918,7 @@ FORCE_INLINE int8x16_t vsriq_n_s8(int8x16_t __a, int8x16_t __b, const int __c) {
 }
 
 FORCE_INLINE int16x8_t vsriq_n_s16(int16x8_t __a, int16x8_t __b, const int __c) {
-  uint16_t mask = UINT16_MAX >> __c;
+  uint16_t mask = (__c == 16) ? 0 : UINT16_MAX >> __c;
   vint16m1_t high = __riscv_vand_vx_i16m1(__a, ~mask, 8);
   vint16m1_t low_unmasked = __riscv_vsra_vx_i16m1(__b, __c, 8);
   vint16m1_t low = __riscv_vand_vx_i16m1(low_unmasked, mask, 8);
@@ -3926,7 +3926,7 @@ FORCE_INLINE int16x8_t vsriq_n_s16(int16x8_t __a, int16x8_t __b, const int __c) 
 }
 
 FORCE_INLINE int32x4_t vsriq_n_s32(int32x4_t __a, int32x4_t __b, const int __c) {
-  uint32_t mask = UINT32_MAX >> __c;
+  uint32_t mask = (__c == 32) ? 0 : UINT32_MAX >> __c;
   vint32m1_t high = __riscv_vand_vx_i32m1(__a, ~mask, 4);
   vint32m1_t low_unmasked = __riscv_vsra_vx_i32m1(__b, __c, 4);
   vint32m1_t low = __riscv_vand_vx_i32m1(low_unmasked, mask, 4);
@@ -3934,7 +3934,7 @@ FORCE_INLINE int32x4_t vsriq_n_s32(int32x4_t __a, int32x4_t __b, const int __c) 
 }
 
 FORCE_INLINE int64x2_t vsriq_n_s64(int64x2_t __a, int64x2_t __b, const int __c) {
-  uint64_t mask = UINT64_MAX >> __c;
+  uint64_t mask = (__c == 64) ? 0 : UINT64_MAX >> __c;
   vint64m1_t high = __riscv_vand_vx_i64m1(__a, ~mask, 2);
   vint64m1_t low_unmasked = __riscv_vsra_vx_i64m1(__b, __c, 2);
   vint64m1_t low = __riscv_vand_vx_i64m1(low_unmasked, mask, 2);
@@ -3942,7 +3942,7 @@ FORCE_INLINE int64x2_t vsriq_n_s64(int64x2_t __a, int64x2_t __b, const int __c) 
 }
 
 FORCE_INLINE uint8x16_t vsriq_n_u8(uint8x16_t __a, uint8x16_t __b, const int __c) {
-  uint8_t mask = UINT8_MAX >> __c;
+  uint8_t mask = (__c == 8) ? 0 : UINT8_MAX >> __c;
   vuint8m1_t high = __riscv_vand_vx_u8m1(__a, ~mask, 16);
   vuint8m1_t low_unmasked = __riscv_vsrl_vx_u8m1(__b, __c, 16);
   vuint8m1_t low = __riscv_vand_vx_u8m1(low_unmasked, mask, 16);
@@ -3950,7 +3950,7 @@ FORCE_INLINE uint8x16_t vsriq_n_u8(uint8x16_t __a, uint8x16_t __b, const int __c
 }
 
 FORCE_INLINE uint16x8_t vsriq_n_u16(uint16x8_t __a, uint16x8_t __b, const int __c) {
-  uint16_t mask = UINT16_MAX >> __c;
+  uint16_t mask = (__c == 16) ? 0 : UINT16_MAX >> __c;
   vuint16m1_t high = __riscv_vand_vx_u16m1(__a, ~mask, 8);
   vuint16m1_t low_unmasked = __riscv_vsrl_vx_u16m1(__b, __c, 8);
   vuint16m1_t low = __riscv_vand_vx_u16m1(low_unmasked, mask, 8);
@@ -3958,7 +3958,7 @@ FORCE_INLINE uint16x8_t vsriq_n_u16(uint16x8_t __a, uint16x8_t __b, const int __
 }
 
 FORCE_INLINE uint32x4_t vsriq_n_u32(uint32x4_t __a, uint32x4_t __b, const int __c) {
-  uint32_t mask = UINT32_MAX >> __c;
+  uint32_t mask = (__c == 32) ? 0 : UINT32_MAX >> __c;
   vuint32m1_t high = __riscv_vand_vx_u32m1(__a, ~mask, 4);
   vuint32m1_t low_unmasked = __riscv_vsrl_vx_u32m1(__b, __c, 4);
   vuint32m1_t low = __riscv_vand_vx_u32m1(low_unmasked, mask, 4);
@@ -3966,7 +3966,7 @@ FORCE_INLINE uint32x4_t vsriq_n_u32(uint32x4_t __a, uint32x4_t __b, const int __
 }
 
 FORCE_INLINE uint64x2_t vsriq_n_u64(uint64x2_t __a, uint64x2_t __b, const int __c) {
-  uint64_t mask = UINT64_MAX >> __c;
+  uint64_t mask = (__c == 64) ? 0 : UINT64_MAX >> __c;
   vuint64m1_t high = __riscv_vand_vx_u64m1(__a, ~mask, 2);
   vuint64m1_t low_unmasked = __riscv_vsrl_vx_u64m1(__b, __c, 2);
   vuint64m1_t low = __riscv_vand_vx_u64m1(low_unmasked, mask, 2);
