@@ -4235,7 +4235,7 @@ FORCE_INLINE int8x8_t vcnt_s8(int8x8_t __a) {
 
 FORCE_INLINE uint8x8_t vcnt_u8(uint8x8_t __a) {
   const uint8_t bit_population_lookup_arr[16] = {0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4};
-  vuint8m1_t lookup = __riscv_vle8_v_u8m1(bit_population_lookup_arr, 8);
+  vuint8m1_t lookup = __riscv_vle8_v_u8m1(bit_population_lookup_arr, 16);
   vuint8m1_t cnt_low = __riscv_vrgather_vv_u8m1(lookup, __riscv_vand_vx_u8m1(__a, 0xf, 8), 8);
   vuint8m1_t a_high = __riscv_vsrl_vx_u8m1(__a, 4, 8);
   vuint8m1_t cnt_high = __riscv_vrgather_vv_u8m1(lookup, a_high, 8);
