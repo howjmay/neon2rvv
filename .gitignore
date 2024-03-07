@@ -15,4 +15,7 @@
 # Log file
 *.log
 
+# python venv
+scripts/neon_scrapper/venv
+
 main
