@@ -22,8 +22,8 @@
   _(vaddq_f32)                                                                   \
   _(vadd_f64)                                                                    \
   _(vaddq_f64)                                                                   \
-  /*_(vaddd_s64)                                                              */ \
-  /*_(vaddd_u64)                                                              */ \
+  _(vaddd_s64)                                                                   \
+  _(vaddd_u64)                                                                   \
   _(vaddq_u8)                                                                    \
   _(vaddq_u16)                                                                   \
   _(vaddq_u32)                                                                   \
