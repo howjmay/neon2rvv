@@ -214,9 +214,9 @@ FORCE_INLINE float64x1_t vadd_f64(float64x1_t a, float64x1_t b) { return __riscv
 
 FORCE_INLINE float64x2_t vaddq_f64(float64x2_t a, float64x2_t b) { return __riscv_vfadd_vv_f64m1(a, b, 2); }
 
-// FORCE_INLINE int64_t vaddd_s64(int64_t a, int64_t b);
+FORCE_INLINE int64_t vaddd_s64(int64_t a, int64_t b) { return a + b; }
 
-// FORCE_INLINE uint64_t vaddd_u64(uint64_t a, uint64_t b);
+FORCE_INLINE uint64_t vaddd_u64(uint64_t a, uint64_t b) { return a + b; }
 
 FORCE_INLINE uint8x16_t vaddq_u8(uint8x16_t a, uint8x16_t b) { return __riscv_vadd_vv_u8m1(a, b, 16); }
 
