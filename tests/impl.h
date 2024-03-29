@@ -20,8 +20,8 @@
   _(vaddq_s32)                                                                   \
   _(vaddq_s64)                                                                   \
   _(vaddq_f32)                                                                   \
-  /*_(vadd_f64)                                                               */ \
-  /*_(vaddq_f64)                                                              */ \
+  _(vadd_f64)                                                                    \
+  _(vaddq_f64)                                                                   \
   /*_(vaddd_s64)                                                              */ \
   /*_(vaddd_u64)                                                              */ \
   _(vaddq_u8)                                                                    \
@@ -2610,8 +2610,8 @@
   _(vld1q_u64)                                                                   \
   /*_(vld1q_p8)                                                          */      \
   /*_(vld1q_p16)                                                         */      \
-  /*_(vld1_f64)                                                               */ \
-  /*_(vld1q_f64)                                                              */ \
+  _(vld1_f64)                                                                    \
+  _(vld1q_f64)                                                                   \
   _(vld1_lane_s8)                                                                \
   _(vld1_lane_s16)                                                               \
   _(vld1_lane_s32)                                                               \

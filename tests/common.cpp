@@ -704,7 +704,7 @@ result_t validate_double(float64x2_t a, double d0, double d1) {
   return TEST_SUCCESS;
 }
 
-result_t validate_double(float64x2_t a, double d0) {
+result_t validate_double(float64x1_t a, double d0) {
   const double *t = (const double *)&a;
   ASSERT_RETURN(validate_float_pair(t[0], d0));
   return TEST_SUCCESS;
