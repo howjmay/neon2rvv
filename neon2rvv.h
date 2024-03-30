@@ -316,17 +316,40 @@ FORCE_INLINE uint64x2_t vaddw_u32(uint64x2_t a, uint32x2_t b) {
   return __riscv_vadd_vv_u64m1(a, b_ext, 2);
 }
 
-// FORCE_INLINE int16x8_t vaddw_high_s8(int16x8_t a, int8x16_t b);
+FORCE_INLINE int16x8_t vaddw_high_s8(int16x8_t a, int8x16_t b) {
+  vint16m1_t b_ext = __riscv_vsext_vf2_i16m1(__riscv_vlmul_trunc_v_i8m1_i8mf2(__riscv_vslidedown_vx_i8m1(b, 8, 16)), 8);
+  return __riscv_vadd_vv_i16m1(a, b_ext, 8);
+}
 
-// FORCE_INLINE int32x4_t vaddw_high_s16(int32x4_t a, int16x8_t b);
+FORCE_INLINE int32x4_t vaddw_high_s16(int32x4_t a, int16x8_t b) {
+  vint32m1_t b_ext =
+      __riscv_vsext_vf2_i32m1(__riscv_vlmul_trunc_v_i16m1_i16mf2(__riscv_vslidedown_vx_i16m1(b, 4, 8)), 4);
+  return __riscv_vadd_vv_i32m1(a, b_ext, 4);
+}
 
-// FORCE_INLINE int64x2_t vaddw_high_s32(int64x2_t a, int32x4_t b);
+FORCE_INLINE int64x2_t vaddw_high_s32(int64x2_t a, int32x4_t b) {
+  vint64m1_t b_ext =
+      __riscv_vsext_vf2_i64m1(__riscv_vlmul_trunc_v_i32m1_i32mf2(__riscv_vslidedown_vx_i32m1(b, 2, 4)), 2);
+  return __riscv_vadd_vv_i64m1(a, b_ext, 2);
+}
 
-// FORCE_INLINE uint16x8_t vaddw_high_u8(uint16x8_t a, uint8x16_t b);
+FORCE_INLINE uint16x8_t vaddw_high_u8(uint16x8_t a, uint8x16_t b) {
+  vuint16m1_t b_ext =
+      __riscv_vzext_vf2_u16m1(__riscv_vlmul_trunc_v_u8m1_u8mf2(__riscv_vslidedown_vx_u8m1(b, 8, 16)), 8);
+  return __riscv_vadd_vv_u16m1(a, b_ext, 8);
+}
 
-// FORCE_INLINE uint32x4_t vaddw_high_u16(uint32x4_t a, uint16x8_t b);
+FORCE_INLINE uint32x4_t vaddw_high_u16(uint32x4_t a, uint16x8_t b) {
+  vuint32m1_t b_ext =
+      __riscv_vzext_vf2_u32m1(__riscv_vlmul_trunc_v_u16m1_u16mf2(__riscv_vslidedown_vx_u16m1(b, 4, 8)), 4);
+  return __riscv_vadd_vv_u32m1(a, b_ext, 4);
+}
 
-// FORCE_INLINE uint64x2_t vaddw_high_u32(uint64x2_t a, uint32x4_t b);
+FORCE_INLINE uint64x2_t vaddw_high_u32(uint64x2_t a, uint32x4_t b) {
+  vuint64m1_t b_ext =
+      __riscv_vzext_vf2_u64m1(__riscv_vlmul_trunc_v_u32m1_u32mf2(__riscv_vslidedown_vx_u32m1(b, 2, 4)), 2);
+  return __riscv_vadd_vv_u64m1(a, b_ext, 2);
+}
 
 FORCE_INLINE int8x8_t vhadd_s8(int8x8_t a, int8x8_t b) { return __riscv_vaadd_vv_i8m1(a, b, __RISCV_VXRM_RDN, 8); }
 
