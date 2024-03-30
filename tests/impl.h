@@ -888,20 +888,20 @@
   /*_(vpmaxnmqd_f64)                                                          */ \
   /*_(vpminnms_f32)                                                           */ \
   /*_(vpminnmqd_f64)                                                          */ \
-  /*_(vaddv_s8)                                                               */ \
-  /*_(vaddvq_s8)                                                              */ \
-  /*_(vaddv_s16)                                                              */ \
-  /*_(vaddvq_s16)                                                             */ \
-  /*_(vaddv_s32)                                                              */ \
-  /*_(vaddvq_s32)                                                             */ \
-  /*_(vaddvq_s64)                                                             */ \
-  /*_(vaddv_u8)                                                               */ \
-  /*_(vaddvq_u8)                                                              */ \
-  /*_(vaddv_u16)                                                              */ \
-  /*_(vaddvq_u16)                                                             */ \
-  /*_(vaddv_u32)                                                              */ \
-  /*_(vaddvq_u32)                                                             */ \
-  /*_(vaddvq_u64)                                                             */ \
+  _(vaddv_s8)                                                                    \
+  _(vaddvq_s8)                                                                   \
+  _(vaddv_s16)                                                                   \
+  _(vaddvq_s16)                                                                  \
+  _(vaddv_s32)                                                                   \
+  _(vaddvq_s32)                                                                  \
+  _(vaddvq_s64)                                                                  \
+  _(vaddv_u8)                                                                    \
+  _(vaddvq_u8)                                                                   \
+  _(vaddv_u16)                                                                   \
+  _(vaddvq_u16)                                                                  \
+  _(vaddv_u32)                                                                   \
+  _(vaddvq_u32)                                                                  \
+  _(vaddvq_u64)                                                                  \
   /*_(vaddv_f32)                                                              */ \
   /*_(vaddvq_f32)                                                             */ \
   /*_(vaddvq_f64)                                                             */ \
