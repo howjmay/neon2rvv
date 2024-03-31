@@ -3793,10 +3793,10 @@
   /*_(vceqq_p64)                                                         */      \
   _(vceq_f64)                                                                    \
   _(vceqq_f64)                                                                   \
-  /*_(vceqd_s64)                                                              */ \
-  /*_(vceqd_u64)                                                              */ \
-  /*_(vceqs_f32)                                                              */ \
-  /*_(vceqd_f64)                                                              */ \
+  _(vceqd_s64)                                                                   \
+  _(vceqd_u64)                                                                   \
+  _(vceqs_f32)                                                                   \
+  _(vceqd_f64)                                                                   \
   /*_(vceqz_s8)                                                               */ \
   /*_(vceqzq_s8)                                                              */ \
   /*_(vceqz_s16)                                                              */ \

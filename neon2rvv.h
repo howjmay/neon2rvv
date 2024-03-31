@@ -1833,13 +1833,13 @@ FORCE_INLINE uint64x2_t vceqq_f64(float64x2_t a, float64x2_t b) {
   return __riscv_vmerge_vvm_u64m1(vdupq_n_u64(0x0), vdupq_n_u64(UINT64_MAX), cmp_res, 2);
 }
 
-// FORCE_INLINE uint64_t vceqd_s64(int64_t a, int64_t b);
+FORCE_INLINE uint64_t vceqd_s64(int64_t a, int64_t b) { return a == b ? UINT64_MAX : 0x0; }
 
-// FORCE_INLINE uint64_t vceqd_u64(uint64_t a, uint64_t b);
+FORCE_INLINE uint64_t vceqd_u64(uint64_t a, uint64_t b) { return a == b ? UINT64_MAX : 0x0; }
 
-// FORCE_INLINE uint32_t vceqs_f32(float32_t a, float32_t b);
+FORCE_INLINE uint32_t vceqs_f32(float32_t a, float32_t b) { return a == b ? UINT32_MAX : 0x0; }
 
-// FORCE_INLINE uint64_t vceqd_f64(float64_t a, float64_t b);
+FORCE_INLINE uint64_t vceqd_f64(float64_t a, float64_t b) { return a == b ? UINT64_MAX : 0x0; }
 
 // FORCE_INLINE uint8x8_t vceqz_s8(int8x8_t a);
 
