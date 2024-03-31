@@ -723,9 +723,15 @@ FORCE_INLINE int32x4_t vqdmulhq_s32(int32x4_t a, int32x4_t b) {
   return __riscv_vnsra_wx_i32m1(ab_mulx2, 32, 4);
 }
 
-// FORCE_INLINE int16_t vqdmulhh_s16(int16_t a, int16_t b);
+FORCE_INLINE int16_t vqdmulhh_s16(int16_t a, int16_t b) {
+  int32_t unsat = 2 * (int32_t)a * (int32_t)b;
+  return unsat >> 16;
+}
 
-// FORCE_INLINE int32_t vqdmulhs_s32(int32_t a, int32_t b);
+FORCE_INLINE int32_t vqdmulhs_s32(int32_t a, int32_t b) {
+  int64_t unsat = 2 * (int64_t)a * (int64_t)b;
+  return unsat >> 32;
+}
 
 FORCE_INLINE int16x4_t vqrdmulh_s16(int16x4_t a, int16x4_t b) {
   vint32m2_t ab_mul = __riscv_vwmul_vv_i32m2(a, b, 4);
@@ -751,9 +757,15 @@ FORCE_INLINE int32x4_t vqrdmulhq_s32(int32x4_t a, int32x4_t b) {
   return __riscv_vnclip_wx_i32m1(ab_mulx2, 32, __RISCV_VXRM_RNU, 4);
 }
 
-// FORCE_INLINE int16_t vqrdmulhh_s16(int16_t a, int16_t b);
+FORCE_INLINE int16_t vqrdmulhh_s16(int16_t a, int16_t b) {
+  int32_t dmul = 2 * (int32_t)a * (int32_t)b;
+  return ((dmul >> 15) + 1) >> 1;
+}
 
-// FORCE_INLINE int32_t vqrdmulhs_s32(int32_t a, int32_t b);
+FORCE_INLINE int32_t vqrdmulhs_s32(int32_t a, int32_t b) {
+  int64_t dmul = 2 * (int64_t)a * (int64_t)b;
+  return ((dmul >> 31) + 1) >> 1;
+}
 
 FORCE_INLINE int16x4_t vqrdmlah_s16(int16x4_t a, int16x4_t b, int16x4_t c) {
   vint32m2_t bc_mul = __riscv_vwmul_vv_i32m2(b, c, 4);

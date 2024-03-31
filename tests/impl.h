@@ -192,14 +192,14 @@
   _(vqdmulh_s32)                                                                 \
   _(vqdmulhq_s16)                                                                \
   _(vqdmulhq_s32)                                                                \
-  /*_(vqdmulhh_s16)                                                           */ \
-  /*_(vqdmulhs_s32)                                                           */ \
+  _(vqdmulhh_s16)                                                                \
+  _(vqdmulhs_s32)                                                                \
   _(vqrdmulh_s16)                                                                \
   _(vqrdmulh_s32)                                                                \
   _(vqrdmulhq_s16)                                                               \
   _(vqrdmulhq_s32)                                                               \
-  /*_(vqrdmulhh_s16)                                                          */ \
-  /*_(vqrdmulhs_s32)                                                          */ \
+  _(vqrdmulhh_s16)                                                               \
+  _(vqrdmulhs_s32)                                                               \
   _(vqrdmlah_s16)                                                                \
   _(vqrdmlah_s32)                                                                \
   _(vqrdmlahq_s16)                                                               \
