@@ -385,12 +385,12 @@
   _(vsubl_u8)                                                                    \
   _(vsubl_u16)                                                                   \
   _(vsubl_u32)                                                                   \
-  /*_(vsubl_high_s8)                                                          */ \
-  /*_(vsubl_high_s16)                                                         */ \
-  /*_(vsubl_high_s32)                                                         */ \
-  /*_(vsubl_high_u8)                                                          */ \
-  /*_(vsubl_high_u16)                                                         */ \
-  /*_(vsubl_high_u32)                                                         */ \
+  _(vsubl_high_s8)                                                               \
+  _(vsubl_high_s16)                                                              \
+  _(vsubl_high_s32)                                                              \
+  _(vsubl_high_u8)                                                               \
+  _(vsubl_high_u16)                                                              \
+  _(vsubl_high_u32)                                                              \
   _(vsubw_s8)                                                                    \
   _(vsubw_s16)                                                                   \
   _(vsubw_s32)                                                                   \
