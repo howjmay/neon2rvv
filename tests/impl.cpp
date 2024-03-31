@@ -5077,9 +5077,41 @@ result_t test_vsubq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #endif  // ENABLE_TEST_ALL
 }
 
-result_t test_vsub_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vsub_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const double *_a = (double *)impl.test_cases_int_pointer1;
+  const double *_b = (double *)impl.test_cases_int_pointer2;
+  double _d[1];
+  for (int i = 0; i < 1; i++) {
+    _d[i] = _a[i] - _b[i];
+  }
 
-result_t test_vsubq_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  float64x1_t a = vld1_f64(_a);
+  float64x1_t b = vld1_f64(_b);
+  float64x1_t c = vsub_f64(a, b);
+  return validate_double(c, _d[0]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vsubq_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const double *_a = (double *)impl.test_cases_int_pointer1;
+  const double *_b = (double *)impl.test_cases_int_pointer2;
+  double _d[2];
+  for (int i = 0; i < 2; i++) {
+    _d[i] = _a[i] - _b[i];
+  }
+
+  float64x2_t a = vld1q_f64(_a);
+  float64x2_t b = vld1q_f64(_b);
+  float64x2_t c = vsubq_f64(a, b);
+  return validate_double(c, _d[0], _d[1]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vsubd_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
