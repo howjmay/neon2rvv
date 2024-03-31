@@ -287,34 +287,27 @@ FORCE_INLINE uint64x2_t vaddl_high_u32(uint32x4_t a, uint32x4_t b) {
 }
 
 FORCE_INLINE int16x8_t vaddw_s8(int16x8_t a, int8x8_t b) {
-  // FIXME use vwmaccu_vx to simplify the impl
-  vint16m1_t b_ext = __riscv_vlmul_trunc_v_i16m2_i16m1(__riscv_vsext_vf2_i16m2(b, 8));
-  return __riscv_vadd_vv_i16m1(a, b_ext, 8);
+  return __riscv_vwmacc_vx_i16m1(a, 1, __riscv_vlmul_trunc_v_i8m1_i8mf2(b), 8);
 }
 
 FORCE_INLINE int32x4_t vaddw_s16(int32x4_t a, int16x4_t b) {
-  vint32m1_t b_ext = __riscv_vlmul_trunc_v_i32m2_i32m1(__riscv_vsext_vf2_i32m2(b, 4));
-  return __riscv_vadd_vv_i32m1(a, b_ext, 4);
+  return __riscv_vwmacc_vx_i32m1(a, 1, __riscv_vlmul_trunc_v_i16m1_i16mf2(b), 4);
 }
 
 FORCE_INLINE int64x2_t vaddw_s32(int64x2_t a, int32x2_t b) {
-  vint64m1_t b_ext = __riscv_vlmul_trunc_v_i64m2_i64m1(__riscv_vsext_vf2_i64m2(b, 2));
-  return __riscv_vadd_vv_i64m1(a, b_ext, 2);
+  return __riscv_vwmacc_vx_i64m1(a, 1, __riscv_vlmul_trunc_v_i32m1_i32mf2(b), 2);
 }
 
 FORCE_INLINE uint16x8_t vaddw_u8(uint16x8_t a, uint8x8_t b) {
-  vuint16m1_t b_ext = __riscv_vlmul_trunc_v_u16m2_u16m1(__riscv_vzext_vf2_u16m2(b, 8));
-  return __riscv_vadd_vv_u16m1(a, b_ext, 8);
+  return __riscv_vwmaccu_vx_u16m1(a, 1, __riscv_vlmul_trunc_v_u8m1_u8mf2(b), 8);
 }
 
 FORCE_INLINE uint32x4_t vaddw_u16(uint32x4_t a, uint16x4_t b) {
-  vuint32m1_t b_ext = __riscv_vlmul_trunc_v_u32m2_u32m1(__riscv_vzext_vf2_u32m2(b, 4));
-  return __riscv_vadd_vv_u32m1(a, b_ext, 4);
+  return __riscv_vwmaccu_vx_u32m1(a, 1, __riscv_vlmul_trunc_v_u16m1_u16mf2(b), 4);
 }
 
 FORCE_INLINE uint64x2_t vaddw_u32(uint64x2_t a, uint32x2_t b) {
-  vuint64m1_t b_ext = __riscv_vlmul_trunc_v_u64m2_u64m1(__riscv_vzext_vf2_u64m2(b, 2));
-  return __riscv_vadd_vv_u64m1(a, b_ext, 2);
+  return __riscv_vwmaccu_vx_u64m1(a, 1, __riscv_vlmul_trunc_v_u32m1_u32mf2(b), 2);
 }
 
 FORCE_INLINE int16x8_t vaddw_high_s8(int16x8_t a, int8x16_t b) {
