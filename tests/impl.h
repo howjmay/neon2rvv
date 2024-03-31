@@ -479,10 +479,10 @@
   _(vceqq_u16)                                                                   \
   _(vceqq_u32)                                                                   \
   /*_(vceqq_p8)                                                          */      \
-  /*_(vceq_s64)                                                               */ \
-  /*_(vceqq_s64)                                                              */ \
-  /*_(vceq_u64)                                                               */ \
-  /*_(vceqq_u64)                                                              */ \
+  _(vceq_s64)                                                                    \
+  _(vceqq_s64)                                                                   \
+  _(vceq_u64)                                                                    \
+  _(vceqq_u64)                                                                   \
   _(vcge_s8)                                                                     \
   _(vcge_s16)                                                                    \
   _(vcge_s32)                                                                    \
@@ -3791,8 +3791,8 @@
   /*_(vceq_p64)                                                          */      \
   /*_(vceqz_p64)                                                         */      \
   /*_(vceqq_p64)                                                         */      \
-  /*_(vceq_f64)                                                               */ \
-  /*_(vceqq_f64)                                                              */ \
+  _(vceq_f64)                                                                    \
+  _(vceqq_f64)                                                                   \
   /*_(vceqd_s64)                                                              */ \
   /*_(vceqd_u64)                                                              */ \
   /*_(vceqs_f32)                                                              */ \

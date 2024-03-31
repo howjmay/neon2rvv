@@ -6634,21 +6634,117 @@ result_t test_vceq_p8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TE
 
 result_t test_vceqq_p8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vceq_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vceq_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int64_t *_a = (const int64_t *)impl.test_cases_int_pointer1;
+  const int64_t *_b = (const int64_t *)impl.test_cases_int_pointer2;
+  uint64_t _c[1];
+  for (int i = 0; i < 1; i++) {
+    _c[i] = (_a[i] == _b[i]) ? UINT64_MAX : 0x00;
+  }
 
-result_t test_vceqq_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  int64x1_t a = vld1_s64(_a);
+  int64x1_t b = vld1_s64(_b);
+  uint64x1_t c = vceq_s64(a, b);
+  return validate_uint64(c, _c[0]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
-result_t test_vceq_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vceqq_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int64_t *_a = (const int64_t *)impl.test_cases_int_pointer1;
+  const int64_t *_b = (const int64_t *)impl.test_cases_int_pointer2;
+  uint64_t _c[2];
+  for (int i = 0; i < 2; i++) {
+    _c[i] = (_a[i] == _b[i]) ? UINT64_MAX : 0x00;
+  }
 
-result_t test_vceqq_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  int64x2_t a = vld1q_s64(_a);
+  int64x2_t b = vld1q_s64(_b);
+  uint64x2_t c = vceqq_s64(a, b);
+  return validate_uint64(c, _c[0], _c[1]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vceq_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint64_t *_a = (const uint64_t *)impl.test_cases_int_pointer1;
+  const uint64_t *_b = (const uint64_t *)impl.test_cases_int_pointer2;
+  uint64_t _c[1];
+  for (int i = 0; i < 1; i++) {
+    _c[i] = (_a[i] == _b[i]) ? UINT64_MAX : 0x00;
+  }
+
+  uint64x1_t a = vld1_u64(_a);
+  uint64x1_t b = vld1_u64(_b);
+  uint64x1_t c = vceq_u64(a, b);
+  return validate_uint64(c, _c[0]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vceqq_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint64_t *_a = (const uint64_t *)impl.test_cases_int_pointer1;
+  const uint64_t *_b = (const uint64_t *)impl.test_cases_int_pointer2;
+  uint64_t _c[2];
+  for (int i = 0; i < 2; i++) {
+    _c[i] = (_a[i] == _b[i]) ? UINT64_MAX : 0x00;
+  }
+
+  uint64x2_t a = vld1q_u64(_a);
+  uint64x2_t b = vld1q_u64(_b);
+  uint64x2_t c = vceqq_u64(a, b);
+  return validate_uint64(c, _c[0], _c[1]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vceq_p64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
 result_t test_vceqq_p64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vceq_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vceq_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const double *_a = (const double *)impl.test_cases_float_pointer1;
+  const double *_b = (const double *)impl.test_cases_float_pointer2;
+  uint64_t _c[1];
+  for (int i = 0; i < 1; i++) {
+    _c[i] = (_a[i] == _b[i]) ? UINT64_MAX : 0x00;
+  }
 
-result_t test_vceqq_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  float64x1_t a = vld1_f64(_a);
+  float64x1_t b = vld1_f64(_b);
+  uint64x1_t c = vceq_f64(a, b);
+  return validate_uint64(c, _c[0]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vceqq_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const double *_a = (const double *)impl.test_cases_float_pointer1;
+  const double *_b = (const double *)impl.test_cases_float_pointer2;
+  uint64_t _c[2];
+  for (int i = 0; i < 2; i++) {
+    _c[i] = (_a[i] == _b[i]) ? UINT64_MAX : 0x00;
+  }
+
+  float64x2_t a = vld1q_f64(_a);
+  float64x2_t b = vld1q_f64(_b);
+  uint64x2_t c = vceqq_f64(a, b);
+  return validate_uint64(c, _c[0], _c[1]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vceqd_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 

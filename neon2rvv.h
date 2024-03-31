@@ -1799,21 +1799,39 @@ FORCE_INLINE uint32x4_t vceqq_f32(float32x4_t a, float32x4_t b) {
 
 // FORCE_INLINE uint8x16_t vceqq_p8(poly8x16_t a, poly8x16_t b);
 
-// FORCE_INLINE uint64x1_t vceq_s64(int64x1_t a, int64x1_t b);
+FORCE_INLINE uint64x1_t vceq_s64(int64x1_t a, int64x1_t b) {
+  vbool64_t cmp_res = __riscv_vmseq_vv_i64m1_b64(a, b, 1);
+  return __riscv_vmerge_vvm_u64m1(vdupq_n_u64(0x0), vdupq_n_u64(UINT64_MAX), cmp_res, 1);
+}
 
-// FORCE_INLINE uint64x2_t vceqq_s64(int64x2_t a, int64x2_t b);
+FORCE_INLINE uint64x2_t vceqq_s64(int64x2_t a, int64x2_t b) {
+  vbool64_t cmp_res = __riscv_vmseq_vv_i64m1_b64(a, b, 2);
+  return __riscv_vmerge_vvm_u64m1(vdupq_n_u64(0x0), vdupq_n_u64(UINT64_MAX), cmp_res, 2);
+}
 
-// FORCE_INLINE uint64x1_t vceq_u64(uint64x1_t a, uint64x1_t b);
+FORCE_INLINE uint64x1_t vceq_u64(uint64x1_t a, uint64x1_t b) {
+  vbool64_t cmp_res = __riscv_vmseq_vv_u64m1_b64(a, b, 1);
+  return __riscv_vmerge_vvm_u64m1(vdupq_n_u64(0x0), vdupq_n_u64(UINT64_MAX), cmp_res, 1);
+}
 
-// FORCE_INLINE uint64x2_t vceqq_u64(uint64x2_t a, uint64x2_t b);
+FORCE_INLINE uint64x2_t vceqq_u64(uint64x2_t a, uint64x2_t b) {
+  vbool64_t cmp_res = __riscv_vmseq_vv_u64m1_b64(a, b, 2);
+  return __riscv_vmerge_vvm_u64m1(vdupq_n_u64(0x0), vdupq_n_u64(UINT64_MAX), cmp_res, 2);
+}
 
 // FORCE_INLINE uint64x1_t vceq_p64(poly64x1_t a, poly64x1_t b);
 
 // FORCE_INLINE uint64x2_t vceqq_p64(poly64x2_t a, poly64x2_t b);
 
-// FORCE_INLINE uint64x1_t vceq_f64(float64x1_t a, float64x1_t b);
+FORCE_INLINE uint64x1_t vceq_f64(float64x1_t a, float64x1_t b) {
+  vbool64_t cmp_res = __riscv_vmfeq_vv_f64m1_b64(a, b, 1);
+  return __riscv_vmerge_vvm_u64m1(vdupq_n_u64(0x0), vdupq_n_u64(UINT64_MAX), cmp_res, 1);
+}
 
-// FORCE_INLINE uint64x2_t vceqq_f64(float64x2_t a, float64x2_t b);
+FORCE_INLINE uint64x2_t vceqq_f64(float64x2_t a, float64x2_t b) {
+  vbool64_t cmp_res = __riscv_vmfeq_vv_f64m1_b64(a, b, 2);
+  return __riscv_vmerge_vvm_u64m1(vdupq_n_u64(0x0), vdupq_n_u64(UINT64_MAX), cmp_res, 2);
+}
 
 // FORCE_INLINE uint64_t vceqd_s64(int64_t a, int64_t b);
 
