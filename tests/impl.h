@@ -3797,20 +3797,20 @@
   _(vceqd_u64)                                                                   \
   _(vceqs_f32)                                                                   \
   _(vceqd_f64)                                                                   \
-  /*_(vceqz_s8)                                                               */ \
-  /*_(vceqzq_s8)                                                              */ \
-  /*_(vceqz_s16)                                                              */ \
-  /*_(vceqzq_s16)                                                             */ \
-  /*_(vceqz_s32)                                                              */ \
-  /*_(vceqzq_s32)                                                             */ \
-  /*_(vceqz_u8)                                                               */ \
-  /*_(vceqzq_u8)                                                              */ \
-  /*_(vceqz_u16)                                                              */ \
-  /*_(vceqzq_u16)                                                             */ \
-  /*_(vceqz_u32)                                                              */ \
-  /*_(vceqzq_u32)                                                             */ \
-  /*_(vceqz_f32)                                                              */ \
-  /*_(vceqzq_f32)                                                             */ \
+  _(vceqz_s8)                                                                    \
+  _(vceqzq_s8)                                                                   \
+  _(vceqz_s16)                                                                   \
+  _(vceqzq_s16)                                                                  \
+  _(vceqz_s32)                                                                   \
+  _(vceqzq_s32)                                                                  \
+  _(vceqz_u8)                                                                    \
+  _(vceqzq_u8)                                                                   \
+  _(vceqz_u16)                                                                   \
+  _(vceqzq_u16)                                                                  \
+  _(vceqz_u32)                                                                   \
+  _(vceqzq_u32)                                                                  \
+  _(vceqz_f32)                                                                   \
+  _(vceqzq_f32)                                                                  \
   /*_(vceqz_p8)                                                               */ \
   /*_(vceqzq_p8)                                                              */ \
   /*_(vceqz_s64)                                                              */ \
@@ -3818,8 +3818,8 @@
   /*_(vceqz_u64)                                                              */ \
   /*_(vceqzq_u64)                                                             */ \
   /*_(vceqzq_p64)                                                        */      \
-  /*_(vceqz_f64)                                                              */ \
-  /*_(vceqzq_f64)                                                             */ \
+  _(vceqz_f64)                                                                   \
+  _(vceqzq_f64)                                                                  \
   /*_(vceqzd_s64)                                                             */ \
   /*_(vceqzd_u64)                                                             */ \
   /*_(vceqzs_f32)                                                             */ \
