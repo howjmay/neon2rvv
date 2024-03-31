@@ -273,8 +273,8 @@
   _(vmlsq_s16)                                                                   \
   _(vmlsq_s32)                                                                   \
   _(vmlsq_f32)                                                                   \
-  /*_(vmls_f64)                                                               */ \
-  /*_(vmlsq_f64)                                                              */ \
+  _(vmls_f64)                                                                    \
+  _(vmlsq_f64)                                                                   \
   _(vmlsq_u8)                                                                    \
   _(vmlsq_u16)                                                                   \
   _(vmlsq_u32)                                                                   \

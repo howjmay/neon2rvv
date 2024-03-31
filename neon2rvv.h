@@ -1069,9 +1069,13 @@ FORCE_INLINE float32x4_t vmlsq_f32(float32x4_t a, float32x4_t b, float32x4_t c) 
   return __riscv_vfnmsac_vv_f32m1(a, b, c, 4);
 }
 
-// FORCE_INLINE float64x1_t vmls_f64(float64x1_t a, float64x1_t b, float64x1_t c);
+FORCE_INLINE float64x1_t vmls_f64(float64x1_t a, float64x1_t b, float64x1_t c) {
+  return __riscv_vfnmsac_vv_f64m1(a, b, c, 1);
+}
 
-// FORCE_INLINE float64x2_t vmlsq_f64(float64x2_t a, float64x2_t b, float64x2_t c);
+FORCE_INLINE float64x2_t vmlsq_f64(float64x2_t a, float64x2_t b, float64x2_t c) {
+  return __riscv_vfnmsac_vv_f64m1(a, b, c, 2);
+}
 
 FORCE_INLINE uint8x16_t vmlsq_u8(uint8x16_t a, uint8x16_t b, uint8x16_t c) {
   return __riscv_vnmsac_vv_u8m1(a, b, c, 16);
