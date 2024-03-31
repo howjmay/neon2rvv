@@ -725,7 +725,7 @@ result_t validate_double_error(float64x2_t a, double d0, double d1, double err) 
   return TEST_SUCCESS;
 }
 
-result_t validate_double_error(float64x2_t a, double d0, double err) {
+result_t validate_double_error(float64x1_t a, double d0, double err) {
   const double *t = (const double *)&a;
   double td0 = fabs((t[0] - d0) / d0);
   if (std::isnan(t[0]) && std::isnan(d0)) {
