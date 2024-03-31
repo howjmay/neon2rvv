@@ -1949,13 +1949,13 @@ FORCE_INLINE uint64x2_t vceqzq_f64(float64x2_t a) {
   return __riscv_vmerge_vvm_u64m1(vdupq_n_u64(0x0), vdupq_n_u64(UINT64_MAX), cmp_res, 2);
 }
 
-// FORCE_INLINE uint64_t vceqzd_s64(int64_t a);
+FORCE_INLINE uint64_t vceqzd_s64(int64_t a) { return a == 0 ? UINT64_MAX : 0x0; }
 
-// FORCE_INLINE uint64_t vceqzd_u64(uint64_t a);
+FORCE_INLINE uint64_t vceqzd_u64(uint64_t a) { return a == 0 ? UINT64_MAX : 0x0; }
 
-// FORCE_INLINE uint32_t vceqzs_f32(float32_t a);
+FORCE_INLINE uint32_t vceqzs_f32(float32_t a) { return a == 0 ? UINT32_MAX : 0x0; }
 
-// FORCE_INLINE uint64_t vceqzd_f64(float64_t a);
+FORCE_INLINE uint64_t vceqzd_f64(float64_t a) { return a == 0 ? UINT64_MAX : 0x0; }
 
 FORCE_INLINE uint8x16_t vceqq_u8(uint8x16_t a, uint8x16_t b) {
   vbool8_t cmp_res = __riscv_vmseq_vv_u8m1_b8(a, b, 16);
