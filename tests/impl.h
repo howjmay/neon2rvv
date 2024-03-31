@@ -250,12 +250,12 @@
   _(vmlal_u8)                                                                    \
   _(vmlal_u16)                                                                   \
   _(vmlal_u32)                                                                   \
-  /*_(vmlal_high_s8)                                                          */ \
-  /*_(vmlal_high_s16)                                                         */ \
-  /*_(vmlal_high_s32)                                                         */ \
-  /*_(vmlal_high_u8)                                                          */ \
-  /*_(vmlal_high_u16)                                                         */ \
-  /*_(vmlal_high_u32)                                                         */ \
+  _(vmlal_high_s8)                                                               \
+  _(vmlal_high_s16)                                                              \
+  _(vmlal_high_s32)                                                              \
+  _(vmlal_high_u8)                                                               \
+  _(vmlal_high_u16)                                                              \
+  _(vmlal_high_u32)                                                              \
   _(vqdmlal_s16)                                                                 \
   _(vqdmlal_s32)                                                                 \
   /*_(vqdmlalh_s16)                                                           */ \
