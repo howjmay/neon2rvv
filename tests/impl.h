@@ -215,12 +215,12 @@
   _(vmull_u16)                                                                   \
   _(vmull_u32)                                                                   \
   /*_(vmull_p8)                                                          */      \
-  /*_(vmull_high_s8)                                                          */ \
-  /*_(vmull_high_s16)                                                         */ \
-  /*_(vmull_high_s32)                                                         */ \
-  /*_(vmull_high_u8)                                                          */ \
-  /*_(vmull_high_u16)                                                         */ \
-  /*_(vmull_high_u32)                                                         */ \
+  _(vmull_high_s8)                                                               \
+  _(vmull_high_s16)                                                              \
+  _(vmull_high_s32)                                                              \
+  _(vmull_high_u8)                                                               \
+  _(vmull_high_u16)                                                              \
+  _(vmull_high_u32)                                                              \
   /*_(vmull_high_p8)                                                          */ \
   _(vqdmull_s16)                                                                 \
   _(vqdmull_s32)                                                                 \
