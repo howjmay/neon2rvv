@@ -34,12 +34,12 @@
   _(vaddl_u8)                                                                    \
   _(vaddl_u16)                                                                   \
   _(vaddl_u32)                                                                   \
-  /*_(vaddl_high_s8)                                                          */ \
-  /*_(vaddl_high_s16)                                                         */ \
-  /*_(vaddl_high_s32)                                                         */ \
-  /*_(vaddl_high_u8)                                                          */ \
-  /*_(vaddl_high_u16)                                                         */ \
-  /*_(vaddl_high_u32)                                                         */ \
+  _(vaddl_high_s8)                                                               \
+  _(vaddl_high_s16)                                                              \
+  _(vaddl_high_s32)                                                              \
+  _(vaddl_high_u8)                                                               \
+  _(vaddl_high_u16)                                                              \
+  _(vaddl_high_u32)                                                              \
   _(vaddw_s8)                                                                    \
   _(vaddw_s16)                                                                   \
   _(vaddw_s32)                                                                   \
