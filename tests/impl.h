@@ -298,8 +298,8 @@
   /*_(vqdmlsl_high_s32)                                                       */ \
   _(vfma_f32)                                                                    \
   _(vfmaq_f32)                                                                   \
-  /*_(vfma_f64)                                                               */ \
-  /*_(vfmaq_f64)                                                              */ \
+  _(vfma_f64)                                                                    \
+  _(vfmaq_f64)                                                                   \
   /*_(vfma_lane_f32)                                                          */ \
   /*_(vfmaq_lane_f32)                                                         */ \
   /*_(vfma_lane_f64)                                                          */ \

@@ -139,7 +139,7 @@ result_t validate_float_error(float32x2_t a, float f0, float f1, float err);
 result_t validate_double(float64x2_t a, double d0, double d1);
 result_t validate_double(float64x1_t a, double d0);
 result_t validate_double_error(float64x2_t a, double d0, double d1, double err);
-result_t validate_double_error(float64x2_t a, double d0, double err);
+result_t validate_double_error(float64x1_t a, double d0, double err);
 result_t validate_float_pair(float a, float b);
 
 int8_t saturate_int8(int a);
