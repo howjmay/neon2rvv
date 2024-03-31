@@ -3813,17 +3813,17 @@
   _(vceqzq_f32)                                                                  \
   /*_(vceqz_p8)                                                               */ \
   /*_(vceqzq_p8)                                                              */ \
-  /*_(vceqz_s64)                                                              */ \
-  /*_(vceqzq_s64)                                                             */ \
-  /*_(vceqz_u64)                                                              */ \
-  /*_(vceqzq_u64)                                                             */ \
+  _(vceqz_s64)                                                                   \
+  _(vceqzq_s64)                                                                  \
+  _(vceqz_u64)                                                                   \
+  _(vceqzq_u64)                                                                  \
   /*_(vceqzq_p64)                                                        */      \
   _(vceqz_f64)                                                                   \
   _(vceqzq_f64)                                                                  \
-  /*_(vceqzd_s64)                                                             */ \
-  /*_(vceqzd_u64)                                                             */ \
-  /*_(vceqzs_f32)                                                             */ \
-  /*_(vceqzd_f64)                                                             */ \
+  _(vceqzd_s64)                                                                  \
+  _(vceqzd_u64)                                                                  \
+  _(vceqzs_f32)                                                                  \
+  _(vceqzd_f64)                                                                  \
   /*_(vtst_p64)                                                          */      \
   /*_(vtstq_p64)                                                              */ \
   /*_(vtstd_s64)                                                              */ \
