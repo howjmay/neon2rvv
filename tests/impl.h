@@ -130,12 +130,12 @@
   _(vaddhn_u16)                                                                  \
   _(vaddhn_u32)                                                                  \
   _(vaddhn_u64)                                                                  \
-  /*_(vaddhn_high_s16)                                                        */ \
-  /*_(vaddhn_high_s32)                                                        */ \
-  /*_(vaddhn_high_s64)                                                        */ \
-  /*_(vaddhn_high_u16)                                                        */ \
-  /*_(vaddhn_high_u32)                                                        */ \
-  /*_(vaddhn_high_u64)                                                        */ \
+  _(vaddhn_high_s16)                                                             \
+  _(vaddhn_high_s32)                                                             \
+  _(vaddhn_high_s64)                                                             \
+  _(vaddhn_high_u16)                                                             \
+  _(vaddhn_high_u32)                                                             \
+  _(vaddhn_high_u64)                                                             \
   _(vraddhn_s16)                                                                 \
   _(vraddhn_s32)                                                                 \
   _(vraddhn_s64)                                                                 \
