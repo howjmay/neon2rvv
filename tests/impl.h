@@ -371,8 +371,8 @@
   _(vsubq_s32)                                                                   \
   _(vsubq_s64)                                                                   \
   _(vsubq_f32)                                                                   \
-  /*_(vsub_f64)                                                               */ \
-  /*_(vsubq_f64)                                                              */ \
+  _(vsub_f64)                                                                    \
+  _(vsubq_f64)                                                                   \
   /*_(vsubd_s64)                                                              */ \
   /*_(vsubd_u64)                                                              */ \
   _(vsubq_u8)                                                                    \
