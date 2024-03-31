@@ -284,12 +284,12 @@
   _(vmlsl_u8)                                                                    \
   _(vmlsl_u16)                                                                   \
   _(vmlsl_u32)                                                                   \
-  /*_(vmlsl_high_s8)                                                          */ \
-  /*_(vmlsl_high_s16)                                                         */ \
-  /*_(vmlsl_high_s32)                                                         */ \
-  /*_(vmlsl_high_u8)                                                          */ \
-  /*_(vmlsl_high_u16)                                                         */ \
-  /*_(vmlsl_high_u32)                                                         */ \
+  _(vmlsl_high_s8)                                                               \
+  _(vmlsl_high_s16)                                                              \
+  _(vmlsl_high_s32)                                                              \
+  _(vmlsl_high_u8)                                                               \
+  _(vmlsl_high_u16)                                                              \
+  _(vmlsl_high_u32)                                                              \
   _(vqdmlsl_s16)                                                                 \
   _(vqdmlsl_s32)                                                                 \
   /*_(vqdmlslh_s16)                                                           */ \
