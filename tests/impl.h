@@ -184,10 +184,10 @@
   /*_(vmulxq_laneq_f64)                                                       */ \
   /*_(vmulxs_laneq_f32)                                                       */ \
   /*_(vmulxd_laneq_f64)                                                       */ \
-  /*_(vdiv_f32)                                                               */ \
-  /*_(vdivq_f32)                                                              */ \
-  /*_(vdiv_f64)                                                               */ \
-  /*_(vdivq_f64)                                                              */ \
+  _(vdiv_f32)                                                                    \
+  _(vdivq_f32)                                                                   \
+  _(vdiv_f64)                                                                    \
+  _(vdivq_f64)                                                                   \
   _(vqdmulh_s16)                                                                 \
   _(vqdmulh_s32)                                                                 \
   _(vqdmulhq_s16)                                                                \
