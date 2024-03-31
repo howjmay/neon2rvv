@@ -239,8 +239,8 @@
   _(vmlaq_s16)                                                                   \
   _(vmlaq_s32)                                                                   \
   _(vmlaq_f32)                                                                   \
-  /*_(vmla_f64)                                                               */ \
-  /*_(vmlaq_f64)                                                              */ \
+  _(vmla_f64)                                                                    \
+  _(vmlaq_f64)                                                                   \
   _(vmlaq_u8)                                                                    \
   _(vmlaq_u16)                                                                   \
   _(vmlaq_u32)                                                                   \
