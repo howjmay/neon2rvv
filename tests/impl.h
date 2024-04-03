@@ -1455,14 +1455,14 @@
   /*_(vsetq_lane_f64)                                                         */ \
   /*_(vrecpxs_f32)                                                            */ \
   /*_(vrecpxd_f64)                                                            */ \
-  /*_(vfma_n_f32)                                                             */ \
-  /*_(vfmaq_n_f32)                                                            */ \
-  /*_(vfms_n_f32)                                                             */ \
-  /*_(vfmsq_n_f32)                                                            */ \
-  /*_(vfma_n_f64)                                                             */ \
-  /*_(vfmaq_n_f64)                                                            */ \
-  /*_(vfms_n_f64)                                                             */ \
-  /*_(vfmsq_n_f64)                                                            */ \
+  _(vfma_n_f32)                                                                  \
+  _(vfmaq_n_f32)                                                                 \
+  _(vfms_n_f32)                                                                  \
+  _(vfmsq_n_f32)                                                                 \
+  _(vfma_n_f64)                                                                  \
+  _(vfmaq_n_f64)                                                                 \
+  _(vfms_n_f64)                                                                  \
+  _(vfmsq_n_f64)                                                                 \
   _(vsetq_lane_u8)                                                               \
   _(vsetq_lane_u16)                                                              \
   _(vsetq_lane_u32)                                                              \
