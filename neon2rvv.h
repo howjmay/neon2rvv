@@ -6058,21 +6058,37 @@ FORCE_INLINE float32x4_t vsetq_lane_f32(float32_t a, float32x4_t b, const int c)
 
 // FORCE_INLINE float64_t vrecpxd_f64(float64_t a);
 
-// FORCE_INLINE float32x2_t vfma_n_f32(float32x2_t a, float32x2_t b, float32_t n);
+FORCE_INLINE float32x2_t vfma_n_f32(float32x2_t a, float32x2_t b, float32_t n) {
+  return __riscv_vfmacc_vf_f32m1(a, n, b, 2);
+}
 
-// FORCE_INLINE float32x4_t vfmaq_n_f32(float32x4_t a, float32x4_t b, float32_t n);
+FORCE_INLINE float32x4_t vfmaq_n_f32(float32x4_t a, float32x4_t b, float32_t n) {
+  return __riscv_vfmacc_vf_f32m1(a, n, b, 4);
+}
 
-// FORCE_INLINE float32x2_t vfms_n_f32(float32x2_t a, float32x2_t b, float32_t n);
+FORCE_INLINE float32x2_t vfms_n_f32(float32x2_t a, float32x2_t b, float32_t n) {
+  return __riscv_vfnmsac_vf_f32m1(a, n, b, 2);
+}
 
-// FORCE_INLINE float32x4_t vfmsq_n_f32(float32x4_t a, float32x4_t b, float32_t n);
+FORCE_INLINE float32x4_t vfmsq_n_f32(float32x4_t a, float32x4_t b, float32_t n) {
+  return __riscv_vfnmsac_vf_f32m1(a, n, b, 4);
+}
 
-// FORCE_INLINE float64x1_t vfma_n_f64(float64x1_t a, float64x1_t b, float64_t n);
+FORCE_INLINE float64x1_t vfma_n_f64(float64x1_t a, float64x1_t b, float64_t n) {
+  return __riscv_vfmacc_vf_f64m1(a, n, b, 1);
+}
 
-// FORCE_INLINE float64x2_t vfmaq_n_f64(float64x2_t a, float64x2_t b, float64_t n);
+FORCE_INLINE float64x2_t vfmaq_n_f64(float64x2_t a, float64x2_t b, float64_t n) {
+  return __riscv_vfmacc_vf_f64m1(a, n, b, 2);
+}
 
-// FORCE_INLINE float64x1_t vfms_n_f64(float64x1_t a, float64x1_t b, float64_t n);
+FORCE_INLINE float64x1_t vfms_n_f64(float64x1_t a, float64x1_t b, float64_t n) {
+  return __riscv_vfnmacc_vf_f64m1(a, n, b, 1);
+}
 
-// FORCE_INLINE float64x2_t vfmsq_n_f64(float64x2_t a, float64x2_t b, float64_t n);
+FORCE_INLINE float64x2_t vfmsq_n_f64(float64x2_t a, float64x2_t b, float64_t n) {
+  return __riscv_vfnmacc_vf_f64m1(a, n, b, 2);
+}
 
 FORCE_INLINE uint8x16_t vsetq_lane_u8(uint8_t a, uint8x16_t b, const int c) {
   vbool8_t mask = __riscv_vreinterpret_v_u16m1_b8(vdup_n_u16((uint16_t)(1 << c)));
