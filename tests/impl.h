@@ -1507,8 +1507,8 @@
   _(vdupq_n_u32)                                                                 \
   /*_(vdupq_n_p8)                                                        */      \
   /*_(vdupq_n_p16)                                                       */      \
-  /*_(vdup_n_f64)                                                             */ \
-  /*_(vdupq_n_f64)                                                            */ \
+  _(vdup_n_f64)                                                                  \
+  _(vdupq_n_f64)                                                                 \
   _(vdupq_n_s64)                                                                 \
   _(vdupq_n_u64)                                                                 \
   _(vmov_n_s8)                                                                   \
