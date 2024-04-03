@@ -87,7 +87,7 @@ void print_128_bits_f32_arr(const char *var_name, const float *f) {
          f[3]);
 }
 void print_128_bits_f64_arr(const char *var_name, const double *f) {
-  printf("%s0: %.3f, %s1: %.3f\n", var_name, f[0], var_name, f[1], var_name);
+  printf("%s0: %.3f, %s1: %.3f\n", var_name, f[0], var_name, f[1]);
 }
 
 void print_u8_64(const char *var_name, uint8_t u0, uint8_t u1, uint8_t u2, uint8_t u3, uint8_t u4, uint8_t u5,

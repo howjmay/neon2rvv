@@ -1484,7 +1484,7 @@
   _(vcreate_u64)                                                                 \
   /*_(vcreate_p8)                                                        */      \
   /*_(vcreate_p16)                                                       */      \
-  /*_(vcreate_f64)                                                            */ \
+  _(vcreate_f64)                                                                 \
   _(vdup_n_s8)                                                                   \
   _(vdup_n_s16)                                                                  \
   _(vdup_n_s32)                                                                  \

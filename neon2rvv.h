@@ -6146,7 +6146,9 @@ FORCE_INLINE float32x2_t vcreate_f32(uint64_t a) {
 
 // FORCE_INLINE poly16x4_t vcreate_p16(uint64_t a);
 
-// FORCE_INLINE float64x1_t vcreate_f64(uint64_t a);
+FORCE_INLINE float64x1_t vcreate_f64(uint64_t a) {
+  return __riscv_vreinterpret_v_u64m1_f64m1(__riscv_vmv_v_x_u64m1(a, 8));
+}
 
 FORCE_INLINE uint8x8_t vcreate_u8(uint64_t a) {
   return __riscv_vreinterpret_v_u64m1_u8m1(
