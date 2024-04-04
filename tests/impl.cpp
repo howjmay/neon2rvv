@@ -1525,7 +1525,7 @@ result_t test_vqadd_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int8_t *_b = (const int8_t *)impl.test_cases_int_pointer2;
   int8_t _c[8];
   for (int i = 0; i < 8; i++) {
-    _c[i] = saturate_int8((int16_t)_a[i] + (int16_t)_b[i]);
+    _c[i] = sat_add(_a[i], _b[i]);
   }
 
   int8x8_t a = vld1_s8(_a);
@@ -1543,7 +1543,7 @@ result_t test_vqadd_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_b = (const int16_t *)impl.test_cases_int_pointer2;
   int16_t _c[4];
   for (int i = 0; i < 4; i++) {
-    _c[i] = saturate_int16((int32_t)_a[i] + (int32_t)_b[i]);
+    _c[i] = sat_add(_a[i], _b[i]);
   }
 
   int16x4_t a = vld1_s16(_a);
@@ -1561,7 +1561,7 @@ result_t test_vqadd_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int32_t *_b = (const int32_t *)impl.test_cases_int_pointer2;
   int32_t _c[2];
   for (int i = 0; i < 2; i++) {
-    _c[i] = saturate_int32((int64_t)_a[i] + (int64_t)_b[i]);
+    _c[i] = sat_add(_a[i], _b[i]);
   }
 
   int32x2_t a = vld1_s32(_a);
@@ -1579,17 +1579,7 @@ result_t test_vqadd_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int64_t *_b = (const int64_t *)impl.test_cases_int_pointer2;
   int64_t _c[1];
   for (int i = 0; i < 1; i++) {
-    if (_a[i] > 0) {
-      if (_b[i] > INT64_MAX - _a[i]) {
-        _c[i] = INT64_MAX;
-      } else {
-        _c[i] = _a[i] + _b[i];
-      }
-    } else if (_b[i] < INT64_MIN - _a[i]) {
-      _c[i] = INT64_MIN;
-    } else {
-      _c[i] = _a[i] + _b[i];
-    }
+    _c[i] = sat_add(_a[i], _b[i]);
   }
 
   int64x1_t a = vld1_s64(_a);
@@ -1607,7 +1597,7 @@ result_t test_vqadd_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint8_t *_b = (const uint8_t *)impl.test_cases_int_pointer2;
   uint8_t _c[8];
   for (int i = 0; i < 8; i++) {
-    _c[i] = saturate_uint8((int16_t)_a[i] + (int16_t)_b[i]);
+    _c[i] = sat_add(_a[i], _b[i]);
   }
 
   uint8x8_t a = vld1_u8(_a);
@@ -1625,7 +1615,7 @@ result_t test_vqadd_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint16_t *_b = (const uint16_t *)impl.test_cases_int_pointer2;
   uint16_t _c[4];
   for (int i = 0; i < 4; i++) {
-    _c[i] = saturate_uint16((int32_t)_a[i] + (int32_t)_b[i]);
+    _c[i] = sat_add(_a[i], _b[i]);
   }
 
   uint16x4_t a = vld1_u16(_a);
@@ -1643,7 +1633,7 @@ result_t test_vqadd_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint32_t *_b = (const uint32_t *)impl.test_cases_int_pointer2;
   uint32_t _c[2];
   for (int i = 0; i < 2; i++) {
-    _c[i] = saturate_uint32((int64_t)_a[i] + (int64_t)_b[i]);
+    _c[i] = sat_add(_a[i], _b[i]);
   }
 
   uint32x2_t a = vld1_u32(_a);
@@ -1661,11 +1651,7 @@ result_t test_vqadd_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint64_t *_b = (const uint64_t *)impl.test_cases_int_pointer2;
   uint64_t _c[1];
   for (int i = 0; i < 1; i++) {
-    if (_b[i] > UINT64_MAX - _a[i]) {
-      _c[i] = UINT64_MAX;
-    } else {
-      _c[i] = _a[i] + _b[i];
-    }
+    _c[i] = sat_add(_a[i], _b[i]);
   }
 
   uint64x1_t a = vld1_u64(_a);
@@ -1683,7 +1669,7 @@ result_t test_vqaddq_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int8_t *_b = (const int8_t *)impl.test_cases_int_pointer2;
   int8_t _c[16];
   for (int i = 0; i < 16; i++) {
-    _c[i] = saturate_int8((int16_t)_a[i] + (int16_t)_b[i]);
+    _c[i] = sat_add(_a[i], _b[i]);
   }
 
   int8x16_t a = vld1q_s8(_a);
@@ -1702,7 +1688,7 @@ result_t test_vqaddq_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_b = (const int16_t *)impl.test_cases_int_pointer2;
   int16_t _c[8];
   for (int i = 0; i < 8; i++) {
-    _c[i] = saturate_int16((int32_t)_a[i] + (int32_t)_b[i]);
+    _c[i] = sat_add(_a[i], _b[i]);
   }
 
   int16x8_t a = vld1q_s16(_a);
@@ -1720,7 +1706,7 @@ result_t test_vqaddq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int32_t *_b = (const int32_t *)impl.test_cases_int_pointer2;
   int32_t _c[4];
   for (int i = 0; i < 4; i++) {
-    _c[i] = saturate_int32((int64_t)_a[i] + (int64_t)_b[i]);
+    _c[i] = sat_add(_a[i], _b[i]);
   }
 
   int32x4_t a = vld1q_s32(_a);
@@ -1738,17 +1724,7 @@ result_t test_vqaddq_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int64_t *_b = (const int64_t *)impl.test_cases_int_pointer2;
   int64_t _c[2];
   for (int i = 0; i < 2; i++) {
-    if (_a[i] > 0) {
-      if (_b[i] > INT64_MAX - _a[i]) {
-        _c[i] = INT64_MAX;
-      } else {
-        _c[i] = _a[i] + _b[i];
-      }
-    } else if (_b[i] < INT64_MIN - _a[i]) {
-      _c[i] = INT64_MIN;
-    } else {
-      _c[i] = _a[i] + _b[i];
-    }
+    _c[i] = sat_add(_a[i], _b[i]);
   }
 
   int64x2_t a = vld1q_s64(_a);
@@ -1766,7 +1742,7 @@ result_t test_vqaddq_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint8_t *_b = (const uint8_t *)impl.test_cases_int_pointer2;
   uint8_t _c[16];
   for (int i = 0; i < 16; i++) {
-    _c[i] = saturate_uint8((int16_t)_a[i] + (int16_t)_b[i]);
+    _c[i] = sat_add(_a[i], _b[i]);
   }
 
   uint8x16_t a = vld1q_u8(_a);
@@ -1785,7 +1761,7 @@ result_t test_vqaddq_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint16_t *_b = (const uint16_t *)impl.test_cases_int_pointer2;
   uint16_t _c[8];
   for (int i = 0; i < 8; i++) {
-    _c[i] = saturate_uint16((int32_t)_a[i] + (int32_t)_b[i]);
+    _c[i] = sat_add(_a[i], _b[i]);
   }
 
   uint16x8_t a = vld1q_u16(_a);
@@ -1803,7 +1779,7 @@ result_t test_vqaddq_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint32_t *_b = (const uint32_t *)impl.test_cases_int_pointer2;
   uint32_t _c[4];
   for (int i = 0; i < 4; i++) {
-    _c[i] = saturate_uint32((int64_t)_a[i] + (int64_t)_b[i]);
+    _c[i] = sat_add(_a[i], _b[i]);
   }
 
   uint32x4_t a = vld1q_u32(_a);
@@ -1821,11 +1797,7 @@ result_t test_vqaddq_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint64_t *_b = (const uint64_t *)impl.test_cases_int_pointer2;
   uint64_t _c[2];
   for (int i = 0; i < 2; i++) {
-    if (_b[i] > UINT64_MAX - _a[i]) {
-      _c[i] = UINT64_MAX;
-    } else {
-      _c[i] = _a[i] + _b[i];
-    }
+    _c[i] = sat_add(_a[i], _b[i]);
   }
 
   uint64x2_t a = vld1q_u64(_a);
@@ -2734,10 +2706,8 @@ result_t test_vqrdmulh_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
   const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
   int16_t _c[4];
-  const int32_t round = 1 << 15;
   for (int i = 0; i < 4; i++) {
-    int32_t tmp = 2 * (int32_t)_a[i] * (int32_t)_b[i] + round;
-    _c[i] = saturate_int16(tmp >> 16);
+    _c[i] = sat_rdmulh(_a[i], _b[i]);
   }
 
   int16x4_t a = vld1_s16(_a);
@@ -2754,12 +2724,8 @@ result_t test_vqrdmulh_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
   const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
   int32_t _c[2];
-  int32_t round = 1;
   for (int i = 0; i < 2; i++) {
-    int64_t tmp = 2 * (int64_t)_a[i] * (int64_t)_b[i];
-    tmp = tmp >> 31;
-    tmp += round;
-    _c[i] = saturate_int32(tmp >> 1);
+    _c[i] = sat_rdmulh(_a[i], _b[i]);
   }
 
   int32x2_t a = vld1_s32(_a);
@@ -2776,10 +2742,8 @@ result_t test_vqrdmulhq_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
   const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
   int16_t _c[8];
-  const int32_t round = 1 << 15;
   for (int i = 0; i < 8; i++) {
-    int32_t tmp = 2 * (int32_t)_a[i] * (int32_t)_b[i] + round;
-    _c[i] = saturate_int16(tmp >> 16);
+    _c[i] = sat_rdmulh(_a[i], _b[i]);
   }
 
   int16x8_t a = vld1q_s16(_a);
@@ -2796,12 +2760,8 @@ result_t test_vqrdmulhq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
   const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
   int32_t _c[4];
-  int32_t round = 1;
   for (int i = 0; i < 4; i++) {
-    int64_t tmp = 2 * (int64_t)_a[i] * (int64_t)_b[i];
-    tmp = tmp >> 31;
-    tmp += round;
-    _c[i] = saturate_int32(tmp >> 1);
+    _c[i] = sat_rdmulh(_a[i], _b[i]);
   }
 
   int32x4_t a = vld1q_s32(_a);
@@ -2817,9 +2777,7 @@ result_t test_vqrdmulhh_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
   const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
   const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
-  const int32_t round = 1 << 15;
-  int32_t tmp = 2 * (int32_t)_a[0] * (int32_t)_b[0] + round;
-  int32_t _c = saturate_int16(tmp >> 16);
+  int16_t _c = sat_rdmulh(_a[0], _b[0]);
 
   int16_t c = vqrdmulhh_s16(_a[0], _b[0]);
   return c == _c ? TEST_SUCCESS : TEST_FAIL;
@@ -2832,11 +2790,7 @@ result_t test_vqrdmulhs_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
   const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
   const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
-  int32_t round = 1;
-  int64_t tmp = 2 * (int64_t)_a[0] * (int64_t)_b[0];
-  tmp = tmp >> 31;
-  tmp += round;
-  int32_t _c = saturate_int32(tmp >> 1);
+  int32_t _c = sat_rdmulh(_a[0], _b[0]);
 
   int32_t c = vqrdmulhs_s32(_a[0], _b[0]);
   return c == _c ? TEST_SUCCESS : TEST_FAIL;
@@ -2854,10 +2808,8 @@ result_t test_vqrdmlah_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
   const int16_t *_c = (int16_t *)impl.test_cases_int_pointer3;
   int16_t _d[4];
-  const int32_t round_const = 1 << 15;
   for (int i = 0; i < 4; i++) {
-    int32_t tmp = 2 * (int32_t)_b[i] * (int32_t)_c[i] + round_const;
-    _d[i] = saturate_int16(_a[i] + (tmp >> 16));
+    _d[i] = sat_rdmlah(_a[i], _b[i], _c[i]);
   }
 
   int16x4_t a = vld1_s16(_a);
@@ -2880,10 +2832,8 @@ result_t test_vqrdmlah_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
   const int32_t *_c = (int32_t *)impl.test_cases_int_pointer3;
   int32_t _d[2];
-  const int64_t round_const = (int64_t)1 << 31;
   for (int i = 0; i < 2; i++) {
-    int64_t tmp = 2 * (int64_t)_b[i] * (int64_t)_c[i] + round_const;
-    _d[i] = saturate_int32((int64_t)_a[i] + (tmp >> 32));
+    _d[i] = sat_rdmlah(_a[i], _b[i], _c[i]);
   }
 
   int32x2_t a = vld1_s32(_a);
@@ -2906,10 +2856,8 @@ result_t test_vqrdmlahq_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
   const int16_t *_c = (int16_t *)impl.test_cases_int_pointer3;
   int16_t _d[8];
-  const int32_t round_const = 1 << 15;
   for (int i = 0; i < 8; i++) {
-    int32_t tmp = 2 * (int32_t)_b[i] * (int32_t)_c[i] + round_const;
-    _d[i] = saturate_int16(_a[i] + (tmp >> 16));
+    _d[i] = sat_rdmlah(_a[i], _b[i], _c[i]);
   }
 
   int16x8_t a = vld1q_s16(_a);
@@ -2932,10 +2880,8 @@ result_t test_vqrdmlahq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
   const int32_t *_c = (int32_t *)impl.test_cases_int_pointer3;
   int32_t _d[4];
-  const int64_t round_const = (int64_t)1 << 31;
   for (int i = 0; i < 4; i++) {
-    int64_t tmp = 2 * (int64_t)_b[i] * (int64_t)_c[i] + round_const;
-    _d[i] = saturate_int32((int64_t)_a[i] + (tmp >> 32));
+    _d[i] = sat_rdmlah(_a[i], _b[i], _c[i]);
   }
 
   int32x4_t a = vld1q_s32(_a);
@@ -2958,10 +2904,8 @@ result_t test_vqrdmlsh_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
   const int16_t *_c = (int16_t *)impl.test_cases_int_pointer3;
   int16_t _d[4];
-  const int32_t round_const = 1 << 15;
   for (int i = 0; i < 4; i++) {
-    int32_t tmp = -2 * (int32_t)_b[i] * (int32_t)_c[i] + round_const;
-    _d[i] = saturate_int16((int32_t)_a[i] + (tmp >> 16));
+    _d[i] = sat_rdmlsh(_a[i], _b[i], _c[i]);
   }
 
   int16x4_t a = vld1_s16(_a);
@@ -2984,10 +2928,8 @@ result_t test_vqrdmlsh_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
   const int32_t *_c = (int32_t *)impl.test_cases_int_pointer3;
   int32_t _d[2];
-  const int64_t round_const = (int64_t)1 << 31;
   for (int i = 0; i < 2; i++) {
-    int64_t tmp = -2 * (int64_t)_b[i] * (int64_t)_c[i] + round_const;
-    _d[i] = saturate_int32((int64_t)_a[i] + (tmp >> 32));
+    _d[i] = sat_rdmlsh(_a[i], _b[i], _c[i]);
   }
 
   int32x2_t a = vld1_s32(_a);
@@ -3010,10 +2952,8 @@ result_t test_vqrdmlshq_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
   const int16_t *_c = (int16_t *)impl.test_cases_int_pointer3;
   int16_t _d[8];
-  const int32_t round_const = 1 << 15;
   for (int i = 0; i < 8; i++) {
-    int32_t tmp = -2 * (int32_t)_b[i] * (int32_t)_c[i] + round_const;
-    _d[i] = saturate_int16(_a[i] + (tmp >> 16));
+    _d[i] = sat_rdmlsh(_a[i], _b[i], _c[i]);
   }
 
   int16x8_t a = vld1q_s16(_a);
@@ -3036,10 +2976,8 @@ result_t test_vqrdmlshq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
   const int32_t *_c = (int32_t *)impl.test_cases_int_pointer3;
   int32_t _d[4];
-  const int64_t round_const = (int64_t)1 << 31;
   for (int i = 0; i < 4; i++) {
-    int64_t tmp = -2 * (int64_t)_b[i] * (int64_t)_c[i] + round_const;
-    _d[i] = saturate_int32((int64_t)_a[i] + (tmp >> 32));
+    _d[i] = sat_rdmlsh(_a[i], _b[i], _c[i]);
   }
 
   int32x4_t a = vld1q_s32(_a);
@@ -3279,7 +3217,7 @@ result_t test_vqdmull_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
   int32_t _c[4];
   for (int i = 0; i < 4; i++) {
-    _c[i] = saturate_int32(2 * _a[i] * _b[i]);
+    _c[i] = sat_dmull(_a[i], _b[i]);
   }
 
   int16x4_t a = vld1_s16(_a);
@@ -3295,18 +3233,9 @@ result_t test_vqdmull_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
   const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
   const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
-  int64_t _c[4];
-  float max_f = (float)INT64_MAX, min_f = (float)INT64_MIN;
-  for (int i = 0; i < 4; i++) {
-    float a_f = _a[i];
-    float b_f = _b[i];
-    if ((a_f * b_f > 0) && (2 * a_f * b_f > max_f)) {
-      _c[i] = INT64_MAX;
-    } else if (2 * a_f * b_f < min_f) {
-      _c[i] = INT64_MIN;
-    } else {
-      _c[i] = 2 * (int64_t)_a[i] * (int64_t)_b[i];
-    }
+  int64_t _c[2];
+  for (int i = 0; i < 2; i++) {
+    _c[i] = sat_dmull(_a[i], _b[i]);
   }
 
   int32x2_t a = vld1_s32(_a);
@@ -3895,8 +3824,7 @@ result_t test_vqdmlal_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_c = (int16_t *)impl.test_cases_int_pointer3;
   int32_t _d[4];
   for (int i = 0; i < 4; i++) {
-    int32_t bcx2 = saturate_int32(2 * _b[i] * _c[i]);
-    _d[i] = saturate_int32(_a[i] + bcx2);
+    _d[i] = sat_add(_a[i], sat_dmull(_b[i], _c[i]));
   }
 
   int32x4_t a = vld1q_s32(_a);
@@ -3916,14 +3844,7 @@ result_t test_vqdmlal_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int32_t *_c = (int32_t *)impl.test_cases_int_pointer3;
   int64_t _d[2];
   for (int i = 0; i < 2; i++) {
-    int64_t tmp = (((int64_t)_b[i] * (int64_t)_c[i]) >> 32) * 2 + (_a[i] >> 32);
-    if (tmp > INT64_MAX) {
-      _d[i] = INT64_MAX;
-    } else if (tmp < INT64_MIN) {
-      _d[i] = INT64_MIN;
-    } else {
-      _d[i] = (int64_t)_b[i] * (int64_t)_c[i] * 2 + _a[i];
-    }
+    _d[i] = sat_add(_a[i], sat_dmull(_b[i], _c[i]));
   }
 
   int64x2_t a = vld1q_s64(_a);
@@ -4513,8 +4434,7 @@ result_t test_vqdmlsl_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_c = (int16_t *)impl.test_cases_int_pointer3;
   int32_t _d[4];
   for (int i = 0; i < 4; i++) {
-    int32_t bcx2 = saturate_int32(2 * _b[i] * _c[i]);
-    _d[i] = saturate_int32(_a[i] - bcx2);
+    _d[i] = sat_sub(_a[i], sat_dmull(_b[i], _c[i]));
   }
 
   int32x4_t a = vld1q_s32(_a);
@@ -4533,23 +4453,8 @@ result_t test_vqdmlsl_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
   const int32_t *_c = (int32_t *)impl.test_cases_int_pointer3;
   int64_t _d[2];
-  float max_f = (float)INT64_MAX, min_f = (float)INT64_MIN;
   for (int i = 0; i < 2; i++) {
-    float b_f = _b[i];
-    float c_f = _c[i];
-    int64_t tmp;
-    if ((b_f * c_f > 0) && (2 * b_f * c_f > max_f)) {
-      tmp = INT64_MAX;
-    } else if (2 * b_f * c_f < min_f) {
-      tmp = INT64_MIN;
-    } else {
-      tmp = 2 * (int64_t)_b[i] * (int64_t)_c[i];
-    }
-    if ((tmp > 0 && _a[i] < INT64_MIN + tmp) || (tmp < 0 && _a[i] > INT64_MAX + tmp)) {
-      _d[i] = (tmp > 0) ? INT64_MAX : INT64_MIN;
-    } else {
-      _d[i] = (int64_t)_a[i] - tmp;
-    }
+    _d[i] = sat_sub(_a[i], sat_dmull(_b[i], _c[i]));
   }
 
   int64x2_t a = vld1q_s64(_a);
@@ -5984,7 +5889,7 @@ result_t test_vqsub_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int8_t *_b = (const int8_t *)impl.test_cases_int_pointer2;
   int16_t _c[8];
   for (int i = 0; i < 8; i++) {
-    _c[i] = saturate_int8((int16_t)_a[i] - (int16_t)_b[i]);
+    _c[i] = sat_sub(_a[i], _b[i]);
   }
 
   int8x8_t a = vld1_s8(_a);
@@ -6002,7 +5907,7 @@ result_t test_vqsub_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_b = (const int16_t *)impl.test_cases_int_pointer2;
   int32_t _c[4];
   for (int i = 0; i < 4; i++) {
-    _c[i] = saturate_int16((int32_t)_a[i] - (int32_t)_b[i]);
+    _c[i] = sat_sub(_a[i], _b[i]);
   }
 
   int16x4_t a = vld1_s16(_a);
@@ -6020,7 +5925,7 @@ result_t test_vqsub_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int32_t *_b = (const int32_t *)impl.test_cases_int_pointer2;
   int64_t _c[2];
   for (int i = 0; i < 2; i++) {
-    _c[i] = saturate_int32((int64_t)_a[i] - (int64_t)_b[i]);
+    _c[i] = sat_sub(_a[i], _b[i]);
   }
 
   int32x2_t a = vld1_s32(_a);
@@ -6038,11 +5943,7 @@ result_t test_vqsub_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int64_t *_b = (const int64_t *)impl.test_cases_int_pointer2;
   int64_t _c[1];
   for (int i = 0; i < 1; i++) {
-    if ((_b[i] > 0 && _a[i] < INT64_MIN + _b[i]) || (_b[i] < 0 && _a[i] > INT64_MAX + _b[i])) {
-      _c[i] = (_b[i] > 0) ? INT64_MAX : INT64_MIN;
-    } else {
-      _c[i] = _a[i] - _b[i];
-    }
+    _c[i] = sat_sub(_a[i], _b[i]);
   }
 
   int64x1_t a = vld1_s64(_a);
@@ -6060,7 +5961,7 @@ result_t test_vqsub_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint8_t *_b = (const uint8_t *)impl.test_cases_int_pointer2;
   uint8_t _c[8];
   for (int i = 0; i < 8; i++) {
-    _c[i] = saturate_uint8((int16_t)_a[i] - (int16_t)_b[i]);
+    _c[i] = sat_sub(_a[i], _b[i]);
   }
 
   uint8x8_t a = vld1_u8(_a);
@@ -6078,7 +5979,7 @@ result_t test_vqsub_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint16_t *_b = (const uint16_t *)impl.test_cases_int_pointer2;
   uint32_t _c[4];
   for (int i = 0; i < 4; i++) {
-    _c[i] = saturate_uint16((uint32_t)_a[i] - (uint32_t)_b[i]);
+    _c[i] = sat_sub(_a[i], _b[i]);
   }
 
   uint16x4_t a = vld1_u16(_a);
@@ -6096,7 +5997,7 @@ result_t test_vqsub_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint32_t *_b = (const uint32_t *)impl.test_cases_int_pointer2;
   uint64_t _c[2];
   for (int i = 0; i < 2; i++) {
-    _c[i] = saturate_uint32((uint64_t)_a[i] - (uint64_t)_b[i]);
+    _c[i] = sat_sub(_a[i], _b[i]);
   }
 
   uint32x2_t a = vld1_u32(_a);
@@ -6114,11 +6015,7 @@ result_t test_vqsub_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint64_t *_b = (const uint64_t *)impl.test_cases_int_pointer2;
   uint64_t _c[1];
   for (int i = 0; i < 1; i++) {
-    if (_a[i] > _b[i]) {
-      _c[i] = _a[i] - _b[i];
-    } else {
-      _c[i] = 0;
-    }
+    _c[i] = sat_sub(_a[i], _b[i]);
   }
 
   uint64x1_t a = vld1_u64(_a);
@@ -6136,7 +6033,7 @@ result_t test_vqsubq_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int8_t *_b = (const int8_t *)impl.test_cases_int_pointer2;
   int16_t _c[16];
   for (int i = 0; i < 16; i++) {
-    _c[i] = saturate_int8((int16_t)_a[i] - (int16_t)_b[i]);
+    _c[i] = sat_sub(_a[i], _b[i]);
   }
 
   int8x16_t a = vld1q_s8(_a);
@@ -6155,7 +6052,7 @@ result_t test_vqsubq_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_b = (const int16_t *)impl.test_cases_int_pointer2;
   int32_t _c[8];
   for (int i = 0; i < 8; i++) {
-    _c[i] = saturate_int16((int32_t)_a[i] - (int32_t)_b[i]);
+    _c[i] = sat_sub(_a[i], _b[i]);
   }
 
   int16x8_t a = vld1q_s16(_a);
@@ -6173,7 +6070,7 @@ result_t test_vqsubq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int32_t *_b = (const int32_t *)impl.test_cases_int_pointer2;
   int64_t _c[4];
   for (int i = 0; i < 4; i++) {
-    _c[i] = saturate_int32((int64_t)_a[i] - (int64_t)_b[i]);
+    _c[i] = sat_sub(_a[i], _b[i]);
   }
 
   int32x4_t a = vld1q_s32(_a);
@@ -6191,11 +6088,7 @@ result_t test_vqsubq_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int64_t *_b = (const int64_t *)impl.test_cases_int_pointer2;
   int64_t _c[2];
   for (int i = 0; i < 2; i++) {
-    if ((_b[i] > 0 && _a[i] < INT64_MIN + _b[i]) || (_b[i] < 0 && _a[i] > INT64_MAX + _b[i])) {
-      _c[i] = (_b[i] > 0) ? INT64_MAX : INT64_MIN;
-    } else {
-      _c[i] = _a[i] - _b[i];
-    }
+    _c[i] = sat_sub(_a[i], _b[i]);
   }
 
   int64x2_t a = vld1q_s64(_a);
@@ -6213,7 +6106,7 @@ result_t test_vqsubq_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint8_t *_b = (const uint8_t *)impl.test_cases_int_pointer2;
   uint8_t _c[16];
   for (int i = 0; i < 16; i++) {
-    _c[i] = saturate_uint8((int16_t)_a[i] - (int16_t)_b[i]);
+    _c[i] = sat_sub(_a[i], _b[i]);
   }
 
   uint8x16_t a = vld1q_u8(_a);
@@ -6232,7 +6125,7 @@ result_t test_vqsubq_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint16_t *_b = (const uint16_t *)impl.test_cases_int_pointer2;
   uint32_t _c[8];
   for (int i = 0; i < 8; i++) {
-    _c[i] = saturate_uint16((uint32_t)_a[i] - (uint32_t)_b[i]);
+    _c[i] = sat_sub(_a[i], _b[i]);
   }
 
   uint16x8_t a = vld1q_u16(_a);
@@ -6250,7 +6143,7 @@ result_t test_vqsubq_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint32_t *_b = (const uint32_t *)impl.test_cases_int_pointer2;
   uint64_t _c[4];
   for (int i = 0; i < 4; i++) {
-    _c[i] = saturate_uint32((uint64_t)_a[i] - (uint64_t)_b[i]);
+    _c[i] = sat_sub(_a[i], _b[i]);
   }
 
   uint32x4_t a = vld1q_u32(_a);
@@ -6268,11 +6161,7 @@ result_t test_vqsubq_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint64_t *_b = (const uint64_t *)impl.test_cases_int_pointer2;
   uint64_t _c[2];
   for (int i = 0; i < 2; i++) {
-    if (_a[i] > _b[i]) {
-      _c[i] = _a[i] - _b[i];
-    } else {
-      _c[i] = 0;
-    }
+    _c[i] = sat_sub(_a[i], _b[i]);
   }
 
   uint64x2_t a = vld1q_u64(_a);
@@ -13191,9 +13080,7 @@ result_t test_vqrshl_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int8_t _c[8];
   for (int i = 0; i < 8; i++) {
     if (_b[i] < 0) {
-      int8_t b_neg = -_b[i];
-      uint8_t round_const = 1 << (-_b[i] - 1);
-      _c[i] = (_a[i] + round_const) >> b_neg;
+      _c[i] = sat_rshr(_a[i], _b[i]);
     } else {
       _c[i] = saturate_int8((int16_t)_a[i] << _b[i]);
     }
@@ -13217,9 +13104,7 @@ result_t test_vqrshl_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int16_t _c[4];
   for (int i = 0; i < 4; i++) {
     if (_b[i] < 0) {
-      int16_t b_neg = -_b[i];
-      uint16_t round_const = 1 << (-_b[i] - 1);
-      _c[i] = (_a[i] + round_const) >> b_neg;
+      _c[i] = sat_rshr(_a[i], _b[i]);
     } else {
       _c[i] = saturate_int16((int32_t)_a[i] << _b[i]);
     }
@@ -13243,9 +13128,7 @@ result_t test_vqrshl_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int32_t _c[2];
   for (int i = 0; i < 2; i++) {
     if (_b[i] < 0) {
-      int32_t b_neg = -_b[i];
-      uint32_t round_const = 1 << (-_b[i] - 1);
-      _c[i] = ((int64_t)_a[i] + round_const) >> b_neg;
+      _c[i] = sat_rshr(_a[i], _b[i]);
     } else {
       _c[i] = saturate_int32((int64_t)_a[i] << _b[i]);
     }
@@ -13271,9 +13154,7 @@ result_t test_vqrshl_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   uint8_t _c[8];
   for (int i = 0; i < 8; i++) {
     if (_b[i] < 0) {
-      uint8_t b_neg = -_b[i];
-      uint8_t round_const = 1 << (-_b[i] - 1);
-      _c[i] = (_a[i] + round_const) >> b_neg;
+      _c[i] = sat_rshr(_a[i], _b[i]);
     } else {
       _c[i] = saturate_uint8((uint16_t)_a[i] << _b[i]);
     }
@@ -13297,9 +13178,7 @@ result_t test_vqrshl_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   uint16_t _c[4];
   for (int i = 0; i < 4; i++) {
     if (_b[i] < 0) {
-      uint16_t b_neg = -_b[i];
-      uint16_t round_const = 1 << (-_b[i] - 1);
-      _c[i] = (_a[i] + round_const) >> b_neg;
+      _c[i] = sat_rshr(_a[i], _b[i]);
     } else {
       _c[i] = saturate_uint16((uint32_t)_a[i] << _b[i]);
     }
@@ -13323,9 +13202,7 @@ result_t test_vqrshl_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   uint32_t _c[2];
   for (int i = 0; i < 2; i++) {
     if (_b[i] < 0) {
-      uint32_t b_neg = -_b[i];
-      uint32_t round_const = 1 << (-_b[i] - 1);
-      _c[i] = ((uint64_t)_a[i] + round_const) >> b_neg;
+      _c[i] = sat_rshr(_a[i], _b[i]);
     } else {
       _c[i] = saturate_uint32((uint64_t)_a[i] << _b[i]);
     }
@@ -13351,9 +13228,7 @@ result_t test_vqrshlq_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int8_t _c[16];
   for (int i = 0; i < 16; i++) {
     if (_b[i] < 0) {
-      int8_t b_neg = -_b[i];
-      uint8_t round_const = 1 << (-_b[i] - 1);
-      _c[i] = (_a[i] + round_const) >> b_neg;
+      _c[i] = sat_rshr(_a[i], _b[i]);
     } else {
       _c[i] = saturate_int8((int16_t)_a[i] << _b[i]);
     }
@@ -13378,9 +13253,7 @@ result_t test_vqrshlq_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int16_t _c[8];
   for (int i = 0; i < 8; i++) {
     if (_b[i] < 0) {
-      int16_t b_neg = -_b[i];
-      uint16_t round_const = 1 << (-_b[i] - 1);
-      _c[i] = (_a[i] + round_const) >> b_neg;
+      _c[i] = sat_rshr(_a[i], _b[i]);
     } else {
       _c[i] = saturate_int16((int32_t)_a[i] << _b[i]);
     }
@@ -13404,9 +13277,7 @@ result_t test_vqrshlq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int32_t _c[4];
   for (int i = 0; i < 4; i++) {
     if (_b[i] < 0) {
-      int32_t b_neg = -_b[i];
-      uint32_t round_const = 1 << (-_b[i] - 1);
-      _c[i] = ((int64_t)_a[i] + round_const) >> b_neg;
+      _c[i] = sat_rshr(_a[i], _b[i]);
     } else {
       _c[i] = saturate_int32((int64_t)_a[i] << _b[i]);
     }
@@ -13432,9 +13303,7 @@ result_t test_vqrshlq_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   uint8_t _c[16];
   for (int i = 0; i < 16; i++) {
     if (_b[i] < 0) {
-      uint8_t b_neg = -_b[i];
-      uint8_t round_const = 1 << (-_b[i] - 1);
-      _c[i] = (_a[i] + round_const) >> b_neg;
+      _c[i] = sat_rshr(_a[i], _b[i]);
     } else {
       _c[i] = saturate_uint8((uint16_t)_a[i] << _b[i]);
     }
@@ -13459,9 +13328,7 @@ result_t test_vqrshlq_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   uint16_t _c[8];
   for (int i = 0; i < 8; i++) {
     if (_b[i] < 0) {
-      uint16_t b_neg = -_b[i];
-      uint16_t round_const = 1 << (-_b[i] - 1);
-      _c[i] = (_a[i] + round_const) >> b_neg;
+      _c[i] = sat_rshr(_a[i], _b[i]);
     } else {
       _c[i] = saturate_uint16((uint32_t)_a[i] << _b[i]);
     }
@@ -13485,9 +13352,7 @@ result_t test_vqrshlq_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   uint32_t _c[4];
   for (int i = 0; i < 4; i++) {
     if (_b[i] < 0) {
-      uint32_t b_neg = -_b[i];
-      uint32_t round_const = 1 << (-_b[i] - 1);
-      _c[i] = ((uint64_t)_a[i] + round_const) >> b_neg;
+      _c[i] = sat_rshr(_a[i], _b[i]);
     } else {
       _c[i] = saturate_uint32((uint64_t)_a[i] << _b[i]);
     }
@@ -23419,16 +23284,15 @@ result_t test_vqdmlal_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int32x4_t a, d;
   int16x4_t b, c;
   int32_t _d[4];
-#define TEST_IMPL(IDX)                                  \
-  for (int i = 0; i < 4; i++) {                         \
-    int32_t bcx2 = saturate_int32(2 * _b[i] * _c[IDX]); \
-    _d[i] = saturate_int32(_a[i] + bcx2);               \
-  }                                                     \
-                                                        \
-  a = vld1q_s32(_a);                                    \
-  b = vld1_s16(_b);                                     \
-  c = vld1_s16(_c);                                     \
-  d = vqdmlal_lane_s16(a, b, c, IDX);                   \
+#define TEST_IMPL(IDX)                                 \
+  for (int i = 0; i < 4; i++) {                        \
+    _d[i] = sat_add(_a[i], sat_dmull(_b[i], _c[IDX])); \
+  }                                                    \
+                                                       \
+  a = vld1q_s32(_a);                                   \
+  b = vld1_s16(_b);                                    \
+  c = vld1_s16(_c);                                    \
+  d = vqdmlal_lane_s16(a, b, c, IDX);                  \
   CHECK_RESULT(validate_int32(d, _d[0], _d[1], _d[2], _d[3]))
 
   IMM_4_ITER
@@ -23449,22 +23313,15 @@ result_t test_vqdmlal_lane_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int32x2_t b, c;
   int64_t _d[2];
 
-#define TEST_IMPL(IDX)                                                             \
-  for (int i = 0; i < 2; i++) {                                                    \
-    int64_t tmp = (((int64_t)_b[i] * (int64_t)_c[IDX]) >> 32) * 2 + (_a[i] >> 32); \
-    if (tmp > INT64_MAX) {                                                         \
-      _d[i] = INT64_MAX;                                                           \
-    } else if (tmp < INT64_MIN) {                                                  \
-      _d[i] = INT64_MIN;                                                           \
-    } else {                                                                       \
-      _d[i] = (int64_t)_b[i] * (int64_t)_c[IDX] * 2 + _a[i];                       \
-    }                                                                              \
-  }                                                                                \
-                                                                                   \
-  a = vld1q_s64(_a);                                                               \
-  b = vld1_s32(_b);                                                                \
-  c = vld1_s32(_c);                                                                \
-  d = vqdmlal_lane_s32(a, b, c, IDX);                                              \
+#define TEST_IMPL(IDX)                                 \
+  for (int i = 0; i < 2; i++) {                        \
+    _d[i] = sat_add(_a[i], sat_dmull(_b[i], _c[IDX])); \
+  }                                                    \
+                                                       \
+  a = vld1q_s64(_a);                                   \
+  b = vld1_s32(_b);                                    \
+  c = vld1_s32(_c);                                    \
+  d = vqdmlal_lane_s32(a, b, c, IDX);                  \
   CHECK_RESULT(validate_int64(d, _d[0], _d[1]))
 
   IMM_2_ITER
@@ -23929,12 +23786,11 @@ result_t test_vqdmlsl_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int32x4_t d;
   int32_t _d[4];
 
-#define TEST_IMPL(IDX)                                  \
-  for (int i = 0; i < 4; i++) {                         \
-    int32_t bcx2 = saturate_int32(2 * _b[i] * _c[IDX]); \
-    _d[i] = saturate_int32(_a[i] - bcx2);               \
-  }                                                     \
-  d = vqdmlsl_lane_s16(a, b, c, IDX);                   \
+#define TEST_IMPL(IDX)                                 \
+  for (int i = 0; i < 4; i++) {                        \
+    _d[i] = sat_sub(_a[i], sat_dmull(_b[i], _c[IDX])); \
+  }                                                    \
+  d = vqdmlsl_lane_s16(a, b, c, IDX);                  \
   CHECK_RESULT(validate_int32(d, _d[0], _d[1], _d[2], _d[3]))
 
   IMM_2_ITER
@@ -23955,27 +23811,13 @@ result_t test_vqdmlsl_lane_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int32x2_t b = vld1_s32(_b);
   int32x2_t c = vld1_s32(_c);
   int64x2_t d;
-  int64_t _d[2], tmp;
-  float b_f, c_f, max_f = (float)INT64_MAX, min_f = (float)INT64_MIN;
+  int64_t _d[2];
 
-#define TEST_IMPL(IDX)                                                                  \
-  for (int i = 0; i < 2; i++) {                                                         \
-    b_f = _b[i];                                                                        \
-    c_f = _c[IDX];                                                                      \
-    if ((b_f * c_f > 0) && (2 * b_f * c_f > max_f)) {                                   \
-      tmp = INT64_MAX;                                                                  \
-    } else if (2 * b_f * c_f < min_f) {                                                 \
-      tmp = INT64_MIN;                                                                  \
-    } else {                                                                            \
-      tmp = 2 * (int64_t)_b[i] * (int64_t)_c[IDX];                                      \
-    }                                                                                   \
-    if ((tmp > 0 && _a[i] < INT64_MIN + tmp) || (tmp < 0 && _a[i] > INT64_MAX + tmp)) { \
-      _d[i] = (tmp > 0) ? INT64_MAX : INT64_MIN;                                        \
-    } else {                                                                            \
-      _d[i] = (int64_t)_a[i] - tmp;                                                     \
-    }                                                                                   \
-  }                                                                                     \
-  d = vqdmlsl_lane_s32(a, b, c, IDX);                                                   \
+#define TEST_IMPL(IDX)                                 \
+  for (int i = 0; i < 2; i++) {                        \
+    _d[i] = sat_sub(_a[i], sat_dmull(_b[i], _c[IDX])); \
+  }                                                    \
+  d = vqdmlsl_lane_s32(a, b, c, IDX);                  \
   CHECK_RESULT(validate_int64(d, _d[0], _d[1]))
 
   IMM_2_ITER
@@ -24140,11 +23982,11 @@ result_t test_vqdmull_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int16x4_t b = vld1_s16(_b);
   int32x4_t c;
 
-#define TEST_IMPL(IDX)                           \
-  for (int i = 0; i < 4; i++) {                  \
-    _c[i] = saturate_int32(2 * _a[i] * _b[IDX]); \
-  }                                              \
-  c = vqdmull_lane_s16(a, b, IDX);               \
+#define TEST_IMPL(IDX)                 \
+  for (int i = 0; i < 4; i++) {        \
+    _c[i] = sat_dmull(_a[i], _b[IDX]); \
+  }                                    \
+  c = vqdmull_lane_s16(a, b, IDX);     \
   CHECK_RESULT(validate_int32(c, _c[0], _c[1], _c[2], _c[3]))
 
   IMM_4_ITER
@@ -24164,21 +24006,12 @@ result_t test_vqdmull_lane_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int32x2_t a = vld1_s32(_a);
   int32x2_t b = vld1_s32(_b);
   int64x2_t c;
-  float a_f, b_f, max_f = (float)INT64_MAX, min_f = (float)INT64_MIN;
 
-#define TEST_IMPL(IDX)                                \
-  for (int i = 0; i < 2; i++) {                       \
-    a_f = _a[i];                                      \
-    b_f = _b[IDX];                                    \
-    if ((a_f * b_f > 0) && (2 * a_f * b_f > max_f)) { \
-      _c[i] = INT64_MAX;                              \
-    } else if (2 * a_f * b_f < min_f) {               \
-      _c[i] = INT64_MIN;                              \
-    } else {                                          \
-      _c[i] = 2 * (int64_t)_a[i] * (int64_t)_b[IDX];  \
-    }                                                 \
-  }                                                   \
-  c = vqdmull_lane_s32(a, b, IDX);                    \
+#define TEST_IMPL(IDX)                 \
+  for (int i = 0; i < 2; i++) {        \
+    _c[i] = sat_dmull(_a[i], _b[IDX]); \
+  }                                    \
+  c = vqdmull_lane_s32(a, b, IDX);     \
   CHECK_RESULT(validate_int64(c, _c[0], _c[1]))
 
   IMM_2_ITER
@@ -24291,7 +24124,6 @@ result_t test_vqdmulh_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   for (int i = 0; i < 4; i++) {                                          \
     _c[i] = saturate_int16(2 * (int32_t)_a[i] * (int32_t)_b[IDX] >> 16); \
   }                                                                      \
-                                                                         \
   a = vld1_s16(_a);                                                      \
   b = vld1_s16(_b);                                                      \
   c = vqdmulh_lane_s16(a, b, IDX);                                       \
@@ -24317,7 +24149,6 @@ result_t test_vqdmulh_lane_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   for (int i = 0; i < 2; i++) {                                          \
     _c[i] = saturate_int32(2 * (int64_t)_a[i] * (int64_t)_b[IDX] >> 32); \
   }                                                                      \
-                                                                         \
   a = vld1_s32(_a);                                                      \
   b = vld1_s32(_b);                                                      \
   c = vqdmulh_lane_s32(a, b, IDX);                                       \
@@ -24339,17 +24170,15 @@ result_t test_vqrdmulhq_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) 
   int16_t _c[8];
   int16x8_t a, c;
   int16x4_t b;
-  const int32_t round = 1 << 15;
 
-#define TEST_IMPL(IDX)                                           \
-  for (int i = 0; i < 8; i++) {                                  \
-    int32_t tmp = 2 * (int32_t)_a[i] * (int32_t)_b[IDX] + round; \
-    _c[i] = saturate_int16(tmp >> 16);                           \
-  }                                                              \
-                                                                 \
-  a = vld1q_s16(_a);                                             \
-  b = vld1_s16(_b);                                              \
-  c = vqrdmulhq_lane_s16(a, b, IDX);                             \
+#define TEST_IMPL(IDX)                  \
+  for (int i = 0; i < 8; i++) {         \
+    _c[i] = sat_rdmulh(_a[i], _b[IDX]); \
+  }                                     \
+                                        \
+  a = vld1q_s16(_a);                    \
+  b = vld1_s16(_b);                     \
+  c = vqrdmulhq_lane_s16(a, b, IDX);    \
   CHECK_RESULT(validate_int16(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]))
 
   IMM_4_ITER
@@ -24368,18 +24197,14 @@ result_t test_vqrdmulhq_lane_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) 
   int32_t _c[4];
   int32x4_t a, c;
   int32x2_t b;
-  const int64_t round = 1;
 
-#define TEST_IMPL(IDX)                                   \
-  for (int i = 0; i < 4; i++) {                          \
-    int64_t tmp = 2 * (int64_t)_a[i] * (int64_t)_b[IDX]; \
-    tmp = tmp >> 31;                                     \
-    tmp += round;                                        \
-    _c[i] = saturate_int32(tmp >> 1);                    \
-  }                                                      \
-  a = vld1q_s32(_a);                                     \
-  b = vld1_s32(_b);                                      \
-  c = vqrdmulhq_lane_s32(a, b, IDX);                     \
+#define TEST_IMPL(IDX)                  \
+  for (int i = 0; i < 4; i++) {         \
+    _c[i] = sat_rdmulh(_a[i], _b[IDX]); \
+  }                                     \
+  a = vld1q_s32(_a);                    \
+  b = vld1_s32(_b);                     \
+  c = vqrdmulhq_lane_s32(a, b, IDX);    \
   CHECK_RESULT(validate_int32(c, _c[0], _c[1], _c[2], _c[3]))
 
   IMM_2_ITER
@@ -24413,17 +24238,15 @@ result_t test_vqrdmulh_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
   int16_t _c[4];
   int16x4_t a, b, c;
-  const int32_t round = 1 << 15;
 
-#define TEST_IMPL(IDX)                                           \
-  for (int i = 0; i < 4; i++) {                                  \
-    int32_t tmp = 2 * (int32_t)_a[i] * (int32_t)_b[IDX] + round; \
-    _c[i] = saturate_int16(tmp >> 16);                           \
-  }                                                              \
-                                                                 \
-  a = vld1_s16(_a);                                              \
-  b = vld1_s16(_b);                                              \
-  c = vqrdmulh_lane_s16(a, b, IDX);                              \
+#define TEST_IMPL(IDX)                  \
+  for (int i = 0; i < 4; i++) {         \
+    _c[i] = sat_rdmulh(_a[i], _b[IDX]); \
+  }                                     \
+                                        \
+  a = vld1_s16(_a);                     \
+  b = vld1_s16(_b);                     \
+  c = vqrdmulh_lane_s16(a, b, IDX);     \
   CHECK_RESULT(validate_int16(c, _c[0], _c[1], _c[2], _c[3]))
 
   IMM_4_ITER
@@ -24441,18 +24264,14 @@ result_t test_vqrdmulh_lane_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
   int32_t _c[2];
   int32x2_t a, b, c;
-  const int64_t round = 1;
 
-#define TEST_IMPL(IDX)                                   \
-  for (int i = 0; i < 2; i++) {                          \
-    int64_t tmp = 2 * (int64_t)_a[i] * (int64_t)_b[IDX]; \
-    tmp = tmp >> 31;                                     \
-    tmp += round;                                        \
-    _c[i] = saturate_int32(tmp >> 1);                    \
-  }                                                      \
-  a = vld1_s32(_a);                                      \
-  b = vld1_s32(_b);                                      \
-  c = vqrdmulh_lane_s32(a, b, IDX);                      \
+#define TEST_IMPL(IDX)                  \
+  for (int i = 0; i < 2; i++) {         \
+    _c[i] = sat_rdmulh(_a[i], _b[IDX]); \
+  }                                     \
+  a = vld1_s32(_a);                     \
+  b = vld1_s32(_b);                     \
+  c = vqrdmulh_lane_s32(a, b, IDX);     \
   CHECK_RESULT(validate_int32(c, _c[0], _c[1]))
 
   IMM_2_ITER
@@ -24473,17 +24292,15 @@ result_t test_vqrdmlahq_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) 
   const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
   const int16_t *_c = (int16_t *)impl.test_cases_int_pointer3;
   int16_t _d[8];
-  const int32_t round_const = 1 << 15;
   int16x8_t a, b, d;
   int16x4_t c;
-#define TEST_IMPL(IDX)                                                 \
-  for (int i = 0; i < 8; i++) {                                        \
-    int32_t tmp = 2 * (int32_t)_b[i] * (int32_t)_c[IDX] + round_const; \
-    _d[i] = saturate_int16(_a[i] + (tmp >> 16));                       \
-  }                                                                    \
-  a = vld1q_s16(_a);                                                   \
-  b = vld1q_s16(_b);                                                   \
-  c = vld1_s16(_c);                                                    \
+#define TEST_IMPL(IDX)                         \
+  for (int i = 0; i < 8; i++) {                \
+    _d[i] = sat_rdmlah(_a[i], _b[i], _c[IDX]); \
+  }                                            \
+  a = vld1q_s16(_a);                           \
+  b = vld1q_s16(_b);                           \
+  c = vld1_s16(_c);                            \
   d = vqrdmlahq_lane_s16(a, b, c, IDX);
 
   IMM_4_ITER
@@ -24509,17 +24326,15 @@ result_t test_vqrdmlahq_lane_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) 
   const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
   const int32_t *_c = (int32_t *)impl.test_cases_int_pointer3;
   int32_t _d[4];
-  const int64_t round_const = (int64_t)1 << 31;
   int32x4_t a, b, d;
   int32x2_t c;
-#define TEST_IMPL(IDX)                                                 \
-  for (int i = 0; i < 4; i++) {                                        \
-    int64_t tmp = 2 * (int64_t)_b[i] * (int64_t)_c[IDX] + round_const; \
-    _d[i] = saturate_int32(_a[i] + (tmp >> 32));                       \
-  }                                                                    \
-  a = vld1q_s32(_a);                                                   \
-  b = vld1q_s32(_b);                                                   \
-  c = vld1_s32(_c);                                                    \
+#define TEST_IMPL(IDX)                         \
+  for (int i = 0; i < 4; i++) {                \
+    _d[i] = sat_rdmlah(_a[i], _b[i], _c[IDX]); \
+  }                                            \
+  a = vld1q_s32(_a);                           \
+  b = vld1q_s32(_b);                           \
+  c = vld1_s32(_c);                            \
   d = vqrdmlahq_lane_s32(a, b, c, IDX);
 
   IMM_2_ITER
@@ -24530,7 +24345,7 @@ result_t test_vqrdmlahq_lane_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) 
 #else
   return TEST_UNIMPL;
 #endif  // ENABLE_TEST_ALL
-}
+}  // namespace NEON2RVV
 
 result_t test_vqrdmlah_laneq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
@@ -24545,16 +24360,14 @@ result_t test_vqrdmlah_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
   const int16_t *_c = (int16_t *)impl.test_cases_int_pointer3;
   int16_t _d[4];
-  const int32_t round_const = 1 << 15;
   int16x4_t a, b, c, d;
-#define TEST_IMPL(IDX)                                                 \
-  for (int i = 0; i < 4; i++) {                                        \
-    int32_t tmp = 2 * (int32_t)_b[i] * (int32_t)_c[IDX] + round_const; \
-    _d[i] = saturate_int16(_a[i] + (tmp >> 16));                       \
-  }                                                                    \
-  a = vld1_s16(_a);                                                    \
-  b = vld1_s16(_b);                                                    \
-  c = vld1_s16(_c);                                                    \
+#define TEST_IMPL(IDX)                         \
+  for (int i = 0; i < 4; i++) {                \
+    _d[i] = sat_rdmlah(_a[i], _b[i], _c[IDX]); \
+  }                                            \
+  a = vld1_s16(_a);                            \
+  b = vld1_s16(_b);                            \
+  c = vld1_s16(_c);                            \
   d = vqrdmlah_lane_s16(a, b, c, IDX);
 
   IMM_4_ITER
@@ -24576,16 +24389,14 @@ result_t test_vqrdmlah_lane_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
   const int32_t *_c = (int32_t *)impl.test_cases_int_pointer3;
   int32_t _d[2];
-  const int64_t round_const = (int64_t)1 << 31;
   int32x2_t a, b, c, d;
-#define TEST_IMPL(IDX)                                                 \
-  for (int i = 0; i < 2; i++) {                                        \
-    int64_t tmp = 2 * (int64_t)_b[i] * (int64_t)_c[IDX] + round_const; \
-    _d[i] = saturate_int32(_a[i] + (tmp >> 32));                       \
-  }                                                                    \
-  a = vld1_s32(_a);                                                    \
-  b = vld1_s32(_b);                                                    \
-  c = vld1_s32(_c);                                                    \
+#define TEST_IMPL(IDX)                         \
+  for (int i = 0; i < 2; i++) {                \
+    _d[i] = sat_rdmlah(_a[i], _b[i], _c[IDX]); \
+  }                                            \
+  a = vld1_s32(_a);                            \
+  b = vld1_s32(_b);                            \
+  c = vld1_s32(_c);                            \
   d = vqrdmlah_lane_s32(a, b, c, IDX);
 
   IMM_2_ITER
@@ -24607,17 +24418,15 @@ result_t test_vqrdmlshq_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) 
   const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
   const int16_t *_c = (int16_t *)impl.test_cases_int_pointer3;
   int16_t _d[8];
-  const int32_t round_const = 1 << 15;
   int16x8_t a, b, d;
   int16x4_t c;
-#define TEST_IMPL(IDX)                                                  \
-  for (int i = 0; i < 8; i++) {                                         \
-    int32_t tmp = -2 * (int32_t)_b[i] * (int32_t)_c[IDX] + round_const; \
-    _d[i] = saturate_int16(_a[i] - (tmp >> 16));                        \
-  }                                                                     \
-  a = vld1q_s16(_a);                                                    \
-  b = vld1q_s16(_b);                                                    \
-  c = vld1_s16(_c);                                                     \
+#define TEST_IMPL(IDX)                         \
+  for (int i = 0; i < 8; i++) {                \
+    _d[i] = sat_rdmlsh(_a[i], _b[i], _c[IDX]); \
+  }                                            \
+  a = vld1q_s16(_a);                           \
+  b = vld1q_s16(_b);                           \
+  c = vld1_s16(_c);                            \
   d = vqrdmlshq_lane_s16(a, b, c, IDX);
 
   IMM_4_ITER
@@ -24646,14 +24455,13 @@ result_t test_vqrdmlshq_lane_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) 
   const int64_t round_const = (int64_t)1 << 31;
   int32x4_t a, b, d;
   int32x2_t c;
-#define TEST_IMPL(IDX)                                                  \
-  for (int i = 0; i < 4; i++) {                                         \
-    int64_t tmp = -2 * (int64_t)_b[i] * (int64_t)_c[IDX] + round_const; \
-    _d[i] = saturate_int32(_a[i] - (tmp >> 32));                        \
-  }                                                                     \
-  a = vld1q_s32(_a);                                                    \
-  b = vld1q_s32(_b);                                                    \
-  c = vld1_s32(_c);                                                     \
+#define TEST_IMPL(IDX)                         \
+  for (int i = 0; i < 4; i++) {                \
+    _d[i] = sat_rdmlsh(_a[i], _b[i], _c[IDX]); \
+  }                                            \
+  a = vld1q_s32(_a);                           \
+  b = vld1q_s32(_b);                           \
+  c = vld1_s32(_c);                            \
   d = vqrdmlshq_lane_s32(a, b, c, IDX);
 
   IMM_2_ITER
@@ -25883,16 +25691,14 @@ result_t test_vqrdmlsh_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
   const int16_t *_c = (int16_t *)impl.test_cases_int_pointer3;
   int16_t _d[4];
-  const int32_t round_const = 1 << 15;
   int16x4_t a, b, c, d;
-#define TEST_IMPL(IDX)                                                  \
-  for (int i = 0; i < 4; i++) {                                         \
-    int32_t tmp = -2 * (int32_t)_b[i] * (int32_t)_c[IDX] + round_const; \
-    _d[i] = saturate_int16(_a[i] - (tmp >> 16));                        \
-  }                                                                     \
-  a = vld1_s16(_a);                                                     \
-  b = vld1_s16(_b);                                                     \
-  c = vld1_s16(_c);                                                     \
+#define TEST_IMPL(IDX)                         \
+  for (int i = 0; i < 4; i++) {                \
+    _d[i] = sat_rdmlsh(_a[i], _b[i], _c[IDX]); \
+  }                                            \
+  a = vld1_s16(_a);                            \
+  b = vld1_s16(_b);                            \
+  c = vld1_s16(_c);                            \
   d = vqrdmlsh_lane_s16(a, b, c, IDX);
 
   IMM_4_ITER
@@ -25914,16 +25720,14 @@ result_t test_vqrdmlsh_lane_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
   const int32_t *_c = (int32_t *)impl.test_cases_int_pointer3;
   int32_t _d[2];
-  const int64_t round_const = (int64_t)1 << 31;
   int32x2_t a, b, c, d;
-#define TEST_IMPL(IDX)                                                  \
-  for (int i = 0; i < 2; i++) {                                         \
-    int64_t tmp = -2 * (int64_t)_b[i] * (int64_t)_c[IDX] + round_const; \
-    _d[i] = saturate_int32(_a[i] - (tmp >> 32));                        \
-  }                                                                     \
-  a = vld1_s32(_a);                                                     \
-  b = vld1_s32(_b);                                                     \
-  c = vld1_s32(_c);                                                     \
+#define TEST_IMPL(IDX)                         \
+  for (int i = 0; i < 2; i++) {                \
+    _d[i] = sat_rdmlsh(_a[i], _b[i], _c[IDX]); \
+  }                                            \
+  a = vld1_s32(_a);                            \
+  b = vld1_s32(_b);                            \
+  c = vld1_s32(_c);                            \
   d = vqrdmlsh_lane_s32(a, b, c, IDX);
 
   IMM_2_ITER
@@ -26194,7 +25998,7 @@ result_t test_vqdmull_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int16x4_t a = vld1_s16(_a);
 
   for (int i = 0; i < 4; i++) {
-    _c[i] = saturate_int32(2 * _a[i] * _b[0]);
+    _c[i] = sat_dmull(_a[i], _b[0]);
   }
   int32x4_t c = vqdmull_n_s16(a, _b[0]);
   return validate_int32(c, _c[0], _c[1], _c[2], _c[3]);
@@ -26210,17 +26014,8 @@ result_t test_vqdmull_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int64_t _c[2];
   int32x2_t a = vld1_s32(_a);
 
-  float max_f = (float)INT64_MAX, min_f = (float)INT64_MIN;
   for (int i = 0; i < 2; i++) {
-    float a_f = _a[i];
-    float b_f = _b[0];
-    if ((a_f * b_f > 0) && (2 * a_f * b_f > max_f)) {
-      _c[i] = INT64_MAX;
-    } else if (2 * a_f * b_f < min_f) {
-      _c[i] = INT64_MIN;
-    } else {
-      _c[i] = 2 * (int64_t)_a[i] * (int64_t)_b[0];
-    }
+    _c[i] = sat_dmull(_a[i], _b[0]);
   }
   int64x2_t c = vqdmull_n_s32(a, _b[0]);
   return validate_int64(c, _c[0], _c[1]);
@@ -26306,10 +26101,8 @@ result_t test_vqrdmulhq_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
   const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
   int16_t _c[8];
-  const int32_t round = 1 << 15;
   for (int i = 0; i < 8; i++) {
-    int32_t tmp = 2 * (int32_t)_a[i] * (int32_t)_b[0] + round;
-    _c[i] = saturate_int16(tmp >> 16);
+    _c[i] = sat_rdmulh(_a[i], _b[0]);
   }
 
   int16x8_t a = vld1q_s16(_a);
@@ -26325,12 +26118,8 @@ result_t test_vqrdmulhq_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
   const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
   int32_t _c[4];
-  int32_t round = 1;
   for (int i = 0; i < 4; i++) {
-    int64_t tmp = 2 * (int64_t)_a[i] * (int64_t)_b[0];
-    tmp = tmp >> 31;
-    tmp += round;
-    _c[i] = saturate_int32(tmp >> 1);
+    _c[i] = sat_rdmulh(_a[i], _b[0]);
   }
 
   int32x4_t a = vld1q_s32(_a);
@@ -26346,10 +26135,8 @@ result_t test_vqrdmulh_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
   const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
   int16_t _c[4];
-  const int32_t round = 1 << 15;
   for (int i = 0; i < 4; i++) {
-    int32_t tmp = 2 * (int32_t)_a[i] * (int32_t)_b[0] + round;
-    _c[i] = saturate_int16(tmp >> 16);
+    _c[i] = sat_rdmulh(_a[i], _b[0]);
   }
 
   int16x4_t a = vld1_s16(_a);
@@ -26365,12 +26152,8 @@ result_t test_vqrdmulh_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
   const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
   int32_t _c[2];
-  int32_t round = 1;
   for (int i = 0; i < 2; i++) {
-    int64_t tmp = 2 * (int64_t)_a[i] * (int64_t)_b[0];
-    tmp = tmp >> 31;
-    tmp += round;
-    _c[i] = saturate_int32(tmp >> 1);
+    _c[i] = sat_rdmulh(_a[i], _b[0]);
   }
 
   int32x2_t a = vld1_s32(_a);
@@ -26662,8 +26445,7 @@ result_t test_vqdmlal_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_c = (int16_t *)impl.test_cases_int_pointer3;
   int32_t _d[4];
   for (int i = 0; i < 4; i++) {
-    int32_t bcx2 = saturate_int32(2 * _b[i] * _c[0]);
-    _d[i] = saturate_int32(_a[i] + bcx2);
+    _d[i] = sat_add(_a[i], sat_dmull(_b[i], _c[0]));
   }
 
   int32x4_t a = vld1q_s32(_a);
@@ -26682,14 +26464,7 @@ result_t test_vqdmlal_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int32_t *_c = (int32_t *)impl.test_cases_int_pointer3;
   int64_t _d[2];
   for (int i = 0; i < 2; i++) {
-    int64_t tmp = (((int64_t)_b[i] * (int64_t)_c[0]) >> 32) * 2 + (_a[i] >> 32);
-    if (tmp > INT64_MAX) {
-      _d[i] = INT64_MAX;
-    } else if (tmp < INT64_MIN) {
-      _d[i] = INT64_MIN;
-    } else {
-      _d[i] = (int64_t)_b[i] * (int64_t)_c[0] * 2 + _a[i];
-    }
+    _d[i] = sat_add(_a[i], sat_dmull(_b[i], _c[0]));
   }
 
   int64x2_t a = vld1q_s64(_a);
@@ -26986,8 +26761,7 @@ result_t test_vqdmlsl_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_c = (int16_t *)impl.test_cases_int_pointer3;
   int32_t _d[4];
   for (int i = 0; i < 4; i++) {
-    int32_t bcx2 = saturate_int32(2 * _b[i] * _c[0]);
-    _d[i] = saturate_int32(_a[i] - bcx2);
+    _d[i] = sat_sub(_a[i], sat_dmull(_b[i], _c[0]));
   }
 
   int32x4_t a = vld1q_s32(_a);
@@ -27005,23 +26779,8 @@ result_t test_vqdmlsl_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
   const int32_t *_c = (int32_t *)impl.test_cases_int_pointer3;
   int64_t _d[2];
-  float max_f = (float)INT64_MAX, min_f = (float)INT64_MIN;
   for (int i = 0; i < 2; i++) {
-    float b_f = _b[i];
-    float c_f = _c[0];
-    int64_t tmp;
-    if ((b_f * c_f > 0) && (2 * b_f * c_f > max_f)) {
-      tmp = INT64_MAX;
-    } else if (2 * b_f * c_f < min_f) {
-      tmp = INT64_MIN;
-    } else {
-      tmp = 2 * (int64_t)_b[i] * (int64_t)_c[0];
-    }
-    if ((tmp > 0 && _a[i] < INT64_MIN + tmp) || (tmp < 0 && _a[i] > INT64_MAX + tmp)) {
-      _d[i] = (tmp > 0) ? INT64_MAX : INT64_MIN;
-    } else {
-      _d[i] = (int64_t)_a[i] - tmp;
-    }
+    _d[i] = sat_sub(_a[i], sat_dmull(_b[i], _c[0]));
   }
 
   int64x2_t a = vld1q_s64(_a);
