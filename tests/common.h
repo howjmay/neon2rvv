@@ -149,6 +149,78 @@ uint16_t saturate_uint16(int a);
 int32_t saturate_int32(int64_t a);
 uint32_t saturate_uint32(int64_t a);
 
+#define SATURATE_ADD_SUB(BIT)                                             \
+  static inline int##BIT##_t sat_add(int##BIT##_t a, int##BIT##_t b) {    \
+    if (a > 0 && b > INT##BIT##_MAX - a) {                                \
+      return INT##BIT##_MAX;                                              \
+    } else if (a < 0 && b < INT##BIT##_MIN - a) {                         \
+      return INT##BIT##_MIN;                                              \
+    } else                                                                \
+      return a + b;                                                       \
+  }                                                                       \
+  static inline uint##BIT##_t sat_add(uint##BIT##_t a, uint##BIT##_t b) { \
+    uint##BIT##_t r = a + b;                                              \
+    r |= -(r < a);                                                        \
+    return r;                                                             \
+  }                                                                       \
+  static inline int##BIT##_t sat_sub(int##BIT##_t a, int##BIT##_t b) {    \
+    if (b > 0 && a < INT##BIT##_MIN + b) {                                \
+      return INT##BIT##_MIN;                                              \
+    } else if (b < 0 && a > INT##BIT##_MAX + b) {                         \
+      return INT##BIT##_MAX;                                              \
+    } else                                                                \
+      return a - b;                                                       \
+  }                                                                       \
+  static inline uint##BIT##_t sat_sub(uint##BIT##_t a, uint##BIT##_t b) { \
+    uint##BIT##_t r = a - b;                                              \
+    r &= -(r <= a);                                                       \
+    return r;                                                             \
+  }
+SATURATE_ADD_SUB(8)
+SATURATE_ADD_SUB(16)
+SATURATE_ADD_SUB(32)
+SATURATE_ADD_SUB(64)
+
+// CBIT stands for current bit size, and HBIT stands for higher bit size
+#define SATURATE_DMUL(CBIT, HBIT)                                                                               \
+  static inline int##HBIT##_t sat_dmull(int##CBIT##_t a, int##CBIT##_t b) {                                     \
+    int##HBIT##_t tmp = (int##HBIT##_t)a * (int##HBIT##_t)b;                                                    \
+    return tmp > INT##HBIT##_MAX / 2 ? INT##HBIT##_MAX : tmp < INT##HBIT##_MIN / 2 ? INT##HBIT##_MIN : tmp * 2; \
+  }                                                                                                             \
+  static inline uint##HBIT##_t sat_dmull(uint##CBIT##_t a, uint##CBIT##_t b) {                                  \
+    uint##HBIT##_t tmp = a * b;                                                                                 \
+    return tmp > UINT##HBIT##_MAX / 2 ? UINT##HBIT##_MAX : tmp * 2;                                             \
+  }                                                                                                             \
+  static inline int##HBIT##_t sat_rdmulh(int##CBIT##_t a, int##CBIT##_t b) {                                    \
+    int##HBIT##_t tmp = sat_dmull(a, b);                                                                        \
+    tmp = (tmp >> (CBIT - 1)) + 1;                                                                              \
+    return saturate_int##CBIT(tmp >> 1);                                                                        \
+  }                                                                                                             \
+  static inline int##CBIT##_t sat_rdmlah(int##CBIT##_t a, int##CBIT##_t b, int##CBIT##_t c) {                   \
+    int##HBIT##_t tmp = sat_dmull(b, c);                                                                        \
+    tmp = sat_add(tmp, (int##HBIT##_t)(1 << (CBIT - 1)));                                                       \
+    return sat_add(a, (int##CBIT##_t)(tmp >> CBIT));                                                            \
+  }                                                                                                             \
+  static inline int##CBIT##_t sat_rdmlsh(int##CBIT##_t a, int##CBIT##_t b, int##CBIT##_t c) {                   \
+    int##HBIT##_t tmp = sat_dmull(b, c);                                                                        \
+    tmp = sat_sub(tmp, (int##HBIT##_t)(1 << (CBIT - 1)));                                                       \
+    return sat_sub(a, (int##CBIT##_t)(tmp >> CBIT));                                                            \
+  }
+SATURATE_DMUL(8, 16)
+SATURATE_DMUL(16, 32)
+SATURATE_DMUL(32, 64)
+
+#define SATURATE_SHIFT(CBIT, HBIT)                                           \
+  static inline int##CBIT##_t sat_rshr(int##CBIT##_t a, int##CBIT##_t b) {   \
+    return ((int##HBIT##_t)a + (1 << (-b - 1))) >> (-b);                     \
+  }                                                                          \
+  static inline uint##CBIT##_t sat_rshr(uint##CBIT##_t a, int##CBIT##_t b) { \
+    return ((uint##HBIT##_t)a + (1 << (-b - 1))) >> (-b);                    \
+  }
+SATURATE_SHIFT(8, 16)
+SATURATE_SHIFT(16, 32)
+SATURATE_SHIFT(32, 64)
+
 #if defined(__riscv) || defined(__riscv__)
 #define DEFINE_TUPLEx2_GET(TYPE, SIGN, BIT, ELT_NUM)                                                          \
   __attribute__((unused)) static void TYPE##x2_get_##TYPE(TYPE##x##ELT_NUM##x2_t a, TYPE##x##ELT_NUM##_t *a0, \
