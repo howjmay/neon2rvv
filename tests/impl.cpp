@@ -1809,21 +1809,109 @@ result_t test_vqaddq_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #endif  // ENABLE_TEST_ALL
 }
 
-result_t test_vqaddb_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vqaddb_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int8_t *_a = (const int8_t *)impl.test_cases_int_pointer1;
+  const int8_t *_b = (const int8_t *)impl.test_cases_int_pointer2;
+  int8_t _c = sat_add(_a[0], _b[0]);
 
-result_t test_vqaddh_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  int8_t c = vqaddb_s8(_a[0], _b[0]);
+  return c == _c ? TEST_SUCCESS : TEST_FAIL;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
-result_t test_vqadds_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vqaddh_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int16_t *_a = (const int16_t *)impl.test_cases_int_pointer1;
+  const int16_t *_b = (const int16_t *)impl.test_cases_int_pointer2;
+  int16_t _c = sat_add(_a[0], _b[0]);
 
-result_t test_vqaddd_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  int16_t c = vqaddh_s16(_a[0], _b[0]);
+  return c == _c ? TEST_SUCCESS : TEST_FAIL;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
-result_t test_vqaddb_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vqadds_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int32_t *_a = (const int32_t *)impl.test_cases_int_pointer1;
+  const int32_t *_b = (const int32_t *)impl.test_cases_int_pointer2;
+  int32_t _c = sat_add(_a[0], _b[0]);
 
-result_t test_vqaddh_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  int32_t c = vqadds_s32(_a[0], _b[0]);
+  return c == _c ? TEST_SUCCESS : TEST_FAIL;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
-result_t test_vqadds_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vqaddd_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int64_t *_a = (const int64_t *)impl.test_cases_int_pointer1;
+  const int64_t *_b = (const int64_t *)impl.test_cases_int_pointer2;
+  int64_t _c = sat_add(_a[0], _b[0]);
 
-result_t test_vqaddd_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  int64_t c = vqaddd_s64(_a[0], _b[0]);
+  return c == _c ? TEST_SUCCESS : TEST_FAIL;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vqaddb_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint8_t *_a = (const uint8_t *)impl.test_cases_int_pointer1;
+  const uint8_t *_b = (const uint8_t *)impl.test_cases_int_pointer2;
+  uint8_t _c = sat_add(_a[0], _b[0]);
+
+  uint8_t c = vqaddb_u8(_a[0], _b[0]);
+  return c == _c ? TEST_SUCCESS : TEST_FAIL;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vqaddh_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint16_t *_a = (const uint16_t *)impl.test_cases_int_pointer1;
+  const uint16_t *_b = (const uint16_t *)impl.test_cases_int_pointer2;
+  uint16_t _c = sat_add(_a[0], _b[0]);
+
+  uint16_t c = vqaddh_u16(_a[0], _b[0]);
+  return c == _c ? TEST_SUCCESS : TEST_FAIL;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vqadds_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint32_t *_a = (const uint32_t *)impl.test_cases_int_pointer1;
+  const uint32_t *_b = (const uint32_t *)impl.test_cases_int_pointer2;
+  uint32_t _c = sat_add(_a[0], _b[0]);
+
+  uint32_t c = vqadds_u32(_a[0], _b[0]);
+  return c == _c ? TEST_SUCCESS : TEST_FAIL;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vqaddd_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint64_t *_a = (const uint64_t *)impl.test_cases_int_pointer1;
+  const uint64_t *_b = (const uint64_t *)impl.test_cases_int_pointer2;
+  uint64_t _c = sat_add(_a[0], _b[0]);
+
+  uint64_t c = vqaddd_u64(_a[0], _b[0]);
+  return c == _c ? TEST_SUCCESS : TEST_FAIL;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vuqadd_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 

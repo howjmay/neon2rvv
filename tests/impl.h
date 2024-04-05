@@ -92,14 +92,14 @@
   _(vqaddq_u16)                                                                  \
   _(vqaddq_u32)                                                                  \
   _(vqaddq_u64)                                                                  \
-  /*_(vqaddb_s8)                                                              */ \
-  /*_(vqaddh_s16)                                                             */ \
-  /*_(vqadds_s32)                                                             */ \
-  /*_(vqaddd_s64)                                                             */ \
-  /*_(vqaddb_u8)                                                              */ \
-  /*_(vqaddh_u16)                                                             */ \
-  /*_(vqadds_u32)                                                             */ \
-  /*_(vqaddd_u64)                                                             */ \
+  _(vqaddb_s8)                                                                   \
+  _(vqaddh_s16)                                                                  \
+  _(vqadds_s32)                                                                  \
+  _(vqaddd_s64)                                                                  \
+  _(vqaddb_u8)                                                                   \
+  _(vqaddh_u16)                                                                  \
+  _(vqadds_u32)                                                                  \
+  _(vqaddd_u64)                                                                  \
   /*_(vuqadd_s8)                                                              */ \
   /*_(vuqaddq_s8)                                                             */ \
   /*_(vuqadd_s16)                                                             */ \

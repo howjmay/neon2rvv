@@ -745,7 +745,7 @@ result_t validate_double_error(float64x1_t a, double d0, double err) {
 }
 
 result_t validate_double_error(double a, double d0, double err) {
-  double df0 = fabsf((a - d0) / d0);
+  double df0 = abs((a - d0) / d0);
   if ((std::isnan(a) && std::isnan(d0)) || (a == 0 && d0 == 0) || (std::isinf(a) && std::isinf(d0))) {
     df0 = 0;
   }

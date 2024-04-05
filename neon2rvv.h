@@ -459,21 +459,53 @@ FORCE_INLINE uint32x4_t vqaddq_u32(uint32x4_t a, uint32x4_t b) { return __riscv_
 
 FORCE_INLINE uint64x2_t vqaddq_u64(uint64x2_t a, uint64x2_t b) { return __riscv_vsaddu_vv_u64m1(a, b, 2); }
 
-// FORCE_INLINE int8_t vqaddb_s8(int8_t a, int8_t b);
+#define SATURATE_ADD_SUB(BIT)                                                       \
+  static inline int##BIT##_t sat_add_int##BIT(int##BIT##_t a, int##BIT##_t b) {     \
+    if (a > 0 && b > INT##BIT##_MAX - a) {                                          \
+      return INT##BIT##_MAX;                                                        \
+    } else if (a < 0 && b < INT##BIT##_MIN - a) {                                   \
+      return INT##BIT##_MIN;                                                        \
+    } else                                                                          \
+      return a + b;                                                                 \
+  }                                                                                 \
+  static inline uint##BIT##_t sat_add_uint##BIT(uint##BIT##_t a, uint##BIT##_t b) { \
+    uint##BIT##_t r = a + b;                                                        \
+    r |= -(r < a);                                                                  \
+    return r;                                                                       \
+  }                                                                                 \
+  static inline int##BIT##_t sat_sub_int##BIT(int##BIT##_t a, int##BIT##_t b) {     \
+    if (b > 0 && a < INT##BIT##_MIN + b) {                                          \
+      return INT##BIT##_MIN;                                                        \
+    } else if (b < 0 && a > INT##BIT##_MAX + b) {                                   \
+      return INT##BIT##_MAX;                                                        \
+    } else                                                                          \
+      return a - b;                                                                 \
+  }                                                                                 \
+  static inline uint##BIT##_t sat_sub_uint##BIT(uint##BIT##_t a, uint##BIT##_t b) { \
+    uint##BIT##_t r = a - b;                                                        \
+    r &= -(r <= a);                                                                 \
+    return r;                                                                       \
+  }
+SATURATE_ADD_SUB(8)
+SATURATE_ADD_SUB(16)
+SATURATE_ADD_SUB(32)
+SATURATE_ADD_SUB(64)
 
-// FORCE_INLINE int16_t vqaddh_s16(int16_t a, int16_t b);
+FORCE_INLINE int8_t vqaddb_s8(int8_t a, int8_t b) { return sat_add_int8(a, b); }
 
-// FORCE_INLINE int32_t vqadds_s32(int32_t a, int32_t b);
+FORCE_INLINE int16_t vqaddh_s16(int16_t a, int16_t b) { return sat_add_int16(a, b); }
 
-// FORCE_INLINE int64_t vqaddd_s64(int64_t a, int64_t b);
+FORCE_INLINE int32_t vqadds_s32(int32_t a, int32_t b) { return sat_add_int32(a, b); }
 
-// FORCE_INLINE uint8_t vqaddb_u8(uint8_t a, uint8_t b);
+FORCE_INLINE int64_t vqaddd_s64(int64_t a, int64_t b) { return sat_add_int64(a, b); }
 
-// FORCE_INLINE uint16_t vqaddh_u16(uint16_t a, uint16_t b);
+FORCE_INLINE uint8_t vqaddb_u8(uint8_t a, uint8_t b) { return sat_add_uint8(a, b); }
 
-// FORCE_INLINE uint32_t vqadds_u32(uint32_t a, uint32_t b);
+FORCE_INLINE uint16_t vqaddh_u16(uint16_t a, uint16_t b) { return sat_add_uint16(a, b); }
 
-// FORCE_INLINE uint64_t vqaddd_u64(uint64_t a, uint64_t b);
+FORCE_INLINE uint32_t vqadds_u32(uint32_t a, uint32_t b) { return sat_add_uint32(a, b); }
+
+FORCE_INLINE uint64_t vqaddd_u64(uint64_t a, uint64_t b) { return sat_add_uint64(a, b); }
 
 // FORCE_INLINE int8x8_t vuqadd_s8(int8x8_t a, uint8x8_t b);
 
