@@ -300,16 +300,16 @@
   _(vfmaq_f32)                                                                   \
   _(vfma_f64)                                                                    \
   _(vfmaq_f64)                                                                   \
-  /*_(vfma_lane_f32)                                                          */ \
-  /*_(vfmaq_lane_f32)                                                         */ \
-  /*_(vfma_lane_f64)                                                          */ \
-  /*_(vfmaq_lane_f64)                                                         */ \
-  /*_(vfmas_lane_f32)                                                         */ \
-  /*_(vfmad_lane_f64)                                                         */ \
-  /*_(vfma_laneq_f32)                                                         */ \
-  /*_(vfmaq_laneq_f32)                                                        */ \
-  /*_(vfma_laneq_f64)                                                         */ \
-  /*_(vfmaq_laneq_f64)                                                        */ \
+  _(vfma_lane_f32)                                                               \
+  _(vfmaq_lane_f32)                                                              \
+  _(vfma_lane_f64)                                                               \
+  _(vfmaq_lane_f64)                                                              \
+  _(vfmas_lane_f32)                                                              \
+  _(vfmad_lane_f64)                                                              \
+  _(vfma_laneq_f32)                                                              \
+  _(vfmaq_laneq_f32)                                                             \
+  _(vfma_laneq_f64)                                                              \
+  _(vfmaq_laneq_f64)                                                             \
   /*_(vfmas_laneq_f32)                                                        */ \
   /*_(vfmad_laneq_f64)                                                        */ \
   _(vfms_f32)                                                                    \

@@ -697,6 +697,15 @@ result_t validate_float_error(float32x2_t a, float f0, float f1, float err) {
   return TEST_SUCCESS;
 }
 
+result_t validate_float_error(float32_t a, float f0, float err) {
+  float df0 = fabsf((a - f0) / f0);
+  if ((std::isnan(a) && std::isnan(f0)) || (a == 0 && f0 == 0) || (std::isinf(a) && std::isinf(f0))) {
+    df0 = 0;
+  }
+  ASSERT_RETURN(df0 < err);
+  return TEST_SUCCESS;
+}
+
 result_t validate_double(float64x2_t a, double d0, double d1) {
   const double *t = (const double *)&a;
   ASSERT_RETURN(validate_float_pair(t[0], d0));
@@ -732,6 +741,15 @@ result_t validate_double_error(float64x1_t a, double d0, double err) {
     td0 = 0;
   }
   ASSERT_RETURN(td0 < err);
+  return TEST_SUCCESS;
+}
+
+result_t validate_double_error(double a, double d0, double err) {
+  double df0 = fabsf((a - d0) / d0);
+  if ((std::isnan(a) && std::isnan(d0)) || (a == 0 && d0 == 0) || (std::isinf(a) && std::isinf(d0))) {
+    df0 = 0;
+  }
+  ASSERT_RETURN(df0 < err);
   return TEST_SUCCESS;
 }
 
