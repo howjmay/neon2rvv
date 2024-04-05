@@ -258,10 +258,10 @@
   _(vmlal_high_u32)                                                              \
   _(vqdmlal_s16)                                                                 \
   _(vqdmlal_s32)                                                                 \
-  /*_(vqdmlalh_s16)                                                           */ \
-  /*_(vqdmlals_s32)                                                           */ \
-  /*_(vqdmlal_high_s16)                                                       */ \
-  /*_(vqdmlal_high_s32)                                                       */ \
+  _(vqdmlalh_s16)                                                                \
+  _(vqdmlals_s32)                                                                \
+  _(vqdmlal_high_s16)                                                            \
+  _(vqdmlal_high_s32)                                                            \
   _(vmls_s8)                                                                     \
   _(vmls_s16)                                                                    \
   _(vmls_s32)                                                                    \
@@ -292,10 +292,10 @@
   _(vmlsl_high_u32)                                                              \
   _(vqdmlsl_s16)                                                                 \
   _(vqdmlsl_s32)                                                                 \
-  /*_(vqdmlslh_s16)                                                           */ \
-  /*_(vqdmlsls_s32)                                                           */ \
-  /*_(vqdmlsl_high_s16)                                                       */ \
-  /*_(vqdmlsl_high_s32)                                                       */ \
+  _(vqdmlslh_s16)                                                                \
+  _(vqdmlsls_s32)                                                                \
+  _(vqdmlsl_high_s16)                                                            \
+  _(vqdmlsl_high_s32)                                                            \
   _(vfma_f32)                                                                    \
   _(vfmaq_f32)                                                                   \
   _(vfma_f64)                                                                    \
