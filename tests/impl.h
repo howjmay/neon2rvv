@@ -431,14 +431,14 @@
   _(vqsubq_u16)                                                                  \
   _(vqsubq_u32)                                                                  \
   _(vqsubq_u64)                                                                  \
-  /*_(vqsubb_s8)                                                              */ \
-  /*_(vqsubh_s16)                                                             */ \
-  /*_(vqsubs_s32)                                                             */ \
-  /*_(vqsubd_s64)                                                             */ \
-  /*_(vqsubb_u8)                                                              */ \
-  /*_(vqsubh_u16)                                                             */ \
-  /*_(vqsubs_u32)                                                             */ \
-  /*_(vqsubd_u64)                                                             */ \
+  _(vqsubb_s8)                                                                   \
+  _(vqsubh_s16)                                                                  \
+  _(vqsubs_s32)                                                                  \
+  _(vqsubd_s64)                                                                  \
+  _(vqsubb_u8)                                                                   \
+  _(vqsubh_u16)                                                                  \
+  _(vqsubs_u32)                                                                  \
+  _(vqsubd_u64)                                                                  \
   _(vsubhn_s16)                                                                  \
   _(vsubhn_s32)                                                                  \
   _(vsubhn_s64)                                                                  \
