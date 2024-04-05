@@ -445,12 +445,12 @@
   _(vsubhn_u16)                                                                  \
   _(vsubhn_u32)                                                                  \
   _(vsubhn_u64)                                                                  \
-  /*_(vsubhn_high_s16)                                                        */ \
-  /*_(vsubhn_high_s32)                                                        */ \
-  /*_(vsubhn_high_s64)                                                        */ \
-  /*_(vsubhn_high_u16)                                                        */ \
-  /*_(vsubhn_high_u32)                                                        */ \
-  /*_(vsubhn_high_u64)                                                        */ \
+  _(vsubhn_high_s16)                                                             \
+  _(vsubhn_high_s32)                                                             \
+  _(vsubhn_high_s64)                                                             \
+  _(vsubhn_high_u16)                                                             \
+  _(vsubhn_high_u32)                                                             \
+  _(vsubhn_high_u64)                                                             \
   _(vrsubhn_s16)                                                                 \
   _(vrsubhn_s32)                                                                 \
   _(vrsubhn_s64)                                                                 \
