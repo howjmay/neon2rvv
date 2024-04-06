@@ -543,21 +543,21 @@
   _(vcled_u64)                                                                   \
   _(vcles_f32)                                                                   \
   _(vcled_f64)                                                                   \
-  /*_(vclez_s8)                                                               */ \
-  /*_(vclezq_s8)                                                              */ \
-  /*_(vclez_s16)                                                              */ \
-  /*_(vclezq_s16)                                                             */ \
-  /*_(vclez_s32)                                                              */ \
-  /*_(vclezq_s32)                                                             */ \
-  /*_(vclez_s64)                                                              */ \
-  /*_(vclezq_s64)                                                             */ \
-  /*_(vclez_f32)                                                              */ \
-  /*_(vclezq_f32)                                                             */ \
-  /*_(vclez_f64)                                                              */ \
-  /*_(vclezq_f64)                                                             */ \
-  /*_(vclezd_s64)                                                             */ \
-  /*_(vclezs_f32)                                                             */ \
-  /*_(vclezd_f64)                                                             */ \
+  _(vclez_s8)                                                                    \
+  _(vclezq_s8)                                                                   \
+  _(vclez_s16)                                                                   \
+  _(vclezq_s16)                                                                  \
+  _(vclez_s32)                                                                   \
+  _(vclezq_s32)                                                                  \
+  _(vclez_s64)                                                                   \
+  _(vclezq_s64)                                                                  \
+  _(vclez_f32)                                                                   \
+  _(vclezq_f32)                                                                  \
+  _(vclez_f64)                                                                   \
+  _(vclezq_f64)                                                                  \
+  _(vclezd_s64)                                                                  \
+  _(vclezs_f32)                                                                  \
+  _(vclezd_f64)                                                                  \
   _(vcleq_u8)                                                                    \
   _(vcleq_u16)                                                                   \
   _(vcleq_u32)                                                                   \
