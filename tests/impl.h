@@ -504,21 +504,21 @@
   _(vcged_u64)                                                                   \
   _(vcges_f32)                                                                   \
   _(vcged_f64)                                                                   \
-  /*_(vcgez_s8)                                                               */ \
-  /*_(vcgezq_s8)                                                              */ \
-  /*_(vcgez_s16)                                                              */ \
-  /*_(vcgezq_s16)                                                             */ \
-  /*_(vcgez_s32)                                                              */ \
-  /*_(vcgezq_s32)                                                             */ \
-  /*_(vcgez_s64)                                                              */ \
-  /*_(vcgezq_s64)                                                             */ \
-  /*_(vcgez_f32)                                                              */ \
-  /*_(vcgezq_f32)                                                             */ \
-  /*_(vcgez_f64)                                                              */ \
-  /*_(vcgezq_f64)                                                             */ \
-  /*_(vcgezd_s64)                                                             */ \
-  /*_(vcgezs_f32)                                                             */ \
-  /*_(vcgezd_f64)                                                             */ \
+  _(vcgez_s8)                                                                    \
+  _(vcgezq_s8)                                                                   \
+  _(vcgez_s16)                                                                   \
+  _(vcgezq_s16)                                                                  \
+  _(vcgez_s32)                                                                   \
+  _(vcgezq_s32)                                                                  \
+  _(vcgez_s64)                                                                   \
+  _(vcgezq_s64)                                                                  \
+  _(vcgez_f32)                                                                   \
+  _(vcgezq_f32)                                                                  \
+  _(vcgez_f64)                                                                   \
+  _(vcgezq_f64)                                                                  \
+  _(vcgezd_s64)                                                                  \
+  _(vcgezs_f32)                                                                  \
+  _(vcgezd_f64)                                                                  \
   _(vcgeq_u8)                                                                    \
   _(vcgeq_u16)                                                                   \
   _(vcgeq_u32)                                                                   \
