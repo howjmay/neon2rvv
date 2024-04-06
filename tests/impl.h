@@ -703,10 +703,10 @@
   _(vtstq_u16)                                                                   \
   _(vtstq_u32)                                                                   \
   /*_(vtstq_p8)                                                          */      \
-  /*_(vtst_s64)                                                               */ \
-  /*_(vtstq_s64)                                                              */ \
-  /*_(vtst_u64)                                                               */ \
-  /*_(vtstq_u64)                                                              */ \
+  _(vtst_s64)                                                                    \
+  _(vtstq_s64)                                                                   \
+  _(vtst_u64)                                                                    \
+  _(vtstq_u64)                                                                   \
   /*_(vtstq_p16)                                                         */      \
   _(vabd_s8)                                                                     \
   _(vabd_s16)                                                                    \
@@ -3826,8 +3826,8 @@
   _(vceqzd_f64)                                                                  \
   /*_(vtst_p64)                                                          */      \
   /*_(vtstq_p64)                                                              */ \
-  /*_(vtstd_s64)                                                              */ \
-  /*_(vtstd_u64)                                                              */ \
+  _(vtstd_s64)                                                                   \
+  _(vtstd_u64)                                                                   \
   _(vaeseq_u8)                                                                   \
   _(vaesdq_u8)                                                                   \
   _(vaesmcq_u8)                                                                  \
