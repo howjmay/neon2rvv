@@ -2921,21 +2921,39 @@ FORCE_INLINE uint32x4_t vtstq_u32(uint32x4_t a, uint32x4_t b) {
 
 // FORCE_INLINE uint8x16_t vtstq_p8(poly8x16_t a, poly8x16_t b);
 
-// FORCE_INLINE uint64x1_t vtst_s64(int64x1_t a, int64x1_t b);
+FORCE_INLINE uint64x1_t vtst_s64(int64x1_t a, int64x1_t b) {
+  vuint64m1_t ab_and =
+      __riscv_vand_vv_u64m1(__riscv_vreinterpret_v_i64m1_u64m1(a), __riscv_vreinterpret_v_i64m1_u64m1(b), 1);
+  vbool64_t nonzero_mask = __riscv_vmsgtu_vx_u64m1_b64(ab_and, 0, 1);
+  return __riscv_vmerge_vxm_u64m1(vdup_n_u64(0), UINT64_MAX, nonzero_mask, 1);
+}
 
-// FORCE_INLINE uint64x2_t vtstq_s64(int64x2_t a, int64x2_t b);
+FORCE_INLINE uint64x2_t vtstq_s64(int64x2_t a, int64x2_t b) {
+  vuint64m1_t ab_and =
+      __riscv_vand_vv_u64m1(__riscv_vreinterpret_v_i64m1_u64m1(a), __riscv_vreinterpret_v_i64m1_u64m1(b), 2);
+  vbool64_t nonzero_mask = __riscv_vmsgtu_vx_u64m1_b64(ab_and, 0, 2);
+  return __riscv_vmerge_vxm_u64m1(vdupq_n_u64(0), UINT64_MAX, nonzero_mask, 2);
+}
 
-// FORCE_INLINE uint64x1_t vtst_u64(uint64x1_t a, uint64x1_t b);
+FORCE_INLINE uint64x1_t vtst_u64(uint64x1_t a, uint64x1_t b) {
+  vuint64m1_t ab_and = __riscv_vand_vv_u64m1(a, b, 1);
+  vbool64_t nonzero_mask = __riscv_vmsgtu_vx_u64m1_b64(ab_and, 0, 1);
+  return __riscv_vmerge_vxm_u64m1(vdup_n_u64(0), UINT64_MAX, nonzero_mask, 1);
+}
 
-// FORCE_INLINE uint64x2_t vtstq_u64(uint64x2_t a, uint64x2_t b);
+FORCE_INLINE uint64x2_t vtstq_u64(uint64x2_t a, uint64x2_t b) {
+  vuint64m1_t ab_and = __riscv_vand_vv_u64m1(a, b, 2);
+  vbool64_t nonzero_mask = __riscv_vmsgtu_vx_u64m1_b64(ab_and, 0, 2);
+  return __riscv_vmerge_vxm_u64m1(vdupq_n_u64(0), UINT64_MAX, nonzero_mask, 2);
+}
 
 // FORCE_INLINE uint64x1_t vtst_p64(poly64x1_t a, poly64x1_t b);
 
 // FORCE_INLINE uint64x2_t vtstq_p64(poly64x2_t a, poly64x2_t b);
 
-// FORCE_INLINE uint64_t vtstd_s64(int64_t a, int64_t b);
+FORCE_INLINE uint64_t vtstd_s64(int64_t a, int64_t b) { return (a & b) ? UINT64_MAX : 0x0; }
 
-// FORCE_INLINE uint64_t vtstd_u64(uint64_t a, uint64_t b);
+FORCE_INLINE uint64_t vtstd_u64(uint64_t a, uint64_t b) { return (a & b) ? UINT64_MAX : 0x0; }
 
 FORCE_INLINE int8x8_t vabd_s8(int8x8_t a, int8x8_t b) {
   // TODO need to benchmark the two implementation
