@@ -732,12 +732,12 @@
   _(vabdl_u8)                                                                    \
   _(vabdl_u16)                                                                   \
   _(vabdl_u32)                                                                   \
-  /*_(vabdl_high_s8)                                                          */ \
-  /*_(vabdl_high_s16)                                                         */ \
-  /*_(vabdl_high_s32)                                                         */ \
-  /*_(vabdl_high_u8)                                                          */ \
-  /*_(vabdl_high_u16)                                                         */ \
-  /*_(vabdl_high_u32)                                                         */ \
+  _(vabdl_high_s8)                                                               \
+  _(vabdl_high_s16)                                                              \
+  _(vabdl_high_s32)                                                              \
+  _(vabdl_high_u8)                                                               \
+  _(vabdl_high_u16)                                                              \
+  _(vabdl_high_u32)                                                              \
   _(vaba_s8)                                                                     \
   _(vaba_s16)                                                                    \
   _(vaba_s32)                                                                    \
