@@ -494,16 +494,16 @@
   _(vcgeq_s16)                                                                   \
   _(vcgeq_s32)                                                                   \
   _(vcgeq_f32)                                                                   \
-  /*_(vcge_s64)                                                               */ \
-  /*_(vcgeq_s64)                                                              */ \
-  /*_(vcge_u64)                                                               */ \
-  /*_(vcgeq_u64)                                                              */ \
-  /*_(vcge_f64)                                                               */ \
-  /*_(vcgeq_f64)                                                              */ \
-  /*_(vcged_s64)                                                              */ \
-  /*_(vcged_u64)                                                              */ \
-  /*_(vcges_f32)                                                              */ \
-  /*_(vcged_f64)                                                              */ \
+  _(vcge_s64)                                                                    \
+  _(vcgeq_s64)                                                                   \
+  _(vcge_u64)                                                                    \
+  _(vcgeq_u64)                                                                   \
+  _(vcge_f64)                                                                    \
+  _(vcgeq_f64)                                                                   \
+  _(vcged_s64)                                                                   \
+  _(vcged_u64)                                                                   \
+  _(vcges_f32)                                                                   \
+  _(vcged_f64)                                                                   \
   /*_(vcgez_s8)                                                               */ \
   /*_(vcgezq_s8)                                                              */ \
   /*_(vcgez_s16)                                                              */ \
