@@ -224,10 +224,10 @@
   /*_(vmull_high_p8)                                                          */ \
   _(vqdmull_s16)                                                                 \
   _(vqdmull_s32)                                                                 \
-  /*_(vqdmullh_s16)                                                           */ \
-  /*_(vqdmulls_s32)                                                           */ \
-  /*_(vqdmull_high_s16)                                                       */ \
-  /*_(vqdmull_high_s32)                                                       */ \
+  _(vqdmullh_s16)                                                                \
+  _(vqdmulls_s32)                                                                \
+  _(vqdmull_high_s16)                                                            \
+  _(vqdmull_high_s32)                                                            \
   _(vmla_s8)                                                                     \
   _(vmla_s16)                                                                    \
   _(vmla_s32)                                                                    \
