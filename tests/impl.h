@@ -533,16 +533,16 @@
   _(vcleq_s16)                                                                   \
   _(vcleq_s32)                                                                   \
   _(vcleq_f32)                                                                   \
-  /*_(vcle_s64)                                                               */ \
-  /*_(vcleq_s64)                                                              */ \
-  /*_(vcle_u64)                                                               */ \
-  /*_(vcleq_u64)                                                              */ \
-  /*_(vcle_f64)                                                               */ \
-  /*_(vcleq_f64)                                                              */ \
-  /*_(vcled_s64)                                                              */ \
-  /*_(vcled_u64)                                                              */ \
-  /*_(vcles_f32)                                                              */ \
-  /*_(vcled_f64)                                                              */ \
+  _(vcle_s64)                                                                    \
+  _(vcleq_s64)                                                                   \
+  _(vcle_u64)                                                                    \
+  _(vcleq_u64)                                                                   \
+  _(vcle_f64)                                                                    \
+  _(vcleq_f64)                                                                   \
+  _(vcled_s64)                                                                   \
+  _(vcled_u64)                                                                   \
+  _(vcles_f32)                                                                   \
+  _(vcled_f64)                                                                   \
   /*_(vclez_s8)                                                               */ \
   /*_(vclezq_s8)                                                              */ \
   /*_(vclez_s16)                                                              */ \
