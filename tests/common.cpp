@@ -713,9 +713,41 @@ result_t validate_double(float64x2_t a, double d0, double d1) {
   return TEST_SUCCESS;
 }
 
+result_t validate_double(float64x2x2_t a, double d0, double d1, double d2, double d3) {
+#if defined(__riscv) || defined(__riscv__)
+  vfloat64m1_t a0 = __riscv_vget_v_f64m1x2_f64m1(a, 0);
+  vfloat64m1_t a1 = __riscv_vget_v_f64m1x2_f64m1(a, 1);
+  const double *t0 = (const double *)&a0;
+  const double *t1 = (const double *)&a1;
+#elif defined(__aarch64__) || defined(_M_ARM64)
+  const double *t0 = (const double *)&a.val[0];
+  const double *t1 = (const double *)&a.val[1];
+#endif
+  ASSERT_RETURN(validate_float_pair(t0[0], d0));
+  ASSERT_RETURN(validate_float_pair(t0[1], d1));
+  ASSERT_RETURN(validate_float_pair(t1[0], d2));
+  ASSERT_RETURN(validate_float_pair(t1[1], d3));
+  return TEST_SUCCESS;
+}
+
 result_t validate_double(float64x1_t a, double d0) {
   const double *t = (const double *)&a;
   ASSERT_RETURN(validate_float_pair(t[0], d0));
+  return TEST_SUCCESS;
+}
+
+result_t validate_double(float64x1x2_t a, double d0, double d1) {
+#if defined(__riscv) || defined(__riscv__)
+  vfloat64m1_t a0 = __riscv_vget_v_f64m1x2_f64m1(a, 0);
+  vfloat64m1_t a1 = __riscv_vget_v_f64m1x2_f64m1(a, 1);
+  const double *t0 = (const double *)&a0;
+  const double *t1 = (const double *)&a1;
+#elif defined(__aarch64__) || defined(_M_ARM64)
+  const double *t0 = (const double *)&a.val[0];
+  const double *t1 = (const double *)&a.val[1];
+#endif
+  ASSERT_RETURN(validate_float_pair(t0[0], d0));
+  ASSERT_RETURN(validate_float_pair(t1[0], d1));
   return TEST_SUCCESS;
 }
 
