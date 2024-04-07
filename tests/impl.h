@@ -647,11 +647,11 @@
   _(vabsq_s16)                                                                   \
   _(vabsq_s32)                                                                   \
   _(vabsq_f32)                                                                   \
-  /*_(vabs_s64)                                                               */ \
-  /*_(vabsd_s64)                                                              */ \
-  /*_(vabsq_s64)                                                              */ \
-  /*_(vabs_f64)                                                               */ \
-  /*_(vabsq_f64)                                                              */ \
+  _(vabs_s64)                                                                    \
+  _(vabsd_s64)                                                                   \
+  _(vabsq_s64)                                                                   \
+  _(vabs_f64)                                                                    \
+  _(vabsq_f64)                                                                   \
   _(vqabs_s8)                                                                    \
   _(vqabs_s16)                                                                   \
   _(vqabs_s32)                                                                   \
