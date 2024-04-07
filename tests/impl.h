@@ -756,12 +756,12 @@
   _(vabal_u8)                                                                    \
   _(vabal_u16)                                                                   \
   _(vabal_u32)                                                                   \
-  /*_(vabal_high_s8)                                                          */ \
-  /*_(vabal_high_s16)                                                         */ \
-  /*_(vabal_high_s32)                                                         */ \
-  /*_(vabal_high_u8)                                                          */ \
-  /*_(vabal_high_u16)                                                         */ \
-  /*_(vabal_high_u32)                                                         */ \
+  _(vabal_high_s8)                                                               \
+  _(vabal_high_s16)                                                              \
+  _(vabal_high_s32)                                                              \
+  _(vabal_high_u8)                                                               \
+  _(vabal_high_u16)                                                              \
+  _(vabal_high_u32)                                                              \
   _(vmax_s8)                                                                     \
   _(vmax_s16)                                                                    \
   _(vmax_s32)                                                                    \
