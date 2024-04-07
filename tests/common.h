@@ -138,7 +138,9 @@ result_t validate_float_error(float32x4_t a, float f0, float f1, float f2, float
 result_t validate_float_error(float32x2_t a, float f0, float f1, float err);
 result_t validate_float_error(float32_t a, float f0, float err);
 result_t validate_double(float64x2_t a, double d0, double d1);
+result_t validate_double(float64x2x2_t a, double d0, double d1, double d2, double d3);
 result_t validate_double(float64x1_t a, double d0);
+result_t validate_double(float64x1x2_t a, double d0, double d1);
 result_t validate_double_error(float64x2_t a, double d0, double d1, double err);
 result_t validate_double_error(float64x1_t a, double d0, double err);
 result_t validate_double_error(double a, double d0, double err);
