@@ -2843,17 +2843,45 @@ FORCE_INLINE int32x4_t vqabsq_s32(int32x4_t a) {
   return __riscv_vssub_vv_i32m1(a_xor, mask, 4);
 }
 
-// FORCE_INLINE int64x1_t vqabs_s64(int64x1_t a);
+FORCE_INLINE int64x1_t vqabs_s64(int64x1_t a) {
+  vint64m1_t mask = __riscv_vsra_vx_i64m1(a, 63, 1);
+  vint64m1_t a_xor = __riscv_vxor_vv_i64m1(a, mask, 1);
+  return __riscv_vssub_vv_i64m1(a_xor, mask, 1);
+}
 
-// FORCE_INLINE int64x2_t vqabsq_s64(int64x2_t a);
+FORCE_INLINE int64x2_t vqabsq_s64(int64x2_t a) {
+  vint64m1_t mask = __riscv_vsra_vx_i64m1(a, 63, 2);
+  vint64m1_t a_xor = __riscv_vxor_vv_i64m1(a, mask, 2);
+  return __riscv_vssub_vv_i64m1(a_xor, mask, 2);
+}
 
-// FORCE_INLINE int8_t vqabsb_s8(int8_t a);
+FORCE_INLINE int8_t vqabsb_s8(int8_t a) {
+  int8_t mask = a >> 7;
+  int8_t a_xor = a ^ mask;
+  int8_t un_sat = a_xor - mask;
+  return (un_sat & 0x80) ? INT8_MAX : un_sat;
+}
 
-// FORCE_INLINE int16_t vqabsh_s16(int16_t a);
+FORCE_INLINE int16_t vqabsh_s16(int16_t a) {
+  int16_t mask = a >> 15;
+  int16_t a_xor = a ^ mask;
+  int16_t un_sat = a_xor - mask;
+  return (un_sat & 0x8000) ? INT16_MAX : un_sat;
+}
 
-// FORCE_INLINE int32_t vqabss_s32(int32_t a);
+FORCE_INLINE int32_t vqabss_s32(int32_t a) {
+  int32_t mask = a >> 31;
+  int32_t a_xor = a ^ mask;
+  int32_t un_sat = a_xor - mask;
+  return (un_sat & 0x80000000) ? INT32_MAX : un_sat;
+}
 
-// FORCE_INLINE int64_t vqabsd_s64(int64_t a);
+FORCE_INLINE int64_t vqabsd_s64(int64_t a) {
+  int64_t mask = a >> 63;
+  int64_t a_xor = a ^ mask;
+  int64_t un_sat = a_xor - mask;
+  return (un_sat & 0x8000000000000000) ? INT64_MAX : un_sat;
+}
 
 FORCE_INLINE uint32x2_t vcage_f32(float32x2_t a, float32x2_t b) {
   vfloat32m1_t a_abs = __riscv_vfabs_v_f32m1(a, 2);
