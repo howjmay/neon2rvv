@@ -658,12 +658,12 @@
   _(vqabsq_s8)                                                                   \
   _(vqabsq_s16)                                                                  \
   _(vqabsq_s32)                                                                  \
-  /*_(vqabs_s64)                                                              */ \
-  /*_(vqabsq_s64)                                                             */ \
-  /*_(vqabsb_s8)                                                              */ \
-  /*_(vqabsh_s16)                                                             */ \
-  /*_(vqabss_s32)                                                             */ \
-  /*_(vqabsd_s64)                                                             */ \
+  _(vqabs_s64)                                                                   \
+  _(vqabsq_s64)                                                                  \
+  _(vqabsb_s8)                                                                   \
+  _(vqabsh_s16)                                                                  \
+  _(vqabss_s32)                                                                  \
+  _(vqabsd_s64)                                                                  \
   _(vcage_f32)                                                                   \
   _(vcageq_f32)                                                                  \
   /*_(vcage_f64)                                                              */ \
