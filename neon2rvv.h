@@ -12719,29 +12719,89 @@ FORCE_INLINE void vst4q_lane_f32(float32_t *a, float32x4x4_t b, const int c) {
 
 // FORCE_INLINE void vst4q_lane_f64(float64_t * ptr, float64x2x4_t val, const int lane);
 
-// FORCE_INLINE void vst1_s8_x2(int8_t * ptr, int8x8x2_t val);
+FORCE_INLINE void vst1_s8_x2(int8_t *ptr, int8x8x2_t val) {
+  vint8m1_t val0 = __riscv_vget_v_i8m1x2_i8m1(val, 0);
+  vint8m1_t val1 = __riscv_vget_v_i8m1x2_i8m1(val, 1);
+  vint8m1_t v = __riscv_vslideup_vx_i8m1(val0, val1, 8, 16);
+  __riscv_vse8_v_i8m1(ptr, v, 16);
+}
 
-// FORCE_INLINE void vst1q_s8_x2(int8_t * ptr, int8x16x2_t val);
+FORCE_INLINE void vst1q_s8_x2(int8_t *ptr, int8x16x2_t val) {
+  vint8m2_t val0 = __riscv_vlmul_ext_v_i8m1_i8m2(__riscv_vget_v_i8m1x2_i8m1(val, 0));
+  vint8m2_t val1 = __riscv_vlmul_ext_v_i8m1_i8m2(__riscv_vget_v_i8m1x2_i8m1(val, 1));
+  vint8m2_t v = __riscv_vslideup_vx_i8m2(val0, val1, 16, 32);
+  __riscv_vse8_v_i8m2(ptr, v, 32);
+}
 
-// FORCE_INLINE void vst1_s16_x2(int16_t * ptr, int16x4x2_t val);
+FORCE_INLINE void vst1_s16_x2(int16_t *ptr, int16x4x2_t val) {
+  vint16m1_t val0 = __riscv_vget_v_i16m1x2_i16m1(val, 0);
+  vint16m1_t val1 = __riscv_vget_v_i16m1x2_i16m1(val, 1);
+  vint16m1_t v = __riscv_vslideup_vx_i16m1(val0, val1, 4, 8);
+  __riscv_vse16_v_i16m1(ptr, v, 8);
+}
 
-// FORCE_INLINE void vst1q_s16_x2(int16_t * ptr, int16x8x2_t val);
+FORCE_INLINE void vst1q_s16_x2(int16_t *ptr, int16x8x2_t val) {
+  vint16m2_t val0 = __riscv_vlmul_ext_v_i16m1_i16m2(__riscv_vget_v_i16m1x2_i16m1(val, 0));
+  vint16m2_t val1 = __riscv_vlmul_ext_v_i16m1_i16m2(__riscv_vget_v_i16m1x2_i16m1(val, 1));
+  vint16m2_t v = __riscv_vslideup_vx_i16m2(val0, val1, 8, 16);
+  __riscv_vse16_v_i16m2(ptr, v, 16);
+}
 
-// FORCE_INLINE void vst1_s32_x2(int32_t * ptr, int32x2x2_t val);
+FORCE_INLINE void vst1_s32_x2(int32_t *ptr, int32x2x2_t val) {
+  vint32m1_t val0 = __riscv_vget_v_i32m1x2_i32m1(val, 0);
+  vint32m1_t val1 = __riscv_vget_v_i32m1x2_i32m1(val, 1);
+  vint32m1_t v = __riscv_vslideup_vx_i32m1(val0, val1, 2, 4);
+  __riscv_vse32_v_i32m1(ptr, v, 4);
+}
 
-// FORCE_INLINE void vst1q_s32_x2(int32_t * ptr, int32x4x2_t val);
+FORCE_INLINE void vst1q_s32_x2(int32_t *ptr, int32x4x2_t val) {
+  vint32m2_t val0 = __riscv_vlmul_ext_v_i32m1_i32m2(__riscv_vget_v_i32m1x2_i32m1(val, 0));
+  vint32m2_t val1 = __riscv_vlmul_ext_v_i32m1_i32m2(__riscv_vget_v_i32m1x2_i32m1(val, 1));
+  vint32m2_t v = __riscv_vslideup_vx_i32m2(val0, val1, 4, 8);
+  __riscv_vse32_v_i32m2(ptr, v, 8);
+}
 
-// FORCE_INLINE void vst1_u8_x2(uint8_t * ptr, uint8x8x2_t val);
+FORCE_INLINE void vst1_u8_x2(uint8_t *ptr, uint8x8x2_t val) {
+  vuint8m1_t val0 = __riscv_vget_v_u8m1x2_u8m1(val, 0);
+  vuint8m1_t val1 = __riscv_vget_v_u8m1x2_u8m1(val, 1);
+  vuint8m1_t v = __riscv_vslideup_vx_u8m1(val0, val1, 8, 16);
+  __riscv_vse8_v_u8m1(ptr, v, 16);
+}
 
-// FORCE_INLINE void vst1q_u8_x2(uint8_t * ptr, uint8x16x2_t val);
+FORCE_INLINE void vst1q_u8_x2(uint8_t *ptr, uint8x16x2_t val) {
+  vuint8m2_t val0 = __riscv_vlmul_ext_v_u8m1_u8m2(__riscv_vget_v_u8m1x2_u8m1(val, 0));
+  vuint8m2_t val1 = __riscv_vlmul_ext_v_u8m1_u8m2(__riscv_vget_v_u8m1x2_u8m1(val, 1));
+  vuint8m2_t v = __riscv_vslideup_vx_u8m2(val0, val1, 16, 32);
+  __riscv_vse8_v_u8m2(ptr, v, 32);
+}
 
-// FORCE_INLINE void vst1_u16_x2(uint16_t * ptr, uint16x4x2_t val);
+FORCE_INLINE void vst1_u16_x2(uint16_t *ptr, uint16x4x2_t val) {
+  vuint16m1_t val0 = __riscv_vget_v_u16m1x2_u16m1(val, 0);
+  vuint16m1_t val1 = __riscv_vget_v_u16m1x2_u16m1(val, 1);
+  vuint16m1_t v = __riscv_vslideup_vx_u16m1(val0, val1, 4, 8);
+  __riscv_vse16_v_u16m1(ptr, v, 8);
+}
 
-// FORCE_INLINE void vst1q_u16_x2(uint16_t * ptr, uint16x8x2_t val);
+FORCE_INLINE void vst1q_u16_x2(uint16_t *ptr, uint16x8x2_t val) {
+  vuint16m2_t val0 = __riscv_vlmul_ext_v_u16m1_u16m2(__riscv_vget_v_u16m1x2_u16m1(val, 0));
+  vuint16m2_t val1 = __riscv_vlmul_ext_v_u16m1_u16m2(__riscv_vget_v_u16m1x2_u16m1(val, 1));
+  vuint16m2_t v = __riscv_vslideup_vx_u16m2(val0, val1, 8, 16);
+  __riscv_vse16_v_u16m2(ptr, v, 16);
+}
 
-// FORCE_INLINE void vst1_u32_x2(uint32_t * ptr, uint32x2x2_t val);
+FORCE_INLINE void vst1_u32_x2(uint32_t *ptr, uint32x2x2_t val) {
+  vuint32m1_t val0 = __riscv_vget_v_u32m1x2_u32m1(val, 0);
+  vuint32m1_t val1 = __riscv_vget_v_u32m1x2_u32m1(val, 1);
+  vuint32m1_t v = __riscv_vslideup_vx_u32m1(val0, val1, 2, 4);
+  __riscv_vse32_v_u32m1(ptr, v, 4);
+}
 
-// FORCE_INLINE void vst1q_u32_x2(uint32_t * ptr, uint32x4x2_t val);
+FORCE_INLINE void vst1q_u32_x2(uint32_t *ptr, uint32x4x2_t val) {
+  vuint32m2_t val0 = __riscv_vlmul_ext_v_u32m1_u32m2(__riscv_vget_v_u32m1x2_u32m1(val, 0));
+  vuint32m2_t val1 = __riscv_vlmul_ext_v_u32m1_u32m2(__riscv_vget_v_u32m1x2_u32m1(val, 1));
+  vuint32m2_t v = __riscv_vslideup_vx_u32m2(val0, val1, 4, 8);
+  __riscv_vse32_v_u32m2(ptr, v, 8);
+}
 
 // FORCE_INLINE void vst1_f16_x2(float16_t * ptr, float16x4x2_t val);
 
