@@ -773,8 +773,8 @@
   _(vmaxq_s16)                                                                   \
   _(vmaxq_s32)                                                                   \
   _(vmaxq_f32)                                                                   \
-  /*_(vmax_f64)                                                               */ \
-  /*_(vmaxq_f64)                                                              */ \
+  _(vmax_f64)                                                                    \
+  _(vmaxq_f64)                                                                   \
   _(vmaxnm_f32)                                                                  \
   _(vmaxnmq_f32)                                                                 \
   /*_(vmaxnm_f64)                                                             */ \
@@ -797,8 +797,8 @@
   _(vminq_s16)                                                                   \
   _(vminq_s32)                                                                   \
   _(vminq_f32)                                                                   \
-  /*_(vmin_f64)                                                               */ \
-  /*_(vminq_f64)                                                              */ \
+  _(vmin_f64)                                                                    \
+  _(vminq_f64)                                                                   \
   _(vminq_u8)                                                                    \
   _(vminq_u16)                                                                   \
   _(vminq_u32)                                                                   \
