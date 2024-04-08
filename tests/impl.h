@@ -457,12 +457,12 @@
   _(vrsubhn_u16)                                                                 \
   _(vrsubhn_u32)                                                                 \
   _(vrsubhn_u64)                                                                 \
-  /*_(vrsubhn_high_s16)                                                       */ \
-  /*_(vrsubhn_high_s32)                                                       */ \
-  /*_(vrsubhn_high_s64)                                                       */ \
-  /*_(vrsubhn_high_u16)                                                       */ \
-  /*_(vrsubhn_high_u32)                                                       */ \
-  /*_(vrsubhn_high_u64)                                                       */ \
+  _(vrsubhn_high_s16)                                                            \
+  _(vrsubhn_high_s32)                                                            \
+  _(vrsubhn_high_s64)                                                            \
+  _(vrsubhn_high_u16)                                                            \
+  _(vrsubhn_high_u32)                                                            \
+  _(vrsubhn_high_u64)                                                            \
   _(vceq_s8)                                                                     \
   _(vceq_s16)                                                                    \
   _(vceq_s32)                                                                    \
