@@ -862,14 +862,14 @@
   _(vpmin_s16)                                                                   \
   _(vpmin_s32)                                                                   \
   _(vpmin_f32)                                                                   \
-  /*_(vpminq_s8)                                                              */ \
-  /*_(vpminq_s16)                                                             */ \
-  /*_(vpminq_s32)                                                             */ \
-  /*_(vpminq_u8)                                                              */ \
-  /*_(vpminq_u16)                                                             */ \
-  /*_(vpminq_u32)                                                             */ \
-  /*_(vpminq_f32)                                                             */ \
-  /*_(vpminq_f64)                                                             */ \
+  _(vpminq_s8)                                                                   \
+  _(vpminq_s16)                                                                  \
+  _(vpminq_s32)                                                                  \
+  _(vpminq_u8)                                                                   \
+  _(vpminq_u16)                                                                  \
+  _(vpminq_u32)                                                                  \
+  _(vpminq_f32)                                                                  \
+  _(vpminq_f64)                                                                  \
   /*_(vpmaxnm_f32)                                                            */ \
   /*_(vpmaxnmq_f32)                                                           */ \
   /*_(vpmaxnmq_f64)                                                           */ \
