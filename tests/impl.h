@@ -310,8 +310,8 @@
   _(vfmaq_laneq_f32)                                                             \
   _(vfma_laneq_f64)                                                              \
   _(vfmaq_laneq_f64)                                                             \
-  /*_(vfmas_laneq_f32)                                                        */ \
-  /*_(vfmad_laneq_f64)                                                        */ \
+  _(vfmas_laneq_f32)                                                             \
+  _(vfmad_laneq_f64)                                                             \
   _(vfms_f32)                                                                    \
   _(vfmsq_f32)                                                                   \
   _(vfms_f64)                                                                    \

@@ -5077,9 +5077,49 @@ result_t test_vfmaq_laneq_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #endif  // ENABLE_TEST_ALL
 }
 
-result_t test_vfmas_laneq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vfmas_laneq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const float *_a = (float *)impl.test_cases_float_pointer1;
+  const float *_b = (float *)impl.test_cases_float_pointer2;
+  const float *_c = (float *)impl.test_cases_float_pointer3;
+  float32x4_t c = vld1q_f32(_c);
+  float d, _d;
 
-result_t test_vfmad_laneq_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+#define TEST_IMPL(IDX)                       \
+  _d = _a[0] + _b[0] * _c[IDX];              \
+  d = vfmas_laneq_f32(_a[0], _b[0], c, IDX); \
+  CHECK_RESULT(validate_float_error(d, _d, 0.001f))
+
+  IMM_4_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vfmad_laneq_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const double *_a = (double *)impl.test_cases_float_pointer1;
+  const double *_b = (double *)impl.test_cases_float_pointer2;
+  const double *_c = (double *)impl.test_cases_float_pointer3;
+  float64x2_t c = vld1q_f64(_c);
+  float d, _d;
+
+#define TEST_IMPL(IDX)                       \
+  _d = _a[0] + _b[0] * _c[IDX];              \
+  d = vfmad_laneq_f64(_a[0], _b[0], c, IDX); \
+  CHECK_RESULT(validate_double_error(d, _d, 0.001f))
+
+  IMM_2_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vfms_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
