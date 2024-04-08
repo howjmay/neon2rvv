@@ -3573,9 +3573,9 @@ FORCE_INLINE int32x4_t vmaxq_s32(int32x4_t a, int32x4_t b) { return __riscv_vmax
 
 FORCE_INLINE float32x4_t vmaxq_f32(float32x4_t a, float32x4_t b) { return __riscv_vfmax_vv_f32m1(a, b, 4); }
 
-// FORCE_INLINE float64x1_t vmax_f64(float64x1_t a, float64x1_t b);
+FORCE_INLINE float64x1_t vmax_f64(float64x1_t a, float64x1_t b) { return __riscv_vfmax_vv_f64m1(a, b, 1); }
 
-// FORCE_INLINE float64x2_t vmaxq_f64(float64x2_t a, float64x2_t b);
+FORCE_INLINE float64x2_t vmaxq_f64(float64x2_t a, float64x2_t b) { return __riscv_vfmax_vv_f64m1(a, b, 2); }
 
 FORCE_INLINE float32x2_t vmaxnm_f32(float32x2_t a, float32x2_t b) { return __riscv_vfmax_vv_f32m1(a, b, 2); }
 
@@ -3621,9 +3621,9 @@ FORCE_INLINE int32x4_t vminq_s32(int32x4_t a, int32x4_t b) { return __riscv_vmin
 
 FORCE_INLINE float32x4_t vminq_f32(float32x4_t a, float32x4_t b) { return __riscv_vfmin_vv_f32m1(a, b, 4); }
 
-// FORCE_INLINE float64x1_t vmin_f64(float64x1_t a, float64x1_t b);
+FORCE_INLINE float64x1_t vmin_f64(float64x1_t a, float64x1_t b) { return __riscv_vfmin_vv_f64m1(a, b, 1); }
 
-// FORCE_INLINE float64x2_t vminq_f64(float64x2_t a, float64x2_t b);
+FORCE_INLINE float64x2_t vminq_f64(float64x2_t a, float64x2_t b) { return __riscv_vfmin_vv_f64m1(a, b, 2); }
 
 FORCE_INLINE uint8x16_t vminq_u8(uint8x16_t a, uint8x16_t b) { return __riscv_vminu_vv_u8m1(a, b, 16); }
 
