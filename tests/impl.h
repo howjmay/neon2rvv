@@ -847,14 +847,14 @@
   _(vpmax_s16)                                                                   \
   _(vpmax_s32)                                                                   \
   _(vpmax_f32)                                                                   \
-  /*_(vpmaxq_s8)                                                              */ \
-  /*_(vpmaxq_s16)                                                             */ \
-  /*_(vpmaxq_s32)                                                             */ \
-  /*_(vpmaxq_u8)                                                              */ \
-  /*_(vpmaxq_u16)                                                             */ \
-  /*_(vpmaxq_u32)                                                             */ \
-  /*_(vpmaxq_f32)                                                             */ \
-  /*_(vpmaxq_f64)                                                             */ \
+  _(vpmaxq_s8)                                                                   \
+  _(vpmaxq_s16)                                                                  \
+  _(vpmaxq_s32)                                                                  \
+  _(vpmaxq_u8)                                                                   \
+  _(vpmaxq_u16)                                                                  \
+  _(vpmaxq_u32)                                                                  \
+  _(vpmaxq_f32)                                                                  \
+  _(vpmaxq_f64)                                                                  \
   _(vpmax_u8)                                                                    \
   _(vpmax_u16)                                                                   \
   _(vpmax_u32)                                                                   \
