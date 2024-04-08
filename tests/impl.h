@@ -314,20 +314,20 @@
   /*_(vfmad_laneq_f64)                                                        */ \
   _(vfms_f32)                                                                    \
   _(vfmsq_f32)                                                                   \
-  /*_(vfms_f64)                                                               */ \
-  /*_(vfmsq_f64)                                                              */ \
-  /*_(vfms_lane_f32)                                                          */ \
-  /*_(vfmsq_lane_f32)                                                         */ \
-  /*_(vfms_lane_f64)                                                          */ \
-  /*_(vfmsq_lane_f64)                                                         */ \
-  /*_(vfmss_lane_f32)                                                         */ \
-  /*_(vfmsd_lane_f64)                                                         */ \
-  /*_(vfms_laneq_f32)                                                         */ \
-  /*_(vfmsq_laneq_f32)                                                        */ \
-  /*_(vfms_laneq_f64)                                                         */ \
-  /*_(vfmsq_laneq_f64)                                                        */ \
-  /*_(vfmss_laneq_f32)                                                        */ \
-  /*_(vfmsd_laneq_f64)                                                        */ \
+  _(vfms_f64)                                                                    \
+  _(vfmsq_f64)                                                                   \
+  _(vfms_lane_f32)                                                               \
+  _(vfmsq_lane_f32)                                                              \
+  _(vfms_lane_f64)                                                               \
+  _(vfmsq_lane_f64)                                                              \
+  _(vfmss_lane_f32)                                                              \
+  _(vfmsd_lane_f64)                                                              \
+  _(vfms_laneq_f32)                                                              \
+  _(vfmsq_laneq_f32)                                                             \
+  _(vfms_laneq_f64)                                                              \
+  _(vfmsq_laneq_f64)                                                             \
+  _(vfmss_laneq_f32)                                                             \
+  _(vfmsd_laneq_f64)                                                             \
   _(vrndn_f32)                                                                   \
   _(vrndnq_f32)                                                                  \
   /*_(vrndn_f64)                                                              */ \
