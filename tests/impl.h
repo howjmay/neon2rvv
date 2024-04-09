@@ -1392,16 +1392,16 @@
   _(vrecpe_f32)                                                                  \
   _(vrecpe_u32)                                                                  \
   _(vrecpeq_f32)                                                                 \
-  /*_(vrecpe_f64)                                                             */ \
-  /*_(vrecpeq_f64)                                                            */ \
+  _(vrecpe_f64)                                                                  \
+  _(vrecpeq_f64)                                                                 \
   /*_(vrecpes_f32)                                                            */ \
   /*_(vrecped_f64)                                                            */ \
   _(vrecpeq_u32)                                                                 \
   _(vrsqrte_f32)                                                                 \
   _(vrsqrte_u32)                                                                 \
   _(vrsqrteq_f32)                                                                \
-  /*_(vrsqrte_f64)                                                            */ \
-  /*_(vrsqrteq_f64)                                                           */ \
+  _(vrsqrte_f64)                                                                 \
+  _(vrsqrteq_f64)                                                                \
   /*_(vrsqrtes_f32)                                                           */ \
   /*_(vrsqrted_f64)                                                           */ \
   _(vrsqrteq_u32)                                                                \
