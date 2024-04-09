@@ -806,16 +806,16 @@
   _(vpadd_s16)                                                                   \
   _(vpadd_s32)                                                                   \
   _(vpadd_f32)                                                                   \
-  /*_(vpaddq_s8)                                                              */ \
-  /*_(vpaddq_s16)                                                             */ \
-  /*_(vpaddq_s32)                                                             */ \
-  /*_(vpaddq_s64)                                                             */ \
-  /*_(vpaddq_u8)                                                              */ \
-  /*_(vpaddq_u16)                                                             */ \
-  /*_(vpaddq_u32)                                                             */ \
-  /*_(vpaddq_u64)                                                             */ \
-  /*_(vpaddq_f32)                                                             */ \
-  /*_(vpaddq_f64)                                                             */ \
+  _(vpaddq_s8)                                                                   \
+  _(vpaddq_s16)                                                                  \
+  _(vpaddq_s32)                                                                  \
+  _(vpaddq_s64)                                                                  \
+  _(vpaddq_u8)                                                                   \
+  _(vpaddq_u16)                                                                  \
+  _(vpaddq_u32)                                                                  \
+  _(vpaddq_u64)                                                                  \
+  _(vpaddq_f32)                                                                  \
+  _(vpaddq_f64)                                                                  \
   _(vpadd_u8)                                                                    \
   _(vpadd_u16)                                                                   \
   _(vpadd_u32)                                                                   \
