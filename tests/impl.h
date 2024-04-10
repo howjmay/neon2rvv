@@ -1766,12 +1766,12 @@
   _(vmovn_u16)                                                                   \
   _(vmovn_u32)                                                                   \
   _(vmovn_u64)                                                                   \
-  /*_(vmovn_high_s16)                                                         */ \
-  /*_(vmovn_high_s32)                                                         */ \
-  /*_(vmovn_high_s64)                                                         */ \
-  /*_(vmovn_high_u16)                                                         */ \
-  /*_(vmovn_high_u32)                                                         */ \
-  /*_(vmovn_high_u64)                                                         */ \
+  _(vmovn_high_s16)                                                              \
+  _(vmovn_high_s32)                                                              \
+  _(vmovn_high_s64)                                                              \
+  _(vmovn_high_u16)                                                              \
+  _(vmovn_high_u32)                                                              \
+  _(vmovn_high_u64)                                                              \
   _(vqmovn_s16)                                                                  \
   _(vqmovn_s32)                                                                  \
   _(vqmovn_s64)                                                                  \
