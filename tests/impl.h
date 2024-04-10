@@ -1531,8 +1531,8 @@
   _(vmovq_n_u32)                                                                 \
   /*_(vmovq_n_p8)                                                        */      \
   /*_(vmovq_n_p16)                                                       */      \
-  /*_(vmov_n_f64)                                                             */ \
-  /*_(vmovq_n_f64)                                                            */ \
+  _(vmov_n_f64)                                                                  \
+  _(vmovq_n_f64)                                                                 \
   _(vmovq_n_s64)                                                                 \
   _(vmovq_n_u64)                                                                 \
   _(vdup_lane_s8)                                                                \
