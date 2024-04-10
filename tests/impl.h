@@ -1805,12 +1805,12 @@
   _(vmovl_u8)                                                                    \
   _(vmovl_u16)                                                                   \
   _(vmovl_u32)                                                                   \
-  /*_(vmovl_high_s8)                                                          */ \
-  /*_(vmovl_high_s16)                                                         */ \
-  /*_(vmovl_high_s32)                                                         */ \
-  /*_(vmovl_high_u8)                                                          */ \
-  /*_(vmovl_high_u16)                                                         */ \
-  /*_(vmovl_high_u32)                                                         */ \
+  _(vmovl_high_s8)                                                               \
+  _(vmovl_high_s16)                                                              \
+  _(vmovl_high_s32)                                                              \
+  _(vmovl_high_u8)                                                               \
+  _(vmovl_high_u16)                                                              \
+  _(vmovl_high_u32)                                                              \
   _(vtbl1_s8)                                                                    \
   _(vtbl1_u8)                                                                    \
   /*_(vtbl1_p8)                                                          */      \
