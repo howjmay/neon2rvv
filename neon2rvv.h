@@ -6966,9 +6966,9 @@ FORCE_INLINE float32x4_t vmovq_n_f32(float32_t a) { return vdupq_n_f32(a); }
 
 // FORCE_INLINE poly16x8_t vmovq_n_p16(poly16_t value);
 
-// FORCE_INLINE float64x1_t vmov_n_f64(float64_t value);
+FORCE_INLINE float64x1_t vmov_n_f64(float64_t a) { return vdup_n_f64(a); }
 
-// FORCE_INLINE float64x2_t vmovq_n_f64(float64_t value);
+FORCE_INLINE float64x2_t vmovq_n_f64(float64_t a) { return vdupq_n_f64(a); }
 
 FORCE_INLINE uint8x16_t vmovq_n_u8(uint8_t a) { return vdupq_n_u8(a); }
 
