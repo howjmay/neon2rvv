@@ -1409,7 +1409,7 @@
   _(vget_lane_s16)                                                               \
   _(vget_lane_s32)                                                               \
   _(vget_lane_f32)                                                               \
-  /*_(vget_lane_f64)                                                          */ \
+  _(vget_lane_f64)                                                               \
   _(vget_lane_u8)                                                                \
   _(vget_lane_u16)                                                               \
   _(vget_lane_u32)                                                               \
@@ -1422,7 +1422,7 @@
   _(vgetq_lane_s16)                                                              \
   _(vgetq_lane_s32)                                                              \
   _(vgetq_lane_f32)                                                              \
-  /*_(vgetq_lane_f64)                                                         */ \
+  _(vgetq_lane_f64)                                                              \
   _(vgetq_lane_u8)                                                               \
   _(vgetq_lane_u16)                                                              \
   _(vgetq_lane_u32)                                                              \
