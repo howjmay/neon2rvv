@@ -1450,35 +1450,11 @@ FORCE_INLINE float64_t vfmsd_laneq_f64(float64_t a, float64_t b, float64x2_t v, 
 }
 
 FORCE_INLINE float32x2_t vrndn_f32(float32x2_t a) {
-  // FIXME riscv round doesn't work
-  float arr[2];
-  const int len = 2;
-  __riscv_vse32_v_f32m1(arr, a, len);
-  for (int i = 0; i < len; i++) {
-    const float trunc_diff = fabs(arr[i] - trunc(arr[i]));
-    if (trunc_diff == 0.5) {
-      arr[i] = round(arr[i] / 2) * 2;
-    } else {
-      arr[i] = round(arr[i]);
-    }
-  }
-  return __riscv_vle32_v_f32m1(arr, len);
+  return __riscv_vfcvt_f_x_v_f32m1(__riscv_vfcvt_x_f_v_i32m1_rm(a, __RISCV_FRM_RNE, 2), 2);
 }
 
 FORCE_INLINE float32x4_t vrndnq_f32(float32x4_t a) {
-  // FIXME riscv round doesn't work
-  float arr[4];
-  const int len = 4;
-  __riscv_vse32_v_f32m1(arr, a, len);
-  for (int i = 0; i < len; i++) {
-    const float trunc_diff = fabs(arr[i] - trunc(arr[i]));
-    if (trunc_diff == 0.5) {
-      arr[i] = round(arr[i] / 2) * 2;
-    } else {
-      arr[i] = round(arr[i]);
-    }
-  }
-  return __riscv_vle32_v_f32m1(arr, len);
+  return __riscv_vfcvt_f_x_v_f32m1(__riscv_vfcvt_x_f_v_i32m1_rm(a, __RISCV_FRM_RNE, 4), 4);
 }
 
 // FORCE_INLINE float64x1_t vrndn_f64(float64x1_t a);
@@ -1488,25 +1464,11 @@ FORCE_INLINE float32x4_t vrndnq_f32(float32x4_t a) {
 // FORCE_INLINE float32_t vrndns_f32(float32_t a);
 
 FORCE_INLINE float32x2_t vrnda_f32(float32x2_t a) {
-  // FIXME riscv round doesn't work
-  float arr[2];
-  const int len = 2;
-  __riscv_vse32_v_f32m1(arr, a, len);
-  for (int i = 0; i < len; i++) {
-    arr[i] = round(arr[i]);
-  }
-  return __riscv_vle32_v_f32m1(arr, len);
+  return __riscv_vfcvt_f_x_v_f32m1(__riscv_vfcvt_x_f_v_i32m1_rm(a, __RISCV_FRM_RMM, 2), 2);
 }
 
 FORCE_INLINE float32x4_t vrndaq_f32(float32x4_t a) {
-  // FIXME riscv round doesn't work
-  float arr[4];
-  const int len = 4;
-  __riscv_vse32_v_f32m1(arr, a, len);
-  for (int i = 0; i < len; i++) {
-    arr[i] = round(arr[i]);
-  }
-  return __riscv_vle32_v_f32m1(arr, len);
+  return __riscv_vfcvt_f_x_v_f32m1(__riscv_vfcvt_x_f_v_i32m1_rm(a, __RISCV_FRM_RMM, 4), 4);
 }
 
 // FORCE_INLINE float64x1_t vrnda_f64(float64x1_t a);
@@ -1522,25 +1484,11 @@ FORCE_INLINE float32x4_t vrndaq_f32(float32x4_t a) {
 // FORCE_INLINE float64x2_t vrndiq_f64(float64x2_t a);
 
 FORCE_INLINE float32x2_t vrndp_f32(float32x2_t a) {
-  // FIXME riscv round doesn't work
-  float arr[2];
-  const int len = 2;
-  __riscv_vse32_v_f32m1(arr, a, len);
-  for (int i = 0; i < len; i++) {
-    arr[i] = ceil(arr[i]);
-  }
-  return __riscv_vle32_v_f32m1(arr, len);
+  return __riscv_vfcvt_f_x_v_f32m1(__riscv_vfcvt_x_f_v_i32m1_rm(a, __RISCV_FRM_RUP, 2), 2);
 }
 
 FORCE_INLINE float32x4_t vrndpq_f32(float32x4_t a) {
-  // FIXME riscv round doesn't work
-  float arr[4];
-  const int len = 4;
-  __riscv_vse32_v_f32m1(arr, a, len);
-  for (int i = 0; i < len; i++) {
-    arr[i] = ceil(arr[i]);
-  }
-  return __riscv_vle32_v_f32m1(arr, len);
+  return __riscv_vfcvt_f_x_v_f32m1(__riscv_vfcvt_x_f_v_i32m1_rm(a, __RISCV_FRM_RUP, 4), 4);
 }
 
 // FORCE_INLINE float64x1_t vrndp_f64(float64x1_t a);
@@ -1548,25 +1496,11 @@ FORCE_INLINE float32x4_t vrndpq_f32(float32x4_t a) {
 // FORCE_INLINE float64x2_t vrndpq_f64(float64x2_t a);
 
 FORCE_INLINE float32x2_t vrndm_f32(float32x2_t a) {
-  // FIXME riscv round doesn't work
-  float arr[2];
-  const int len = 2;
-  __riscv_vse32_v_f32m1(arr, a, len);
-  for (int i = 0; i < len; i++) {
-    arr[i] = floor(arr[i]);
-  }
-  return __riscv_vle32_v_f32m1(arr, len);
+    return __riscv_vfcvt_f_x_v_f32m1(__riscv_vfcvt_x_f_v_i32m1_rm(a, __RISCV_FRM_RDN, 2), 2);
 }
 
 FORCE_INLINE float32x4_t vrndmq_f32(float32x4_t a) {
-  // FIXME riscv round doesn't work
-  float arr[4];
-  const int len = 4;
-  __riscv_vse32_v_f32m1(arr, a, len);
-  for (int i = 0; i < len; i++) {
-    arr[i] = floor(arr[i]);
-  }
-  return __riscv_vle32_v_f32m1(arr, len);
+    return __riscv_vfcvt_f_x_v_f32m1(__riscv_vfcvt_x_f_v_i32m1_rm(a, __RISCV_FRM_RDN, 4), 4);
 }
 
 // FORCE_INLINE float64x1_t vrndm_f64(float64x1_t a);
@@ -1582,25 +1516,11 @@ FORCE_INLINE float32x4_t vrndmq_f32(float32x4_t a) {
 // FORCE_INLINE float64x2_t vrndxq_f64(float64x2_t a);
 
 FORCE_INLINE float32x2_t vrnd_f32(float32x2_t a) {
-  // FIXME riscv round doesn't work
-  float arr[2];
-  const int len = 2;
-  __riscv_vse32_v_f32m1(arr, a, len);
-  for (int i = 0; i < len; i++) {
-    arr[i] = trunc(arr[i]);
-  }
-  return __riscv_vle32_v_f32m1(arr, len);
+    return __riscv_vfcvt_f_x_v_f32m1(__riscv_vfcvt_x_f_v_i32m1_rm(a, __RISCV_FRM_RTZ, 2), 2);
 }
 
 FORCE_INLINE float32x4_t vrndq_f32(float32x4_t a) {
-  // FIXME riscv round doesn't work
-  float arr[4];
-  const int len = 4;
-  __riscv_vse32_v_f32m1(arr, a, len);
-  for (int i = 0; i < len; i++) {
-    arr[i] = trunc(arr[i]);
-  }
-  return __riscv_vle32_v_f32m1(arr, len);
+    return __riscv_vfcvt_f_x_v_f32m1(__riscv_vfcvt_x_f_v_i32m1_rm(a, __RISCV_FRM_RTZ, 4), 4);
 }
 
 // FORCE_INLINE float64x1_t vrnd_f64(float64x1_t a);
@@ -6792,11 +6712,11 @@ FORCE_INLINE float64x2_t vfmaq_n_f64(float64x2_t a, float64x2_t b, float64_t n) 
 }
 
 FORCE_INLINE float64x1_t vfms_n_f64(float64x1_t a, float64x1_t b, float64_t n) {
-  return __riscv_vfnmacc_vf_f64m1(a, n, b, 1);
+  return __riscv_vfnmsac_vf_f64m1(a, n, b, 1);
 }
 
 FORCE_INLINE float64x2_t vfmsq_n_f64(float64x2_t a, float64x2_t b, float64_t n) {
-  return __riscv_vfnmacc_vf_f64m1(a, n, b, 2);
+  return __riscv_vfnmsac_vf_f64m1(a, n, b, 2);
 }
 
 FORCE_INLINE uint8x16_t vsetq_lane_u8(uint8_t a, uint8x16_t b, const int c) {

@@ -10668,16 +10668,12 @@ result_t test_vqabs_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   // insert edge case _a[i] = INT64_MIN
   _a[0] = INT64_MIN;
   for (int i = 0; i < 1; i++) {
-    int64_t tmp = _a[i];
-    if (_a[i] < 0) {
-      tmp = -tmp;
-    }
-    if (tmp > INT64_MAX) {
+    if (_a[i] == INT64_MIN) {
       _c[i] = INT64_MAX;
-    } else if (tmp == INT64_MIN) {
-      _c[i] = INT64_MAX;
+    } else if (_a[i] < 0) {
+      _c[i] = -_a[i];
     } else {
-      _c[i] = tmp;
+      _c[i] = _a[i];
     }
   }
 
@@ -10696,16 +10692,12 @@ result_t test_vqabsq_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   // insert edge case _a[i] = INT64_MIN
   _a[0] = INT64_MIN;
   for (int i = 0; i < 2; i++) {
-    int64_t tmp = _a[i];
-    if (_a[i] < 0) {
-      tmp = -tmp;
-    }
-    if (tmp > INT64_MAX) {
+    if (_a[i] == INT64_MIN) {
       _c[i] = INT64_MAX;
-    } else if (tmp == INT64_MIN) {
-      _c[i] = INT64_MAX;
+    } else if (_a[i] < 0) {
+      _c[i] = -_a[i];
     } else {
-      _c[i] = tmp;
+      _c[i] = _a[i];
     }
   }
 
@@ -22652,9 +22644,6 @@ result_t test_vfms_n_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 
 result_t test_vfmsq_n_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
-  // FIXME spike returns opposite signed result in some cases. Otherwise the neon2rvv impl is correct.
-  return TEST_UNIMPL;
-
   const double *_a = (double *)impl.test_cases_float_pointer1;
   const double *_b = (double *)impl.test_cases_float_pointer2;
   const double *_c = (double *)impl.test_cases_float_pointer3;
