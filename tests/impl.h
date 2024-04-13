@@ -666,28 +666,28 @@
   _(vqabsd_s64)                                                                  \
   _(vcage_f32)                                                                   \
   _(vcageq_f32)                                                                  \
-  /*_(vcage_f64)                                                              */ \
-  /*_(vcageq_f64)                                                             */ \
-  /*_(vcages_f32)                                                             */ \
-  /*_(vcaged_f64)                                                             */ \
+  _(vcage_f64)                                                                   \
+  _(vcageq_f64)                                                                  \
+  _(vcages_f32)                                                                  \
+  _(vcaged_f64)                                                                  \
   _(vcale_f32)                                                                   \
   _(vcaleq_f32)                                                                  \
-  /*_(vcale_f64)                                                              */ \
-  /*_(vcaleq_f64)                                                             */ \
-  /*_(vcales_f32)                                                             */ \
-  /*_(vcaled_f64)                                                             */ \
+  _(vcale_f64)                                                                   \
+  _(vcaleq_f64)                                                                  \
+  _(vcales_f32)                                                                  \
+  _(vcaled_f64)                                                                  \
   _(vcagt_f32)                                                                   \
   _(vcagtq_f32)                                                                  \
-  /*_(vcagt_f64)                                                              */ \
-  /*_(vcagtq_f64)                                                             */ \
-  /*_(vcagts_f32)                                                             */ \
-  /*_(vcagtd_f64)                                                             */ \
+  _(vcagt_f64)                                                                   \
+  _(vcagtq_f64)                                                                  \
+  _(vcagts_f32)                                                                  \
+  _(vcagtd_f64)                                                                  \
   _(vcalt_f32)                                                                   \
   _(vcaltq_f32)                                                                  \
-  /*_(vcalt_f64)                                                              */ \
-  /*_(vcaltq_f64)                                                             */ \
-  /*_(vcalts_f32)                                                             */ \
-  /*_(vcaltd_f64)                                                             */ \
+  _(vcalt_f64)                                                                   \
+  _(vcaltq_f64)                                                                  \
+  _(vcalts_f32)                                                                  \
+  _(vcaltd_f64)                                                                  \
   _(vtst_s8)                                                                     \
   _(vtst_s16)                                                                    \
   _(vtst_s32)                                                                    \
