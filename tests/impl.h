@@ -611,16 +611,16 @@
   _(vcltq_s16)                                                                   \
   _(vcltq_s32)                                                                   \
   _(vcltq_f32)                                                                   \
-  /*_(vclt_s64)                                                               */ \
-  /*_(vcltq_s64)                                                              */ \
-  /*_(vclt_u64)                                                               */ \
-  /*_(vcltq_u64)                                                              */ \
-  /*_(vclt_f64)                                                               */ \
-  /*_(vcltq_f64)                                                              */ \
-  /*_(vcltd_s64)                                                              */ \
-  /*_(vcltd_u64)                                                              */ \
-  /*_(vclts_f32)                                                              */ \
-  /*_(vcltd_f64)                                                              */ \
+  _(vclt_s64)                                                                    \
+  _(vcltq_s64)                                                                   \
+  _(vclt_u64)                                                                    \
+  _(vcltq_u64)                                                                   \
+  _(vclt_f64)                                                                    \
+  _(vcltq_f64)                                                                   \
+  _(vcltd_s64)                                                                   \
+  _(vcltd_u64)                                                                   \
+  _(vclts_f32)                                                                   \
+  _(vcltd_f64)                                                                   \
   /*_(vcltz_s8)                                                               */ \
   /*_(vcltzq_s8)                                                              */ \
   /*_(vcltz_s16)                                                              */ \
