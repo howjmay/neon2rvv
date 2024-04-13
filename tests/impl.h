@@ -621,21 +621,21 @@
   _(vcltd_u64)                                                                   \
   _(vclts_f32)                                                                   \
   _(vcltd_f64)                                                                   \
-  /*_(vcltz_s8)                                                               */ \
-  /*_(vcltzq_s8)                                                              */ \
-  /*_(vcltz_s16)                                                              */ \
-  /*_(vcltzq_s16)                                                             */ \
-  /*_(vcltz_s32)                                                              */ \
-  /*_(vcltzq_s32)                                                             */ \
-  /*_(vcltz_s64)                                                              */ \
-  /*_(vcltzq_s64)                                                             */ \
-  /*_(vcltz_f32)                                                              */ \
-  /*_(vcltzq_f32)                                                             */ \
-  /*_(vcltz_f64)                                                              */ \
-  /*_(vcltzq_f64)                                                             */ \
-  /*_(vcltzd_s64)                                                             */ \
-  /*_(vcltzs_f32)                                                             */ \
-  /*_(vcltzd_f64)                                                             */ \
+  _(vcltz_s8)                                                                    \
+  _(vcltzq_s8)                                                                   \
+  _(vcltz_s16)                                                                   \
+  _(vcltzq_s16)                                                                  \
+  _(vcltz_s32)                                                                   \
+  _(vcltzq_s32)                                                                  \
+  _(vcltz_s64)                                                                   \
+  _(vcltzq_s64)                                                                  \
+  _(vcltz_f32)                                                                   \
+  _(vcltzq_f32)                                                                  \
+  _(vcltz_f64)                                                                   \
+  _(vcltzq_f64)                                                                  \
+  _(vcltzd_s64)                                                                  \
+  _(vcltzs_f32)                                                                  \
+  _(vcltzd_f64)                                                                  \
   _(vcltq_u8)                                                                    \
   _(vcltq_u16)                                                                   \
   _(vcltq_u32)                                                                   \
