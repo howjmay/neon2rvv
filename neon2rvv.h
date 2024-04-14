@@ -3373,13 +3373,17 @@ FORCE_INLINE float32x4_t vabdq_f32(float32x4_t a, float32x4_t b) {
   return __riscv_vfabs_v_f32m1(__riscv_vfsub_vv_f32m1(a, b, 4), 4);
 }
 
-// FORCE_INLINE float64x1_t vabd_f64(float64x1_t a, float64x1_t b);
+FORCE_INLINE float64x1_t vabd_f64(float64x1_t a, float64x1_t b) {
+  return __riscv_vfabs_v_f64m1(__riscv_vfsub_vv_f64m1(a, b, 1), 1);
+}
 
-// FORCE_INLINE float64x2_t vabdq_f64(float64x2_t a, float64x2_t b);
+FORCE_INLINE float64x2_t vabdq_f64(float64x2_t a, float64x2_t b) {
+  return __riscv_vfabs_v_f64m1(__riscv_vfsub_vv_f64m1(a, b, 2), 2);
+}
 
-// FORCE_INLINE float32_t vabds_f32(float32_t a, float32_t b);
+FORCE_INLINE float32_t vabds_f32(float32_t a, float32_t b) { return abs(a - b); }
 
-// FORCE_INLINE float64_t vabdd_f64(float64_t a, float64_t b);
+FORCE_INLINE float64_t vabdd_f64(float64_t a, float64_t b) { return abs(a - b); }
 
 FORCE_INLINE uint8x16_t vabdq_u8(uint8x16_t a, uint8x16_t b) {
   vuint8m1_t ab_max = __riscv_vmaxu_vv_u8m1(a, b, 16);
