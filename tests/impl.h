@@ -719,10 +719,10 @@
   _(vabdq_s16)                                                                   \
   _(vabdq_s32)                                                                   \
   _(vabdq_f32)                                                                   \
-  /*_(vabd_f64)                                                               */ \
-  /*_(vabdq_f64)                                                              */ \
-  /*_(vabds_f32)                                                              */ \
-  /*_(vabdd_f64)                                                              */ \
+  _(vabd_f64)                                                                    \
+  _(vabdq_f64)                                                                   \
+  _(vabds_f32)                                                                   \
+  _(vabdd_f64)                                                                   \
   _(vabdq_u8)                                                                    \
   _(vabdq_u16)                                                                   \
   _(vabdq_u32)                                                                   \
