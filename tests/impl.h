@@ -162,8 +162,8 @@
   _(vmulq_u8)                                                                    \
   _(vmulq_u16)                                                                   \
   _(vmulq_u32)                                                                   \
-  /*_(vmul_p8)                                                           */      \
-  /*_(vmulq_p8)                                                          */      \
+  /*_(vmul_p8)                                                                */ \
+  /*_(vmulq_p8)                                                               */ \
   /*_(vmul_f64)                                                               */ \
   /*_(vmulq_f64)                                                              */ \
   /*_(vmulx_f32)                                                              */ \
@@ -214,7 +214,7 @@
   _(vmull_u8)                                                                    \
   _(vmull_u16)                                                                   \
   _(vmull_u32)                                                                   \
-  /*_(vmull_p8)                                                          */      \
+  /*_(vmull_p8)                                                               */ \
   _(vmull_high_s8)                                                               \
   _(vmull_high_s16)                                                              \
   _(vmull_high_s32)                                                              \
@@ -470,7 +470,7 @@
   _(vceq_u8)                                                                     \
   _(vceq_u16)                                                                    \
   _(vceq_u32)                                                                    \
-  /*_(vceq_p8)                                                           */      \
+  /*_(vceq_p8)                                                                */ \
   _(vceqq_s8)                                                                    \
   _(vceqq_s16)                                                                   \
   _(vceqq_s32)                                                                   \
@@ -478,7 +478,7 @@
   _(vceqq_u8)                                                                    \
   _(vceqq_u16)                                                                   \
   _(vceqq_u32)                                                                   \
-  /*_(vceqq_p8)                                                          */      \
+  /*_(vceqq_p8)                                                               */ \
   _(vceq_s64)                                                                    \
   _(vceqq_s64)                                                                   \
   _(vceq_u64)                                                                    \
@@ -694,20 +694,20 @@
   _(vtst_u8)                                                                     \
   _(vtst_u16)                                                                    \
   _(vtst_u32)                                                                    \
-  /*_(vtst_p8)                                                           */      \
-  /*_(vtst_p16)                                                          */      \
+  /*_(vtst_p8)                                                                */ \
+  /*_(vtst_p16)                                                               */ \
   _(vtstq_s8)                                                                    \
   _(vtstq_s16)                                                                   \
   _(vtstq_s32)                                                                   \
   _(vtstq_u8)                                                                    \
   _(vtstq_u16)                                                                   \
   _(vtstq_u32)                                                                   \
-  /*_(vtstq_p8)                                                          */      \
+  /*_(vtstq_p8)                                                               */ \
   _(vtst_s64)                                                                    \
   _(vtstq_s64)                                                                   \
   _(vtst_u64)                                                                    \
   _(vtstq_u64)                                                                   \
-  /*_(vtstq_p16)                                                         */      \
+  /*_(vtstq_p16)                                                              */ \
   _(vabd_s8)                                                                     \
   _(vabd_s16)                                                                    \
   _(vabd_s32)                                                                    \
@@ -1272,7 +1272,7 @@
   _(vrsraq_n_u64)                                                                \
   /*_(vrsrad_n_s64)                                                           */ \
   /*_(vrsrad_n_u64)                                                           */ \
-  /*_(vsri_n_p64)                                                        */      \
+  /*_(vsri_n_p64)                                                             */ \
   _(vsri_n_s8)                                                                   \
   _(vsri_n_s16)                                                                  \
   _(vsri_n_s32)                                                                  \
@@ -1281,9 +1281,9 @@
   _(vsri_n_u16)                                                                  \
   _(vsri_n_u32)                                                                  \
   _(vsri_n_u64)                                                                  \
-  /*_(vsri_n_p8)                                                         */      \
-  /*_(vsri_n_p16)                                                        */      \
-  /*_(vsriq_n_p64)                                                       */      \
+  /*_(vsri_n_p8)                                                              */ \
+  /*_(vsri_n_p16)                                                             */ \
+  /*_(vsriq_n_p64)                                                            */ \
   _(vsriq_n_s8)                                                                  \
   _(vsriq_n_s16)                                                                 \
   _(vsriq_n_s32)                                                                 \
@@ -1292,11 +1292,11 @@
   _(vsriq_n_u16)                                                                 \
   _(vsriq_n_u32)                                                                 \
   _(vsriq_n_u64)                                                                 \
-  /*_(vsriq_n_p8)                                                        */      \
-  /*_(vsriq_n_p16)                                                       */      \
+  /*_(vsriq_n_p8)                                                             */ \
+  /*_(vsriq_n_p16)                                                            */ \
   /*_(vsrid_n_s64)                                                            */ \
   /*_(vsrid_n_u64)                                                            */ \
-  /*_(vsli_n_p64)                                                        */      \
+  /*_(vsli_n_p64)                                                             */ \
   _(vsli_n_s8)                                                                   \
   _(vsli_n_s16)                                                                  \
   _(vsli_n_s32)                                                                  \
@@ -1305,9 +1305,9 @@
   _(vsli_n_u16)                                                                  \
   _(vsli_n_u32)                                                                  \
   _(vsli_n_u64)                                                                  \
-  /*_(vsli_n_p8)                                                         */      \
-  /*_(vsli_n_p16)                                                        */      \
-  /*_(vsliq_n_p64)                                                       */      \
+  /*_(vsli_n_p8)                                                              */ \
+  /*_(vsli_n_p16)                                                             */ \
+  /*_(vsliq_n_p64)                                                            */ \
   _(vsliq_n_s8)                                                                  \
   _(vsliq_n_s16)                                                                 \
   _(vsliq_n_s32)                                                                 \
@@ -1316,8 +1316,8 @@
   _(vsliq_n_u16)                                                                 \
   _(vsliq_n_u32)                                                                 \
   _(vsliq_n_u64)                                                                 \
-  /*_(vsliq_n_p8)                                                        */      \
-  /*_(vsliq_n_p16)                                                       */      \
+  /*_(vsliq_n_p8)                                                             */ \
+  /*_(vsliq_n_p16)                                                            */ \
   /*_(vslid_n_s64)                                                            */ \
   /*_(vslid_n_u64)                                                            */ \
   _(vneg_s8)                                                                     \
@@ -1351,14 +1351,14 @@
   _(vmvn_u8)                                                                     \
   _(vmvn_u16)                                                                    \
   _(vmvn_u32)                                                                    \
-  /*_(vmvn_p8)                                                           */      \
+  /*_(vmvn_p8)                                                                */ \
   _(vmvnq_s8)                                                                    \
   _(vmvnq_s16)                                                                   \
   _(vmvnq_s32)                                                                   \
   _(vmvnq_u8)                                                                    \
   _(vmvnq_u16)                                                                   \
   _(vmvnq_u32)                                                                   \
-  /*_(vmvnq_p8)                                                          */      \
+  /*_(vmvnq_p8)                                                               */ \
   _(vcls_s8)                                                                     \
   _(vcls_s16)                                                                    \
   _(vcls_s32)                                                                    \
@@ -1385,10 +1385,10 @@
   _(vclzq_u32)                                                                   \
   _(vcnt_s8)                                                                     \
   _(vcnt_u8)                                                                     \
-  /*_(vcnt_p8)                                                           */      \
+  /*_(vcnt_p8)                                                                */ \
   _(vcntq_s8)                                                                    \
   _(vcntq_u8)                                                                    \
-  /*_(vcntq_p8)                                                          */      \
+  /*_(vcntq_p8)                                                               */ \
   _(vrecpe_f32)                                                                  \
   _(vrecpe_u32)                                                                  \
   _(vrecpeq_f32)                                                                 \
@@ -1413,10 +1413,10 @@
   _(vget_lane_u8)                                                                \
   _(vget_lane_u16)                                                               \
   _(vget_lane_u32)                                                               \
-  /*_(vget_lane_p8)                                                      */      \
-  /*_(vget_lane_p16)                                                     */      \
+  /*_(vget_lane_p8)                                                           */ \
+  /*_(vget_lane_p16)                                                          */ \
   _(vget_lane_s64)                                                               \
-  /*_(vget_lane_p64)                                                     */      \
+  /*_(vget_lane_p64)                                                          */ \
   _(vget_lane_u64)                                                               \
   _(vgetq_lane_s8)                                                               \
   _(vgetq_lane_s16)                                                              \
@@ -1426,12 +1426,12 @@
   _(vgetq_lane_u8)                                                               \
   _(vgetq_lane_u16)                                                              \
   _(vgetq_lane_u32)                                                              \
-  /*_(vgetq_lane_p8)                                                     */      \
-  /*_(vgetq_lane_p16)                                                    */      \
+  /*_(vgetq_lane_p8)                                                          */ \
+  /*_(vgetq_lane_p16)                                                         */ \
   /*_(vget_lane_f16)                                                          */ \
   /*_(vgetq_lane_f16)                                                         */ \
   _(vgetq_lane_s64)                                                              \
-  /*_(vgetq_lane_p64)                                                    */      \
+  /*_(vgetq_lane_p64)                                                         */ \
   _(vgetq_lane_u64)                                                              \
   _(vset_lane_s8)                                                                \
   _(vset_lane_s16)                                                               \
@@ -1441,13 +1441,13 @@
   _(vset_lane_u8)                                                                \
   _(vset_lane_u16)                                                               \
   _(vset_lane_u32)                                                               \
-  /*_(vset_lane_p8)                                                      */      \
-  /*_(vset_lane_p16)                                                     */      \
+  /*_(vset_lane_p8)                                                           */ \
+  /*_(vset_lane_p16)                                                          */ \
   /*_(vset_lane_f16)                                                          */ \
   /*_(vsetq_lane_f16)                                                         */ \
   _(vset_lane_s64)                                                               \
   _(vset_lane_u64)                                                               \
-  /*_(vset_lane_p64)                                                     */      \
+  /*_(vset_lane_p64)                                                          */ \
   _(vsetq_lane_s8)                                                               \
   _(vsetq_lane_s16)                                                              \
   _(vsetq_lane_s32)                                                              \
@@ -1466,24 +1466,24 @@
   _(vsetq_lane_u8)                                                               \
   _(vsetq_lane_u16)                                                              \
   _(vsetq_lane_u32)                                                              \
-  /*_(vsetq_lane_p8)                                                     */      \
-  /*_(vsetq_lane_p16)                                                    */      \
+  /*_(vsetq_lane_p8)                                                          */ \
+  /*_(vsetq_lane_p16)                                                         */ \
   _(vsetq_lane_s64)                                                              \
   _(vsetq_lane_u64)                                                              \
-  /*_(vsetq_lane_p64)                                                    */      \
-  /*_(vcreate_p64)                                                       */      \
+  /*_(vsetq_lane_p64)                                                         */ \
+  /*_(vcreate_p64)                                                            */ \
   _(vcreate_s8)                                                                  \
   _(vcreate_s16)                                                                 \
   _(vcreate_s32)                                                                 \
   _(vcreate_s64)                                                                 \
-  /*_(vcreate_f16)                                                       */      \
+  /*_(vcreate_f16)                                                            */ \
   _(vcreate_f32)                                                                 \
   _(vcreate_u8)                                                                  \
   _(vcreate_u16)                                                                 \
   _(vcreate_u32)                                                                 \
   _(vcreate_u64)                                                                 \
-  /*_(vcreate_p8)                                                        */      \
-  /*_(vcreate_p16)                                                       */      \
+  /*_(vcreate_p8)                                                             */ \
+  /*_(vcreate_p16)                                                            */ \
   _(vcreate_f64)                                                                 \
   _(vdup_n_s8)                                                                   \
   _(vdup_n_s16)                                                                  \
@@ -1492,12 +1492,12 @@
   _(vdup_n_u8)                                                                   \
   _(vdup_n_u16)                                                                  \
   _(vdup_n_u32)                                                                  \
-  /*_(vdup_n_p8)                                                         */      \
-  /*_(vdup_n_p16)                                                        */      \
-  /*_(vdup_n_p64)                                                        */      \
+  /*_(vdup_n_p8)                                                              */ \
+  /*_(vdup_n_p16)                                                             */ \
+  /*_(vdup_n_p64)                                                             */ \
   _(vdup_n_s64)                                                                  \
   _(vdup_n_u64)                                                                  \
-  /*_(vdupq_n_p64)                                                       */      \
+  /*_(vdupq_n_p64)                                                            */ \
   _(vdupq_n_s8)                                                                  \
   _(vdupq_n_s16)                                                                 \
   _(vdupq_n_s32)                                                                 \
@@ -1505,8 +1505,8 @@
   _(vdupq_n_u8)                                                                  \
   _(vdupq_n_u16)                                                                 \
   _(vdupq_n_u32)                                                                 \
-  /*_(vdupq_n_p8)                                                        */      \
-  /*_(vdupq_n_p16)                                                       */      \
+  /*_(vdupq_n_p8)                                                             */ \
+  /*_(vdupq_n_p16)                                                            */ \
   _(vdup_n_f64)                                                                  \
   _(vdupq_n_f64)                                                                 \
   _(vdupq_n_s64)                                                                 \
@@ -1518,8 +1518,8 @@
   _(vmov_n_u8)                                                                   \
   _(vmov_n_u16)                                                                  \
   _(vmov_n_u32)                                                                  \
-  /*_(vmov_n_p8)                                                         */      \
-  /*_(vmov_n_p16)                                                        */      \
+  /*_(vmov_n_p8)                                                              */ \
+  /*_(vmov_n_p16)                                                             */ \
   _(vmov_n_s64)                                                                  \
   _(vmov_n_u64)                                                                  \
   _(vmovq_n_s8)                                                                  \
@@ -1529,8 +1529,8 @@
   _(vmovq_n_u8)                                                                  \
   _(vmovq_n_u16)                                                                 \
   _(vmovq_n_u32)                                                                 \
-  /*_(vmovq_n_p8)                                                        */      \
-  /*_(vmovq_n_p16)                                                       */      \
+  /*_(vmovq_n_p8)                                                             */ \
+  /*_(vmovq_n_p16)                                                            */ \
   _(vmov_n_f64)                                                                  \
   _(vmovq_n_f64)                                                                 \
   _(vmovq_n_s64)                                                                 \
@@ -1542,9 +1542,9 @@
   _(vdup_lane_u8)                                                                \
   _(vdup_lane_u16)                                                               \
   _(vdup_lane_u32)                                                               \
-  /*_(vdup_lane_p8)                                                      */      \
-  /*_(vdup_lane_p16)                                                     */      \
-  /*_(vdup_lane_p64)                                                     */      \
+  /*_(vdup_lane_p8)                                                           */ \
+  /*_(vdup_lane_p16)                                                          */ \
+  /*_(vdup_lane_p64)                                                          */ \
   _(vdup_lane_s64)                                                               \
   _(vdup_lane_u64)                                                               \
   _(vdupq_lane_s8)                                                               \
@@ -1554,8 +1554,8 @@
   _(vdupq_lane_u8)                                                               \
   _(vdupq_lane_u16)                                                              \
   _(vdupq_lane_u32)                                                              \
-  /*_(vdupq_lane_p8)                                                     */      \
-  /*_(vdupq_lane_p16)                                                    */      \
+  /*_(vdupq_lane_p8)                                                          */ \
+  /*_(vdupq_lane_p16)                                                         */ \
   /*_(vdup_lane_f64)                                                          */ \
   /*_(vdupq_lane_f64)                                                         */ \
   /*_(vdup_laneq_s8)                                                          */ \
@@ -1584,47 +1584,47 @@
   /*_(vdupq_laneq_p16)                                                        */ \
   /*_(vdup_laneq_f64)                                                         */ \
   /*_(vdupq_laneq_f64)                                                        */ \
-  /*_(vdupq_lane_p64)                                                    */      \
+  /*_(vdupq_lane_p64)                                                         */ \
   _(vdupq_lane_s64)                                                              \
   _(vdupq_lane_u64)                                                              \
-  /*_(vcombine_p64)                                                      */      \
+  /*_(vcombine_p64)                                                           */ \
   _(vcombine_s8)                                                                 \
   _(vcombine_s16)                                                                \
   _(vcombine_s32)                                                                \
   _(vcombine_s64)                                                                \
-  /*_(vcombine_f16)                                                      */      \
+  /*_(vcombine_f16)                                                           */ \
   _(vcombine_f32)                                                                \
   _(vcombine_u8)                                                                 \
   _(vcombine_u16)                                                                \
   _(vcombine_u32)                                                                \
   _(vcombine_u64)                                                                \
-  /*_(vcombine_p8)                                                       */      \
-  /*_(vcombine_p16)                                                      */      \
+  /*_(vcombine_p8)                                                            */ \
+  /*_(vcombine_p16)                                                           */ \
   /*_(vcombine_f64)                                                           */ \
-  /*_(vget_high_p64)                                                     */      \
+  /*_(vget_high_p64)                                                          */ \
   _(vget_high_s8)                                                                \
   _(vget_high_s16)                                                               \
   _(vget_high_s32)                                                               \
   _(vget_high_s64)                                                               \
-  /*_(vget_high_f16)                                                     */      \
+  /*_(vget_high_f16)                                                          */ \
   _(vget_high_f32)                                                               \
   _(vget_high_u8)                                                                \
   _(vget_high_u16)                                                               \
   _(vget_high_u32)                                                               \
   _(vget_high_u64)                                                               \
-  /*_(vget_high_p8)                                                      */      \
-  /*_(vget_high_p16)                                                     */      \
+  /*_(vget_high_p8)                                                           */ \
+  /*_(vget_high_p16)                                                          */ \
   /*_(vget_high_f64)                                                          */ \
   _(vget_low_s8)                                                                 \
   _(vget_low_s16)                                                                \
   _(vget_low_s32)                                                                \
-  /*_(vget_low_f16)                                                      */      \
+  /*_(vget_low_f16)                                                           */ \
   _(vget_low_f32)                                                                \
   _(vget_low_u8)                                                                 \
   _(vget_low_u16)                                                                \
   _(vget_low_u32)                                                                \
-  /*_(vget_low_p8)                                                       */      \
-  /*_(vget_low_p16)                                                      */      \
+  /*_(vget_low_p8)                                                            */ \
+  /*_(vget_low_p16)                                                           */ \
   /*_(vget_low_f64)                                                           */ \
   /*_(vdupb_lane_s8)                                                          */ \
   /*_(vduph_lane_s16)                                                         */ \
@@ -1650,7 +1650,7 @@
   /*_(vdupd_laneq_f64)                                                        */ \
   /*_(vdupb_laneq_p8)                                                         */ \
   /*_(vduph_laneq_p16)                                                        */ \
-  /*_(vget_low_p64)                                                      */      \
+  /*_(vget_low_p64)                                                           */ \
   _(vget_low_s64)                                                                \
   _(vget_low_u64)                                                                \
   _(vcvt_s32_f32)                                                                \
@@ -1725,11 +1725,11 @@
   /*_(vcvtpd_u64_f64)                                                         */ \
   /*_(vcvtad_s64_f64)                                                         */ \
   /*_(vcvtad_u64_f64)                                                         */ \
-  /*_(vcvt_f16_f32)                                                      */      \
+  /*_(vcvt_f16_f32)                                                           */ \
   /*_(vcvt_high_f16_f32)                                                      */ \
   /*_(vcvt_f32_f64)                                                           */ \
   /*_(vcvt_high_f32_f64)                                                      */ \
-  /*_(vcvt_f32_f16)                                                      */      \
+  /*_(vcvt_f32_f16)                                                           */ \
   /*_(vcvt_high_f32_f16)                                                      */ \
   /*_(vcvt_f64_f32)                                                           */ \
   /*_(vcvt_high_f64_f32)                                                      */ \
@@ -1813,28 +1813,28 @@
   _(vmovl_high_u32)                                                              \
   _(vtbl1_s8)                                                                    \
   _(vtbl1_u8)                                                                    \
-  /*_(vtbl1_p8)                                                          */      \
+  /*_(vtbl1_p8)                                                               */ \
   _(vtbl2_s8)                                                                    \
   _(vtbl2_u8)                                                                    \
-  /*_(vtbl2_p8)                                                          */      \
+  /*_(vtbl2_p8)                                                               */ \
   _(vtbl3_s8)                                                                    \
   _(vtbl3_u8)                                                                    \
-  /*_(vtbl3_p8)                                                          */      \
+  /*_(vtbl3_p8)                                                               */ \
   _(vtbl4_s8)                                                                    \
   _(vtbl4_u8)                                                                    \
-  /*_(vtbl4_p8)                                                          */      \
+  /*_(vtbl4_p8)                                                               */ \
   _(vtbx1_s8)                                                                    \
   _(vtbx1_u8)                                                                    \
-  /*_(vtbx1_p8)                                                          */      \
+  /*_(vtbx1_p8)                                                               */ \
   _(vtbx2_s8)                                                                    \
   _(vtbx2_u8)                                                                    \
-  /*_(vtbx2_p8)                                                          */      \
+  /*_(vtbx2_p8)                                                               */ \
   _(vtbx3_s8)                                                                    \
   _(vtbx3_u8)                                                                    \
-  /*_(vtbx3_p8)                                                          */      \
+  /*_(vtbx3_p8)                                                               */ \
   _(vtbx4_s8)                                                                    \
   _(vtbx4_u8)                                                                    \
-  /*_(vtbx4_p8)                                                          */      \
+  /*_(vtbx4_p8)                                                               */ \
   /*_(vqtbl1_s8)                                                              */ \
   /*_(vqtbl1q_s8)                                                             */ \
   /*_(vqtbl1_u8)                                                              */ \
@@ -2252,7 +2252,7 @@
   _(vqdmlsl_n_s32)                                                               \
   /*_(vqdmlsl_high_n_s16)                                                     */ \
   /*_(vqdmlsl_high_n_s32)                                                     */ \
-  /*_(vext_p64)                                                          */      \
+  /*_(vext_p64)                                                               */ \
   _(vext_s8)                                                                     \
   _(vext_s16)                                                                    \
   _(vext_s32)                                                                    \
@@ -2262,9 +2262,9 @@
   _(vext_u16)                                                                    \
   _(vext_u32)                                                                    \
   _(vext_u64)                                                                    \
-  /*_(vext_p8)                                                           */      \
-  /*_(vext_p16)                                                          */      \
-  /*_(vextq_p64)                                                         */      \
+  /*_(vext_p8)                                                                */ \
+  /*_(vext_p16)                                                               */ \
+  /*_(vextq_p64)                                                              */ \
   _(vextq_s8)                                                                    \
   _(vextq_s16)                                                                   \
   _(vextq_s32)                                                                   \
@@ -2276,8 +2276,8 @@
   _(vextq_u16)                                                                   \
   _(vextq_u32)                                                                   \
   _(vextq_u64)                                                                   \
-  /*_(vextq_p8)                                                          */      \
-  /*_(vextq_p16)                                                         */      \
+  /*_(vextq_p8)                                                               */ \
+  /*_(vextq_p16)                                                              */ \
   _(vrev64_s8)                                                                   \
   _(vrev64_s16)                                                                  \
   _(vrev64_s32)                                                                  \
@@ -2285,8 +2285,8 @@
   _(vrev64_u8)                                                                   \
   _(vrev64_u16)                                                                  \
   _(vrev64_u32)                                                                  \
-  /*_(vrev64_p8)                                                         */      \
-  /*_(vrev64_p16)                                                        */      \
+  /*_(vrev64_p8)                                                              */ \
+  /*_(vrev64_p16)                                                             */ \
   _(vrev64q_s8)                                                                  \
   _(vrev64q_s16)                                                                 \
   _(vrev64q_s32)                                                                 \
@@ -2294,26 +2294,26 @@
   _(vrev64q_u8)                                                                  \
   _(vrev64q_u16)                                                                 \
   _(vrev64q_u32)                                                                 \
-  /*_(vrev64q_p8)                                                        */      \
-  /*_(vrev64q_p16)                                                       */      \
+  /*_(vrev64q_p8)                                                             */ \
+  /*_(vrev64q_p16)                                                            */ \
   _(vrev32_s8)                                                                   \
   _(vrev32_s16)                                                                  \
   _(vrev32_u8)                                                                   \
   _(vrev32_u16)                                                                  \
-  /*_(vrev32_p8)                                                         */      \
-  /*_(vrev32_p16)                                                        */      \
+  /*_(vrev32_p8)                                                              */ \
+  /*_(vrev32_p16)                                                             */ \
   _(vrev32q_s8)                                                                  \
   _(vrev32q_s16)                                                                 \
   _(vrev32q_u8)                                                                  \
   _(vrev32q_u16)                                                                 \
-  /*_(vrev32q_p8)                                                        */      \
-  /*_(vrev32q_p16)                                                       */      \
+  /*_(vrev32q_p8)                                                             */ \
+  /*_(vrev32q_p16)                                                            */ \
   _(vrev16_s8)                                                                   \
   _(vrev16_u8)                                                                   \
-  /*_(vrev16_p8)                                                         */      \
+  /*_(vrev16_p8)                                                              */ \
   _(vrev16q_s8)                                                                  \
   _(vrev16q_u8)                                                                  \
-  /*_(vrev16q_p8)                                                        */      \
+  /*_(vrev16q_p8)                                                             */ \
   /*_(vzip1_s8)                                                               */ \
   /*_(vzip1q_s8)                                                              */ \
   /*_(vzip1_s16)                                                              */ \
@@ -2446,7 +2446,7 @@
   /*_(vtrn2q_p8)                                                              */ \
   /*_(vtrn2_p16)                                                              */ \
   /*_(vtrn2q_p16)                                                             */ \
-  /*_(vbsl_p64)                                                          */      \
+  /*_(vbsl_p64)                                                               */ \
   _(vbsl_s8)                                                                     \
   _(vbsl_s16)                                                                    \
   _(vbsl_s32)                                                                    \
@@ -2456,9 +2456,9 @@
   _(vbsl_u16)                                                                    \
   _(vbsl_u32)                                                                    \
   _(vbsl_u64)                                                                    \
-  /*_(vbsl_p8)                                                           */      \
-  /*_(vbsl_p16)                                                          */      \
-  /*_(vbslq_p64)                                                         */      \
+  /*_(vbsl_p8)                                                                */ \
+  /*_(vbsl_p16)                                                               */ \
+  /*_(vbslq_p64)                                                              */ \
   _(vbslq_s8)                                                                    \
   _(vbslq_s16)                                                                   \
   _(vbslq_s32)                                                                   \
@@ -2468,8 +2468,8 @@
   _(vbslq_u16)                                                                   \
   _(vbslq_u32)                                                                   \
   _(vbslq_u64)                                                                   \
-  /*_(vbslq_p8)                                                          */      \
-  /*_(vbslq_p16)                                                         */      \
+  /*_(vbslq_p8)                                                               */ \
+  /*_(vbslq_p16)                                                              */ \
   /*_(vbsl_f64)                                                               */ \
   /*_(vbslq_f64)                                                              */ \
   /*_(vcopy_lane_s8)                                                          */ \
@@ -2534,8 +2534,8 @@
   _(vtrn_s16)                                                                    \
   _(vtrn_u8)                                                                     \
   _(vtrn_u16)                                                                    \
-  /*_(vtrn_p8)                                                           */      \
-  /*_(vtrn_p16)                                                          */      \
+  /*_(vtrn_p8)                                                                */ \
+  /*_(vtrn_p16)                                                               */ \
   _(vtrn_s32)                                                                    \
   _(vtrn_f32)                                                                    \
   _(vtrn_u32)                                                                    \
@@ -2546,14 +2546,14 @@
   _(vtrnq_u8)                                                                    \
   _(vtrnq_u16)                                                                   \
   _(vtrnq_u32)                                                                   \
-  /*_(vtrnq_p8)                                                          */      \
-  /*_(vtrnq_p16)                                                         */      \
+  /*_(vtrnq_p8)                                                               */ \
+  /*_(vtrnq_p16)                                                              */ \
   _(vzip_s8)                                                                     \
   _(vzip_s16)                                                                    \
   _(vzip_u8)                                                                     \
   _(vzip_u16)                                                                    \
-  /*_(vzip_p8)                                                           */      \
-  /*_(vzip_p16)                                                          */      \
+  /*_(vzip_p8)                                                                */ \
+  /*_(vzip_p16)                                                               */ \
   _(vzip_s32)                                                                    \
   _(vzip_f32)                                                                    \
   _(vzip_u32)                                                                    \
@@ -2564,8 +2564,8 @@
   _(vzipq_u8)                                                                    \
   _(vzipq_u16)                                                                   \
   _(vzipq_u32)                                                                   \
-  /*_(vzipq_p8)                                                          */      \
-  /*_(vzipq_p16)                                                         */      \
+  /*_(vzipq_p8)                                                               */ \
+  /*_(vzipq_p16)                                                              */ \
   _(vuzp_s8)                                                                     \
   _(vuzp_s16)                                                                    \
   _(vuzp_s32)                                                                    \
@@ -2573,8 +2573,8 @@
   _(vuzp_u8)                                                                     \
   _(vuzp_u16)                                                                    \
   _(vuzp_u32)                                                                    \
-  /*_(vuzp_p8)                                                           */      \
-  /*_(vuzp_p16)                                                          */      \
+  /*_(vuzp_p8)                                                                */ \
+  /*_(vuzp_p16)                                                               */ \
   _(vuzpq_s8)                                                                    \
   _(vuzpq_s16)                                                                   \
   _(vuzpq_s32)                                                                   \
@@ -2582,159 +2582,159 @@
   _(vuzpq_u8)                                                                    \
   _(vuzpq_u16)                                                                   \
   _(vuzpq_u32)                                                                   \
-  /*_(vuzpq_p8)                                                          */      \
-  /*_(vuzpq_p16)                                                         */      \
-  /*_(vld1_p64)                                                          */      \
+  /*_(vuzpq_p8)                                                               */ \
+  /*_(vuzpq_p16)                                                              */ \
+  /*_(vld1_p64)                                                               */ \
   _(vld1_s8)                                                                     \
   _(vld1_s16)                                                                    \
   _(vld1_s32)                                                                    \
   _(vld1_s64)                                                                    \
-  /*_(vld1_f16)                                                          */      \
+  /*_(vld1_f16)                                                               */ \
   _(vld1_f32)                                                                    \
   _(vld1_u8)                                                                     \
   _(vld1_u16)                                                                    \
   _(vld1_u32)                                                                    \
   _(vld1_u64)                                                                    \
-  /*_(vld1_p8)                                                           */      \
-  /*_(vld1_p16)                                                          */      \
-  /*_(vld1q_p64)                                                         */      \
+  /*_(vld1_p8)                                                                */ \
+  /*_(vld1_p16)                                                               */ \
+  /*_(vld1q_p64)                                                              */ \
   _(vld1q_s8)                                                                    \
   _(vld1q_s16)                                                                   \
   _(vld1q_s32)                                                                   \
   _(vld1q_s64)                                                                   \
-  /*_(vld1q_f16)                                                         */      \
+  /*_(vld1q_f16)                                                              */ \
   _(vld1q_f32)                                                                   \
   _(vld1q_u8)                                                                    \
   _(vld1q_u16)                                                                   \
   _(vld1q_u32)                                                                   \
   _(vld1q_u64)                                                                   \
-  /*_(vld1q_p8)                                                          */      \
-  /*_(vld1q_p16)                                                         */      \
+  /*_(vld1q_p8)                                                               */ \
+  /*_(vld1q_p16)                                                              */ \
   _(vld1_f64)                                                                    \
   _(vld1q_f64)                                                                   \
   _(vld1_lane_s8)                                                                \
   _(vld1_lane_s16)                                                               \
   _(vld1_lane_s32)                                                               \
-  /*_(vld1_lane_f16)                                                     */      \
+  /*_(vld1_lane_f16)                                                          */ \
   _(vld1_lane_f32)                                                               \
   _(vld1_lane_u8)                                                                \
   _(vld1_lane_u16)                                                               \
   _(vld1_lane_u32)                                                               \
-  /*_(vld1_lane_p8)                                                      */      \
-  /*_(vld1_lane_p16)                                                     */      \
-  /*_(vld1_lane_p64)                                                     */      \
+  /*_(vld1_lane_p8)                                                           */ \
+  /*_(vld1_lane_p16)                                                          */ \
+  /*_(vld1_lane_p64)                                                          */ \
   _(vld1_lane_s64)                                                               \
   _(vld1_lane_u64)                                                               \
   _(vld1q_lane_s8)                                                               \
   _(vld1q_lane_s16)                                                              \
   _(vld1q_lane_s32)                                                              \
-  /*_(vld1q_lane_f16)                                                    */      \
+  /*_(vld1q_lane_f16)                                                         */ \
   _(vld1q_lane_f32)                                                              \
   _(vld1q_lane_u8)                                                               \
   _(vld1q_lane_u16)                                                              \
   _(vld1q_lane_u32)                                                              \
-  /*_(vld1q_lane_p8)                                                     */      \
-  /*_(vld1q_lane_p16)                                                    */      \
+  /*_(vld1q_lane_p8)                                                          */ \
+  /*_(vld1q_lane_p16)                                                         */ \
   /*_(vld1_lane_f64)                                                          */ \
   /*_(vld1q_lane_f64)                                                         */ \
-  /*_(vld1q_lane_p64)                                                    */      \
+  /*_(vld1q_lane_p64)                                                         */ \
   _(vld1q_lane_s64)                                                              \
   _(vld1q_lane_u64)                                                              \
   _(vld1_dup_s8)                                                                 \
   _(vld1_dup_s16)                                                                \
   _(vld1_dup_s32)                                                                \
-  /*_(vld1_dup_f16)                                                      */      \
+  /*_(vld1_dup_f16)                                                           */ \
   _(vld1_dup_f32)                                                                \
   _(vld1_dup_u8)                                                                 \
   _(vld1_dup_u16)                                                                \
   _(vld1_dup_u32)                                                                \
-  /*_(vld1_dup_p8)                                                       */      \
-  /*_(vld1_dup_p16)                                                      */      \
-  /*_(vld1_dup_p64)                                                      */      \
+  /*_(vld1_dup_p8)                                                            */ \
+  /*_(vld1_dup_p16)                                                           */ \
+  /*_(vld1_dup_p64)                                                           */ \
   _(vld1_dup_s64)                                                                \
   _(vld1_dup_u64)                                                                \
   _(vld1q_dup_s8)                                                                \
   _(vld1q_dup_s16)                                                               \
   _(vld1q_dup_s32)                                                               \
-  /*_(vld1q_dup_f16)                                                     */      \
+  /*_(vld1q_dup_f16)                                                          */ \
   _(vld1q_dup_f32)                                                               \
   _(vld1q_dup_u8)                                                                \
   _(vld1q_dup_u16)                                                               \
   _(vld1q_dup_u32)                                                               \
-  /*_(vld1q_dup_p8)                                                      */      \
-  /*_(vld1q_dup_p16)                                                     */      \
+  /*_(vld1q_dup_p8)                                                           */ \
+  /*_(vld1q_dup_p16)                                                          */ \
   /*_(vld1_dup_f64)                                                           */ \
   /*_(vld1q_dup_f64)                                                          */ \
-  /*_(vld1q_dup_p64)                                                     */      \
+  /*_(vld1q_dup_p64)                                                          */ \
   _(vld1q_dup_s64)                                                               \
   _(vld1q_dup_u64)                                                               \
-  /*_(vst1_p64)                                                          */      \
+  /*_(vst1_p64)                                                               */ \
   _(vst1_s8)                                                                     \
   _(vst1_s16)                                                                    \
   _(vst1_s32)                                                                    \
   _(vst1_s64)                                                                    \
-  /*_(vst1_f16)                                                          */      \
+  /*_(vst1_f16)                                                               */ \
   _(vst1_f32)                                                                    \
   _(vst1_u8)                                                                     \
   _(vst1_u16)                                                                    \
   _(vst1_u32)                                                                    \
   _(vst1_u64)                                                                    \
-  /*_(vst1_p8)                                                           */      \
-  /*_(vst1_p16)                                                          */      \
-  /*_(vst1q_p64)                                                         */      \
+  /*_(vst1_p8)                                                                */ \
+  /*_(vst1_p16)                                                               */ \
+  /*_(vst1q_p64)                                                              */ \
   _(vst1q_s8)                                                                    \
   _(vst1q_s16)                                                                   \
   _(vst1q_s32)                                                                   \
   _(vst1q_s64)                                                                   \
-  /*_(vst1q_f16)                                                         */      \
+  /*_(vst1q_f16)                                                              */ \
   _(vst1q_f32)                                                                   \
   _(vst1q_u8)                                                                    \
   _(vst1q_u16)                                                                   \
   _(vst1q_u32)                                                                   \
   _(vst1q_u64)                                                                   \
-  /*_(vst1q_p8)                                                          */      \
-  /*_(vst1q_p16)                                                         */      \
+  /*_(vst1q_p8)                                                               */ \
+  /*_(vst1q_p16)                                                              */ \
   /*_(vst1_f64)                                                               */ \
   /*_(vst1q_f64)                                                              */ \
   _(vst1_lane_s8)                                                                \
   _(vst1_lane_s16)                                                               \
   _(vst1_lane_s32)                                                               \
-  /*_(vst1_lane_f16)                                                     */      \
+  /*_(vst1_lane_f16)                                                          */ \
   _(vst1_lane_f32)                                                               \
   _(vst1_lane_u8)                                                                \
   _(vst1_lane_u16)                                                               \
   _(vst1_lane_u32)                                                               \
-  /*_(vst1_lane_p8)                                                      */      \
-  /*_(vst1_lane_p16)                                                     */      \
-  /*_(vst1_lane_p64)                                                     */      \
+  /*_(vst1_lane_p8)                                                           */ \
+  /*_(vst1_lane_p16)                                                          */ \
+  /*_(vst1_lane_p64)                                                          */ \
   _(vst1_lane_s64)                                                               \
   _(vst1_lane_u64)                                                               \
   _(vst1q_lane_s8)                                                               \
   _(vst1q_lane_s16)                                                              \
   _(vst1q_lane_s32)                                                              \
-  /*_(vst1q_lane_f16)                                                    */      \
+  /*_(vst1q_lane_f16)                                                         */ \
   _(vst1q_lane_f32)                                                              \
   _(vst1q_lane_u8)                                                               \
   _(vst1q_lane_u16)                                                              \
   _(vst1q_lane_u32)                                                              \
-  /*_(vst1q_lane_p8)                                                     */      \
-  /*_(vst1q_lane_p16)                                                    */      \
+  /*_(vst1q_lane_p8)                                                          */ \
+  /*_(vst1q_lane_p16)                                                         */ \
   /*_(vst1_lane_f64)                                                          */ \
   /*_(vst1q_lane_f64)                                                         */ \
-  /*_(vst1q_lane_p64)                                                    */      \
+  /*_(vst1q_lane_p64)                                                         */ \
   _(vst1q_lane_s64)                                                              \
   _(vst1q_lane_u64)                                                              \
   _(vld2_s8)                                                                     \
   _(vld2_s16)                                                                    \
   _(vld2_s32)                                                                    \
-  /*_(vld2_f16)                                                          */      \
+  /*_(vld2_f16)                                                               */ \
   _(vld2_f32)                                                                    \
   _(vld2_u8)                                                                     \
   _(vld2_u16)                                                                    \
   _(vld2_u32)                                                                    \
-  /*_(vld2_p8)                                                           */      \
-  /*_(vld2_p16)                                                          */      \
-  /*_(vld2_p64)                                                          */      \
+  /*_(vld2_p8)                                                                */ \
+  /*_(vld2_p16)                                                               */ \
+  /*_(vld2_p64)                                                               */ \
   _(vld2q_s64)                                                                   \
   _(vld2q_u64)                                                                   \
   /*_(vld2q_p64)                                                              */ \
@@ -2745,22 +2745,22 @@
   _(vld2q_s8)                                                                    \
   _(vld2q_s16)                                                                   \
   _(vld2q_s32)                                                                   \
-  /*_(vld2q_f16)                                                         */      \
+  /*_(vld2q_f16)                                                              */ \
   _(vld2q_f32)                                                                   \
   _(vld2q_u8)                                                                    \
   _(vld2q_u16)                                                                   \
   _(vld2q_u32)                                                                   \
-  /*_(vld2q_p8)                                                          */      \
-  /*_(vld2q_p16)                                                         */      \
+  /*_(vld2q_p8)                                                               */ \
+  /*_(vld2q_p16)                                                              */ \
   _(vld2_lane_s8)                                                                \
   _(vld2_lane_s16)                                                               \
   _(vld2_lane_s32)                                                               \
-  /*_(vld2_lane_f16)                                                     */      \
+  /*_(vld2_lane_f16)                                                          */ \
   _(vld2_lane_f32)                                                               \
   _(vld2_lane_u8)                                                                \
   _(vld2_lane_u16)                                                               \
   _(vld2_lane_u32)                                                               \
-  /*_(vld2_lane_p8)                                                      */      \
+  /*_(vld2_lane_p8)                                                           */ \
   /*_(vld2q_lane_s8)                                                          */ \
   /*_(vld2q_lane_u8)                                                          */ \
   /*_(vld2q_lane_p8)                                                          */ \
@@ -2772,21 +2772,21 @@
   /*_(vld2q_lane_p64)                                                         */ \
   /*_(vld2_lane_f64)                                                          */ \
   /*_(vld2q_lane_f64)                                                         */ \
-  /*_(vld2_lane_p16)                                                     */      \
+  /*_(vld2_lane_p16)                                                          */ \
   _(vld2q_lane_s16)                                                              \
   _(vld2q_lane_s32)                                                              \
-  /*_(vld2q_lane_f16)                                                    */      \
+  /*_(vld2q_lane_f16)                                                         */ \
   _(vld2q_lane_f32)                                                              \
   _(vld2q_lane_u16)                                                              \
   _(vld2q_lane_u32)                                                              \
-  /*_(vld2q_lane_p16)                                                    */      \
+  /*_(vld2q_lane_p16)                                                         */ \
   _(vld2_dup_s8)                                                                 \
   /*_(vld2q_dup_s8)                                                           */ \
   _(vld2_dup_s16)                                                                \
   /*_(vld2q_dup_s16)                                                          */ \
   _(vld2_dup_s32)                                                                \
   /*_(vld2q_dup_s32)                                                          */ \
-  /*_(vld2_dup_f16)                                                      */      \
+  /*_(vld2_dup_f16)                                                           */ \
   /*_(vld2q_dup_f16)                                                          */ \
   _(vld2_dup_f32)                                                                \
   /*_(vld2q_dup_f32)                                                          */ \
@@ -2796,11 +2796,11 @@
   /*_(vld2q_dup_u16)                                                          */ \
   _(vld2_dup_u32)                                                                \
   /*_(vld2q_dup_u32)                                                          */ \
-  /*_(vld2_dup_p8)                                                       */      \
+  /*_(vld2_dup_p8)                                                            */ \
   /*_(vld2q_dup_p8)                                                           */ \
-  /*_(vld2_dup_p16)                                                      */      \
+  /*_(vld2_dup_p16)                                                           */ \
   /*_(vld2q_dup_p16)                                                          */ \
-  /*_(vld2_dup_p64)                                                      */      \
+  /*_(vld2_dup_p64)                                                           */ \
   /*_(vld2q_dup_s64)                                                          */ \
   /*_(vld2q_dup_u64)                                                          */ \
   /*_(vld2q_dup_p64)                                                          */ \
@@ -2811,14 +2811,14 @@
   _(vst2_s8)                                                                     \
   _(vst2_s16)                                                                    \
   _(vst2_s32)                                                                    \
-  /*_(vst2_f16)                                                          */      \
+  /*_(vst2_f16)                                                               */ \
   _(vst2_f32)                                                                    \
   _(vst2_u8)                                                                     \
   _(vst2_u16)                                                                    \
   _(vst2_u32)                                                                    \
-  /*_(vst2_p8)                                                           */      \
-  /*_(vst2_p16)                                                          */      \
-  /*_(vst2_p64)                                                          */      \
+  /*_(vst2_p8)                                                                */ \
+  /*_(vst2_p16)                                                               */ \
+  /*_(vst2_p64)                                                               */ \
   /*_(vst2q_s64)                                                              */ \
   /*_(vst2q_u64)                                                              */ \
   /*_(vst2q_p64)                                                              */ \
@@ -2829,30 +2829,30 @@
   _(vst2q_s8)                                                                    \
   _(vst2q_s16)                                                                   \
   _(vst2q_s32)                                                                   \
-  /*_(vst2q_f16)                                                         */      \
+  /*_(vst2q_f16)                                                              */ \
   _(vst2q_f32)                                                                   \
   _(vst2q_u8)                                                                    \
   _(vst2q_u16)                                                                   \
   _(vst2q_u32)                                                                   \
-  /*_(vst2q_p8)                                                          */      \
-  /*_(vst2q_p16)                                                         */      \
+  /*_(vst2q_p8)                                                               */ \
+  /*_(vst2q_p16)                                                              */ \
   _(vst2_lane_s8)                                                                \
   _(vst2_lane_s16)                                                               \
   _(vst2_lane_s32)                                                               \
-  /*_(vst2_lane_f16)                                                     */      \
+  /*_(vst2_lane_f16)                                                          */ \
   _(vst2_lane_f32)                                                               \
   _(vst2_lane_u8)                                                                \
   _(vst2_lane_u16)                                                               \
   _(vst2_lane_u32)                                                               \
-  /*_(vst2_lane_p8)                                                      */      \
-  /*_(vst2_lane_p16)                                                     */      \
+  /*_(vst2_lane_p8)                                                           */ \
+  /*_(vst2_lane_p16)                                                          */ \
   _(vst2q_lane_s16)                                                              \
   _(vst2q_lane_s32)                                                              \
-  /*_(vst2q_lane_f16)                                                    */      \
+  /*_(vst2q_lane_f16)                                                         */ \
   _(vst2q_lane_f32)                                                              \
   _(vst2q_lane_u16)                                                              \
   _(vst2q_lane_u32)                                                              \
-  /*_(vst2q_lane_p16)                                                    */      \
+  /*_(vst2q_lane_p16)                                                         */ \
   /*_(vst2q_lane_s8)                                                          */ \
   /*_(vst2q_lane_u8)                                                          */ \
   /*_(vst2q_lane_p8)                                                          */ \
@@ -2867,14 +2867,14 @@
   _(vld3_s8)                                                                     \
   _(vld3_s16)                                                                    \
   _(vld3_s32)                                                                    \
-  /*_(vld3_f16)                                                          */      \
+  /*_(vld3_f16)                                                               */ \
   _(vld3_f32)                                                                    \
   _(vld3_u8)                                                                     \
   _(vld3_u16)                                                                    \
   _(vld3_u32)                                                                    \
-  /*_(vld3_p8)                                                           */      \
-  /*_(vld3_p16)                                                          */      \
-  /*_(vld3_p64)                                                          */      \
+  /*_(vld3_p8)                                                                */ \
+  /*_(vld3_p16)                                                               */ \
+  /*_(vld3_p64)                                                               */ \
   /*_(vld3q_s64)                                                              */ \
   /*_(vld3q_u64)                                                              */ \
   /*_(vld3q_p64)                                                              */ \
@@ -2885,22 +2885,22 @@
   _(vld3q_s8)                                                                    \
   _(vld3q_s16)                                                                   \
   _(vld3q_s32)                                                                   \
-  /*_(vld3q_f16)                                                         */      \
+  /*_(vld3q_f16)                                                              */ \
   _(vld3q_f32)                                                                   \
   _(vld3q_u8)                                                                    \
   _(vld3q_u16)                                                                   \
   _(vld3q_u32)                                                                   \
-  /*_(vld3q_p8)                                                          */      \
-  /*_(vld3q_p16)                                                         */      \
+  /*_(vld3q_p8)                                                               */ \
+  /*_(vld3q_p16)                                                              */ \
   _(vld3_lane_s8)                                                                \
   _(vld3_lane_s16)                                                               \
   _(vld3_lane_s32)                                                               \
-  /*_(vld3_lane_f16)                                                     */      \
+  /*_(vld3_lane_f16)                                                          */ \
   _(vld3_lane_f32)                                                               \
   _(vld3_lane_u8)                                                                \
   _(vld3_lane_u16)                                                               \
   _(vld3_lane_u32)                                                               \
-  /*_(vld3_lane_p8)                                                      */      \
+  /*_(vld3_lane_p8)                                                           */ \
   /*_(vld3q_lane_s8)                                                          */ \
   /*_(vld3q_lane_u8)                                                          */ \
   /*_(vld3q_lane_p8)                                                          */ \
@@ -2912,21 +2912,21 @@
   /*_(vld3q_lane_p64)                                                         */ \
   /*_(vld3_lane_f64)                                                          */ \
   /*_(vld3q_lane_f64)                                                         */ \
-  /*_(vld3_lane_p16)                                                     */      \
+  /*_(vld3_lane_p16)                                                          */ \
   _(vld3q_lane_s16)                                                              \
   _(vld3q_lane_s32)                                                              \
-  /*_(vld3q_lane_f16)                                                    */      \
+  /*_(vld3q_lane_f16)                                                         */ \
   _(vld3q_lane_f32)                                                              \
   _(vld3q_lane_u16)                                                              \
   _(vld3q_lane_u32)                                                              \
-  /*_(vld3q_lane_p16)                                                    */      \
+  /*_(vld3q_lane_p16)                                                         */ \
   _(vld3_dup_s8)                                                                 \
   /*_(vld3q_dup_s8)                                                           */ \
   _(vld3_dup_s16)                                                                \
   /*_(vld3q_dup_s16)                                                          */ \
   _(vld3_dup_s32)                                                                \
   /*_(vld3q_dup_s32)                                                          */ \
-  /*_(vld3_dup_f16)                                                      */      \
+  /*_(vld3_dup_f16)                                                           */ \
   /*_(vld3q_dup_f16)                                                          */ \
   _(vld3_dup_f32)                                                                \
   /*_(vld3q_dup_f32)                                                          */ \
@@ -2936,11 +2936,11 @@
   /*_(vld3q_dup_u16)                                                          */ \
   _(vld3_dup_u32)                                                                \
   /*_(vld3q_dup_u32)                                                          */ \
-  /*_(vld3_dup_p8)                                                       */      \
+  /*_(vld3_dup_p8)                                                            */ \
   /*_(vld3q_dup_p8)                                                           */ \
-  /*_(vld3_dup_p16)                                                      */      \
+  /*_(vld3_dup_p16)                                                           */ \
   /*_(vld3q_dup_p16)                                                          */ \
-  /*_(vld3_dup_p64)                                                      */      \
+  /*_(vld3_dup_p64)                                                           */ \
   /*_(vld3q_dup_s64)                                                          */ \
   /*_(vld3q_dup_u64)                                                          */ \
   /*_(vld3q_dup_p64)                                                          */ \
@@ -2951,14 +2951,14 @@
   _(vst3_s8)                                                                     \
   _(vst3_s16)                                                                    \
   _(vst3_s32)                                                                    \
-  /*_(vst3_f16)                                                          */      \
+  /*_(vst3_f16)                                                               */ \
   _(vst3_f32)                                                                    \
   _(vst3_u8)                                                                     \
   _(vst3_u16)                                                                    \
   _(vst3_u32)                                                                    \
-  /*_(vst3_p8)                                                           */      \
-  /*_(vst3_p16)                                                          */      \
-  /*_(vst3_p64)                                                          */      \
+  /*_(vst3_p8)                                                                */ \
+  /*_(vst3_p16)                                                               */ \
+  /*_(vst3_p64)                                                               */ \
   /*_(vst3q_s64)                                                              */ \
   /*_(vst3q_u64)                                                              */ \
   /*_(vst3q_p64)                                                              */ \
@@ -2969,30 +2969,30 @@
   _(vst3q_s8)                                                                    \
   _(vst3q_s16)                                                                   \
   _(vst3q_s32)                                                                   \
-  /*_(vst3q_f16)                                                         */      \
+  /*_(vst3q_f16)                                                              */ \
   _(vst3q_f32)                                                                   \
   _(vst3q_u8)                                                                    \
   _(vst3q_u16)                                                                   \
   _(vst3q_u32)                                                                   \
-  /*_(vst3q_p8)                                                          */      \
-  /*_(vst3q_p16)                                                         */      \
+  /*_(vst3q_p8)                                                               */ \
+  /*_(vst3q_p16)                                                              */ \
   _(vst3_lane_s8)                                                                \
   _(vst3_lane_s16)                                                               \
   _(vst3_lane_s32)                                                               \
-  /*_(vst3_lane_f16)                                                     */      \
+  /*_(vst3_lane_f16)                                                          */ \
   _(vst3_lane_f32)                                                               \
   _(vst3_lane_u8)                                                                \
   _(vst3_lane_u16)                                                               \
   _(vst3_lane_u32)                                                               \
-  /*_(vst3_lane_p8)                                                      */      \
-  /*_(vst3_lane_p16)                                                     */      \
+  /*_(vst3_lane_p8)                                                           */ \
+  /*_(vst3_lane_p16)                                                          */ \
   _(vst3q_lane_s16)                                                              \
   _(vst3q_lane_s32)                                                              \
-  /*_(vst3q_lane_f16)                                                    */      \
+  /*_(vst3q_lane_f16)                                                         */ \
   _(vst3q_lane_f32)                                                              \
   _(vst3q_lane_u16)                                                              \
   _(vst3q_lane_u32)                                                              \
-  /*_(vst3q_lane_p16)                                                    */      \
+  /*_(vst3q_lane_p16)                                                         */ \
   /*_(vst3q_lane_s8)                                                          */ \
   /*_(vst3q_lane_u8)                                                          */ \
   /*_(vst3q_lane_p8)                                                          */ \
@@ -3007,14 +3007,14 @@
   _(vld4_s8)                                                                     \
   _(vld4_s16)                                                                    \
   _(vld4_s32)                                                                    \
-  /*_(vld4_f16)                                                          */      \
+  /*_(vld4_f16)                                                               */ \
   _(vld4_f32)                                                                    \
   _(vld4_u8)                                                                     \
   _(vld4_u16)                                                                    \
   _(vld4_u32)                                                                    \
-  /*_(vld4_p8)                                                           */      \
-  /*_(vld4_p16)                                                          */      \
-  /*_(vld4_p64)                                                          */      \
+  /*_(vld4_p8)                                                                */ \
+  /*_(vld4_p16)                                                               */ \
+  /*_(vld4_p64)                                                               */ \
   /*_(vld4q_s64)                                                              */ \
   /*_(vld4q_u64)                                                              */ \
   /*_(vld4q_p64)                                                              */ \
@@ -3025,22 +3025,22 @@
   _(vld4q_s8)                                                                    \
   _(vld4q_s16)                                                                   \
   _(vld4q_s32)                                                                   \
-  /*_(vld4q_f16)                                                         */      \
+  /*_(vld4q_f16)                                                              */ \
   _(vld4q_f32)                                                                   \
   _(vld4q_u8)                                                                    \
   _(vld4q_u16)                                                                   \
   _(vld4q_u32)                                                                   \
-  /*_(vld4q_p8)                                                          */      \
-  /*_(vld4q_p16)                                                         */      \
+  /*_(vld4q_p8)                                                               */ \
+  /*_(vld4q_p16)                                                              */ \
   _(vld4_lane_s8)                                                                \
   _(vld4_lane_s16)                                                               \
   _(vld4_lane_s32)                                                               \
-  /*_(vld4_lane_f16)                                                     */      \
+  /*_(vld4_lane_f16)                                                          */ \
   _(vld4_lane_f32)                                                               \
   _(vld4_lane_u8)                                                                \
   _(vld4_lane_u16)                                                               \
   _(vld4_lane_u32)                                                               \
-  /*_(vld4_lane_p8)                                                      */      \
+  /*_(vld4_lane_p8)                                                           */ \
   /*_(vld4q_lane_s8)                                                          */ \
   /*_(vld4q_lane_u8)                                                          */ \
   /*_(vld4q_lane_p8)                                                          */ \
@@ -3052,21 +3052,21 @@
   /*_(vld4q_lane_p64)                                                         */ \
   /*_(vld4_lane_f64)                                                          */ \
   /*_(vld4q_lane_f64)                                                         */ \
-  /*_(vld4_lane_p16)                                                     */      \
+  /*_(vld4_lane_p16)                                                          */ \
   _(vld4q_lane_s16)                                                              \
   _(vld4q_lane_s32)                                                              \
-  /*_(vld4q_lane_f16)                                                    */      \
+  /*_(vld4q_lane_f16)                                                         */ \
   _(vld4q_lane_f32)                                                              \
   _(vld4q_lane_u16)                                                              \
   _(vld4q_lane_u32)                                                              \
-  /*_(vld4q_lane_p16)                                                    */      \
+  /*_(vld4q_lane_p16)                                                         */ \
   _(vld4_dup_s8)                                                                 \
   /*_(vld4q_dup_s8)                                                           */ \
   _(vld4_dup_s16)                                                                \
   /*_(vld4q_dup_s16)                                                          */ \
   _(vld4_dup_s32)                                                                \
   /*_(vld4q_dup_s32)                                                          */ \
-  /*_(vld4_dup_f16)                                                      */      \
+  /*_(vld4_dup_f16)                                                           */ \
   /*_(vld4q_dup_f16)                                                          */ \
   _(vld4_dup_f32)                                                                \
   /*_(vld4q_dup_f32)                                                          */ \
@@ -3076,11 +3076,11 @@
   /*_(vld4q_dup_u16)                                                          */ \
   _(vld4_dup_u32)                                                                \
   /*_(vld4q_dup_u32)                                                          */ \
-  /*_(vld4_dup_p8)                                                       */      \
+  /*_(vld4_dup_p8)                                                            */ \
   /*_(vld4q_dup_p8)                                                           */ \
-  /*_(vld4_dup_p16)                                                      */      \
+  /*_(vld4_dup_p16)                                                           */ \
   /*_(vld4q_dup_p16)                                                          */ \
-  /*_(vld4_dup_p64)                                                      */      \
+  /*_(vld4_dup_p64)                                                           */ \
   /*_(vld4q_dup_s64)                                                          */ \
   /*_(vld4q_dup_u64)                                                          */ \
   /*_(vld4q_dup_p64)                                                          */ \
@@ -3091,14 +3091,14 @@
   _(vst4_s8)                                                                     \
   _(vst4_s16)                                                                    \
   _(vst4_s32)                                                                    \
-  /*_(vst4_f16)                                                          */      \
+  /*_(vst4_f16)                                                               */ \
   _(vst4_f32)                                                                    \
   _(vst4_u8)                                                                     \
   _(vst4_u16)                                                                    \
   _(vst4_u32)                                                                    \
-  /*_(vst4_p8)                                                           */      \
-  /*_(vst4_p16)                                                          */      \
-  /*_(vst4_p64)                                                          */      \
+  /*_(vst4_p8)                                                                */ \
+  /*_(vst4_p16)                                                               */ \
+  /*_(vst4_p64)                                                               */ \
   /*_(vst4q_s64)                                                              */ \
   /*_(vst4q_u64)                                                              */ \
   /*_(vst4q_p64)                                                              */ \
@@ -3109,30 +3109,30 @@
   _(vst4q_s8)                                                                    \
   _(vst4q_s16)                                                                   \
   _(vst4q_s32)                                                                   \
-  /*_(vst4q_f16)                                                         */      \
+  /*_(vst4q_f16)                                                              */ \
   _(vst4q_f32)                                                                   \
   _(vst4q_u8)                                                                    \
   _(vst4q_u16)                                                                   \
   _(vst4q_u32)                                                                   \
-  /*_(vst4q_p8)                                                          */      \
-  /*_(vst4q_p16)                                                         */      \
+  /*_(vst4q_p8)                                                               */ \
+  /*_(vst4q_p16)                                                              */ \
   _(vst4_lane_s8)                                                                \
   _(vst4_lane_s16)                                                               \
   _(vst4_lane_s32)                                                               \
-  /*_(vst4_lane_f16)                                                     */      \
+  /*_(vst4_lane_f16)                                                          */ \
   _(vst4_lane_f32)                                                               \
   _(vst4_lane_u8)                                                                \
   _(vst4_lane_u16)                                                               \
   _(vst4_lane_u32)                                                               \
-  /*_(vst4_lane_p8)                                                      */      \
-  /*_(vst4_lane_p16)                                                     */      \
+  /*_(vst4_lane_p8)                                                           */ \
+  /*_(vst4_lane_p16)                                                          */ \
   _(vst4q_lane_s16)                                                              \
   _(vst4q_lane_s32)                                                              \
-  /*_(vst4q_lane_f16)                                                    */      \
+  /*_(vst4q_lane_f16)                                                         */ \
   _(vst4q_lane_f32)                                                              \
   _(vst4q_lane_u16)                                                              \
   _(vst4q_lane_u32)                                                              \
-  /*_(vst4q_lane_p16)                                                    */      \
+  /*_(vst4q_lane_p16)                                                         */ \
   /*_(vst4q_lane_s8)                                                          */ \
   /*_(vst4q_lane_u8)                                                          */ \
   /*_(vst4q_lane_p8)                                                          */ \
@@ -3392,47 +3392,47 @@
   _(vornq_u16)                                                                   \
   _(vornq_u32)                                                                   \
   _(vornq_u64)                                                                   \
-  /*_(vreinterpret_p8_p16)                                               */      \
-  /*_(vreinterpret_p8_f16)                                               */      \
-  /*_(vreinterpret_p8_f32)                                               */      \
-  /*_(vreinterpret_p8_p64)                                               */      \
-  /*_(vreinterpret_p8_s64)                                               */      \
-  /*_(vreinterpret_p8_u64)                                               */      \
-  /*_(vreinterpret_p8_s8)                                                */      \
-  /*_(vreinterpret_p8_s16)                                               */      \
-  /*_(vreinterpret_p8_s32)                                               */      \
-  /*_(vreinterpret_p8_u8)                                                */      \
-  /*_(vreinterpret_p8_u16)                                               */      \
-  /*_(vreinterpret_p8_u32)                                               */      \
-  /*_(vreinterpret_p16_p8)                                               */      \
-  /*_(vreinterpret_p16_f16)                                              */      \
-  /*_(vreinterpret_p16_f32)                                              */      \
-  /*_(vreinterpret_p16_p64)                                              */      \
-  /*_(vreinterpret_p16_s64)                                              */      \
-  /*_(vreinterpret_p16_u64)                                              */      \
-  /*_(vreinterpret_p16_s8)                                               */      \
-  /*_(vreinterpret_p16_s16)                                              */      \
-  /*_(vreinterpret_p16_s32)                                              */      \
-  /*_(vreinterpret_p16_u8)                                               */      \
-  /*_(vreinterpret_p16_u16)                                              */      \
-  /*_(vreinterpret_p16_u32)                                              */      \
-  /*_(vreinterpret_f16_bf16)                                             */      \
-  /*_(vreinterpret_f16_p8)                                               */      \
-  /*_(vreinterpret_f16_p16)                                              */      \
-  /*_(vreinterpret_f16_f32)                                              */      \
-  /*_(vreinterpret_f16_p64)                                              */      \
-  /*_(vreinterpret_f16_s64)                                              */      \
-  /*_(vreinterpret_f16_u64)                                              */      \
-  /*_(vreinterpret_f16_s8)                                               */      \
-  /*_(vreinterpret_f16_s16)                                              */      \
-  /*_(vreinterpret_f16_s32)                                              */      \
-  /*_(vreinterpret_f16_u8)                                               */      \
-  /*_(vreinterpret_f16_u16)                                              */      \
-  /*_(vreinterpret_f16_u32)                                              */      \
-  /*_(vreinterpret_f32_p8)                                               */      \
-  /*_(vreinterpret_f32_p16)                                              */      \
-  /*_(vreinterpret_f32_f16)                                              */      \
-  /*_(vreinterpret_f32_p64)                                              */      \
+  /*_(vreinterpret_p8_p16)                                                    */ \
+  /*_(vreinterpret_p8_f16)                                                    */ \
+  /*_(vreinterpret_p8_f32)                                                    */ \
+  /*_(vreinterpret_p8_p64)                                                    */ \
+  /*_(vreinterpret_p8_s64)                                                    */ \
+  /*_(vreinterpret_p8_u64)                                                    */ \
+  /*_(vreinterpret_p8_s8)                                                     */ \
+  /*_(vreinterpret_p8_s16)                                                    */ \
+  /*_(vreinterpret_p8_s32)                                                    */ \
+  /*_(vreinterpret_p8_u8)                                                     */ \
+  /*_(vreinterpret_p8_u16)                                                    */ \
+  /*_(vreinterpret_p8_u32)                                                    */ \
+  /*_(vreinterpret_p16_p8)                                                    */ \
+  /*_(vreinterpret_p16_f16)                                                   */ \
+  /*_(vreinterpret_p16_f32)                                                   */ \
+  /*_(vreinterpret_p16_p64)                                                   */ \
+  /*_(vreinterpret_p16_s64)                                                   */ \
+  /*_(vreinterpret_p16_u64)                                                   */ \
+  /*_(vreinterpret_p16_s8)                                                    */ \
+  /*_(vreinterpret_p16_s16)                                                   */ \
+  /*_(vreinterpret_p16_s32)                                                   */ \
+  /*_(vreinterpret_p16_u8)                                                    */ \
+  /*_(vreinterpret_p16_u16)                                                   */ \
+  /*_(vreinterpret_p16_u32)                                                   */ \
+  /*_(vreinterpret_f16_bf16)                                                  */ \
+  /*_(vreinterpret_f16_p8)                                                    */ \
+  /*_(vreinterpret_f16_p16)                                                   */ \
+  /*_(vreinterpret_f16_f32)                                                   */ \
+  /*_(vreinterpret_f16_p64)                                                   */ \
+  /*_(vreinterpret_f16_s64)                                                   */ \
+  /*_(vreinterpret_f16_u64)                                                   */ \
+  /*_(vreinterpret_f16_s8)                                                    */ \
+  /*_(vreinterpret_f16_s16)                                                   */ \
+  /*_(vreinterpret_f16_s32)                                                   */ \
+  /*_(vreinterpret_f16_u8)                                                    */ \
+  /*_(vreinterpret_f16_u16)                                                   */ \
+  /*_(vreinterpret_f16_u32)                                                   */ \
+  /*_(vreinterpret_f32_p8)                                                    */ \
+  /*_(vreinterpret_f32_p16)                                                   */ \
+  /*_(vreinterpret_f32_f16)                                                   */ \
+  /*_(vreinterpret_f32_p64)                                                   */ \
   _(vreinterpret_f32_s64)                                                        \
   _(vreinterpret_f32_u64)                                                        \
   _(vreinterpret_f32_s8)                                                         \
@@ -3441,28 +3441,28 @@
   _(vreinterpret_f32_u8)                                                         \
   _(vreinterpret_f32_u16)                                                        \
   _(vreinterpret_f32_u32)                                                        \
-  /*_(vreinterpret_p64_p8)                                               */      \
-  /*_(vreinterpret_p64_p16)                                              */      \
-  /*_(vreinterpret_p64_f16)                                              */      \
-  /*_(vreinterpret_p64_f32)                                              */      \
+  /*_(vreinterpret_p64_p8)                                                    */ \
+  /*_(vreinterpret_p64_p16)                                                   */ \
+  /*_(vreinterpret_p64_f16)                                                   */ \
+  /*_(vreinterpret_p64_f32)                                                   */ \
   /*_(vreinterpret_p64_f64)                                                   */ \
-  /*_(vreinterpret_p64_s64)                                              */      \
-  /*_(vreinterpret_p64_u64)                                              */      \
-  /*_(vreinterpret_p64_s8)                                               */      \
-  /*_(vreinterpret_p64_s16)                                              */      \
-  /*_(vreinterpret_p64_s32)                                              */      \
-  /*_(vreinterpret_p64_u8)                                               */      \
-  /*_(vreinterpret_p64_u16)                                              */      \
-  /*_(vreinterpret_p64_u32)                                              */      \
-  /*_(vreinterpret_s64_p8)                                               */      \
+  /*_(vreinterpret_p64_s64)                                                   */ \
+  /*_(vreinterpret_p64_u64)                                                   */ \
+  /*_(vreinterpret_p64_s8)                                                    */ \
+  /*_(vreinterpret_p64_s16)                                                   */ \
+  /*_(vreinterpret_p64_s32)                                                   */ \
+  /*_(vreinterpret_p64_u8)                                                    */ \
+  /*_(vreinterpret_p64_u16)                                                   */ \
+  /*_(vreinterpret_p64_u32)                                                   */ \
+  /*_(vreinterpret_s64_p8)                                                    */ \
   /*_(vreinterpret_f64_p8)                                                    */ \
-  /*_(vreinterpret_s64_p16)                                              */      \
+  /*_(vreinterpret_s64_p16)                                                   */ \
   /*_(vreinterpret_f64_p16)                                                   */ \
-  /*_(vreinterpret_s64_f16)                                              */      \
+  /*_(vreinterpret_s64_f16)                                                   */ \
   /*_(vreinterpret_f64_f16)                                                   */ \
   _(vreinterpret_s64_f32)                                                        \
   /*_(vreinterpret_f64_f32)                                                   */ \
-  /*_(vreinterpret_s64_p64)                                              */      \
+  /*_(vreinterpret_s64_p64)                                                   */ \
   /*_(vreinterpret_f64_p64)                                                   */ \
   _(vreinterpret_s64_u64)                                                        \
   /*_(vreinterpret_f64_u64)                                                   */ \
@@ -3478,11 +3478,11 @@
   /*_(vreinterpret_f64_u16)                                                   */ \
   _(vreinterpret_s64_u32)                                                        \
   /*_(vreinterpret_f64_u32)                                                   */ \
-  /*_(vreinterpret_u64_p8)                                               */      \
-  /*_(vreinterpret_u64_p16)                                              */      \
-  /*_(vreinterpret_u64_f16)                                              */      \
+  /*_(vreinterpret_u64_p8)                                                    */ \
+  /*_(vreinterpret_u64_p16)                                                   */ \
+  /*_(vreinterpret_u64_f16)                                                   */ \
   _(vreinterpret_u64_f32)                                                        \
-  /*_(vreinterpret_u64_p64)                                              */      \
+  /*_(vreinterpret_u64_p64)                                                   */ \
   _(vreinterpret_u64_s64)                                                        \
   /*_(vreinterpret_f64_s64)                                                   */ \
   _(vreinterpret_u64_s8)                                                         \
@@ -3491,11 +3491,11 @@
   _(vreinterpret_u64_u8)                                                         \
   _(vreinterpret_u64_u16)                                                        \
   _(vreinterpret_u64_u32)                                                        \
-  /*_(vreinterpret_s8_p8)                                                */      \
-  /*_(vreinterpret_s8_p16)                                               */      \
-  /*_(vreinterpret_s8_f16)                                               */      \
+  /*_(vreinterpret_s8_p8)                                                     */ \
+  /*_(vreinterpret_s8_p16)                                                    */ \
+  /*_(vreinterpret_s8_f16)                                                    */ \
   _(vreinterpret_s8_f32)                                                         \
-  /*_(vreinterpret_s8_p64)                                               */      \
+  /*_(vreinterpret_s8_p64)                                                    */ \
   _(vreinterpret_s8_s64)                                                         \
   _(vreinterpret_s8_u64)                                                         \
   _(vreinterpret_s8_s16)                                                         \
@@ -3503,11 +3503,11 @@
   _(vreinterpret_s8_u8)                                                          \
   _(vreinterpret_s8_u16)                                                         \
   _(vreinterpret_s8_u32)                                                         \
-  /*_(vreinterpret_s16_p8)                                               */      \
-  /*_(vreinterpret_s16_p16)                                              */      \
-  /*_(vreinterpret_s16_f16)                                              */      \
+  /*_(vreinterpret_s16_p8)                                                    */ \
+  /*_(vreinterpret_s16_p16)                                                   */ \
+  /*_(vreinterpret_s16_f16)                                                   */ \
   _(vreinterpret_s16_f32)                                                        \
-  /*_(vreinterpret_s16_p64)                                              */      \
+  /*_(vreinterpret_s16_p64)                                                   */ \
   _(vreinterpret_s16_s64)                                                        \
   _(vreinterpret_s16_u64)                                                        \
   _(vreinterpret_s16_s8)                                                         \
@@ -3515,11 +3515,11 @@
   _(vreinterpret_s16_u8)                                                         \
   _(vreinterpret_s16_u16)                                                        \
   _(vreinterpret_s16_u32)                                                        \
-  /*_(vreinterpret_s32_p8)                                               */      \
-  /*_(vreinterpret_s32_p16)                                              */      \
-  /*_(vreinterpret_s32_f16)                                              */      \
+  /*_(vreinterpret_s32_p8)                                                    */ \
+  /*_(vreinterpret_s32_p16)                                                   */ \
+  /*_(vreinterpret_s32_f16)                                                   */ \
   _(vreinterpret_s32_f32)                                                        \
-  /*_(vreinterpret_s32_p64)                                              */      \
+  /*_(vreinterpret_s32_p64)                                                   */ \
   _(vreinterpret_s32_s64)                                                        \
   _(vreinterpret_s32_u64)                                                        \
   _(vreinterpret_s32_s8)                                                         \
@@ -3527,11 +3527,11 @@
   _(vreinterpret_s32_u8)                                                         \
   _(vreinterpret_s32_u16)                                                        \
   _(vreinterpret_s32_u32)                                                        \
-  /*_(vreinterpret_u8_p8)                                                */      \
-  /*_(vreinterpret_u8_p16)                                               */      \
-  /*_(vreinterpret_u8_f16)                                               */      \
+  /*_(vreinterpret_u8_p8)                                                     */ \
+  /*_(vreinterpret_u8_p16)                                                    */ \
+  /*_(vreinterpret_u8_f16)                                                    */ \
   _(vreinterpret_u8_f32)                                                         \
-  /*_(vreinterpret_u8_p64)                                               */      \
+  /*_(vreinterpret_u8_p64)                                                    */ \
   _(vreinterpret_u8_s64)                                                         \
   _(vreinterpret_u8_u64)                                                         \
   _(vreinterpret_u8_s8)                                                          \
@@ -3539,11 +3539,11 @@
   _(vreinterpret_u8_s32)                                                         \
   _(vreinterpret_u8_u16)                                                         \
   _(vreinterpret_u8_u32)                                                         \
-  /*_(vreinterpret_u16_p8)                                               */      \
-  /*_(vreinterpret_u16_p16)                                              */      \
-  /*_(vreinterpret_u16_f16)                                              */      \
+  /*_(vreinterpret_u16_p8)                                                    */ \
+  /*_(vreinterpret_u16_p16)                                                   */ \
+  /*_(vreinterpret_u16_f16)                                                   */ \
   _(vreinterpret_u16_f32)                                                        \
-  /*_(vreinterpret_u16_p64)                                              */      \
+  /*_(vreinterpret_u16_p64)                                                   */ \
   _(vreinterpret_u16_s64)                                                        \
   _(vreinterpret_u16_u64)                                                        \
   _(vreinterpret_u16_s8)                                                         \
@@ -3551,11 +3551,11 @@
   _(vreinterpret_u16_s32)                                                        \
   _(vreinterpret_u16_u8)                                                         \
   _(vreinterpret_u16_u32)                                                        \
-  /*_(vreinterpret_u32_p8)                                               */      \
-  /*_(vreinterpret_u32_p16)                                              */      \
-  /*_(vreinterpret_u32_f16)                                              */      \
+  /*_(vreinterpret_u32_p8)                                                    */ \
+  /*_(vreinterpret_u32_p16)                                                   */ \
+  /*_(vreinterpret_u32_f16)                                                   */ \
   _(vreinterpret_u32_f32)                                                        \
-  /*_(vreinterpret_u32_p64)                                              */      \
+  /*_(vreinterpret_u32_p64)                                                   */ \
   _(vreinterpret_u32_s64)                                                        \
   _(vreinterpret_u32_u64)                                                        \
   _(vreinterpret_u32_s8)                                                         \
@@ -3563,51 +3563,51 @@
   _(vreinterpret_u32_s32)                                                        \
   _(vreinterpret_u32_u8)                                                         \
   _(vreinterpret_u32_u16)                                                        \
-  /*_(vreinterpretq_p8_p16)                                              */      \
-  /*_(vreinterpretq_p8_f16)                                              */      \
-  /*_(vreinterpretq_p8_f32)                                              */      \
-  /*_(vreinterpretq_p8_p64)                                              */      \
-  /*_(vreinterpretq_p8_p128)                                             */      \
-  /*_(vreinterpretq_p8_s64)                                              */      \
-  /*_(vreinterpretq_p8_u64)                                              */      \
-  /*_(vreinterpretq_p8_s8)                                               */      \
-  /*_(vreinterpretq_p8_s16)                                              */      \
-  /*_(vreinterpretq_p8_s32)                                              */      \
-  /*_(vreinterpretq_p8_u8)                                               */      \
-  /*_(vreinterpretq_p8_u16)                                              */      \
-  /*_(vreinterpretq_p8_u32)                                              */      \
-  /*_(vreinterpretq_p16_p8)                                              */      \
-  /*_(vreinterpretq_p16_f16)                                             */      \
-  /*_(vreinterpretq_p16_f32)                                             */      \
-  /*_(vreinterpretq_p16_p64)                                             */      \
-  /*_(vreinterpretq_p16_p128)                                            */      \
-  /*_(vreinterpretq_p16_s64)                                             */      \
-  /*_(vreinterpretq_p16_u64)                                             */      \
-  /*_(vreinterpretq_p16_s8)                                              */      \
-  /*_(vreinterpretq_p16_s16)                                             */      \
-  /*_(vreinterpretq_p16_s32)                                             */      \
-  /*_(vreinterpretq_p16_u8)                                              */      \
-  /*_(vreinterpretq_p16_u16)                                             */      \
-  /*_(vreinterpretq_p16_u32)                                             */      \
-  /*_(vreinterpretq_f16_p8)                                              */      \
-  /*_(vreinterpretq_f16_p16)                                             */      \
-  /*_(vreinterpretq_f16_bf16)                                            */      \
-  /*_(vreinterpretq_f16_f32)                                             */      \
-  /*_(vreinterpretq_f16_p64)                                             */      \
-  /*_(vreinterpretq_f16_p128)                                            */      \
-  /*_(vreinterpretq_f16_s64)                                             */      \
-  /*_(vreinterpretq_f16_u64)                                             */      \
-  /*_(vreinterpretq_f16_s8)                                              */      \
-  /*_(vreinterpretq_f16_s16)                                             */      \
-  /*_(vreinterpretq_f16_s32)                                             */      \
-  /*_(vreinterpretq_f16_u8)                                              */      \
-  /*_(vreinterpretq_f16_u16)                                             */      \
-  /*_(vreinterpretq_f16_u32)                                             */      \
-  /*_(vreinterpretq_f32_p8)                                              */      \
-  /*_(vreinterpretq_f32_p16)                                             */      \
-  /*_(vreinterpretq_f32_f16)                                             */      \
-  /*_(vreinterpretq_f32_p64)                                             */      \
-  /*_(vreinterpretq_f32_p128)                                            */      \
+  /*_(vreinterpretq_p8_p16)                                                   */ \
+  /*_(vreinterpretq_p8_f16)                                                   */ \
+  /*_(vreinterpretq_p8_f32)                                                   */ \
+  /*_(vreinterpretq_p8_p64)                                                   */ \
+  /*_(vreinterpretq_p8_p128)                                                  */ \
+  /*_(vreinterpretq_p8_s64)                                                   */ \
+  /*_(vreinterpretq_p8_u64)                                                   */ \
+  /*_(vreinterpretq_p8_s8)                                                    */ \
+  /*_(vreinterpretq_p8_s16)                                                   */ \
+  /*_(vreinterpretq_p8_s32)                                                   */ \
+  /*_(vreinterpretq_p8_u8)                                                    */ \
+  /*_(vreinterpretq_p8_u16)                                                   */ \
+  /*_(vreinterpretq_p8_u32)                                                   */ \
+  /*_(vreinterpretq_p16_p8)                                                   */ \
+  /*_(vreinterpretq_p16_f16)                                                  */ \
+  /*_(vreinterpretq_p16_f32)                                                  */ \
+  /*_(vreinterpretq_p16_p64)                                                  */ \
+  /*_(vreinterpretq_p16_p128)                                                 */ \
+  /*_(vreinterpretq_p16_s64)                                                  */ \
+  /*_(vreinterpretq_p16_u64)                                                  */ \
+  /*_(vreinterpretq_p16_s8)                                                   */ \
+  /*_(vreinterpretq_p16_s16)                                                  */ \
+  /*_(vreinterpretq_p16_s32)                                                  */ \
+  /*_(vreinterpretq_p16_u8)                                                   */ \
+  /*_(vreinterpretq_p16_u16)                                                  */ \
+  /*_(vreinterpretq_p16_u32)                                                  */ \
+  /*_(vreinterpretq_f16_p8)                                                   */ \
+  /*_(vreinterpretq_f16_p16)                                                  */ \
+  /*_(vreinterpretq_f16_bf16)                                                 */ \
+  /*_(vreinterpretq_f16_f32)                                                  */ \
+  /*_(vreinterpretq_f16_p64)                                                  */ \
+  /*_(vreinterpretq_f16_p128)                                                 */ \
+  /*_(vreinterpretq_f16_s64)                                                  */ \
+  /*_(vreinterpretq_f16_u64)                                                  */ \
+  /*_(vreinterpretq_f16_s8)                                                   */ \
+  /*_(vreinterpretq_f16_s16)                                                  */ \
+  /*_(vreinterpretq_f16_s32)                                                  */ \
+  /*_(vreinterpretq_f16_u8)                                                   */ \
+  /*_(vreinterpretq_f16_u16)                                                  */ \
+  /*_(vreinterpretq_f16_u32)                                                  */ \
+  /*_(vreinterpretq_f32_p8)                                                   */ \
+  /*_(vreinterpretq_f32_p16)                                                  */ \
+  /*_(vreinterpretq_f32_f16)                                                  */ \
+  /*_(vreinterpretq_f32_p64)                                                  */ \
+  /*_(vreinterpretq_f32_p128)                                                 */ \
   _(vreinterpretq_f32_s64)                                                       \
   _(vreinterpretq_f32_u64)                                                       \
   _(vreinterpretq_f32_s8)                                                        \
@@ -3616,22 +3616,22 @@
   _(vreinterpretq_f32_u8)                                                        \
   _(vreinterpretq_f32_u16)                                                       \
   _(vreinterpretq_f32_u32)                                                       \
-  /*_(vreinterpretq_p64_p8)                                              */      \
-  /*_(vreinterpretq_p64_p16)                                             */      \
-  /*_(vreinterpretq_p64_f16)                                             */      \
-  /*_(vreinterpretq_p64_f32)                                             */      \
-  /*_(vreinterpretq_p64_p128)                                            */      \
-  /*_(vreinterpretq_p64_s64)                                             */      \
-  /*_(vreinterpretq_p64_u64)                                             */      \
-  /*_(vreinterpretq_p64_s8)                                              */      \
-  /*_(vreinterpretq_p64_s16)                                             */      \
-  /*_(vreinterpretq_p64_s32)                                             */      \
-  /*_(vreinterpretq_p64_u8)                                              */      \
-  /*_(vreinterpretq_p64_u16)                                             */      \
-  /*_(vreinterpretq_p64_u32)                                             */      \
-  /*_(vreinterpretq_p128_p8)                                             */      \
-  /*_(vreinterpretq_p128_p16)                                            */      \
-  /*_(vreinterpretq_p128_f16)                                            */      \
+  /*_(vreinterpretq_p64_p8)                                                   */ \
+  /*_(vreinterpretq_p64_p16)                                                  */ \
+  /*_(vreinterpretq_p64_f16)                                                  */ \
+  /*_(vreinterpretq_p64_f32)                                                  */ \
+  /*_(vreinterpretq_p64_p128)                                                 */ \
+  /*_(vreinterpretq_p64_s64)                                                  */ \
+  /*_(vreinterpretq_p64_u64)                                                  */ \
+  /*_(vreinterpretq_p64_s8)                                                   */ \
+  /*_(vreinterpretq_p64_s16)                                                  */ \
+  /*_(vreinterpretq_p64_s32)                                                  */ \
+  /*_(vreinterpretq_p64_u8)                                                   */ \
+  /*_(vreinterpretq_p64_u16)                                                  */ \
+  /*_(vreinterpretq_p64_u32)                                                  */ \
+  /*_(vreinterpretq_p128_p8)                                                  */ \
+  /*_(vreinterpretq_p128_p16)                                                 */ \
+  /*_(vreinterpretq_p128_f16)                                                 */ \
   /*_(vreinterpret_s8_f64)                                                    */ \
   /*_(vreinterpret_s16_f64)                                                   */ \
   /*_(vreinterpret_s32_f64)                                                   */ \
@@ -3656,29 +3656,29 @@
   /*_(vreinterpretq_s64_f64)                                                  */ \
   /*_(vreinterpretq_f16_f64)                                                  */ \
   /*_(vreinterpretq_f32_f64)                                                  */ \
-  /*_(vreinterpretq_p128_f32)                                            */      \
+  /*_(vreinterpretq_p128_f32)                                                 */ \
   /*_(vreinterpretq_p64_f64)                                                  */ \
   /*_(vreinterpretq_p128_f64)                                                 */ \
-  /*_(vreinterpretq_p128_p64)                                            */      \
-  /*_(vreinterpretq_p128_s64)                                            */      \
-  /*_(vreinterpretq_p128_u64)                                            */      \
-  /*_(vreinterpretq_p128_s8)                                             */      \
-  /*_(vreinterpretq_p128_s16)                                            */      \
-  /*_(vreinterpretq_p128_s32)                                            */      \
-  /*_(vreinterpretq_p128_u8)                                             */      \
-  /*_(vreinterpretq_p128_u16)                                            */      \
-  /*_(vreinterpretq_p128_u32)                                            */      \
-  /*_(vreinterpretq_s64_p8)                                              */      \
+  /*_(vreinterpretq_p128_p64)                                                 */ \
+  /*_(vreinterpretq_p128_s64)                                                 */ \
+  /*_(vreinterpretq_p128_u64)                                                 */ \
+  /*_(vreinterpretq_p128_s8)                                                  */ \
+  /*_(vreinterpretq_p128_s16)                                                 */ \
+  /*_(vreinterpretq_p128_s32)                                                 */ \
+  /*_(vreinterpretq_p128_u8)                                                  */ \
+  /*_(vreinterpretq_p128_u16)                                                 */ \
+  /*_(vreinterpretq_p128_u32)                                                 */ \
+  /*_(vreinterpretq_s64_p8)                                                   */ \
   /*_(vreinterpretq_f64_p8)                                                   */ \
-  /*_(vreinterpretq_s64_p16)                                             */      \
+  /*_(vreinterpretq_s64_p16)                                                  */ \
   /*_(vreinterpretq_f64_p16)                                                  */ \
-  /*_(vreinterpretq_s64_f16)                                             */      \
+  /*_(vreinterpretq_s64_f16)                                                  */ \
   /*_(vreinterpretq_f64_f16)                                                  */ \
   _(vreinterpretq_s64_f32)                                                       \
   /*_(vreinterpretq_f64_f32)                                                  */ \
-  /*_(vreinterpretq_s64_p64)                                             */      \
+  /*_(vreinterpretq_s64_p64)                                                  */ \
   /*_(vreinterpretq_f64_p64)                                                  */ \
-  /*_(vreinterpretq_s64_p128)                                            */      \
+  /*_(vreinterpretq_s64_p128)                                                 */ \
   /*_(vreinterpretq_f64_p128)                                                 */ \
   _(vreinterpretq_s64_u64)                                                       \
   /*_(vreinterpretq_f64_u64)                                                  */ \
@@ -3695,12 +3695,12 @@
   /*_(vreinterpretq_f64_u16)                                                  */ \
   _(vreinterpretq_s64_u32)                                                       \
   /*_(vreinterpretq_f64_u32)                                                  */ \
-  /*_(vreinterpretq_u64_p8)                                              */      \
-  /*_(vreinterpretq_u64_p16)                                             */      \
-  /*_(vreinterpretq_u64_f16)                                             */      \
+  /*_(vreinterpretq_u64_p8)                                                   */ \
+  /*_(vreinterpretq_u64_p16)                                                  */ \
+  /*_(vreinterpretq_u64_f16)                                                  */ \
   _(vreinterpretq_u64_f32)                                                       \
-  /*_(vreinterpretq_u64_p64)                                             */      \
-  /*_(vreinterpretq_u64_p128)                                            */      \
+  /*_(vreinterpretq_u64_p64)                                                  */ \
+  /*_(vreinterpretq_u64_p128)                                                 */ \
   _(vreinterpretq_u64_s64)                                                       \
   _(vreinterpretq_u64_s8)                                                        \
   _(vreinterpretq_u64_s16)                                                       \
@@ -3708,12 +3708,12 @@
   _(vreinterpretq_u64_u8)                                                        \
   _(vreinterpretq_u64_u16)                                                       \
   _(vreinterpretq_u64_u32)                                                       \
-  /*_(vreinterpretq_s8_p8)                                               */      \
-  /*_(vreinterpretq_s8_p16)                                              */      \
-  /*_(vreinterpretq_s8_f16)                                              */      \
+  /*_(vreinterpretq_s8_p8)                                                    */ \
+  /*_(vreinterpretq_s8_p16)                                                   */ \
+  /*_(vreinterpretq_s8_f16)                                                   */ \
   _(vreinterpretq_s8_f32)                                                        \
-  /*_(vreinterpretq_s8_p64)                                              */      \
-  /*_(vreinterpretq_s8_p128)                                             */      \
+  /*_(vreinterpretq_s8_p64)                                                   */ \
+  /*_(vreinterpretq_s8_p128)                                                  */ \
   _(vreinterpretq_s8_s64)                                                        \
   _(vreinterpretq_s8_u64)                                                        \
   _(vreinterpretq_s8_s16)                                                        \
@@ -3721,12 +3721,12 @@
   _(vreinterpretq_s8_u8)                                                         \
   _(vreinterpretq_s8_u16)                                                        \
   _(vreinterpretq_s8_u32)                                                        \
-  /*_(vreinterpretq_s16_p8)                                              */      \
-  /*_(vreinterpretq_s16_p16)                                             */      \
-  /*_(vreinterpretq_s16_f16)                                             */      \
+  /*_(vreinterpretq_s16_p8)                                                   */ \
+  /*_(vreinterpretq_s16_p16)                                                  */ \
+  /*_(vreinterpretq_s16_f16)                                                  */ \
   _(vreinterpretq_s16_f32)                                                       \
-  /*_(vreinterpretq_s16_p64)                                             */      \
-  /*_(vreinterpretq_s16_p128)                                            */      \
+  /*_(vreinterpretq_s16_p64)                                                  */ \
+  /*_(vreinterpretq_s16_p128)                                                 */ \
   _(vreinterpretq_s16_s64)                                                       \
   _(vreinterpretq_s16_u64)                                                       \
   _(vreinterpretq_s16_s8)                                                        \
@@ -3734,12 +3734,12 @@
   _(vreinterpretq_s16_u8)                                                        \
   _(vreinterpretq_s16_u16)                                                       \
   _(vreinterpretq_s16_u32)                                                       \
-  /*_(vreinterpretq_s32_p8)                                              */      \
-  /*_(vreinterpretq_s32_p16)                                             */      \
-  /*_(vreinterpretq_s32_f16)                                             */      \
+  /*_(vreinterpretq_s32_p8)                                                   */ \
+  /*_(vreinterpretq_s32_p16)                                                  */ \
+  /*_(vreinterpretq_s32_f16)                                                  */ \
   _(vreinterpretq_s32_f32)                                                       \
-  /*_(vreinterpretq_s32_p64)                                             */      \
-  /*_(vreinterpretq_s32_p128)                                            */      \
+  /*_(vreinterpretq_s32_p64)                                                  */ \
+  /*_(vreinterpretq_s32_p128)                                                 */ \
   _(vreinterpretq_s32_s64)                                                       \
   _(vreinterpretq_s32_u64)                                                       \
   _(vreinterpretq_s32_s8)                                                        \
@@ -3747,12 +3747,12 @@
   _(vreinterpretq_s32_u8)                                                        \
   _(vreinterpretq_s32_u16)                                                       \
   _(vreinterpretq_s32_u32)                                                       \
-  /*_(vreinterpretq_u8_p8)                                               */      \
-  /*_(vreinterpretq_u8_p16)                                              */      \
-  /*_(vreinterpretq_u8_f16)                                              */      \
+  /*_(vreinterpretq_u8_p8)                                                    */ \
+  /*_(vreinterpretq_u8_p16)                                                   */ \
+  /*_(vreinterpretq_u8_f16)                                                   */ \
   _(vreinterpretq_u8_f32)                                                        \
-  /*_(vreinterpretq_u8_p64)                                              */      \
-  /*_(vreinterpretq_u8_p128)                                             */      \
+  /*_(vreinterpretq_u8_p64)                                                   */ \
+  /*_(vreinterpretq_u8_p128)                                                  */ \
   _(vreinterpretq_u8_s64)                                                        \
   _(vreinterpretq_u8_u64)                                                        \
   _(vreinterpretq_u8_s8)                                                         \
@@ -3760,12 +3760,12 @@
   _(vreinterpretq_u8_s32)                                                        \
   _(vreinterpretq_u8_u16)                                                        \
   _(vreinterpretq_u8_u32)                                                        \
-  /*_(vreinterpretq_u16_p8)                                              */      \
-  /*_(vreinterpretq_u16_p16)                                             */      \
-  /*_(vreinterpretq_u16_f16)                                             */      \
+  /*_(vreinterpretq_u16_p8)                                                   */ \
+  /*_(vreinterpretq_u16_p16)                                                  */ \
+  /*_(vreinterpretq_u16_f16)                                                  */ \
   _(vreinterpretq_u16_f32)                                                       \
-  /*_(vreinterpretq_u16_p64)                                             */      \
-  /*_(vreinterpretq_u16_p128)                                            */      \
+  /*_(vreinterpretq_u16_p64)                                                  */ \
+  /*_(vreinterpretq_u16_p128)                                                 */ \
   _(vreinterpretq_u16_s64)                                                       \
   _(vreinterpretq_u16_u64)                                                       \
   _(vreinterpretq_u16_s8)                                                        \
@@ -3773,12 +3773,12 @@
   _(vreinterpretq_u16_s32)                                                       \
   _(vreinterpretq_u16_u8)                                                        \
   _(vreinterpretq_u16_u32)                                                       \
-  /*_(vreinterpretq_u32_p8)                                              */      \
-  /*_(vreinterpretq_u32_p16)                                             */      \
-  /*_(vreinterpretq_u32_f16)                                             */      \
+  /*_(vreinterpretq_u32_p8)                                                   */ \
+  /*_(vreinterpretq_u32_p16)                                                  */ \
+  /*_(vreinterpretq_u32_f16)                                                  */ \
   _(vreinterpretq_u32_f32)                                                       \
-  /*_(vreinterpretq_u32_p64)                                             */      \
-  /*_(vreinterpretq_u32_p128)                                            */      \
+  /*_(vreinterpretq_u32_p64)                                                  */ \
+  /*_(vreinterpretq_u32_p128)                                                 */ \
   _(vreinterpretq_u32_s64)                                                       \
   _(vreinterpretq_u32_u64)                                                       \
   _(vreinterpretq_u32_s8)                                                        \
@@ -3786,11 +3786,11 @@
   _(vreinterpretq_u32_s32)                                                       \
   _(vreinterpretq_u32_u8)                                                        \
   _(vreinterpretq_u32_u16)                                                       \
-  /*_(vldrq_p128)                                                        */      \
-  /*_(vstrq_p128)                                                        */      \
-  /*_(vceq_p64)                                                          */      \
-  /*_(vceqz_p64)                                                         */      \
-  /*_(vceqq_p64)                                                         */      \
+  /*_(vldrq_p128)                                                             */ \
+  /*_(vstrq_p128)                                                             */ \
+  /*_(vceq_p64)                                                               */ \
+  /*_(vceqz_p64)                                                              */ \
+  /*_(vceqq_p64)                                                              */ \
   _(vceq_f64)                                                                    \
   _(vceqq_f64)                                                                   \
   _(vceqd_s64)                                                                   \
@@ -3817,14 +3817,14 @@
   _(vceqzq_s64)                                                                  \
   _(vceqz_u64)                                                                   \
   _(vceqzq_u64)                                                                  \
-  /*_(vceqzq_p64)                                                        */      \
+  /*_(vceqzq_p64)                                                             */ \
   _(vceqz_f64)                                                                   \
   _(vceqzq_f64)                                                                  \
   _(vceqzd_s64)                                                                  \
   _(vceqzd_u64)                                                                  \
   _(vceqzs_f32)                                                                  \
   _(vceqzd_f64)                                                                  \
-  /*_(vtst_p64)                                                          */      \
+  /*_(vtst_p64)                                                               */ \
   /*_(vtstq_p64)                                                              */ \
   _(vtstd_s64)                                                                   \
   _(vtstd_u64)                                                                   \
@@ -3842,8 +3842,8 @@
   _(vsha256h2q_u32)                                                              \
   _(vsha256su0q_u32)                                                             \
   _(vsha256su1q_u32)                                                             \
-  /*_(vmull_p64)                                                         */      \
-  /*_(vmull_high_p64)                                                    */      \
+  /*_(vmull_p64)                                                              */ \
+  /*_(vmull_high_p64)                                                         */ \
   /*_(vadd_p8)                                                                */ \
   /*_(vadd_p16)                                                               */ \
   /*_(vadd_p64)                                                               */ \
@@ -3860,78 +3860,78 @@
   /*_(__crc32cw)                                                              */ \
   /*_(__crc32cd)                                                              */ \
   /* Intrinsics for FP16 instructions. */                                        \
-  /*_(vabd_f16)                                                          */      \
-  /*_(vabdq_f16)                                                         */      \
-  /*_(vabs_f16)                                                          */      \
-  /*_(vabsq_f16)                                                         */      \
-  /*_(vadd_f16)                                                          */      \
-  /*_(vaddq_f16)                                                         */      \
-  /*_(vcage_f16)                                                         */      \
-  /*_(vcageq_f16)                                                        */      \
-  /*_(vcagt_f16)                                                         */      \
-  /*_(vcagtq_f16)                                                        */      \
-  /*_(vcale_f16)                                                         */      \
-  /*_(vcaleq_f16)                                                        */      \
-  /*_(vcalt_f16)                                                         */      \
-  /*_(vcaltq_f16)                                                        */      \
-  /*_(vceq_f16)                                                          */      \
-  /*_(vceqq_f16)                                                         */      \
-  /*_(vceqz_f16)                                                         */      \
-  /*_(vceqzq_f16)                                                        */      \
-  /*_(vcge_f16)                                                          */      \
-  /*_(vcgeq_f16)                                                         */      \
-  /*_(vcgez_f16)                                                         */      \
-  /*_(vcgezq_f16)                                                        */      \
-  /*_(vcgt_f16)                                                          */      \
-  /*_(vcgtq_f16)                                                         */      \
-  /*_(vcgtz_f16)                                                         */      \
-  /*_(vcgtzq_f16)                                                        */      \
-  /*_(vcle_f16)                                                          */      \
-  /*_(vcleq_f16)                                                         */      \
-  /*_(vclez_f16)                                                         */      \
-  /*_(vclezq_f16)                                                        */      \
-  /*_(vclt_f16)                                                          */      \
-  /*_(vcltq_f16)                                                         */      \
-  /*_(vcltz_f16)                                                         */      \
-  /*_(vcltzq_f16)                                                        */      \
-  /*_(vcvt_f16_s16)                                                      */      \
-  /*_(vcvt_f16_u16)                                                      */      \
-  /*_(vcvt_s16_f16)                                                      */      \
-  /*_(vcvt_u16_f16)                                                      */      \
-  /*_(vcvtq_f16_s16)                                                     */      \
-  /*_(vcvtq_f16_u16)                                                     */      \
-  /*_(vcvtq_s16_f16)                                                     */      \
-  /*_(vcvtq_u16_f16)                                                     */      \
-  /*_(vcvta_s16_f16)                                                     */      \
-  /*_(vcvta_u16_f16)                                                     */      \
-  /*_(vcvtaq_s16_f16)                                                    */      \
-  /*_(vcvtaq_u16_f16)                                                    */      \
-  /*_(vcvtm_s16_f16)                                                     */      \
-  /*_(vcvtm_u16_f16)                                                     */      \
-  /*_(vcvtmq_s16_f16)                                                    */      \
-  /*_(vcvtmq_u16_f16)                                                    */      \
-  /*_(vcvtn_s16_f16)                                                     */      \
-  /*_(vcvtn_u16_f16)                                                     */      \
-  /*_(vcvtnq_s16_f16)                                                    */      \
-  /*_(vcvtnq_u16_f16)                                                    */      \
-  /*_(vcvtp_s16_f16)                                                     */      \
-  /*_(vcvtp_u16_f16)                                                     */      \
-  /*_(vcvtpq_s16_f16)                                                    */      \
-  /*_(vcvtpq_u16_f16)                                                    */      \
-  /*_(vcvt_n_f16_s16)                                                    */      \
-  /*_(vcvt_n_f16_u16)                                                    */      \
-  /*_(vcvtq_n_f16_s16)                                                   */      \
-  /*_(vcvtq_n_f16_u16)                                                   */      \
-  /*_(vcvt_n_s16_f16)                                                    */      \
-  /*_(vcvt_n_u16_f16)                                                    */      \
-  /*_(vcvtq_n_s16_f16)                                                   */      \
-  /*_(vcvtq_n_u16_f16)                                                   */      \
+  /*_(vabd_f16)                                                               */ \
+  /*_(vabdq_f16)                                                              */ \
+  /*_(vabs_f16)                                                               */ \
+  /*_(vabsq_f16)                                                              */ \
+  /*_(vadd_f16)                                                               */ \
+  /*_(vaddq_f16)                                                              */ \
+  /*_(vcage_f16)                                                              */ \
+  /*_(vcageq_f16)                                                             */ \
+  /*_(vcagt_f16)                                                              */ \
+  /*_(vcagtq_f16)                                                             */ \
+  /*_(vcale_f16)                                                              */ \
+  /*_(vcaleq_f16)                                                             */ \
+  /*_(vcalt_f16)                                                              */ \
+  /*_(vcaltq_f16)                                                             */ \
+  /*_(vceq_f16)                                                               */ \
+  /*_(vceqq_f16)                                                              */ \
+  /*_(vceqz_f16)                                                              */ \
+  /*_(vceqzq_f16)                                                             */ \
+  /*_(vcge_f16)                                                               */ \
+  /*_(vcgeq_f16)                                                              */ \
+  /*_(vcgez_f16)                                                              */ \
+  /*_(vcgezq_f16)                                                             */ \
+  /*_(vcgt_f16)                                                               */ \
+  /*_(vcgtq_f16)                                                              */ \
+  /*_(vcgtz_f16)                                                              */ \
+  /*_(vcgtzq_f16)                                                             */ \
+  /*_(vcle_f16)                                                               */ \
+  /*_(vcleq_f16)                                                              */ \
+  /*_(vclez_f16)                                                              */ \
+  /*_(vclezq_f16)                                                             */ \
+  /*_(vclt_f16)                                                               */ \
+  /*_(vcltq_f16)                                                              */ \
+  /*_(vcltz_f16)                                                              */ \
+  /*_(vcltzq_f16)                                                             */ \
+  /*_(vcvt_f16_s16)                                                           */ \
+  /*_(vcvt_f16_u16)                                                           */ \
+  /*_(vcvt_s16_f16)                                                           */ \
+  /*_(vcvt_u16_f16)                                                           */ \
+  /*_(vcvtq_f16_s16)                                                          */ \
+  /*_(vcvtq_f16_u16)                                                          */ \
+  /*_(vcvtq_s16_f16)                                                          */ \
+  /*_(vcvtq_u16_f16)                                                          */ \
+  /*_(vcvta_s16_f16)                                                          */ \
+  /*_(vcvta_u16_f16)                                                          */ \
+  /*_(vcvtaq_s16_f16)                                                         */ \
+  /*_(vcvtaq_u16_f16)                                                         */ \
+  /*_(vcvtm_s16_f16)                                                          */ \
+  /*_(vcvtm_u16_f16)                                                          */ \
+  /*_(vcvtmq_s16_f16)                                                         */ \
+  /*_(vcvtmq_u16_f16)                                                         */ \
+  /*_(vcvtn_s16_f16)                                                          */ \
+  /*_(vcvtn_u16_f16)                                                          */ \
+  /*_(vcvtnq_s16_f16)                                                         */ \
+  /*_(vcvtnq_u16_f16)                                                         */ \
+  /*_(vcvtp_s16_f16)                                                          */ \
+  /*_(vcvtp_u16_f16)                                                          */ \
+  /*_(vcvtpq_s16_f16)                                                         */ \
+  /*_(vcvtpq_u16_f16)                                                         */ \
+  /*_(vcvt_n_f16_s16)                                                         */ \
+  /*_(vcvt_n_f16_u16)                                                         */ \
+  /*_(vcvtq_n_f16_s16)                                                        */ \
+  /*_(vcvtq_n_f16_u16)                                                        */ \
+  /*_(vcvt_n_s16_f16)                                                         */ \
+  /*_(vcvt_n_u16_f16)                                                         */ \
+  /*_(vcvtq_n_s16_f16)                                                        */ \
+  /*_(vcvtq_n_u16_f16)                                                        */ \
   /*_(vdiv_f16)                                                               */ \
   /*_(vdivq_f16)                                                              */ \
-  /*_(vfma_f16)                                                          */      \
-  /*_(vfmaq_f16)                                                         */      \
-  /*_(vfms_f16)                                                          */      \
-  /*_(vfmsq_f16)                                                         */      \
+  /*_(vfma_f16)                                                               */ \
+  /*_(vfmaq_f16)                                                              */ \
+  /*_(vfms_f16)                                                               */ \
+  /*_(vfmsq_f16)                                                              */ \
   /*_(vfma_lane_f16)                                                          */ \
   /*_(vfmaq_lane_f16)                                                         */ \
   /*_(vfma_laneq_f16)                                                         */ \
@@ -3948,24 +3948,24 @@
   /*_(vfmsq_n_f16)                                                            */ \
   /*_(vfmsh_lane_f16)                                                         */ \
   /*_(vfmsh_laneq_f16)                                                        */ \
-  /*_(vmax_f16)                                                          */      \
-  /*_(vmaxq_f16)                                                         */      \
-  /*_(vmaxnm_f16)                                                        */      \
-  /*_(vmaxnmq_f16)                                                       */      \
-  /*_(vmin_f16)                                                          */      \
-  /*_(vminq_f16)                                                         */      \
-  /*_(vminnm_f16)                                                        */      \
-  /*_(vminnmq_f16)                                                       */      \
-  /*_(vmul_f16)                                                          */      \
-  /*_(vmul_lane_f16)                                                     */      \
-  /*_(vmul_n_f16)                                                        */      \
-  /*_(vmulq_f16)                                                         */      \
+  /*_(vmax_f16)                                                               */ \
+  /*_(vmaxq_f16)                                                              */ \
+  /*_(vmaxnm_f16)                                                             */ \
+  /*_(vmaxnmq_f16)                                                            */ \
+  /*_(vmin_f16)                                                               */ \
+  /*_(vminq_f16)                                                              */ \
+  /*_(vminnm_f16)                                                             */ \
+  /*_(vminnmq_f16)                                                            */ \
+  /*_(vmul_f16)                                                               */ \
+  /*_(vmul_lane_f16)                                                          */ \
+  /*_(vmul_n_f16)                                                             */ \
+  /*_(vmulq_f16)                                                              */ \
   /*_(vmulx_f16)                                                              */ \
   /*_(vmulxq_f16)                                                             */ \
-  /*_(vmulq_lane_f16)                                                    */      \
+  /*_(vmulq_lane_f16)                                                         */ \
   /*_(vmul_laneq_f16)                                                         */ \
   /*_(vmulq_laneq_f16)                                                        */ \
-  /*_(vmulq_n_f16)                                                       */      \
+  /*_(vmulq_n_f16)                                                            */ \
   /*_(vmulh_lane_f16)                                                         */ \
   /*_(vmulh_laneq_f16)                                                        */ \
   /*_(vmulx_lane_f16)                                                         */ \
@@ -3984,57 +3984,57 @@
   /*_(vmaxnmvq_f16)                                                           */ \
   /*_(vminnmv_f16)                                                            */ \
   /*_(vminnmvq_f16)                                                           */ \
-  /*_(vneg_f16)                                                          */      \
-  /*_(vnegq_f16)                                                         */      \
-  /*_(vpadd_f16)                                                         */      \
+  /*_(vneg_f16)                                                               */ \
+  /*_(vnegq_f16)                                                              */ \
+  /*_(vpadd_f16)                                                              */ \
   /*_(vpaddq_f16)                                                             */ \
-  /*_(vpmax_f16)                                                         */      \
+  /*_(vpmax_f16)                                                              */ \
   /*_(vpmaxq_f16)                                                             */ \
   /*_(vpmaxnm_f16)                                                            */ \
   /*_(vpmaxnmq_f16)                                                           */ \
-  /*_(vpmin_f16)                                                         */      \
+  /*_(vpmin_f16)                                                              */ \
   /*_(vpminq_f16)                                                             */ \
   /*_(vpminnm_f16)                                                            */ \
   /*_(vpminnmq_f16)                                                           */ \
-  /*_(vrecpe_f16)                                                        */      \
-  /*_(vrecpeq_f16)                                                       */      \
-  /*_(vrnd_f16)                                                          */      \
-  /*_(vrndq_f16)                                                         */      \
-  /*_(vrnda_f16)                                                         */      \
-  /*_(vrndaq_f16)                                                        */      \
+  /*_(vrecpe_f16)                                                             */ \
+  /*_(vrecpeq_f16)                                                            */ \
+  /*_(vrnd_f16)                                                               */ \
+  /*_(vrndq_f16)                                                              */ \
+  /*_(vrnda_f16)                                                              */ \
+  /*_(vrndaq_f16)                                                             */ \
   /*_(vrndi_f16)                                                              */ \
   /*_(vrndiq_f16)                                                             */ \
-  /*_(vrndm_f16)                                                         */      \
-  /*_(vrndmq_f16)                                                        */      \
-  /*_(vrndn_f16)                                                         */      \
-  /*_(vrndnq_f16)                                                        */      \
-  /*_(vrndp_f16)                                                         */      \
-  /*_(vrndpq_f16)                                                        */      \
-  /*_(vrndx_f16)                                                         */      \
-  /*_(vrndxq_f16)                                                        */      \
-  /*_(vrsqrte_f16)                                                       */      \
-  /*_(vrsqrteq_f16)                                                      */      \
+  /*_(vrndm_f16)                                                              */ \
+  /*_(vrndmq_f16)                                                             */ \
+  /*_(vrndn_f16)                                                              */ \
+  /*_(vrndnq_f16)                                                             */ \
+  /*_(vrndp_f16)                                                              */ \
+  /*_(vrndpq_f16)                                                             */ \
+  /*_(vrndx_f16)                                                              */ \
+  /*_(vrndxq_f16)                                                             */ \
+  /*_(vrsqrte_f16)                                                            */ \
+  /*_(vrsqrteq_f16)                                                           */ \
   /*_(vsqrt_f16)                                                              */ \
   /*_(vsqrtq_f16)                                                             */ \
-  /*_(vrecps_f16)                                                        */      \
-  /*_(vrecpsq_f16)                                                       */      \
-  /*_(vrsqrts_f16)                                                       */      \
-  /*_(vrsqrtsq_f16)                                                      */      \
-  /*_(vsub_f16)                                                          */      \
-  /*_(vsubq_f16)                                                         */      \
+  /*_(vrecps_f16)                                                             */ \
+  /*_(vrecpsq_f16)                                                            */ \
+  /*_(vrsqrts_f16)                                                            */ \
+  /*_(vrsqrtsq_f16)                                                           */ \
+  /*_(vsub_f16)                                                               */ \
+  /*_(vsubq_f16)                                                              */ \
   /* Half-precision data processing intrinsics. */                               \
-  /*_(vbsl_f16)                                                          */      \
-  /*_(vbslq_f16)                                                         */      \
-  /*_(vdup_n_f16)                                                        */      \
-  /*_(vdupq_n_f16)                                                       */      \
-  /*_(vdup_lane_f16)                                                     */      \
-  /*_(vdupq_lane_f16)                                                    */      \
-  /*_(vext_f16)                                                          */      \
-  /*_(vextq_f16)                                                         */      \
-  /*_(vmov_n_f16)                                                        */      \
-  /*_(vmovq_n_f16)                                                       */      \
-  /*_(vrev64_f16)                                                        */      \
-  /*_(vrev64q_f16)                                                       */      \
+  /*_(vbsl_f16)                                                               */ \
+  /*_(vbslq_f16)                                                              */ \
+  /*_(vdup_n_f16)                                                             */ \
+  /*_(vdupq_n_f16)                                                            */ \
+  /*_(vdup_lane_f16)                                                          */ \
+  /*_(vdupq_lane_f16)                                                         */ \
+  /*_(vext_f16)                                                               */ \
+  /*_(vextq_f16)                                                              */ \
+  /*_(vmov_n_f16)                                                             */ \
+  /*_(vmovq_n_f16)                                                            */ \
+  /*_(vrev64_f16)                                                             */ \
+  /*_(vrev64q_f16)                                                            */ \
   /*_(vzip1_f16)                                                              */ \
   /*_(vzip1q_f16)                                                             */ \
   /*_(vzip2_f16)                                                              */ \
@@ -4051,12 +4051,12 @@
   /*_(vdupq_laneq_f16)                                                        */ \
   /*_(vduph_lane_f16)                                                         */ \
   /*_(vduph_laneq_f16)                                                        */ \
-  /*_(vtrn_f16)                                                          */      \
-  /*_(vtrnq_f16)                                                         */      \
-  /*_(vuzp_f16)                                                          */      \
-  /*_(vuzpq_f16)                                                         */      \
-  /*_(vzip_f16)                                                          */      \
-  /*_(vzipq_f16)                                                         */      \
+  /*_(vtrn_f16)                                                               */ \
+  /*_(vtrnq_f16)                                                              */ \
+  /*_(vuzp_f16)                                                               */ \
+  /*_(vuzpq_f16)                                                              */ \
+  /*_(vzip_f16)                                                               */ \
+  /*_(vzipq_f16)                                                              */ \
   /* AdvSIMD Dot Product intrinsics. */                                          \
   /*_(vdot_u32)                                                               */ \
   /*_(vdotq_u32)                                                              */ \
@@ -4101,59 +4101,59 @@
   /*_(vdotq_laneq_u32)                                                        */ \
   /*_(vdot_laneq_s32)                                                         */ \
   /*_(vdotq_laneq_s32)                                                        */ \
-  /*_(vfmlal_low_f16)                                                    */      \
-  /*_(vfmlsl_low_f16)                                                    */      \
-  /*_(vfmlal_high_f16)                                                   */      \
-  /*_(vfmlsl_high_f16)                                                   */      \
-  /*_(vfmlalq_low_f16)                                                   */      \
-  /*_(vfmlslq_low_f16)                                                   */      \
-  /*_(vfmlalq_high_f16)                                                  */      \
-  /*_(vfmlslq_high_f16)                                                  */      \
-  /*_(vfmlal_lane_low_f16)                                               */      \
-  /*_(vfmlal_lane_high_f16)                                              */      \
-  /*_(vfmlalq_laneq_low_f16)                                             */      \
-  /*_(vfmlalq_lane_low_f16)                                              */      \
-  /*_(vfmlal_laneq_low_f16)                                              */      \
-  /*_(vfmlalq_laneq_high_f16)                                            */      \
-  /*_(vfmlalq_lane_high_f16)                                             */      \
-  /*_(vfmlal_laneq_high_f16)                                             */      \
-  /*_(vfmlsl_lane_low_f16)                                               */      \
-  /*_(vfmlsl_lane_high_f16)                                              */      \
-  /*_(vfmlslq_laneq_low_f16)                                             */      \
-  /*_(vfmlslq_lane_low_f16)                                              */      \
-  /*_(vfmlsl_laneq_low_f16)                                              */      \
-  /*_(vfmlslq_laneq_high_f16)                                            */      \
-  /*_(vfmlslq_lane_high_f16)                                             */      \
-  /*_(vfmlsl_laneq_high_f16)                                             */      \
+  /*_(vfmlal_low_f16)                                                         */ \
+  /*_(vfmlsl_low_f16)                                                         */ \
+  /*_(vfmlal_high_f16)                                                        */ \
+  /*_(vfmlsl_high_f16)                                                        */ \
+  /*_(vfmlalq_low_f16)                                                        */ \
+  /*_(vfmlslq_low_f16)                                                        */ \
+  /*_(vfmlalq_high_f16)                                                       */ \
+  /*_(vfmlslq_high_f16)                                                       */ \
+  /*_(vfmlal_lane_low_f16)                                                    */ \
+  /*_(vfmlal_lane_high_f16)                                                   */ \
+  /*_(vfmlalq_laneq_low_f16)                                                  */ \
+  /*_(vfmlalq_lane_low_f16)                                                   */ \
+  /*_(vfmlal_laneq_low_f16)                                                   */ \
+  /*_(vfmlalq_laneq_high_f16)                                                 */ \
+  /*_(vfmlalq_lane_high_f16)                                                  */ \
+  /*_(vfmlal_laneq_high_f16)                                                  */ \
+  /*_(vfmlsl_lane_low_f16)                                                    */ \
+  /*_(vfmlsl_lane_high_f16)                                                   */ \
+  /*_(vfmlslq_laneq_low_f16)                                                  */ \
+  /*_(vfmlslq_lane_low_f16)                                                   */ \
+  /*_(vfmlsl_laneq_low_f16)                                                   */ \
+  /*_(vfmlslq_laneq_high_f16)                                                 */ \
+  /*_(vfmlslq_lane_high_f16)                                                  */ \
+  /*_(vfmlsl_laneq_high_f16)                                                  */ \
   /* AdvSIMD Complex numbers intrinsics. */                                      \
-  /*_(vcadd_rot90_f16)                                                   */      \
-  /*_(vcaddq_rot90_f16)                                                  */      \
-  /*_(vcadd_rot270_f16)                                                  */      \
-  /*_(vcaddq_rot270_f16)                                                 */      \
-  /*_(vcmla_f16)                                                         */      \
-  /*_(vcmlaq_f16)                                                        */      \
-  /*_(vcmla_lane_f16)                                                    */      \
-  /*_(vcmla_laneq_f16)                                                   */      \
-  /*_(vcmlaq_lane_f16)                                                   */      \
-  /*_(vcmlaq_laneq_f16)                                                  */      \
-  /*_(vcmla_rot90_f16)                                                   */      \
-  /*_(vcmlaq_rot90_f16)                                                  */      \
-  /*_(vcmla_rot90_lane_f16)                                              */      \
-  /*_(vcmla_rot90_laneq_f16)                                             */      \
-  /*_(vcmlaq_rot90_lane_f16)                                             */      \
-  /*_(vcmlaq_rot90_laneq_f16)                                            */      \
-  /*_(vcmla_rot180_f16)                                                  */      \
-  /*_(vcmlaq_rot180_f16)                                                 */      \
-  /*_(vcmla_rot180_lane_f16)                                             */      \
-  /*_(vcmla_rot180_laneq_f16)                                            */      \
-  /*_(vcmlaq_rot180_lane_f16)                                            */      \
-  /*_(vcmlaq_rot180_laneq_f16)                                           */      \
-  /*_(vcmla_rot270_f16)                                                  */      \
-  /*_(vcmlaq_rot270_f16)                                                 */      \
-  /*_(vcmla_rot270_lane_f16)                                             */      \
-  /*_(vcmla_rot270_laneq_f16)                                            */      \
-  /*_(vcmlaq_rot270_lane_f16)                                            */      \
-  /*_(vcmlaq_rot270_laneq_f16)                                           */      \
+  /*_(vcadd_rot90_f16)                                                        */ \
+  /*_(vcaddq_rot90_f16)                                                       */ \
+  /*_(vcadd_rot270_f16)                                                       */ \
+  /*_(vcaddq_rot270_f16)                                                      */ \
+  /*_(vcmla_f16)                                                              */ \
+  /*_(vcmlaq_f16)                                                             */ \
+  /*_(vcmla_lane_f16)                                                         */ \
+  /*_(vcmla_laneq_f16)                                                        */ \
+  /*_(vcmlaq_lane_f16)                                                        */ \
+  /*_(vcmlaq_laneq_f16)                                                       */ \
+  /*_(vcmla_rot90_f16)                                                        */ \
+  /*_(vcmlaq_rot90_f16)                                                       */ \
+  /*_(vcmla_rot90_lane_f16)                                                   */ \
+  /*_(vcmla_rot90_laneq_f16)                                                  */ \
+  /*_(vcmlaq_rot90_lane_f16)                                                  */ \
+  /*_(vcmlaq_rot90_laneq_f16)                                                 */ \
+  /*_(vcmla_rot180_f16)                                                       */ \
+  /*_(vcmlaq_rot180_f16)                                                      */ \
+  /*_(vcmla_rot180_lane_f16)                                                  */ \
+  /*_(vcmla_rot180_laneq_f16)                                                 */ \
+  /*_(vcmlaq_rot180_lane_f16)                                                 */ \
+  /*_(vcmlaq_rot180_laneq_f16)                                                */ \
+  /*_(vcmla_rot270_f16)                                                       */ \
+  /*_(vcmlaq_rot270_f16)                                                      */ \
+  /*_(vcmla_rot270_lane_f16)                                                  */ \
+  /*_(vcmla_rot270_laneq_f16)                                                 */ \
+  /*_(vcmlaq_rot270_lane_f16)                                                 */ \
+  /*_(vcmlaq_rot270_laneq_f16)                                                */ \
   /*_(vcadd_rot90_f32)                                                        */ \
   /*_(vcaddq_rot90_f32)                                                       */ \
   /*_(vcaddq_rot90_f64)                                                       */ \
