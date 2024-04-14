@@ -572,31 +572,31 @@
   _(vcgtq_s16)                                                                   \
   _(vcgtq_s32)                                                                   \
   _(vcgtq_f32)                                                                   \
-  /*_(vcgt_s64)                                                               */ \
-  /*_(vcgtq_s64)                                                              */ \
-  /*_(vcgt_u64)                                                               */ \
-  /*_(vcgtq_u64)                                                              */ \
-  /*_(vcgt_f64)                                                               */ \
-  /*_(vcgtq_f64)                                                              */ \
-  /*_(vcgtd_s64)                                                              */ \
-  /*_(vcgtd_u64)                                                              */ \
-  /*_(vcgts_f32)                                                              */ \
-  /*_(vcgtd_f64)                                                              */ \
-  /*_(vcgtz_s8)                                                               */ \
-  /*_(vcgtzq_s8)                                                              */ \
-  /*_(vcgtz_s16)                                                              */ \
-  /*_(vcgtzq_s16)                                                             */ \
-  /*_(vcgtz_s32)                                                              */ \
-  /*_(vcgtzq_s32)                                                             */ \
-  /*_(vcgtz_s64)                                                              */ \
-  /*_(vcgtzq_s64)                                                             */ \
-  /*_(vcgtz_f32)                                                              */ \
-  /*_(vcgtzq_f32)                                                             */ \
-  /*_(vcgtz_f64)                                                              */ \
-  /*_(vcgtzq_f64)                                                             */ \
-  /*_(vcgtzd_s64)                                                             */ \
-  /*_(vcgtzs_f32)                                                             */ \
-  /*_(vcgtzd_f64)                                                             */ \
+  _(vcgt_s64)                                                                    \
+  _(vcgtq_s64)                                                                   \
+  _(vcgt_u64)                                                                    \
+  _(vcgtq_u64)                                                                   \
+  _(vcgt_f64)                                                                    \
+  _(vcgtq_f64)                                                                   \
+  _(vcgtd_s64)                                                                   \
+  _(vcgtd_u64)                                                                   \
+  _(vcgts_f32)                                                                   \
+  _(vcgtd_f64)                                                                   \
+  _(vcgtz_s8)                                                                    \
+  _(vcgtzq_s8)                                                                   \
+  _(vcgtz_s16)                                                                   \
+  _(vcgtzq_s16)                                                                  \
+  _(vcgtz_s32)                                                                   \
+  _(vcgtzq_s32)                                                                  \
+  _(vcgtz_s64)                                                                   \
+  _(vcgtzq_s64)                                                                  \
+  _(vcgtz_f32)                                                                   \
+  _(vcgtzq_f32)                                                                  \
+  _(vcgtz_f64)                                                                   \
+  _(vcgtzq_f64)                                                                  \
+  _(vcgtzd_s64)                                                                  \
+  _(vcgtzs_f32)                                                                  \
+  _(vcgtzd_f64)                                                                  \
   _(vcgtq_u8)                                                                    \
   _(vcgtq_u16)                                                                   \
   _(vcgtq_u32)                                                                   \
