@@ -876,14 +876,14 @@
   /*_(vpminnm_f32)                                                            */ \
   /*_(vpminnmq_f32)                                                           */ \
   /*_(vpminnmq_f64)                                                           */ \
-  /*_(vpaddd_s64)                                                             */ \
-  /*_(vpaddd_u64)                                                             */ \
-  /*_(vpadds_f32)                                                             */ \
-  /*_(vpaddd_f64)                                                             */ \
-  /*_(vpmaxs_f32)                                                             */ \
-  /*_(vpmaxqd_f64)                                                            */ \
-  /*_(vpmins_f32)                                                             */ \
-  /*_(vpminqd_f64)                                                            */ \
+  _(vpaddd_s64)                                                                  \
+  _(vpaddd_u64)                                                                  \
+  _(vpadds_f32)                                                                  \
+  _(vpaddd_f64)                                                                  \
+  _(vpmaxs_f32)                                                                  \
+  _(vpmaxqd_f64)                                                                 \
+  _(vpmins_f32)                                                                  \
+  _(vpminqd_f64)                                                                 \
   /*_(vpmaxnms_f32)                                                           */ \
   /*_(vpmaxnmqd_f64)                                                          */ \
   /*_(vpminnms_f32)                                                           */ \
