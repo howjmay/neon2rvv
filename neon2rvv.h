@@ -6872,7 +6872,10 @@ FORCE_INLINE float32x2_t vset_lane_f32(float32_t a, float32x2_t b, const int c) 
   return __riscv_vfmerge_vfm_f32m1(b, a, mask, 2);
 }
 
-// FORCE_INLINE float64x1_t vset_lane_f64(float64_t a, float64x1_t v, const int lane);
+FORCE_INLINE float64x1_t vset_lane_f64(float64_t a, float64x1_t b, const int c) {
+  vbool64_t mask = __riscv_vreinterpret_v_u64m1_b64(vdup_n_u64((uint64_t)(1 << c)));
+  return __riscv_vfmerge_vfm_f64m1(b, a, mask, 1);
+}
 
 FORCE_INLINE uint8x8_t vset_lane_u8(uint8_t a, uint8x8_t b, const int c) {
   vbool8_t mask = __riscv_vreinterpret_v_u8m1_b8(vdup_n_u8((uint8_t)(1 << c)));
@@ -6929,7 +6932,10 @@ FORCE_INLINE float32x4_t vsetq_lane_f32(float32_t a, float32x4_t b, const int c)
   return __riscv_vfmerge_vfm_f32m1(b, a, mask, 4);
 }
 
-// FORCE_INLINE float64x2_t vsetq_lane_f64(float64_t a, float64x2_t v, const int lane);
+FORCE_INLINE float64x2_t vsetq_lane_f64(float64_t a, float64x2_t b, const int c) {
+  vbool64_t mask = __riscv_vreinterpret_v_u64m1_b64(vdup_n_u64((uint64_t)(1 << c)));
+  return __riscv_vfmerge_vfm_f64m1(b, a, mask, 2);
+}
 
 // FORCE_INLINE float32_t vrecpxs_f32(float32_t a);
 

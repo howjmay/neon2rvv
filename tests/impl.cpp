@@ -23283,7 +23283,33 @@ result_t test_vset_lane_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #endif  // ENABLE_TEST_ALL
 }
 
-result_t test_vset_lane_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vset_lane_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const double *_a = (double *)impl.test_cases_float_pointer1;
+  const double *_b = (double *)impl.test_cases_float_pointer2;
+  double _c[2];
+  float64x1_t a = vld1_f64(_a);
+  float64x1_t c;
+
+#define TEST_IMPL(IDX)              \
+  for (int i = 0; i < 1; i++) {     \
+    if (i == IDX) {                 \
+      _c[i] = _b[0];                \
+    } else {                        \
+      _c[i] = _a[i];                \
+    }                               \
+  }                                 \
+  c = vset_lane_f64(_b[0], a, IDX); \
+  CHECK_RESULT(validate_double(c, _c[0]))
+
+  IMM_1_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vset_lane_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
@@ -23547,7 +23573,33 @@ result_t test_vsetq_lane_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #endif  // ENABLE_TEST_ALL
 }
 
-result_t test_vsetq_lane_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vsetq_lane_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const double *_a = (double *)impl.test_cases_float_pointer1;
+  const double *_b = (double *)impl.test_cases_float_pointer2;
+  double _c[4];
+  float64x2_t a = vld1q_f64(_a);
+  float64x2_t c;
+
+#define TEST_IMPL(IDX)               \
+  for (int i = 0; i < 2; i++) {      \
+    if (i == IDX) {                  \
+      _c[i] = _b[0];                 \
+    } else {                         \
+      _c[i] = _a[i];                 \
+    }                                \
+  }                                  \
+  c = vsetq_lane_f64(_b[0], a, IDX); \
+  CHECK_RESULT(validate_double(c, _c[0], _c[1]))
+
+  IMM_2_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vrecpxs_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
