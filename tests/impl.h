@@ -1437,7 +1437,7 @@
   _(vset_lane_s16)                                                               \
   _(vset_lane_s32)                                                               \
   _(vset_lane_f32)                                                               \
-  /*_(vset_lane_f64)                                                          */ \
+  _(vset_lane_f64)                                                               \
   _(vset_lane_u8)                                                                \
   _(vset_lane_u16)                                                               \
   _(vset_lane_u32)                                                               \
@@ -1452,7 +1452,7 @@
   _(vsetq_lane_s16)                                                              \
   _(vsetq_lane_s32)                                                              \
   _(vsetq_lane_f32)                                                              \
-  /*_(vsetq_lane_f64)                                                         */ \
+  _(vsetq_lane_f64)                                                              \
   /*_(vrecpxs_f32)                                                            */ \
   /*_(vrecpxd_f64)                                                            */ \
   _(vfma_n_f32)                                                                  \
