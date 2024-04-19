@@ -1556,34 +1556,34 @@
   _(vdupq_lane_u32)                                                              \
   /*_(vdupq_lane_p8)                                                          */ \
   /*_(vdupq_lane_p16)                                                         */ \
-  /*_(vdup_lane_f64)                                                          */ \
-  /*_(vdupq_lane_f64)                                                         */ \
-  /*_(vdup_laneq_s8)                                                          */ \
-  /*_(vdupq_laneq_s8)                                                         */ \
-  /*_(vdup_laneq_s16)                                                         */ \
-  /*_(vdupq_laneq_s16)                                                        */ \
-  /*_(vdup_laneq_s32)                                                         */ \
-  /*_(vdupq_laneq_s32)                                                        */ \
-  /*_(vdup_laneq_s64)                                                         */ \
-  /*_(vdupq_laneq_s64)                                                        */ \
-  /*_(vdup_laneq_u8)                                                          */ \
-  /*_(vdupq_laneq_u8)                                                         */ \
-  /*_(vdup_laneq_u16)                                                         */ \
-  /*_(vdupq_laneq_u16)                                                        */ \
-  /*_(vdup_laneq_u32)                                                         */ \
-  /*_(vdupq_laneq_u32)                                                        */ \
-  /*_(vdup_laneq_u64)                                                         */ \
-  /*_(vdupq_laneq_u64)                                                        */ \
+  _(vdup_lane_f64)                                                               \
+  _(vdupq_lane_f64)                                                              \
+  _(vdup_laneq_s8)                                                               \
+  _(vdupq_laneq_s8)                                                              \
+  _(vdup_laneq_s16)                                                              \
+  _(vdupq_laneq_s16)                                                             \
+  _(vdup_laneq_s32)                                                              \
+  _(vdupq_laneq_s32)                                                             \
+  _(vdup_laneq_s64)                                                              \
+  _(vdupq_laneq_s64)                                                             \
+  _(vdup_laneq_u8)                                                               \
+  _(vdupq_laneq_u8)                                                              \
+  _(vdup_laneq_u16)                                                              \
+  _(vdupq_laneq_u16)                                                             \
+  _(vdup_laneq_u32)                                                              \
+  _(vdupq_laneq_u32)                                                             \
+  _(vdup_laneq_u64)                                                              \
+  _(vdupq_laneq_u64)                                                             \
   /*_(vdup_laneq_p64)                                                         */ \
   /*_(vdupq_laneq_p64)                                                        */ \
-  /*_(vdup_laneq_f32)                                                         */ \
-  /*_(vdupq_laneq_f32)                                                        */ \
+  _(vdup_laneq_f32)                                                              \
+  _(vdupq_laneq_f32)                                                             \
   /*_(vdup_laneq_p8)                                                          */ \
   /*_(vdupq_laneq_p8)                                                         */ \
   /*_(vdup_laneq_p16)                                                         */ \
   /*_(vdupq_laneq_p16)                                                        */ \
-  /*_(vdup_laneq_f64)                                                         */ \
-  /*_(vdupq_laneq_f64)                                                        */ \
+  _(vdup_laneq_f64)                                                              \
+  _(vdupq_laneq_f64)                                                             \
   /*_(vdupq_lane_p64)                                                         */ \
   _(vdupq_lane_s64)                                                              \
   _(vdupq_lane_u64)                                                              \
