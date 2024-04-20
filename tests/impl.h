@@ -917,21 +917,21 @@
   /*_(vaddlvq_u16)                                                            */ \
   /*_(vaddlv_u32)                                                             */ \
   /*_(vaddlvq_u32)                                                            */ \
-  /*_(vmaxv_s8)                                                               */ \
-  /*_(vmaxvq_s8)                                                              */ \
-  /*_(vmaxv_s16)                                                              */ \
-  /*_(vmaxvq_s16)                                                             */ \
-  /*_(vmaxv_s32)                                                              */ \
-  /*_(vmaxvq_s32)                                                             */ \
-  /*_(vmaxv_u8)                                                               */ \
-  /*_(vmaxvq_u8)                                                              */ \
-  /*_(vmaxv_u16)                                                              */ \
-  /*_(vmaxvq_u16)                                                             */ \
-  /*_(vmaxv_u32)                                                              */ \
-  /*_(vmaxvq_u32)                                                             */ \
-  /*_(vmaxv_f32)                                                              */ \
-  /*_(vmaxvq_f32)                                                             */ \
-  /*_(vmaxvq_f64)                                                             */ \
+  _(vmaxv_s8)                                                                    \
+  _(vmaxvq_s8)                                                                   \
+  _(vmaxv_s16)                                                                   \
+  _(vmaxvq_s16)                                                                  \
+  _(vmaxv_s32)                                                                   \
+  _(vmaxvq_s32)                                                                  \
+  _(vmaxv_u8)                                                                    \
+  _(vmaxvq_u8)                                                                   \
+  _(vmaxv_u16)                                                                   \
+  _(vmaxvq_u16)                                                                  \
+  _(vmaxv_u32)                                                                   \
+  _(vmaxvq_u32)                                                                  \
+  _(vmaxv_f32)                                                                   \
+  _(vmaxvq_f32)                                                                  \
+  _(vmaxvq_f64)                                                                  \
   /*_(vminv_s8)                                                               */ \
   /*_(vminvq_s8)                                                              */ \
   /*_(vminv_s16)                                                              */ \
