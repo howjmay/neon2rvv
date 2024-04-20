@@ -902,9 +902,9 @@
   _(vaddv_u32)                                                                   \
   _(vaddvq_u32)                                                                  \
   _(vaddvq_u64)                                                                  \
-  /*_(vaddv_f32)                                                              */ \
-  /*_(vaddvq_f32)                                                             */ \
-  /*_(vaddvq_f64)                                                             */ \
+  _(vaddv_f32)                                                                   \
+  _(vaddvq_f32)                                                                  \
+  _(vaddvq_f64)                                                                  \
   /*_(vaddlv_s8)                                                              */ \
   /*_(vaddlvq_s8)                                                             */ \
   /*_(vaddlv_s16)                                                             */ \
