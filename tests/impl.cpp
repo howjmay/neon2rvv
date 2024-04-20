@@ -25313,7 +25313,24 @@ result_t test_vcombine_p8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { retur
 
 result_t test_vcombine_p16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vcombine_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vcombine_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const double *_a = (double *)impl.test_cases_float_pointer1;
+  const double *_b = (double *)impl.test_cases_float_pointer2;
+  double _c[2];
+  for (int i = 0; i < 1; i++) {
+    _c[i] = _a[i];
+    _c[i + 1] = _b[i];
+  }
+  float64x1_t a = vld1_f64(_a);
+  float64x1_t b = vld1_f64(_b);
+  float64x2_t c = vcombine_f64(a, b);
+
+  return validate_double(c, _c[0], _c[1]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vcombine_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL

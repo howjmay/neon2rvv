@@ -1600,7 +1600,7 @@
   _(vcombine_u64)                                                                \
   /*_(vcombine_p8)                                                            */ \
   /*_(vcombine_p16)                                                           */ \
-  /*_(vcombine_f64)                                                           */ \
+  _(vcombine_f64)                                                                \
   /*_(vget_high_p64)                                                          */ \
   _(vget_high_s8)                                                                \
   _(vget_high_s16)                                                               \
