@@ -7220,7 +7220,7 @@ FORCE_INLINE float32x2_t vget_high_f32(float32x4_t a) { return __riscv_vslidedow
 
 // FORCE_INLINE poly16x4_t vget_high_p16(poly16x8_t a);
 
-// FORCE_INLINE float64x1_t vget_high_f64(float64x2_t a);
+FORCE_INLINE float64x1_t vget_high_f64(float64x2_t a) { return __riscv_vslidedown_vx_f64m1(a, 1, 2); }
 
 FORCE_INLINE uint8x8_t vget_high_u8(uint8x16_t a) { return __riscv_vslidedown_vx_u8m1(a, 8, 16); }
 
@@ -7246,7 +7246,7 @@ FORCE_INLINE float32x2_t vget_low_f32(float32x4_t a) { return a; }
 
 // FORCE_INLINE poly16x4_t vget_low_p16(poly16x8_t a);
 
-// FORCE_INLINE float64x1_t vget_low_f64(float64x2_t a);
+FORCE_INLINE float64x1_t vget_low_f64(float64x2_t a) { return a; }
 
 // FORCE_INLINE int8_t vdupb_lane_s8(int8x8_t vec, const int lane);
 

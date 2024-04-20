@@ -1614,7 +1614,7 @@
   _(vget_high_u64)                                                               \
   /*_(vget_high_p8)                                                           */ \
   /*_(vget_high_p16)                                                          */ \
-  /*_(vget_high_f64)                                                          */ \
+  _(vget_high_f64)                                                               \
   _(vget_low_s8)                                                                 \
   _(vget_low_s16)                                                                \
   _(vget_low_s32)                                                                \
@@ -1625,7 +1625,7 @@
   _(vget_low_u32)                                                                \
   /*_(vget_low_p8)                                                            */ \
   /*_(vget_low_p16)                                                           */ \
-  /*_(vget_low_f64)                                                           */ \
+  _(vget_low_f64)                                                                \
   /*_(vdupb_lane_s8)                                                          */ \
   /*_(vduph_lane_s16)                                                         */ \
   /*_(vdups_lane_s32)                                                         */ \
