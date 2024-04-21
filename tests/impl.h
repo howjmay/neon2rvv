@@ -988,8 +988,8 @@
   _(vshlq_u16)                                                                   \
   _(vshlq_u32)                                                                   \
   _(vshlq_u64)                                                                   \
-  /*_(vshld_s64)                                                              */ \
-  /*_(vshld_u64)                                                              */ \
+  _(vshld_s64)                                                                   \
+  _(vshld_u64)                                                                   \
   _(vrshl_s8)                                                                    \
   _(vrshl_s16)                                                                   \
   _(vrshl_s32)                                                                   \
