@@ -4760,9 +4760,21 @@ FORCE_INLINE uint64x2_t vshlq_u64(uint64x2_t a, int64x2_t b) {
   return __riscv_vmerge_vvm_u64m1(shr, shl, positive_mask, 2);
 }
 
-// FORCE_INLINE int64_t vshld_s64(int64_t a, int64_t b);
+FORCE_INLINE int64_t vshld_s64(int64_t a, int64_t b) {
+  if (b < 0) {
+    return a >> -b;
+  } else {
+    return a << b;
+  }
+}
 
-// FORCE_INLINE uint64_t vshld_u64(uint64_t a, int64_t b);
+FORCE_INLINE uint64_t vshld_u64(uint64_t a, int64_t b) {
+  if (b < 0) {
+    return a >> -b;
+  } else {
+    return a << b;
+  }
+}
 
 FORCE_INLINE int8x8_t vrshl_s8(int8x8_t a, int8x8_t b) {
   vbool8_t positive_mask = __riscv_vmsgt_vx_i8m1_b8(b, 0, 8);
