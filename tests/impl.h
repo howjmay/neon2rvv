@@ -905,18 +905,18 @@
   _(vaddv_f32)                                                                   \
   _(vaddvq_f32)                                                                  \
   _(vaddvq_f64)                                                                  \
-  /*_(vaddlv_s8)                                                              */ \
-  /*_(vaddlvq_s8)                                                             */ \
-  /*_(vaddlv_s16)                                                             */ \
-  /*_(vaddlvq_s16)                                                            */ \
-  /*_(vaddlv_s32)                                                             */ \
-  /*_(vaddlvq_s32)                                                            */ \
-  /*_(vaddlv_u8)                                                              */ \
-  /*_(vaddlvq_u8)                                                             */ \
-  /*_(vaddlv_u16)                                                             */ \
-  /*_(vaddlvq_u16)                                                            */ \
-  /*_(vaddlv_u32)                                                             */ \
-  /*_(vaddlvq_u32)                                                            */ \
+  _(vaddlv_s8)                                                                   \
+  _(vaddlvq_s8)                                                                  \
+  _(vaddlv_s16)                                                                  \
+  _(vaddlvq_s16)                                                                 \
+  _(vaddlv_s32)                                                                  \
+  _(vaddlvq_s32)                                                                 \
+  _(vaddlv_u8)                                                                   \
+  _(vaddlvq_u8)                                                                  \
+  _(vaddlv_u16)                                                                  \
+  _(vaddlvq_u16)                                                                 \
+  _(vaddlv_u32)                                                                  \
+  _(vaddlvq_u32)                                                                 \
   _(vmaxv_s8)                                                                    \
   _(vmaxvq_s8)                                                                   \
   _(vmaxv_s16)                                                                   \
@@ -1836,9 +1836,9 @@
   _(vtbx4_u8)                                                                    \
   /*_(vtbx4_p8)                                                               */ \
   /*_(vqtbl1_s8)                                                              */ \
-  /*_(vqtbl1q_s8)                                                             */ \
-  /*_(vqtbl1_u8)                                                              */ \
-  /*_(vqtbl1q_u8)                                                             */ \
+  _(vqtbl1q_s8)                                                                  \
+  _(vqtbl1_u8)                                                                   \
+  _(vqtbl1q_u8)                                                                  \
   /*_(vqtbl1_p8)                                                              */ \
   /*_(vqtbl1q_p8)                                                             */ \
   /*_(vqtbx1_s8)                                                              */ \
@@ -1848,21 +1848,21 @@
   /*_(vqtbx1_p8)                                                              */ \
   /*_(vqtbx1q_p8)                                                             */ \
   /*_(vqtbl2_s8)                                                              */ \
-  /*_(vqtbl2q_s8)                                                             */ \
-  /*_(vqtbl2_u8)                                                              */ \
-  /*_(vqtbl2q_u8)                                                             */ \
+  _(vqtbl2q_s8)                                                                  \
+  _(vqtbl2_u8)                                                                   \
+  _(vqtbl2q_u8)                                                                  \
   /*_(vqtbl2_p8)                                                              */ \
   /*_(vqtbl2q_p8)                                                             */ \
   /*_(vqtbl3_s8)                                                              */ \
   /*_(vqtbl3q_s8)                                                             */ \
   /*_(vqtbl3_u8)                                                              */ \
-  /*_(vqtbl3q_u8)                                                             */ \
+  _(vqtbl3q_u8)                                                                  \
   /*_(vqtbl3_p8)                                                              */ \
   /*_(vqtbl3q_p8)                                                             */ \
   /*_(vqtbl4_s8)                                                              */ \
   /*_(vqtbl4q_s8)                                                             */ \
   /*_(vqtbl4_u8)                                                              */ \
-  /*_(vqtbl4q_u8)                                                             */ \
+  _(vqtbl4q_u8)                                                                  \
   /*_(vqtbl4_p8)                                                              */ \
   /*_(vqtbl4q_p8)                                                             */ \
   /*_(vqtbx2_s8)                                                              */ \
@@ -2317,12 +2317,12 @@
   /*_(vzip1_s8)                                                               */ \
   /*_(vzip1q_s8)                                                              */ \
   /*_(vzip1_s16)                                                              */ \
-  /*_(vzip1q_s16)                                                             */ \
+  _(vzip1q_s16)                                                                  \
   /*_(vzip1_s32)                                                              */ \
-  /*_(vzip1q_s32)                                                             */ \
-  /*_(vzip1q_s64)                                                             */ \
+  _(vzip1q_s32)                                                                  \
+  _(vzip1q_s64)                                                                  \
   /*_(vzip1_u8)                                                               */ \
-  /*_(vzip1q_u8)                                                              */ \
+  _(vzip1q_u8)                                                                   \
   /*_(vzip1_u16)                                                              */ \
   /*_(vzip1q_u16)                                                             */ \
   /*_(vzip1_u32)                                                              */ \
@@ -2342,7 +2342,7 @@
   /*_(vzip2q_s16)                                                             */ \
   /*_(vzip2_s32)                                                              */ \
   /*_(vzip2q_s32)                                                             */ \
-  /*_(vzip2q_s64)                                                             */ \
+  _(vzip2q_s64)                                                                  \
   /*_(vzip2_u8)                                                               */ \
   /*_(vzip2q_u8)                                                              */ \
   /*_(vzip2_u16)                                                              */ \
@@ -2363,7 +2363,7 @@
   /*_(vuzp1_s16)                                                              */ \
   /*_(vuzp1q_s16)                                                             */ \
   /*_(vuzp1_s32)                                                              */ \
-  /*_(vuzp1q_s32)                                                             */ \
+  _(vuzp1q_s32)                                                                  \
   /*_(vuzp1q_s64)                                                             */ \
   /*_(vuzp1_u8)                                                               */ \
   /*_(vuzp1q_u8)                                                              */ \
@@ -2408,14 +2408,14 @@
   /*_(vtrn1q_s16)                                                             */ \
   /*_(vtrn1_s32)                                                              */ \
   /*_(vtrn1q_s32)                                                             */ \
-  /*_(vtrn1q_s64)                                                             */ \
-  /*_(vtrn1_u8)                                                               */ \
-  /*_(vtrn1q_u8)                                                              */ \
+  _(vtrn1q_s64)                                                                  \
+  _(vtrn1_u8)                                                                    \
+  _(vtrn1q_u8)                                                                   \
   /*_(vtrn1_u16)                                                              */ \
   /*_(vtrn1q_u16)                                                             */ \
   /*_(vtrn1_u32)                                                              */ \
   /*_(vtrn1q_u32)                                                             */ \
-  /*_(vtrn1q_u64)                                                             */ \
+  _(vtrn1q_u64)                                                                  \
   /*_(vtrn1q_p64)                                                             */ \
   /*_(vtrn1_f32)                                                              */ \
   /*_(vtrn1q_f32)                                                             */ \
@@ -2430,14 +2430,14 @@
   /*_(vtrn2q_s16)                                                             */ \
   /*_(vtrn2_s32)                                                              */ \
   /*_(vtrn2q_s32)                                                             */ \
-  /*_(vtrn2q_s64)                                                             */ \
+  _(vtrn2q_s64)                                                                  \
   /*_(vtrn2_u8)                                                               */ \
   /*_(vtrn2q_u8)                                                              */ \
   /*_(vtrn2_u16)                                                              */ \
   /*_(vtrn2q_u16)                                                             */ \
   /*_(vtrn2_u32)                                                              */ \
   /*_(vtrn2q_u32)                                                             */ \
-  /*_(vtrn2q_u64)                                                             */ \
+  _(vtrn2q_u64)                                                                  \
   /*_(vtrn2q_p64)                                                             */ \
   /*_(vtrn2_f32)                                                              */ \
   /*_(vtrn2q_f32)                                                             */ \
@@ -3237,7 +3237,7 @@
   /*_(vld1_u8_x2)                                                             */ \
   /*_(vld1q_u8_x2)                                                            */ \
   /*_(vld1_u16_x2)                                                            */ \
-  /*_(vld1q_u16_x2)                                                           */ \
+  _(vld1q_u16_x2)                                                                \
   /*_(vld1_u32_x2)                                                            */ \
   /*_(vld1q_u32_x2)                                                           */ \
   /*_(vld1_f16_x2)                                                            */ \
@@ -4058,14 +4058,14 @@
   /*_(vzip_f16)                                                               */ \
   /*_(vzipq_f16)                                                              */ \
   /* AdvSIMD Dot Product intrinsics. */                                          \
-  /*_(vdot_u32)                                                               */ \
-  /*_(vdotq_u32)                                                              */ \
+  _(vdot_u32)                                                                    \
+  _(vdotq_u32)                                                                   \
   /*_(vdot_s32)                                                               */ \
   /*_(vdotq_s32)                                                              */ \
   /*_(vdot_lane_u32)                                                          */ \
   /*_(vdotq_lane_u32)                                                         */ \
   /*_(vdot_lane_s32)                                                          */ \
-  /*_(vdotq_lane_s32)                                                         */ \
+  _(vdotq_lane_s32)                                                              \
   /*_(vsha512hq_u64)                                                          */ \
   /*_(vsha512h2q_u64)                                                         */ \
   /*_(vsha512su0q_u64)                                                        */ \
@@ -4100,7 +4100,7 @@
   /*_(vdot_laneq_u32)                                                         */ \
   /*_(vdotq_laneq_u32)                                                        */ \
   /*_(vdot_laneq_s32)                                                         */ \
-  /*_(vdotq_laneq_s32)                                                        */ \
+  _(vdotq_laneq_s32)                                                             \
   /*_(vfmlal_low_f16)                                                         */ \
   /*_(vfmlsl_low_f16)                                                         */ \
   /*_(vfmlal_high_f16)                                                        */ \
@@ -4209,13 +4209,13 @@
   /*_(vusmmlaq_s32)                                                           */ \
   /* AdvSIMD Matrix Multiply-Accumulate and Dot Product intrinsics. */           \
   /*_(vusdot_s32)                                                             */ \
-  /*_(vusdotq_s32)                                                            */ \
+  _(vusdotq_s32)                                                                 \
   /*_(vusdot_lane_s32)                                                        */ \
-  /*_(vusdotq_lane_s32)                                                       */ \
+  _(vusdotq_lane_s32)                                                            \
   /*_(vsudot_lane_s32)                                                        */ \
   /*_(vsudotq_lane_s32)                                                       */ \
   /*_(vusdot_laneq_s32)                                                       */ \
-  /*_(vusdotq_laneq_s32)                                                      */ \
+  _(vusdotq_laneq_s32)                                                           \
   /*_(vsudot_laneq_s32)                                                       */ \
   /*_(vsudotq_laneq_s32)                                                      */ \
   /*_(vcreate_bf16)                                                           */ \
