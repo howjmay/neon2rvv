@@ -11908,7 +11908,7 @@ FORCE_INLINE void vst1_s64(int64_t *a, int64x1_t b) { return __riscv_vse64_v_i64
 
 FORCE_INLINE void vst1_f32(float32_t *a, float32x2_t b) { return __riscv_vse32_v_f32m1(a, b, 2); }
 
-FORCE_INLINE void vst1_u8(uint8_t *a, uint8x8_t b) { return __riscv_vse8_v_u8m1(a, b, 16); }
+FORCE_INLINE void vst1_u8(uint8_t *a, uint8x8_t b) { return __riscv_vse8_v_u8m1(a, b, 8); }
 
 FORCE_INLINE void vst1_u16(uint16_t *a, uint16x4_t b) { return __riscv_vse16_v_u16m1(a, b, 4); }
 
