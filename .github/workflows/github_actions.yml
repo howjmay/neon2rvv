@@ -36,7 +36,7 @@ jobs:
       - name: build artifact
         run: |
           export ENABLE_TEST_ALL=true
-          export ARCH_CFLAGS="-arch arm64 -march=armv8-a+simd -mcpu=generic+neon"
+          export ARCH_CFLAGS="-arch arm64 -march=armv8-a+simd"
           make test
   check_test_cases_gcc:
     runs-on: macos-14
@@ -52,7 +52,7 @@ jobs:
           export CC=gcc-12
           export CXX=g++-12
           export ENABLE_TEST_ALL=true
-          export ARCH_CFLAGS="-arch arm64 -march=armv8-a+simd -mcpu=generic+neon"
+          export ARCH_CFLAGS="-arch arm64 -march=armv8-a+simd"
           make test
 
   coding_style:
