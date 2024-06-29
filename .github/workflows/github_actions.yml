@@ -29,30 +29,31 @@ jobs:
 
   # for validate test cases only
   check_test_cases:
-    runs-on: ubuntu-22.04
-    strategy:
-      matrix:
-        arch: [aarch64]
-        cxx_compiler: [g++-10, clang++-11]
+    runs-on: macos-14
     steps:
       - name: checkout code
         uses: actions/checkout@v3.2.0
       - name: build artifact
-        # The Github Action for non-x86 CPU
-        # https://github.com/uraimo/run-on-arch-action
-        uses: uraimo/run-on-arch-action@v2.5.0
-        with:
-          arch: ${{ matrix.arch }}
-          distro: ubuntu20.04
-          env: |
-            CXX: ${{ matrix.cxx_compiler }}
-          install: |
-            apt-get update -q -y
-            apt-get install -q -y "${{ matrix.cxx_compiler }}" make
-            apt-get install -q -y gcc
-          run: |
-            export ENABLE_TEST_ALL=true
-            make test
+        run: |
+          export ENABLE_TEST_ALL=true
+          make test
+  check_test_cases_gcc:
+    runs-on: macos-14
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v3.2.0
+      - name: install gcc
+        run: |
+          brew update
+          brew install gcc@12
+      - name: build artifact
+        run: |
+          export CC=gcc
+          export CXX=g++
+          gcc --version
+          g++ --version
+          export ENABLE_TEST_ALL=true
+          make test
 
   coding_style:
     runs-on: ubuntu-22.04
