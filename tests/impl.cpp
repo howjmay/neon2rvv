@@ -42192,7 +42192,7 @@ result_t test_vst4_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int8_t *_b = (int8_t *)impl.test_cases_int_pointer1;
   const int reg_elt_num = 8;
   int8_t _in[reg_elt_num * 4];
-  merge_arrays(_a, _b, _in, reg_elt_num);
+  merge_arrays(_a, _b, _in, reg_elt_num*2);
   int8_t _c[reg_elt_num * 4];
   int8x8x4_t in = vld4_s8(_in);
   vst4_s8(_c, in);
@@ -42213,7 +42213,7 @@ result_t test_vst4_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_b = (int16_t *)impl.test_cases_int_pointer1;
   const int reg_elt_num = 4;
   int16_t _in[reg_elt_num * 4];
-  merge_arrays(_a, _b, _in, reg_elt_num);
+  merge_arrays(_a, _b, _in, reg_elt_num*2);
   int16_t _c[reg_elt_num * 4];
   int16x4x4_t in = vld4_s16(_in);
   vst4_s16(_c, in);
@@ -42234,7 +42234,7 @@ result_t test_vst4_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int32_t *_b = (int32_t *)impl.test_cases_int_pointer1;
   const int reg_elt_num = 2;
   int32_t _in[reg_elt_num * 4];
-  merge_arrays(_a, _b, _in, reg_elt_num);
+  merge_arrays(_a, _b, _in, reg_elt_num*2);
   int32_t _c[reg_elt_num * 4];
   int32x2x4_t in = vld4_s32(_in);
   vst4_s32(_c, in);
@@ -42253,11 +42253,9 @@ result_t test_vst4_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
   const float *_in1 = (float *)impl.test_cases_float_pointer1;
   const float *_in2 = (float *)impl.test_cases_float_pointer2;
-  const float *_in3 = (float *)impl.test_cases_float_pointer3;
-  const float *_in4 = (float *)impl.test_cases_float_pointer4;
   const int reg_elt_num = 2;
   float _in[reg_elt_num * 4];
-  merge_arrays(_in1, _in2, _in3, _in4, _in, reg_elt_num);
+  merge_arrays(_in1, _in2, _in, reg_elt_num*2);
   float _c[reg_elt_num * 4];
   float32x2x4_t in = vld4_f32(_in);
   vst4_f32(_c, in);
@@ -42278,7 +42276,7 @@ result_t test_vst4_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint8_t *_b = (uint8_t *)impl.test_cases_int_pointer1;
   const int reg_elt_num = 8;
   uint8_t _in[reg_elt_num * 4];
-  merge_arrays(_a, _b, _in, reg_elt_num);
+  merge_arrays(_a, _b, _in, reg_elt_num*2);
   uint8_t _c[reg_elt_num * 4];
   uint8x8x4_t in = vld4_u8(_in);
   vst4_u8(_c, in);
@@ -42299,7 +42297,7 @@ result_t test_vst4_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint16_t *_b = (uint16_t *)impl.test_cases_int_pointer1;
   const int reg_elt_num = 4;
   uint16_t _in[reg_elt_num * 4];
-  merge_arrays(_a, _b, _in, reg_elt_num);
+  merge_arrays(_a, _b, _in, reg_elt_num*2);
   uint16_t _c[reg_elt_num * 4];
   uint16x4x4_t in = vld4_u16(_in);
   vst4_u16(_c, in);
@@ -42320,7 +42318,7 @@ result_t test_vst4_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint32_t *_b = (uint32_t *)impl.test_cases_int_pointer1;
   const int reg_elt_num = 2;
   uint32_t _in[reg_elt_num * 4];
-  merge_arrays(_a, _b, _in, reg_elt_num);
+  merge_arrays(_a, _b, _in, reg_elt_num*2);
   uint32_t _c[reg_elt_num * 4];
   uint32x2x4_t in = vld4_u32(_in);
   vst4_u32(_c, in);
@@ -42341,7 +42339,7 @@ result_t test_vst4_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int64_t *_b = (int64_t *)impl.test_cases_int_pointer1;
   const int reg_elt_num = 1;
   int64_t _in[reg_elt_num * 4];
-  merge_arrays(_a, _b, _in, reg_elt_num);
+  merge_arrays(_a, _b, _in, reg_elt_num*2);
   int64_t _c[reg_elt_num * 4];
   int64x1x4_t in = vld4_s64(_in);
   vst4_s64(_c, in);
@@ -42362,7 +42360,7 @@ result_t test_vst4_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const uint64_t *_b = (uint64_t *)impl.test_cases_int_pointer1;
   const int reg_elt_num = 1;
   uint64_t _in[reg_elt_num * 4];
-  merge_arrays(_a, _b, _in, reg_elt_num);
+  merge_arrays(_a, _b, _in, reg_elt_num*2);
   uint64_t _c[reg_elt_num * 4];
   uint64x1x4_t in = vld4_u64(_in);
   vst4_u64(_c, in);
