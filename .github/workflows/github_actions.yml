@@ -48,10 +48,8 @@ jobs:
           brew install gcc@12
       - name: build artifact
         run: |
-          export CC=gcc
-          export CXX=g++
-          gcc --version
-          g++ --version
+          export CC=gcc-12
+          export CXX=g++-12
           export ENABLE_TEST_ALL=true
           make test
 
