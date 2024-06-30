@@ -42340,14 +42340,10 @@ result_t test_vst4_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int64_t *_a3 = (int64_t *)impl.test_cases_int_pointer4;
   const int reg_elt_num = 1;
   int64_t _in[reg_elt_num * 2 * 4];
-  printf("hihihi 1\n");
   merge_arrays(_a0, _a1, _a2, _a3, _in, reg_elt_num * 2);
-  printf("hihihi 2\n");
   int64_t _c[reg_elt_num * 4];
   int64x1x4_t in = vld4_s64(_in);
-  printf("hihihi 3\n");
   vst4_s64(_c, in);
-  printf("hihihi 4\n");
   for (int i = 0; i < reg_elt_num * 4; i++) {
     if (_in[i] != _c[i]) {
       return TEST_FAIL;
@@ -42957,7 +42953,7 @@ result_t test_vst1_s8_x2(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int8_t *_in2 = (int8_t *)impl.test_cases_int_pointer1;
   int8_t _b[reg_elt_num * 2];
   int8_t in[reg_elt_num * 4];
-  merge_arrays(_in1, _in2, in, reg_elt_num);
+  merge_arrays(_in1, _in2, in, reg_elt_num*2);
   for (int i = 0; i < reg_elt_num; i++) {
     _b[i] = in[2 * i];
     _b[i + reg_elt_num] = in[2 * i + 1];
@@ -42985,7 +42981,7 @@ result_t test_vst1q_s8_x2(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int8_t *_in2 = (int8_t *)impl.test_cases_int_pointer1;
   int8_t _b[reg_elt_num * 2];
   int8_t in[reg_elt_num * 4];
-  merge_arrays(_in1, _in2, in, reg_elt_num);
+  merge_arrays(_in1, _in2, in, reg_elt_num*2);
   for (int i = 0; i < reg_elt_num; i++) {
     _b[i] = in[2 * i];
     _b[i + reg_elt_num] = in[2 * i + 1];
@@ -43013,7 +43009,7 @@ result_t test_vst1_s16_x2(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_in2 = (int16_t *)impl.test_cases_int_pointer1;
   int16_t _b[reg_elt_num * 2];
   int16_t in[reg_elt_num * 4];
-  merge_arrays(_in1, _in2, in, reg_elt_num);
+  merge_arrays(_in1, _in2, in, reg_elt_num*2);
   for (int i = 0; i < reg_elt_num; i++) {
     _b[i] = in[2 * i];
     _b[i + reg_elt_num] = in[2 * i + 1];
@@ -43041,7 +43037,7 @@ result_t test_vst1q_s16_x2(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int16_t *_in2 = (int16_t *)impl.test_cases_int_pointer1;
   int16_t _b[reg_elt_num * 2];
   int16_t in[reg_elt_num * 4];
-  merge_arrays(_in1, _in2, in, reg_elt_num);
+  merge_arrays(_in1, _in2, in, reg_elt_num*2);
   for (int i = 0; i < reg_elt_num; i++) {
     _b[i] = in[2 * i];
     _b[i + reg_elt_num] = in[2 * i + 1];
@@ -43066,10 +43062,10 @@ result_t test_vst1_s32_x2(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int reg_elt_num = 2;
   int32_t _a[reg_elt_num * 2];
   const int32_t *_in1 = (int32_t *)impl.test_cases_int_pointer1;
-  const int32_t *_in2 = (int32_t *)impl.test_cases_int_pointer1;
+  const int32_t *_in2 = (int32_t *)impl.test_cases_int_pointer2;
   int32_t _b[reg_elt_num * 2];
   int32_t in[reg_elt_num * 4];
-  merge_arrays(_in1, _in2, in, reg_elt_num);
+  merge_arrays(_in1, _in2, in, reg_elt_num*2);
   for (int i = 0; i < reg_elt_num; i++) {
     _b[i] = in[2 * i];
     _b[i + reg_elt_num] = in[2 * i + 1];
