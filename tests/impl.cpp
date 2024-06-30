@@ -42331,7 +42331,7 @@ result_t test_vst4_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   return TEST_UNIMPL;
 #endif  // ENABLE_TEST_ALL
 }
-
+#include <stdio.h>
 result_t test_vst4_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
   const int64_t *_a0 = (int64_t *)impl.test_cases_int_pointer1;
@@ -42340,10 +42340,14 @@ result_t test_vst4_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const int64_t *_a3 = (int64_t *)impl.test_cases_int_pointer4;
   const int reg_elt_num = 1;
   int64_t _in[reg_elt_num * 2 * 4];
+  printf("hihihi 1\n");
   merge_arrays(_a0, _a1, _a2, _a3, _in, reg_elt_num * 2);
+  printf("hihihi 2\n");
   int64_t _c[reg_elt_num * 4];
   int64x1x4_t in = vld4_s64(_in);
+  printf("hihihi 3\n");
   vst4_s64(_c, in);
+  printf("hihihi 4\n");
   for (int i = 0; i < reg_elt_num * 4; i++) {
     if (_in[i] != _c[i]) {
       return TEST_FAIL;
