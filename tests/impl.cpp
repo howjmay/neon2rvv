@@ -42370,6 +42370,7 @@ result_t test_vst4_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
       return TEST_FAIL;
     }
   }
+  printf("HIHI\n");
   return TEST_SUCCESS;
 #else
   return TEST_UNIMPL;
