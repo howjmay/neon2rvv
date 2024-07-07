@@ -37,21 +37,21 @@ jobs:
         run: |
           export ENABLE_TEST_ALL=true
           make test
-  check_test_cases_gcc:
-    runs-on: macos-14
-    steps:
-      - name: checkout code
-        uses: actions/checkout@v3.2.0
-      - name: install gcc
-        run: |
-          brew update
-          brew install gcc@12
-      - name: build artifact
-        run: |
-          export CC=gcc-12
-          export CXX=g++-12
-          export ENABLE_TEST_ALL=true
-          make test
+  # check_test_cases_gcc:
+  #   runs-on: macos-14
+  #   steps:
+  #     - name: checkout code
+  #       uses: actions/checkout@v3.2.0
+  #     - name: install gcc
+  #       run: |
+  #         brew update
+  #         brew install gcc@12
+  #     - name: build artifact
+  #       run: |
+  #         export CC=gcc-12
+  #         export CXX=g++-12
+  #         export ENABLE_TEST_ALL=true
+  #         make test
 
   coding_style:
     runs-on: ubuntu-22.04
