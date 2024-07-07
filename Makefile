@@ -14,7 +14,7 @@ endif
 
 ifndef CROSS_COMPILE
     processor := $(shell uname -m)
-	ARCH_CFLAGS = -march=armv8.6-a
+	ARCH_CFLAGS = -march=armv8.4-a+simd+i8mm+dotprod
 else # CROSS_COMPILE was set
     CC = $(CROSS_COMPILE)gcc
     CXX = $(CROSS_COMPILE)g++
