@@ -42359,11 +42359,13 @@ result_t test_vst4_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 result_t test_vst4_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
 printf("HI 1\n");
-  const uint64_t *_a = (uint64_t *)impl.test_cases_int_pointer1;
-  const uint64_t *_b = (uint64_t *)impl.test_cases_int_pointer1;
+  const uint64_t *_a1 = (uint64_t *)impl.test_cases_int_pointer1;
+  const uint64_t *_a2 = (uint64_t *)impl.test_cases_int_pointer2;
+  const uint64_t *_a3 = (uint64_t *)impl.test_cases_int_pointer3;
+  const uint64_t *_a4 = (uint64_t *)impl.test_cases_int_pointer4;
   const int reg_elt_num = 1;
   uint64_t _in[reg_elt_num * 4];
-  merge_arrays(_a, _b, _in, reg_elt_num);
+  merge_arrays(_a1, _a2, _a3, _a4, _in, reg_elt_num*4);
   printf("HI 2\n");
   uint64_t _c[reg_elt_num * 4];
   uint64x1x4_t in = vld4_u64(_in);
