@@ -6,7 +6,13 @@
  *
  * MIT License
  *
- * Copyright (c) 2023 Yang Hau <yuanyanghau@gmail.com>
+ * Copyright (c) 2015-2024 NEON2RVV Contributors.
+ *
+ * Contributors to this work are:
+ *    Yang Hau <yuanyanghau@gmail.com>
+ *    Octavian Maghiar <octavian.maghiar@imgtec.com>
+ *    Camel Coder <camel-cdr@protonmail.com>
+ *    Yang Liu <numbksco@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
