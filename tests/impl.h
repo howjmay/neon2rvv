@@ -164,8 +164,8 @@
   _(vmulq_u32)                                                                   \
   /*_(vmul_p8)                                                                */ \
   /*_(vmulq_p8)                                                               */ \
-  /*_(vmul_f64)                                                               */ \
-  /*_(vmulq_f64)                                                              */ \
+  _(vmul_f64)                                                                    \
+  _(vmulq_f64)                                                                   \
   /*_(vmulx_f32)                                                              */ \
   /*_(vmulxq_f32)                                                             */ \
   /*_(vmulx_f64)                                                              */ \
