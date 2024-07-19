@@ -7734,17 +7734,56 @@ FORCE_INLINE uint32x2_t vqmovn_u64(uint64x2_t a) {
   return __riscv_vlmul_ext_v_u32mf2_u32m1(__riscv_vnclipu_wx_u32mf2(a, 0, __RISCV_VXRM_RDN, 2));
 }
 
-// FORCE_INLINE int8_t vqmovnh_s16(int16_t a);
+FORCE_INLINE int8_t vqmovnh_s16(int16_t a) {
+  if (a > INT8_MAX)
+    return (int8_t)INT8_MAX;
+  if (a < INT8_MIN)
+    return (int8_t)INT8_MIN;
+  return (int8_t)a;
+}
 
-// FORCE_INLINE int16_t vqmovns_s32(int32_t a);
+FORCE_INLINE int16_t vqmovns_s32(int32_t a) {
+  if (a > INT16_MAX)
+    return (int16_t)INT16_MAX;
+  if (a < INT16_MIN)
+    return (int16_t)INT16_MIN;
+  return (int16_t)a;
+}
 
-// FORCE_INLINE int32_t vqmovnd_s64(int64_t a);
+FORCE_INLINE int32_t vqmovnd_s64(int64_t a) {
+  if (a > INT32_MAX)
+    return (int32_t)INT32_MAX;
+  if (a < INT32_MIN)
+    return (int32_t)INT32_MIN;
+  return (int32_t)a;
+}
 
-// FORCE_INLINE uint8_t vqmovnh_u16(uint16_t a);
+FORCE_INLINE uint8_t vqmovnh_u16(uint16_t a) {
+  if (a > UINT8_MAX) {
+    return (uint8_t)UINT8_MAX;
+  } else if (a < 0) {
+    return 0;
+  }
+  return (uint8_t)a;
+}
 
-// FORCE_INLINE uint16_t vqmovns_u32(uint32_t a);
+FORCE_INLINE uint16_t vqmovns_u32(uint32_t a) {
+  if (a > UINT16_MAX) {
+    return (uint16_t)UINT16_MAX;
+  } else if (a < 0) {
+    return 0;
+  }
+  return a;
+}
 
-// FORCE_INLINE uint32_t vqmovnd_u64(uint64_t a);
+FORCE_INLINE uint32_t vqmovnd_u64(uint64_t a) {
+  if (a > UINT32_MAX) {
+    return (uint32_t)UINT32_MAX;
+  } else if (a < 0) {
+    return 0;
+  }
+  return a;
+}
 
 // FORCE_INLINE int8x16_t vqmovn_high_s16(int8x8_t r, int16x8_t a);
 
