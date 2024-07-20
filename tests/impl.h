@@ -1186,8 +1186,8 @@
   _(vshlq_n_u16)                                                                 \
   _(vshlq_n_u32)                                                                 \
   _(vshlq_n_u64)                                                                 \
-  /*_(vshld_n_s64)                                                            */ \
-  /*_(vshld_n_u64)                                                            */ \
+  _(vshld_n_s64)                                                                 \
+  _(vshld_n_u64)                                                                 \
   _(vqshl_n_s8)                                                                  \
   _(vqshl_n_s16)                                                                 \
   _(vqshl_n_s32)                                                                 \

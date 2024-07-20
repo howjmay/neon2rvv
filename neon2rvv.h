@@ -5909,9 +5909,9 @@ FORCE_INLINE uint32x4_t vshlq_n_u32(uint32x4_t a, const int b) { return __riscv_
 
 FORCE_INLINE uint64x2_t vshlq_n_u64(uint64x2_t a, const int b) { return __riscv_vsll_vx_u64m1(a, b, 2); }
 
-// FORCE_INLINE int64_t vshld_n_s64(int64_t a, const int n);
+FORCE_INLINE int64_t vshld_n_s64(int64_t a, const int n) { return a << n; }
 
-// FORCE_INLINE uint64_t vshld_n_u64(uint64_t a, const int n);
+FORCE_INLINE uint64_t vshld_n_u64(uint64_t a, const int n) { return a << n; }
 
 FORCE_INLINE int8x8_t vqshl_n_s8(int8x8_t a, const int b) {
   vint16m2_t a_ext = __riscv_vsext_vf2_i16m2(a, 8);
