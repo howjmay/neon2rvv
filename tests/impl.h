@@ -1784,12 +1784,12 @@
   _(vqmovnh_u16)                                                                 \
   _(vqmovns_u32)                                                                 \
   _(vqmovnd_u64)                                                                 \
-  /*_(vqmovn_high_s16)                                                        */ \
-  /*_(vqmovn_high_s32)                                                        */ \
-  /*_(vqmovn_high_s64)                                                        */ \
-  /*_(vqmovn_high_u16)                                                        */ \
-  /*_(vqmovn_high_u32)                                                        */ \
-  /*_(vqmovn_high_u64)                                                        */ \
+  _(vqmovn_high_s16)                                                             \
+  _(vqmovn_high_s32)                                                             \
+  _(vqmovn_high_s64)                                                             \
+  _(vqmovn_high_u16)                                                             \
+  _(vqmovn_high_u32)                                                             \
+  _(vqmovn_high_u64)                                                             \
   _(vqmovun_s16)                                                                 \
   _(vqmovun_s32)                                                                 \
   _(vqmovun_s64)                                                                 \
