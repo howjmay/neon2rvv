@@ -7785,17 +7785,35 @@ FORCE_INLINE uint32_t vqmovnd_u64(uint64_t a) {
   return a;
 }
 
-// FORCE_INLINE int8x16_t vqmovn_high_s16(int8x8_t r, int16x8_t a);
+FORCE_INLINE int8x16_t vqmovn_high_s16(int8x8_t r, int16x8_t a) {
+  vint8m1_t qmovn = __riscv_vlmul_ext_v_i8mf2_i8m1(__riscv_vnclip_wx_i8mf2(a, 0, __RISCV_VXRM_RDN, 8));
+  return __riscv_vslideup_vx_i8m1(r, qmovn, 8, 16);
+}
 
-// FORCE_INLINE int16x8_t vqmovn_high_s32(int16x4_t r, int32x4_t a);
+FORCE_INLINE int16x8_t vqmovn_high_s32(int16x4_t r, int32x4_t a) {
+  vint16m1_t qmovn = __riscv_vlmul_ext_v_i16mf2_i16m1(__riscv_vnclip_wx_i16mf2(a, 0, __RISCV_VXRM_RDN, 4));
+  return __riscv_vslideup_vx_i16m1(r, qmovn, 4, 8);
+}
 
-// FORCE_INLINE int32x4_t vqmovn_high_s64(int32x2_t r, int64x2_t a);
+FORCE_INLINE int32x4_t vqmovn_high_s64(int32x2_t r, int64x2_t a) {
+  vint32m1_t qmovn = __riscv_vlmul_ext_v_i32mf2_i32m1(__riscv_vnclip_wx_i32mf2(a, 0, __RISCV_VXRM_RDN, 2));
+  return __riscv_vslideup_vx_i32m1(r, qmovn, 2, 4);
+}
 
-// FORCE_INLINE uint8x16_t vqmovn_high_u16(uint8x8_t r, uint16x8_t a);
+FORCE_INLINE uint8x16_t vqmovn_high_u16(uint8x8_t r, uint16x8_t a) {
+  vuint8m1_t qmovn = __riscv_vlmul_ext_v_u8mf2_u8m1(__riscv_vnclipu_wx_u8mf2(a, 0, __RISCV_VXRM_RDN, 8));
+  return __riscv_vslideup_vx_u8m1(r, qmovn, 8, 16);
+}
 
-// FORCE_INLINE uint16x8_t vqmovn_high_u32(uint16x4_t r, uint32x4_t a);
+FORCE_INLINE uint16x8_t vqmovn_high_u32(uint16x4_t r, uint32x4_t a) {
+  vuint16m1_t qmovn = __riscv_vlmul_ext_v_u16mf2_u16m1(__riscv_vnclipu_wx_u16mf2(a, 0, __RISCV_VXRM_RDN, 4));
+  return __riscv_vslideup_vx_u16m1(r, qmovn, 4, 8);
+}
 
-// FORCE_INLINE uint32x4_t vqmovn_high_u64(uint32x2_t r, uint64x2_t a);
+FORCE_INLINE uint32x4_t vqmovn_high_u64(uint32x2_t r, uint64x2_t a) {
+  vuint32m1_t qmovn = __riscv_vlmul_ext_v_u32mf2_u32m1(__riscv_vnclipu_wx_u32mf2(a, 0, __RISCV_VXRM_RDN, 2));
+  return __riscv_vslideup_vx_u32m1(r, qmovn, 2, 4);
+}
 
 FORCE_INLINE uint8x8_t vqmovun_s16(int16x8_t a) {
   vuint16m1_t a_non_neg = __riscv_vreinterpret_v_i16m1_u16m1(__riscv_vmax_vx_i16m1(a, 0, 8));
