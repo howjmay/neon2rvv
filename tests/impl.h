@@ -142,12 +142,12 @@
   _(vraddhn_u16)                                                                 \
   _(vraddhn_u32)                                                                 \
   _(vraddhn_u64)                                                                 \
-  /*_(vraddhn_high_s16)                                                       */ \
-  /*_(vraddhn_high_s32)                                                       */ \
-  /*_(vraddhn_high_s64)                                                       */ \
-  /*_(vraddhn_high_u16)                                                       */ \
-  /*_(vraddhn_high_u32)                                                       */ \
-  /*_(vraddhn_high_u64)                                                       */ \
+  _(vraddhn_high_s16)                                                            \
+  _(vraddhn_high_s32)                                                            \
+  _(vraddhn_high_s64)                                                            \
+  _(vraddhn_high_u16)                                                            \
+  _(vraddhn_high_u32)                                                            \
+  _(vraddhn_high_u64)                                                            \
   _(vmul_s8)                                                                     \
   _(vmul_s16)                                                                    \
   _(vmul_s32)                                                                    \
