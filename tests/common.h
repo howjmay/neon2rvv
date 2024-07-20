@@ -377,9 +377,9 @@ static void merge_arrays(const T *arr1, const T *arr2, const T *arr3, const T *a
 float bankers_rounding(float val);
 double bankers_rounding(double val);
 
-#define CHECK_RESULT(EXP)    \
-  if (EXP != TEST_SUCCESS) { \
-    return TEST_FAIL;        \
+#define CHECK_RESULT(EXP)      \
+  if ((EXP) != TEST_SUCCESS) { \
+    return TEST_FAIL;          \
   }
 #define IMM_1_ITER TEST_IMPL(0)
 #define IMM_2_ITER \
