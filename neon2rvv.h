@@ -5607,9 +5607,21 @@ FORCE_INLINE uint64x2_t vrshrq_n_u64(uint64x2_t a, const int b) {
   return __riscv_vsrl_vx_u64m1(srl_round, 1, 2);
 }
 
-// FORCE_INLINE int64_t vrshrd_n_s64(int64_t a, const int n);
+FORCE_INLINE int64_t vrshrd_n_s64(int64_t a, const int n) {
+  int64_t round_const = 0;
+  if (a & ((int64_t)1 << (n - 1))) {
+    round_const = 1;
+  }
+  return ((a >> (n - 1)) + round_const) >> 1;
+}
 
-// FORCE_INLINE uint64_t vrshrd_n_u64(uint64_t a, const int n);
+FORCE_INLINE uint64_t vrshrd_n_u64(uint64_t a, const int n) {
+  uint64_t round_const = 0;
+  if (a & ((uint64_t)1 << (n - 1))) {
+    round_const = 1;
+  }
+  return ((a >> (n - 1)) + round_const) >> 1;
+}
 
 FORCE_INLINE int8x8_t vshrn_n_s16(int16x8_t a, const int b) {
   return __riscv_vreinterpret_v_u8m1_i8m1(
