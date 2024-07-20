@@ -1098,12 +1098,12 @@
   _(vshrn_n_u16)                                                                 \
   _(vshrn_n_u32)                                                                 \
   _(vshrn_n_u64)                                                                 \
-  /*_(vshrn_high_n_s16)                                                       */ \
-  /*_(vshrn_high_n_s32)                                                       */ \
-  /*_(vshrn_high_n_s64)                                                       */ \
-  /*_(vshrn_high_n_u16)                                                       */ \
-  /*_(vshrn_high_n_u32)                                                       */ \
-  /*_(vshrn_high_n_u64)                                                       */ \
+  _(vshrn_high_n_s16)                                                            \
+  _(vshrn_high_n_s32)                                                            \
+  _(vshrn_high_n_s64)                                                            \
+  _(vshrn_high_n_u16)                                                            \
+  _(vshrn_high_n_u32)                                                            \
+  _(vshrn_high_n_u64)                                                            \
   _(vrshrn_n_s16)                                                                \
   _(vrshrn_n_s32)                                                                \
   _(vrshrn_n_s64)                                                                \
