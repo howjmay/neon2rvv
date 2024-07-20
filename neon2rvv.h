@@ -5650,17 +5650,38 @@ FORCE_INLINE uint32x2_t vshrn_n_u64(uint64x2_t a, const int b) {
   return __riscv_vnsrl_wx_u32m1(__riscv_vlmul_ext_v_u64m1_u64m2(a), b, 2);
 }
 
-// FORCE_INLINE int8x16_t vshrn_high_n_s16(int8x8_t r, int16x8_t a, const int n);
+FORCE_INLINE int8x16_t vshrn_high_n_s16(int8x8_t r, int16x8_t a, const int n) {
+  vint8m1_t shrn_n = __riscv_vreinterpret_v_u8m1_i8m1(
+      __riscv_vnsrl_wx_u8m1(__riscv_vlmul_ext_v_u16m1_u16m2(__riscv_vreinterpret_v_i16m1_u16m1(a)), n, 8));
+  return __riscv_vslideup_vx_i8m1(r, shrn_n, 8, 16);
+}
 
-// FORCE_INLINE int16x8_t vshrn_high_n_s32(int16x4_t r, int32x4_t a, const int n);
+FORCE_INLINE int16x8_t vshrn_high_n_s32(int16x4_t r, int32x4_t a, const int n) {
+  vint16m1_t shrn_n = __riscv_vreinterpret_v_u16m1_i16m1(
+      __riscv_vnsrl_wx_u16m1(__riscv_vlmul_ext_v_u32m1_u32m2(__riscv_vreinterpret_v_i32m1_u32m1(a)), n, 4));
+  return __riscv_vslideup_vx_i16m1(r, shrn_n, 4, 8);
+}
 
-// FORCE_INLINE int32x4_t vshrn_high_n_s64(int32x2_t r, int64x2_t a, const int n);
+FORCE_INLINE int32x4_t vshrn_high_n_s64(int32x2_t r, int64x2_t a, const int n) {
+  vint32m1_t shrn_n = __riscv_vreinterpret_v_u32m1_i32m1(
+      __riscv_vnsrl_wx_u32m1(__riscv_vlmul_ext_v_u64m1_u64m2(__riscv_vreinterpret_v_i64m1_u64m1(a)), n, 2));
+  return __riscv_vslideup_vx_i32m1(r, shrn_n, 2, 4);
+}
 
-// FORCE_INLINE uint8x16_t vshrn_high_n_u16(uint8x8_t r, uint16x8_t a, const int n);
+FORCE_INLINE uint8x16_t vshrn_high_n_u16(uint8x8_t r, uint16x8_t a, const int n) {
+  vuint8m1_t shrn_n = __riscv_vnsrl_wx_u8m1(__riscv_vlmul_ext_v_u16m1_u16m2(a), n, 8);
+  return __riscv_vslideup_vx_u8m1(r, shrn_n, 8, 16);
+}
 
-// FORCE_INLINE uint16x8_t vshrn_high_n_u32(uint16x4_t r, uint32x4_t a, const int n);
+FORCE_INLINE uint16x8_t vshrn_high_n_u32(uint16x4_t r, uint32x4_t a, const int n) {
+  vuint16m1_t shrn_n = __riscv_vnsrl_wx_u16m1(__riscv_vlmul_ext_v_u32m1_u32m2(a), n, 4);
+  return __riscv_vslideup_vx_u16m1(r, shrn_n, 4, 8);
+}
 
-// FORCE_INLINE uint32x4_t vshrn_high_n_u64(uint32x2_t r, uint64x2_t a, const int n);
+FORCE_INLINE uint32x4_t vshrn_high_n_u64(uint32x2_t r, uint64x2_t a, const int n) {
+  vuint32m1_t shrn_n = __riscv_vnsrl_wx_u32m1(__riscv_vlmul_ext_v_u64m1_u64m2(a), n, 2);
+  return __riscv_vslideup_vx_u32m1(r, shrn_n, 2, 4);
+}
 
 FORCE_INLINE int8x8_t vrshrn_n_s16(int16x8_t a, const int b) {
   vuint16m1_t a_round = __riscv_vadd_vx_u16m1(__riscv_vreinterpret_v_i16m1_u16m1(a), 1 << (b - 1), 8);
