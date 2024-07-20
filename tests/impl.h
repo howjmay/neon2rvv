@@ -1072,8 +1072,8 @@
   _(vshrq_n_u16)                                                                 \
   _(vshrq_n_u32)                                                                 \
   _(vshrq_n_u64)                                                                 \
-  /*_(vshrd_n_s64)                                                            */ \
-  /*_(vshrd_n_u64)                                                            */ \
+  _(vshrd_n_s64)                                                                 \
+  _(vshrd_n_u64)                                                                 \
   _(vrshr_n_s8)                                                                  \
   _(vrshr_n_s16)                                                                 \
   _(vrshr_n_s32)                                                                 \
