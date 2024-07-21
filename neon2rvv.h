@@ -6681,19 +6681,19 @@ FORCE_INLINE int8x16_t vnegq_s8(int8x16_t a) { return __riscv_vneg_v_i8m1(a, 16)
 
 FORCE_INLINE int16x8_t vnegq_s16(int16x8_t a) { return __riscv_vneg_v_i16m1(a, 8); }
 
-FORCE_INLINE int32x4_t vnegq_s32(int32x4_t a) { return __riscv_vneg_v_i32m1(a, 8); }
+FORCE_INLINE int32x4_t vnegq_s32(int32x4_t a) { return __riscv_vneg_v_i32m1(a, 4); }
 
 FORCE_INLINE float32x4_t vnegq_f32(float32x4_t a) { return __riscv_vfneg_v_f32m1(a, 4); }
 
-// FORCE_INLINE int64x1_t vneg_s64(int64x1_t a);
+FORCE_INLINE int64x1_t vneg_s64(int64x1_t a) { return __riscv_vneg_v_i64m1(a, 1); }
 
-// FORCE_INLINE int64_t vnegd_s64(int64_t a);
+FORCE_INLINE int64_t vnegd_s64(int64_t a) { return -a; }
 
-// FORCE_INLINE int64x2_t vnegq_s64(int64x2_t a);
+FORCE_INLINE int64x2_t vnegq_s64(int64x2_t a) { return __riscv_vneg_v_i64m1(a, 2); }
 
-// FORCE_INLINE float64x1_t vneg_f64(float64x1_t a);
+FORCE_INLINE float64x1_t vneg_f64(float64x1_t a) { return __riscv_vfneg_v_f64m1(a, 1); }
 
-// FORCE_INLINE float64x2_t vnegq_f64(float64x2_t a);
+FORCE_INLINE float64x2_t vnegq_f64(float64x2_t a) { return __riscv_vfneg_v_f64m1(a, 2); }
 
 FORCE_INLINE int8x8_t vqneg_s8(int8x8_t a) {
   vint16m2_t a_ext = __riscv_vsext_vf2_i16m2(a, 8);
