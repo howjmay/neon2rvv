@@ -21630,9 +21630,63 @@ result_t test_vsraq_n_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #endif  // ENABLE_TEST_ALL
 }
 
-result_t test_vsrad_n_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vsrad_n_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int64_t *_a = (const int64_t *)impl.test_cases_int_pointer1;
+  const int64_t *_b = (const int64_t *)impl.test_cases_int_pointer2;
+  int64_t _c, c;
 
-result_t test_vsrad_n_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+#define TEST_IMPL(IDX)                      \
+  for (int i = 0; i < 1; i++) {             \
+    int idx = (IDX + 1);                    \
+    if (idx == 64) {                        \
+      if (_b[0] > 0) {                      \
+        _c = _a[0];                         \
+      } else {                              \
+        _c = _a[0] - 1;                     \
+      }                                     \
+    } else {                                \
+      _c = _a[0] + (_b[0] >> idx);          \
+    }                                       \
+  }                                         \
+  c = vsrad_n_s64(_a[0], _b[0], (IDX + 1)); \
+  CHECK_RESULT(c == _c ? TEST_SUCCESS : TEST_FAIL)
+
+  IMM_64_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vsrad_n_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint64_t *_a = (const uint64_t *)impl.test_cases_int_pointer1;
+  const uint64_t *_b = (const uint64_t *)impl.test_cases_int_pointer2;
+  uint64_t _c, c;
+
+#define TEST_IMPL(IDX)                      \
+  for (int i = 0; i < 1; i++) {             \
+    int idx = (IDX + 1);                    \
+    if (idx == 64) {                        \
+      _c = _a[0];                           \
+    } else {                                \
+      _c = _a[0] + (_b[0] >> idx);          \
+    }                                       \
+  }                                         \
+  c = vsrad_n_u64(_a[0], _b[0], (IDX + 1)); \
+  CHECK_RESULT(c == _c ? TEST_SUCCESS : TEST_FAIL)
+
+  IMM_64_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vrsra_n_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
