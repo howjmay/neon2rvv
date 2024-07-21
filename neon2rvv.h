@@ -5235,21 +5235,100 @@ FORCE_INLINE uint64x2_t vqshlq_u64(uint64x2_t a, int64x2_t b) {
   return __riscv_vle64_v_u64m1(_c, 2);
 }
 
-// FORCE_INLINE int8_t vqshlb_s8(int8_t a, int8_t b);
+FORCE_INLINE int8_t vqshlb_s8(int8_t a, int8_t b) {
+  if (b < 0) {
+    return a >> -b;
+  }
 
-// FORCE_INLINE int16_t vqshlh_s16(int16_t a, int16_t b);
+  int16_t tmp = a << b;
+  if (tmp > INT8_MAX) {
+    return (int8_t)INT8_MAX;
+  }
+  if (tmp < INT8_MIN) {
+    return (int8_t)INT8_MIN;
+  }
+  return (int8_t)tmp;
+}
 
-// FORCE_INLINE int32_t vqshls_s32(int32_t a, int32_t b);
+FORCE_INLINE int16_t vqshlh_s16(int16_t a, int16_t b) {
+  if (b < 0) {
+    return a >> -b;
+  }
+  int32_t tmp = a << b;
+  if (tmp > INT16_MAX) {
+    return (int16_t)INT16_MAX;
+  }
+  if (tmp < INT16_MIN) {
+    return (int16_t)INT16_MIN;
+  }
+  return (int16_t)tmp;
+}
 
-// FORCE_INLINE int64_t vqshld_s64(int64_t a, int64_t b);
+FORCE_INLINE int32_t vqshls_s32(int32_t a, int32_t b) {
+  if (b < 0) {
+    return a >> -b;
+  }
+  if ((INT32_MAX >> b) < a) {
+    return INT32_MAX;
+  } else {
+    return a << b;
+  }
+}
 
-// FORCE_INLINE uint8_t vqshlb_u8(uint8_t a, int8_t b);
+FORCE_INLINE int64_t vqshld_s64(int64_t a, int64_t b) {
+  if (b < 0) {
+    return a >> -b;
+  }
+  if ((INT64_MAX >> b) < a) {
+    return INT64_MAX;
+  } else {
+    return (int64_t)a << b;
+  }
+}
 
-// FORCE_INLINE uint16_t vqshlh_u16(uint16_t a, int16_t b);
+FORCE_INLINE uint8_t vqshlb_u8(uint8_t a, int8_t b) {
+  if (b < 0) {
+    return a >> -b;
+  }
+  if ((UINT8_MAX >> b) < a) {
+    return UINT8_MAX;
+  } else {
+    return a << b;
+  }
+}
 
-// FORCE_INLINE uint32_t vqshls_u32(uint32_t a, int32_t b);
+FORCE_INLINE uint16_t vqshlh_u16(uint16_t a, int16_t b) {
+  if (b < 0) {
+    return a >> -b;
+  }
+  if ((UINT16_MAX >> b) < a) {
+    return UINT16_MAX;
+  } else {
+    return a << b;
+  }
+}
 
-// FORCE_INLINE uint64_t vqshld_u64(uint64_t a, int64_t b);
+FORCE_INLINE uint32_t vqshls_u32(uint32_t a, int32_t b) {
+  if (b < 0) {
+    return a >> -b;
+  }
+  if ((UINT32_MAX >> b) < a) {
+    return UINT32_MAX;
+  } else {
+    return a << b;
+  }
+}
+
+FORCE_INLINE uint64_t vqshld_u64(uint64_t a, int64_t b) {
+  if (b < 0) {
+    return a >> -b;
+  }
+  if ((UINT64_MAX >> b) < a) {
+    return UINT64_MAX;
+  } else {
+    return (uint64_t)a << b;
+  }
+}
 
 FORCE_INLINE int8x8_t vqrshl_s8(int8x8_t a, int8x8_t b) {
   vbool8_t positive_mask = __riscv_vmsgt_vx_i8m1_b8(b, 0, 8);
