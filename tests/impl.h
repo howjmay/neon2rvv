@@ -5,7 +5,6 @@
 #include "debug_tools.h"
 
 #define INTRIN_LIST                                                              \
-  /* vadd */                                                                     \
   _(vadd_s8)                                                                     \
   _(vadd_s16)                                                                    \
   _(vadd_s32)                                                                    \
@@ -1024,14 +1023,14 @@
   _(vqshlq_u16)                                                                  \
   _(vqshlq_u32)                                                                  \
   _(vqshlq_u64)                                                                  \
-  /*_(vqshlb_s8)                                                              */ \
-  /*_(vqshlh_s16)                                                             */ \
-  /*_(vqshls_s32)                                                             */ \
-  /*_(vqshld_s64)                                                             */ \
-  /*_(vqshlb_u8)                                                              */ \
-  /*_(vqshlh_u16)                                                             */ \
-  /*_(vqshls_u32)                                                             */ \
-  /*_(vqshld_u64)                                                             */ \
+  _(vqshlb_s8)                                                                   \
+  _(vqshlh_s16)                                                                  \
+  _(vqshls_s32)                                                                  \
+  _(vqshld_s64)                                                                  \
+  _(vqshlb_u8)                                                                   \
+  _(vqshlh_u16)                                                                  \
+  _(vqshls_u32)                                                                  \
+  _(vqshld_u64)                                                                  \
   _(vqrshl_s8)                                                                   \
   _(vqrshl_s16)                                                                  \
   _(vqrshl_s32)                                                                  \
