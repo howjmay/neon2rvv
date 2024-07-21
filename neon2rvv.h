@@ -6505,9 +6505,25 @@ FORCE_INLINE uint64x2_t vsriq_n_u64(uint64x2_t a, uint64x2_t b, const int c) {
 
 // FORCE_INLINE poly16x8_t vsriq_n_p16(poly16x8_t a, poly16x8_t b, const int n);
 
-// FORCE_INLINE int64_t vsrid_n_s64(int64_t a, int64_t b, const int n);
+FORCE_INLINE int64_t vsrid_n_s64(int64_t a, int64_t b, const int n) {
+  if (n == 64) {
+    uint64_t mask = 0;
+    return (a & ~mask) | (0 & mask);
+  } else {
+    uint64_t mask = UINT64_MAX >> n;
+    return (a & ~mask) | ((b >> n) & mask);
+  }
+}
 
-// FORCE_INLINE uint64_t vsrid_n_u64(uint64_t a, uint64_t b, const int n);
+FORCE_INLINE uint64_t vsrid_n_u64(uint64_t a, uint64_t b, const int n) {
+  if (n == 64) {
+    uint64_t mask = 0;
+    return (a & ~mask) | (0 & mask);
+  } else {
+    uint64_t mask = UINT64_MAX >> n;
+    return (a & ~mask) | ((b >> n) & mask);
+  }
+}
 
 FORCE_INLINE int8x8_t vsli_n_s8(int8x8_t a, int8x8_t b, const int c) {
   uint8_t mask = UINT8_MAX << c;

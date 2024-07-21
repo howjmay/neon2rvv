@@ -1294,8 +1294,8 @@
   _(vsriq_n_u64)                                                                 \
   /*_(vsriq_n_p8)                                                             */ \
   /*_(vsriq_n_p16)                                                            */ \
-  /*_(vsrid_n_s64)                                                            */ \
-  /*_(vsrid_n_u64)                                                            */ \
+  _(vsrid_n_s64)                                                                 \
+  _(vsrid_n_u64)                                                                 \
   /*_(vsli_n_p64)                                                             */ \
   _(vsli_n_s8)                                                                   \
   _(vsli_n_s16)                                                                  \
