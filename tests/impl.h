@@ -1328,11 +1328,11 @@
   _(vnegq_s16)                                                                   \
   _(vnegq_s32)                                                                   \
   _(vnegq_f32)                                                                   \
-  /*_(vneg_s64)                                                               */ \
-  /*_(vnegd_s64)                                                              */ \
-  /*_(vnegq_s64)                                                              */ \
-  /*_(vneg_f64)                                                               */ \
-  /*_(vnegq_f64)                                                              */ \
+  _(vneg_s64)                                                                    \
+  _(vnegd_s64)                                                                   \
+  _(vnegq_s64)                                                                   \
+  _(vneg_f64)                                                                    \
+  _(vnegq_f64)                                                                   \
   _(vqneg_s8)                                                                    \
   _(vqneg_s16)                                                                   \
   _(vqneg_s32)                                                                   \
