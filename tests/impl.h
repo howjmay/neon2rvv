@@ -1270,8 +1270,8 @@
   _(vrsraq_n_u16)                                                                \
   _(vrsraq_n_u32)                                                                \
   _(vrsraq_n_u64)                                                                \
-  /*_(vrsrad_n_s64)                                                           */ \
-  /*_(vrsrad_n_u64)                                                           */ \
+  _(vrsrad_n_s64)                                                                \
+  _(vrsrad_n_u64)                                                                \
   /*_(vsri_n_p64)                                                             */ \
   _(vsri_n_s8)                                                                   \
   _(vsri_n_s16)                                                                  \
