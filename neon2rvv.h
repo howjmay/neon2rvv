@@ -164,6 +164,52 @@ typedef vfloat64m1x4_t float64x2x4_t;
 // #define __RISCV_FRM_RUP 3  // round up (towards +infinity)
 // #define __RISCV_FRM_RMM 4  // round to nearest, ties to max magnitude
 
+static inline int8_t neon2rvv_saturate_int8(int a) {
+  if (a > INT8_MAX)
+    return (int8_t)INT8_MAX;
+  if (a < INT8_MIN)
+    return (int8_t)INT8_MIN;
+  return (int8_t)a;
+}
+static inline uint8_t neon2rvv_saturate_uint8(int a) {
+  if (a > UINT8_MAX) {
+    return (uint8_t)UINT8_MAX;
+  } else if (a < 0) {
+    return 0;
+  }
+  return (uint8_t)a;
+}
+static inline int16_t neon2rvv_saturate_int16(int a) {
+  if (a > INT16_MAX)
+    return (int16_t)INT16_MAX;
+  if (a < INT16_MIN)
+    return (int16_t)INT16_MIN;
+  return (int16_t)a;
+}
+static inline uint16_t neon2rvv_saturate_uint16(int a) {
+  if (a > UINT16_MAX) {
+    return (uint16_t)UINT16_MAX;
+  } else if (a < 0) {
+    return 0;
+  }
+  return a;
+}
+static inline int32_t neon2rvv_saturate_int32(int64_t a) {
+  if (a > INT32_MAX)
+    return (int32_t)INT32_MAX;
+  if (a < INT32_MIN)
+    return (int32_t)INT32_MIN;
+  return (int32_t)a;
+}
+static inline uint32_t neon2rvv_saturate_uint32(uint64_t a) {
+  if (a > UINT32_MAX) {
+    return (uint32_t)UINT32_MAX;
+  } else if (a < 0) {
+    return 0;
+  }
+  return a;
+}
+
 // forward declaration
 // FIXME vdup_n_* will be removed if the __riscv_vmv_* errors are fixed
 FORCE_INLINE int8x8_t vdup_n_s8(int8_t a);
@@ -5858,17 +5904,17 @@ FORCE_INLINE uint32x2_t vqshrn_n_u64(uint64x2_t a, const int b) {
   return __riscv_vnclipu_wx_u32m1(__riscv_vlmul_ext_v_u64m1_u64m2(a), b, __RISCV_VXRM_RDN, 2);
 }
 
-// FORCE_INLINE int8_t vqshrnh_n_s16(int16_t a, const int n);
+FORCE_INLINE int8_t vqshrnh_n_s16(int16_t a, const int n) { return neon2rvv_saturate_int8(a >> n); }
 
-// FORCE_INLINE int16_t vqshrns_n_s32(int32_t a, const int n);
+FORCE_INLINE int16_t vqshrns_n_s32(int32_t a, const int n) { return neon2rvv_saturate_int16(a >> n); }
 
-// FORCE_INLINE int32_t vqshrnd_n_s64(int64_t a, const int n);
+FORCE_INLINE int32_t vqshrnd_n_s64(int64_t a, const int n) { return neon2rvv_saturate_int32(a >> n); }
 
-// FORCE_INLINE uint8_t vqshrnh_n_u16(uint16_t a, const int n);
+FORCE_INLINE uint8_t vqshrnh_n_u16(uint16_t a, const int n) { return neon2rvv_saturate_uint8(a >> n); }
 
-// FORCE_INLINE uint16_t vqshrns_n_u32(uint32_t a, const int n);
+FORCE_INLINE uint16_t vqshrns_n_u32(uint32_t a, const int n) { return neon2rvv_saturate_uint16(a >> n); }
 
-// FORCE_INLINE uint32_t vqshrnd_n_u64(uint64_t a, const int n);
+FORCE_INLINE uint32_t vqshrnd_n_u64(uint64_t a, const int n) { return neon2rvv_saturate_uint32(a >> n); }
 
 // FORCE_INLINE int8x16_t vqshrn_high_n_s16(int8x8_t r, int16x8_t a, const int n);
 

@@ -19984,17 +19984,119 @@ result_t test_vqshrn_n_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #endif  // ENABLE_TEST_ALL
 }
 
-result_t test_vqshrnh_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vqshrnh_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int16_t *_a = (const int16_t *)impl.test_cases_int_pointer1;
+  int8_t _c, c;
 
-result_t test_vqshrns_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+#define TEST_IMPL(IDX)                    \
+  _c = saturate_int8(_a[0] >> (IDX + 1)); \
+  c = vqshrnh_n_s16(_a[0], (IDX + 1));    \
+  CHECK_RESULT(c == _c ? TEST_SUCCESS : TEST_FAIL)
 
-result_t test_vqshrnd_n_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  IMM_8_ITER
+#undef TEST_IMPL
 
-result_t test_vqshrnh_n_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
-result_t test_vqshrns_n_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vqshrns_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int32_t *_a = (const int32_t *)impl.test_cases_int_pointer1;
+  int16_t _c, c;
 
-result_t test_vqshrnd_n_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+#define TEST_IMPL(IDX)                     \
+  _c = saturate_int16(_a[0] >> (IDX + 1)); \
+  c = vqshrns_n_s32(_a[0], (IDX + 1));     \
+  CHECK_RESULT(c == _c ? TEST_SUCCESS : TEST_FAIL)
+
+  IMM_16_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vqshrnd_n_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int64_t *_a = (const int64_t *)impl.test_cases_int_pointer1;
+  int32_t _c, c;
+
+#define TEST_IMPL(IDX)                     \
+  _c = saturate_int32(_a[0] >> (IDX + 1)); \
+  c = vqshrnd_n_s64(_a[0], (IDX + 1));     \
+  CHECK_RESULT(c == _c ? TEST_SUCCESS : TEST_FAIL)
+
+  IMM_32_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vqshrnh_n_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint16_t *_a = (const uint16_t *)impl.test_cases_int_pointer1;
+  uint8_t _c, c;
+
+#define TEST_IMPL(IDX)                     \
+  _c = saturate_uint8(_a[0] >> (IDX + 1)); \
+  c = vqshrnh_n_u16(_a[0], (IDX + 1));     \
+  CHECK_RESULT(c == _c ? TEST_SUCCESS : TEST_FAIL)
+
+  IMM_8_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vqshrns_n_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint32_t *_a = (const uint32_t *)impl.test_cases_int_pointer1;
+  uint16_t _c, c;
+
+#define TEST_IMPL(IDX)                      \
+  _c = saturate_uint16(_a[0] >> (IDX + 1)); \
+  c = vqshrns_n_u32(_a[0], (IDX + 1));      \
+  CHECK_RESULT(c == _c ? TEST_SUCCESS : TEST_FAIL)
+
+  IMM_16_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vqshrnd_n_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint64_t *_a = (const uint64_t *)impl.test_cases_int_pointer1;
+  uint32_t _c, c;
+
+#define TEST_IMPL(IDX)                      \
+  _c = saturate_uint32(_a[0] >> (IDX + 1)); \
+  c = vqshrnd_n_u64(_a[0], (IDX + 1));      \
+  CHECK_RESULT(c == _c ? TEST_SUCCESS : TEST_FAIL)
+
+  IMM_32_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vqshrn_high_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
@@ -20189,11 +20291,15 @@ result_t test_vqshrun_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int16x8_t a = vld1q_s16(_a);
   uint8x8_t c;
 
-#define TEST_IMPL(IDX)                                   \
-  for (int i = 0; i < 8; i++) {                          \
-    _c[i] = saturate_uint8((int16_t)_a[i] >> (IDX + 1)); \
-  }                                                      \
-  c = vqshrun_n_s16(a, (IDX + 1));                       \
+#define TEST_IMPL(IDX)                         \
+  for (int i = 0; i < 8; i++) {                \
+    int16_t tmp = (int16_t)_a[i] >> (IDX + 1); \
+    if (tmp < 0) {                             \
+      tmp = 0;                                 \
+    }                                          \
+    _c[i] = saturate_uint8(tmp);               \
+  }                                            \
+  c = vqshrun_n_s16(a, (IDX + 1));             \
   CHECK_RESULT(validate_uint8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]))
 
   IMM_8_ITER
@@ -20212,11 +20318,15 @@ result_t test_vqshrun_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int32x4_t a = vld1q_s32(_a);
   uint16x4_t c;
 
-#define TEST_IMPL(IDX)                                    \
-  for (int i = 0; i < 4; i++) {                           \
-    _c[i] = saturate_uint16((int32_t)_a[i] >> (IDX + 1)); \
-  }                                                       \
-  c = vqshrun_n_s32(a, (IDX + 1));                        \
+#define TEST_IMPL(IDX)                         \
+  for (int i = 0; i < 4; i++) {                \
+    int32_t tmp = (int32_t)_a[i] >> (IDX + 1); \
+    if (tmp < 0) {                             \
+      tmp = 0;                                 \
+    }                                          \
+    _c[i] = saturate_uint16(tmp);              \
+  }                                            \
+  c = vqshrun_n_s32(a, (IDX + 1));             \
   CHECK_RESULT(validate_uint16(c, _c[0], _c[1], _c[2], _c[3]))
 
   IMM_4_ITER
@@ -20235,11 +20345,15 @@ result_t test_vqshrun_n_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int64x2_t a = vld1q_s64(_a);
   uint32x2_t c;
 
-#define TEST_IMPL(IDX)                                    \
-  for (int i = 0; i < 2; i++) {                           \
-    _c[i] = saturate_uint32((int64_t)_a[i] >> (IDX + 1)); \
-  }                                                       \
-  c = vqshrun_n_s64(a, (IDX + 1));                        \
+#define TEST_IMPL(IDX)                         \
+  for (int i = 0; i < 2; i++) {                \
+    int64_t tmp = (int64_t)_a[i] >> (IDX + 1); \
+    if (tmp < 0) {                             \
+      tmp = 0;                                 \
+    }                                          \
+    _c[i] = saturate_uint32(tmp);              \
+  }                                            \
+  c = vqshrun_n_s64(a, (IDX + 1));             \
   CHECK_RESULT(validate_uint32(c, _c[0], _c[1]))
 
   IMM_2_ITER
@@ -20271,12 +20385,16 @@ result_t test_vqrshrun_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   uint8x8_t c;
   uint16_t round_const;
 
-#define TEST_IMPL(IDX)                                          \
-  for (int i = 0; i < 8; i++) {                                 \
-    round_const = 1 << ((IDX + 1) - 1);                         \
-    _c[i] = saturate_uint8((_a[i] + round_const) >> (IDX + 1)); \
-  }                                                             \
-  c = vqrshrun_n_s16(a, (IDX + 1));                             \
+#define TEST_IMPL(IDX)                                         \
+  for (int i = 0; i < 8; i++) {                                \
+    round_const = 1 << ((IDX + 1) - 1);                        \
+    int16_t tmp = ((int16_t)_a[i] + round_const) >> (IDX + 1); \
+    if (tmp < 0) {                                             \
+      tmp = 0;                                                 \
+    }                                                          \
+    _c[i] = saturate_uint8(tmp);                               \
+  }                                                            \
+  c = vqrshrun_n_s16(a, (IDX + 1));                            \
   CHECK_RESULT(validate_uint8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]))
 
   IMM_8_ITER
@@ -20294,14 +20412,18 @@ result_t test_vqrshrun_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   uint16_t _c[4];
   int32x4_t a = vld1q_s32(_a);
   uint16x4_t c;
-  uint32_t round_const;
+  int32_t round_const;
 
-#define TEST_IMPL(IDX)                                                    \
-  for (int i = 0; i < 4; i++) {                                           \
-    round_const = 1 << ((IDX + 1) - 1);                                   \
-    _c[i] = saturate_uint16((_a[i] + (int32_t)round_const) >> (IDX + 1)); \
-  }                                                                       \
-  c = vqrshrun_n_s32(a, (IDX + 1));                                       \
+#define TEST_IMPL(IDX)                                         \
+  for (int i = 0; i < 4; i++) {                                \
+    round_const = 1 << ((IDX + 1) - 1);                        \
+    int32_t tmp = ((int32_t)_a[i] + round_const) >> (IDX + 1); \
+    if (tmp < 0) {                                             \
+      tmp = 0;                                                 \
+    }                                                          \
+    _c[i] = saturate_uint16(tmp);                              \
+  }                                                            \
+  c = vqrshrun_n_s32(a, (IDX + 1));                            \
   CHECK_RESULT(validate_uint16(c, _c[0], _c[1], _c[2], _c[3]))
 
   IMM_16_ITER
@@ -20323,6 +20445,9 @@ result_t test_vqrshrun_n_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #define TEST_IMPL(IDX)                       \
   for (int i = 0; i < 2; i++) {              \
     int64_t tmp = _a[i] >> ((IDX + 1) - 1);  \
+    if (tmp < 0) {                           \
+      tmp = 0;                               \
+    }                                        \
     _c[i] = saturate_uint32((tmp + 1) >> 1); \
   }                                          \
   c = vqrshrun_n_s64(a, (IDX + 1));          \
@@ -21182,11 +21307,15 @@ result_t test_vqshlu_n_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int8x8_t a = vld1_s8(_a);
   uint8x8_t c;
 
-#define TEST_IMPL(IDX)                    \
-  for (int i = 0; i < 8; i++) {           \
-    _c[i] = saturate_uint8(_a[i] << IDX); \
-  }                                       \
-  c = vqshlu_n_s8(a, IDX);                \
+#define TEST_IMPL(IDX)                   \
+  for (int i = 0; i < 8; i++) {          \
+    int16_t tmp = (int16_t)_a[i] << IDX; \
+    if (tmp < 0) {                       \
+      tmp = 0;                           \
+    }                                    \
+    _c[i] = saturate_uint8(tmp);         \
+  }                                      \
+  c = vqshlu_n_s8(a, IDX);               \
   CHECK_RESULT(validate_uint8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]))
 
   IMM_8_ITER
@@ -21205,11 +21334,15 @@ result_t test_vqshlu_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int16x4_t a = vld1_s16(_a);
   uint16x4_t c;
 
-#define TEST_IMPL(IDX)                     \
-  for (int i = 0; i < 4; i++) {            \
-    _c[i] = saturate_uint16(_a[i] << IDX); \
-  }                                        \
-  c = vqshlu_n_s16(a, IDX);                \
+#define TEST_IMPL(IDX)                   \
+  for (int i = 0; i < 4; i++) {          \
+    int32_t tmp = (int32_t)_a[i] << IDX; \
+    if (tmp < 0) {                       \
+      tmp = 0;                           \
+    }                                    \
+    _c[i] = saturate_uint16(tmp);        \
+  }                                      \
+  c = vqshlu_n_s16(a, IDX);              \
   CHECK_RESULT(validate_uint16(c, _c[0], _c[1], _c[2], _c[3]))
 
   IMM_16_ITER
@@ -21228,11 +21361,15 @@ result_t test_vqshlu_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int32x2_t a = vld1_s32(_a);
   uint32x2_t c;
 
-#define TEST_IMPL(IDX)                              \
-  for (int i = 0; i < 2; i++) {                     \
-    _c[i] = saturate_uint32((int64_t)_a[i] << IDX); \
-  }                                                 \
-  c = vqshlu_n_s32(a, IDX);                         \
+#define TEST_IMPL(IDX)                   \
+  for (int i = 0; i < 2; i++) {          \
+    int64_t tmp = (int64_t)_a[i] << IDX; \
+    if (tmp < 0) {                       \
+      tmp = 0;                           \
+    }                                    \
+    _c[i] = saturate_uint32(tmp);        \
+  }                                      \
+  c = vqshlu_n_s32(a, IDX);              \
   CHECK_RESULT(validate_uint32(c, _c[0], _c[1]))
 
   IMM_32_ITER
@@ -21284,7 +21421,11 @@ result_t test_vqshluq_n_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 
 #define TEST_IMPL(IDX)                                                                                                 \
   for (int i = 0; i < 16; i++) {                                                                                       \
-    _c[i] = saturate_uint8(_a[i] << IDX);                                                                              \
+    int16_t tmp = (int16_t)_a[i] << IDX;                                                                               \
+    if (tmp < 0) {                                                                                                     \
+      tmp = 0;                                                                                                         \
+    }                                                                                                                  \
+    _c[i] = saturate_uint8(tmp);                                                                                       \
   }                                                                                                                    \
   c = vqshluq_n_s8(a, IDX);                                                                                            \
   CHECK_RESULT(validate_uint8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7], _c[8], _c[9], _c[10], _c[11], \
@@ -21306,11 +21447,15 @@ result_t test_vqshluq_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int16x8_t a = vld1q_s16(_a);
   uint16x8_t c;
 
-#define TEST_IMPL(IDX)                     \
-  for (int i = 0; i < 8; i++) {            \
-    _c[i] = saturate_uint16(_a[i] << IDX); \
-  }                                        \
-  c = vqshluq_n_s16(a, IDX);               \
+#define TEST_IMPL(IDX)                   \
+  for (int i = 0; i < 8; i++) {          \
+    int32_t tmp = (int32_t)_a[i] << IDX; \
+    if (tmp < 0) {                       \
+      tmp = 0;                           \
+    }                                    \
+    _c[i] = saturate_uint16(tmp);        \
+  }                                      \
+  c = vqshluq_n_s16(a, IDX);             \
   CHECK_RESULT(validate_uint16(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]))
 
   IMM_16_ITER
@@ -21329,11 +21474,15 @@ result_t test_vqshluq_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   int32x4_t a = vld1q_s32(_a);
   uint32x4_t c;
 
-#define TEST_IMPL(IDX)                              \
-  for (int i = 0; i < 4; i++) {                     \
-    _c[i] = saturate_uint32((int64_t)_a[i] << IDX); \
-  }                                                 \
-  c = vqshluq_n_s32(a, IDX);                        \
+#define TEST_IMPL(IDX)                   \
+  for (int i = 0; i < 4; i++) {          \
+    int64_t tmp = (int64_t)_a[i] << IDX; \
+    if (tmp < 0) {                       \
+      tmp = 0;                           \
+    }                                    \
+    _c[i] = saturate_uint32(tmp);        \
+  }                                      \
+  c = vqshluq_n_s32(a, IDX);             \
   CHECK_RESULT(validate_uint32(c, _c[0], _c[1], _c[2], _c[3]))
 
   IMM_32_ITER
