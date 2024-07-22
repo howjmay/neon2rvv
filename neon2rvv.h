@@ -10519,9 +10519,9 @@ FORCE_INLINE int32x4_t vmulq_n_s32(int32x4_t a, int32_t b) { return __riscv_vmul
 
 FORCE_INLINE float32x4_t vmulq_n_f32(float32x4_t a, float32_t b) { return __riscv_vfmul_vf_f32m1(a, b, 4); }
 
-// FORCE_INLINE float64x1_t vmul_n_f64(float64x1_t a, float64_t b);
+FORCE_INLINE float64x1_t vmul_n_f64(float64x1_t a, float64_t b) { return __riscv_vfmul_vf_f64m1(a, b, 1); }
 
-// FORCE_INLINE float64x2_t vmulq_n_f64(float64x2_t a, float64_t b);
+FORCE_INLINE float64x2_t vmulq_n_f64(float64x2_t a, float64_t b) { return __riscv_vfmul_vf_f64m1(a, b, 2); }
 
 FORCE_INLINE uint16x8_t vmulq_n_u16(uint16x8_t a, uint16_t b) { return __riscv_vmul_vx_u16m1(a, b, 8); }
 

@@ -2183,8 +2183,8 @@
   _(vmulq_n_s16)                                                                 \
   _(vmulq_n_s32)                                                                 \
   _(vmulq_n_f32)                                                                 \
-  /*_(vmul_n_f64)                                                             */ \
-  /*_(vmulq_n_f64)                                                            */ \
+  _(vmul_n_f64)                                                                  \
+  _(vmulq_n_f64)                                                                 \
   _(vmulq_n_u16)                                                                 \
   _(vmulq_n_u32)                                                                 \
   _(vmull_n_s16)                                                                 \
