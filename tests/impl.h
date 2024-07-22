@@ -1109,12 +1109,12 @@
   _(vrshrn_n_u16)                                                                \
   _(vrshrn_n_u32)                                                                \
   _(vrshrn_n_u64)                                                                \
-  /*_(vrshrn_high_n_s16)                                                      */ \
-  /*_(vrshrn_high_n_s32)                                                      */ \
-  /*_(vrshrn_high_n_s64)                                                      */ \
-  /*_(vrshrn_high_n_u16)                                                      */ \
-  /*_(vrshrn_high_n_u32)                                                      */ \
-  /*_(vrshrn_high_n_u64)                                                      */ \
+  _(vrshrn_high_n_s16)                                                           \
+  _(vrshrn_high_n_s32)                                                           \
+  _(vrshrn_high_n_s64)                                                           \
+  _(vrshrn_high_n_u16)                                                           \
+  _(vrshrn_high_n_u32)                                                           \
+  _(vrshrn_high_n_u64)                                                           \
   _(vqshrn_n_s16)                                                                \
   _(vqshrn_n_s32)                                                                \
   _(vqshrn_n_s64)                                                                \
