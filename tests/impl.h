@@ -1229,12 +1229,12 @@
   _(vshll_n_u8)                                                                  \
   _(vshll_n_u16)                                                                 \
   _(vshll_n_u32)                                                                 \
-  /*_(vshll_high_n_s8)                                                        */ \
-  /*_(vshll_high_n_s16)                                                       */ \
-  /*_(vshll_high_n_s32)                                                       */ \
-  /*_(vshll_high_n_u8)                                                        */ \
-  /*_(vshll_high_n_u16)                                                       */ \
-  /*_(vshll_high_n_u32)                                                       */ \
+  _(vshll_high_n_s8)                                                             \
+  _(vshll_high_n_s16)                                                            \
+  _(vshll_high_n_s32)                                                            \
+  _(vshll_high_n_u8)                                                             \
+  _(vshll_high_n_u16)                                                            \
+  _(vshll_high_n_u32)                                                            \
   _(vsra_n_s8)                                                                   \
   _(vsra_n_s16)                                                                  \
   _(vsra_n_s32)                                                                  \

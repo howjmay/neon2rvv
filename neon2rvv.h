@@ -6306,17 +6306,41 @@ FORCE_INLINE uint64x2_t vshll_n_u32(uint32x2_t a, const int b) {
   return __riscv_vsll_vx_u64m1(a_ext, b, 2);
 }
 
-// FORCE_INLINE int16x8_t vshll_high_n_s8(int8x16_t a, const int n);
+FORCE_INLINE int16x8_t vshll_high_n_s8(int8x16_t a, const int n) {
+  vint8m1_t _a = __riscv_vslidedown_vx_i8m1(a, 8, 16);
+  vint16m1_t a_ext = __riscv_vlmul_trunc_v_i16m2_i16m1(__riscv_vsext_vf2_i16m2(_a, 8));
+  return __riscv_vsll_vx_i16m1(a_ext, n, 8);
+}
 
-// FORCE_INLINE int32x4_t vshll_high_n_s16(int16x8_t a, const int n);
+FORCE_INLINE int32x4_t vshll_high_n_s16(int16x8_t a, const int n) {
+  vint16m1_t _a = __riscv_vslidedown_vx_i16m1(a, 4, 8);
+  vint32m1_t a_ext = __riscv_vlmul_trunc_v_i32m2_i32m1(__riscv_vsext_vf2_i32m2(_a, 4));
+  return __riscv_vsll_vx_i32m1(a_ext, n, 4);
+}
 
-// FORCE_INLINE int64x2_t vshll_high_n_s32(int32x4_t a, const int n);
+FORCE_INLINE int64x2_t vshll_high_n_s32(int32x4_t a, const int n) {
+  vint32m1_t _a = __riscv_vslidedown_vx_i32m1(a, 2, 4);
+  vint64m1_t a_ext = __riscv_vlmul_trunc_v_i64m2_i64m1(__riscv_vsext_vf2_i64m2(_a, 2));
+  return __riscv_vsll_vx_i64m1(a_ext, n, 2);
+}
 
-// FORCE_INLINE uint16x8_t vshll_high_n_u8(uint8x16_t a, const int n);
+FORCE_INLINE uint16x8_t vshll_high_n_u8(uint8x16_t a, const int n) {
+  vuint8m1_t _a = __riscv_vslidedown_vx_u8m1(a, 8, 16);
+  vuint16m1_t a_ext = __riscv_vlmul_trunc_v_u16m2_u16m1(__riscv_vzext_vf2_u16m2(_a, 8));
+  return __riscv_vsll_vx_u16m1(a_ext, n, 8);
+}
 
-// FORCE_INLINE uint32x4_t vshll_high_n_u16(uint16x8_t a, const int n);
+FORCE_INLINE uint32x4_t vshll_high_n_u16(uint16x8_t a, const int n) {
+  vuint16m1_t _a = __riscv_vslidedown_vx_u16m1(a, 4, 8);
+  vuint32m1_t a_ext = __riscv_vlmul_trunc_v_u32m2_u32m1(__riscv_vzext_vf2_u32m2(_a, 4));
+  return __riscv_vsll_vx_u32m1(a_ext, n, 4);
+}
 
-// FORCE_INLINE uint64x2_t vshll_high_n_u32(uint32x4_t a, const int n);
+FORCE_INLINE uint64x2_t vshll_high_n_u32(uint32x4_t a, const int n) {
+  vuint32m1_t _a = __riscv_vslidedown_vx_u32m1(a, 2, 4);
+  vuint64m1_t a_ext = __riscv_vlmul_trunc_v_u64m2_u64m1(__riscv_vzext_vf2_u64m2(_a, 2));
+  return __riscv_vsll_vx_u64m1(a_ext, n, 2);
+}
 
 FORCE_INLINE int8x8_t vsra_n_s8(int8x8_t a, int8x8_t b, const int c) {
   const int imm = c - (c >> 3);
