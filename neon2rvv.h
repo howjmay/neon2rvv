@@ -7109,7 +7109,15 @@ FORCE_INLINE uint8x16_t vcntq_u8(uint8x16_t a) {
 
 FORCE_INLINE float32x2_t vrecpe_f32(float32x2_t a) { return __riscv_vfrec7_v_f32m1(a, 2); }
 
-// FORCE_INLINE uint32x2_t vrecpe_u32(uint32x2_t a);
+FORCE_INLINE uint32x2_t vrecpe_u32(uint32x2_t a) {
+  const uint32_t sign_bit = 0x80000000;
+  vbool32_t signbit_mask = __riscv_vmsgeu_vx_u32m1_b32(__a, 0x80000000, 2);
+  const uint32_t input_lower_bound = 0x80000000, input_upper_bound = UINT32_MAX;
+  const uint32_t estimate_lower_bound = 0x80000000, estimate_upper_bound = 0xff800000;
+  const uint32_t input_range = input_upper_bound - input_lower_bound;
+  const uint32_t estimate_range = estimate_upper_bound - estimate_lower_bound;
+  vuint32m1_t diff = __riscv_vrsub_vx_u32m1(__a, UINT32_MAX, 2);
+}
 
 FORCE_INLINE float32x4_t vrecpeq_f32(float32x4_t a) { return __riscv_vfrec7_v_f32m1(a, 4); }
 

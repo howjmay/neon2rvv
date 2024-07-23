@@ -25031,7 +25031,36 @@ result_t test_vrecpe_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #endif  // ENABLE_TEST_ALL
 }
 
-result_t test_vrecpe_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vrecpe_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+  // refer: https://community.arm.com/support-forums/f/armds-forum/930/division-with-neon
+  // https://www.cnblogs.com/pepetang/p/7777243.html
+  const uint32_t *_a = (const uint32_t *)impl.test_cases_int_pointer1;
+  uint32_t _c[2];
+  // const uint32_t sign_bit = 0x80000000;
+  // const uint32_t input_lower_bound = 0x80000000, input_upper_bound = UINT32_MAX;
+  // const uint32_t estimate_lower_bound = 0x80000000, estimate_upper_bound = 0xff800000;
+  // const uint32_t input_range = input_upper_bound - input_lower_bound;
+  // const uint32_t estimate_range = estimate_upper_bound - estimate_lower_bound;
+  // for (int i = 0; i < 2; i++) {
+  //   if (!(_a[i] & sign_bit)) {
+  //     _c[i] = UINT32_MAX;
+  //   } else {
+  //     uint32_t diff = UINT32_MAX - _a[i];
+  //     _c[i] = (diff / (input_range) * (estimate_range) + estimate_lower_bound);
+  //   }
+  // }
+  for (int i = 0; i < 2; i++) {
+  x_normalized = x << 
+  }
+
+
+  uint32x2_t a = vld1_u32(_a);
+  uint32x2_t c = vrecpe_u32(a);
+  // print_u32_64("_a", _a);
+  // print_u32_64("_c", _c);
+  // print_u32_64("-c", c);
+  return validate_uint32(c, _c[0], _c[1]);
+}
 
 result_t test_vrecpeq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
