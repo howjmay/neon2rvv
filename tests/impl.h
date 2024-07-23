@@ -2227,8 +2227,8 @@
   _(vmlal_high_n_u32)                                                            \
   _(vqdmlal_n_s16)                                                               \
   _(vqdmlal_n_s32)                                                               \
-  /*_(vqdmlal_high_n_s16)                                                     */ \
-  /*_(vqdmlal_high_n_s32)                                                     */ \
+  _(vqdmlal_high_n_s16)                                                      \
+  _(vqdmlal_high_n_s32)                                                      \
   _(vmls_n_s16)                                                                  \
   _(vmls_n_s32)                                                                  \
   _(vmls_n_f32)                                                                  \
