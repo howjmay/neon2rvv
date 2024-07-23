@@ -1219,10 +1219,10 @@
   _(vqshluq_n_s16)                                                               \
   _(vqshluq_n_s32)                                                               \
   _(vqshluq_n_s64)                                                               \
-  /*_(vqshlub_n_s8)                                                           */ \
-  /*_(vqshluh_n_s16)                                                          */ \
-  /*_(vqshlus_n_s32)                                                          */ \
-  /*_(vqshlud_n_s64)                                                          */ \
+  _(vqshlub_n_s8)                                                                \
+  _(vqshluh_n_s16)                                                               \
+  _(vqshlus_n_s32)                                                               \
+  _(vqshlud_n_s64)                                                               \
   _(vshll_n_s8)                                                                  \
   _(vshll_n_s16)                                                                 \
   _(vshll_n_s32)                                                                 \
