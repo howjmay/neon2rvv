@@ -1203,14 +1203,14 @@
   _(vqshlq_n_u16)                                                                \
   _(vqshlq_n_u32)                                                                \
   _(vqshlq_n_u64)                                                                \
-  /*_(vqshlb_n_s8)                                                            */ \
-  /*_(vqshlh_n_s16)                                                           */ \
-  /*_(vqshls_n_s32)                                                           */ \
-  /*_(vqshld_n_s64)                                                           */ \
-  /*_(vqshlb_n_u8)                                                            */ \
-  /*_(vqshlh_n_u16)                                                           */ \
-  /*_(vqshls_n_u32)                                                           */ \
-  /*_(vqshld_n_u64)                                                           */ \
+  _(vqshlb_n_s8)                                                                 \
+  _(vqshlh_n_s16)                                                                \
+  _(vqshls_n_s32)                                                                \
+  _(vqshld_n_s64)                                                                \
+  _(vqshlb_n_u8)                                                                 \
+  _(vqshlh_n_u16)                                                                \
+  _(vqshls_n_u32)                                                                \
+  _(vqshld_n_u64)                                                                \
   _(vqshlu_n_s8)                                                                 \
   _(vqshlu_n_s16)                                                                \
   _(vqshlu_n_s32)                                                                \
