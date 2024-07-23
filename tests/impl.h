@@ -2191,10 +2191,10 @@
   _(vmull_n_s32)                                                                 \
   _(vmull_n_u16)                                                                 \
   _(vmull_n_u32)                                                                 \
-  /*_(vmull_high_n_s16)                                                       */ \
-  /*_(vmull_high_n_s32)                                                       */ \
-  /*_(vmull_high_n_u16)                                                       */ \
-  /*_(vmull_high_n_u32)                                                       */ \
+  _(vmull_high_n_s16)                                                            \
+  _(vmull_high_n_s32)                                                            \
+  _(vmull_high_n_u16)                                                            \
+  _(vmull_high_n_u32)                                                            \
   _(vqdmull_n_s16)                                                               \
   _(vqdmull_n_s32)                                                               \
   /*_(vqdmull_high_n_s16)                                                     */ \

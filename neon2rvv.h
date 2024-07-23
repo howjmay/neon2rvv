@@ -10587,13 +10587,25 @@ FORCE_INLINE uint64x2_t vmull_n_u32(uint32x2_t a, uint32_t b) {
   return __riscv_vlmul_trunc_v_u64m2_u64m1(__riscv_vwmulu_vx_u64m2(a, b, 4));
 }
 
-// FORCE_INLINE int32x4_t vmull_high_n_s16(int16x8_t a, int16_t b);
+FORCE_INLINE int32x4_t vmull_high_n_s16(int16x8_t a, int16_t b) {
+  vint16m1_t a_high = __riscv_vslidedown_vx_i16m1(a, 4, 8);
+  return __riscv_vlmul_trunc_v_i32m2_i32m1(__riscv_vwmul_vx_i32m2(a_high, b, 4));
+}
 
-// FORCE_INLINE int64x2_t vmull_high_n_s32(int32x4_t a, int32_t b);
+FORCE_INLINE int64x2_t vmull_high_n_s32(int32x4_t a, int32_t b) {
+  vint32m1_t a_high = __riscv_vslidedown_vx_i32m1(a, 2, 4);
+  return __riscv_vlmul_trunc_v_i64m2_i64m1(__riscv_vwmul_vx_i64m2(a_high, b, 2));
+}
 
-// FORCE_INLINE uint32x4_t vmull_high_n_u16(uint16x8_t a, uint16_t b);
+FORCE_INLINE uint32x4_t vmull_high_n_u16(uint16x8_t a, uint16_t b) {
+  vuint16m1_t a_high = __riscv_vslidedown_vx_u16m1(a, 4, 8);
+  return __riscv_vlmul_trunc_v_u32m2_u32m1(__riscv_vwmulu_vx_u32m2(a_high, b, 4));
+}
 
-// FORCE_INLINE uint64x2_t vmull_high_n_u32(uint32x4_t a, uint32_t b);
+FORCE_INLINE uint64x2_t vmull_high_n_u32(uint32x4_t a, uint32_t b) {
+  vuint32m1_t a_high = __riscv_vslidedown_vx_u32m1(a, 2, 4);
+  return __riscv_vlmul_trunc_v_u64m2_u64m1(__riscv_vwmulu_vx_u64m2(a_high, b, 4));
+}
 
 FORCE_INLINE int32x4_t vqdmull_n_s16(int16x4_t a, int16_t b) {
   vint32m2_t ab_mul = __riscv_vwmul_vx_i32m2(a, b, 4);
