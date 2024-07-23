@@ -2221,10 +2221,10 @@
   _(vmlal_n_s32)                                                                 \
   _(vmlal_n_u16)                                                                 \
   _(vmlal_n_u32)                                                                 \
-  /*_(vmlal_high_n_s16)                                                       */ \
-  /*_(vmlal_high_n_s32)                                                       */ \
-  /*_(vmlal_high_n_u16)                                                       */ \
-  /*_(vmlal_high_n_u32)                                                       */ \
+  _(vmlal_high_n_s16)                                                            \
+  _(vmlal_high_n_s32)                                                            \
+  _(vmlal_high_n_u16)                                                            \
+  _(vmlal_high_n_u32)                                                            \
   _(vqdmlal_n_s16)                                                               \
   _(vqdmlal_n_s32)                                                               \
   /*_(vqdmlal_high_n_s16)                                                     */ \
