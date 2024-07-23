@@ -2243,10 +2243,10 @@
   _(vmlsl_n_s32)                                                                 \
   _(vmlsl_n_u16)                                                                 \
   _(vmlsl_n_u32)                                                                 \
-  /*_(vmlsl_high_n_s16)                                                       */ \
-  /*_(vmlsl_high_n_s32)                                                       */ \
-  /*_(vmlsl_high_n_u16)                                                       */ \
-  /*_(vmlsl_high_n_u32)                                                       */ \
+  _(vmlsl_high_n_s16)                                                            \
+  _(vmlsl_high_n_s32)                                                            \
+  _(vmlsl_high_n_u16)                                                            \
+  _(vmlsl_high_n_u32)                                                            \
   _(vqdmlsl_n_s16)                                                               \
   _(vqdmlsl_n_s32)                                                               \
   /*_(vqdmlsl_high_n_s16)                                                     */ \
