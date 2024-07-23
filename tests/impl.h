@@ -2010,10 +2010,10 @@
   _(vmull_lane_s32)                                                              \
   _(vmull_lane_u16)                                                              \
   _(vmull_lane_u32)                                                              \
-  /*_(vmull_high_lane_s16)                                                    */ \
-  /*_(vmull_high_lane_s32)                                                    */ \
-  /*_(vmull_high_lane_u16)                                                    */ \
-  /*_(vmull_high_lane_u32)                                                    */ \
+  _(vmull_high_lane_s16)                                                         \
+  _(vmull_high_lane_s32)                                                         \
+  _(vmull_high_lane_u16)                                                         \
+  _(vmull_high_lane_u32)                                                         \
   /*_(vmull_laneq_s16)                                                        */ \
   /*_(vmull_laneq_s32)                                                        */ \
   /*_(vmull_laneq_u16)                                                        */ \
