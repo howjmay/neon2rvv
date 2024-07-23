@@ -6270,21 +6270,38 @@ FORCE_INLINE uint64x2_t vqshlq_n_u64(uint64x2_t a, const int b) {
   return __riscv_vmerge_vxm_u64m1(shl, UINT64_MAX, mask_sat_positive, 2);
 }
 
-// FORCE_INLINE int8_t vqshlb_n_s8(int8_t a, const int n);
+FORCE_INLINE int8_t vqshlb_n_s8(int8_t a, const int n) { return neon2rvv_saturate_int8(a << n); }
 
-// FORCE_INLINE int16_t vqshlh_n_s16(int16_t a, const int n);
+FORCE_INLINE int16_t vqshlh_n_s16(int16_t a, const int n) { return neon2rvv_saturate_int16(a << n); }
 
-// FORCE_INLINE int32_t vqshls_n_s32(int32_t a, const int n);
+FORCE_INLINE int32_t vqshls_n_s32(int32_t a, const int n) { return neon2rvv_saturate_int32((int64_t)a << n); }
 
-// FORCE_INLINE int64_t vqshld_n_s64(int64_t a, const int n);
+FORCE_INLINE int64_t vqshld_n_s64(int64_t a, const int n) {
+  if (a > 0) {
+    if (a > (INT64_MAX >> n)) {
+      return INT64_MAX;
+    } else {
+      return a << n;
+    }
+  }
+  if (a < (INT64_MIN >> n)) {
+    return INT64_MIN;
+  }
+  return a << n;
+}
 
-// FORCE_INLINE uint8_t vqshlb_n_u8(uint8_t a, const int n);
+FORCE_INLINE uint8_t vqshlb_n_u8(uint8_t a, const int n) { return neon2rvv_saturate_uint8(a << n); }
 
-// FORCE_INLINE uint16_t vqshlh_n_u16(uint16_t a, const int n);
+FORCE_INLINE uint16_t vqshlh_n_u16(uint16_t a, const int n) { return neon2rvv_saturate_uint16(a << n); }
 
-// FORCE_INLINE uint32_t vqshls_n_u32(uint32_t a, const int n);
+FORCE_INLINE uint32_t vqshls_n_u32(uint32_t a, const int n) { return neon2rvv_saturate_uint32((uint64_t)a << n); }
 
-// FORCE_INLINE uint64_t vqshld_n_u64(uint64_t a, const int n);
+FORCE_INLINE uint64_t vqshld_n_u64(uint64_t a, const int n) {
+  if (a > (UINT64_MAX >> n)) {
+    return UINT64_MAX;
+  }
+  return a << n;
+}
 
 FORCE_INLINE uint8x8_t vqshlu_n_s8(int8x8_t a, const int b) {
   vint8m1_t a_non_neg = __riscv_vmax_vx_i8m1(a, 0, 8);
