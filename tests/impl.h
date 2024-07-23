@@ -2018,10 +2018,10 @@
   _(vmull_laneq_s32)                                                             \
   _(vmull_laneq_u16)                                                             \
   _(vmull_laneq_u32)                                                             \
-  /*_(vmull_high_laneq_s16)                                                   */ \
-  /*_(vmull_high_laneq_s32)                                                   */ \
-  /*_(vmull_high_laneq_u16)                                                   */ \
-  /*_(vmull_high_laneq_u32)                                                   */ \
+  _(vmull_high_laneq_s16)                                                        \
+  _(vmull_high_laneq_s32)                                                        \
+  _(vmull_high_laneq_u16)                                                        \
+  _(vmull_high_laneq_u32)                                                        \
   _(vqdmull_lane_s16)                                                            \
   _(vqdmull_lane_s32)                                                            \
   /*_(vqdmullh_lane_s16)                                                      */ \
