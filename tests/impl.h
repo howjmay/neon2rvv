@@ -2227,8 +2227,8 @@
   _(vmlal_high_n_u32)                                                            \
   _(vqdmlal_n_s16)                                                               \
   _(vqdmlal_n_s32)                                                               \
-  _(vqdmlal_high_n_s16)                                                      \
-  _(vqdmlal_high_n_s32)                                                      \
+  _(vqdmlal_high_n_s16)                                                          \
+  _(vqdmlal_high_n_s32)                                                          \
   _(vmls_n_s16)                                                                  \
   _(vmls_n_s32)                                                                  \
   _(vmls_n_f32)                                                                  \
@@ -2249,8 +2249,8 @@
   _(vmlsl_high_n_u32)                                                            \
   _(vqdmlsl_n_s16)                                                               \
   _(vqdmlsl_n_s32)                                                               \
-  /*_(vqdmlsl_high_n_s16)                                                     */ \
-  /*_(vqdmlsl_high_n_s32)                                                     */ \
+  _(vqdmlsl_high_n_s16)                                                          \
+  _(vqdmlsl_high_n_s32)                                                          \
   /*_(vext_p64)                                                               */ \
   _(vext_s8)                                                                     \
   _(vext_s16)                                                                    \
