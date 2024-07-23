@@ -36778,9 +36778,47 @@ result_t test_vbsl_p16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return T
 
 result_t test_vbslq_p16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vbsl_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vbsl_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { 
+  // #ifdef ENABLE_TEST_ALL
+  const uint64_t *_a = (uint64_t *)impl.test_cases_int_pointer1;
+  const double *_b = (double *)impl.test_cases_float_pointer1;
+  const double *_c = (double *)impl.test_cases_float_pointer2;
+  uint64_t _d[1];
+  for (int i = 0; i < 1; i++) {
+    uint64_t b_u = (*(const uint64_t *)&_b[i]);
+    uint64_t c_u = (*(const uint64_t *)&_c[i]);
+    _d[i] = (c_u ^ ((c_u ^ b_u) & _a[i]));
+  }
+  uint64x1_t a = vld1_u64(_a);
+  float64x1_t b = vld1_f64(_b);
+  float64x1_t c = vld1_f64(_c);
+  uint64x1_t d = vreinterpret_u64_f64(vbsl_f64(a, b, c));
+  return validate_uint64(d, _d[0]);
+// #else
+//   return TEST_UNIMPL;
+// #endif  // ENABLE_TEST_ALL
+ }
 
-result_t test_vbslq_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vbslq_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { 
+  // #ifdef ENABLE_TEST_ALL
+  const uint64_t *_a = (uint64_t *)impl.test_cases_int_pointer1;
+  const double *_b = (double *)impl.test_cases_float_pointer1;
+  const double *_c = (double *)impl.test_cases_float_pointer2;
+  uint64_t _d[4];
+  for (int i = 0; i < 4; i++) {
+    uint64_t b_u = (*(const uint64_t *)&_b[i]);
+    uint64_t c_u = (*(const uint64_t *)&_c[i]);
+    _d[i] = (c_u ^ ((c_u ^ b_u) & _a[i]));
+  }
+  uint64x2_t a = vld1q_u64(_a);
+  float64x2_t b = vld1q_f64(_b);
+  float64x2_t c = vld1q_f64(_c);
+  uint64x2_t d = vreinterpretq_u64_f64(vbslq_f64(a, b, c));
+  return validate_uint64(d, _d[0], _d[1]);
+// #else
+//   return TEST_UNIMPL;
+// #endif  // ENABLE_TEST_ALL
+ }
 
 result_t test_vcopy_lane_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 

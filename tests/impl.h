@@ -2469,8 +2469,8 @@
   _(vbslq_u64)                                                                   \
   /*_(vbslq_p8)                                                               */ \
   /*_(vbslq_p16)                                                              */ \
-  /*_(vbsl_f64)                                                               */ \
-  /*_(vbslq_f64)                                                              */ \
+  _(vbsl_f64)                                                                \
+  _(vbslq_f64)                                                               \
   /*_(vcopy_lane_s8)                                                          */ \
   /*_(vcopyq_lane_s8)                                                         */ \
   /*_(vcopy_lane_s16)                                                         */ \
