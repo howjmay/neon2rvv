@@ -2197,8 +2197,8 @@
   _(vmull_high_n_u32)                                                            \
   _(vqdmull_n_s16)                                                               \
   _(vqdmull_n_s32)                                                               \
-  /*_(vqdmull_high_n_s16)                                                     */ \
-  /*_(vqdmull_high_n_s32)                                                     */ \
+  _(vqdmull_high_n_s16)                                                          \
+  _(vqdmull_high_n_s32)                                                          \
   _(vqdmulhq_n_s16)                                                              \
   _(vqdmulhq_n_s32)                                                              \
   _(vqdmulh_n_s16)                                                               \
