@@ -1005,8 +1005,8 @@
   _(vrshlq_u16)                                                                  \
   _(vrshlq_u32)                                                                  \
   _(vrshlq_u64)                                                                  \
-  /*_(vrshld_s64)                                                             */ \
-  /*_(vrshld_u64)                                                             */ \
+  _(vrshld_s64)                                                                  \
+  _(vrshld_u64)                                                                  \
   _(vqshl_s8)                                                                    \
   _(vqshl_s16)                                                                   \
   _(vqshl_s32)                                                                   \
