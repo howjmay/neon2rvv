@@ -1317,8 +1317,8 @@
   _(vsliq_n_u64)                                                                 \
   /*_(vsliq_n_p8)                                                             */ \
   /*_(vsliq_n_p16)                                                            */ \
-  /*_(vslid_n_s64)                                                            */ \
-  /*_(vslid_n_u64)                                                            */ \
+  _(vslid_n_s64)                                                                 \
+  _(vslid_n_u64)                                                                 \
   _(vneg_s8)                                                                     \
   _(vneg_s16)                                                                    \
   _(vneg_s32)                                                                    \
