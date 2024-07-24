@@ -6110,11 +6110,25 @@ FORCE_INLINE uint32x2_t vqrshrun_n_s64(int64x2_t a, const int b) {
   return __riscv_vnclipu_wx_u32m1(__riscv_vreinterpret_v_i64m2_u64m2(a_eliminate_neg), b, __RISCV_VXRM_RNU, 2);
 }
 
-// FORCE_INLINE uint8_t vqrshrunh_n_s16(int16_t a, const int n);
+FORCE_INLINE uint8_t vqrshrunh_n_s16(int16_t a, const int n) {
+  int16_t round_const = 1 << (n - 1);
+  int16_t tmp = (a + round_const) >> n;
+  tmp = ~(tmp >> 15) & tmp;
+  return neon2rvv_saturate_uint8(tmp);
+}
 
-// FORCE_INLINE uint16_t vqrshruns_n_s32(int32_t a, const int n);
+FORCE_INLINE uint16_t vqrshruns_n_s32(int32_t a, const int n) {
+  int32_t round_const = 1 << (n - 1);
+  int32_t tmp = (a + round_const) >> n;
+  tmp = ~(tmp >> 31) & tmp;
+  return neon2rvv_saturate_uint16(tmp);
+}
 
-// FORCE_INLINE uint32_t vqrshrund_n_s64(int64_t a, const int n);
+FORCE_INLINE uint32_t vqrshrund_n_s64(int64_t a, const int n) {
+  int64_t tmp = a >> (n - 1);
+  tmp = ~(tmp >> 63) & tmp;
+  return neon2rvv_saturate_uint32((tmp + 1) >> 1);
+}
 
 // FORCE_INLINE uint8x16_t vqrshrun_high_n_s16(uint8x8_t r, int16x8_t a, const int n);
 

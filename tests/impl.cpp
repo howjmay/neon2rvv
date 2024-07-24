@@ -21068,11 +21068,84 @@ result_t test_vqrshrun_n_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #endif  // ENABLE_TEST_ALL
 }
 
-result_t test_vqrshrunh_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vqrshrunh_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int16_t *_a = (const int16_t *)impl.test_cases_int_pointer1;
+  uint8_t _c, c;
+  uint16_t round_const;
 
-result_t test_vqrshruns_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+#define TEST_IMPL(IDX)                                         \
+  for (int i = 0; i < 8; i++) {                                \
+    round_const = 1 << ((IDX + 1) - 1);                        \
+    int16_t tmp = ((int16_t)_a[0] + round_const) >> (IDX + 1); \
+    if (tmp < 0) {                                             \
+      tmp = 0;                                                 \
+    }                                                          \
+    _c = saturate_uint8(tmp);                                  \
+  }                                                            \
+  c = vqrshrunh_n_s16(_a[0], (IDX + 1));                       \
+  CHECK_RESULT(c == _c ? TEST_SUCCESS : TEST_FAIL)
 
-result_t test_vqrshrund_n_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  IMM_8_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vqrshruns_n_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int32_t *_a = (const int32_t *)impl.test_cases_int_pointer1;
+  uint16_t _c, c;
+  int32_t round_const;
+
+#define TEST_IMPL(IDX)                                         \
+  for (int i = 0; i < 4; i++) {                                \
+    round_const = 1 << ((IDX + 1) - 1);                        \
+    int32_t tmp = ((int32_t)_a[0] + round_const) >> (IDX + 1); \
+    if (tmp < 0) {                                             \
+      tmp = 0;                                                 \
+    }                                                          \
+    _c = saturate_uint16(tmp);                                 \
+  }                                                            \
+  c = vqrshruns_n_s32(_a[0], (IDX + 1));                       \
+  CHECK_RESULT(c == _c ? TEST_SUCCESS : TEST_FAIL)
+
+  IMM_16_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vqrshrund_n_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int64_t *_a = (const int64_t *)impl.test_cases_int_pointer1;
+  uint32_t _c, c;
+
+#define TEST_IMPL(IDX)                      \
+  for (int i = 0; i < 2; i++) {             \
+    int64_t tmp = _a[0] >> ((IDX + 1) - 1); \
+    if (tmp < 0) {                          \
+      tmp = 0;                              \
+    }                                       \
+    _c = saturate_uint32((tmp + 1) >> 1);   \
+  }                                         \
+  c = vqrshrund_n_s64(_a[0], (IDX + 1));    \
+  CHECK_RESULT(c == _c ? TEST_SUCCESS : TEST_FAIL)
+
+  IMM_32_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vqrshrun_high_n_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
