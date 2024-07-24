@@ -1792,9 +1792,9 @@
   _(vqmovun_s16)                                                                 \
   _(vqmovun_s32)                                                                 \
   _(vqmovun_s64)                                                                 \
-  /*_(vqmovunh_s16)                                                           */ \
-  /*_(vqmovuns_s32)                                                           */ \
-  /*_(vqmovund_s64)                                                           */ \
+  _(vqmovunh_s16)                                                                \
+  _(vqmovuns_s32)                                                                \
+  _(vqmovund_s64)                                                                \
   _(vqmovun_high_s16)                                                            \
   _(vqmovun_high_s32)                                                            \
   _(vqmovun_high_s64)                                                            \

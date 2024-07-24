@@ -29746,11 +29746,59 @@ result_t test_vqmovun_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #endif  // ENABLE_TEST_ALL
 }
 
-result_t test_vqmovunh_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vqmovunh_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
+  uint8_t _c, c;
+  if (_a[0] < 0) {
+    _c = 0;
+  } else if (_a[0] > UINT8_MAX) {
+    _c = UINT8_MAX;
+  } else {
+    _c = _a[0];
+  }
+  c = vqmovunh_s16(_a[0]);
+  return c == _c ? TEST_SUCCESS : TEST_FAIL;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
-result_t test_vqmovuns_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vqmovuns_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
+  uint16_t _c, c;
+  if (_a[0] < 0) {
+    _c = 0;
+  } else if (_a[0] > UINT16_MAX) {
+    _c = UINT16_MAX;
+  } else {
+    _c = _a[0];
+  }
+  c = vqmovuns_s32(_a[0]);
+  return c == _c ? TEST_SUCCESS : TEST_FAIL;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
-result_t test_vqmovund_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vqmovund_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int64_t *_a = (int64_t *)impl.test_cases_int_pointer1;
+  uint32_t _c, c;
+  if (_a[0] < 0) {
+    _c = 0;
+  } else if (_a[0] > UINT32_MAX) {
+    _c = UINT32_MAX;
+  } else {
+    _c = _a[0];
+  }
+  c = vqmovund_s64(_a[0]);
+  return c == _c ? TEST_SUCCESS : TEST_FAIL;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vqmovun_high_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL

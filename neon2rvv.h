@@ -8272,11 +8272,29 @@ FORCE_INLINE uint32x2_t vqmovun_s64(int64x2_t a) {
   return __riscv_vlmul_ext_v_u32mf2_u32m1(__riscv_vnclipu_wx_u32mf2(a_non_neg, 0, __RISCV_VXRM_RDN, 2));
 }
 
-// FORCE_INLINE uint8_t vqmovunh_s16(int16_t a);
+FORCE_INLINE uint8_t vqmovunh_s16(int16_t a) {
+  if (a > UINT8_MAX) {
+    return UINT8_MAX;
+  }
+  int16_t a_sign = ~(a >> 15);
+  return a & a_sign;
+}
 
-// FORCE_INLINE uint16_t vqmovuns_s32(int32_t a);
+FORCE_INLINE uint16_t vqmovuns_s32(int32_t a) {
+  if (a > UINT16_MAX) {
+    return UINT16_MAX;
+  }
+  int32_t a_sign = ~(a >> 31);
+  return a & a_sign;
+}
 
-// FORCE_INLINE uint32_t vqmovund_s64(int64_t a);
+FORCE_INLINE uint32_t vqmovund_s64(int64_t a) {
+  if (a > UINT32_MAX) {
+    return UINT32_MAX;
+  }
+  int64_t a_sign = ~(a >> 63);
+  return a & a_sign;
+}
 
 FORCE_INLINE uint8x16_t vqmovun_high_s16(uint8x8_t r, int16x8_t a) {
   vuint16m1_t a_non_neg = __riscv_vreinterpret_v_i16m1_u16m1(__riscv_vmax_vx_i16m1(a, 0, 8));
