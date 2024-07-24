@@ -17460,9 +17460,49 @@ result_t test_vrshlq_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #endif  // ENABLE_TEST_ALL
 }
 
-result_t test_vrshld_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vrshld_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int64_t *_a = (int64_t *)impl.test_cases_int_pointer1;
+  int64_t *_b = (int64_t *)impl.test_cases_int_pointer2;
+  for (int i = 0; i < 2; i++) {
+    _b[0] = _b[0] % 8;
+  }
+  int64_t _c, c;
+  if (_b[0] < 0) {
+    int64_t b_neg = -_b[0];
+    _c = (_a[0] + (1 << (b_neg - 1))) >> b_neg;
+  } else {
+    _c = (_a[0]) << _b[0];
+  }
+  c = vrshld_s64(_a[0], _b[0]);
 
-result_t test_vrshld_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  return c == _c ? TEST_SUCCESS : TEST_FAIL;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vrshld_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint64_t *_a = (uint64_t *)impl.test_cases_int_pointer1;
+  int64_t *_b = (int64_t *)impl.test_cases_int_pointer2;
+  for (int i = 0; i < 2; i++) {
+    _b[0] = _b[0] % 8;
+  }
+  uint64_t _c, c;
+  if (_b[0] < 0) {
+    int64_t b_neg = -_b[0];
+    _c = (_a[0] + (1 << (b_neg - 1))) >> b_neg;
+  } else {
+    _c = (_a[0]) << _b[0];
+  }
+  c = vrshld_u64(_a[0], _b[0]);
+
+  return c == _c ? TEST_SUCCESS : TEST_FAIL;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vqshl_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
