@@ -1795,9 +1795,9 @@
   /*_(vqmovunh_s16)                                                           */ \
   /*_(vqmovuns_s32)                                                           */ \
   /*_(vqmovund_s64)                                                           */ \
-  /*_(vqmovun_high_s16)                                                       */ \
-  /*_(vqmovun_high_s32)                                                       */ \
-  /*_(vqmovun_high_s64)                                                       */ \
+  _(vqmovun_high_s16)                                                            \
+  _(vqmovun_high_s32)                                                            \
+  _(vqmovun_high_s64)                                                            \
   _(vmovl_s8)                                                                    \
   _(vmovl_s16)                                                                   \
   _(vmovl_s32)                                                                   \
