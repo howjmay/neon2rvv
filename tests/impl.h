@@ -1166,9 +1166,9 @@
   _(vqrshrunh_n_s16)                                                             \
   _(vqrshruns_n_s32)                                                             \
   _(vqrshrund_n_s64)                                                             \
-  /*_(vqrshrun_high_n_s16)                                                    */ \
-  /*_(vqrshrun_high_n_s32)                                                    */ \
-  /*_(vqrshrun_high_n_s64)                                                    */ \
+  _(vqrshrun_high_n_s16)                                                         \
+  _(vqrshrun_high_n_s32)                                                         \
+  _(vqrshrun_high_n_s64)                                                         \
   _(vshl_n_s8)                                                                   \
   _(vshl_n_s16)                                                                  \
   _(vshl_n_s32)                                                                  \
