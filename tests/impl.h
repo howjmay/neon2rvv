@@ -1890,8 +1890,8 @@
   _(vmulq_lane_s16)                                                              \
   _(vmulq_lane_s32)                                                              \
   _(vmulq_lane_f32)                                                              \
-  /*_(vmul_lane_f64)                                                          */ \
-  /*_(vmulq_lane_f64)                                                         */ \
+  _(vmul_lane_f64)                                                               \
+  _(vmulq_lane_f64)                                                              \
   /*_(vmuls_lane_f32)                                                         */ \
   /*_(vmuld_lane_f64)                                                         */ \
   /*_(vmul_laneq_s16)                                                         */ \
