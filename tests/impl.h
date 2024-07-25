@@ -1934,10 +1934,10 @@
   _(vmlal_lane_s32)                                                              \
   _(vmlal_lane_u16)                                                              \
   _(vmlal_lane_u32)                                                              \
-  /*_(vmlal_high_lane_s16)                                                    */ \
-  /*_(vmlal_high_lane_s32)                                                    */ \
-  /*_(vmlal_high_lane_u16)                                                    */ \
-  /*_(vmlal_high_lane_u32)                                                    */ \
+  _(vmlal_high_lane_s16)                                                         \
+  _(vmlal_high_lane_s32)                                                         \
+  _(vmlal_high_lane_u16)                                                         \
+  _(vmlal_high_lane_u32)                                                         \
   /*_(vmlal_laneq_s16)                                                        */ \
   /*_(vmlal_laneq_s32)                                                        */ \
   /*_(vmlal_laneq_u16)                                                        */ \
