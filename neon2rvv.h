@@ -7243,9 +7243,9 @@ FORCE_INLINE float64x1_t vrecpe_f64(float64x1_t a) { return __riscv_vfrec7_v_f64
 
 FORCE_INLINE float64x2_t vrecpeq_f64(float64x2_t a) { return __riscv_vfrec7_v_f64m1(a, 2); }
 
-// FORCE_INLINE float32_t vrecpes_f32(float32_t a);
+FORCE_INLINE float32_t vrecpes_f32(float32_t a) { return 1.0f / a; }
 
-// FORCE_INLINE float64_t vrecped_f64(float64_t a);
+FORCE_INLINE float64_t vrecped_f64(float64_t a) { return 1.0f / a; }
 
 // FORCE_INLINE uint32x4_t vrecpeq_u32(uint32x4_t a);
 
