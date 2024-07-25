@@ -7259,9 +7259,9 @@ FORCE_INLINE float64x1_t vrsqrte_f64(float64x1_t a) { return __riscv_vfrsqrt7_v_
 
 FORCE_INLINE float64x2_t vrsqrteq_f64(float64x2_t a) { return __riscv_vfrsqrt7_v_f64m1(a, 2); }
 
-// FORCE_INLINE float32_t vrsqrtes_f32(float32_t a);
+FORCE_INLINE float32_t vrsqrtes_f32(float32_t a) { return 1 / sqrtf(a); }
 
-// FORCE_INLINE float64_t vrsqrted_f64(float64_t a);
+FORCE_INLINE float64_t vrsqrted_f64(float64_t a) { return 1 / sqrt(a); }
 
 // FORCE_INLINE uint32x4_t vrsqrteq_u32(uint32x4_t a);
 
