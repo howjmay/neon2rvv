@@ -1942,10 +1942,10 @@
   _(vmlal_laneq_s32)                                                             \
   _(vmlal_laneq_u16)                                                             \
   _(vmlal_laneq_u32)                                                             \
-  /*_(vmlal_high_laneq_s16)                                                   */ \
-  /*_(vmlal_high_laneq_s32)                                                   */ \
-  /*_(vmlal_high_laneq_u16)                                                   */ \
-  /*_(vmlal_high_laneq_u32)                                                   */ \
+  _(vmlal_high_laneq_s16)                                                        \
+  _(vmlal_high_laneq_s32)                                                        \
+  _(vmlal_high_laneq_u16)                                                        \
+  _(vmlal_high_laneq_u32)                                                        \
   _(vqdmlal_lane_s16)                                                            \
   _(vqdmlal_lane_s32)                                                            \
   /*_(vqdmlalh_lane_s16)                                                      */ \
