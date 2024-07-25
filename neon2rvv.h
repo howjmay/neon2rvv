@@ -8775,9 +8775,15 @@ FORCE_INLINE float32x4_t vmulq_lane_f32(float32x4_t a, float32x2_t b, const int 
   return __riscv_vfmul_vv_f32m1(a, b_dup_lane, 4);
 }
 
-// FORCE_INLINE float64x1_t vmul_lane_f64(float64x1_t a, float64x1_t v, const int lane);
+FORCE_INLINE float64x1_t vmul_lane_f64(float64x1_t a, float64x1_t b, const int lane) {
+  vfloat64m1_t b_dup_lane = __riscv_vrgather_vx_f64m1(b, lane, 1);
+  return __riscv_vfmul_vv_f64m1(a, b_dup_lane, 1);
+}
 
-// FORCE_INLINE float64x2_t vmulq_lane_f64(float64x2_t a, float64x1_t v, const int lane);
+FORCE_INLINE float64x2_t vmulq_lane_f64(float64x2_t a, float64x1_t b, const int lane) {
+  vfloat64m1_t b_dup_lane = __riscv_vrgather_vx_f64m1(b, lane, 2);
+  return __riscv_vfmul_vv_f64m1(a, b_dup_lane, 2);
+}
 
 // FORCE_INLINE float32_t vmuls_lane_f32(float32_t a, float32x2_t v, const int lane);
 
