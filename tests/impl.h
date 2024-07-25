@@ -1401,8 +1401,8 @@
   _(vrsqrteq_f32)                                                                \
   _(vrsqrte_f64)                                                                 \
   _(vrsqrteq_f64)                                                                \
-  /*_(vrsqrtes_f32)                                                           */ \
-  /*_(vrsqrted_f64)                                                           */ \
+  _(vrsqrtes_f32)                                                                \
+  _(vrsqrted_f64)                                                                \
   _(vrsqrteq_u32)                                                                \
   _(vget_lane_s8)                                                                \
   _(vget_lane_s16)                                                               \
