@@ -8817,53 +8817,53 @@ FORCE_INLINE float64x2_t vmulq_lane_f64(float64x2_t a, float64x1_t b, const int 
 
 // FORCE_INLINE float64_t vmuld_laneq_f64(float64_t a, float64x2_t v, const int lane);
 
-FORCE_INLINE uint16x8_t vmulq_lane_u16(uint16x8_t a, uint16x4_t b, const int c) {
-  vuint16m1_t b_dup_lane = __riscv_vrgather_vx_u16m1(b, c, 8);
+FORCE_INLINE uint16x8_t vmulq_lane_u16(uint16x8_t a, uint16x4_t b, const int lane) {
+  vuint16m1_t b_dup_lane = __riscv_vrgather_vx_u16m1(b, lane, 8);
   return __riscv_vmul_vv_u16m1(a, b_dup_lane, 8);
 }
 
-FORCE_INLINE uint32x4_t vmulq_lane_u32(uint32x4_t a, uint32x2_t b, const int c) {
-  vuint32m1_t b_dup_lane = __riscv_vrgather_vx_u32m1(b, c, 4);
+FORCE_INLINE uint32x4_t vmulq_lane_u32(uint32x4_t a, uint32x2_t b, const int lane) {
+  vuint32m1_t b_dup_lane = __riscv_vrgather_vx_u32m1(b, lane, 4);
   return __riscv_vmul_vv_u32m1(a, b_dup_lane, 4);
 }
 
-FORCE_INLINE int16x4_t vmla_lane_s16(int16x4_t a, int16x4_t b, int16x4_t c, const int __d) {
-  vint16m1_t c_dup_lane = __riscv_vrgather_vx_i16m1(c, __d, 4);
+FORCE_INLINE int16x4_t vmla_lane_s16(int16x4_t a, int16x4_t b, int16x4_t c, const int lane) {
+  vint16m1_t c_dup_lane = __riscv_vrgather_vx_i16m1(c, lane, 4);
   return __riscv_vmacc_vv_i16m1(a, b, c_dup_lane, 4);
 }
 
-FORCE_INLINE int32x2_t vmla_lane_s32(int32x2_t a, int32x2_t b, int32x2_t c, const int __d) {
-  vint32m1_t c_dup_lane = __riscv_vrgather_vx_i32m1(c, __d, 2);
+FORCE_INLINE int32x2_t vmla_lane_s32(int32x2_t a, int32x2_t b, int32x2_t c, const int lane) {
+  vint32m1_t c_dup_lane = __riscv_vrgather_vx_i32m1(c, lane, 2);
   return __riscv_vmacc_vv_i32m1(a, b, c_dup_lane, 2);
 }
 
-FORCE_INLINE float32x2_t vmla_lane_f32(float32x2_t a, float32x2_t b, float32x2_t c, const int __d) {
-  vfloat32m1_t c_dup_lane = __riscv_vrgather_vx_f32m1(c, __d, 2);
+FORCE_INLINE float32x2_t vmla_lane_f32(float32x2_t a, float32x2_t b, float32x2_t c, const int lane) {
+  vfloat32m1_t c_dup_lane = __riscv_vrgather_vx_f32m1(c, lane, 2);
   return __riscv_vfmacc_vv_f32m1(a, b, c_dup_lane, 2);
 }
 
-FORCE_INLINE uint16x4_t vmla_lane_u16(uint16x4_t a, uint16x4_t b, uint16x4_t c, const int __d) {
-  vuint16m1_t c_dup_lane = __riscv_vrgather_vx_u16m1(c, __d, 4);
+FORCE_INLINE uint16x4_t vmla_lane_u16(uint16x4_t a, uint16x4_t b, uint16x4_t c, const int lane) {
+  vuint16m1_t c_dup_lane = __riscv_vrgather_vx_u16m1(c, lane, 4);
   return __riscv_vmacc_vv_u16m1(a, b, c_dup_lane, 4);
 }
 
-FORCE_INLINE uint32x2_t vmla_lane_u32(uint32x2_t a, uint32x2_t b, uint32x2_t c, const int __d) {
-  vuint32m1_t c_dup_lane = __riscv_vrgather_vx_u32m1(c, __d, 2);
+FORCE_INLINE uint32x2_t vmla_lane_u32(uint32x2_t a, uint32x2_t b, uint32x2_t c, const int lane) {
+  vuint32m1_t c_dup_lane = __riscv_vrgather_vx_u32m1(c, lane, 2);
   return __riscv_vmacc_vv_u32m1(a, b, c_dup_lane, 2);
 }
 
-FORCE_INLINE int16x8_t vmlaq_lane_s16(int16x8_t a, int16x8_t b, int16x4_t c, const int __d) {
-  vint16m1_t c_dup_lane = __riscv_vrgather_vx_i16m1(c, __d, 8);
+FORCE_INLINE int16x8_t vmlaq_lane_s16(int16x8_t a, int16x8_t b, int16x4_t c, const int lane) {
+  vint16m1_t c_dup_lane = __riscv_vrgather_vx_i16m1(c, lane, 8);
   return __riscv_vmacc_vv_i16m1(a, b, c_dup_lane, 8);
 }
 
-FORCE_INLINE int32x4_t vmlaq_lane_s32(int32x4_t a, int32x4_t b, int32x2_t c, const int __d) {
-  vint32m1_t c_dup_lane = __riscv_vrgather_vx_i32m1(c, __d, 4);
+FORCE_INLINE int32x4_t vmlaq_lane_s32(int32x4_t a, int32x4_t b, int32x2_t c, const int lane) {
+  vint32m1_t c_dup_lane = __riscv_vrgather_vx_i32m1(c, lane, 4);
   return __riscv_vmacc_vv_i32m1(a, b, c_dup_lane, 4);
 }
 
-FORCE_INLINE float32x4_t vmlaq_lane_f32(float32x4_t a, float32x4_t b, float32x2_t c, const int __d) {
-  vfloat32m1_t c_dup_lane = __riscv_vrgather_vx_f32m1(c, __d, 4);
+FORCE_INLINE float32x4_t vmlaq_lane_f32(float32x4_t a, float32x4_t b, float32x2_t c, const int lane) {
+  vfloat32m1_t c_dup_lane = __riscv_vrgather_vx_f32m1(c, lane, 4);
   return __riscv_vfmacc_vv_f32m1(a, b, c_dup_lane, 4);
 }
 
@@ -8887,33 +8887,33 @@ FORCE_INLINE float32x4_t vmlaq_lane_f32(float32x4_t a, float32x4_t b, float32x2_
 
 // FORCE_INLINE float32x4_t vmlaq_laneq_f32(float32x4_t a, float32x4_t b, float32x4_t v, const int lane);
 
-FORCE_INLINE uint16x8_t vmlaq_lane_u16(uint16x8_t a, uint16x8_t b, uint16x4_t c, const int __d) {
-  vuint16m1_t c_dup_lane = __riscv_vrgather_vx_u16m1(c, __d, 8);
+FORCE_INLINE uint16x8_t vmlaq_lane_u16(uint16x8_t a, uint16x8_t b, uint16x4_t c, const int lane) {
+  vuint16m1_t c_dup_lane = __riscv_vrgather_vx_u16m1(c, lane, 8);
   return __riscv_vmacc_vv_u16m1(a, b, c_dup_lane, 8);
 }
 
-FORCE_INLINE uint32x4_t vmlaq_lane_u32(uint32x4_t a, uint32x4_t b, uint32x2_t c, const int __d) {
-  vuint32m1_t c_dup_lane = __riscv_vrgather_vx_u32m1(c, __d, 4);
+FORCE_INLINE uint32x4_t vmlaq_lane_u32(uint32x4_t a, uint32x4_t b, uint32x2_t c, const int lane) {
+  vuint32m1_t c_dup_lane = __riscv_vrgather_vx_u32m1(c, lane, 4);
   return __riscv_vmacc_vv_u32m1(a, b, c_dup_lane, 4);
 }
 
-FORCE_INLINE int32x4_t vmlal_lane_s16(int32x4_t a, int16x4_t b, int16x4_t c, const int __d) {
-  vint16m1_t c_dup = __riscv_vrgather_vx_i16m1(c, __d, 4);
+FORCE_INLINE int32x4_t vmlal_lane_s16(int32x4_t a, int16x4_t b, int16x4_t c, const int lane) {
+  vint16m1_t c_dup = __riscv_vrgather_vx_i16m1(c, lane, 4);
   return __riscv_vlmul_trunc_v_i32m2_i32m1(__riscv_vwmacc_vv_i32m2(__riscv_vlmul_ext_v_i32m1_i32m2(a), b, c_dup, 4));
 }
 
-FORCE_INLINE int64x2_t vmlal_lane_s32(int64x2_t a, int32x2_t b, int32x2_t c, const int __d) {
-  vint32m1_t c_dup = __riscv_vrgather_vx_i32m1(c, __d, 2);
+FORCE_INLINE int64x2_t vmlal_lane_s32(int64x2_t a, int32x2_t b, int32x2_t c, const int lane) {
+  vint32m1_t c_dup = __riscv_vrgather_vx_i32m1(c, lane, 2);
   return __riscv_vlmul_trunc_v_i64m2_i64m1(__riscv_vwmacc_vv_i64m2(__riscv_vlmul_ext_v_i64m1_i64m2(a), b, c_dup, 2));
 }
 
-FORCE_INLINE uint32x4_t vmlal_lane_u16(uint32x4_t a, uint16x4_t b, uint16x4_t c, const int __d) {
-  vuint16m1_t c_dup = __riscv_vrgather_vx_u16m1(c, __d, 4);
+FORCE_INLINE uint32x4_t vmlal_lane_u16(uint32x4_t a, uint16x4_t b, uint16x4_t c, const int lane) {
+  vuint16m1_t c_dup = __riscv_vrgather_vx_u16m1(c, lane, 4);
   return __riscv_vlmul_trunc_v_u32m2_u32m1(__riscv_vwmaccu_vv_u32m2(__riscv_vlmul_ext_v_u32m1_u32m2(a), b, c_dup, 4));
 }
 
-FORCE_INLINE uint64x2_t vmlal_lane_u32(uint64x2_t a, uint32x2_t b, uint32x2_t c, const int __d) {
-  vuint32m1_t c_dup = __riscv_vrgather_vx_u32m1(c, __d, 2);
+FORCE_INLINE uint64x2_t vmlal_lane_u32(uint64x2_t a, uint32x2_t b, uint32x2_t c, const int lane) {
+  vuint32m1_t c_dup = __riscv_vrgather_vx_u32m1(c, lane, 2);
   return __riscv_vlmul_trunc_v_u64m2_u64m1(__riscv_vwmaccu_vv_u64m2(__riscv_vlmul_ext_v_u64m1_u64m2(a), b, c_dup, 2));
 }
 
@@ -8945,13 +8945,25 @@ FORCE_INLINE uint64x2_t vmlal_high_lane_u32(uint64x2_t a, uint32x4_t b, uint32x2
       __riscv_vwmaccu_vv_u64m2(__riscv_vlmul_ext_v_u64m1_u64m2(a), b_high, c_dup, 2));
 }
 
-// FORCE_INLINE int32x4_t vmlal_laneq_s16(int32x4_t a, int16x4_t b, int16x8_t v, const int lane);
+FORCE_INLINE int32x4_t vmlal_laneq_s16(int32x4_t a, int16x4_t b, int16x8_t c, const int lane) {
+  vint16m1_t c_dup = __riscv_vrgather_vx_i16m1(c, lane, 4);
+  return __riscv_vlmul_trunc_v_i32m2_i32m1(__riscv_vwmacc_vv_i32m2(__riscv_vlmul_ext_v_i32m1_i32m2(a), b, c_dup, 4));
+}
 
-// FORCE_INLINE int64x2_t vmlal_laneq_s32(int64x2_t a, int32x2_t b, int32x4_t v, const int lane);
+FORCE_INLINE int64x2_t vmlal_laneq_s32(int64x2_t a, int32x2_t b, int32x4_t c, const int lane) {
+  vint32m1_t c_dup = __riscv_vrgather_vx_i32m1(c, lane, 2);
+  return __riscv_vlmul_trunc_v_i64m2_i64m1(__riscv_vwmacc_vv_i64m2(__riscv_vlmul_ext_v_i64m1_i64m2(a), b, c_dup, 2));
+}
 
-// FORCE_INLINE uint32x4_t vmlal_laneq_u16(uint32x4_t a, uint16x4_t b, uint16x8_t v, const int lane);
+FORCE_INLINE uint32x4_t vmlal_laneq_u16(uint32x4_t a, uint16x4_t b, uint16x8_t c, const int lane) {
+  vuint16m1_t c_dup = __riscv_vrgather_vx_u16m1(c, lane, 4);
+  return __riscv_vlmul_trunc_v_u32m2_u32m1(__riscv_vwmaccu_vv_u32m2(__riscv_vlmul_ext_v_u32m1_u32m2(a), b, c_dup, 4));
+}
 
-// FORCE_INLINE uint64x2_t vmlal_laneq_u32(uint64x2_t a, uint32x2_t b, uint32x4_t v, const int lane);
+FORCE_INLINE uint64x2_t vmlal_laneq_u32(uint64x2_t a, uint32x2_t b, uint32x4_t c, const int lane) {
+  vuint32m1_t c_dup = __riscv_vrgather_vx_u32m1(c, lane, 2);
+  return __riscv_vlmul_trunc_v_u64m2_u64m1(__riscv_vwmaccu_vv_u64m2(__riscv_vlmul_ext_v_u64m1_u64m2(a), b, c_dup, 2));
+}
 
 // FORCE_INLINE int32x4_t vmlal_high_laneq_s16(int32x4_t a, int16x8_t b, int16x8_t v, const int lane);
 
