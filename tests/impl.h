@@ -165,12 +165,12 @@
   /*_(vmulq_p8)                                                               */ \
   _(vmul_f64)                                                                    \
   _(vmulq_f64)                                                                   \
-  /*_(vmulx_f32)                                                              */ \
-  /*_(vmulxq_f32)                                                             */ \
-  /*_(vmulx_f64)                                                              */ \
-  /*_(vmulxq_f64)                                                             */ \
-  /*_(vmulxs_f32)                                                             */ \
-  /*_(vmulxd_f64)                                                             */ \
+  _(vmulx_f32)                                                                   \
+  _(vmulxq_f32)                                                                  \
+  _(vmulx_f64)                                                                   \
+  _(vmulxq_f64)                                                                  \
+  _(vmulxs_f32)                                                                  \
+  _(vmulxd_f64)                                                                  \
   /*_(vmulx_lane_f32)                                                         */ \
   /*_(vmulxq_lane_f32)                                                        */ \
   /*_(vmulx_lane_f64)                                                         */ \
@@ -1986,10 +1986,10 @@
   _(vmlsl_high_lane_s32)                                                         \
   _(vmlsl_high_lane_u16)                                                         \
   _(vmlsl_high_lane_u32)                                                         \
-  _(vmlsl_laneq_s16)                                                         \
-  _(vmlsl_laneq_s32)                                                         \
-  _(vmlsl_laneq_u16)                                                         \
-  _(vmlsl_laneq_u32)                                                         \
+  _(vmlsl_laneq_s16)                                                             \
+  _(vmlsl_laneq_s32)                                                             \
+  _(vmlsl_laneq_u16)                                                             \
+  _(vmlsl_laneq_u32)                                                             \
   _(vmlsl_high_laneq_s16)                                                        \
   _(vmlsl_high_laneq_s32)                                                        \
   _(vmlsl_high_laneq_u16)                                                        \

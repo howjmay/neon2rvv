@@ -51,6 +51,7 @@ extern "C" {
 #include <math.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <string.h>
 
 #if defined(__GNUC__) || defined(__clang__)
 #pragma push_macro("FORCE_INLINE")
@@ -784,17 +785,49 @@ FORCE_INLINE float64x1_t vmul_f64(float64x1_t a, float64x1_t b) { return __riscv
 
 FORCE_INLINE float64x2_t vmulq_f64(float64x2_t a, float64x2_t b) { return __riscv_vfmul_vv_f64m1(a, b, 2); }
 
-// FORCE_INLINE float32x2_t vmulx_f32(float32x2_t a, float32x2_t b);
+FORCE_INLINE float32x2_t vmulx_f32(float32x2_t a, float32x2_t b) {
+  vfloat32m1_t mul = __riscv_vfmul_vv_f32m1(a, b, 2);
+  vbool32_t non_nan_mask = __riscv_vmfeq_vv_f32m1_b32(mul, mul, 2);
+  vfloat32m1_t all_twos = __riscv_vfmv_v_f_f32m1(2, 2);
+  return __riscv_vmerge_vvm_f32m1(all_twos, mul, non_nan_mask, 2);
+}
 
-// FORCE_INLINE float32x4_t vmulxq_f32(float32x4_t a, float32x4_t b);
+FORCE_INLINE float32x4_t vmulxq_f32(float32x4_t a, float32x4_t b) {
+  vfloat32m1_t mul = __riscv_vfmul_vv_f32m1(a, b, 4);
+  vbool32_t non_nan_mask = __riscv_vmfeq_vv_f32m1_b32(mul, mul, 4);
+  vfloat32m1_t all_twos = __riscv_vfmv_v_f_f32m1(2, 2);
+  return __riscv_vmerge_vvm_f32m1(all_twos, mul, non_nan_mask, 4);
+}
 
-// FORCE_INLINE float64x1_t vmulx_f64(float64x1_t a, float64x1_t b);
+FORCE_INLINE float64x1_t vmulx_f64(float64x1_t a, float64x1_t b) {
+  vfloat64m1_t mul = __riscv_vfmul_vv_f64m1(a, b, 1);
+  vbool64_t non_nan_mask = __riscv_vmfeq_vv_f64m1_b64(mul, mul, 1);
+  vfloat64m1_t all_twos = __riscv_vfmv_v_f_f64m1(2, 2);
+  return __riscv_vmerge_vvm_f64m1(all_twos, mul, non_nan_mask, 1);
+}
 
-// FORCE_INLINE float64x2_t vmulxq_f64(float64x2_t a, float64x2_t b);
+FORCE_INLINE float64x2_t vmulxq_f64(float64x2_t a, float64x2_t b) {
+  vfloat64m1_t mul = __riscv_vfmul_vv_f64m1(a, b, 2);
+  vbool64_t nan_mask = __riscv_vmfeq_vv_f64m1_b64(mul, mul, 2);
+  vfloat64m1_t all_twos = __riscv_vfmv_v_f_f64m1(2, 2);
+  return __riscv_vmerge_vvm_f64m1(all_twos, mul, nan_mask, 2);
+}
 
-// FORCE_INLINE float32_t vmulxs_f32(float32_t a, float32_t b);
+FORCE_INLINE float32_t vmulxs_f32(float32_t a, float32_t b) {
+  float32_t mul = a * b;
+  if (mul != mul) {
+    return 2;
+  }
+  return mul;
+}
 
-// FORCE_INLINE float64_t vmulxd_f64(float64_t a, float64_t b);
+FORCE_INLINE float64_t vmulxd_f64(float64_t a, float64_t b) {
+  float64_t mul = a * b;
+  if (mul != mul) {
+    return 2;
+  }
+  return mul;
+}
 
 // FORCE_INLINE float32x2_t vmulx_lane_f32(float32x2_t a, float32x2_t v, const int lane);
 
