@@ -1986,10 +1986,10 @@
   _(vmlsl_high_lane_s32)                                                         \
   _(vmlsl_high_lane_u16)                                                         \
   _(vmlsl_high_lane_u32)                                                         \
-  /*_(vmlsl_laneq_s16)                                                        */ \
-  /*_(vmlsl_laneq_s32)                                                        */ \
-  /*_(vmlsl_laneq_u16)                                                        */ \
-  /*_(vmlsl_laneq_u32)                                                        */ \
+  _(vmlsl_laneq_s16)                                                         \
+  _(vmlsl_laneq_s32)                                                         \
+  _(vmlsl_laneq_u16)                                                         \
+  _(vmlsl_laneq_u32)                                                         \
   _(vmlsl_high_laneq_s16)                                                        \
   _(vmlsl_high_laneq_s32)                                                        \
   _(vmlsl_high_laneq_u16)                                                        \
