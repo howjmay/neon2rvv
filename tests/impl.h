@@ -1966,16 +1966,16 @@
   _(vmlsq_lane_s16)                                                              \
   _(vmlsq_lane_s32)                                                              \
   _(vmlsq_lane_f32)                                                              \
-  /*_(vmls_laneq_s16)                                                         */ \
-  /*_(vmlsq_laneq_s16)                                                        */ \
-  /*_(vmls_laneq_s32)                                                         */ \
-  /*_(vmlsq_laneq_s32)                                                        */ \
-  /*_(vmls_laneq_u16)                                                         */ \
-  /*_(vmlsq_laneq_u16)                                                        */ \
-  /*_(vmls_laneq_u32)                                                         */ \
-  /*_(vmlsq_laneq_u32)                                                        */ \
-  /*_(vmls_laneq_f32)                                                         */ \
-  /*_(vmlsq_laneq_f32)                                                        */ \
+  _(vmls_laneq_s16)                                                              \
+  _(vmlsq_laneq_s16)                                                             \
+  _(vmls_laneq_s32)                                                              \
+  _(vmlsq_laneq_s32)                                                             \
+  _(vmls_laneq_u16)                                                              \
+  _(vmlsq_laneq_u16)                                                             \
+  _(vmls_laneq_u32)                                                              \
+  _(vmlsq_laneq_u32)                                                             \
+  _(vmls_laneq_f32)                                                              \
+  _(vmlsq_laneq_f32)                                                             \
   _(vmlsq_lane_u16)                                                              \
   _(vmlsq_lane_u32)                                                              \
   _(vmlsl_lane_s16)                                                              \
