@@ -786,31 +786,47 @@ FORCE_INLINE float64x1_t vmul_f64(float64x1_t a, float64x1_t b) { return __riscv
 FORCE_INLINE float64x2_t vmulq_f64(float64x2_t a, float64x2_t b) { return __riscv_vfmul_vv_f64m1(a, b, 2); }
 
 FORCE_INLINE float32x2_t vmulx_f32(float32x2_t a, float32x2_t b) {
+  vbool32_t a_non_nan_mask = __riscv_vmfeq_vv_f32m1_b32(a, a, 2);
+  vbool32_t b_non_nan_mask = __riscv_vmfeq_vv_f32m1_b32(b, b, 2);
+  vbool32_t ab_nan_mask = __riscv_vmnot_m_b32(__riscv_vmor_mm_b32(a_non_nan_mask, b_non_nan_mask, 2), 2);
   vfloat32m1_t mul = __riscv_vfmul_vv_f32m1(a, b, 2);
   vbool32_t non_nan_mask = __riscv_vmfeq_vv_f32m1_b32(mul, mul, 2);
+  vbool32_t non_two_mask = __riscv_vmor_mm_b32(non_nan_mask, ab_nan_mask, 2);
   vfloat32m1_t all_twos = __riscv_vfmv_v_f_f32m1(2, 2);
-  return __riscv_vmerge_vvm_f32m1(all_twos, mul, non_nan_mask, 2);
+  return __riscv_vmerge_vvm_f32m1(all_twos, mul, non_two_mask, 2);
 }
 
 FORCE_INLINE float32x4_t vmulxq_f32(float32x4_t a, float32x4_t b) {
+  vbool32_t a_non_nan_mask = __riscv_vmfeq_vv_f32m1_b32(a, a, 4);
+  vbool32_t b_non_nan_mask = __riscv_vmfeq_vv_f32m1_b32(b, b, 4);
+  vbool32_t ab_nan_mask = __riscv_vmnot_m_b32(__riscv_vmor_mm_b32(a_non_nan_mask, b_non_nan_mask, 4), 4);
   vfloat32m1_t mul = __riscv_vfmul_vv_f32m1(a, b, 4);
   vbool32_t non_nan_mask = __riscv_vmfeq_vv_f32m1_b32(mul, mul, 4);
-  vfloat32m1_t all_twos = __riscv_vfmv_v_f_f32m1(2, 2);
-  return __riscv_vmerge_vvm_f32m1(all_twos, mul, non_nan_mask, 4);
+  vbool32_t non_two_mask = __riscv_vmor_mm_b32(non_nan_mask, ab_nan_mask, 4);
+  vfloat32m1_t all_twos = __riscv_vfmv_v_f_f32m1(2, 4);
+  return __riscv_vmerge_vvm_f32m1(all_twos, mul, non_two_mask, 4);
 }
 
 FORCE_INLINE float64x1_t vmulx_f64(float64x1_t a, float64x1_t b) {
+  vbool64_t a_non_nan_mask = __riscv_vmfeq_vv_f64m1_b64(a, a, 1);
+  vbool64_t b_non_nan_mask = __riscv_vmfeq_vv_f64m1_b64(b, b, 1);
+  vbool64_t ab_nan_mask = __riscv_vmnot_m_b64(__riscv_vmor_mm_b64(a_non_nan_mask, b_non_nan_mask, 1), 1);
   vfloat64m1_t mul = __riscv_vfmul_vv_f64m1(a, b, 1);
   vbool64_t non_nan_mask = __riscv_vmfeq_vv_f64m1_b64(mul, mul, 1);
-  vfloat64m1_t all_twos = __riscv_vfmv_v_f_f64m1(2, 2);
-  return __riscv_vmerge_vvm_f64m1(all_twos, mul, non_nan_mask, 1);
+  vbool64_t non_two_mask = __riscv_vmor_mm_b64(non_nan_mask, ab_nan_mask, 1);
+  vfloat64m1_t all_twos = __riscv_vfmv_v_f_f64m1(2, 1);
+  return __riscv_vmerge_vvm_f64m1(all_twos, mul, non_two_mask, 1);
 }
 
 FORCE_INLINE float64x2_t vmulxq_f64(float64x2_t a, float64x2_t b) {
+  vbool64_t a_non_nan_mask = __riscv_vmfeq_vv_f64m1_b64(a, a, 2);
+  vbool64_t b_non_nan_mask = __riscv_vmfeq_vv_f64m1_b64(b, b, 2);
+  vbool64_t ab_nan_mask = __riscv_vmnot_m_b64(__riscv_vmor_mm_b64(a_non_nan_mask, b_non_nan_mask, 2), 2);
   vfloat64m1_t mul = __riscv_vfmul_vv_f64m1(a, b, 2);
-  vbool64_t nan_mask = __riscv_vmfeq_vv_f64m1_b64(mul, mul, 2);
+  vbool64_t non_nan_mask = __riscv_vmfeq_vv_f64m1_b64(mul, mul, 2);
+  vbool64_t non_two_mask = __riscv_vmor_mm_b64(non_nan_mask, ab_nan_mask, 2);
   vfloat64m1_t all_twos = __riscv_vfmv_v_f_f64m1(2, 2);
-  return __riscv_vmerge_vvm_f64m1(all_twos, mul, nan_mask, 2);
+  return __riscv_vmerge_vvm_f64m1(all_twos, mul, non_two_mask, 2);
 }
 
 FORCE_INLINE float32_t vmulxs_f32(float32_t a, float32_t b) {
