@@ -34,10 +34,12 @@ class NEON2RVV_TEST_IMPL : public NEON2RVV_TEST {
     test_cases_float_pointer2 = (float *)platform_aligned_alloc(REGISTER_SIZE);
     test_cases_float_pointer3 = (float *)platform_aligned_alloc(REGISTER_SIZE);
     test_cases_float_pointer4 = (float *)platform_aligned_alloc(REGISTER_SIZE);
+    test_cases_float_pointer_huge = (float *)platform_aligned_alloc(REGISTER_SIZE*5);
     test_cases_int_pointer1 = (int32_t *)platform_aligned_alloc(REGISTER_SIZE);
     test_cases_int_pointer2 = (int32_t *)platform_aligned_alloc(REGISTER_SIZE);
     test_cases_int_pointer3 = (int32_t *)platform_aligned_alloc(REGISTER_SIZE);
     test_cases_int_pointer4 = (int32_t *)platform_aligned_alloc(REGISTER_SIZE);
+    test_cases_int_pointer_huge = (int32_t *)platform_aligned_alloc(REGISTER_SIZE*5);
     srand(0);
     for (uint32_t i = 0; i < MAX_TEST_VALUE; i++) {
       test_cases_floats[i] = ranf(-100000, 100000);
@@ -48,10 +50,12 @@ class NEON2RVV_TEST_IMPL : public NEON2RVV_TEST {
   float *test_cases_float_pointer2;
   float *test_cases_float_pointer3;
   float *test_cases_float_pointer4;
+  float *test_cases_float_pointer_huge;
   int32_t *test_cases_int_pointer1;
   int32_t *test_cases_int_pointer2;
   int32_t *test_cases_int_pointer3;
   int32_t *test_cases_int_pointer4;
+  int32_t *test_cases_int_pointer_huge;
   float test_cases_floats[MAX_TEST_VALUE];
   int32_t test_cases_ints[MAX_TEST_VALUE];
 
@@ -60,10 +64,12 @@ class NEON2RVV_TEST_IMPL : public NEON2RVV_TEST {
     platform_aligned_free(test_cases_float_pointer2);
     platform_aligned_free(test_cases_float_pointer3);
     platform_aligned_free(test_cases_float_pointer4);
+    platform_aligned_free(test_cases_float_pointer_huge);
     platform_aligned_free(test_cases_int_pointer1);
     platform_aligned_free(test_cases_int_pointer2);
     platform_aligned_free(test_cases_int_pointer3);
     platform_aligned_free(test_cases_int_pointer4);
+    platform_aligned_free(test_cases_int_pointer_huge);
   }
 
   void load_test_float_pointers(uint32_t iter) {
@@ -82,6 +88,13 @@ class NEON2RVV_TEST_IMPL : public NEON2RVV_TEST {
       test_cases_int_pointer4[i] = test_cases_ints[iter + i + 12];
     }
   }
+  void load_test_huge_pointers(uint32_t iter) {
+    for (int i = 0; i < 20; i++) {
+      test_cases_float_pointer_huge[i] = test_cases_floats[iter + i];
+      test_cases_int_pointer_huge[i] = test_cases_ints[iter + i];
+    }
+  }
+
   result_t run_single_test(INSTRUCTION_TEST test, uint32_t iter);
 
   virtual void release(void) { delete this; }
@@ -30422,20 +30435,9 @@ result_t test_vtbl2_p8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return T
 
 result_t test_vtbl3_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
-  const int8_t *in1 = (int8_t *)impl.test_cases_int_pointer1;
-  const int8_t *in2 = (int8_t *)impl.test_cases_int_pointer2;
+  const int8_t *_a = (int8_t *)impl.test_cases_int_pointer_huge;
   const int8_t *_b = (int8_t *)impl.test_cases_int_pointer3;
-  const size_t reg_elt_num = 8;
-  int8_t _in_interleave[32];
-  int8_t _a[24];
   int8_t _c[8];
-  merge_arrays(in1, in2, _in_interleave, reg_elt_num);
-  // organize input array
-  for (int i = 0; i < 8; i++) {
-    _a[i] = _in_interleave[3 * i];
-    _a[i + 8] = _in_interleave[3 * i + 1];
-    _a[i + 16] = _in_interleave[3 * i + 2];
-  }
   for (int i = 0; i < 8; i++) {
     if (_b[i] > 23 || _b[i] < 0) {
       _c[i] = 0;
@@ -30444,7 +30446,7 @@ result_t test_vtbl3_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
     }
   }
 
-  int8x8x3_t a = vld3_s8(_in_interleave);
+  int8x8x3_t a = vld3_s8(_a);
   int8x8_t b = vld1_s8(_b);
   int8x8_t c = vtbl3_s8(a, b);
   return validate_int8(c, _c[0], _c[1], _c[2], _c[3], _c[4], _c[5], _c[6], _c[7]);
