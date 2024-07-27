@@ -171,16 +171,16 @@
   _(vmulxq_f64)                                                                  \
   _(vmulxs_f32)                                                                  \
   _(vmulxd_f64)                                                                  \
-  /*_(vmulx_lane_f32)                                                         */ \
-  /*_(vmulxq_lane_f32)                                                        */ \
-  /*_(vmulx_lane_f64)                                                         */ \
-  /*_(vmulxq_lane_f64)                                                        */ \
+  _(vmulx_lane_f32)                                                              \
+  _(vmulxq_lane_f32)                                                             \
+  _(vmulx_lane_f64)                                                              \
+  _(vmulxq_lane_f64)                                                             \
   /*_(vmulxs_lane_f32)                                                        */ \
   /*_(vmulxd_lane_f64)                                                        */ \
-  /*_(vmulx_laneq_f32)                                                        */ \
-  /*_(vmulxq_laneq_f32)                                                       */ \
-  /*_(vmulx_laneq_f64)                                                        */ \
-  /*_(vmulxq_laneq_f64)                                                       */ \
+  _(vmulx_laneq_f32)                                                             \
+  _(vmulxq_laneq_f32)                                                            \
+  _(vmulx_laneq_f64)                                                             \
+  _(vmulxq_laneq_f64)                                                            \
   /*_(vmulxs_laneq_f32)                                                       */ \
   /*_(vmulxd_laneq_f64)                                                       */ \
   _(vdiv_f32)                                                                    \
