@@ -2471,28 +2471,28 @@
   /*_(vbslq_p16)                                                              */ \
   _(vbsl_f64)                                                                    \
   _(vbslq_f64)                                                                   \
-  /*_(vcopy_lane_s8)                                                          */ \
-  /*_(vcopyq_lane_s8)                                                         */ \
-  /*_(vcopy_lane_s16)                                                         */ \
-  /*_(vcopyq_lane_s16)                                                        */ \
-  /*_(vcopy_lane_s32)                                                         */ \
-  /*_(vcopyq_lane_s32)                                                        */ \
-  /*_(vcopy_lane_s64)                                                         */ \
-  /*_(vcopyq_lane_s64)                                                        */ \
-  /*_(vcopy_lane_u8)                                                          */ \
-  /*_(vcopyq_lane_u8)                                                         */ \
-  /*_(vcopy_lane_u16)                                                         */ \
-  /*_(vcopyq_lane_u16)                                                        */ \
-  /*_(vcopy_lane_u32)                                                         */ \
-  /*_(vcopyq_lane_u32)                                                        */ \
-  /*_(vcopy_lane_u64)                                                         */ \
-  /*_(vcopyq_lane_u64)                                                        */ \
+  _(vcopy_lane_s8)                                                               \
+  _(vcopyq_lane_s8)                                                              \
+  _(vcopy_lane_s16)                                                              \
+  _(vcopyq_lane_s16)                                                             \
+  _(vcopy_lane_s32)                                                              \
+  _(vcopyq_lane_s32)                                                             \
+  _(vcopy_lane_s64)                                                              \
+  _(vcopyq_lane_s64)                                                             \
+  _(vcopy_lane_u8)                                                               \
+  _(vcopyq_lane_u8)                                                              \
+  _(vcopy_lane_u16)                                                              \
+  _(vcopyq_lane_u16)                                                             \
+  _(vcopy_lane_u32)                                                              \
+  _(vcopyq_lane_u32)                                                             \
+  _(vcopy_lane_u64)                                                              \
+  _(vcopyq_lane_u64)                                                             \
   /*_(vcopy_lane_p64)                                                         */ \
   /*_(vcopyq_lane_p64)                                                        */ \
-  /*_(vcopy_lane_f32)                                                         */ \
-  /*_(vcopyq_lane_f32)                                                        */ \
-  /*_(vcopy_lane_f64)                                                         */ \
-  /*_(vcopyq_lane_f64)                                                        */ \
+  _(vcopy_lane_f32)                                                              \
+  _(vcopyq_lane_f32)                                                             \
+  _(vcopy_lane_f64)                                                              \
+  _(vcopyq_lane_f64)                                                             \
   /*_(vcopy_lane_p8)                                                          */ \
   /*_(vcopyq_lane_p8)                                                         */ \
   /*_(vcopy_lane_p16)                                                         */ \
