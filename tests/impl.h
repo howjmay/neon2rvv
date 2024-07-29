@@ -1892,8 +1892,8 @@
   _(vmulq_lane_f32)                                                              \
   _(vmul_lane_f64)                                                               \
   _(vmulq_lane_f64)                                                              \
-  /*_(vmuls_lane_f32)                                                         */ \
-  /*_(vmuld_lane_f64)                                                         */ \
+  _(vmuls_lane_f32)                                                              \
+  _(vmuld_lane_f64)                                                              \
   /*_(vmul_laneq_s16)                                                         */ \
   /*_(vmulq_laneq_s16)                                                        */ \
   /*_(vmul_laneq_s32)                                                         */ \
@@ -1902,12 +1902,12 @@
   /*_(vmulq_laneq_u16)                                                        */ \
   /*_(vmul_laneq_u32)                                                         */ \
   /*_(vmulq_laneq_u32)                                                        */ \
-  /*_(vmul_laneq_f32)                                                         */ \
-  /*_(vmulq_laneq_f32)                                                        */ \
-  /*_(vmul_laneq_f64)                                                         */ \
-  /*_(vmulq_laneq_f64)                                                        */ \
-  /*_(vmuls_laneq_f32)                                                        */ \
-  /*_(vmuld_laneq_f64)                                                        */ \
+  _(vmul_laneq_f32)                                                              \
+  _(vmulq_laneq_f32)                                                             \
+  _(vmul_laneq_f64)                                                              \
+  _(vmulq_laneq_f64)                                                             \
+  _(vmuls_laneq_f32)                                                             \
+  _(vmuld_laneq_f64)                                                             \
   _(vmulq_lane_u16)                                                              \
   _(vmulq_lane_u32)                                                              \
   _(vmla_lane_s16)                                                               \
