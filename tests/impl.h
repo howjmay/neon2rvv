@@ -1625,28 +1625,28 @@
   /*_(vget_low_p8)                                                            */ \
   /*_(vget_low_p16)                                                           */ \
   _(vget_low_f64)                                                                \
-  /*_(vdupb_lane_s8)                                                          */ \
-  /*_(vduph_lane_s16)                                                         */ \
-  /*_(vdups_lane_s32)                                                         */ \
-  /*_(vdupd_lane_s64)                                                         */ \
-  /*_(vdupb_lane_u8)                                                          */ \
-  /*_(vduph_lane_u16)                                                         */ \
-  /*_(vdups_lane_u32)                                                         */ \
-  /*_(vdupd_lane_u64)                                                         */ \
-  /*_(vdups_lane_f32)                                                         */ \
-  /*_(vdupd_lane_f64)                                                         */ \
+  _(vdupb_lane_s8)                                                               \
+  _(vduph_lane_s16)                                                              \
+  _(vdups_lane_s32)                                                              \
+  _(vdupd_lane_s64)                                                              \
+  _(vdupb_lane_u8)                                                               \
+  _(vduph_lane_u16)                                                              \
+  _(vdups_lane_u32)                                                              \
+  _(vdupd_lane_u64)                                                              \
+  _(vdups_lane_f32)                                                              \
+  _(vdupd_lane_f64)                                                              \
   /*_(vdupb_lane_p8)                                                          */ \
   /*_(vduph_lane_p16)                                                         */ \
-  /*_(vdupb_laneq_s8)                                                         */ \
-  /*_(vduph_laneq_s16)                                                        */ \
-  /*_(vdups_laneq_s32)                                                        */ \
-  /*_(vdupd_laneq_s64)                                                        */ \
-  /*_(vdupb_laneq_u8)                                                         */ \
-  /*_(vduph_laneq_u16)                                                        */ \
-  /*_(vdups_laneq_u32)                                                        */ \
-  /*_(vdupd_laneq_u64)                                                        */ \
-  /*_(vdups_laneq_f32)                                                        */ \
-  /*_(vdupd_laneq_f64)                                                        */ \
+  _(vdupb_laneq_s8)                                                              \
+  _(vduph_laneq_s16)                                                             \
+  _(vdups_laneq_s32)                                                             \
+  _(vdupd_laneq_s64)                                                             \
+  _(vdupb_laneq_u8)                                                              \
+  _(vduph_laneq_u16)                                                             \
+  _(vdups_laneq_u32)                                                             \
+  _(vdupd_laneq_u64)                                                             \
+  _(vdups_laneq_f32)                                                             \
+  _(vdupd_laneq_f64)                                                             \
   /*_(vdupb_laneq_p8)                                                         */ \
   /*_(vduph_laneq_p16)                                                        */ \
   /*_(vget_low_p64)                                                           */ \
