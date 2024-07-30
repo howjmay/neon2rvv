@@ -11574,9 +11574,15 @@ FORCE_INLINE float32x4_t vextq_f32(float32x4_t a, float32x4_t b, const int c) {
   return __riscv_vslideup_vx_f32m1(a_slidedown, b, 4 - c, 4);
 }
 
-// FORCE_INLINE float64x1_t vext_f64(float64x1_t a, float64x1_t b, const int n);
+FORCE_INLINE float64x1_t vext_f64(float64x1_t a, float64x1_t b, const int c) {
+  vfloat64m1_t a_slidedown = __riscv_vslidedown_vx_f64m1(a, c, 1);
+  return __riscv_vslideup_vx_f64m1(a_slidedown, b, 1 - c, 1);
+}
 
-// FORCE_INLINE float64x2_t vextq_f64(float64x2_t a, float64x2_t b, const int n);
+FORCE_INLINE float64x2_t vextq_f64(float64x2_t a, float64x2_t b, const int c) {
+  vfloat64m1_t a_slidedown = __riscv_vslidedown_vx_f64m1(a, c, 2);
+  return __riscv_vslideup_vx_f64m1(a_slidedown, b, 2 - c, 2);
+}
 
 // FORCE_INLINE poly8x8_t vext_p8(poly8x8_t a, poly8x8_t b, const int n);
 
