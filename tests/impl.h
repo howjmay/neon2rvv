@@ -2269,8 +2269,8 @@
   _(vextq_s32)                                                                   \
   _(vextq_s64)                                                                   \
   _(vextq_f32)                                                                   \
-  /*_(vext_f64)                                                               */ \
-  /*_(vextq_f64)                                                              */ \
+  _(vext_f64)                                                                    \
+  _(vextq_f64)                                                                   \
   _(vextq_u8)                                                                    \
   _(vextq_u16)                                                                   \
   _(vextq_u32)                                                                   \

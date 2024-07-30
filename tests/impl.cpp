@@ -39230,9 +39230,69 @@ result_t test_vextq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #endif  // ENABLE_TEST_ALL
 }
 
-result_t test_vext_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vext_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const double *_a = (const double *)impl.test_cases_float_pointer1;
+  const double *_b = (const double *)impl.test_cases_float_pointer2;
+  const int elt_num = 1;
+  double _c[elt_num];
+  float64x1_t a, b, c;
 
-result_t test_vextq_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  float temp_arr[elt_num * 2];
+  for (int i = 0; i < elt_num; i++) {
+    temp_arr[i] = _a[i];
+    temp_arr[i + elt_num] = _b[i];
+  }
+
+#define TEST_IMPL(IDX)                \
+  for (int i = 0; i < elt_num; i++) { \
+    _c[i] = temp_arr[i + IDX];        \
+  }                                   \
+  a = vld1_f64(_a);                   \
+  b = vld1_f64(_b);                   \
+  c = vext_f64(a, b, IDX);            \
+  CHECK_RESULT(validate_double(c, _c[0]))
+
+  IMM_1_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vextq_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const double *_a = (const double *)impl.test_cases_float_pointer1;
+  const double *_b = (const double *)impl.test_cases_float_pointer2;
+  const int elt_num = 2;
+  double _c[elt_num];
+  float64x2_t a, b, c;
+
+  float temp_arr[elt_num * 2];
+  for (int i = 0; i < elt_num; i++) {
+    temp_arr[i] = _a[i];
+    temp_arr[i + elt_num] = _b[i];
+  }
+
+#define TEST_IMPL(IDX)                \
+  for (int i = 0; i < elt_num; i++) { \
+    _c[i] = temp_arr[i + IDX];        \
+  }                                   \
+  a = vld1q_f64(_a);                  \
+  b = vld1q_f64(_b);                  \
+  c = vextq_f64(a, b, IDX);           \
+  CHECK_RESULT(validate_double(c, _c[0], _c[1]))
+
+  IMM_2_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vext_p8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
