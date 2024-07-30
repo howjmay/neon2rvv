@@ -2634,8 +2634,8 @@
   _(vld1q_lane_u32)                                                              \
   /*_(vld1q_lane_p8)                                                          */ \
   /*_(vld1q_lane_p16)                                                         */ \
-  /*_(vld1_lane_f64)                                                          */ \
-  /*_(vld1q_lane_f64)                                                         */ \
+  _(vld1_lane_f64)                                                               \
+  _(vld1q_lane_f64)                                                              \
   /*_(vld1q_lane_p64)                                                         */ \
   _(vld1q_lane_s64)                                                              \
   _(vld1q_lane_u64)                                                              \

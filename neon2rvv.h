@@ -13084,80 +13084,80 @@ FORCE_INLINE uint64x2_t vld1q_u64(const uint64_t *ptr) { return __riscv_vle64_v_
 
 // FORCE_INLINE float16x8_t vld1q_f16(float16_t const * ptr);
 
-FORCE_INLINE int8x8_t vld1_lane_s8(const int8_t *a, int8x8_t b, const int c) {
-  vbool8_t mask = __riscv_vreinterpret_v_u8m1_b8(vdup_n_u8((uint8_t)(1 << c)));
+FORCE_INLINE int8x8_t vld1_lane_s8(const int8_t *a, int8x8_t b, const int lane) {
+  vbool8_t mask = __riscv_vreinterpret_v_u8m1_b8(vdup_n_u8((uint8_t)(1 << lane)));
   vint8m1_t a_dup = vdup_n_s8(a[0]);
   return __riscv_vmerge_vvm_i8m1(b, a_dup, mask, 8);
 }
 
-FORCE_INLINE int16x4_t vld1_lane_s16(const int16_t *a, int16x4_t b, const int c) {
-  vbool16_t mask = __riscv_vreinterpret_v_u8m1_b16(vdup_n_u8((uint8_t)(1 << c)));
+FORCE_INLINE int16x4_t vld1_lane_s16(const int16_t *a, int16x4_t b, const int lane) {
+  vbool16_t mask = __riscv_vreinterpret_v_u8m1_b16(vdup_n_u8((uint8_t)(1 << lane)));
   vint16m1_t a_dup = vdup_n_s16(a[0]);
   return __riscv_vmerge_vvm_i16m1(b, a_dup, mask, 4);
 }
 
-FORCE_INLINE int32x2_t vld1_lane_s32(const int32_t *a, int32x2_t b, const int c) {
-  vbool32_t mask = __riscv_vreinterpret_v_u8m1_b32(vdup_n_u8((uint8_t)(1 << c)));
+FORCE_INLINE int32x2_t vld1_lane_s32(const int32_t *a, int32x2_t b, const int lane) {
+  vbool32_t mask = __riscv_vreinterpret_v_u8m1_b32(vdup_n_u8((uint8_t)(1 << lane)));
   vint32m1_t a_dup = vdup_n_s32(a[0]);
   return __riscv_vmerge_vvm_i32m1(b, a_dup, mask, 2);
 }
 
-FORCE_INLINE float32x2_t vld1_lane_f32(const float32_t *a, float32x2_t b, const int c) {
-  vbool32_t mask = __riscv_vreinterpret_v_u8m1_b32(vdup_n_u8((uint8_t)(1 << c)));
+FORCE_INLINE float32x2_t vld1_lane_f32(const float32_t *a, float32x2_t b, const int lane) {
+  vbool32_t mask = __riscv_vreinterpret_v_u8m1_b32(vdup_n_u8((uint8_t)(1 << lane)));
   vfloat32m1_t a_dup = vdup_n_f32(a[0]);
   return __riscv_vmerge_vvm_f32m1(b, a_dup, mask, 2);
 }
 
-FORCE_INLINE uint8x8_t vld1_lane_u8(const uint8_t *a, uint8x8_t b, const int c) {
-  vbool8_t mask = __riscv_vreinterpret_v_u8m1_b8(vdup_n_u8((uint8_t)(1 << c)));
+FORCE_INLINE uint8x8_t vld1_lane_u8(const uint8_t *a, uint8x8_t b, const int lane) {
+  vbool8_t mask = __riscv_vreinterpret_v_u8m1_b8(vdup_n_u8((uint8_t)(1 << lane)));
   vuint8m1_t a_dup = vdup_n_u8(a[0]);
   return __riscv_vmerge_vvm_u8m1(b, a_dup, mask, 8);
 }
 
-FORCE_INLINE uint16x4_t vld1_lane_u16(const uint16_t *a, uint16x4_t b, const int c) {
-  vbool16_t mask = __riscv_vreinterpret_v_u8m1_b16(vdup_n_u8((uint8_t)(1 << c)));
+FORCE_INLINE uint16x4_t vld1_lane_u16(const uint16_t *a, uint16x4_t b, const int lane) {
+  vbool16_t mask = __riscv_vreinterpret_v_u8m1_b16(vdup_n_u8((uint8_t)(1 << lane)));
   vuint16m1_t a_dup = vdup_n_u16(a[0]);
   return __riscv_vmerge_vvm_u16m1(b, a_dup, mask, 4);
 }
 
-FORCE_INLINE uint32x2_t vld1_lane_u32(const uint32_t *a, uint32x2_t b, const int c) {
-  vbool32_t mask = __riscv_vreinterpret_v_u8m1_b32(vdup_n_u8((uint8_t)(1 << c)));
+FORCE_INLINE uint32x2_t vld1_lane_u32(const uint32_t *a, uint32x2_t b, const int lane) {
+  vbool32_t mask = __riscv_vreinterpret_v_u8m1_b32(vdup_n_u8((uint8_t)(1 << lane)));
   vuint32m1_t a_dup = vdup_n_u32(a[0]);
   return __riscv_vmerge_vvm_u32m1(b, a_dup, mask, 2);
 }
 
-FORCE_INLINE int64x1_t vld1_lane_s64(const int64_t *a, int64x1_t b, const int c) {
-  vbool64_t mask = __riscv_vreinterpret_v_u8m1_b64(vdup_n_u8((uint8_t)(1 << c)));
+FORCE_INLINE int64x1_t vld1_lane_s64(const int64_t *a, int64x1_t b, const int lane) {
+  vbool64_t mask = __riscv_vreinterpret_v_u8m1_b64(vdup_n_u8((uint8_t)(1 << lane)));
   vint64m1_t a_dup = vdup_n_s64(a[0]);
   return __riscv_vmerge_vvm_i64m1(b, a_dup, mask, 1);
 }
 
-FORCE_INLINE uint64x1_t vld1_lane_u64(const uint64_t *a, uint64x1_t b, const int c) {
-  vbool64_t mask = __riscv_vreinterpret_v_u8m1_b64(vdup_n_u8((uint8_t)(1 << c)));
+FORCE_INLINE uint64x1_t vld1_lane_u64(const uint64_t *a, uint64x1_t b, const int lane) {
+  vbool64_t mask = __riscv_vreinterpret_v_u8m1_b64(vdup_n_u8((uint8_t)(1 << lane)));
   vuint64m1_t a_dup = vdup_n_u64(a[0]);
   return __riscv_vmerge_vvm_u64m1(b, a_dup, mask, 1);
 }
 
-FORCE_INLINE int8x16_t vld1q_lane_s8(const int8_t *a, int8x16_t b, const int c) {
-  vbool8_t mask = __riscv_vreinterpret_v_u16m1_b8(vdup_n_u16((uint16_t)(1 << c)));
+FORCE_INLINE int8x16_t vld1q_lane_s8(const int8_t *a, int8x16_t b, const int lane) {
+  vbool8_t mask = __riscv_vreinterpret_v_u16m1_b8(vdup_n_u16((uint16_t)(1 << lane)));
   vint8m1_t a_dup = vdupq_n_s8(a[0]);
   return __riscv_vmerge_vvm_i8m1(b, a_dup, mask, 16);
 }
 
-FORCE_INLINE int16x8_t vld1q_lane_s16(const int16_t *a, int16x8_t b, const int c) {
-  vbool16_t mask = __riscv_vreinterpret_v_u8m1_b16(vdup_n_u8((uint8_t)(1 << c)));
+FORCE_INLINE int16x8_t vld1q_lane_s16(const int16_t *a, int16x8_t b, const int lane) {
+  vbool16_t mask = __riscv_vreinterpret_v_u8m1_b16(vdup_n_u8((uint8_t)(1 << lane)));
   vint16m1_t a_dup = vdupq_n_s16(a[0]);
   return __riscv_vmerge_vvm_i16m1(b, a_dup, mask, 8);
 }
 
-FORCE_INLINE int32x4_t vld1q_lane_s32(const int32_t *a, int32x4_t b, const int c) {
-  vbool32_t mask = __riscv_vreinterpret_v_u8m1_b32(vdup_n_u8((uint8_t)(1 << c)));
+FORCE_INLINE int32x4_t vld1q_lane_s32(const int32_t *a, int32x4_t b, const int lane) {
+  vbool32_t mask = __riscv_vreinterpret_v_u8m1_b32(vdup_n_u8((uint8_t)(1 << lane)));
   vint32m1_t a_dup = vdupq_n_s32(a[0]);
   return __riscv_vmerge_vvm_i32m1(b, a_dup, mask, 4);
 }
 
-FORCE_INLINE float32x4_t vld1q_lane_f32(const float32_t *a, float32x4_t b, const int c) {
-  vbool32_t mask = __riscv_vreinterpret_v_u8m1_b32(vdup_n_u8((uint8_t)(1 << c)));
+FORCE_INLINE float32x4_t vld1q_lane_f32(const float32_t *a, float32x4_t b, const int lane) {
+  vbool32_t mask = __riscv_vreinterpret_v_u8m1_b32(vdup_n_u8((uint8_t)(1 << lane)));
   vfloat32m1_t a_dup = vdupq_n_f32(a[0]);
   return __riscv_vmerge_vvm_f32m1(b, a_dup, mask, 4);
 }
@@ -13170,36 +13170,44 @@ FORCE_INLINE float32x4_t vld1q_lane_f32(const float32_t *a, float32x4_t b, const
 
 // FORCE_INLINE poly16x8_t vld1q_lane_p16(poly16_t const * ptr, poly16x8_t src, const int lane);
 
-// FORCE_INLINE float64x1_t vld1_lane_f64(float64_t const * ptr, float64x1_t src, const int lane);
+FORCE_INLINE float64x1_t vld1_lane_f64(float64_t const *a, float64x1_t b, const int lane) {
+  vbool64_t mask = __riscv_vreinterpret_v_u8m1_b64(vdup_n_u8((uint8_t)(1 << lane)));
+  vfloat64m1_t a_dup = vdup_n_f64(a[0]);
+  return __riscv_vmerge_vvm_f64m1(b, a_dup, mask, 1);
+}
 
-// FORCE_INLINE float64x2_t vld1q_lane_f64(float64_t const * ptr, float64x2_t src, const int lane);
+FORCE_INLINE float64x2_t vld1q_lane_f64(float64_t const *a, float64x2_t b, const int lane) {
+  vbool64_t mask = __riscv_vreinterpret_v_u8m1_b64(vdup_n_u8((uint8_t)(1 << lane)));
+  vfloat64m1_t a_dup = vdupq_n_f64(a[0]);
+  return __riscv_vmerge_vvm_f64m1(b, a_dup, mask, 2);
+}
 
-FORCE_INLINE uint8x16_t vld1q_lane_u8(const uint8_t *a, uint8x16_t b, const int c) {
-  vbool8_t mask = __riscv_vreinterpret_v_u16m1_b8(vdup_n_u16((uint16_t)(1 << c)));
+FORCE_INLINE uint8x16_t vld1q_lane_u8(const uint8_t *a, uint8x16_t b, const int lane) {
+  vbool8_t mask = __riscv_vreinterpret_v_u16m1_b8(vdup_n_u16((uint16_t)(1 << lane)));
   vuint8m1_t a_dup = vdupq_n_u8(a[0]);
   return __riscv_vmerge_vvm_u8m1(b, a_dup, mask, 16);
 }
 
-FORCE_INLINE uint16x8_t vld1q_lane_u16(const uint16_t *a, uint16x8_t b, const int c) {
-  vbool16_t mask = __riscv_vreinterpret_v_u8m1_b16(vdup_n_u8((uint8_t)(1 << c)));
+FORCE_INLINE uint16x8_t vld1q_lane_u16(const uint16_t *a, uint16x8_t b, const int lane) {
+  vbool16_t mask = __riscv_vreinterpret_v_u8m1_b16(vdup_n_u8((uint8_t)(1 << lane)));
   vuint16m1_t a_dup = vdupq_n_u16(a[0]);
   return __riscv_vmerge_vvm_u16m1(b, a_dup, mask, 8);
 }
 
-FORCE_INLINE uint32x4_t vld1q_lane_u32(const uint32_t *a, uint32x4_t b, const int c) {
-  vbool32_t mask = __riscv_vreinterpret_v_u8m1_b32(vdup_n_u8((uint8_t)(1 << c)));
+FORCE_INLINE uint32x4_t vld1q_lane_u32(const uint32_t *a, uint32x4_t b, const int lane) {
+  vbool32_t mask = __riscv_vreinterpret_v_u8m1_b32(vdup_n_u8((uint8_t)(1 << lane)));
   vuint32m1_t a_dup = vdupq_n_u32(a[0]);
   return __riscv_vmerge_vvm_u32m1(b, a_dup, mask, 4);
 }
 
-FORCE_INLINE int64x2_t vld1q_lane_s64(const int64_t *a, int64x2_t b, const int c) {
-  vbool64_t mask = __riscv_vreinterpret_v_u8m1_b64(vdup_n_u8((uint8_t)(1 << c)));
+FORCE_INLINE int64x2_t vld1q_lane_s64(const int64_t *a, int64x2_t b, const int lane) {
+  vbool64_t mask = __riscv_vreinterpret_v_u8m1_b64(vdup_n_u8((uint8_t)(1 << lane)));
   vint64m1_t a_dup = vdupq_n_s64(a[0]);
   return __riscv_vmerge_vvm_i64m1(b, a_dup, mask, 2);
 }
 
-FORCE_INLINE uint64x2_t vld1q_lane_u64(const uint64_t *a, uint64x2_t b, const int c) {
-  vbool64_t mask = __riscv_vreinterpret_v_u8m1_b64(vdup_n_u8((uint8_t)(1 << c)));
+FORCE_INLINE uint64x2_t vld1q_lane_u64(const uint64_t *a, uint64x2_t b, const int lane) {
+  vbool64_t mask = __riscv_vreinterpret_v_u8m1_b64(vdup_n_u8((uint8_t)(1 << lane)));
   vuint64m1_t a_dup = vdupq_n_u64(a[0]);
   return __riscv_vmerge_vvm_u64m1(b, a_dup, mask, 2);
 }

@@ -43414,9 +43414,59 @@ result_t test_vld1_lane_p16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { ret
 
 result_t test_vld1q_lane_p16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vld1_lane_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vld1_lane_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  double *_a = (double *)impl.test_cases_float_pointer1;
+  double *_b = (double *)impl.test_cases_float_pointer2;
+  double _c[1];
+  float64x1_t c;
+  float64x1_t b = vld1_f64(_b);
+#define TEST_IMPL(IDX)           \
+  for (int i = 0; i < 1; i++) {  \
+    if (i != IDX) {              \
+      _c[i] = _b[i];             \
+    } else {                     \
+      _c[i] = _a[0];             \
+    }                            \
+  }                              \
+  c = vld1_lane_f64(_a, b, IDX); \
+  CHECK_RESULT(validate_double(c, _c[0]))
 
-result_t test_vld1q_lane_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  IMM_1_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vld1q_lane_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  double *_a = (double *)impl.test_cases_float_pointer1;
+  double *_b = (double *)impl.test_cases_float_pointer2;
+  double _c[2];
+  float64x2_t c;
+  float64x2_t b = vld1q_f64(_b);
+#define TEST_IMPL(IDX)            \
+  for (int i = 0; i < 2; i++) {   \
+    if (i != IDX) {               \
+      _c[i] = _b[i];              \
+    } else {                      \
+      _c[i] = _a[0];              \
+    }                             \
+  }                               \
+  c = vld1q_lane_f64(_a, b, IDX); \
+  CHECK_RESULT(validate_double(c, _c[0], _c[1]))
+
+  IMM_2_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vld1q_lane_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
