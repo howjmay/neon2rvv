@@ -13254,9 +13254,9 @@ FORCE_INLINE float32x4_t vld1q_dup_f32(const float32_t *a) { return vdupq_n_f32(
 
 // FORCE_INLINE poly16x8_t vld1q_dup_p16(poly16_t const * ptr);
 
-// FORCE_INLINE float64x1_t vld1_dup_f64(float64_t const * ptr);
+FORCE_INLINE float64x1_t vld1_dup_f64(float64_t const *a) { return vdup_n_f64(a[0]); }
 
-// FORCE_INLINE float64x2_t vld1q_dup_f64(float64_t const * ptr);
+FORCE_INLINE float64x2_t vld1q_dup_f64(float64_t const *a) { return vdupq_n_f64(a[0]); }
 
 FORCE_INLINE uint8x16_t vld1q_dup_u8(const uint8_t *a) { return vdupq_n_u8(a[0]); }
 
