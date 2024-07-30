@@ -4796,9 +4796,9 @@ FORCE_INLINE float64x2_t vrecpsq_f64(float64x2_t a, float64x2_t b) {
   return __riscv_vfnmsac_vv_f64m1(vdupq_n_f64(2.0), a, b, 2);
 }
 
-// FORCE_INLINE float32_t vrecpss_f32(float32_t a, float32_t b);
+FORCE_INLINE float32_t vrecpss_f32(float32_t a, float32_t b) { return 2.0 - a * b; }
 
-// FORCE_INLINE float64_t vrecpsd_f64(float64_t a, float64_t b);
+FORCE_INLINE float64_t vrecpsd_f64(float64_t a, float64_t b) { return 2.0 - a * b; }
 
 // FORCE_INLINE float32x2_t vsqrt_f32(float32x2_t a);
 

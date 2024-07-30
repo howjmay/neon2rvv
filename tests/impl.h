@@ -959,8 +959,8 @@
   _(vrecpsq_f32)                                                                 \
   _(vrecps_f64)                                                                  \
   _(vrecpsq_f64)                                                                 \
-  /*_(vrecpss_f32)                                                            */ \
-  /*_(vrecpsd_f64)                                                            */ \
+  _(vrecpss_f32)                                                                 \
+  _(vrecpsd_f64)                                                                 \
   /*_(vsqrt_f32)                                                              */ \
   /*_(vsqrtq_f32)                                                             */ \
   /*_(vsqrt_f64)                                                              */ \
