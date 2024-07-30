@@ -967,10 +967,10 @@
   /*_(vsqrtq_f64)                                                             */ \
   _(vrsqrts_f32)                                                                 \
   _(vrsqrtsq_f32)                                                                \
-  /*_(vrsqrts_f64)                                                            */ \
-  /*_(vrsqrtsq_f64)                                                           */ \
-  /*_(vrsqrtss_f32)                                                           */ \
-  /*_(vrsqrtsd_f64)                                                           */ \
+  _(vrsqrts_f64)                                                                 \
+  _(vrsqrtsq_f64)                                                                \
+  _(vrsqrtss_f32)                                                                \
+  _(vrsqrtsd_f64)                                                                \
   _(vshl_s8)                                                                     \
   _(vshl_s16)                                                                    \
   _(vshl_s32)                                                                    \

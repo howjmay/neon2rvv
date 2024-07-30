@@ -4816,13 +4816,17 @@ FORCE_INLINE float32x4_t vrsqrtsq_f32(float32x4_t a, float32x4_t b) {
   return __riscv_vfdiv_vf_f32m1(__riscv_vfnmsac_vv_f32m1(vdupq_n_f32(3.0), a, b, 4), 2.0, 4);
 }
 
-// FORCE_INLINE float64x1_t vrsqrts_f64(float64x1_t a, float64x1_t b);
+FORCE_INLINE float64x1_t vrsqrts_f64(float64x1_t a, float64x1_t b) {
+  return __riscv_vfdiv_vf_f64m1(__riscv_vfnmsac_vv_f64m1(vdup_n_f64(3.0), a, b, 1), 2.0, 1);
+}
 
-// FORCE_INLINE float64x2_t vrsqrtsq_f64(float64x2_t a, float64x2_t b);
+FORCE_INLINE float64x2_t vrsqrtsq_f64(float64x2_t a, float64x2_t b) {
+  return __riscv_vfdiv_vf_f64m1(__riscv_vfnmsac_vv_f64m1(vdupq_n_f64(3.0), a, b, 2), 2.0, 2);
+}
 
-// FORCE_INLINE float32_t vrsqrtss_f32(float32_t a, float32_t b);
+FORCE_INLINE float32_t vrsqrtss_f32(float32_t a, float32_t b) { return (3.0 - a * b) / 2.0; }
 
-// FORCE_INLINE float64_t vrsqrtsd_f64(float64_t a, float64_t b);
+FORCE_INLINE float64_t vrsqrtsd_f64(float64_t a, float64_t b) { return (3.0 - a * b) / 2.0; }
 
 FORCE_INLINE int8x8_t vshl_s8(int8x8_t a, int8x8_t b) {
   // implementation only works within defined range 'b' in [0, 7]
