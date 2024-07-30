@@ -16984,9 +16984,31 @@ result_t test_vrecpsq_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #endif  // ENABLE_TEST_ALL
 }
 
-result_t test_vrecpss_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vrecpss_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const float *_a = (const float *)impl.test_cases_float_pointer1;
+  const float *_b = (const float *)impl.test_cases_float_pointer2;
+  float _c, c;
+  _c = 2.0 - _a[0] * _b[0];
+  c = vrecpss_f32(_a[0], _b[0]);
+  return validate_float_error(c, _c, 0.001f);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
-result_t test_vrecpsd_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vrecpsd_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const double *_a = (const double *)impl.test_cases_float_pointer1;
+  const double *_b = (const double *)impl.test_cases_float_pointer2;
+  double _c, c;
+  _c = 2.0 - _a[0] * _b[0];
+  c = vrecpsd_f64(_a[0], _b[0]);
+  return validate_double_error(c, _c, 0.001f);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vsqrt_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
