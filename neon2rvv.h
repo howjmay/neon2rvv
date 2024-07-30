@@ -9432,25 +9432,45 @@ FORCE_INLINE int64x2_t vqdmlsl_lane_s32(int64x2_t a, int32x2_t b, int32x2_t c, c
   return __riscv_vsub_vv_i64m1(a, bc_mulx2, 2);
 }
 
-// FORCE_INLINE int32_t vqdmlslh_lane_s16(int32_t a, int16_t b, int16x4_t v, const int lane);
+FORCE_INLINE int32_t vqdmlslh_lane_s16(int32_t a, int16_t b, int16x4_t c, const int lane) {
+  int16_t c_lane = vget_lane_s16(c, lane);
+  int32_t dmull = (int32_t)b * (int32_t)c_lane;
+  dmull = dmull > INT32_MAX / 2 ? INT32_MAX : dmull < INT32_MIN / 2 ? INT32_MIN : dmull * 2;
+  return sat_sub_int32(a, dmull);
+}
 
-// FORCE_INLINE int64_t vqdmlsls_lane_s32(int64_t a, int32_t b, int32x2_t v, const int lane);
+FORCE_INLINE int64_t vqdmlsls_lane_s32(int64_t a, int32_t b, int32x2_t c, const int lane) {
+  int32_t c_lane = vget_lane_s32(c, lane);
+  int64_t dmull = (int64_t)b * (int64_t)c_lane;
+  dmull = dmull > INT64_MAX / 2 ? INT64_MAX : dmull < INT64_MIN / 2 ? INT64_MIN : dmull * 2;
+  return sat_sub_int64(a, dmull);
+}
 
-// FORCE_INLINE int32x4_t vqdmlsl_high_lane_s16(int32x4_t a, int16x8_t b, int16x4_t v, const int lane);
+// FORCE_INLINE int32x4_t vqdmlsl_high_lane_s16(int32x4_t a, int16x8_t b, int16x4_t c, const int lane);
 
-// FORCE_INLINE int64x2_t vqdmlsl_high_lane_s32(int64x2_t a, int32x4_t b, int32x2_t v, const int lane);
+// FORCE_INLINE int64x2_t vqdmlsl_high_lane_s32(int64x2_t a, int32x4_t b, int32x2_t c, const int lane);
 
-// FORCE_INLINE int32x4_t vqdmlsl_laneq_s16(int32x4_t a, int16x4_t b, int16x8_t v, const int lane);
+// FORCE_INLINE int32x4_t vqdmlsl_laneq_s16(int32x4_t a, int16x4_t b, int16x8_t c, const int lane);
 
-// FORCE_INLINE int64x2_t vqdmlsl_laneq_s32(int64x2_t a, int32x2_t b, int32x4_t v, const int lane);
+// FORCE_INLINE int64x2_t vqdmlsl_laneq_s32(int64x2_t a, int32x2_t b, int32x4_t c, const int lane);
 
-// FORCE_INLINE int32_t vqdmlslh_laneq_s16(int32_t a, int16_t b, int16x8_t v, const int lane);
+FORCE_INLINE int32_t vqdmlslh_laneq_s16(int32_t a, int16_t b, int16x8_t c, const int lane) {
+  int16_t c_lane = vgetq_lane_s16(c, lane);
+  int32_t dmull = (int32_t)b * (int32_t)c_lane;
+  dmull = dmull > INT32_MAX / 2 ? INT32_MAX : dmull < INT32_MIN / 2 ? INT32_MIN : dmull * 2;
+  return sat_sub_int32(a, dmull);
+}
 
-// FORCE_INLINE int64_t vqdmlsls_laneq_s32(int64_t a, int32_t b, int32x4_t v, const int lane);
+FORCE_INLINE int64_t vqdmlsls_laneq_s32(int64_t a, int32_t b, int32x4_t c, const int lane) {
+  int32_t c_lane = vgetq_lane_s32(c, lane);
+  int64_t dmull = (int64_t)b * (int64_t)c_lane;
+  dmull = dmull > INT64_MAX / 2 ? INT64_MAX : dmull < INT64_MIN / 2 ? INT64_MIN : dmull * 2;
+  return sat_sub_int64(a, dmull);
+}
 
-// FORCE_INLINE int32x4_t vqdmlsl_high_laneq_s16(int32x4_t a, int16x8_t b, int16x8_t v, const int lane);
+// FORCE_INLINE int32x4_t vqdmlsl_high_laneq_s16(int32x4_t a, int16x8_t b, int16x8_t c, const int lane);
 
-// FORCE_INLINE int64x2_t vqdmlsl_high_laneq_s32(int64x2_t a, int32x4_t b, int32x4_t v, const int lane);
+// FORCE_INLINE int64x2_t vqdmlsl_high_laneq_s32(int64x2_t a, int32x4_t b, int32x4_t c, const int lane);
 
 FORCE_INLINE int32x4_t vmull_lane_s16(int16x4_t a, int16x4_t b, const int c) {
   vint16m1_t b_dup = __riscv_vrgather_vx_i16m1(b, c, 4);
