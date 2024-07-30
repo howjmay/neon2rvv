@@ -2000,8 +2000,8 @@
   _(vqdmlsls_lane_s32)                                                           \
   /*_(vqdmlsl_high_lane_s16)                                                  */ \
   /*_(vqdmlsl_high_lane_s32)                                                  */ \
-  /*_(vqdmlsl_laneq_s16)                                                      */ \
-  /*_(vqdmlsl_laneq_s32)                                                      */ \
+  _(vqdmlsl_laneq_s16)                                                           \
+  _(vqdmlsl_laneq_s32)                                                           \
   _(vqdmlslh_laneq_s16)                                                          \
   _(vqdmlsls_laneq_s32)                                                          \
   /*_(vqdmlsl_high_laneq_s16)                                                 */ \
