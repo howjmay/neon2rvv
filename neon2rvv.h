@@ -13332,68 +13332,68 @@ FORCE_INLINE void vst1q_u64(uint64_t *a, uint64x2_t b) { __riscv_vse64_v_u64m1(a
 
 // FORCE_INLINE void vst1q_f16(float16_t * ptr, float16x8_t val);
 
-FORCE_INLINE void vst1_lane_s8(int8_t *a, int8x8_t b, const int c) {
-  vint8m1_t b_s = __riscv_vslidedown_vx_i8m1(b, c, 8);
+FORCE_INLINE void vst1_lane_s8(int8_t *a, int8x8_t b, const int lane) {
+  vint8m1_t b_s = __riscv_vslidedown_vx_i8m1(b, lane, 8);
   *a = __riscv_vmv_x_s_i8m1_i8(b_s);
 }
 
-FORCE_INLINE void vst1_lane_s16(int16_t *a, int16x4_t b, const int c) {
-  vint16m1_t b_s = __riscv_vslidedown_vx_i16m1(b, c, 4);
+FORCE_INLINE void vst1_lane_s16(int16_t *a, int16x4_t b, const int lane) {
+  vint16m1_t b_s = __riscv_vslidedown_vx_i16m1(b, lane, 4);
   *a = __riscv_vmv_x_s_i16m1_i16(b_s);
 }
 
-FORCE_INLINE void vst1_lane_s32(int32_t *a, int32x2_t b, const int c) {
-  vint32m1_t b_s = __riscv_vslidedown_vx_i32m1(b, c, 2);
+FORCE_INLINE void vst1_lane_s32(int32_t *a, int32x2_t b, const int lane) {
+  vint32m1_t b_s = __riscv_vslidedown_vx_i32m1(b, lane, 2);
   *a = __riscv_vmv_x_s_i32m1_i32(b_s);
 }
 
-FORCE_INLINE void vst1_lane_f32(float32_t *a, float32x2_t b, const int c) {
-  vfloat32m1_t b_s = __riscv_vslidedown_vx_f32m1(b, c, 2);
+FORCE_INLINE void vst1_lane_f32(float32_t *a, float32x2_t b, const int lane) {
+  vfloat32m1_t b_s = __riscv_vslidedown_vx_f32m1(b, lane, 2);
   *a = __riscv_vfmv_f_s_f32m1_f32(b_s);
 }
 
-FORCE_INLINE void vst1_lane_u8(uint8_t *a, uint8x8_t b, const int c) {
-  vuint8m1_t b_s = __riscv_vslidedown_vx_u8m1(b, c, 8);
+FORCE_INLINE void vst1_lane_u8(uint8_t *a, uint8x8_t b, const int lane) {
+  vuint8m1_t b_s = __riscv_vslidedown_vx_u8m1(b, lane, 8);
   *a = __riscv_vmv_x_s_u8m1_u8(b_s);
 }
 
-FORCE_INLINE void vst1_lane_u16(uint16_t *a, uint16x4_t b, const int c) {
-  vuint16m1_t b_s = __riscv_vslidedown_vx_u16m1(b, c, 4);
+FORCE_INLINE void vst1_lane_u16(uint16_t *a, uint16x4_t b, const int lane) {
+  vuint16m1_t b_s = __riscv_vslidedown_vx_u16m1(b, lane, 4);
   *a = __riscv_vmv_x_s_u16m1_u16(b_s);
 }
 
-FORCE_INLINE void vst1_lane_u32(uint32_t *a, uint32x2_t b, const int c) {
-  vuint32m1_t b_s = __riscv_vslidedown_vx_u32m1(b, c, 2);
+FORCE_INLINE void vst1_lane_u32(uint32_t *a, uint32x2_t b, const int lane) {
+  vuint32m1_t b_s = __riscv_vslidedown_vx_u32m1(b, lane, 2);
   *a = __riscv_vmv_x_s_u32m1_u32(b_s);
 }
 
-FORCE_INLINE void vst1_lane_s64(int64_t *a, int64x1_t b, const int c) {
-  vint64m1_t b_s = __riscv_vslidedown_vx_i64m1(b, c, 1);
+FORCE_INLINE void vst1_lane_s64(int64_t *a, int64x1_t b, const int lane) {
+  vint64m1_t b_s = __riscv_vslidedown_vx_i64m1(b, lane, 1);
   *a = __riscv_vmv_x_s_i64m1_i64(b_s);
 }
 
-FORCE_INLINE void vst1_lane_u64(uint64_t *a, uint64x1_t b, const int c) {
-  vuint64m1_t b_s = __riscv_vslidedown_vx_u64m1(b, c, 1);
+FORCE_INLINE void vst1_lane_u64(uint64_t *a, uint64x1_t b, const int lane) {
+  vuint64m1_t b_s = __riscv_vslidedown_vx_u64m1(b, lane, 1);
   *a = __riscv_vmv_x_s_u64m1_u64(b_s);
 }
 
-FORCE_INLINE void vst1q_lane_s8(int8_t *a, int8x16_t b, const int c) {
-  int8x8_t b_s = __riscv_vslidedown_vx_i8m1(b, c, 8);
+FORCE_INLINE void vst1q_lane_s8(int8_t *a, int8x16_t b, const int lane) {
+  int8x8_t b_s = __riscv_vslidedown_vx_i8m1(b, lane, 8);
   *a = __riscv_vmv_x_s_i8m1_i8(b_s);
 }
 
-FORCE_INLINE void vst1q_lane_s16(int16_t *a, int16x8_t b, const int c) {
-  vint16m1_t b_s = __riscv_vslidedown_vx_i16m1(b, c, 4);
+FORCE_INLINE void vst1q_lane_s16(int16_t *a, int16x8_t b, const int lane) {
+  vint16m1_t b_s = __riscv_vslidedown_vx_i16m1(b, lane, 4);
   *a = __riscv_vmv_x_s_i16m1_i16(b_s);
 }
 
-FORCE_INLINE void vst1q_lane_s32(int32_t *a, int32x4_t b, const int c) {
-  vint32m1_t b_s = __riscv_vslidedown_vx_i32m1(b, c, 4);
+FORCE_INLINE void vst1q_lane_s32(int32_t *a, int32x4_t b, const int lane) {
+  vint32m1_t b_s = __riscv_vslidedown_vx_i32m1(b, lane, 4);
   *a = __riscv_vmv_x_s_i32m1_i32(b_s);
 }
 
-FORCE_INLINE void vst1q_lane_f32(float32_t *a, float32x4_t b, const int c) {
-  vfloat32m1_t b_s = __riscv_vslidedown_vx_f32m1(b, c, 4);
+FORCE_INLINE void vst1q_lane_f32(float32_t *a, float32x4_t b, const int lane) {
+  vfloat32m1_t b_s = __riscv_vslidedown_vx_f32m1(b, lane, 4);
   *a = __riscv_vfmv_f_s_f32m1_f32(b_s);
 }
 
@@ -13405,9 +13405,15 @@ FORCE_INLINE void vst1q_lane_f32(float32_t *a, float32x4_t b, const int c) {
 
 // FORCE_INLINE void vst1q_lane_p16(poly16_t * ptr, poly16x8_t val, const int lane);
 
-// FORCE_INLINE void vst1_lane_f64(float64_t * ptr, float64x1_t val, const int lane);
+FORCE_INLINE void vst1_lane_f64(float64_t *a, float64x1_t b, const int lane) {
+  vfloat64m1_t b_s = __riscv_vslidedown_vx_f64m1(b, lane, 1);
+  *a = __riscv_vfmv_f_s_f64m1_f64(b_s);
+}
 
-// FORCE_INLINE void vst1q_lane_f64(float64_t * ptr, float64x2_t val, const int lane);
+FORCE_INLINE void vst1q_lane_f64(float64_t *a, float64x2_t b, const int lane) {
+  vfloat64m1_t b_s = __riscv_vslidedown_vx_f64m1(b, lane, 2);
+  *a = __riscv_vfmv_f_s_f64m1_f64(b_s);
+}
 
 FORCE_INLINE void vst1q_lane_u8(uint8_t *a, uint8x16_t b, const int c) {
   vuint8m1_t b_s = __riscv_vslidedown_vx_u8m1(b, c, 8);

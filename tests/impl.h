@@ -2718,8 +2718,8 @@
   _(vst1q_lane_u32)                                                              \
   /*_(vst1q_lane_p8)                                                          */ \
   /*_(vst1q_lane_p16)                                                         */ \
-  /*_(vst1_lane_f64)                                                          */ \
-  /*_(vst1q_lane_f64)                                                         */ \
+  _(vst1_lane_f64)                                                               \
+  _(vst1q_lane_f64)                                                              \
   /*_(vst1q_lane_p64)                                                         */ \
   _(vst1q_lane_s64)                                                              \
   _(vst1q_lane_u64)                                                              \
