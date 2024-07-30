@@ -2662,8 +2662,8 @@
   _(vld1q_dup_u32)                                                               \
   /*_(vld1q_dup_p8)                                                           */ \
   /*_(vld1q_dup_p16)                                                          */ \
-  /*_(vld1_dup_f64)                                                           */ \
-  /*_(vld1q_dup_f64)                                                          */ \
+  _(vld1_dup_f64)                                                                \
+  _(vld1q_dup_f64)                                                               \
   /*_(vld1q_dup_p64)                                                          */ \
   _(vld1q_dup_s64)                                                               \
   _(vld1q_dup_u64)                                                               \
