@@ -9,7 +9,7 @@ def read_file(file_path):
         return file.readlines()
 
 def expect_impl(s):
-    not_impl_list = ["p8", "p16", "p32", "p128", "p64", "f16"]
+    not_impl_list = ["p8", "p16", "p32", "p64", "p128", "f16"]
 
     # print the intrinsics that haven't implemented by expected to
     # if not any(not_impl in s for not_impl in not_impl_list):
