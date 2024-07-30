@@ -2024,14 +2024,14 @@
   _(vmull_high_laneq_u32)                                                        \
   _(vqdmull_lane_s16)                                                            \
   _(vqdmull_lane_s32)                                                            \
-  /*_(vqdmullh_lane_s16)                                                      */ \
-  /*_(vqdmulls_lane_s32)                                                      */ \
+  _(vqdmullh_lane_s16)                                                           \
+  _(vqdmulls_lane_s32)                                                           \
   /*_(vqdmull_high_lane_s16)                                                  */ \
   /*_(vqdmull_high_lane_s32)                                                  */ \
   /*_(vqdmull_laneq_s16)                                                      */ \
   /*_(vqdmull_laneq_s32)                                                      */ \
-  /*_(vqdmullh_laneq_s16)                                                     */ \
-  /*_(vqdmulls_laneq_s32)                                                     */ \
+  _(vqdmullh_laneq_s16)                                                          \
+  _(vqdmulls_laneq_s32)                                                          \
   /*_(vqdmull_high_laneq_s16)                                                 */ \
   /*_(vqdmull_high_laneq_s32)                                                 */ \
   _(vqdmulhq_lane_s16)                                                           \
