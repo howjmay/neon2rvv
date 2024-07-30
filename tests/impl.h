@@ -1948,14 +1948,14 @@
   _(vmlal_high_laneq_u32)                                                        \
   _(vqdmlal_lane_s16)                                                            \
   _(vqdmlal_lane_s32)                                                            \
-  /*_(vqdmlalh_lane_s16)                                                      */ \
-  /*_(vqdmlals_lane_s32)                                                      */ \
+  _(vqdmlalh_lane_s16)                                                           \
+  _(vqdmlals_lane_s32)                                                           \
   _(vqdmlal_high_lane_s16)                                                       \
   _(vqdmlal_high_lane_s32)                                                       \
   _(vqdmlal_laneq_s16)                                                           \
   _(vqdmlal_laneq_s32)                                                           \
-  /*_(vqdmlalh_laneq_s16)                                                     */ \
-  /*_(vqdmlals_laneq_s32)                                                     */ \
+  _(vqdmlalh_laneq_s16)                                                          \
+  _(vqdmlals_laneq_s32)                                                          \
   _(vqdmlal_high_laneq_s16)                                                      \
   _(vqdmlal_high_laneq_s32)                                                      \
   _(vmls_lane_s16)                                                               \
