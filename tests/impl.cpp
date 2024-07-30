@@ -44327,9 +44327,49 @@ result_t test_vst1_lane_p16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { ret
 
 result_t test_vst1q_lane_p16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_vst1_lane_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vst1_lane_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  double _a[1];
+  const double *_b = (const double *)impl.test_cases_float_pointer1;
+  float64x1_t b;
+  float64x1_t a;
 
-result_t test_vst1q_lane_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+#define TEST_IMPL(IDX)       \
+  b = vld1_f64(_b);          \
+  vst1_lane_f64(_a, b, IDX); \
+  a = vld1_f64(_a);          \
+  CHECK_RESULT(validate_double(a, _b[IDX]))
+
+  IMM_1_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vst1q_lane_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  double _a[2];
+  const double *_b = (const double *)impl.test_cases_float_pointer1;
+  float64x2_t b;
+  float64x2_t a;
+
+#define TEST_IMPL(IDX)        \
+  b = vld1q_f64(_b);          \
+  vst1q_lane_f64(_a, b, IDX); \
+  a = vld1q_f64(_a);          \
+  CHECK_RESULT(validate_double(a, _b[IDX], _a[1]))
+
+  IMM_2_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vst1q_lane_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
