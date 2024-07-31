@@ -1659,8 +1659,8 @@
   _(vcvtq_s32_f32)                                                               \
   _(vcvtq_f32_s32)                                                               \
   _(vcvtq_f32_u32)                                                               \
-  /*_(vcvts_f32_s32)                                                          */ \
-  /*_(vcvts_f32_u32)                                                          */ \
+  _(vcvts_f32_s32)                                                               \
+  _(vcvts_f32_u32)                                                               \
   /*_(vcvt_f64_s64)                                                           */ \
   /*_(vcvtq_f64_s64)                                                          */ \
   /*_(vcvt_f64_u64)                                                           */ \

@@ -8068,9 +8068,9 @@ FORCE_INLINE float32x4_t vcvtq_f32_s32(int32x4_t a) { return __riscv_vfcvt_f_x_v
 
 FORCE_INLINE float32x4_t vcvtq_f32_u32(uint32x4_t a) { return __riscv_vfcvt_f_xu_v_f32m1(a, 4); }
 
-// FORCE_INLINE float32_t vcvts_f32_s32(int32_t a);
+FORCE_INLINE float32_t vcvts_f32_s32(int32_t a) { return (float32_t)a; }
 
-// FORCE_INLINE float32_t vcvts_f32_u32(uint32_t a);
+FORCE_INLINE float32_t vcvts_f32_u32(uint32_t a) { return (float32_t)a; }
 
 // FORCE_INLINE float64x1_t vcvt_f64_s64(int64x1_t a);
 
