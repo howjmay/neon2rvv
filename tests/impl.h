@@ -1340,10 +1340,10 @@
   _(vqnegq_s32)                                                                  \
   _(vqneg_s64)                                                                   \
   _(vqnegq_s64)                                                                  \
-  /*_(vqnegb_s8)                                                              */ \
-  /*_(vqnegh_s16)                                                             */ \
-  /*_(vqnegs_s32)                                                             */ \
-  /*_(vqnegd_s64)                                                             */ \
+  _(vqnegb_s8)                                                                   \
+  _(vqnegh_s16)                                                                  \
+  _(vqnegs_s32)                                                                  \
+  _(vqnegd_s64)                                                                  \
   _(vmvn_s8)                                                                     \
   _(vmvn_s16)                                                                    \
   _(vmvn_s32)                                                                    \

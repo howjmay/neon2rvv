@@ -25927,13 +25927,69 @@ result_t test_vqnegq_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #endif  // ENABLE_TEST_ALL
 }
 
-result_t test_vqnegb_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vqnegb_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  int8_t *_a = (int8_t *)impl.test_cases_int_pointer1;
+  int8_t _c, c;
+  if (_a[0] == INT8_MIN) {
+    _c = INT8_MAX;
+  } else {
+    _c = -_a[0];
+  }
+  c = vqnegb_s8(_a[0]);
+  return c == _c ? TEST_SUCCESS : TEST_FAIL;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
-result_t test_vqnegh_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vqnegh_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
+  int16_t _c, c;
+  if (_a[0] == INT16_MIN) {
+    _c = INT16_MAX;
+  } else {
+    _c = -_a[0];
+  }
+  c = vqnegh_s16(_a[0]);
+  return c == _c ? TEST_SUCCESS : TEST_FAIL;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
-result_t test_vqnegs_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vqnegs_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
+  int32_t _c, c;
+  if (_a[0] == INT32_MIN) {
+    _c = INT32_MAX;
+  } else {
+    _c = -_a[0];
+  }
+  c = vqnegs_s32(_a[0]);
+  return c == _c ? TEST_SUCCESS : TEST_FAIL;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
-result_t test_vqnegd_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vqnegd_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  int64_t *_a = (int64_t *)impl.test_cases_int_pointer1;
+  int64_t _c, c;
+  if (_a[0] == INT64_MIN) {
+    _c = INT64_MAX;
+  } else {
+    _c = -_a[0];
+  }
+  c = vqnegd_s64(_a[0]);
+  return c == _c ? TEST_SUCCESS : TEST_FAIL;
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vmvn_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL

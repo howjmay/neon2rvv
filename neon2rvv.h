@@ -7197,13 +7197,37 @@ FORCE_INLINE int64x2_t vqnegq_s64(int64x2_t a) {
   return __riscv_vmerge_vxm_i64m1(a_neg, INT64_MAX, min_mask, 2);
 }
 
-// FORCE_INLINE int8_t vqnegb_s8(int8_t a);
+FORCE_INLINE int8_t vqnegb_s8(int8_t a) {
+  if (a == INT8_MIN) {
+    return INT8_MAX;
+  } else {
+    return -a;
+  }
+}
 
-// FORCE_INLINE int16_t vqnegh_s16(int16_t a);
+FORCE_INLINE int16_t vqnegh_s16(int16_t a) {
+  if (a == INT16_MIN) {
+    return INT16_MAX;
+  } else {
+    return -a;
+  }
+}
 
-// FORCE_INLINE int32_t vqnegs_s32(int32_t a);
+FORCE_INLINE int32_t vqnegs_s32(int32_t a) {
+  if (a == INT32_MIN) {
+    return INT32_MAX;
+  } else {
+    return -a;
+  }
+}
 
-// FORCE_INLINE int64_t vqnegd_s64(int64_t a);
+FORCE_INLINE int64_t vqnegd_s64(int64_t a) {
+  if (a == INT64_MIN) {
+    return INT64_MAX;
+  } else {
+    return -a;
+  }
+}
 
 FORCE_INLINE int8x8_t vmvn_s8(int8x8_t a) { return __riscv_vnot_v_i8m1(a, 8); }
 
