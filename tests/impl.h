@@ -1047,14 +1047,14 @@
   _(vqrshlq_u16)                                                                 \
   _(vqrshlq_u32)                                                                 \
   _(vqrshlq_u64)                                                                 \
-  /*_(vqrshlb_s8)                                                             */ \
-  /*_(vqrshlh_s16)                                                            */ \
-  /*_(vqrshls_s32)                                                            */ \
-  /*_(vqrshld_s64)                                                            */ \
-  /*_(vqrshlb_u8)                                                             */ \
-  /*_(vqrshlh_u16)                                                            */ \
-  /*_(vqrshls_u32)                                                            */ \
-  /*_(vqrshld_u64)                                                            */ \
+  _(vqrshlb_s8)                                                                  \
+  _(vqrshlh_s16)                                                                 \
+  _(vqrshls_s32)                                                                 \
+  _(vqrshld_s64)                                                                 \
+  _(vqrshlb_u8)                                                                  \
+  _(vqrshlh_u16)                                                                 \
+  _(vqrshls_u32)                                                                 \
+  _(vqrshld_u64)                                                                 \
   _(vshr_n_s8)                                                                   \
   _(vshr_n_s16)                                                                  \
   _(vshr_n_s32)                                                                  \
