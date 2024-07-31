@@ -1694,10 +1694,10 @@
   /*_(vcvtps_u32_f32)                                                         */ \
   /*_(vcvtas_s32_f32)                                                         */ \
   /*_(vcvtas_u32_f32)                                                         */ \
-  /*_(vcvt_s64_f64)                                                           */ \
-  /*_(vcvtq_s64_f64)                                                          */ \
-  /*_(vcvt_u64_f64)                                                           */ \
-  /*_(vcvtq_u64_f64)                                                          */ \
+  _(vcvt_s64_f64)                                                                \
+  _(vcvtq_s64_f64)                                                               \
+  _(vcvt_u64_f64)                                                                \
+  _(vcvtq_u64_f64)                                                               \
   /*_(vcvtn_s64_f64)                                                          */ \
   /*_(vcvtnq_s64_f64)                                                         */ \
   /*_(vcvtn_u64_f64)                                                          */ \
@@ -1714,8 +1714,8 @@
   /*_(vcvtaq_s64_f64)                                                         */ \
   /*_(vcvta_u64_f64)                                                          */ \
   /*_(vcvtaq_u64_f64)                                                         */ \
-  /*_(vcvtd_s64_f64)                                                          */ \
-  /*_(vcvtd_u64_f64)                                                          */ \
+  _(vcvtd_s64_f64)                                                               \
+  _(vcvtd_u64_f64)                                                               \
   /*_(vcvtnd_s64_f64)                                                         */ \
   /*_(vcvtnd_u64_f64)                                                         */ \
   /*_(vcvtmd_s64_f64)                                                         */ \

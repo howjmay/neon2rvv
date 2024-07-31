@@ -8138,13 +8138,13 @@ FORCE_INLINE uint32x4_t vcvtq_u32_f32(float32x4_t a) { return __riscv_vfcvt_rtz_
 
 // FORCE_INLINE uint32_t vcvtas_u32_f32(float32_t a);
 
-// FORCE_INLINE int64x1_t vcvt_s64_f64(float64x1_t a);
+FORCE_INLINE int64x1_t vcvt_s64_f64(float64x1_t a) { return __riscv_vfcvt_rtz_x_f_v_i64m1(a, 1); }
 
-// FORCE_INLINE int64x2_t vcvtq_s64_f64(float64x2_t a);
+FORCE_INLINE int64x2_t vcvtq_s64_f64(float64x2_t a) { return __riscv_vfcvt_rtz_x_f_v_i64m1(a, 2); }
 
-// FORCE_INLINE uint64x1_t vcvt_u64_f64(float64x1_t a);
+FORCE_INLINE uint64x1_t vcvt_u64_f64(float64x1_t a) { return __riscv_vfcvt_rtz_xu_f_v_u64m1(a, 1); }
 
-// FORCE_INLINE uint64x2_t vcvtq_u64_f64(float64x2_t a);
+FORCE_INLINE uint64x2_t vcvtq_u64_f64(float64x2_t a) { return __riscv_vfcvt_rtz_xu_f_v_u64m1(a, 2); }
 
 // FORCE_INLINE int64x1_t vcvtn_s64_f64(float64x1_t a);
 
@@ -8178,9 +8178,9 @@ FORCE_INLINE uint32x4_t vcvtq_u32_f32(float32x4_t a) { return __riscv_vfcvt_rtz_
 
 // FORCE_INLINE uint64x2_t vcvtaq_u64_f64(float64x2_t a);
 
-// FORCE_INLINE int64_t vcvtd_s64_f64(float64_t a);
+FORCE_INLINE int64_t vcvtd_s64_f64(float64_t a) { return (int64_t)a; }
 
-// FORCE_INLINE uint64_t vcvtd_u64_f64(float64_t a);
+FORCE_INLINE uint64_t vcvtd_u64_f64(float64_t a) { return (uint64_t)a; }
 
 // FORCE_INLINE int64_t vcvtnd_s64_f64(float64_t a);
 
