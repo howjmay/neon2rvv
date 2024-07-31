@@ -1,6 +1,6 @@
 #include "debug_tools.h"
-#include <cmath>
-#include <cstdint>
+#include <math.h>
+#include <stdint.h>
 
 namespace NEON2RVV {
 

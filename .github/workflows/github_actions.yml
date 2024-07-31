@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: checkout code
         uses: actions/checkout@v3.2.0
+        with:
+          submodules: recursive
       - name: setup riscv toolchain
         run: |
           mkdir /opt/riscv
@@ -29,30 +31,22 @@ jobs:
 
   # for validate test cases only
   check_test_cases:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-22.04-arm
     strategy:
       matrix:
-        arch: [aarch64]
-        cxx_compiler: [g++-10, clang++-11]
+        cxx_compiler: [g++-12, clang++-14]
     steps:
       - name: checkout code
         uses: actions/checkout@v3.2.0
+      - name: install dependencies
+        run: |
+          sudo apt-get update -q -y
+          sudo apt-get install -q -y "${{ matrix.cxx_compiler }}" make gcc
       - name: build artifact
-        # The Github Action for non-x86 CPU
-        # https://github.com/uraimo/run-on-arch-action
-        uses: uraimo/run-on-arch-action@v2.5.0
-        with:
-          arch: ${{ matrix.arch }}
-          distro: ubuntu20.04
-          env: |
-            CXX: ${{ matrix.cxx_compiler }}
-          install: |
-            apt-get update -q -y
-            apt-get install -q -y "${{ matrix.cxx_compiler }}" make
-            apt-get install -q -y gcc
-          run: |
-            export ENABLE_TEST_ALL=true
-            make test
+        env:
+          CXX: ${{ matrix.cxx_compiler }}
+          ENABLE_TEST_ALL: "true"
+        run: make test
 
   coding_style:
     runs-on: ubuntu-22.04
@@ -63,5 +57,5 @@ jobs:
         # clang-format version should be set
         run: |
             sudo apt-get install -q -y clang-format
-            sh scripts/check-format.sh
+            bash scripts/check-format.sh
         shell: bash

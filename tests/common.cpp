@@ -1,5 +1,6 @@
 #include "common.h"
-#include <cmath>
+#include <math.h>
+#include <stdlib.h>
 
 namespace NEON2RVV {
 int32_t NaN = ~0;
@@ -596,7 +597,7 @@ result_t validate_double_pair(double a, double b) {
   // We do an integer (binary) compare rather than a
   // floating point compare to take NaNs and infinities
   // into account as well.
-  if (std::isnan(a) && std::isnan(b)) {
+  if (isnan(a) && isnan(b)) {
     return TEST_SUCCESS;
   }
   return (*ua) == (*ub) ? TEST_SUCCESS : TEST_FAIL;
@@ -663,16 +664,16 @@ result_t validate_float_error(float32x4_t a, float f0, float f1, float f2, float
   float df1 = fabsf((t[1] - f1) / f1);
   float df2 = fabsf((t[2] - f2) / f2);
   float df3 = fabsf((t[3] - f3) / f3);
-  if ((std::isnan(t[0]) && std::isnan(f0)) || (t[0] == 0 && f0 == 0) || (std::isinf(t[0]) && std::isinf(f0))) {
+  if ((isnan(t[0]) && isnan(f0)) || (t[0] == 0 && f0 == 0) || (isinf(t[0]) && isinf(f0))) {
     df0 = 0;
   }
-  if ((std::isnan(t[1]) && std::isnan(f1)) || (t[1] == 0 && f1 == 0) || (std::isinf(t[1]) && std::isinf(f1))) {
+  if ((isnan(t[1]) && isnan(f1)) || (t[1] == 0 && f1 == 0) || (isinf(t[1]) && isinf(f1))) {
     df1 = 0;
   }
-  if ((std::isnan(t[2]) && std::isnan(f2)) || (t[2] == 0 && f2 == 0) || (std::isinf(t[2]) && std::isinf(f2))) {
+  if ((isnan(t[2]) && isnan(f2)) || (t[2] == 0 && f2 == 0) || (isinf(t[2]) && isinf(f2))) {
     df2 = 0;
   }
-  if ((std::isnan(t[3]) && std::isnan(f3)) || (t[3] == 0 && f3 == 0) || (std::isinf(t[3]) && std::isinf(f3))) {
+  if ((isnan(t[3]) && isnan(f3)) || (t[3] == 0 && f3 == 0) || (isinf(t[3]) && isinf(f3))) {
     df3 = 0;
   }
   ASSERT_RETURN(df0 < err);
@@ -686,10 +687,10 @@ result_t validate_float_error(float32x2_t a, float f0, float f1, float err) {
   const float *t = (const float *)&a;
   float df0 = fabsf((t[0] - f0) / f0);
   float df1 = fabsf((t[1] - f1) / f1);
-  if ((std::isnan(t[0]) && std::isnan(f0)) || (t[0] == 0 && f0 == 0) || (std::isinf(t[0]) && std::isinf(f0))) {
+  if ((isnan(t[0]) && isnan(f0)) || (t[0] == 0 && f0 == 0) || (isinf(t[0]) && isinf(f0))) {
     df0 = 0;
   }
-  if ((std::isnan(t[1]) && std::isnan(f1)) || (t[1] == 0 && f1 == 0) || (std::isinf(t[1]) && std::isinf(f1))) {
+  if ((isnan(t[1]) && isnan(f1)) || (t[1] == 0 && f1 == 0) || (isinf(t[1]) && isinf(f1))) {
     df1 = 0;
   }
   ASSERT_RETURN(df0 < err);
@@ -699,7 +700,7 @@ result_t validate_float_error(float32x2_t a, float f0, float f1, float err) {
 
 result_t validate_float_error(float32_t a, float f0, float err) {
   float df0 = fabsf((a - f0) / f0);
-  if ((std::isnan(a) && std::isnan(f0)) || (a == 0 && f0 == 0) || (std::isinf(a) && std::isinf(f0))) {
+  if ((isnan(a) && isnan(f0)) || (a == 0 && f0 == 0) || (isinf(a) && isinf(f0))) {
     df0 = 0;
   }
   ASSERT_RETURN(df0 < err);
@@ -755,10 +756,10 @@ result_t validate_double_error(float64x2_t a, double d0, double d1, double err) 
   const double *t = (const double *)&a;
   double td0 = fabs((t[0] - d0) / d0);
   double td1 = fabs((t[1] - d1) / d1);
-  if (std::isnan(t[0]) && std::isnan(d0)) {
+  if (isnan(t[0]) && isnan(d0)) {
     td0 = 0;
   }
-  if (std::isnan(t[1]) && std::isnan(d1)) {
+  if (isnan(t[1]) && isnan(d1)) {
     td1 = 0;
   }
   ASSERT_RETURN(td0 < err);
@@ -769,7 +770,7 @@ result_t validate_double_error(float64x2_t a, double d0, double d1, double err) 
 result_t validate_double_error(float64x1_t a, double d0, double err) {
   const double *t = (const double *)&a;
   double td0 = fabs((t[0] - d0) / d0);
-  if (std::isnan(t[0]) && std::isnan(d0)) {
+  if (isnan(t[0]) && isnan(d0)) {
     td0 = 0;
   }
   ASSERT_RETURN(td0 < err);
@@ -777,8 +778,8 @@ result_t validate_double_error(float64x1_t a, double d0, double err) {
 }
 
 result_t validate_double_error(double a, double d0, double err) {
-  double df0 = abs((a - d0) / d0);
-  if ((std::isnan(a) && std::isnan(d0)) || (a == 0 && d0 == 0) || (std::isinf(a) && std::isinf(d0))) {
+  double df0 = fabs((a - d0) / d0);
+  if ((isnan(a) && isnan(d0)) || (a == 0 && d0 == 0) || (isinf(a) && isinf(d0))) {
     df0 = 0;
   }
   ASSERT_RETURN(df0 < err);
