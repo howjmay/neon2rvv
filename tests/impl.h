@@ -961,10 +961,10 @@
   _(vrecpsq_f64)                                                                 \
   _(vrecpss_f32)                                                                 \
   _(vrecpsd_f64)                                                                 \
-  /*_(vsqrt_f32)                                                              */ \
-  /*_(vsqrtq_f32)                                                             */ \
-  /*_(vsqrt_f64)                                                              */ \
-  /*_(vsqrtq_f64)                                                             */ \
+  _(vsqrt_f32)                                                                   \
+  _(vsqrtq_f32)                                                                  \
+  _(vsqrt_f64)                                                                   \
+  _(vsqrtq_f64)                                                                  \
   _(vrsqrts_f32)                                                                 \
   _(vrsqrtsq_f32)                                                                \
   _(vrsqrts_f64)                                                                 \
