@@ -202,12 +202,12 @@ TEST_SATURATE_ADD_SUB(64)
   }                                                                                                             \
   static inline int##CBIT##_t sat_rdmlah(int##CBIT##_t a, int##CBIT##_t b, int##CBIT##_t c) {                   \
     int##HBIT##_t tmp = sat_dmull(b, c);                                                                        \
-    tmp = sat_add(tmp, (int##HBIT##_t)(1 << (CBIT - 1)));                                                       \
+    tmp = sat_add(tmp, (int##HBIT##_t)((int##HBIT##_t)1 << (CBIT - 1)));                                        \
     return sat_add(a, (int##CBIT##_t)(tmp >> CBIT));                                                            \
   }                                                                                                             \
   static inline int##CBIT##_t sat_rdmlsh(int##CBIT##_t a, int##CBIT##_t b, int##CBIT##_t c) {                   \
     int##HBIT##_t tmp = sat_dmull(b, c);                                                                        \
-    tmp = sat_sub(tmp, (int##HBIT##_t)(1 << (CBIT - 1)));                                                       \
+    tmp = sat_add(tmp, (int##HBIT##_t)((int##HBIT##_t)1 << (CBIT - 1)));                                        \
     return sat_sub(a, (int##CBIT##_t)(tmp >> CBIT));                                                            \
   }
 TEST_SATURATE_DMUL(8, 16)
