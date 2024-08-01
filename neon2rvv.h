@@ -4800,13 +4800,13 @@ FORCE_INLINE float32_t vrecpss_f32(float32_t a, float32_t b) { return 2.0 - a * 
 
 FORCE_INLINE float64_t vrecpsd_f64(float64_t a, float64_t b) { return 2.0 - a * b; }
 
-// FORCE_INLINE float32x2_t vsqrt_f32(float32x2_t a);
+FORCE_INLINE float32x2_t vsqrt_f32(float32x2_t a) { return __riscv_vfsqrt_v_f32m1(a, 2); }
 
-// FORCE_INLINE float32x4_t vsqrtq_f32(float32x4_t a);
+FORCE_INLINE float32x4_t vsqrtq_f32(float32x4_t a) { return __riscv_vfsqrt_v_f32m1(a, 4); }
 
-// FORCE_INLINE float64x1_t vsqrt_f64(float64x1_t a);
+FORCE_INLINE float64x1_t vsqrt_f64(float64x1_t a) { return __riscv_vfsqrt_v_f64m1(a, 1); }
 
-// FORCE_INLINE float64x2_t vsqrtq_f64(float64x2_t a);
+FORCE_INLINE float64x2_t vsqrtq_f64(float64x2_t a) { return __riscv_vfsqrt_v_f64m1(a, 2); }
 
 FORCE_INLINE float32x2_t vrsqrts_f32(float32x2_t a, float32x2_t b) {
   return __riscv_vfdiv_vf_f32m1(__riscv_vfnmsac_vv_f32m1(vdup_n_f32(3.0), a, b, 2), 2.0, 2);

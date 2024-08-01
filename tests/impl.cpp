@@ -17010,13 +17010,73 @@ result_t test_vrecpsd_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #endif  // ENABLE_TEST_ALL
 }
 
-result_t test_vsqrt_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vsqrt_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const float *_a = (const float *)impl.test_cases_float_pointer1;
+  float _c[2];
+  for (int i = 0; i < 2; i++) {
+    _c[i] = sqrtf(_a[i]);
+  }
 
-result_t test_vsqrtq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  float32x2_t a = vld1_f32(_a);
+  float32x2_t c = vsqrt_f32(a);
 
-result_t test_vsqrt_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  return validate_float_error(c, _c[0], _c[1], 0.0001f);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
-result_t test_vsqrtq_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vsqrtq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const float *_a = (const float *)impl.test_cases_float_pointer1;
+  float _c[4];
+  for (int i = 0; i < 4; i++) {
+    _c[i] = sqrtf(_a[i]);
+  }
+
+  float32x4_t a = vld1q_f32(_a);
+  float32x4_t c = vsqrtq_f32(a);
+
+  return validate_float_error(c, _c[0], _c[1], _c[2], _c[3], 0.0001f);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vsqrt_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const double *_a = (const double *)impl.test_cases_float_pointer1;
+  double _c[2];
+  for (int i = 0; i < 1; i++) {
+    _c[i] = sqrt(_a[i]);
+  }
+
+  float64x1_t a = vld1_f64(_a);
+  float64x1_t c = vsqrt_f64(a);
+
+  return validate_double_error(c, _c[0], 0.0001f);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_vsqrtq_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const double *_a = (const double *)impl.test_cases_float_pointer1;
+  double _c[4];
+  for (int i = 0; i < 4; i++) {
+    _c[i] = sqrt(_a[i]);
+  }
+
+  float64x2_t a = vld1q_f64(_a);
+  float64x2_t c = vsqrtq_f64(a);
+
+  return validate_double_error(c, _c[0], _c[1], 0.0001f);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vrsqrts_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
