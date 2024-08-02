@@ -4069,14 +4069,14 @@
   /*_(vsha512h2q_u64)                                                         */ \
   /*_(vsha512su0q_u64)                                                        */ \
   /*_(vsha512su1q_u64)                                                        */ \
-  /*_(veor3q_u8)                                                              */ \
-  /*_(veor3q_u16)                                                             */ \
-  /*_(veor3q_u32)                                                             */ \
-  /*_(veor3q_u64)                                                             */ \
-  /*_(veor3q_s8)                                                              */ \
-  /*_(veor3q_s16)                                                             */ \
-  /*_(veor3q_s32)                                                             */ \
-  /*_(veor3q_s64)                                                             */ \
+  _(veor3q_u8)                                                                   \
+  _(veor3q_u16)                                                                  \
+  _(veor3q_u32)                                                                  \
+  _(veor3q_u64)                                                                  \
+  _(veor3q_s8)                                                                   \
+  _(veor3q_s16)                                                                  \
+  _(veor3q_s32)                                                                  \
+  _(veor3q_s64)                                                                  \
   /*_(vrax1q_u64)                                                             */ \
   /*_(vxarq_u64)                                                              */ \
   /*_(vbcaxq_u8)                                                              */ \
