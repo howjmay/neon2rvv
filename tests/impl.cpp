@@ -37311,21 +37311,199 @@ result_t test_vsha512su0q_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { r
 
 result_t test_vsha512su1q_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
-result_t test_veor3q_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_veor3q_u8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#if defined(__clang__)
+  return TEST_UNIMPL;
+#else
+#ifdef ENABLE_TEST_ALL
+  const uint8_t *_a = (const uint8_t *)impl.test_cases_int_pointer1;
+  const uint8_t *_b = (const uint8_t *)impl.test_cases_int_pointer2;
+  const uint8_t *_c = (const uint8_t *)impl.test_cases_int_pointer3;
+  uint8_t _d[16];
+  for (int i = 0; i < 16; i++) {
+    _d[i] = _a[i] ^ _b[i] ^ _c[i];
+  }
 
-result_t test_veor3q_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  uint8x16_t a = vld1q_u8(_a);
+  uint8x16_t b = vld1q_u8(_b);
+  uint8x16_t c = vld1q_u8(_c);
+  uint8x16_t d = veor3q_u8(a, b, c);
+  return validate_uint8(d, _d[0], _d[1], _d[2], _d[3], _d[4], _d[5], _d[6], _d[7], _d[8], _d[9], _d[10], _d[11], _d[12],
+                        _d[13], _d[14], _d[15]);
+#else
+  return TEST_UNIMPL;
+#endif  // defined(__clang__)
+#endif  // ENABLE_TEST_ALL
+}
 
-result_t test_veor3q_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_veor3q_u16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#if defined(__clang__)
+  return TEST_UNIMPL;
+#else
+#ifdef ENABLE_TEST_ALL
+  const uint16_t *_a = (const uint16_t *)impl.test_cases_int_pointer1;
+  const uint16_t *_b = (const uint16_t *)impl.test_cases_int_pointer2;
+  const uint16_t *_c = (const uint16_t *)impl.test_cases_int_pointer3;
+  uint16_t _d[8];
+  for (int i = 0; i < 8; i++) {
+    _d[i] = _a[i] ^ _b[i] ^ _c[i];
+  }
 
-result_t test_veor3q_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  uint16x8_t a = vld1q_u16(_a);
+  uint16x8_t b = vld1q_u16(_b);
+  uint16x8_t c = vld1q_u16(_c);
+  uint16x8_t d = veor3q_u16(a, b, c);
+  return validate_uint16(d, _d[0], _d[1], _d[2], _d[3], _d[4], _d[5], _d[6], _d[7]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+#endif  // defined(__clang__)
+}
 
-result_t test_veor3q_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_veor3q_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#if defined(__clang__)
+  return TEST_UNIMPL;
+#else
+#ifdef ENABLE_TEST_ALL
+  const uint32_t *_a = (const uint32_t *)impl.test_cases_int_pointer1;
+  const uint32_t *_b = (const uint32_t *)impl.test_cases_int_pointer2;
+  const uint32_t *_c = (const uint32_t *)impl.test_cases_int_pointer3;
+  uint32_t _d[4];
+  for (int i = 0; i < 4; i++) {
+    _d[i] = _a[i] ^ _b[i] ^ _c[i];
+  }
 
-result_t test_veor3q_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  uint32x4_t a = vld1q_u32(_a);
+  uint32x4_t b = vld1q_u32(_b);
+  uint32x4_t c = vld1q_u32(_c);
+  uint32x4_t d = veor3q_u32(a, b, c);
+  return validate_uint32(d, _d[0], _d[1], _d[2], _d[3]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+#endif  // defined(__clang__)
+}
 
-result_t test_veor3q_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_veor3q_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#if defined(__clang__)
+  return TEST_UNIMPL;
+#else
+#ifdef ENABLE_TEST_ALL
+  const uint64_t *_a = (const uint64_t *)impl.test_cases_int_pointer1;
+  const uint64_t *_b = (const uint64_t *)impl.test_cases_int_pointer2;
+  const uint64_t *_c = (const uint64_t *)impl.test_cases_int_pointer3;
+  uint64_t _d[2];
+  for (int i = 0; i < 2; i++) {
+    _d[i] = _a[i] ^ _b[i] ^ _c[i];
+  }
 
-result_t test_veor3q_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  uint64x2_t a = vld1q_u64(_a);
+  uint64x2_t b = vld1q_u64(_b);
+  uint64x2_t c = vld1q_u64(_c);
+  uint64x2_t d = veor3q_u64(a, b, c);
+  return validate_uint64(d, _d[0], _d[1]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+#endif  // defined(__clang__)
+}
+
+result_t test_veor3q_s8(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#if defined(__clang__)
+  return TEST_UNIMPL;
+#else
+#ifdef ENABLE_TEST_ALL
+  const int8_t *_a = (const int8_t *)impl.test_cases_int_pointer1;
+  const int8_t *_b = (const int8_t *)impl.test_cases_int_pointer2;
+  const int8_t *_c = (const int8_t *)impl.test_cases_int_pointer3;
+  int8_t _d[16];
+  for (int i = 0; i < 16; i++) {
+    _d[i] = _a[i] ^ _b[i] ^ _c[i];
+  }
+
+  int8x16_t a = vld1q_s8(_a);
+  int8x16_t b = vld1q_s8(_b);
+  int8x16_t c = vld1q_s8(_c);
+  int8x16_t d = veor3q_s8(a, b, c);
+  return validate_int8(d, _d[0], _d[1], _d[2], _d[3], _d[4], _d[5], _d[6], _d[7], _d[8], _d[9], _d[10], _d[11], _d[12],
+                       _d[13], _d[14], _d[15]);
+#else
+  return TEST_UNIMPL;
+#endif  // defined(__clang__)
+#endif  // ENABLE_TEST_ALL
+}
+
+result_t test_veor3q_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#if defined(__clang__)
+  return TEST_UNIMPL;
+#else
+#ifdef ENABLE_TEST_ALL
+  const int16_t *_a = (const int16_t *)impl.test_cases_int_pointer1;
+  const int16_t *_b = (const int16_t *)impl.test_cases_int_pointer2;
+  const int16_t *_c = (const int16_t *)impl.test_cases_int_pointer3;
+  int16_t _d[8];
+  for (int i = 0; i < 8; i++) {
+    _d[i] = _a[i] ^ _b[i] ^ _c[i];
+  }
+
+  int16x8_t a = vld1q_s16(_a);
+  int16x8_t b = vld1q_s16(_b);
+  int16x8_t c = vld1q_s16(_c);
+  int16x8_t d = veor3q_s16(a, b, c);
+  return validate_int16(d, _d[0], _d[1], _d[2], _d[3], _d[4], _d[5], _d[6], _d[7]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+#endif  // defined(__clang__)
+}
+
+result_t test_veor3q_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#if defined(__clang__)
+  return TEST_UNIMPL;
+#else
+#ifdef ENABLE_TEST_ALL
+  const int32_t *_a = (const int32_t *)impl.test_cases_int_pointer1;
+  const int32_t *_b = (const int32_t *)impl.test_cases_int_pointer2;
+  const int32_t *_c = (const int32_t *)impl.test_cases_int_pointer3;
+  int32_t _d[4];
+  for (int i = 0; i < 4; i++) {
+    _d[i] = _a[i] ^ _b[i] ^ _c[i];
+  }
+
+  int32x4_t a = vld1q_s32(_a);
+  int32x4_t b = vld1q_s32(_b);
+  int32x4_t c = vld1q_s32(_c);
+  int32x4_t d = veor3q_s32(a, b, c);
+  return validate_int32(d, _d[0], _d[1], _d[2], _d[3]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+#endif  // defined(__clang__)
+}
+
+result_t test_veor3q_s64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#if defined(__clang__)
+  return TEST_UNIMPL;
+#else
+#ifdef ENABLE_TEST_ALL
+  const int64_t *_a = (const int64_t *)impl.test_cases_int_pointer1;
+  const int64_t *_b = (const int64_t *)impl.test_cases_int_pointer2;
+  const int64_t *_c = (const int64_t *)impl.test_cases_int_pointer3;
+  int64_t _d[2];
+  for (int i = 0; i < 2; i++) {
+    _d[i] = _a[i] ^ _b[i] ^ _c[i];
+  }
+
+  int64x2_t a = vld1q_s64(_a);
+  int64x2_t b = vld1q_s64(_b);
+  int64x2_t c = vld1q_s64(_c);
+  int64x2_t d = veor3q_s64(a, b, c);
+  return validate_int64(d, _d[0], _d[1]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+#endif  // defined(__clang__)
+}
 
 result_t test_vrax1q_u64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 

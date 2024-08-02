@@ -10701,21 +10701,37 @@ FORCE_INLINE int32x4_t vdotq_lane_s32(int32x4_t r, int8x16_t a, int8x8_t b, cons
 
 // FORCE_INLINE uint64x2_t vsha512su1q_u64(uint64x2_t s01_s02, uint64x2_t w14_15, uint64x2_t w9_10);
 
-// FORCE_INLINE uint8x16_t veor3q_u8(uint8x16_t a, uint8x16_t b, uint8x16_t c);
+FORCE_INLINE uint8x16_t veor3q_u8(uint8x16_t a, uint8x16_t b, uint8x16_t c) {
+  return __riscv_vxor_vv_u8m1(a, __riscv_vxor_vv_u8m1(b, c, 16), 16);
+}
 
-// FORCE_INLINE uint16x8_t veor3q_u16(uint16x8_t a, uint16x8_t b, uint16x8_t c);
+FORCE_INLINE uint16x8_t veor3q_u16(uint16x8_t a, uint16x8_t b, uint16x8_t c) {
+  return __riscv_vxor_vv_u16m1(a, __riscv_vxor_vv_u16m1(b, c, 8), 8);
+}
 
-// FORCE_INLINE uint32x4_t veor3q_u32(uint32x4_t a, uint32x4_t b, uint32x4_t c);
+FORCE_INLINE uint32x4_t veor3q_u32(uint32x4_t a, uint32x4_t b, uint32x4_t c) {
+  return __riscv_vxor_vv_u32m1(a, __riscv_vxor_vv_u32m1(b, c, 4), 4);
+}
 
-// FORCE_INLINE uint64x2_t veor3q_u64(uint64x2_t a, uint64x2_t b, uint64x2_t c);
+FORCE_INLINE uint64x2_t veor3q_u64(uint64x2_t a, uint64x2_t b, uint64x2_t c) {
+  return __riscv_vxor_vv_u64m1(a, __riscv_vxor_vv_u64m1(b, c, 2), 2);
+}
 
-// FORCE_INLINE int8x16_t veor3q_s8(int8x16_t a, int8x16_t b, int8x16_t c);
+FORCE_INLINE int8x16_t veor3q_s8(int8x16_t a, int8x16_t b, int8x16_t c) {
+  return __riscv_vxor_vv_i8m1(a, __riscv_vxor_vv_i8m1(b, c, 16), 16);
+}
 
-// FORCE_INLINE int16x8_t veor3q_s16(int16x8_t a, int16x8_t b, int16x8_t c);
+FORCE_INLINE int16x8_t veor3q_s16(int16x8_t a, int16x8_t b, int16x8_t c) {
+  return __riscv_vxor_vv_i16m1(a, __riscv_vxor_vv_i16m1(b, c, 8), 8);
+}
 
-// FORCE_INLINE int32x4_t veor3q_s32(int32x4_t a, int32x4_t b, int32x4_t c);
+FORCE_INLINE int32x4_t veor3q_s32(int32x4_t a, int32x4_t b, int32x4_t c) {
+  return __riscv_vxor_vv_i32m1(a, __riscv_vxor_vv_i32m1(b, c, 4), 4);
+}
 
-// FORCE_INLINE int64x2_t veor3q_s64(int64x2_t a, int64x2_t b, int64x2_t c);
+FORCE_INLINE int64x2_t veor3q_s64(int64x2_t a, int64x2_t b, int64x2_t c) {
+  return __riscv_vxor_vv_i64m1(a, __riscv_vxor_vv_i64m1(b, c, 2), 2);
+}
 
 // FORCE_INLINE uint64x2_t vrax1q_u64(uint64x2_t a, uint64x2_t b);
 
