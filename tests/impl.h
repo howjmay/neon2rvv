@@ -776,12 +776,12 @@
   _(vmaxq_f64)                                                                   \
   _(vmaxnm_f32)                                                                  \
   _(vmaxnmq_f32)                                                                 \
-  /*_(vmaxnm_f64)                                                             */ \
-  /*_(vmaxnmq_f64)                                                            */ \
+  _(vmaxnm_f64)                                                                  \
+  _(vmaxnmq_f64)                                                                 \
   _(vminnm_f32)                                                                  \
   _(vminnmq_f32)                                                                 \
-  /*_(vminnm_f64)                                                             */ \
-  /*_(vminnmq_f64)                                                            */ \
+  _(vminnm_f64)                                                                  \
+  _(vminnmq_f64)                                                                 \
   _(vmaxq_u8)                                                                    \
   _(vmaxq_u16)                                                                   \
   _(vmaxq_u32)                                                                   \
