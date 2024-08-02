@@ -377,6 +377,11 @@ static void merge_arrays(const T *arr1, const T *arr2, const T *arr3, const T *a
 float bankers_rounding(float val);
 double bankers_rounding(double val);
 
+float maxnm(float a, float b);
+float minnm(float a, float b);
+double maxnm(double a, double b);
+double minnm(double a, double b);
+
 #define CHECK_RESULT(EXP)      \
   if ((EXP) != TEST_SUCCESS) { \
     return TEST_FAIL;          \
