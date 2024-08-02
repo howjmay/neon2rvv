@@ -3829,21 +3829,69 @@ FORCE_INLINE float64x2_t vmaxq_f64(float64x2_t a, float64x2_t b) {
   return __riscv_vmerge_vvm_f64m1(vdupq_n_f64(NAN), max_res, mask, 2);
 }
 
-FORCE_INLINE float32x2_t vmaxnm_f32(float32x2_t a, float32x2_t b) { return __riscv_vfmax_vv_f32m1(a, b, 2); }
+FORCE_INLINE float32x2_t vmaxnm_f32(float32x2_t a, float32x2_t b) {
+  vbool32_t a_non_nan_mask = __riscv_vmfeq_vv_f32m1_b32(a, a, 2);
+  vbool32_t b_non_nan_mask = __riscv_vmfeq_vv_f32m1_b32(b, b, 2);
+  float32x2_t a_replace = __riscv_vmerge_vvm_f32m1(b, a, a_non_nan_mask, 2);
+  float32x2_t b_replace = __riscv_vmerge_vvm_f32m1(a, b, b_non_nan_mask, 2);
+  return __riscv_vfmax_vv_f32m1(a_replace, b_replace, 2);
+}
 
-FORCE_INLINE float32x4_t vmaxnmq_f32(float32x4_t a, float32x4_t b) { return __riscv_vfmax_vv_f32m1(a, b, 4); }
+FORCE_INLINE float32x4_t vmaxnmq_f32(float32x4_t a, float32x4_t b) {
+  vbool32_t a_non_nan_mask = __riscv_vmfeq_vv_f32m1_b32(a, a, 4);
+  vbool32_t b_non_nan_mask = __riscv_vmfeq_vv_f32m1_b32(b, b, 4);
+  float32x2_t a_replace = __riscv_vmerge_vvm_f32m1(b, a, a_non_nan_mask, 4);
+  float32x2_t b_replace = __riscv_vmerge_vvm_f32m1(a, b, b_non_nan_mask, 4);
+  return __riscv_vfmax_vv_f32m1(a_replace, b_replace, 4);
+}
 
-// FORCE_INLINE float64x1_t vmaxnm_f64(float64x1_t a, float64x1_t b);
+FORCE_INLINE float64x1_t vmaxnm_f64(float64x1_t a, float64x1_t b) {
+  vbool64_t a_non_nan_mask = __riscv_vmfeq_vv_f64m1_b64(a, a, 1);
+  vbool64_t b_non_nan_mask = __riscv_vmfeq_vv_f64m1_b64(b, b, 1);
+  float64x2_t a_replace = __riscv_vmerge_vvm_f64m1(b, a, a_non_nan_mask, 1);
+  float64x2_t b_replace = __riscv_vmerge_vvm_f64m1(a, b, b_non_nan_mask, 1);
+  return __riscv_vfmax_vv_f64m1(a_replace, b_replace, 1);
+}
 
-// FORCE_INLINE float64x2_t vmaxnmq_f64(float64x2_t a, float64x2_t b);
+FORCE_INLINE float64x2_t vmaxnmq_f64(float64x2_t a, float64x2_t b) {
+  vbool64_t a_non_nan_mask = __riscv_vmfeq_vv_f64m1_b64(a, a, 2);
+  vbool64_t b_non_nan_mask = __riscv_vmfeq_vv_f64m1_b64(b, b, 2);
+  float64x2_t a_replace = __riscv_vmerge_vvm_f64m1(b, a, a_non_nan_mask, 2);
+  float64x2_t b_replace = __riscv_vmerge_vvm_f64m1(a, b, b_non_nan_mask, 2);
+  return __riscv_vfmax_vv_f64m1(a_replace, b_replace, 2);
+}
 
-FORCE_INLINE float32x2_t vminnm_f32(float32x2_t a, float32x2_t b) { return __riscv_vfmin_vv_f32m1(a, b, 2); }
+FORCE_INLINE float32x2_t vminnm_f32(float32x2_t a, float32x2_t b) {
+  vbool32_t a_non_nan_mask = __riscv_vmfeq_vv_f32m1_b32(a, a, 2);
+  vbool32_t b_non_nan_mask = __riscv_vmfeq_vv_f32m1_b32(b, b, 2);
+  float32x2_t a_replace = __riscv_vmerge_vvm_f32m1(b, a, a_non_nan_mask, 2);
+  float32x2_t b_replace = __riscv_vmerge_vvm_f32m1(a, b, b_non_nan_mask, 2);
+  return __riscv_vfmin_vv_f32m1(a_replace, b_replace, 2);
+}
 
-FORCE_INLINE float32x4_t vminnmq_f32(float32x4_t a, float32x4_t b) { return __riscv_vfmin_vv_f32m1(a, b, 4); }
+FORCE_INLINE float32x4_t vminnmq_f32(float32x4_t a, float32x4_t b) {
+  vbool32_t a_non_nan_mask = __riscv_vmfeq_vv_f32m1_b32(a, a, 4);
+  vbool32_t b_non_nan_mask = __riscv_vmfeq_vv_f32m1_b32(b, b, 4);
+  float32x2_t a_replace = __riscv_vmerge_vvm_f32m1(b, a, a_non_nan_mask, 4);
+  float32x2_t b_replace = __riscv_vmerge_vvm_f32m1(a, b, b_non_nan_mask, 4);
+  return __riscv_vfmin_vv_f32m1(a_replace, b_replace, 4);
+}
 
-// FORCE_INLINE float64x1_t vminnm_f64(float64x1_t a, float64x1_t b);
+FORCE_INLINE float64x1_t vminnm_f64(float64x1_t a, float64x1_t b) {
+  vbool64_t a_non_nan_mask = __riscv_vmfeq_vv_f64m1_b64(a, a, 1);
+  vbool64_t b_non_nan_mask = __riscv_vmfeq_vv_f64m1_b64(b, b, 1);
+  float64x2_t a_replace = __riscv_vmerge_vvm_f64m1(b, a, a_non_nan_mask, 1);
+  float64x2_t b_replace = __riscv_vmerge_vvm_f64m1(a, b, b_non_nan_mask, 1);
+  return __riscv_vfmin_vv_f64m1(a_replace, b_replace, 1);
+}
 
-// FORCE_INLINE float64x2_t vminnmq_f64(float64x2_t a, float64x2_t b);
+FORCE_INLINE float64x2_t vminnmq_f64(float64x2_t a, float64x2_t b) {
+  vbool64_t a_non_nan_mask = __riscv_vmfeq_vv_f64m1_b64(a, a, 2);
+  vbool64_t b_non_nan_mask = __riscv_vmfeq_vv_f64m1_b64(b, b, 2);
+  float64x2_t a_replace = __riscv_vmerge_vvm_f64m1(b, a, a_non_nan_mask, 2);
+  float64x2_t b_replace = __riscv_vmerge_vvm_f64m1(a, b, b_non_nan_mask, 2);
+  return __riscv_vfmin_vv_f64m1(a_replace, b_replace, 2);
+}
 
 FORCE_INLINE uint8x16_t vmaxq_u8(uint8x16_t a, uint8x16_t b) { return __riscv_vmaxu_vv_u8m1(a, b, 16); }
 
