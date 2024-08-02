@@ -869,12 +869,12 @@
   _(vpminq_u32)                                                                  \
   _(vpminq_f32)                                                                  \
   _(vpminq_f64)                                                                  \
-  /*_(vpmaxnm_f32)                                                            */ \
-  /*_(vpmaxnmq_f32)                                                           */ \
-  /*_(vpmaxnmq_f64)                                                           */ \
-  /*_(vpminnm_f32)                                                            */ \
-  /*_(vpminnmq_f32)                                                           */ \
-  /*_(vpminnmq_f64)                                                           */ \
+  _(vpmaxnm_f32)                                                                 \
+  _(vpmaxnmq_f32)                                                                \
+  _(vpmaxnmq_f64)                                                                \
+  _(vpminnm_f32)                                                                 \
+  _(vpminnmq_f32)                                                                \
+  _(vpminnmq_f64)                                                                \
   _(vpaddd_s64)                                                                  \
   _(vpaddd_u64)                                                                  \
   _(vpadds_f32)                                                                  \

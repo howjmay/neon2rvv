@@ -895,4 +895,37 @@ double bankers_rounding(double val) {
   return ret;
 }
 
+float maxnm(float a, float b) {
+  if (std::isnan(a) && !std::isnan(b)) {
+    a = b;
+  } else if (!std::isnan(a) && std::isnan(b)) {
+    b = a;
+  }
+  return a > b ? a : b;
+}
+float minnm(float a, float b) {
+  if (std::isnan(a) && !std::isnan(b)) {
+    a = b;
+  } else if (!std::isnan(a) && std::isnan(b)) {
+    b = a;
+  }
+  return a < b ? a : b;
+}
+double maxnm(double a, double b) {
+  if (std::isnan(a) && !std::isnan(b)) {
+    a = b;
+  } else if (!std::isnan(a) && std::isnan(b)) {
+    b = a;
+  }
+  return a > b ? a : b;
+}
+double minnm(double a, double b) {
+  if (std::isnan(a) && !std::isnan(b)) {
+    a = b;
+  } else if (!std::isnan(a) && std::isnan(b)) {
+    b = a;
+  }
+  return a < b ? a : b;
+}
+
 }  // namespace NEON2RVV
