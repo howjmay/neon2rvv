@@ -69,3 +69,7 @@ $ make CROSS_COMPILE=riscv64-unknown-elf- SIMULATOR_TYPE=qemu test
 
 * [sse2neon](https://github.com/DLTcollab/sse2neon)
 * [rvv_example](https://github.com/brucehoult/rvv_example)
+
+## Relating Projects
+
+* [sse2rvv](https://github.com/pattonkan/sse2rvv)
