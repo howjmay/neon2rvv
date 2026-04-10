@@ -55,17 +55,17 @@ jobs:
     strategy:
       matrix:
         arch: [aarch64]
-        cxx_compiler: [g++-10, clang++-11]
+        cxx_compiler: [g++-12, clang++-14]
     steps:
       - name: checkout code
         uses: actions/checkout@v3.2.0
       - name: build artifact
         # The Github Action for non-x86 CPU
         # https://github.com/uraimo/run-on-arch-action
-        uses: uraimo/run-on-arch-action@v2.5.0
+        uses: uraimo/run-on-arch-action@v3.0.1
         with:
           arch: ${{ matrix.arch }}
-          distro: ubuntu20.04
+          distro: ubuntu22.04
           env: |
             CXX: ${{ matrix.cxx_compiler }}
           install: |
