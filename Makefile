@@ -87,12 +87,21 @@ format:
 # against neon2rvv and compared with the upstream reference output.
 ANT_DIR = tests/arm-neon-tests
 
-# All ref_*.c files except the non-NEON (integer/DSP) ones not covered by
-# neon2rvv. Those are replaced by empty stubs in tests/neon_stubs.c.
+# All ref_*.c files except:
+#  - non-NEON (integer/DSP) stubs replaced by tests/neon_stubs.c
+#  - template files that lack an INSN_NAME guard and are only meant to be
+#    #include-d by the actual per-intrinsic ref_v*.c files
 ANT_SRCS := $(filter-out \
 	$(ANT_DIR)/ref_integer.c \
 	$(ANT_DIR)/ref_dsp.c \
-	$(ANT_DIR)/ref_dspfns.c, \
+	$(ANT_DIR)/ref_dspfns.c \
+	$(ANT_DIR)/ref_v_binary_op.c \
+	$(ANT_DIR)/ref_v_binary_sat_op.c \
+	$(ANT_DIR)/ref_v_comp_f_op.c \
+	$(ANT_DIR)/ref_v_comp_op.c \
+	$(ANT_DIR)/ref_v_unary_op.c \
+	$(ANT_DIR)/ref_v_unary_sat_op.c \
+	$(ANT_DIR)/ref_vsXi_n.c, \
 	$(wildcard $(ANT_DIR)/ref_*.c))
 
 ANT_CFLAGS  = -Wall -Wno-unused-variable -Wno-unused-function \
