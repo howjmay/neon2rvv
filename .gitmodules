@@ -1,0 +1,3 @@
+[submodule "tests/arm-neon-tests"]
+	path = tests/arm-neon-tests
+	url = https://github.com/christophe-lyon/arm-neon-tests

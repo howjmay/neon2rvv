@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: checkout code
         uses: actions/checkout@v3.2.0
+        with:
+          submodules: recursive
       - name: setup riscv toolchain
         run: |
           mkdir /opt/riscv
@@ -26,6 +28,26 @@ jobs:
           export SIMULATOR_TYPE=qemu
           export ENABLE_TEST_ALL=true
           sh scripts/cross-test.sh
+
+  # run arm-neon-tests suite against neon2rvv
+  arm_neon_tests:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v3.2.0
+        with:
+          submodules: recursive
+      - name: setup riscv toolchain
+        run: |
+          mkdir /opt/riscv
+          export PATH=$PATH:/opt/riscv/bin
+          wget https://github.com/howjmay/prebuilt-riscv-spike/releases/download/latest/riscv.tar.gz
+          sudo tar -xzf riscv.tar.gz -C /opt/
+
+      - name: build and check arm-neon-tests
+        run: |
+          export PATH=$PATH:/opt/riscv/bin
+          make CROSS_COMPILE=riscv64-unknown-elf- SIMULATOR_TYPE=qemu check-arm-neon-tests
 
   # for validate test cases only
   check_test_cases:
