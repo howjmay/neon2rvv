@@ -65,6 +65,10 @@ extern "C" {
 typedef float float32_t;
 typedef double float64_t;
 
+// Polynomial scalar types — no dedicated RVV type; alias the matching uint.
+typedef uint8_t poly8_t;
+typedef uint16_t poly16_t;
+
 #if __riscv_v_min_vlen == 128 || __riscv_v_min_vlen == 256 || __riscv_v_min_vlen == 512
 // 64bit width vector register
 typedef vint8m1_t int8x8_t;
@@ -88,6 +92,12 @@ typedef vuint32m1_t uint32x4_t;
 typedef vuint64m1_t uint64x2_t;
 typedef vfloat32m1_t float32x4_t;
 typedef vfloat64m1_t float64x2_t;
+
+// Polynomial vector types — aliased to the corresponding uint vector types.
+typedef vuint8m1_t poly8x8_t;
+typedef vuint8m1_t poly8x16_t;
+typedef vuint16m1_t poly16x4_t;
+typedef vuint16m1_t poly16x8_t;
 
 typedef vint8m1x2_t int8x8x2_t;
 typedef vuint8m1x2_t uint8x8x2_t;
@@ -113,6 +123,19 @@ typedef vint16m1x3_t int16x8x3_t;
 typedef vuint16m1x3_t uint16x8x3_t;
 typedef vint16m1x4_t int16x8x4_t;
 typedef vuint16m1x4_t uint16x8x4_t;
+// Polynomial struct array types (for vld2/vld3/vld4 poly variants).
+typedef vuint8m1x2_t poly8x8x2_t;
+typedef vuint8m1x3_t poly8x8x3_t;
+typedef vuint8m1x4_t poly8x8x4_t;
+typedef vuint8m1x2_t poly8x16x2_t;
+typedef vuint8m1x3_t poly8x16x3_t;
+typedef vuint8m1x4_t poly8x16x4_t;
+typedef vuint16m1x2_t poly16x4x2_t;
+typedef vuint16m1x3_t poly16x4x3_t;
+typedef vuint16m1x4_t poly16x4x4_t;
+typedef vuint16m1x2_t poly16x8x2_t;
+typedef vuint16m1x3_t poly16x8x3_t;
+typedef vuint16m1x4_t poly16x8x4_t;
 typedef vint32m1x2_t int32x2x2_t;
 typedef vuint32m1x2_t uint32x2x2_t;
 typedef vint32m1x3_t int32x2x3_t;
