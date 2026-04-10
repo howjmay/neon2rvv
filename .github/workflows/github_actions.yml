@@ -85,5 +85,5 @@ jobs:
         # clang-format version should be set
         run: |
             sudo apt-get install -q -y clang-format
-            sh scripts/check-format.sh
+            bash scripts/check-format.sh
         shell: bash

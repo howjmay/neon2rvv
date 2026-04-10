@@ -13265,11 +13265,11 @@ FORCE_INLINE float32x4_t vld1q_f32(const float32_t *ptr) { return __riscv_vle32_
 
 FORCE_INLINE poly8x8_t vld1_p8(const poly8_t *ptr) { return vld1_u8(ptr); }
 
-FORCE_INLINE poly8x16_t vld1q_p8(const poly8_t *ptr) { return vld1q_u8(ptr); }
+FORCE_INLINE poly8x16_t vld1q_p8(const poly8_t *ptr) { return __riscv_vle8_v_u8m1(ptr, 16); }
 
 FORCE_INLINE poly16x4_t vld1_p16(const poly16_t *ptr) { return vld1_u16(ptr); }
 
-FORCE_INLINE poly16x8_t vld1q_p16(const poly16_t *ptr) { return vld1q_u16(ptr); }
+FORCE_INLINE poly16x8_t vld1q_p16(const poly16_t *ptr) { return __riscv_vle16_v_u16m1(ptr, 8); }
 
 FORCE_INLINE float64x1_t vld1_f64(float64_t const *ptr) { return __riscv_vle64_v_f64m1(ptr, 1); }
 
@@ -13513,11 +13513,11 @@ FORCE_INLINE void vst1q_f32(float32_t *a, float32x4_t b) { __riscv_vse32_v_f32m1
 
 FORCE_INLINE void vst1_p8(poly8_t *ptr, poly8x8_t val) { vst1_u8(ptr, val); }
 
-FORCE_INLINE void vst1q_p8(poly8_t *ptr, poly8x16_t val) { vst1q_u8(ptr, val); }
+FORCE_INLINE void vst1q_p8(poly8_t *ptr, poly8x16_t val) { __riscv_vse8_v_u8m1(ptr, val, 16); }
 
 FORCE_INLINE void vst1_p16(poly16_t *ptr, poly16x4_t val) { vst1_u16(ptr, val); }
 
-FORCE_INLINE void vst1q_p16(poly16_t *ptr, poly16x8_t val) { vst1q_u16(ptr, val); }
+FORCE_INLINE void vst1q_p16(poly16_t *ptr, poly16x8_t val) { __riscv_vse16_v_u16m1(ptr, val, 8); }
 
 // FORCE_INLINE void vst1_f64(float64_t * ptr, float64x1_t val);
 
@@ -13606,11 +13606,17 @@ FORCE_INLINE void vst1q_lane_f32(float32_t *a, float32x4_t b, const int lane) {
 
 FORCE_INLINE void vst1_lane_p8(poly8_t *ptr, poly8x8_t val, const int lane) { vst1_lane_u8(ptr, val, lane); }
 
-FORCE_INLINE void vst1q_lane_p8(poly8_t *ptr, poly8x16_t val, const int lane) { vst1q_lane_u8(ptr, val, lane); }
+FORCE_INLINE void vst1q_lane_p8(poly8_t *ptr, poly8x16_t val, const int lane) {
+  vuint8m1_t val_s = __riscv_vslidedown_vx_u8m1(val, lane, 8);
+  *ptr = __riscv_vmv_x_s_u8m1_u8(val_s);
+}
 
 FORCE_INLINE void vst1_lane_p16(poly16_t *ptr, poly16x4_t val, const int lane) { vst1_lane_u16(ptr, val, lane); }
 
-FORCE_INLINE void vst1q_lane_p16(poly16_t *ptr, poly16x8_t val, const int lane) { vst1q_lane_u16(ptr, val, lane); }
+FORCE_INLINE void vst1q_lane_p16(poly16_t *ptr, poly16x8_t val, const int lane) {
+  vuint16m1_t val_s = __riscv_vslidedown_vx_u16m1(val, lane, 4);
+  *ptr = __riscv_vmv_x_s_u16m1_u16(val_s);
+}
 
 FORCE_INLINE void vst1_lane_f64(float64_t *a, float64x1_t b, const int lane) {
   vfloat64m1_t b_s = __riscv_vslidedown_vx_f64m1(b, lane, 1);
@@ -13695,11 +13701,11 @@ FORCE_INLINE float32x4x2_t vld2q_f32(const float32_t *a) { return __riscv_vlseg2
 
 FORCE_INLINE poly8x8x2_t vld2_p8(const poly8_t *ptr) { return vld2_u8(ptr); }
 
-FORCE_INLINE poly8x16x2_t vld2q_p8(const poly8_t *ptr) { return vld2q_u8(ptr); }
+FORCE_INLINE poly8x16x2_t vld2q_p8(const poly8_t *ptr) { return __riscv_vlseg2e8_v_u8m1x2(ptr, 16); }
 
 FORCE_INLINE poly16x4x2_t vld2_p16(const poly16_t *ptr) { return vld2_u16(ptr); }
 
-FORCE_INLINE poly16x8x2_t vld2q_p16(const poly16_t *ptr) { return vld2q_u16(ptr); }
+FORCE_INLINE poly16x8x2_t vld2q_p16(const poly16_t *ptr) { return __riscv_vlseg2e16_v_u16m1x2(ptr, 8); }
 
 FORCE_INLINE uint8x16x2_t vld2q_u8(const uint8_t *a) { return __riscv_vlseg2e8_v_u8m1x2(a, 16); }
 
@@ -13807,7 +13813,12 @@ FORCE_INLINE float32x4x2_t vld2q_lane_f32(const float32_t *a, float32x4x2_t b, c
 
 FORCE_INLINE poly16x4x2_t vld2_lane_p16(const poly16_t *ptr, poly16x4x2_t src, const int lane) { return vld2_lane_u16(ptr, src, lane); }
 
-FORCE_INLINE poly16x8x2_t vld2q_lane_p16(const poly16_t *ptr, poly16x8x2_t src, const int lane) { return vld2q_lane_u16(ptr, src, lane); }
+FORCE_INLINE poly16x8x2_t vld2q_lane_p16(const poly16_t *ptr, poly16x8x2_t src, const int lane) {
+  vbool16_t mask = __riscv_vreinterpret_v_u16m1_b16(vdup_n_u16((uint8_t)(1 << lane)));
+  vuint16m1_t c0 = __riscv_vmerge_vxm_u16m1(__riscv_vget_v_u16m1x2_u16m1(src, 0), ptr[0], mask, 8);
+  vuint16m1_t c1 = __riscv_vmerge_vxm_u16m1(__riscv_vget_v_u16m1x2_u16m1(src, 1), ptr[1], mask, 8);
+  return __riscv_vcreate_v_u16m1x2(c0, c1);
+}
 
 FORCE_INLINE uint16x8x2_t vld2q_lane_u16(const uint16_t *a, uint16x8x2_t b, const int c) {
   vbool16_t mask = __riscv_vreinterpret_v_u16m1_b16(vdup_n_u16((uint8_t)(1 << c)));
@@ -13941,11 +13952,11 @@ FORCE_INLINE void vst2q_f32(float32_t *a, float32x4x2_t b) { return __riscv_vsse
 
 FORCE_INLINE void vst2_p8(poly8_t *ptr, poly8x8x2_t val) { vst2_u8(ptr, val); }
 
-FORCE_INLINE void vst2q_p8(poly8_t *ptr, poly8x16x2_t val) { vst2q_u8(ptr, val); }
+FORCE_INLINE void vst2q_p8(poly8_t *ptr, poly8x16x2_t val) { __riscv_vsseg2e8_v_u8m1x2(ptr, val, 16); }
 
 FORCE_INLINE void vst2_p16(poly16_t *ptr, poly16x4x2_t val) { vst2_u16(ptr, val); }
 
-FORCE_INLINE void vst2q_p16(poly16_t *ptr, poly16x8x2_t val) { vst2q_u16(ptr, val); }
+FORCE_INLINE void vst2q_p16(poly16_t *ptr, poly16x8x2_t val) { __riscv_vsseg2e16_v_u16m1x2(ptr, val, 8); }
 
 FORCE_INLINE void vst2q_u8(uint8_t *a, uint8x16x2_t b) { return __riscv_vsseg2e8_v_u8m1x2(a, b, 16); }
 
@@ -14051,7 +14062,14 @@ FORCE_INLINE void vst2q_lane_f32(float32_t *a, float32x4x2_t b, const int c) {
 
 FORCE_INLINE void vst2_lane_p16(poly16_t *ptr, poly16x4x2_t val, const int lane) { vst2_lane_u16(ptr, val, lane); }
 
-FORCE_INLINE void vst2q_lane_p16(poly16_t *ptr, poly16x8x2_t val, const int lane) { vst2q_lane_u16(ptr, val, lane); }
+FORCE_INLINE void vst2q_lane_p16(poly16_t *ptr, poly16x8x2_t val, const int lane) {
+  vuint16m1_t b0 = __riscv_vget_v_u16m1x2_u16m1(val, 0);
+  vuint16m1_t b1 = __riscv_vget_v_u16m1x2_u16m1(val, 1);
+  uint16_t *_b0 = (uint16_t *)&b0;
+  uint16_t *_b1 = (uint16_t *)&b1;
+  ptr[0] = _b0[lane];
+  ptr[1] = _b1[lane];
+}
 
 // FORCE_INLINE void vst2q_lane_s8(int8_t * ptr, int8x16x2_t val, const int lane);
 
@@ -14137,11 +14155,11 @@ FORCE_INLINE float32x4x3_t vld3q_f32(const float32_t *a) { return __riscv_vlseg3
 
 FORCE_INLINE poly8x8x3_t vld3_p8(const poly8_t *ptr) { return vld3_u8(ptr); }
 
-FORCE_INLINE poly8x16x3_t vld3q_p8(const poly8_t *ptr) { return vld3q_u8(ptr); }
+FORCE_INLINE poly8x16x3_t vld3q_p8(const poly8_t *ptr) { return __riscv_vlseg3e8_v_u8m1x3(ptr, 16); }
 
 FORCE_INLINE poly16x4x3_t vld3_p16(const poly16_t *ptr) { return vld3_u16(ptr); }
 
-FORCE_INLINE poly16x8x3_t vld3q_p16(const poly16_t *ptr) { return vld3q_u16(ptr); }
+FORCE_INLINE poly16x8x3_t vld3q_p16(const poly16_t *ptr) { return __riscv_vlseg3e16_v_u16m1x3(ptr, 8); }
 
 FORCE_INLINE uint8x16x3_t vld3q_u8(const uint8_t *a) { return __riscv_vlseg3e8_v_u8m1x3(a, 16); }
 
@@ -14259,7 +14277,13 @@ FORCE_INLINE float32x4x3_t vld3q_lane_f32(const float32_t *a, float32x4x3_t b, c
 
 FORCE_INLINE poly16x4x3_t vld3_lane_p16(const poly16_t *ptr, poly16x4x3_t src, const int lane) { return vld3_lane_u16(ptr, src, lane); }
 
-FORCE_INLINE poly16x8x3_t vld3q_lane_p16(const poly16_t *ptr, poly16x8x3_t src, const int lane) { return vld3q_lane_u16(ptr, src, lane); }
+FORCE_INLINE poly16x8x3_t vld3q_lane_p16(const poly16_t *ptr, poly16x8x3_t src, const int lane) {
+  vbool16_t mask = __riscv_vreinterpret_v_u8m1_b16(vdup_n_u8((uint8_t)(1 << lane)));
+  vuint16m1_t c0 = __riscv_vmerge_vxm_u16m1(__riscv_vget_v_u16m1x3_u16m1(src, 0), ptr[0], mask, 8);
+  vuint16m1_t c1 = __riscv_vmerge_vxm_u16m1(__riscv_vget_v_u16m1x3_u16m1(src, 1), ptr[1], mask, 8);
+  vuint16m1_t c2 = __riscv_vmerge_vxm_u16m1(__riscv_vget_v_u16m1x3_u16m1(src, 2), ptr[2], mask, 8);
+  return __riscv_vcreate_v_u16m1x3(c0, c1, c2);
+}
 
 FORCE_INLINE uint16x8x3_t vld3q_lane_u16(const uint16_t *a, uint16x8x3_t b, const int c) {
   vbool16_t mask = __riscv_vreinterpret_v_u8m1_b16(vdup_n_u8((uint8_t)(1 << c)));
@@ -14535,7 +14559,17 @@ FORCE_INLINE void vst3q_lane_f32(float32_t *a, float32x4x3_t b, const int c) {
 
 FORCE_INLINE void vst3_lane_p16(poly16_t *ptr, poly16x4x3_t val, const int lane) { vst3_lane_u16(ptr, val, lane); }
 
-FORCE_INLINE void vst3q_lane_p16(poly16_t *ptr, poly16x8x3_t val, const int lane) { vst3q_lane_u16(ptr, val, lane); }
+FORCE_INLINE void vst3q_lane_p16(poly16_t *ptr, poly16x8x3_t val, const int lane) {
+  vuint16m1_t b0 = __riscv_vget_v_u16m1x3_u16m1(val, 0);
+  vuint16m1_t b1 = __riscv_vget_v_u16m1x3_u16m1(val, 1);
+  vuint16m1_t b2 = __riscv_vget_v_u16m1x3_u16m1(val, 2);
+  uint16_t *_b0 = (uint16_t *)&b0;
+  uint16_t *_b1 = (uint16_t *)&b1;
+  uint16_t *_b2 = (uint16_t *)&b2;
+  ptr[0] = _b0[lane];
+  ptr[1] = _b1[lane];
+  ptr[2] = _b2[lane];
+}
 
 // FORCE_INLINE void vst3q_lane_s8(int8_t * ptr, int8x16x3_t val, const int lane);
 
@@ -14627,11 +14661,11 @@ FORCE_INLINE float32x4x4_t vld4q_f32(const float32_t *a) { return __riscv_vlseg4
 
 FORCE_INLINE poly8x8x4_t vld4_p8(const poly8_t *ptr) { return vld4_u8(ptr); }
 
-FORCE_INLINE poly8x16x4_t vld4q_p8(const poly8_t *ptr) { return vld4q_u8(ptr); }
+FORCE_INLINE poly8x16x4_t vld4q_p8(const poly8_t *ptr) { return __riscv_vlseg4e8_v_u8m1x4(ptr, 16); }
 
 FORCE_INLINE poly16x4x4_t vld4_p16(const poly16_t *ptr) { return vld4_u16(ptr); }
 
-FORCE_INLINE poly16x8x4_t vld4q_p16(const poly16_t *ptr) { return vld4q_u16(ptr); }
+FORCE_INLINE poly16x8x4_t vld4q_p16(const poly16_t *ptr) { return __riscv_vlseg4e16_v_u16m1x4(ptr, 8); }
 
 FORCE_INLINE uint8x16x4_t vld4q_u8(const uint8_t *a) { return __riscv_vlseg4e8_v_u8m1x4(a, 16); }
 
@@ -14759,7 +14793,14 @@ FORCE_INLINE float32x4x4_t vld4q_lane_f32(const float32_t *a, float32x4x4_t b, c
 
 FORCE_INLINE poly16x4x4_t vld4_lane_p16(const poly16_t *ptr, poly16x4x4_t src, const int lane) { return vld4_lane_u16(ptr, src, lane); }
 
-FORCE_INLINE poly16x8x4_t vld4q_lane_p16(const poly16_t *ptr, poly16x8x4_t src, const int lane) { return vld4q_lane_u16(ptr, src, lane); }
+FORCE_INLINE poly16x8x4_t vld4q_lane_p16(const poly16_t *ptr, poly16x8x4_t src, const int lane) {
+  vbool16_t mask = __riscv_vreinterpret_v_u8m1_b16(vdup_n_u8((uint8_t)(1 << lane)));
+  vuint16m1_t c0 = __riscv_vmerge_vxm_u16m1(__riscv_vget_v_u16m1x4_u16m1(src, 0), ptr[0], mask, 8);
+  vuint16m1_t c1 = __riscv_vmerge_vxm_u16m1(__riscv_vget_v_u16m1x4_u16m1(src, 1), ptr[1], mask, 8);
+  vuint16m1_t c2 = __riscv_vmerge_vxm_u16m1(__riscv_vget_v_u16m1x4_u16m1(src, 2), ptr[2], mask, 8);
+  vuint16m1_t c3 = __riscv_vmerge_vxm_u16m1(__riscv_vget_v_u16m1x4_u16m1(src, 3), ptr[3], mask, 8);
+  return __riscv_vcreate_v_u16m1x4(c0, c1, c2, c3);
+}
 
 FORCE_INLINE uint16x8x4_t vld4q_lane_u16(const uint16_t *a, uint16x8x4_t b, const int c) {
   vbool16_t mask = __riscv_vreinterpret_v_u8m1_b16(vdup_n_u8((uint8_t)(1 << c)));
@@ -15067,7 +15108,20 @@ FORCE_INLINE void vst4q_lane_f32(float32_t *a, float32x4x4_t b, const int c) {
 
 FORCE_INLINE void vst4_lane_p16(poly16_t *ptr, poly16x4x4_t val, const int lane) { vst4_lane_u16(ptr, val, lane); }
 
-FORCE_INLINE void vst4q_lane_p16(poly16_t *ptr, poly16x8x4_t val, const int lane) { vst4q_lane_u16(ptr, val, lane); }
+FORCE_INLINE void vst4q_lane_p16(poly16_t *ptr, poly16x8x4_t val, const int lane) {
+  vuint16m1_t b0 = __riscv_vget_v_u16m1x4_u16m1(val, 0);
+  vuint16m1_t b1 = __riscv_vget_v_u16m1x4_u16m1(val, 1);
+  vuint16m1_t b2 = __riscv_vget_v_u16m1x4_u16m1(val, 2);
+  vuint16m1_t b3 = __riscv_vget_v_u16m1x4_u16m1(val, 3);
+  uint16_t *_b0 = (uint16_t *)&b0;
+  uint16_t *_b1 = (uint16_t *)&b1;
+  uint16_t *_b2 = (uint16_t *)&b2;
+  uint16_t *_b3 = (uint16_t *)&b3;
+  ptr[0] = _b0[lane];
+  ptr[1] = _b1[lane];
+  ptr[2] = _b2[lane];
+  ptr[3] = _b3[lane];
+}
 
 // FORCE_INLINE void vst4q_lane_s8(int8_t * ptr, int8x16x4_t val, const int lane);
 
