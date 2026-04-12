@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: checkout code
         uses: actions/checkout@v3.2.0
+        with:
+          submodules: recursive
       - name: setup riscv toolchain
         run: |
           mkdir /opt/riscv
@@ -27,23 +29,43 @@ jobs:
           export ENABLE_TEST_ALL=true
           sh scripts/cross-test.sh
 
+  # run arm-neon-tests suite against neon2rvv
+  arm_neon_tests:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v3.2.0
+        with:
+          submodules: recursive
+      - name: setup riscv toolchain
+        run: |
+          mkdir /opt/riscv
+          export PATH=$PATH:/opt/riscv/bin
+          wget https://github.com/howjmay/prebuilt-riscv-spike/releases/download/latest/riscv.tar.gz
+          sudo tar -xzf riscv.tar.gz -C /opt/
+
+      - name: build and check arm-neon-tests
+        run: |
+          export PATH=$PATH:/opt/riscv/bin
+          make CROSS_COMPILE=riscv64-unknown-elf- SIMULATOR_TYPE=qemu check-arm-neon-tests
+
   # for validate test cases only
   check_test_cases:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
         arch: [aarch64]
-        cxx_compiler: [g++-10, clang++-11]
+        cxx_compiler: [g++-12, clang++-14]
     steps:
       - name: checkout code
         uses: actions/checkout@v3.2.0
       - name: build artifact
         # The Github Action for non-x86 CPU
         # https://github.com/uraimo/run-on-arch-action
-        uses: uraimo/run-on-arch-action@v2.5.0
+        uses: uraimo/run-on-arch-action@v3.0.1
         with:
           arch: ${{ matrix.arch }}
-          distro: ubuntu20.04
+          distro: ubuntu22.04
           env: |
             CXX: ${{ matrix.cxx_compiler }}
           install: |
@@ -63,5 +85,5 @@ jobs:
         # clang-format version should be set
         run: |
             sudo apt-get install -q -y clang-format
-            sh scripts/check-format.sh
+            bash scripts/check-format.sh
         shell: bash

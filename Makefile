@@ -82,10 +82,55 @@ format:
 	@if ! hash clang-format; then echo "clang-format is required to indent"; fi
 	clang-format -i neon2rvv.h tests/*.cpp tests/*.h
 
-.PHONY: clean check format
+# ── arm-neon-tests integration ──────────────────────────────────────────────
+# Tests from https://github.com/christophe-lyon/arm-neon-tests compiled
+# against neon2rvv and compared with the upstream reference output.
+ANT_DIR = tests/arm-neon-tests
+
+# All ref_*.c files except:
+#  - non-NEON (integer/DSP) stubs replaced by tests/neon_stubs.c
+#  - template files that lack an INSN_NAME guard and are only meant to be
+#    #include-d by the actual per-intrinsic ref_v*.c files
+ANT_SRCS := $(filter-out \
+	$(ANT_DIR)/ref_integer.c \
+	$(ANT_DIR)/ref_dsp.c \
+	$(ANT_DIR)/ref_dspfns.c \
+	$(ANT_DIR)/ref_v_binary_op.c \
+	$(ANT_DIR)/ref_v_binary_sat_op.c \
+	$(ANT_DIR)/ref_v_comp_f_op.c \
+	$(ANT_DIR)/ref_v_comp_op.c \
+	$(ANT_DIR)/ref_v_unary_op.c \
+	$(ANT_DIR)/ref_v_unary_sat_op.c \
+	$(ANT_DIR)/ref_vsXi_n.c, \
+	$(wildcard $(ANT_DIR)/ref_*.c))
+
+ANT_CFLAGS  = -Wall -Wno-unused-variable -Wno-unused-function \
+              -ffast-math $(ARCH_CFLAGS) \
+              -I. -Itests -I$(ANT_DIR)
+ANT_REFFILE     = neon2rvv-neon-ref.txt
+ANT_GCCTESTFILE = neon2rvv-gcc-tests.txt
+ANT_EXEC        = tests/arm-neon-tests-main
+
+$(ANT_EXEC): $(ANT_SRCS) tests/neon_stubs.c
+	$(CC) $(ANT_CFLAGS) -static \
+	    -DREFFILE=\"$(ANT_REFFILE)\" \
+	    -DGCCTESTS_FILE=\"$(ANT_GCCTESTFILE)\" \
+	    -o $@ \
+	    $(ANT_DIR)/compute_ref.c $(ANT_SRCS) tests/neon_stubs.c -lm
+
+# Build only (no run) – useful to verify the code compiles on RISC-V.
+build-arm-neon-tests: $(ANT_EXEC)
+
+# Build, run, and diff against the upstream reference.
+check-arm-neon-tests: $(ANT_EXEC)
+	$(SIMULATOR) $(SIMULATOR_FLAGS) $(PROXY_KERNEL) $<
+	diff $(ANT_REFFILE) $(ANT_DIR)/ref-rvct-neon-nofp16.txt
+
+.PHONY: clean check format build-arm-neon-tests check-arm-neon-tests
 
 clean:
 	$(RM) $(OBJS) $(EXEC) $(deps) neon2rvv.h.gch
+	$(RM) $(ANT_EXEC) $(ANT_REFFILE) $(ANT_GCCTESTFILE)
 
 clean-all: clean
 	$(RM) *.log
