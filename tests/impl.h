@@ -2059,19 +2059,19 @@
   _(vqrdmulh_lane_s16)                                                           \
   _(vqrdmulh_lane_s32)                                                           \
   _(vqrdmlahq_lane_s16)                                                          \
-  /*_(vqrdmlah_laneq_s16)                                                     */ \
-  /*_(vqrdmlahq_laneq_s16)                                                    */ \
+  _(vqrdmlah_laneq_s16)                                                          \
+  _(vqrdmlahq_laneq_s16)                                                         \
   _(vqrdmlahq_lane_s32)                                                          \
-  /*_(vqrdmlah_laneq_s32)                                                     */ \
-  /*_(vqrdmlahq_laneq_s32)                                                    */ \
+  _(vqrdmlah_laneq_s32)                                                          \
+  _(vqrdmlahq_laneq_s32)                                                         \
   _(vqrdmlah_lane_s16)                                                           \
   _(vqrdmlah_lane_s32)                                                           \
   _(vqrdmlshq_lane_s16)                                                          \
-  /*_(vqrdmlsh_laneq_s16)                                                     */ \
-  /*_(vqrdmlshq_laneq_s16)                                                    */ \
+  _(vqrdmlsh_laneq_s16)                                                          \
+  _(vqrdmlshq_laneq_s16)                                                         \
   _(vqrdmlshq_lane_s32)                                                          \
-  /*_(vqrdmlsh_laneq_s32)                                                     */ \
-  /*_(vqrdmlshq_laneq_s32)                                                    */ \
+  _(vqrdmlsh_laneq_s32)                                                           \
+  _(vqrdmlshq_laneq_s32)                                                          \
   /*_(vqrdmlahh_s16)                                                          */ \
   /*_(vqrdmlahs_s32)                                                          */ \
   /*_(vqrdmlshh_s16)                                                          */ \
