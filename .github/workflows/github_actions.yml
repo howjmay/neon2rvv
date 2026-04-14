@@ -59,3 +59,24 @@ jobs:
             sudo apt-get install -q -y clang-format
             bash scripts/check-format.sh
         shell: bash
+
+  update_coverage_badge:
+    runs-on: ubuntu-22.04
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v3.2.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: update coverage badge
+        run: python3 scripts/intrinsics_coverage.py --update-readme
+      - name: commit badge if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git diff --quiet README.md || (
+            git add README.md &&
+            git commit -m "chore: Update coverage badge [skip ci]"
+          )
+      - name: push changes
+        run: git push
