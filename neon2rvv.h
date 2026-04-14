@@ -237,6 +237,11 @@ FORCE_INLINE uint64x2_t vdupq_n_u64(uint64_t a);
 FORCE_INLINE int8x8_t vcnt_s8(int8x8_t a);
 FORCE_INLINE uint8x8_t vcnt_u8(uint8x8_t a);
 
+FORCE_INLINE int64_t vget_lane_s64(int64x1_t a, const int b);
+FORCE_INLINE uint64_t vget_lane_u64(uint64x1_t a, const int b);
+FORCE_INLINE int64_t vqrshld_s64(int64_t a, int64_t b);
+FORCE_INLINE uint64_t vqrshld_u64(uint64_t a, int64_t b);
+
 /* vadd */
 FORCE_INLINE int8x8_t vadd_s8(int8x8_t a, int8x8_t b) { return __riscv_vadd_vv_i8m1(a, b, 8); }
 
@@ -5538,24 +5543,56 @@ FORCE_INLINE int16_t vqshlh_s16(int16_t a, int16_t b) {
 
 FORCE_INLINE int32_t vqshls_s32(int32_t a, int32_t b) {
   if (b < 0) {
-    return a >> -b;
+    int32_t rshift = -b;
+    if (rshift >= 32) {
+      return (a < 0) ? -1 : 0;
+    }
+    return a >> rshift;
   }
-  if ((INT32_MAX >> b) < a) {
+  if (b >= 32) {
+    if (a > 0) {
+      return INT32_MAX;
+    }
+    if (a < 0) {
+      return INT32_MIN;
+    }
+    return 0;
+  }
+  int64_t tmp = ((int64_t)a) << b;
+  if (tmp > INT32_MAX) {
     return INT32_MAX;
-  } else {
-    return a << b;
   }
+  if (tmp < INT32_MIN) {
+    return INT32_MIN;
+  }
+  return (int32_t)tmp;
 }
 
 FORCE_INLINE int64_t vqshld_s64(int64_t a, int64_t b) {
   if (b < 0) {
-    return a >> -b;
+    int64_t rshift = -b;
+    if (rshift >= 64) {
+      return (a < 0) ? -1 : 0;
+    }
+    return a >> rshift;
   }
-  if ((INT64_MAX >> b) < a) {
+  if (b >= 64) {
+    if (a > 0) {
+      return INT64_MAX;
+    }
+    if (a < 0) {
+      return INT64_MIN;
+    }
+    return 0;
+  }
+  __int128 tmp = ((__int128)a) << b;
+  if (tmp > INT64_MAX) {
     return INT64_MAX;
-  } else {
-    return (int64_t)a << b;
   }
+  if (tmp < INT64_MIN) {
+    return INT64_MIN;
+  }
+  return (int64_t)tmp;
 }
 
 FORCE_INLINE uint8_t vqshlb_u8(uint8_t a, int8_t b) {
@@ -5641,7 +5678,11 @@ FORCE_INLINE int32x2_t vqrshl_s32(int32x2_t a, int32x2_t b) {
   return __riscv_vmerge_vvm_i32m1(shr, shl, positive_mask, 2);
 }
 
-// FORCE_INLINE int64x1_t vqrshl_s64(int64x1_t a, int64x1_t b);
+FORCE_INLINE int64x1_t vqrshl_s64(int64x1_t a, int64x1_t b) {
+  int64_t a0 = vget_lane_s64(a, 0);
+  int64_t b0 = vget_lane_s64(b, 0);
+  return vdup_n_s64(vqrshld_s64(a0, b0));
+}
 
 FORCE_INLINE uint8x8_t vqrshl_u8(uint8x8_t a, int8x8_t b) {
   vbool8_t positive_mask = __riscv_vmsgt_vx_i8m1_b8(b, 0, 8);
@@ -5682,7 +5723,11 @@ FORCE_INLINE uint32x2_t vqrshl_u32(uint32x2_t a, int32x2_t b) {
   return __riscv_vmerge_vvm_u32m1(shr, shl, positive_mask, 2);
 }
 
-// FORCE_INLINE uint64x1_t vqrshl_u64(uint64x1_t a, int64x1_t b);
+FORCE_INLINE uint64x1_t vqrshl_u64(uint64x1_t a, int64x1_t b) {
+  uint64_t a0 = vget_lane_u64(a, 0);
+  int64_t b0 = vget_lane_s64(b, 0);
+  return vdup_n_u64(vqrshld_u64(a0, b0));
+}
 
 FORCE_INLINE int8x16_t vqrshlq_s8(int8x16_t a, int8x16_t b) {
   vbool8_t positive_mask = __riscv_vmsgt_vx_i8m1_b8(b, 0, 16);
@@ -5766,21 +5811,135 @@ FORCE_INLINE uint32x4_t vqrshlq_u32(uint32x4_t a, int32x4_t b) {
 
 // FORCE_INLINE uint64x2_t vqrshlq_u64(uint64x2_t a, int64x2_t b);
 
-// FORCE_INLINE int8_t vqrshlb_s8(int8_t a, int8_t b);
+FORCE_INLINE int8_t vqrshlb_s8(int8_t a, int8_t b) {
+  if (b < 0) {
+    return ((int16_t)a + (1 << (-b - 1))) >> (-b);
+  } else {
+    return vqshlb_s8(a, b);
+  }
+}
 
-// FORCE_INLINE int16_t vqrshlh_s16(int16_t a, int16_t b);
+FORCE_INLINE int16_t vqrshlh_s16(int16_t a, int16_t b) {
+  if (b < 0) {
+    return ((int32_t)a + (1 << (-b - 1))) >> (-b);
+  } else {
+    return vqshlh_s16(a, b);
+  }
+}
 
-// FORCE_INLINE int32_t vqrshls_s32(int32_t a, int32_t b);
+FORCE_INLINE int32_t vqrshls_s32(int32_t a, int32_t b) {
+  if (b < 0) {
+    return ((int64_t)a + (1 << (-b - 1))) >> (-b);
+  } else {
+    return vqshls_s32(a, b);
+  }
+}
 
-// FORCE_INLINE int64_t vqrshld_s64(int64_t a, int64_t b);
+FORCE_INLINE int64_t vqrshld_s64(int64_t a, int64_t b) {
+  if (b < 0) {
+    if (b <= -64) {
+      return 0;
+    }
+    uint64_t b_neg = (uint64_t)(-b);
+    // Rounded arithmetic right shift without __int128:
+    // a = q * 2^n + r, where q = a >> n and r are low n bits of a.
+    // Add round-to-nearest increment (2^(n-1)) to r and carry into q.
+    int64_t q = a >> b_neg;
+    uint64_t mask = (UINT64_C(1) << b_neg) - 1;
+    uint64_t r = ((uint64_t)a) & mask;
+    uint64_t carry = (r + (UINT64_C(1) << (b_neg - 1))) >> b_neg;
+    return q + (int64_t)carry;
+  } else {
+    if (b >= 64) {
+      if (a > 0) {
+        return INT64_MAX;
+      }
+      if (a < 0) {
+        return INT64_MIN;
+      }
+      return 0;
+    }
+    return vqshld_s64(a, b);
+  }
+}
 
-// FORCE_INLINE uint8_t vqrshlb_u8(uint8_t a, int8_t b);
+FORCE_INLINE uint8_t vqrshlb_u8(uint8_t a, int8_t b) {
+  if (b < 0) {
+    if (b <= -8) {
+      return 0;
+    }
+    uint32_t b_neg = (uint32_t)(-b);
+    uint32_t q = (uint32_t)a >> b_neg;
+    uint32_t mask = (UINT32_C(1) << b_neg) - 1;
+    uint32_t r = (uint32_t)a & mask;
+    uint32_t carry = (r + (UINT32_C(1) << (b_neg - 1))) >> b_neg;
+    return (uint8_t)(q + carry);
+  } else {
+    if (b >= 8) {
+      return a == 0 ? 0 : UINT8_MAX;
+    }
+    return vqshlb_u8(a, b);
+  }
+}
 
-// FORCE_INLINE uint16_t vqrshlh_u16(uint16_t a, int16_t b);
+FORCE_INLINE uint16_t vqrshlh_u16(uint16_t a, int16_t b) {
+  if (b < 0) {
+    if (b <= -16) {
+      return 0;
+    }
+    uint32_t b_neg = (uint32_t)(-b);
+    uint32_t q = (uint32_t)a >> b_neg;
+    uint32_t mask = (UINT32_C(1) << b_neg) - 1;
+    uint32_t r = (uint32_t)a & mask;
+    uint32_t carry = (r + (UINT32_C(1) << (b_neg - 1))) >> b_neg;
+    return (uint16_t)(q + carry);
+  } else {
+    if (b >= 16) {
+      return a == 0 ? 0 : UINT16_MAX;
+    }
+    return vqshlh_u16(a, b);
+  }
+}
 
-// FORCE_INLINE uint32_t vqrshls_u32(uint32_t a, int32_t b);
+FORCE_INLINE uint32_t vqrshls_u32(uint32_t a, int32_t b) {
+  if (b < 0) {
+    if (b <= -32) {
+      return 0;
+    }
+    uint64_t b_neg = (uint64_t)(-b);
+    uint64_t q = (uint64_t)a >> b_neg;
+    uint64_t mask = (UINT64_C(1) << b_neg) - 1;
+    uint64_t r = (uint64_t)a & mask;
+    uint64_t carry = (r + (UINT64_C(1) << (b_neg - 1))) >> b_neg;
+    return (uint32_t)(q + carry);
+  } else {
+    if (b >= 32) {
+      return a == 0 ? 0 : UINT32_MAX;
+    }
+    return vqshls_u32(a, b);
+  }
+}
 
-// FORCE_INLINE uint64_t vqrshld_u64(uint64_t a, int64_t b);
+FORCE_INLINE uint64_t vqrshld_u64(uint64_t a, int64_t b) {
+  if (b < 0) {
+    if (b <= -64) {
+      return 0;
+    }
+    uint64_t b_neg = (uint64_t)(-b);
+    // Rounded logical right shift without __uint128_t:
+    // split into quotient/remainder at 2^n and propagate rounding carry.
+    uint64_t q = a >> b_neg;
+    uint64_t mask = (UINT64_C(1) << b_neg) - 1;
+    uint64_t r = a & mask;
+    uint64_t carry = (r + (UINT64_C(1) << (b_neg - 1))) >> b_neg;
+    return q + carry;
+  } else {
+    if (b >= 64) {
+      return a == 0 ? 0 : UINT64_MAX;
+    }
+    return vqshld_u64(a, b);
+  }
+}
 
 FORCE_INLINE int8x8_t vshr_n_s8(int8x8_t a, const int b) {
   const int imm = b - (b >> 3);

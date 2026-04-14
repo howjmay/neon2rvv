@@ -1,8 +1,8 @@
 #ifndef NEON2RVV_DEBUG_TOOLS_H
 #define NEON2RVV_DEBUG_TOOLS_H
 
+#include <stdint.h>
 #include <stdio.h>
-#include <cstdint>
 
 #if defined(__riscv) || defined(__riscv__)
 #include "neon2rvv.h"
