@@ -63,6 +63,9 @@ jobs:
   update_coverage_badge:
     runs-on: ubuntu-22.04
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: checkout code
         uses: actions/checkout@v3.2.0
@@ -70,13 +73,13 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: update coverage badge
         run: python3 scripts/intrinsics_coverage.py --update-readme
-      - name: commit badge if changed
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git diff --quiet README.md || (
-            git add README.md &&
-            git commit -m "chore: Update coverage badge [skip ci]"
-          )
-      - name: push changes
-        run: git push
+      - name: create pull request for badge update
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: update coverage badge"
+          title: "chore: update coverage badge"
+          body: "Automated update of the coverage badge in README."
+          branch: "ci/update-coverage-badge"
+          delete-branch: true
+          add-paths: README.md
