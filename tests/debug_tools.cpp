@@ -1,16 +1,12 @@
 #include "debug_tools.h"
+#include <inttypes.h>
 #include <math.h>
 #include <stdint.h>
 
 namespace NEON2RVV {
 
-#if defined(__aarch64__)
-#define INT64_ESCAPE "%20lld"
-#define UINT64_ESCAPE "%20llu"
-#else
-#define INT64_ESCAPE "%20ld"
-#define UINT64_ESCAPE "%20lu"
-#endif
+#define INT64_ESCAPE "%20" PRId64
+#define UINT64_ESCAPE "%20" PRIu64
 
 void print_64_bits_u8_arr(const char *var_name, const uint8_t *u) {
   printf("%s0: %3u, %s1: %3u, %s2: %3u, %s3: %3u, %s4: %3u, %s5: %3u, %s6: %3u, %s7: %3u\n", var_name, u[0], var_name,
