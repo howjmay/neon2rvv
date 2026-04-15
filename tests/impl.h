@@ -2693,8 +2693,8 @@
   _(vst1q_u64)                                                                   \
   /*_(vst1q_p8)                                                               */ \
   /*_(vst1q_p16)                                                              */ \
-  /*_(vst1_f64)                                                               */ \
-  /*_(vst1q_f64)                                                              */ \
+  _(vst1_f64)                                                                    \
+  _(vst1q_f64)                                                                   \
   _(vst1_lane_s8)                                                                \
   _(vst1_lane_s16)                                                               \
   _(vst1_lane_s32)                                                               \
@@ -2818,11 +2818,11 @@
   /*_(vst2_p8)                                                                */ \
   /*_(vst2_p16)                                                               */ \
   /*_(vst2_p64)                                                               */ \
-  /*_(vst2q_s64)                                                              */ \
-  /*_(vst2q_u64)                                                              */ \
+  _(vst2q_s64)                                                                   \
+  _(vst2q_u64)                                                                   \
   /*_(vst2q_p64)                                                              */ \
-  /*_(vst2_f64)                                                               */ \
-  /*_(vst2q_f64)                                                              */ \
+  _(vst2_f64)                                                                    \
+  _(vst2q_f64)                                                                   \
   _(vst2_s64)                                                                    \
   _(vst2_u64)                                                                    \
   _(vst2q_s8)                                                                    \
@@ -2852,17 +2852,17 @@
   _(vst2q_lane_u16)                                                              \
   _(vst2q_lane_u32)                                                              \
   /*_(vst2q_lane_p16)                                                         */ \
-  /*_(vst2q_lane_s8)                                                          */ \
-  /*_(vst2q_lane_u8)                                                          */ \
+  _(vst2q_lane_s8)                                                               \
+  _(vst2q_lane_u8)                                                               \
   /*_(vst2q_lane_p8)                                                          */ \
-  /*_(vst2_lane_s64)                                                          */ \
-  /*_(vst2q_lane_s64)                                                         */ \
-  /*_(vst2_lane_u64)                                                          */ \
-  /*_(vst2q_lane_u64)                                                         */ \
+  _(vst2_lane_s64)                                                               \
+  _(vst2q_lane_s64)                                                              \
+  _(vst2_lane_u64)                                                               \
+  _(vst2q_lane_u64)                                                              \
   /*_(vst2_lane_p64)                                                          */ \
   /*_(vst2q_lane_p64)                                                         */ \
-  /*_(vst2_lane_f64)                                                          */ \
-  /*_(vst2q_lane_f64)                                                         */ \
+  _(vst2_lane_f64)                                                               \
+  _(vst2q_lane_f64)                                                              \
   _(vld3_s8)                                                                     \
   _(vld3_s16)                                                                    \
   _(vld3_s32)                                                                    \
@@ -2958,11 +2958,11 @@
   /*_(vst3_p8)                                                                */ \
   /*_(vst3_p16)                                                               */ \
   /*_(vst3_p64)                                                               */ \
-  /*_(vst3q_s64)                                                              */ \
-  /*_(vst3q_u64)                                                              */ \
+  _(vst3q_s64)                                                                   \
+  _(vst3q_u64)                                                                   \
   /*_(vst3q_p64)                                                              */ \
-  /*_(vst3_f64)                                                               */ \
-  /*_(vst3q_f64)                                                              */ \
+  _(vst3_f64)                                                                    \
+  _(vst3q_f64)                                                                   \
   _(vst3_s64)                                                                    \
   _(vst3_u64)                                                                    \
   _(vst3q_s8)                                                                    \
@@ -2992,17 +2992,17 @@
   _(vst3q_lane_u16)                                                              \
   _(vst3q_lane_u32)                                                              \
   /*_(vst3q_lane_p16)                                                         */ \
-  /*_(vst3q_lane_s8)                                                          */ \
-  /*_(vst3q_lane_u8)                                                          */ \
+  _(vst3q_lane_s8)                                                               \
+  _(vst3q_lane_u8)                                                               \
   /*_(vst3q_lane_p8)                                                          */ \
-  /*_(vst3_lane_s64)                                                          */ \
-  /*_(vst3q_lane_s64)                                                         */ \
-  /*_(vst3_lane_u64)                                                          */ \
-  /*_(vst3q_lane_u64)                                                         */ \
+  _(vst3_lane_s64)                                                               \
+  _(vst3q_lane_s64)                                                              \
+  _(vst3_lane_u64)                                                               \
+  _(vst3q_lane_u64)                                                              \
   /*_(vst3_lane_p64)                                                          */ \
   /*_(vst3q_lane_p64)                                                         */ \
-  /*_(vst3_lane_f64)                                                          */ \
-  /*_(vst3q_lane_f64)                                                         */ \
+  _(vst3_lane_f64)                                                               \
+  _(vst3q_lane_f64)                                                              \
   _(vld4_s8)                                                                     \
   _(vld4_s16)                                                                    \
   _(vld4_s32)                                                                    \
@@ -3098,11 +3098,11 @@
   /*_(vst4_p8)                                                                */ \
   /*_(vst4_p16)                                                               */ \
   /*_(vst4_p64)                                                               */ \
-  /*_(vst4q_s64)                                                              */ \
-  /*_(vst4q_u64)                                                              */ \
+  _(vst4q_s64)                                                                   \
+  _(vst4q_u64)                                                                   \
   /*_(vst4q_p64)                                                              */ \
-  /*_(vst4_f64)                                                               */ \
-  /*_(vst4q_f64)                                                              */ \
+  _(vst4_f64)                                                                    \
+  _(vst4q_f64)                                                                   \
   _(vst4_s64)                                                                    \
   _(vst4_u64)                                                                    \
   _(vst4q_s8)                                                                    \
@@ -3132,17 +3132,17 @@
   _(vst4q_lane_u16)                                                              \
   _(vst4q_lane_u32)                                                              \
   /*_(vst4q_lane_p16)                                                         */ \
-  /*_(vst4q_lane_s8)                                                          */ \
-  /*_(vst4q_lane_u8)                                                          */ \
+  _(vst4q_lane_s8)                                                               \
+  _(vst4q_lane_u8)                                                               \
   /*_(vst4q_lane_p8)                                                          */ \
-  /*_(vst4_lane_s64)                                                          */ \
-  /*_(vst4q_lane_s64)                                                         */ \
-  /*_(vst4_lane_u64)                                                          */ \
-  /*_(vst4q_lane_u64)                                                         */ \
+  _(vst4_lane_s64)                                                               \
+  _(vst4q_lane_s64)                                                              \
+  _(vst4_lane_u64)                                                               \
+  _(vst4q_lane_u64)                                                              \
   /*_(vst4_lane_p64)                                                          */ \
   /*_(vst4q_lane_p64)                                                         */ \
-  /*_(vst4_lane_f64)                                                          */ \
-  /*_(vst4q_lane_f64)                                                         */ \
+  _(vst4_lane_f64)                                                               \
+  _(vst4q_lane_f64)                                                              \
   _(vst1_s8_x2)                                                                  \
   _(vst1q_s8_x2)                                                                 \
   _(vst1_s16_x2)                                                                 \
@@ -3171,62 +3171,62 @@
   /*_(vst1q_p64_x2)                                                           */ \
   _(vst1_f64_x2)                                                                 \
   _(vst1q_f64_x2)                                                                \
-  /*_(vst1_s8_x3)                                                             */ \
-  /*_(vst1q_s8_x3)                                                            */ \
-  /*_(vst1_s16_x3)                                                            */ \
-  /*_(vst1q_s16_x3)                                                           */ \
-  /*_(vst1_s32_x3)                                                            */ \
-  /*_(vst1q_s32_x3)                                                           */ \
-  /*_(vst1_u8_x3)                                                             */ \
-  /*_(vst1q_u8_x3)                                                            */ \
-  /*_(vst1_u16_x3)                                                            */ \
-  /*_(vst1q_u16_x3)                                                           */ \
-  /*_(vst1_u32_x3)                                                            */ \
-  /*_(vst1q_u32_x3)                                                           */ \
+  _(vst1_s8_x3)                                                                  \
+  _(vst1q_s8_x3)                                                                 \
+  _(vst1_s16_x3)                                                                 \
+  _(vst1q_s16_x3)                                                                \
+  _(vst1_s32_x3)                                                                 \
+  _(vst1q_s32_x3)                                                                \
+  _(vst1_u8_x3)                                                                  \
+  _(vst1q_u8_x3)                                                                 \
+  _(vst1_u16_x3)                                                                 \
+  _(vst1q_u16_x3)                                                                \
+  _(vst1_u32_x3)                                                                 \
+  _(vst1q_u32_x3)                                                                \
   /*_(vst1_f16_x3)                                                            */ \
   /*_(vst1q_f16_x3)                                                           */ \
-  /*_(vst1_f32_x3)                                                            */ \
-  /*_(vst1q_f32_x3)                                                           */ \
+  _(vst1_f32_x3)                                                                 \
+  _(vst1q_f32_x3)                                                                \
   /*_(vst1_p8_x3)                                                             */ \
   /*_(vst1q_p8_x3)                                                            */ \
   /*_(vst1_p16_x3)                                                            */ \
   /*_(vst1q_p16_x3)                                                           */ \
-  /*_(vst1_s64_x3)                                                            */ \
-  /*_(vst1_u64_x3)                                                            */ \
+  _(vst1_s64_x3)                                                                 \
+  _(vst1_u64_x3)                                                                 \
   /*_(vst1_p64_x3)                                                            */ \
-  /*_(vst1q_s64_x3)                                                           */ \
-  /*_(vst1q_u64_x3)                                                           */ \
+  _(vst1q_s64_x3)                                                                \
+  _(vst1q_u64_x3)                                                                \
   /*_(vst1q_p64_x3)                                                           */ \
-  /*_(vst1_f64_x3)                                                            */ \
-  /*_(vst1q_f64_x3)                                                           */ \
-  /*_(vst1_s8_x4)                                                             */ \
-  /*_(vst1q_s8_x4)                                                            */ \
-  /*_(vst1_s16_x4)                                                            */ \
-  /*_(vst1q_s16_x4)                                                           */ \
-  /*_(vst1_s32_x4)                                                            */ \
-  /*_(vst1q_s32_x4)                                                           */ \
-  /*_(vst1_u8_x4)                                                             */ \
-  /*_(vst1q_u8_x4)                                                            */ \
-  /*_(vst1_u16_x4)                                                            */ \
-  /*_(vst1q_u16_x4)                                                           */ \
-  /*_(vst1_u32_x4)                                                            */ \
-  /*_(vst1q_u32_x4)                                                           */ \
+  _(vst1_f64_x3)                                                                 \
+  _(vst1q_f64_x3)                                                                \
+  _(vst1_s8_x4)                                                                  \
+  _(vst1q_s8_x4)                                                                 \
+  _(vst1_s16_x4)                                                                 \
+  _(vst1q_s16_x4)                                                                \
+  _(vst1_s32_x4)                                                                 \
+  _(vst1q_s32_x4)                                                                \
+  _(vst1_u8_x4)                                                                  \
+  _(vst1q_u8_x4)                                                                 \
+  _(vst1_u16_x4)                                                                 \
+  _(vst1q_u16_x4)                                                                \
+  _(vst1_u32_x4)                                                                 \
+  _(vst1q_u32_x4)                                                                \
   /*_(vst1_f16_x4)                                                            */ \
   /*_(vst1q_f16_x4)                                                           */ \
-  /*_(vst1_f32_x4)                                                            */ \
-  /*_(vst1q_f32_x4)                                                           */ \
+  _(vst1_f32_x4)                                                                 \
+  _(vst1q_f32_x4)                                                                \
   /*_(vst1_p8_x4)                                                             */ \
   /*_(vst1q_p8_x4)                                                            */ \
   /*_(vst1_p16_x4)                                                            */ \
   /*_(vst1q_p16_x4)                                                           */ \
-  /*_(vst1_s64_x4)                                                            */ \
-  /*_(vst1_u64_x4)                                                            */ \
+  _(vst1_s64_x4)                                                                 \
+  _(vst1_u64_x4)                                                                 \
   /*_(vst1_p64_x4)                                                            */ \
-  /*_(vst1q_s64_x4)                                                           */ \
-  /*_(vst1q_u64_x4)                                                           */ \
+  _(vst1q_s64_x4)                                                                \
+  _(vst1q_u64_x4)                                                                \
   /*_(vst1q_p64_x4)                                                           */ \
-  /*_(vst1_f64_x4)                                                            */ \
-  /*_(vst1q_f64_x4)                                                           */ \
+  _(vst1_f64_x4)                                                                 \
+  _(vst1q_f64_x4)                                                                \
   /*_(vld1_s8_x2)                                                             */ \
   /*_(vld1q_s8_x2)                                                            */ \
   /*_(vld1_s16_x2)                                                            */ \
