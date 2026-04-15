@@ -26719,7 +26719,62 @@ result_t test_vrecpe_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #endif  // ENABLE_TEST_ALL
 }
 
-result_t test_vrecpe_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vrecpe_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint32_t *_a = (const uint32_t *)impl.test_cases_int_pointer1;
+  uint32_t _c[2];
+  static const uint32_t kVrecpeU32Top9Lut[256] = {
+      0xff800000u, 0xfe800000u, 0xfd800000u, 0xfc800000u, 0xfb800000u, 0xfa800000u, 0xf9800000u, 0xf8800000u,
+      0xf8000000u, 0xf7000000u, 0xf6000000u, 0xf5000000u, 0xf4000000u, 0xf3000000u, 0xf2800000u, 0xf1800000u,
+      0xf0800000u, 0xef800000u, 0xee800000u, 0xee000000u, 0xed000000u, 0xec000000u, 0xeb800000u, 0xea800000u,
+      0xe9800000u, 0xe9000000u, 0xe8000000u, 0xe7000000u, 0xe6800000u, 0xe5800000u, 0xe4800000u, 0xe4000000u,
+      0xe3000000u, 0xe2800000u, 0xe1800000u, 0xe1000000u, 0xe0000000u, 0xdf800000u, 0xde800000u, 0xde000000u,
+      0xdd000000u, 0xdc800000u, 0xdb800000u, 0xdb000000u, 0xda000000u, 0xd9800000u, 0xd8800000u, 0xd8000000u,
+      0xd7000000u, 0xd6800000u, 0xd6000000u, 0xd5000000u, 0xd4800000u, 0xd3800000u, 0xd3000000u, 0xd2800000u,
+      0xd1800000u, 0xd1000000u, 0xd0800000u, 0xcf800000u, 0xcf000000u, 0xce800000u, 0xce000000u, 0xcd000000u,
+      0xcc800000u, 0xcc000000u, 0xcb000000u, 0xca800000u, 0xca000000u, 0xc9800000u, 0xc8800000u, 0xc8000000u,
+      0xc7800000u, 0xc7000000u, 0xc6800000u, 0xc5800000u, 0xc5000000u, 0xc4800000u, 0xc4000000u, 0xc3800000u,
+      0xc3000000u, 0xc2000000u, 0xc1800000u, 0xc1000000u, 0xc0800000u, 0xc0000000u, 0xbf800000u, 0xbf000000u,
+      0xbe000000u, 0xbd800000u, 0xbd000000u, 0xbc800000u, 0xbc000000u, 0xbb800000u, 0xbb000000u, 0xba800000u,
+      0xba000000u, 0xb9800000u, 0xb9000000u, 0xb8800000u, 0xb8000000u, 0xb7800000u, 0xb7000000u, 0xb6800000u,
+      0xb6000000u, 0xb5800000u, 0xb5000000u, 0xb4800000u, 0xb4000000u, 0xb3800000u, 0xb3000000u, 0xb2800000u,
+      0xb2000000u, 0xb1800000u, 0xb1000000u, 0xb0800000u, 0xb0000000u, 0xaf800000u, 0xaf000000u, 0xae800000u,
+      0xae000000u, 0xad800000u, 0xad000000u, 0xac800000u, 0xac000000u, 0xac000000u, 0xab800000u, 0xab000000u,
+      0xaa800000u, 0xaa000000u, 0xa9800000u, 0xa9000000u, 0xa8800000u, 0xa8800000u, 0xa8000000u, 0xa7800000u,
+      0xa7000000u, 0xa6800000u, 0xa6000000u, 0xa5800000u, 0xa5800000u, 0xa5000000u, 0xa4800000u, 0xa4000000u,
+      0xa3800000u, 0xa3000000u, 0xa3000000u, 0xa2800000u, 0xa2000000u, 0xa1800000u, 0xa1000000u, 0xa1000000u,
+      0xa0800000u, 0xa0000000u, 0x9f800000u, 0x9f800000u, 0x9f000000u, 0x9e800000u, 0x9e000000u, 0x9d800000u,
+      0x9d800000u, 0x9d000000u, 0x9c800000u, 0x9c000000u, 0x9c000000u, 0x9b800000u, 0x9b000000u, 0x9a800000u,
+      0x9a800000u, 0x9a000000u, 0x99800000u, 0x99800000u, 0x99000000u, 0x98800000u, 0x98000000u, 0x98000000u,
+      0x97800000u, 0x97000000u, 0x97000000u, 0x96800000u, 0x96000000u, 0x96000000u, 0x95800000u, 0x95000000u,
+      0x95000000u, 0x94800000u, 0x94000000u, 0x94000000u, 0x93800000u, 0x93000000u, 0x93000000u, 0x92800000u,
+      0x92000000u, 0x92000000u, 0x91800000u, 0x91000000u, 0x91000000u, 0x90800000u, 0x90000000u, 0x90000000u,
+      0x8f800000u, 0x8f000000u, 0x8f000000u, 0x8e800000u, 0x8e800000u, 0x8e000000u, 0x8d800000u, 0x8d800000u,
+      0x8d000000u, 0x8d000000u, 0x8c800000u, 0x8c000000u, 0x8c000000u, 0x8b800000u, 0x8b800000u, 0x8b000000u,
+      0x8a800000u, 0x8a800000u, 0x8a000000u, 0x8a000000u, 0x89800000u, 0x89000000u, 0x89000000u, 0x88800000u,
+      0x88800000u, 0x88000000u, 0x88000000u, 0x87800000u, 0x87800000u, 0x87000000u, 0x86800000u, 0x86800000u,
+      0x86000000u, 0x86000000u, 0x85800000u, 0x85800000u, 0x85000000u, 0x85000000u, 0x84800000u, 0x84800000u,
+      0x84000000u, 0x83800000u, 0x83800000u, 0x83000000u, 0x83000000u, 0x82800000u, 0x82800000u, 0x82000000u,
+      0x82000000u, 0x81800000u, 0x81800000u, 0x81000000u, 0x81000000u, 0x80800000u, 0x80800000u, 0x80000000u};
+
+  for (int i = 0; i < 2; i++) {
+    if (_a[i] < 0x80000000u) {
+      _c[i] = UINT32_MAX;
+    } else {
+      _c[i] = kVrecpeU32Top9Lut[(_a[i] >> 23) - 256];
+    }
+  }
+
+  uint32x2_t a = vld1_u32(_a);
+  uint32x2_t c = vrecpe_u32(a);
+  // print_u32_64("_a", _a);
+  // print_u32_64("_c", _c);
+  // print_u32_64("-c", c);
+  return validate_uint32(c, _c[0], _c[1]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vrecpeq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
@@ -26792,7 +26847,25 @@ result_t test_vrecped_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #endif  // ENABLE_TEST_ALL
 }
 
-result_t test_vrecpeq_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vrecpeq_u32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const uint32_t *_a = (const uint32_t *)impl.test_cases_int_pointer1;
+  uint32_t _c[4];
+
+  uint32x2_t a0 = vld1_u32(_a);
+  uint32x2_t a1 = vld1_u32(_a + 2);
+  uint32x2_t c0 = vrecpe_u32(a0);
+  uint32x2_t c1 = vrecpe_u32(a1);
+  vst1_u32(_c, c0);
+  vst1_u32(_c + 2, c1);
+
+  uint32x4_t a = vld1q_u32(_a);
+  uint32x4_t c = vrecpeq_u32(a);
+  return validate_uint32(c, _c[0], _c[1], _c[2], _c[3]);
+#else
+  return TEST_UNIMPL;
+#endif  // ENABLE_TEST_ALL
+}
 
 result_t test_vrsqrte_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
 #ifdef ENABLE_TEST_ALL
