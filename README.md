@@ -1,4 +1,4 @@
-![coverage badge](https://img.shields.io/badge/coverage-86.5%25-green)
+![coverage badge](https://img.shields.io/badge/coverage-86.7%25-green)
 # neon2rvv
 
 A C/C++ header file that converts Arm/Aarch64 NEON intrinsics to RISC-V Vector (RVV) Extension.
