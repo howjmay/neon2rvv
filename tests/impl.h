@@ -946,12 +946,12 @@
   _(vminv_f32)                                                                   \
   _(vminvq_f32)                                                                  \
   _(vminvq_f64)                                                                  \
-  /*_(vmaxnmv_f32)                                                            */ \
-  /*_(vmaxnmvq_f32)                                                           */ \
-  /*_(vmaxnmvq_f64)                                                           */ \
-  /*_(vminnmv_f32)                                                            */ \
-  /*_(vminnmvq_f32)                                                           */ \
-  /*_(vminnmvq_f64)                                                           */ \
+  _(vmaxnmv_f32)                                                                 \
+  _(vmaxnmvq_f32)                                                                \
+  _(vmaxnmvq_f64)                                                                \
+  _(vminnmv_f32)                                                                 \
+  _(vminnmvq_f32)                                                                \
+  _(vminnmvq_f64)                                                                \
   _(vpmin_u8)                                                                    \
   _(vpmin_u16)                                                                   \
   _(vpmin_u32)                                                                   \
