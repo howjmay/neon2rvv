@@ -2070,20 +2070,20 @@
   /*_(vqrdmlsh_laneq_s16)                                                     */ \
   /*_(vqrdmlshq_laneq_s16)                                                    */ \
   _(vqrdmlshq_lane_s32)                                                          \
-  /*_(vqrdmlsh_laneq_s32)                                                     */ \
-  /*_(vqrdmlshq_laneq_s32)                                                    */ \
-  /*_(vqrdmlahh_s16)                                                          */ \
-  /*_(vqrdmlahs_s32)                                                          */ \
-  /*_(vqrdmlshh_s16)                                                          */ \
-  /*_(vqrdmlshs_s32)                                                          */ \
-  /*_(vqrdmlahh_lane_s16)                                                     */ \
-  /*_(vqrdmlahh_laneq_s16)                                                    */ \
-  /*_(vqrdmlahs_lane_s32)                                                     */ \
-  /*_(vqrdmlahs_laneq_s32)                                                    */ \
-  /*_(vqrdmlshh_lane_s16)                                                     */ \
-  /*_(vqrdmlshh_laneq_s16)                                                    */ \
-  /*_(vqrdmlshs_lane_s32)                                                     */ \
-  /*_(vqrdmlshs_laneq_s32)                                                    */ \
+  _(vqrdmlsh_laneq_s32)                                                          \
+  _(vqrdmlshq_laneq_s32)                                                         \
+  _(vqrdmlahh_s16)                                                               \
+  _(vqrdmlahs_s32)                                                               \
+  _(vqrdmlshh_s16)                                                               \
+  _(vqrdmlshs_s32)                                                               \
+  _(vqrdmlahh_lane_s16)                                                          \
+  _(vqrdmlahh_laneq_s16)                                                         \
+  _(vqrdmlahs_lane_s32)                                                          \
+  _(vqrdmlahs_laneq_s32)                                                         \
+  _(vqrdmlshh_lane_s16)                                                          \
+  _(vqrdmlshh_laneq_s16)                                                         \
+  _(vqrdmlshs_lane_s32)                                                          \
+  _(vqrdmlshs_laneq_s32)                                                         \
   /*_(vabsh_f16)                                                              */ \
   /*_(vceqzh_f16)                                                             */ \
   /*_(vcgezh_f16)                                                             */ \

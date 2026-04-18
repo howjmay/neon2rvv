@@ -2700,7 +2700,7 @@ result_t test_vmulx_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   float *_b = (float *)impl.test_cases_float_pointer2;
   float _c[2];
   for (int i = 0; i < 2; i++) {
-    if ((std::isinf(_a[i]) && (_b[i] == 0.0)) || (std::isinf(_b[i]) && (_a[i] == 0.0))) {
+    if ((isinf(_a[i]) && (_b[i] == 0.0)) || (isinf(_b[i]) && (_a[i] == 0.0))) {
       _c[i] = 2;
     } else {
       _c[i] = _a[i] * _b[i];
@@ -2717,7 +2717,7 @@ result_t test_vmulx_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   _a[1] = 0;
   _b[1] = INFINITY;
   for (int i = 0; i < 2; i++) {
-    if ((std::isinf(_a[i]) && (_b[i] == 0.0)) || (std::isinf(_b[i]) && (_a[i] == 0.0))) {
+    if ((isinf(_a[i]) && (_b[i] == 0.0)) || (isinf(_b[i]) && (_a[i] == 0.0))) {
       _c[i] = 2;
     } else {
       _c[i] = _a[i] * _b[i];
@@ -2739,7 +2739,7 @@ result_t test_vmulxq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   float *_b = (float *)impl.test_cases_float_pointer2;
   float _c[4];
   for (int i = 0; i < 4; i++) {
-    if ((std::isinf(_a[i]) && (_b[i] == 0.0)) || (std::isinf(_b[i]) && (_a[i] == 0.0))) {
+    if ((isinf(_a[i]) && (_b[i] == 0.0)) || (isinf(_b[i]) && (_a[i] == 0.0))) {
       _c[i] = 2;
     } else {
       _c[i] = _a[i] * _b[i];
@@ -2756,7 +2756,7 @@ result_t test_vmulxq_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   _a[1] = 0;
   _b[1] = INFINITY;
   for (int i = 0; i < 4; i++) {
-    if ((std::isinf(_a[i]) && (_b[i] == 0.0)) || (std::isinf(_b[i]) && (_a[i] == 0.0))) {
+    if ((isinf(_a[i]) && (_b[i] == 0.0)) || (isinf(_b[i]) && (_a[i] == 0.0))) {
       _c[i] = 2;
     } else {
       _c[i] = _a[i] * _b[i];
@@ -2778,7 +2778,7 @@ result_t test_vmulx_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   double *_b = (double *)impl.test_cases_float_pointer2;
   double _c[1];
   for (int i = 0; i < 1; i++) {
-    if ((std::isinf(_a[i]) && (_b[i] == 0.0)) || (std::isinf(_b[i]) && (_a[i] == 0.0))) {
+    if ((isinf(_a[i]) && (_b[i] == 0.0)) || (isinf(_b[i]) && (_a[i] == 0.0))) {
       _c[i] = 2;
     } else {
       _c[i] = _a[i] * _b[i];
@@ -2795,7 +2795,7 @@ result_t test_vmulx_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   _a[1] = 0;
   _b[1] = INFINITY;
   for (int i = 0; i < 1; i++) {
-    if ((std::isinf(_a[i]) && (_b[i] == 0.0)) || (std::isinf(_b[i]) && (_a[i] == 0.0))) {
+    if ((isinf(_a[i]) && (_b[i] == 0.0)) || (isinf(_b[i]) && (_a[i] == 0.0))) {
       _c[i] = 2;
     } else {
       _c[i] = _a[i] * _b[i];
@@ -2817,7 +2817,7 @@ result_t test_vmulxq_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   double *_b = (double *)impl.test_cases_float_pointer2;
   double _c[2];
   for (int i = 0; i < 2; i++) {
-    if ((std::isinf(_a[i]) && (_b[i] == 0.0)) || (std::isinf(_b[i]) && (_a[i] == 0.0))) {
+    if ((isinf(_a[i]) && (_b[i] == 0.0)) || (isinf(_b[i]) && (_a[i] == 0.0))) {
       _c[i] = 2;
     } else {
       _c[i] = _a[i] * _b[i];
@@ -2834,7 +2834,7 @@ result_t test_vmulxq_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   _a[1] = 0;
   _b[1] = INFINITY;
   for (int i = 0; i < 2; i++) {
-    if ((std::isinf(_a[i]) && (_b[i] == 0.0)) || (std::isinf(_b[i]) && (_a[i] == 0.0))) {
+    if ((isinf(_a[i]) && (_b[i] == 0.0)) || (isinf(_b[i]) && (_a[i] == 0.0))) {
       _c[i] = 2;
     } else {
       _c[i] = _a[i] * _b[i];
@@ -2855,7 +2855,7 @@ result_t test_vmulxs_f32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const float *_a = (float *)impl.test_cases_float_pointer1;
   const float *_b = (float *)impl.test_cases_float_pointer2;
   float _c, c;
-  if ((std::isinf(_a[0]) && (_b[0] == 0.0)) || (std::isinf(_b[0]) && (_a[0] == 0.0))) {
+  if ((isinf(_a[0]) && (_b[0] == 0.0)) || (isinf(_b[0]) && (_a[0] == 0.0))) {
     _c = 2;
   } else {
     _c = _a[0] * _b[0];
@@ -2872,7 +2872,7 @@ result_t test_vmulxd_f64(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
   const double *_a = (const double *)impl.test_cases_float_pointer1;
   const double *_b = (const double *)impl.test_cases_float_pointer2;
   double _c, c;
-  if ((std::isinf(_a[0]) && (_b[0] == 0.0)) || (std::isinf(_b[0]) && (_a[0] == 0.0))) {
+  if ((isinf(_a[0]) && (_b[0] == 0.0)) || (isinf(_b[0]) && (_a[0] == 0.0))) {
     _c = 2;
   } else {
     _c = _a[0] * _b[0];
@@ -36903,33 +36903,298 @@ result_t test_vqrdmlshq_lane_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) 
 #endif
 }
 
-result_t test_vqrdmlsh_laneq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vqrdmlsh_laneq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+#if defined(__GNUC__)
+  return TEST_UNIMPL;
+#else
+  const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
+  const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
+  const int32_t *_c = (int32_t *)impl.test_cases_int_pointer3;
+  int32_t _d[2];
+  int32x2_t a, b, d;
+  int32x4_t c;
+#define TEST_IMPL(IDX)                         \
+  for (int i = 0; i < 2; i++) {                \
+    _d[i] = sat_rdmlsh(_a[i], _b[i], _c[IDX]); \
+  }                                            \
+  a = vld1_s32(_a);                            \
+  b = vld1_s32(_b);                            \
+  c = vld1q_s32(_c);                           \
+  d = vqrdmlsh_laneq_s32(a, b, c, IDX);        \
+  CHECK_RESULT(validate_int32(d, _d[0], _d[1]))
 
-result_t test_vqrdmlshq_laneq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  IMM_4_ITER
+#undef TEST_IMPL
 
-result_t test_vqrdmlahh_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  return TEST_SUCCESS;
+#endif
+#else
+  return TEST_UNIMPL;
+#endif
+}
 
-result_t test_vqrdmlahs_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vqrdmlshq_laneq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+#if defined(__GNUC__)
+  return TEST_UNIMPL;
+#else
+  const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
+  const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
+  const int32_t *_c = (int32_t *)impl.test_cases_int_pointer3;
+  int32_t _d[4];
+  int32x4_t a, b, c, d;
+#define TEST_IMPL(IDX)                         \
+  for (int i = 0; i < 4; i++) {                \
+    _d[i] = sat_rdmlsh(_a[i], _b[i], _c[IDX]); \
+  }                                            \
+  a = vld1q_s32(_a);                           \
+  b = vld1q_s32(_b);                           \
+  c = vld1q_s32(_c);                           \
+  d = vqrdmlshq_laneq_s32(a, b, c, IDX);       \
+  CHECK_RESULT(validate_int32(d, _d[0], _d[1], _d[2], _d[3]))
 
-result_t test_vqrdmlshh_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  IMM_4_ITER
+#undef TEST_IMPL
 
-result_t test_vqrdmlshs_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  return TEST_SUCCESS;
+#endif
+#else
+  return TEST_UNIMPL;
+#endif
+}
 
-result_t test_vqrdmlahh_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vqrdmlahh_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
+  const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
+  const int16_t *_c = (int16_t *)impl.test_cases_int_pointer3;
+  int16_t _d = sat_rdmlah(_a[0], _b[0], _c[0]);
+  int16_t d = vqrdmlahh_s16(_a[0], _b[0], _c[0]);
+  return d == _d ? TEST_SUCCESS : TEST_FAIL;
+#else
+  return TEST_UNIMPL;
+#endif
+}
 
-result_t test_vqrdmlahh_laneq_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vqrdmlahs_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
+  const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
+  const int32_t *_c = (int32_t *)impl.test_cases_int_pointer3;
+  int32_t _d = sat_add((int32_t)_a[0], vqrdmulhs_s32(_b[0], _c[0]));
+  int32_t d = vqrdmlahs_s32(_a[0], _b[0], _c[0]);
+  return d == _d ? TEST_SUCCESS : TEST_FAIL;
+#else
+  return TEST_UNIMPL;
+#endif
+}
 
-result_t test_vqrdmlahs_lane_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vqrdmlshh_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+#if defined(__GNUC__)
+  return TEST_UNIMPL;
+#else
+  const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
+  const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
+  const int16_t *_c = (int16_t *)impl.test_cases_int_pointer3;
+  int16_t _d = sat_sub((int16_t)_a[0], vqrdmulhh_s16(_b[0], _c[0]));
+  int16_t d = vqrdmlshh_s16(_a[0], _b[0], _c[0]);
+  return d == _d ? TEST_SUCCESS : TEST_FAIL;
+#endif
+#else
+  return TEST_UNIMPL;
+#endif
+}
 
-result_t test_vqrdmlahs_laneq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vqrdmlshs_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
+  const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
+  const int32_t *_c = (int32_t *)impl.test_cases_int_pointer3;
+  int32_t _d = sat_rdmlsh(_a[0], _b[0], _c[0]);
+  int32_t d = vqrdmlshs_s32(_a[0], _b[0], _c[0]);
+  return d == _d ? TEST_SUCCESS : TEST_FAIL;
+#else
+  return TEST_UNIMPL;
+#endif
+}
 
-result_t test_vqrdmlshh_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vqrdmlahh_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
+  const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
+  int16_t *_c = (int16_t *)impl.test_cases_int_pointer3;
+  int16x4_t c = vld1_s16(_c);
+  int16_t _d, d;
+#define TEST_IMPL(IDX)                          \
+  _d = sat_rdmlah(_a[0], _b[0], _c[IDX]);       \
+  d = vqrdmlahh_lane_s16(_a[0], _b[0], c, IDX); \
+  CHECK_RESULT(d == _d ? TEST_SUCCESS : TEST_FAIL)
 
-result_t test_vqrdmlshh_laneq_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  IMM_4_ITER
+#undef TEST_IMPL
 
-result_t test_vqrdmlshs_lane_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif
+}
 
-result_t test_vqrdmlshs_laneq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
+result_t test_vqrdmlahh_laneq_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
+  const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
+  int16_t *_c = (int16_t *)impl.test_cases_int_pointer3;
+  int16x8_t c = vld1q_s16(_c);
+  int16_t _d, d;
+#define TEST_IMPL(IDX)                           \
+  _d = sat_rdmlah(_a[0], _b[0], _c[IDX]);        \
+  d = vqrdmlahh_laneq_s16(_a[0], _b[0], c, IDX); \
+  CHECK_RESULT(d == _d ? TEST_SUCCESS : TEST_FAIL)
+
+  IMM_8_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif
+}
+
+result_t test_vqrdmlahs_lane_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
+  const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
+  int32_t *_c = (int32_t *)impl.test_cases_int_pointer3;
+  int32x2_t c = vld1_s32(_c);
+  int32_t _d, d;
+#define TEST_IMPL(IDX)                          \
+  _d = sat_add((int32_t)_a[0], vqrdmulhs_s32(_b[0], _c[IDX])); \
+  d = vqrdmlahs_lane_s32(_a[0], _b[0], c, IDX); \
+  CHECK_RESULT(d == _d ? TEST_SUCCESS : TEST_FAIL)
+
+  IMM_2_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif
+}
+
+result_t test_vqrdmlahs_laneq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
+  const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
+  int32_t *_c = (int32_t *)impl.test_cases_int_pointer3;
+  int32x4_t c = vld1q_s32(_c);
+  int32_t _d, d;
+#define TEST_IMPL(IDX)                           \
+  _d = sat_add((int32_t)_a[0], vqrdmulhs_s32(_b[0], _c[IDX])); \
+  d = vqrdmlahs_laneq_s32(_a[0], _b[0], c, IDX); \
+  CHECK_RESULT(d == _d ? TEST_SUCCESS : TEST_FAIL)
+
+  IMM_4_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif
+}
+
+result_t test_vqrdmlshh_lane_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+#if defined(__GNUC__)
+  return TEST_UNIMPL;
+#else
+  const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
+  const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
+  int16_t *_c = (int16_t *)impl.test_cases_int_pointer3;
+  int16x4_t c = vld1_s16(_c);
+  int16_t _d, d;
+#define TEST_IMPL(IDX)                          \
+  _d = sat_sub((int16_t)_a[0], vqrdmulhh_s16(_b[0], _c[IDX])); \
+  d = vqrdmlshh_lane_s16(_a[0], _b[0], c, IDX); \
+  CHECK_RESULT(d == _d ? TEST_SUCCESS : TEST_FAIL)
+
+  IMM_4_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#endif
+#else
+  return TEST_UNIMPL;
+#endif
+}
+
+result_t test_vqrdmlshh_laneq_s16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+#if defined(__GNUC__)
+  return TEST_UNIMPL;
+#else
+  const int16_t *_a = (int16_t *)impl.test_cases_int_pointer1;
+  const int16_t *_b = (int16_t *)impl.test_cases_int_pointer2;
+  int16_t *_c = (int16_t *)impl.test_cases_int_pointer3;
+  int16x8_t c = vld1q_s16(_c);
+  int16_t _d, d;
+#define TEST_IMPL(IDX)                           \
+  _d = sat_sub((int16_t)_a[0], vqrdmulhh_s16(_b[0], _c[IDX])); \
+  d = vqrdmlshh_laneq_s16(_a[0], _b[0], c, IDX); \
+  CHECK_RESULT(d == _d ? TEST_SUCCESS : TEST_FAIL)
+
+  IMM_8_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#endif
+#else
+  return TEST_UNIMPL;
+#endif
+}
+
+result_t test_vqrdmlshs_lane_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
+  const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
+  int32_t *_c = (int32_t *)impl.test_cases_int_pointer3;
+  int32x2_t c = vld1_s32(_c);
+  int32_t _d, d;
+#define TEST_IMPL(IDX)                          \
+  _d = sat_rdmlsh(_a[0], _b[0], _c[IDX]);       \
+  d = vqrdmlshs_lane_s32(_a[0], _b[0], c, IDX); \
+  CHECK_RESULT(d == _d ? TEST_SUCCESS : TEST_FAIL)
+
+  IMM_2_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif
+}
+
+result_t test_vqrdmlshs_laneq_s32(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) {
+#ifdef ENABLE_TEST_ALL
+  const int32_t *_a = (int32_t *)impl.test_cases_int_pointer1;
+  const int32_t *_b = (int32_t *)impl.test_cases_int_pointer2;
+  int32_t *_c = (int32_t *)impl.test_cases_int_pointer3;
+  int32x4_t c = vld1q_s32(_c);
+  int32_t _d, d;
+#define TEST_IMPL(IDX)                           \
+  _d = sat_rdmlsh(_a[0], _b[0], _c[IDX]);        \
+  d = vqrdmlshs_laneq_s32(_a[0], _b[0], c, IDX); \
+  CHECK_RESULT(d == _d ? TEST_SUCCESS : TEST_FAIL)
+
+  IMM_4_ITER
+#undef TEST_IMPL
+
+  return TEST_SUCCESS;
+#else
+  return TEST_UNIMPL;
+#endif
+}
 
 result_t test_vabsh_f16(const NEON2RVV_TEST_IMPL &impl, uint32_t iter) { return TEST_UNIMPL; }
 
