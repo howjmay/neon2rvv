@@ -897,33 +897,33 @@ double bankers_rounding(double val) {
 }
 
 float maxnm(float a, float b) {
-  if (std::isnan(a) && !std::isnan(b)) {
+  if (isnan(a) && !isnan(b)) {
     a = b;
-  } else if (!std::isnan(a) && std::isnan(b)) {
+  } else if (!isnan(a) && isnan(b)) {
     b = a;
   }
   return a > b ? a : b;
 }
 float minnm(float a, float b) {
-  if (std::isnan(a) && !std::isnan(b)) {
+  if (isnan(a) && !isnan(b)) {
     a = b;
-  } else if (!std::isnan(a) && std::isnan(b)) {
+  } else if (!isnan(a) && isnan(b)) {
     b = a;
   }
   return a < b ? a : b;
 }
 double maxnm(double a, double b) {
-  if (std::isnan(a) && !std::isnan(b)) {
+  if (isnan(a) && !isnan(b)) {
     a = b;
-  } else if (!std::isnan(a) && std::isnan(b)) {
+  } else if (!isnan(a) && isnan(b)) {
     b = a;
   }
   return a > b ? a : b;
 }
 double minnm(double a, double b) {
-  if (std::isnan(a) && !std::isnan(b)) {
+  if (isnan(a) && !isnan(b)) {
     a = b;
-  } else if (!std::isnan(a) && std::isnan(b)) {
+  } else if (!isnan(a) && isnan(b)) {
     b = a;
   }
   return a < b ? a : b;
